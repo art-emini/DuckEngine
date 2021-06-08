@@ -1,5 +1,9 @@
 # DuckEngine
 
+![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
+![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
+![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
+
 2D game framework for making games on all web browsers.
 
 ## Features
