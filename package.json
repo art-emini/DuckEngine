@@ -1,0 +1,41 @@
+{
+	"name": "duckengine",
+	"version": "1.0.0",
+	"description": "2D game framework for making games on all web browsers.",
+	"main": "dist/duckengine.js",
+	"typings": "dist/types/duckengine.d.ts",
+	"scripts": {
+		"test": "node test/test.spec.js",
+		"build": "sh scripts/build.sh",
+		"webpack": "webpack --config webpack.config.js",
+		"minify": "uglifyjs dist/duckengine.js -o dist/duckengine.min.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ksplatdev/DuckEngine.git"
+	},
+	"keywords": [
+		"Duck",
+		"Ducky",
+		"Engine",
+		"2d",
+		"game engine",
+		"simple",
+		"fast"
+	],
+	"author": "Bleart Emini",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ksplatdev/DuckEngine/issues"
+	},
+	"homepage": "https://github.com/ksplatdev/DuckEngine#readme",
+	"devDependencies": {
+		"@types/node": "^15.6.1",
+		"express": "^4.17.1",
+		"typedoc": "^0.20.36",
+		"typescript": "^4.2.3",
+		"uglify-js": "^3.13.9",
+		"webpack": "^5.38.1",
+		"webpack-cli": "^4.7.0"
+	}
+}

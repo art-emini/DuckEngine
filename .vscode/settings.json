@@ -1,0 +1,19 @@
+{
+	"explorer.confirmDelete": false,
+	"editor.linkedEditing": true,
+	"editor.autoClosingDelete": "always",
+	"editor.autoIndent": "brackets",
+	"editor.codeActionsOnSave": null,
+	"liveServer.settings.donotVerifyTags": true,
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.fontLigatures": true,
+	"editor.fontFamily": "Fira Code",
+	"workbench.colorTheme": "GitHub Dark Dimmed",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.tabSize": 4,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "es5"
+}
