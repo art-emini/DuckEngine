@@ -7,6 +7,7 @@ import Sprite from './gameobjects/sprite';
 import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
 import Sound from './sound/sound';
+import Input from './input/input';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -37,6 +38,10 @@ export default class Scene extends Basic {
 			) => Circle;
 		};
 		sound: (path: string, options?: Duck.Sound.Config) => Sound;
+		input: (
+			gameobject: Duck.GameObject,
+			mapping: Duck.Input.Mapping
+		) => Input;
 	};
 
 	public set: {
@@ -102,6 +107,12 @@ export default class Scene extends Basic {
 			},
 			sound: (path: string, options?: Duck.Sound.Config) => {
 				return new Sound(path, options);
+			},
+			input: (
+				gameobject: Duck.GameObject,
+				mapping: Duck.Input.Mapping
+			) => {
+				return new Input(gameobject, mapping);
 			},
 		};
 

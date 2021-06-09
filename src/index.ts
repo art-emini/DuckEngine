@@ -66,6 +66,32 @@ export namespace Duck {
 			sprites?: Sprite[];
 		}
 	}
+	export namespace Input {
+		export interface Mapping {
+			w?: boolean;
+			a?: boolean;
+			s?: boolean;
+			d?: boolean;
+			arrow_up?: boolean;
+			arrow_down?: boolean;
+			arrow_left?: boolean;
+			arrow_right?: boolean;
+			spacebar?: boolean;
+		}
+
+		export interface Controller {
+			[key: string]: any;
+			w: boolean;
+			a: boolean;
+			s: boolean;
+			d: boolean;
+			arrow_up: boolean;
+			arrow_down: boolean;
+			arrow_left: boolean;
+			arrow_right: boolean;
+			spacebar: boolean;
+		}
+	}
 }
 
 // export

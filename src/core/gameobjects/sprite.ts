@@ -1,6 +1,7 @@
 import Game from '../game';
 import { Duck } from '../../index';
 import Collider from '../physics/collider';
+import Debug from '../debug/debug';
 
 export default class Sprite {
 	public readonly shape: Duck.Collider.ShapeString;
@@ -25,7 +26,7 @@ export default class Sprite {
 
 	// methods
 	public physics: {
-		addColider: (collidesWith: Duck.GameObject[]) => Collider;
+		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
 		limitToBounds: (x: number, y: number, w: number, h: number) => void;
 	};
 
@@ -62,7 +63,7 @@ export default class Sprite {
 
 		// methods
 		this.physics = {
-			addColider: (collidesWith: Duck.GameObject[]) => {
+			addCollider: (collidesWith: Duck.GameObject[]) => {
 				this.collidesWith = collidesWith;
 				this.collider = new Collider('rect', this, this.game);
 				return this.collider;
@@ -106,10 +107,12 @@ export default class Sprite {
 	public setVelocity(axis: 'x' | 'y', v: number) {
 		if (axis == 'x') {
 			this.vx = v;
+			this.x += this.vx;
 		}
 
 		if (axis == 'y') {
 			this.vy = v;
+			this.y += this.vy;
 		}
 	}
 

@@ -1,7 +1,7 @@
 {
 	"name": "duckengine",
 	"version": "1.0.0",
-	"description": "2D game framework for making games on all web browsers.",
+	"description": "2D game framework for making multiplayer games on all web browsers.",
 	"main": "dist/duckengine.js",
 	"typings": "dist/types/duckengine.d.ts",
 	"scripts": {

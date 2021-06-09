@@ -1,23 +1,25 @@
 # DuckEngine
 
+**NOT COMPLETE! Release soon!**
+
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
 ![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
 
-2D game framework for making games on all web browsers.
+2D game framework for making *multiplayer* games on all web browsers.
 
 ## Features
 
 1. Physics
-2. Sprites
-3. Keyboard, Mouse, and touch input
-4. Storage
-5. DuckMaps and tilemaps
-6. Particles
-7. Sound player with sound sprites
-8. Scenes
-9. Many game objects
-10. Textures and materials
+2. Multiplayer
+3. Sprites
+4. Keyboard, Mouse, and touch input
+5. Storage
+6. DuckMaps and tilemaps
+7. Particles
+8. Sound player with sound sprites
+9. Scenes
+10. Many game objects
 11. Animations
 12. Cutscenes
 13. Custom loader to load from URL or file path
@@ -78,3 +80,5 @@ src / \
 ## Versions
 
 DuckEngine does follow SemVer.
+
+## [Test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js:266-269)
