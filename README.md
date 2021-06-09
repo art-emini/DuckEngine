@@ -6,27 +6,26 @@
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
 ![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
 
-2D game framework for making *multiplayer* games on all web browsers.
+2D game framework for making games on all web browsers.
 
 ## Features
 
 1. Physics
-2. Multiplayer
-3. Sprites
-4. Keyboard, Mouse, and touch input
-5. Storage
-6. DuckMaps and tilemaps
-7. Particles
-8. Sound player with sound sprites
-9. Scenes
-10. Many game objects
-11. Animations
-12. Cutscenes
-13. Custom loader to load from URL or file path
-14. Docs
-15. Written in typescript
-16. Types are included
-17. And way more
+2. Sprites
+3. Keyboard, Mouse, and touch input
+4. Storage
+5. DuckMaps and tilemaps
+6. Particles
+7. Sound player with sound sprites
+8. Scenes
+9. Many game objects
+10. Animations
+11. Cutscenes
+12. Custom loader to load from URL or file path
+13. Docs
+14. Written in typescript
+15. Types are included
+16. And way more
 
 ## Download
 

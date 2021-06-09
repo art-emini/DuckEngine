@@ -11,7 +11,6 @@ import Scene from './core/scene';
 // spec
 export namespace Duck {
 	export type GameObject = Sprite | Rect | Circle;
-
 	export namespace Game {
 		export interface Config {
 			canvas: HTMLCanvasElement | null;
