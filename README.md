@@ -2,6 +2,8 @@
 
 **NOT COMPLETE! Release soon!**
 
+[Live Demo with Parcel (on codesandbox)](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
 ![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
@@ -18,14 +20,18 @@
 6. Particles
 7. Sound player with sound sprites
 8. Scenes
-9. Many game objects
-10. Animations
-11. Cutscenes
-12. Custom loader to load from URL or file path
-13. Docs
-14. Written in typescript
-15. Types are included
-16. And way more
+9. Cameras
+10. Multi-Camera Switching
+11. Scene Unique Stack / Entity Manager
+12. Game Stack / Global Scene Manager
+13. Many game objects
+14. Animations
+15. Cutscenes
+16. Custom loader to load from URL or file path
+17. Docs
+18. Written in typescript
+19. Types are included
+20. And way more
 
 ## Download
 
@@ -80,4 +86,4 @@ src / \
 
 DuckEngine does follow SemVer.
 
-## [Test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js:266-269)
+## [Live Demo with Parcel](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)

@@ -8,6 +8,9 @@ import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
 import Sound from './sound/sound';
 import Input from './input/input';
+import Camera from '../camera/camera';
+import Debug from './debug/debug';
+import { config } from 'process';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -16,7 +19,9 @@ export default class Scene extends Basic {
 	public default: boolean;
 
 	public mainObject: Duck.GameObject | undefined;
-	public mainCamera: any | undefined;
+	public mainCamera: Camera | undefined;
+
+	public cameras: Camera[];
 
 	// methods
 
@@ -42,11 +47,8 @@ export default class Scene extends Basic {
 			gameobject: Duck.GameObject,
 			mapping: Duck.Input.Mapping
 		) => Input;
-	};
-
-	public set: {
-		mainObject: (gameobject: Duck.GameObject) => void;
-		mainCamera: (camera: any) => void;
+		camera: () => Camera;
+		mainCamera: () => Camera;
 	};
 
 	constructor(key: string, game: Game, visible?: boolean) {
@@ -64,7 +66,9 @@ export default class Scene extends Basic {
 
 		// main object and camera
 		this.mainObject;
+
 		this.mainCamera;
+		this.cameras = [];
 
 		// push to stack
 		this.game.stack.scenes.push(this);
@@ -114,15 +118,28 @@ export default class Scene extends Basic {
 			) => {
 				return new Input(gameobject, mapping);
 			},
+			camera: () => {
+				let c = new Camera(this.game, this);
+				this.cameras.push(c);
+				return c;
+			},
+			mainCamera: () => {
+				let c = new Camera(this.game, this);
+				this.cameras.push(c);
+				this.mainCamera = c;
+				return c;
+			},
 		};
+	}
 
-		this.set = {
-			mainObject: (gameobject: Duck.GameObject) => {
-				this.mainObject = gameobject;
-			},
-			mainCamera: (camera: any) => {
-				this.mainCamera = camera;
-			},
-		};
+	public switchCamera(camera: Camera) {
+		let foundCamera = this.cameras.find((_camera) => _camera === camera);
+		if (foundCamera) {
+			this.mainCamera = foundCamera;
+		}
+	}
+
+	public setMainCamera(camera: Camera) {
+		this.mainCamera = camera;
 	}
 }

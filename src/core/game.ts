@@ -82,9 +82,17 @@ export default class Game {
 		self.clearFrame();
 
 		self.stack.scenes.forEach((scene) => {
+			if (scene.mainCamera) {
+				scene.mainCamera.begin();
+			}
+
 			if (scene.visible) {
 				scene.render();
 				scene.update();
+			}
+
+			if (scene.mainCamera) {
+				scene.mainCamera.end();
 			}
 		});
 
