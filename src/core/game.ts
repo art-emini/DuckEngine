@@ -88,8 +88,8 @@ export default class Game {
 		self.clearFrame();
 
 		self.stack.scenes.forEach((scene) => {
-			if (scene.mainCamera) {
-				scene.mainCamera.begin();
+			if (scene.currentCamera) {
+				scene.currentCamera.begin();
 			}
 
 			if (scene.visible) {
@@ -97,8 +97,8 @@ export default class Game {
 				scene.update();
 			}
 
-			if (scene.mainCamera) {
-				scene.mainCamera.end();
+			if (scene.currentCamera) {
+				scene.currentCamera.end();
 			}
 		});
 

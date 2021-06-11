@@ -19,6 +19,7 @@ export default class Scene extends Basic {
 	public default: boolean;
 
 	public mainObject: Duck.GameObject | undefined;
+	public currentCamera: Camera | undefined;
 	public mainCamera: Camera | undefined;
 
 	public cameras: Camera[];
@@ -63,6 +64,7 @@ export default class Scene extends Basic {
 
 		// main object and camera
 		this.mainObject;
+		this.currentCamera;
 
 		this.mainCamera;
 		this.cameras = [];
@@ -121,6 +123,7 @@ export default class Scene extends Basic {
 				let c = new Camera(this.game, this);
 				this.cameras.push(c);
 				this.mainCamera = c;
+				this.currentCamera = c;
 				return c;
 			},
 		};
@@ -129,8 +132,12 @@ export default class Scene extends Basic {
 	public switchCamera(camera: Camera) {
 		let foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
-			this.mainCamera = foundCamera;
+			this.currentCamera = foundCamera;
 		}
+	}
+
+	public switchToMainCamera() {
+		this.currentCamera = this.mainCamera;
 	}
 
 	public setMainCamera(camera: Camera) {
