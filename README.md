@@ -76,11 +76,12 @@ src / \
 
 1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
 2. Fork the repository.
-3. CD into the cloned directory.
-4. Run `npm install`.
-5. Run `npm run build`.
-6. Make your changes.
-7. Create a pull request.
+3. Clone the fork to your computer.
+4. CD into the cloned directory.
+5. Run `npm install`.
+6. Run `npm run build`.
+7. Make your changes.
+8. Create a pull request.
 
 ## Versions
 
