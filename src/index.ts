@@ -90,6 +90,12 @@ export namespace Duck {
 			arrow_right: boolean;
 			spacebar: boolean;
 		}
+
+		export interface Listener {
+			fn: (e: KeyboardEvent) => void;
+			key: string;
+			type: 'keydown' | 'keyup';
+		}
 	}
 }
 

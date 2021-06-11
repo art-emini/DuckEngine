@@ -1,14 +1,11 @@
 import { Duck } from '../../index';
+import randomInt from '../../utils/randomInt';
 
 export default class Input {
-	private object: Duck.GameObject;
-	private mapping: Duck.Input.Mapping;
 	private controller: Duck.Input.Controller;
+	private listeners: Duck.Input.Listener[];
 
-	constructor(gameobject: Duck.GameObject, mapping: Duck.Input.Mapping) {
-		this.object = gameobject;
-		this.mapping = mapping;
-
+	constructor() {
 		this.controller = {
 			w: false,
 			a: false,
@@ -20,6 +17,8 @@ export default class Input {
 			arrow_right: false,
 			spacebar: false,
 		};
+
+		this.listeners = [];
 
 		this.listener();
 	}
@@ -41,6 +40,32 @@ export default class Input {
 				}
 			});
 		});
+	}
+
+	public on(
+		type: 'keydown' | 'keyup',
+		key: string,
+		cb: (e: KeyboardEvent) => void
+	) {
+		let e = document.addEventListener(type, cb);
+		this.listeners.push({
+			fn: cb,
+			key: key,
+			type: type,
+		});
+	}
+
+	public off(key: string) {
+		let foundListener = this.listeners.find(
+			(_listener) => _listener.key === key
+		);
+		if (foundListener) {
+			document.removeEventListener(
+				foundListener.type,
+				foundListener.fn,
+				true
+			);
+		}
 	}
 
 	// place in update loop in your scene

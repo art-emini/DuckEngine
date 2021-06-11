@@ -62,7 +62,7 @@ export default class Game {
 
 			remove: (scene: Scene) => {
 				let f = this.stack.scenes.find(
-					(_scene) => _scene.key == scene.key
+					(_scene) => _scene.key === scene.key
 				);
 				if (f) {
 					this.stack.scenes.splice(

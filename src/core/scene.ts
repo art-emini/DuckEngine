@@ -43,10 +43,7 @@ export default class Scene extends Basic {
 			) => Circle;
 		};
 		sound: (path: string, options?: Duck.Sound.Config) => Sound;
-		input: (
-			gameobject: Duck.GameObject,
-			mapping: Duck.Input.Mapping
-		) => Input;
+		input: () => Input;
 		camera: () => Camera;
 		mainCamera: () => Camera;
 	};
@@ -112,11 +109,8 @@ export default class Scene extends Basic {
 			sound: (path: string, options?: Duck.Sound.Config) => {
 				return new Sound(path, options);
 			},
-			input: (
-				gameobject: Duck.GameObject,
-				mapping: Duck.Input.Mapping
-			) => {
-				return new Input(gameobject, mapping);
+			input: () => {
+				return new Input();
 			},
 			camera: () => {
 				let c = new Camera(this.game, this);
