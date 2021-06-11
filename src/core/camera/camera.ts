@@ -1,11 +1,11 @@
 // core code from : https://github.com/robashton/camera
 // edited
 
-import Game from '../core/game';
-import Circle from '../core/gameobjects/circle';
-import Rect from '../core/gameobjects/rect';
-import Scene from '../core/scene';
-import { Duck } from '../index';
+import Game from '../game';
+import Circle from '../gameobjects/circle';
+import Rect from '../gameobjects/rect';
+import Scene from '../scene';
+import { Duck } from '../../index';
 
 class Camera {
 	private distance: number;

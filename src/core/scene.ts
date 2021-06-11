@@ -8,7 +8,7 @@ import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
 import Sound from './sound/sound';
 import Input from './input/input';
-import Camera from '../camera/camera';
+import Camera from './camera/camera';
 import Debug from './debug/debug';
 import { config } from 'process';
 
