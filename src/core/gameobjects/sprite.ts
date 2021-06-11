@@ -79,8 +79,8 @@ export default class Sprite {
 				this.collider.update(this, this.collidesWith);
 			}
 		} else {
-			console.error(
-				'DuckEngine Error : CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
+			new Debug.Error(
+				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
 			);
 		}
 	}

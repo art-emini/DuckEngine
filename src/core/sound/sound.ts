@@ -1,4 +1,5 @@
 import { Duck } from '../../index';
+import Debug from '../debug/debug';
 
 export default class Sound {
 	private path: string;
@@ -71,9 +72,7 @@ export default class Sound {
 				}
 			}, 1000);
 		} else {
-			console.error(
-				`DuckEngine Error : Cannot find sound sprite with key: '${key}'.`
-			);
+			new Debug.Error(`Cannot find sound sprite with key: '${key}'.`);
 		}
 	}
 }

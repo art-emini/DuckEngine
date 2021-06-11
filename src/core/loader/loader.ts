@@ -1,13 +1,14 @@
 // utils
 import validURL from '../../utils/validURL';
+import Debug from '../debug/debug';
 
 // loads images by URL or file path
 // static class
 
 export default class Loader {
 	constructor() {
-		throw new Error(
-			'DuckEngine Error : Loader is a static class with no constructor. Use Loader.load.'
+		new Debug.Error(
+			'Loader is a static class with no constructor. Use Loader.load.'
 		);
 	}
 

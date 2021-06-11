@@ -65,8 +65,8 @@ export default class Circle {
 			this.game.ctx.fillStyle = this.fillColor;
 			this.game.ctx.fill();
 		} else {
-			console.error(
-				'DuckEngine Error : CanvasRenderingContext2D is undefined. Canvas is undefined.'
+			new Debug.Error(
+				'CanvasRenderingContext2D is undefined. Canvas is undefined.'
 			);
 		}
 	}

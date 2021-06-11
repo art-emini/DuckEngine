@@ -1,6 +1,7 @@
 import { Duck } from '../index';
 import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
+import Debug from './debug/debug';
 
 export default class Game {
 	public readonly config: Duck.Game.Config;
@@ -31,6 +32,11 @@ export default class Game {
 		// set scale
 		if (this.config.scale) {
 			this.setScale(this.config.scale);
+		}
+
+		// set background
+		if (this.config.background) {
+			this.setBackground(this.config.background);
 		}
 
 		// stack
@@ -105,7 +111,7 @@ export default class Game {
 		if (this.canvas) {
 			this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		} else {
-			console.error('DuckEngine Error : Canvas is undefined');
+			new Debug.Error('Canvas is undefined');
 		}
 	}
 
@@ -119,9 +125,13 @@ export default class Game {
 				this.canvas.height = scale.height;
 			}
 		} else {
-			console.error(
-				'DuckEngine Error : Cannot setScale to a canvas of undefined.'
-			);
+			new Debug.Error('Cannot setScale to a canvas of undefined.');
+		}
+	}
+
+	public setBackground(background: string) {
+		if (this.canvas) {
+			this.canvas.style.background = background;
 		}
 	}
 }

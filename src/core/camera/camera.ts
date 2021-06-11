@@ -1,11 +1,13 @@
 // core code from : https://github.com/robashton/camera
-// edited
+// mostly edited
 
 import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Scene from '../scene';
 import { Duck } from '../../index';
+import rectCollision from '../../helper/rectCollision';
+import circleRectCollision from '../../helper/circleRectCollision';
 
 class Camera {
 	private distance: number;
@@ -23,6 +25,8 @@ class Camera {
 	};
 	private aspectRatio: number | any;
 	public readonly isMain: boolean;
+
+	private bounds: { x: number; y: number; w: number; h: number } | undefined;
 
 	constructor(game: Game, scene: Scene) {
 		this.distance = 1000.0;
@@ -42,6 +46,8 @@ class Camera {
 			h: 0,
 			scale: [1.0, 1.0],
 		};
+
+		this.bounds;
 
 		this.updateViewport();
 	}
@@ -89,13 +95,29 @@ class Camera {
 
 	public follow(gameObject: Duck.GameObject) {
 		if (gameObject.shape == 'rect') {
-			this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
-			this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
+			if (this.bounds) {
+				if (rectCollision(gameObject as Rect, this.bounds)) {
+					this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
+					this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
+				}
+			} else {
+				this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
+				this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
+			}
 		}
 
 		if (gameObject.shape == 'circle') {
-			this.lookAt[0] = gameObject.x - (gameObject as Circle).r / 2;
-			this.lookAt[1] = gameObject.y - (gameObject as Circle).r / 2;
+			if (this.bounds) {
+				if (circleRectCollision(gameObject as Circle, this.bounds)) {
+					this.lookAt[0] =
+						gameObject.x - (gameObject as Circle).r / 2;
+					this.lookAt[1] =
+						gameObject.y - (gameObject as Circle).r / 2;
+				}
+			} else {
+				this.lookAt[0] = gameObject.x - (gameObject as Circle).r / 2;
+				this.lookAt[1] = gameObject.y - (gameObject as Circle).r / 2;
+			}
 		}
 
 		this.updateViewport();
@@ -123,6 +145,10 @@ class Camera {
 
 	public resetZoom() {
 		this.distance = 1000.0;
+	}
+
+	public setBounds(bounds: { x: number; y: number; w: number; h: number }) {
+		this.bounds = bounds;
 	}
 
 	public scrollToZoom() {

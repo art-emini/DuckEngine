@@ -71,8 +71,8 @@ export default class Rect {
 			this.game.ctx.fillStyle = this.fillColor;
 			this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
 		} else {
-			console.error(
-				'DuckEngine Error : CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
+			new Debug.Error(
+				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
 			);
 		}
 	}

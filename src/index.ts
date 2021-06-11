@@ -19,6 +19,7 @@ export namespace Duck {
 			debug?: boolean;
 			storage?: Storage.Config;
 			defaultScene: string;
+			background?: string;
 		}
 
 		export interface Stack {
