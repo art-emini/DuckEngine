@@ -62,7 +62,10 @@ export default class Game {
 
 		// methods
 		this.scenes = {
-			add: (scene: Scene) => {
+			add: (scene: Scene, ...scenes: Scene[]) => {
+				scenes.forEach((scene) => {
+					this.stack.scenes.push(scene);
+				});
 				this.stack.scenes.push(scene);
 			},
 
@@ -132,6 +135,22 @@ export default class Game {
 	public setBackground(background: string) {
 		if (this.canvas) {
 			this.canvas.style.background = background;
+		}
+	}
+
+	public switchScene(key: string, key2: string) {
+		let f = this.stack.scenes.find((_scene) => _scene.key === key);
+		let f2 = this.stack.scenes.find((_scene) => _scene.key === key2);
+		if (f) {
+			if (f2) {
+				f.visible = false;
+				f2.visible = true;
+				f2.onChange();
+			} else {
+				new Debug.Error(`Cannot switch to scene with key "${key2}."`);
+			}
+		} else {
+			new Debug.Error(`Cannot switch from scene with key "${key}."`);
 		}
 	}
 }

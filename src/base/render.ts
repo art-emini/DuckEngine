@@ -4,4 +4,6 @@ export default class Render {
 	public render() {}
 
 	public update() {}
+
+	public onChange() {}
 }
