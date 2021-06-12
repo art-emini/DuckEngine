@@ -16,6 +16,7 @@ import RoundRect from './gameobjects/roundrect';
 import Sound from './sound/sound';
 import Input from './input/input';
 import Camera from './camera/camera';
+import StaticLight from './lights/staticLight';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -63,6 +64,15 @@ export default class Scene extends Basic {
 		input: () => Input;
 		camera: () => Camera;
 		mainCamera: () => Camera;
+		light: {
+			staticLight: (
+				x: number,
+				y: number,
+				r: number,
+				fillColor: string,
+				alpha: number
+			) => StaticLight;
+		};
 	};
 
 	constructor(key: string, game: Game, visible?: boolean) {
@@ -156,6 +166,24 @@ export default class Scene extends Basic {
 				this.mainCamera = c;
 				this.currentCamera = c;
 				return c;
+			},
+			light: {
+				staticLight: (
+					x: number,
+					y: number,
+					r: number,
+					fillColor: string,
+					alpha: number
+				) => {
+					return new StaticLight(
+						x,
+						y,
+						r,
+						fillColor,
+						alpha,
+						this.game
+					);
+				},
 			},
 		};
 	}
