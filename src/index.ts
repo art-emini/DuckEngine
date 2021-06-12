@@ -3,6 +3,7 @@
 import Game from './core/game';
 import Circle from './core/gameobjects/circle';
 import Rect from './core/gameobjects/rect';
+import RoundRect from './core/gameobjects/roundrect';
 import Sprite from './core/gameobjects/sprite';
 import Scene from './core/scene';
 
@@ -10,7 +11,7 @@ import Scene from './core/scene';
 
 // spec
 export namespace Duck {
-	export type GameObject = Sprite | Rect | Circle;
+	export type GameObject = Sprite | Rect | Circle | RoundRect;
 	export namespace Game {
 		export interface Config {
 			canvas: HTMLCanvasElement | null;
@@ -39,7 +40,7 @@ export namespace Duck {
 	export namespace Scene {}
 
 	export namespace Collider {
-		export type ShapeString = 'rect' | 'circle';
+		export type ShapeString = 'rect' | 'circle' | 'roundrect';
 	}
 
 	export namespace Storage {
@@ -96,6 +97,23 @@ export namespace Duck {
 			fn: (e: KeyboardEvent) => void;
 			key: string;
 			type: 'keydown' | 'keyup';
+		}
+	}
+
+	export namespace Interactive {
+		export namespace Text {
+			export interface Config {
+				x: number;
+				y: number;
+				method: 'draw' | 'stroke' | 'draw-stroke';
+				styles: {
+					fontCSS: string;
+					strokeWidth?: number;
+					strokeColor?: string;
+					fillColor?: string;
+					maxWidth?: number;
+				};
+			}
 		}
 	}
 }

@@ -2,7 +2,7 @@ import Circle from '../core/gameobjects/circle';
 import Rect from '../core/gameobjects/rect';
 
 export default function circleRectCollision(
-	circle: Circle,
+	circle: Circle | { x: number; y: number; w: number; h: number; r: number },
 	rect: Rect | { x: number; y: number; w: number; h: number }
 ) {
 	var dx = Math.abs(circle.x - (rect.x + rect.w / 2));

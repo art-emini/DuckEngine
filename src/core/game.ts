@@ -147,10 +147,25 @@ export default class Game {
 				f2.visible = true;
 				f2.onChange();
 			} else {
-				new Debug.Error(`Cannot switch to scene with key "${key2}."`);
+				new Debug.Error(
+					`Cannot switch to scene with key "${key2}.  Scene not found."`
+				);
 			}
 		} else {
-			new Debug.Error(`Cannot switch from scene with key "${key}."`);
+			new Debug.Error(
+				`Cannot switch from scene with key "${key}.  Scene not found."`
+			);
+		}
+	}
+
+	public showScene(key: string) {
+		let f = this.stack.scenes.find((_scene) => _scene.key === key);
+		if (f) {
+			f.visible = true;
+		} else {
+			new Debug.Error(
+				`Cannot switch to scene with key "${key}. Scene not found."`
+			);
 		}
 	}
 }

@@ -12,6 +12,7 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
+import RoundRect from '../gameobjects/roundrect';
 
 export default class Collider {
 	public readonly shapeType: string;
@@ -31,9 +32,9 @@ export default class Collider {
 	public update(shape: Duck.GameObject, otherShapes: Duck.GameObject[]) {
 		this.shape = shape;
 		otherShapes.forEach((otherShape) => {
-			if (otherShape.shape == 'rect') {
-				if (this.collideRect(otherShape as Rect)) {
-					this.resolveRect(otherShape as Rect);
+			if (otherShape.shape == 'rect' || otherShape.shape == 'roundrect') {
+				if (this.collideRect(otherShape as Rect | RoundRect)) {
+					this.resolveRect(otherShape as Rect | RoundRect);
 				}
 			}
 
@@ -45,7 +46,7 @@ export default class Collider {
 		});
 	}
 
-	private collideRect(rect: Rect) {
+	private collideRect(rect: Rect | RoundRect) {
 		let l1 = (this.shape as Rect).getLeft();
 		let t1 = (this.shape as Rect).getTop();
 		let r1 = (this.shape as Rect).getRight();
@@ -65,7 +66,7 @@ export default class Collider {
 		return true;
 	}
 
-	private resolveRect(rect: Rect) {
+	private resolveRect(rect: Rect | RoundRect) {
 		let l1 = (this.shape as Rect).getLeft();
 		let t1 = (this.shape as Rect).getTop();
 		let r1 = (this.shape as Rect).getRight();

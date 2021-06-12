@@ -2,15 +2,20 @@ import Game from './game';
 import Basic from '../base/render';
 import { Duck } from '../index';
 
+// debug
+import Debug from './debug/debug';
+
 // import gameobjects
 import Sprite from './gameobjects/sprite';
 import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
+import Text from './interactive/text';
+import RoundRect from './gameobjects/roundrect';
+
+// other stuff
 import Sound from './sound/sound';
 import Input from './input/input';
 import Camera from './camera/camera';
-import Debug from './debug/debug';
-import { config } from 'process';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -42,6 +47,17 @@ export default class Scene extends Basic {
 				r: number,
 				fillColor: string
 			) => Circle;
+			roundRect: (
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				r: number,
+				fillColor: string
+			) => RoundRect;
+		};
+		interactive: {
+			text: (text: string, config: Duck.Interactive.Text.Config) => Text;
 		};
 		sound: (path: string, options?: Duck.Sound.Config) => Sound;
 		input: () => Input;
@@ -106,6 +122,21 @@ export default class Scene extends Basic {
 					fillColor: string
 				) => {
 					return new Circle(x, y, r, fillColor, this.game);
+				},
+				roundRect: (
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					r: number,
+					fillColor: string
+				) => {
+					return new RoundRect(x, y, w, h, r, fillColor, this.game);
+				},
+			},
+			interactive: {
+				text: (text: string, config: Duck.Interactive.Text.Config) => {
+					return new Text(text, config, this.game);
 				},
 			},
 			sound: (path: string, options?: Duck.Sound.Config) => {
