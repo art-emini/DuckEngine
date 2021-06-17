@@ -41,8 +41,8 @@ export default class Group<t extends Duck.Group.StackItem> {
 		return this.stack.indexOf(item);
 	}
 
-	public each(cb: (item: any, index: number) => void) {
-		return this.stack.forEach.call(this, cb);
+	public each(cb: (item: any, index: number) => any) {
+		return this.stack.forEach(cb.bind(this));
 	}
 
 	public filter(filter: Duck.Group.Filter) {
