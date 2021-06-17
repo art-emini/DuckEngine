@@ -15,24 +15,25 @@
 
 1. Physics
 2. Sprites
-3. Keyboard, Mouse, and touch input
-4. Storage
-5. DuckMaps and tilemaps
-6. Particles
-7. Sound player with sound sprites
-8. Scenes
-9. Cameras
-10. Multi-Camera Switching
-11. Scene Unique Stack / Entity Manager
-12. Game Stack / Global Scene Manager
-13. Many game objects
-14. Animations
-15. Cutscenes
-16. Custom loader to load from URL or file path
-17. Docs
-18. Written in typescript
-19. Types are included
-20. And way more
+3. Many Game objects
+4. Group Management
+5. Keyboard, Mouse, and touch input
+6. Storage
+7. DuckMaps and tilemaps
+8. Particles
+9. Sound player with sound sprites
+10. Scenes
+11. Cameras
+12. Multi-Camera Switching
+13. Scene Unique Stack / Entity Manager
+14. Game Stack / Global Scene Manager
+15. Animations
+16. Cutscenes
+17. Custom loader to load from URL or file path
+18. Docs
+19. Written in typescript
+20. Types are included
+21. And way more
 
 ## Download
 

@@ -17,6 +17,7 @@ import Sound from './sound/sound';
 import Input from './input/input';
 import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
+import Group from './group/group';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -73,6 +74,10 @@ export default class Scene extends Basic {
 				alpha: number
 			) => StaticLight;
 		};
+		group: (
+			name: string,
+			defaultValues?: Duck.Group.StackItem[]
+		) => Group<Duck.Group.StackItem>;
 	};
 
 	constructor(key: string, game: Game, visible?: boolean) {
@@ -184,6 +189,9 @@ export default class Scene extends Basic {
 						this.game
 					);
 				},
+			},
+			group: (name: string, defaultValues?: Duck.Group.StackItem[]) => {
+				return new Group(name, defaultValues);
 			},
 		};
 	}

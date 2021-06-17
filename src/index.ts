@@ -1,11 +1,15 @@
 // import
 
+import Camera from './core/camera/camera';
 import Game from './core/game';
 import Circle from './core/gameobjects/circle';
 import Rect from './core/gameobjects/rect';
 import RoundRect from './core/gameobjects/roundrect';
 import Sprite from './core/gameobjects/sprite';
 import Scene from './core/scene';
+import Text from './core/interactive/text';
+import StaticLight from './core/lights/staticLight';
+import Collider from './core/physics/collider';
 
 // main
 
@@ -115,6 +119,24 @@ export namespace Duck {
 				};
 			}
 		}
+	}
+
+	export namespace Group {
+		export type StackItem =
+			| GameObject
+			| Camera
+			| Text
+			| StaticLight
+			| Collider;
+
+		export type Stack = StackItem[];
+
+		export type Filter =
+			| 'gameobject'
+			| 'lights'
+			| 'interactive'
+			| 'physics'
+			| 'cameras';
 	}
 }
 
