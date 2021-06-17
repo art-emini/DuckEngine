@@ -41,7 +41,6 @@ export default class Game {
 
 		// stack
 		this.stack = {
-			cameras: [],
 			scenes: [],
 			defaultScene: this.config.defaultScene,
 		};

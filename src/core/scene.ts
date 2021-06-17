@@ -200,6 +200,10 @@ export default class Scene extends Basic {
 		let foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
 			this.currentCamera = foundCamera;
+		} else {
+			new Debug.Error(
+				'Cannot switch camera. Camera not found in the current scene.'
+			);
 		}
 	}
 

@@ -28,7 +28,6 @@ export namespace Duck {
 		}
 
 		export interface Stack {
-			cameras: any[];
 			scenes: Scene[];
 			defaultScene: string;
 		}
