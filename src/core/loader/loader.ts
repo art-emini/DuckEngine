@@ -13,9 +13,9 @@ export default class Loader {
 	}
 
 	public static async load(pathOrURL: string) {
-		let isUrl = validURL(pathOrURL);
+		const isUrl = validURL(pathOrURL);
 		if (isUrl) {
-			let res = await fetch(pathOrURL);
+			const res = await fetch(pathOrURL);
 			const blob = await res.blob();
 
 			const url = URL.createObjectURL(blob.slice(0, 4000));

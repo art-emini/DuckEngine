@@ -10,7 +10,7 @@ export default class DuckStorage {
 		this.game = game;
 	}
 
-	public save(data?: any[]) {
+	public save(data?: unknown[]) {
 		if (this.config.save.scenes) {
 			localStorage.setItem(
 				'duckengine-save-scenes',
@@ -29,8 +29,8 @@ export default class DuckStorage {
 	}
 
 	public load(loadType: Duck.Storage.LoadType) {
-		if (loadType == 'all') {
-			let res = {
+		if (loadType === 'all') {
+			const res = {
 				scenes: localStorage.getItem('duckengine-save-scenes'),
 				data: localStorage.getItem('duckengine-save-data'),
 				gameConfig: localStorage.getItem('duckengine-save-gameConfig'),
@@ -39,8 +39,8 @@ export default class DuckStorage {
 			return res;
 		}
 
-		if (loadType == 'scenes') {
-			let res = {
+		if (loadType === 'scenes') {
+			const res = {
 				scenes: localStorage.getItem('duckengine-save-scenes'),
 			};
 
@@ -51,8 +51,8 @@ export default class DuckStorage {
 			return res;
 		}
 
-		if (loadType == 'data') {
-			let res = {
+		if (loadType === 'data') {
+			const res = {
 				data: localStorage.getItem('duckengine-save-data'),
 			};
 
@@ -63,8 +63,8 @@ export default class DuckStorage {
 			return res;
 		}
 
-		if (loadType == 'gameConfig') {
-			let res = {
+		if (loadType === 'gameConfig') {
+			const res = {
 				gameConfig: localStorage.getItem('duckengine-save-gameConfig'),
 			};
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
@@ -33,7 +34,7 @@ export default class Group<t extends Duck.Group.StackItem> {
 	}
 
 	public find(item: t) {
-		let a = this.stack.find((_a) => _a === item);
+		const a = this.stack.find((_a) => _a === item);
 		return a;
 	}
 
@@ -41,7 +42,7 @@ export default class Group<t extends Duck.Group.StackItem> {
 		return this.stack.indexOf(item);
 	}
 
-	public each(cb: (item: any, index: number) => any) {
+	public each(cb: (item: unknown, index: number) => void) {
 		return this.stack.forEach(cb.bind(this));
 	}
 

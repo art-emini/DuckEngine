@@ -1,0 +1,23 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
+		"eqeqeq": ["error", "always"],
+		"@typescript-eslint/no-namespace": 0,
+		"@typescript-eslint/explicit-module-boundary-types": 0
+	},
+	"ignorePatterns": ["lib/", "dist/", "src/helper/", "docs/"]
+}

@@ -25,8 +25,7 @@ export default class GameObject {
 
 	// methods
 	public physics: {
-		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
-		limitToBounds: (x: number, y: number, w: number, h: number) => void;
+		addCollider: (collidesWith: Duck.GameObject[]) => Collider | void;
 	};
 
 	constructor(
@@ -63,10 +62,10 @@ export default class GameObject {
 		this.physics = {
 			addCollider: (collidesWith: Duck.GameObject[]) => {
 				this.collidesWith = collidesWith;
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				this.collider = new Collider('rect', this.self!, this.game);
 				return this.collider;
 			},
-			limitToBounds: (x: number, y: number, w: number, h: number) => {},
 		};
 	}
 
@@ -74,6 +73,7 @@ export default class GameObject {
 		this.self = self;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public draw() {}
 
 	public setScale(scale: Duck.Misc.Scale | number) {
@@ -93,12 +93,12 @@ export default class GameObject {
 	}
 
 	public setVelocity(axis: 'x' | 'y', v: number) {
-		if (axis == 'x') {
+		if (axis === 'x') {
 			this.vx = v;
 			this.x += this.vx;
 		}
 
-		if (axis == 'y') {
+		if (axis === 'y') {
 			this.vy = v;
 			this.y += this.vy;
 		}

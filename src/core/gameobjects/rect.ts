@@ -1,6 +1,4 @@
-import { Duck } from '../../index';
 import Game from '../game';
-import Collider from '../physics/collider';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 

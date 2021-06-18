@@ -1,4 +1,4 @@
-let __debugStack_duckengine: string[] = [];
+const __debugStack_duckengine: string[] = [];
 
 class Error {
 	constructor(message: string) {

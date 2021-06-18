@@ -1,7 +1,6 @@
-import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
-import Collider from '../physics/collider';
+
 import GameObject from './gameObject';
 
 export default class RoundRect extends GameObject {

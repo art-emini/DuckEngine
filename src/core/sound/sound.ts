@@ -53,7 +53,7 @@ export default class Sound {
 	}
 
 	public playSprite(key: string) {
-		let foundSprite = this.sprites.find((_sprite) => _sprite.key === key);
+		const foundSprite = this.sprites.find((_sprite) => _sprite.key === key);
 
 		if (foundSprite) {
 			this.seek(foundSprite.startSeconds);
@@ -62,7 +62,7 @@ export default class Sound {
 				this.play();
 			}
 
-			let int = setInterval(() => {
+			const int = setInterval(() => {
 				if (foundSprite) {
 					if (this.element.currentTime >= foundSprite.endSeconds) {
 						this.restart();

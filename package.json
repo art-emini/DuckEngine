@@ -32,6 +32,9 @@
 	"homepage": "https://github.com/ksplatdev/DuckEngine#readme",
 	"devDependencies": {
 		"@types/node": "^15.12.2",
+		"@typescript-eslint/eslint-plugin": "^4.27.0",
+		"@typescript-eslint/parser": "^4.27.0",
+		"eslint": "^7.28.0",
 		"express": "^4.17.1",
 		"typedoc": "^0.20.37",
 		"typedoc-neo-theme": "^1.1.1",

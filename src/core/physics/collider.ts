@@ -12,9 +12,6 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
-import RoundRect from '../gameobjects/roundrect';
-import Sprite from '../gameobjects/sprite';
-
 export default class Collider {
 	public readonly shapeType: string;
 	public shape: Duck.GameObject;
@@ -30,14 +27,20 @@ export default class Collider {
 		this.game = game;
 	}
 
-	public update(shape: Duck.GameObject, otherShapes: Duck.GameObject[]) {
+	public update(
+		shape: Duck.GameObject,
+		otherShapes: Duck.GameObject[]
+	): void {
 		this.shape = shape;
 		otherShapes.forEach((otherShape) => {
-			if (otherShape.shape == 'rect' || otherShape.shape == 'roundrect') {
+			if (
+				otherShape.shape === 'rect' ||
+				otherShape.shape === 'roundrect'
+			) {
 				this.collideRectangle(otherShape as Rect);
 			}
 
-			if (otherShape.shape == 'circle') {
+			if (otherShape.shape === 'circle') {
 				if (this.collideCircle(otherShape as Circle)) {
 					this.resolveCircle(otherShape as Circle);
 				}
@@ -46,16 +49,16 @@ export default class Collider {
 	}
 
 	private collideRectangle(rect: Rect) {
-		let rectCX = rect.x + rect.w * 0.5;
-		let rectCY = rect.y + rect.h * 0.5;
+		const rectCX = rect.x + rect.w * 0.5;
+		const rectCY = rect.y + rect.h * 0.5;
 
-		let thisCX = this.shape.x + this.shape.w * 0.5;
-		let thisCY = this.shape.y + this.shape.h * 0.5;
+		const thisCX = this.shape.x + this.shape.w * 0.5;
+		const thisCY = this.shape.y + this.shape.h * 0.5;
 
-		var dx = rectCX - thisCX; // x difference between centers
-		var dy = rectCY - thisCY; // y difference between centers
-		var aw = (rect.w + this.shape.w) * 0.5; // average width
-		var ah = (rect.h + this.shape.h) * 0.5; // average height
+		const dx = rectCX - thisCX; // x difference between centers
+		const dy = rectCY - thisCY; // y difference between centers
+		const aw = (rect.w + this.shape.w) * 0.5; // average width
+		const ah = (rect.h + this.shape.h) * 0.5; // average height
 
 		/* If either distance is greater than the average dimension there is no collision. */
 		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
@@ -78,10 +81,10 @@ export default class Collider {
 
 	private collideCircle(circle2: Circle) {
 		/* first we get the x and y distance between the two circles. */
-		let distance_x = this.shape.x - circle2.x;
-		let distance_y = this.shape.y - circle2.y;
+		const distance_x = this.shape.x - circle2.x;
+		const distance_y = this.shape.y - circle2.y;
 		/* Then we get the sum of their radii. */
-		let radii_sum = (this.shape as Circle).r + circle2.r;
+		const radii_sum = (this.shape as Circle).r + circle2.r;
 
 		/* Then we test to see if the square of their distance is greater than the
         square of their radii. If it is, then there is no collision. If it isn't,
@@ -96,13 +99,13 @@ export default class Collider {
 	}
 
 	private resolveCircle(c2: Circle) {
-		let distance_x = this.shape.x - c2.x;
-		let distance_y = this.shape.y - c2.y;
-		let radii_sum = (this.shape as Circle).r + c2.r;
-		let length =
+		const distance_x = this.shape.x - c2.x;
+		const distance_y = this.shape.y - c2.y;
+		const radii_sum = (this.shape as Circle).r + c2.r;
+		const length =
 			Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
-		let unit_x = distance_x / length;
-		let unit_y = distance_y / length;
+		const unit_x = distance_x / length;
+		const unit_y = distance_y / length;
 
 		this.shape.x = c2.x + (radii_sum + 1) * unit_x;
 		this.shape.y = c2.y + (radii_sum + 1) * unit_y;

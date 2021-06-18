@@ -20,7 +20,7 @@ export default class Text {
 		if (this.game.ctx) {
 			this.game.ctx.font = this.config.styles.fontCSS;
 
-			if (this.config.method == 'draw') {
+			if (this.config.method === 'draw') {
 				this.game.ctx.fillStyle =
 					this.config.styles.fillColor || '#000';
 				this.game.ctx.strokeStyle =
@@ -34,7 +34,7 @@ export default class Text {
 				);
 			}
 
-			if (this.config.method == 'stroke') {
+			if (this.config.method === 'stroke') {
 				this.game.ctx.lineWidth = this.config.styles.strokeWidth || 1;
 
 				this.game.ctx.strokeText(
@@ -45,7 +45,7 @@ export default class Text {
 				);
 			}
 
-			if (this.config.method == 'draw-stroke') {
+			if (this.config.method === 'draw-stroke') {
 				this.game.ctx.lineWidth = this.config.styles.strokeWidth || 1;
 				this.game.ctx.strokeStyle =
 					this.config.styles.strokeColor || '#000';

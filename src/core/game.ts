@@ -69,7 +69,7 @@ export default class Game {
 			},
 
 			remove: (scene: Scene) => {
-				let f = this.stack.scenes.find(
+				const f = this.stack.scenes.find(
 					(_scene) => _scene.key === scene.key
 				);
 				if (f) {
@@ -138,8 +138,8 @@ export default class Game {
 	}
 
 	public switchScene(key: string, key2: string) {
-		let f = this.stack.scenes.find((_scene) => _scene.key === key);
-		let f2 = this.stack.scenes.find((_scene) => _scene.key === key2);
+		const f = this.stack.scenes.find((_scene) => _scene.key === key);
+		const f2 = this.stack.scenes.find((_scene) => _scene.key === key2);
 		if (f) {
 			if (f2) {
 				f.visible = false;
@@ -158,7 +158,7 @@ export default class Game {
 	}
 
 	public showScene(key: string) {
-		let f = this.stack.scenes.find((_scene) => _scene.key === key);
+		const f = this.stack.scenes.find((_scene) => _scene.key === key);
 		if (f) {
 			f.visible = true;
 		} else {

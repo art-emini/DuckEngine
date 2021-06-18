@@ -1,5 +1,4 @@
 import { Duck } from '../../index';
-import randomInt from '../../utils/randomInt';
 
 export default class Input {
 	private controller: Duck.Input.Controller;
@@ -26,15 +25,15 @@ export default class Input {
 	private listener() {
 		document.addEventListener('keydown', (e) => {
 			Object.keys(this.controller).forEach((key) => {
-				if (e.key.toLowerCase() == key) {
+				if (e.key.toLowerCase() === key) {
 					this.controller[key] = true;
 				}
 			});
 		});
 
-		let a = document.addEventListener('keyup', (e) => {
+		document.addEventListener('keyup', (e) => {
 			Object.keys(this.controller).forEach((key) => {
-				if (e.key.toLowerCase() == key) {
+				if (e.key.toLowerCase() === key) {
 					this.controller[key] = false;
 					return this.controller;
 				}
@@ -47,7 +46,7 @@ export default class Input {
 		key: string,
 		cb: (e: KeyboardEvent) => void
 	) {
-		let e = document.addEventListener(type, cb);
+		document.addEventListener(type, cb);
 		this.listeners.push({
 			fn: cb,
 			key: key,
@@ -56,7 +55,7 @@ export default class Input {
 	}
 
 	public off(key: string) {
-		let foundListener = this.listeners.find(
+		const foundListener = this.listeners.find(
 			(_listener) => _listener.key === key
 		);
 		if (foundListener) {

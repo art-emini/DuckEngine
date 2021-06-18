@@ -7,6 +7,6 @@ export default function hexToRGBA(hex: string, alpha: number) {
 		return `rgba(${r},${g},${b},${alpha})`;
 	} else {
 		new Debug.Error('Cannot convert hex to RGBA. Invalid hex.');
-		return `rgba(0, 0, 0, 1)`;
+		return 'rgba(0, 0, 0, 1)';
 	}
 }

@@ -8,6 +8,7 @@ import Scene from '../scene';
 import { Duck } from '../../index';
 import rectCollision from '../../helper/rectCollision';
 import circleRectCollision from '../../helper/circleRectCollision';
+import Debug from '../debug/debug';
 
 class Camera {
 	private distance: number;
@@ -23,7 +24,7 @@ class Camera {
 		h: number;
 		scale: number[];
 	};
-	private aspectRatio: number | any;
+	private aspectRatio: number | undefined;
 	public readonly isMain: boolean;
 
 	private bounds: { x: number; y: number; w: number; h: number } | undefined;
@@ -31,7 +32,7 @@ class Camera {
 	constructor(game: Game, scene: Scene) {
 		this.distance = 1000.0;
 		this.isMain = false;
-		if (scene.mainCamera == this) {
+		if (scene.mainCamera === this) {
 			this.isMain = true;
 		}
 		this.lookAt = [0, 0];
@@ -71,15 +72,21 @@ class Camera {
 	}
 
 	private updateViewport() {
-		this.aspectRatio = this.ctx!.canvas.width / this.ctx!.canvas.height;
-		this.viewport.w = this.distance * Math.tan(this.fieldOfView);
-		this.viewport.h = this.viewport.w / this.aspectRatio;
-		this.viewport.left = this.lookAt[0] - this.viewport.w / 2.0;
-		this.viewport.top = this.lookAt[1] - this.viewport.h / 2.0;
-		this.viewport.right = this.viewport.left + this.viewport.w;
-		this.viewport.bottom = this.viewport.top + this.viewport.h;
-		this.viewport.scale[0] = this.ctx!.canvas.width / this.viewport.w;
-		this.viewport.scale[1] = this.ctx!.canvas.height / this.viewport.h;
+		if (this.ctx) {
+			this.aspectRatio = this.ctx.canvas.width / this.ctx.canvas.height;
+			this.viewport.w = this.distance * Math.tan(this.fieldOfView);
+			this.viewport.h = this.viewport.w / this.aspectRatio;
+			this.viewport.left = this.lookAt[0] - this.viewport.w / 2.0;
+			this.viewport.top = this.lookAt[1] - this.viewport.h / 2.0;
+			this.viewport.right = this.viewport.left + this.viewport.w;
+			this.viewport.bottom = this.viewport.top + this.viewport.h;
+			this.viewport.scale[0] = this.ctx.canvas.width / this.viewport.w;
+			this.viewport.scale[1] = this.ctx.canvas.height / this.viewport.h;
+		} else {
+			new Debug.Error(
+				'Cannot update camera. CanvasRenderingContext2D is undefined.'
+			);
+		}
 	}
 
 	public setZoom(z: number) {
@@ -94,7 +101,7 @@ class Camera {
 	}
 
 	public follow(gameObject: Duck.GameObject) {
-		if (gameObject.shape == 'rect') {
+		if (gameObject.shape === 'rect') {
 			if (this.bounds) {
 				if (rectCollision(gameObject as Rect, this.bounds)) {
 					this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
@@ -106,7 +113,7 @@ class Camera {
 			}
 		}
 
-		if (gameObject.shape == 'circle') {
+		if (gameObject.shape === 'circle') {
 			if (this.bounds) {
 				if (circleRectCollision(gameObject as Circle, this.bounds)) {
 					this.lookAt[0] =

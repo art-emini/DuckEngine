@@ -9,6 +9,7 @@ import Sprite from './core/gameobjects/sprite';
 import Scene from './core/scene';
 import Text from './core/interactive/text';
 import StaticLight from './core/lights/staticLight';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Collider from './core/physics/collider';
 
 // main
@@ -50,7 +51,7 @@ export namespace Duck {
 		export interface Config {
 			save: {
 				scenes?: Scene[];
-				data?: any[];
+				data?: unknown[];
 				gameConfig?: boolean;
 			};
 		}
@@ -84,7 +85,7 @@ export namespace Duck {
 		}
 
 		export interface Controller {
-			[key: string]: any;
+			[key: string]: unknown;
 			w: boolean;
 			a: boolean;
 			s: boolean;

@@ -5,7 +5,6 @@ import isHex from '../../helper/color/isHex';
 import isHSL from '../../helper/color/isHSL';
 import isRGB from '../../helper/color/isRGB';
 import rgbToRGBA from '../../helper/color/rgbToRGBA';
-import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
 
@@ -44,7 +43,7 @@ export default class StaticLight {
 		}
 
 		if (isHSL(this.color)) {
-			let e = getValuesHSL(this.color);
+			const e = getValuesHSL(this.color);
 			this.color = hslaToRGBA(e[0], e[1], e[2], this.alpha);
 		}
 	}

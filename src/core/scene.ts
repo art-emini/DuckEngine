@@ -88,7 +88,7 @@ export default class Scene extends Basic {
 		this.visible = visible || false;
 		this.default = false;
 
-		if (this.game.stack.defaultScene == this.key) {
+		if (this.game.stack.defaultScene === this.key) {
 			this.default = true;
 			this.visible = true;
 		}
@@ -161,12 +161,12 @@ export default class Scene extends Basic {
 				return new Input();
 			},
 			camera: () => {
-				let c = new Camera(this.game, this);
+				const c = new Camera(this.game, this);
 				this.cameras.push(c);
 				return c;
 			},
 			mainCamera: () => {
-				let c = new Camera(this.game, this);
+				const c = new Camera(this.game, this);
 				this.cameras.push(c);
 				this.mainCamera = c;
 				this.currentCamera = c;
@@ -197,7 +197,7 @@ export default class Scene extends Basic {
 	}
 
 	public switchCamera(camera: Camera) {
-		let foundCamera = this.cameras.find((_camera) => _camera === camera);
+		const foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
 			this.currentCamera = foundCamera;
 		} else {
