@@ -13,6 +13,7 @@ import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import RoundRect from '../gameobjects/roundrect';
+import Sprite from '../gameobjects/sprite';
 
 export default class Collider {
 	public readonly shapeType: string;
@@ -33,9 +34,7 @@ export default class Collider {
 		this.shape = shape;
 		otherShapes.forEach((otherShape) => {
 			if (otherShape.shape == 'rect' || otherShape.shape == 'roundrect') {
-				if (this.collideRect(otherShape as Rect | RoundRect)) {
-					this.resolveRect(otherShape as Rect | RoundRect);
-				}
+				this.collideRectangle(otherShape as Rect);
 			}
 
 			if (otherShape.shape == 'circle') {
@@ -46,56 +45,35 @@ export default class Collider {
 		});
 	}
 
-	private collideRect(rect: Rect | RoundRect) {
-		let l1 = (this.shape as Rect).getLeft();
-		let t1 = (this.shape as Rect).getTop();
-		let r1 = (this.shape as Rect).getRight();
-		let b1 = (this.shape as Rect).getBottom();
+	private collideRectangle(rect: Rect) {
+		let rectCX = rect.x + rect.w * 0.5;
+		let rectCY = rect.y + rect.h * 0.5;
 
-		let l2 = rect.getLeft();
-		let t2 = rect.getTop();
-		let r2 = rect.getRight();
-		let b2 = rect.getBottom();
+		let thisCX = this.shape.x + this.shape.w * 0.5;
+		let thisCY = this.shape.y + this.shape.h * 0.5;
 
-		// not colliding
-		if (b1 < t2 || t1 > b2 || r1 < l2 || l1 > r2) {
-			return false;
+		var dx = rectCX - thisCX; // x difference between centers
+		var dy = rectCY - thisCY; // y difference between centers
+		var aw = (rect.w + this.shape.w) * 0.5; // average width
+		var ah = (rect.h + this.shape.h) * 0.5; // average height
+
+		/* If either distance is greater than the average dimension there is no collision. */
+		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
+
+		/* To determine which region of this rectangle the rect's center
+          point is in, we have to account for the scale of the this rectangle.
+          To do that, we divide dx and dy by it's width and height respectively. */
+		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
+			if (dx < 0) this.shape.x = rect.x + rect.w;
+			// left
+			else this.shape.x = rect.x - rect.w; // right
+		} else {
+			if (dy < 0) this.shape.y = rect.y + rect.h;
+			// top
+			else this.shape.y = rect.y - rect.h; // bottom
 		}
 
-		// collides
 		return true;
-	}
-
-	private resolveRect(rect: Rect | RoundRect) {
-		let l1 = (this.shape as Rect).getLeft();
-		let t1 = (this.shape as Rect).getTop();
-		let r1 = (this.shape as Rect).getRight();
-		let b1 = (this.shape as Rect).getBottom();
-
-		let l2 = rect.getLeft();
-		let t2 = rect.getTop();
-		let r2 = rect.getRight();
-		let b2 = rect.getBottom();
-
-		// bottom
-		if (b1 > t2) {
-			(this.shape as Rect).y = rect.y;
-		}
-
-		// top
-		if (t1 < b2) {
-			(this.shape as Rect).y = rect.y + rect.h;
-		}
-
-		// right
-		if (r1 > l2) {
-			(this.shape as Rect).x = rect.x;
-		}
-
-		// left
-		if (l1 < r2) {
-			(this.shape as Rect).x = rect.x + rect.w;
-		}
 	}
 
 	private collideCircle(circle2: Circle) {
