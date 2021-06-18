@@ -2,29 +2,9 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Collider from '../physics/collider';
 import Debug from '../debug/debug';
+import GameObject from './gameObject';
 
-export default class Circle {
-	public readonly shape: Duck.Collider.ShapeString;
-	public x: number;
-	public y: number;
-	public r: number;
-	public fillColor: string;
-	private game: Game;
-
-	private rotAngle: number;
-	private movingDir: 'up' | 'down' | 'left' | 'right' | 'none';
-
-	private collider: Collider | undefined;
-	private collidesWith: Duck.GameObject[];
-	public vx: number;
-	public vy: number;
-
-	// methods
-	public physics: {
-		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
-		limitToBounds: (x: number, y: number, w: number, h: number) => void;
-	};
-
+export default class Circle extends GameObject {
 	constructor(
 		x: number,
 		y: number,
@@ -32,30 +12,8 @@ export default class Circle {
 		fillColor: string,
 		game: Game
 	) {
-		this.shape = 'circle';
-		this.x = x;
-		this.y = y;
-		this.r = r;
-		this.fillColor = fillColor;
-		this.game = game;
-
-		this.rotAngle = 0;
-		this.movingDir = 'none';
-
-		this.collider;
-		this.collidesWith = [];
-		this.vx = 0;
-		this.vy = 0;
-
-		// methods
-		this.physics = {
-			addCollider: (collidesWith: Duck.GameObject[]) => {
-				this.collidesWith = collidesWith;
-				this.collider = new Collider('rect', this, this.game);
-				return this.collider;
-			},
-			limitToBounds: (x: number, y: number, w: number, h: number) => {},
-		};
+		super('circle', x, y, 0, 0, r, fillColor, game);
+		this.init(this);
 	}
 
 	public draw() {
@@ -69,35 +27,5 @@ export default class Circle {
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'
 			);
 		}
-	}
-
-	public setScale(r: number) {
-		this.r = r;
-	}
-
-	public setVelocity(axis: 'x' | 'y', v: number) {
-		if (axis == 'x') {
-			this.vx = v;
-			this.x += this.vx;
-		}
-
-		if (axis == 'y') {
-			this.vy = v;
-			this.y += this.vy;
-		}
-	}
-
-	public setFillColor(fillColor: string) {
-		this.fillColor = fillColor;
-	}
-
-	// position methods
-
-	public getCenterY() {
-		return this.y + this.r;
-	}
-
-	public getCenterX() {
-		return this.x + this.r;
 	}
 }

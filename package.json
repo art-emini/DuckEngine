@@ -8,7 +8,8 @@
 		"test": "node test/test.spec.js",
 		"build": "sh scripts/build.sh",
 		"webpack": "webpack --config webpack.config.js",
-		"minify": "uglifyjs dist/duckengine.js -o dist/duckengine.min.js"
+		"minify": "uglifyjs dist/duckengine.js -o dist/duckengine.min.js",
+		"docify": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\""
 	},
 	"repository": {
 		"type": "git",
@@ -32,7 +33,8 @@
 	"devDependencies": {
 		"@types/node": "^15.12.2",
 		"express": "^4.17.1",
-		"typescript": "^4.3.2",
+		"typedoc": "^0.20.37",
+		"typescript": "^4.2.3",
 		"uglify-js": "^3.13.9",
 		"webpack": "^5.38.1",
 		"webpack-cli": "^4.7.2"

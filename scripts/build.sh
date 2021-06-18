@@ -7,6 +7,9 @@ echo "Merged"
 echo "Minifying"
 npm run minify
 echo "Minified"
+echo "Building Docs"
+npm run docify
+echo "Built Docs"
 echo "Finishing"
 cp package.json lib/package.json
 echo "Done"

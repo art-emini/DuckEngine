@@ -1,0 +1,263 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>duckengine</title>
+	<meta name="description" content="Documentation for duckengine">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">duckengine</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>duckengine</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#duckengine" id="duckengine" style="color: inherit; text-decoration: none;">
+					<h1>DuckEngine</h1>
+				</a>
+				<p><strong>NOT COMPLETE! Release soon!</strong></p>
+				<p><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel (on codesandbox)</a></p>
+				<p><img src="https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square" alt="Build Badge">
+					<img src="https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square" alt="Release Badge">
+					<img src="https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square" alt="License Badge">
+				<a href="https://wakatime.com/badge/github/ksplatdev/DuckEngine"><img src="https://wakatime.com/badge/github/ksplatdev/DuckEngine.svg" alt="wakatime"></a></p>
+				<p>2D game framework for making games on all web browsers.</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ol>
+					<li>Physics</li>
+					<li>Sprites</li>
+					<li>Many Game objects</li>
+					<li>Group Management</li>
+					<li>Keyboard, Mouse, and touch input</li>
+					<li>Storage</li>
+					<li>DuckMaps and tilemaps</li>
+					<li>Particles</li>
+					<li>Sound player with sound sprites</li>
+					<li>Scenes</li>
+					<li>Cameras</li>
+					<li>Multi-Camera Switching</li>
+					<li>Scene Unique Stack / Entity Manager</li>
+					<li>Game Stack / Global Scene Manager</li>
+					<li>Animations</li>
+					<li>Cutscenes</li>
+					<li>Custom loader to load from URL or file path</li>
+					<li>Docs</li>
+					<li>Written in typescript</li>
+					<li>Types are included</li>
+					<li>And way more</li>
+				</ol>
+				<a href="#download" id="download" style="color: inherit; text-decoration: none;">
+					<h2>Download</h2>
+				</a>
+				<a href="#github" id="github" style="color: inherit; text-decoration: none;">
+					<h3>Github</h3>
+				</a>
+				<ol>
+					<li>Download the <a href="https://github.com/ksplatdev/DuckEngine/releases/latest">latest release</a>.</li>
+					<li>Set up webpack pr parcel.</li>
+					<li>Import DuckEngine.</li>
+					<li>Read the docs.</li>
+				</ol>
+				<a href="#npm" id="npm" style="color: inherit; text-decoration: none;">
+					<h3>NPM</h3>
+				</a>
+				<ol>
+					<li>Run <code>npm install duckengine</code>.</li>
+					<li>Set up webpack or parcel.</li>
+					<li>Import DuckEngine.</li>
+					<li>Read the docs.</li>
+				</ol>
+				<a href="#developers39-guide" id="developers39-guide" style="color: inherit; text-decoration: none;">
+					<h2>Developers&#39; Guide</h2>
+				</a>
+				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+					<h3>Requirements</h3>
+				</a>
+				<ol>
+					<li>Knowledge of TypeScript, Git, and HTML Canvas.</li>
+					<li>Reading and agreeing to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.</li>
+					<li>Basic knowledge of how DuckEngine works.</li>
+				</ol>
+				<a href="#file-structure" id="file-structure" style="color: inherit; text-decoration: none;">
+					<h3>File Structure</h3>
+				</a>
+				<p>src / <br>&ensp; core / <br>&ensp; base / <br>&ensp; helper / <br>&ensp; utils / <br>&ensp; index.ts</p>
+				<a href="#meaning-amp-use" id="meaning-amp-use" style="color: inherit; text-decoration: none;">
+					<h4>Meaning &amp; Use</h4>
+				</a>
+				<ol>
+					<li>src - typescript files, main directory</li>
+					<li>lib - javascript files, compiled from src</li>
+					<li>dist - javascript &amp; type declaration files, bundled with webpack from lib</li>
+				</ol>
+				<a href="#how-to-contribute" id="how-to-contribute" style="color: inherit; text-decoration: none;">
+					<h3>How to contribute</h3>
+				</a>
+				<ol>
+					<li>Reading and agree to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.</li>
+					<li>Fork the repository.</li>
+					<li>Clone the fork to your computer.</li>
+					<li>CD into the cloned directory.</li>
+					<li>Run <code>npm install</code>.</li>
+					<li>Run <code>npm run build</code>.</li>
+					<li>Make your changes.</li>
+					<li>Create a pull request.</li>
+				</ol>
+				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
+					<h2>Versions</h2>
+				</a>
+				<p>DuckEngine does follow SemVer.</p>
+				<a href="#live-demo-with-parcel" id="live-demo-with-parcel" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel</a></h2>
+				</a>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_camera_camera.html">core/camera/camera</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_debug_debug.html">core/debug/debug</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_game.html">core/game</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_gameobjects_circle.html">core/gameobjects/circle</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_gameobjects_gameobject.html">core/gameobjects/game<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_gameobjects_rect.html">core/gameobjects/rect</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_gameobjects_roundrect.html">core/gameobjects/roundrect</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_gameobjects_sprite.html">core/gameobjects/sprite</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_group_group.html">core/group/group</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_input_input.html">core/input/input</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_interactive_text.html">core/interactive/text</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_lights_staticlight.html">core/lights/static<wbr>Light</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_loader_loader.html">core/loader/loader</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_map_map.html">core/map/map</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_map_tilemap.html">core/map/tilemap</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_math_clamp.html">core/math/clamp</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_physics_collider.html">core/physics/collider</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_scene.html">core/scene</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_sound_sound.html">core/sound/sound</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_storage_storage.html">core/storage/storage</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

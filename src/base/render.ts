@@ -1,3 +1,8 @@
+/**
+ * @description Basic class
+ * @exports
+ * @class Render
+ */
 export default class Render {
 	constructor() {}
 
