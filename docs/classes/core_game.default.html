@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>default | duckengine</title>
-	<meta name="description" content="Documentation for duckengine">
+	<title>default | DuckEngine - v1.0.0</title>
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,9 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">duckengine</a>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="../index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -41,6 +43,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -52,22 +56,91 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">duckengine</a>
-				</li>
-				<li>
 					<a href="../modules/core_game.html">core/game</a>
 				</li>
 				<li>
 					<a href="core_game.default.html">default</a>
 				</li>
 			</ul>
-			<h1>Class default</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
-		<div class="col-8 col-content">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_camera_camera.html">core/camera/camera</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_debug_debug.html">core/debug/debug</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/core_game.html">core/game</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_gameobjects_circle.html">core/gameobjects/circle</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_gameobjects_gameobject.html">core/gameobjects/gameObject</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_gameobjects_rect.html">core/gameobjects/rect</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_gameobjects_roundrect.html">core/gameobjects/roundrect</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_gameobjects_sprite.html">core/gameobjects/sprite</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_group_group.html">core/group/group</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_input_input.html">core/input/input</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_interactive_text.html">core/interactive/text</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_lights_staticlight.html">core/lights/staticLight</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_loader_loader.html">core/loader/loader</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_map_map.html">core/map/map</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_map_tilemap.html">core/map/tilemap</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_math_clamp.html">core/math/clamp</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_physics_collider.html">core/physics/collider</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_scene.html">core/scene</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_sound_sound.html">core/sound/sound</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_storage_storage.html">core/storage/storage</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/index.html">index</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>Class default</h1>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -77,7 +150,6 @@
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
@@ -119,22 +191,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type" data-tsd-kind="Interface">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_game.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
+						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_game.default.html" class="tsd-signature-type">default</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L18">core/game.ts:18</a></li>
+									<li>Defined in core/game.ts:18</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type" data-tsd-kind="Interface">Config</a></h5>
+									<h5>config: <a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type">Config</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="core_game.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="core_game.default.html" class="tsd-signature-type">default</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -147,17 +219,17 @@
 					<div class="tsd-signature tsd-kind-icon">canvas<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLCanvasElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L8">core/game.ts:8</a></li>
+							<li>Defined in core/game.ts:8</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="config" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> config</h3>
-					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type" data-tsd-kind="Interface">Config</a></div>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.duck.game.config.html" class="tsd-signature-type">Config</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L7">core/game.ts:7</a></li>
+							<li>Defined in core/game.ts:7</li>
 						</ul>
 					</aside>
 				</section>
@@ -167,27 +239,27 @@
 					<div class="tsd-signature tsd-kind-icon">ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CanvasRenderingContext2D</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L9">core/game.ts:9</a></li>
+							<li>Defined in core/game.ts:9</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gamestorage" class="tsd-anchor"></a>
 					<h3>game<wbr>Storage</h3>
-					<div class="tsd-signature tsd-kind-icon">game<wbr>Storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_storage_storage.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></div>
+					<div class="tsd-signature tsd-kind-icon">game<wbr>Storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_storage_storage.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L12">core/game.ts:12</a></li>
+							<li>Defined in core/game.ts:12</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="misc" class="tsd-anchor"></a>
 					<h3>misc</h3>
-					<div class="tsd-signature tsd-kind-icon">misc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>elapsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>lastTime<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>requiredElapsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">misc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L11">core/game.ts:11</a></li>
+							<li>Defined in core/game.ts:11</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -208,28 +280,28 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="scenes" class="tsd-anchor"></a>
 					<h3>scenes</h3>
-					<div class="tsd-signature tsd-kind-icon">scenes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>add<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>remove<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">scenes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L15">core/game.ts:15</a></li>
+							<li>Defined in core/game.ts:15</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5>add<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<h5>add<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
 								<ul class="tsd-parameters">
-									<li class="tsd-parameter-signature">
+									<li class="tsd-parameter-siganture">
 										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 										</ul>
 										<ul class="tsd-descriptions">
 											<li class="tsd-description">
 												<h4 class="tsd-parameters-title">Parameters</h4>
 												<ul class="tsd-parameters">
 													<li>
-														<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h5>
+														<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type">default</a></h5>
 													</li>
 												</ul>
 												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -239,18 +311,18 @@
 								</ul>
 							</li>
 							<li class="tsd-parameter">
-								<h5>remove<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+								<h5>remove<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
 								<ul class="tsd-parameters">
-									<li class="tsd-parameter-signature">
+									<li class="tsd-parameter-siganture">
 										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 										</ul>
 										<ul class="tsd-descriptions">
 											<li class="tsd-description">
 												<h4 class="tsd-parameters-title">Parameters</h4>
 												<ul class="tsd-parameters">
 													<li>
-														<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h5>
+														<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type">default</a></h5>
 													</li>
 												</ul>
 												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -265,10 +337,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="stack" class="tsd-anchor"></a>
 					<h3>stack</h3>
-					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.duck.game.stack.html" class="tsd-signature-type" data-tsd-kind="Interface">Stack</a></div>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.duck.game.stack.html" class="tsd-signature-type">Stack</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L10">core/game.ts:10</a></li>
+							<li>Defined in core/game.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -285,7 +357,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L112">core/game.ts:112</a></li>
+									<li>Defined in core/game.ts:112</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -296,19 +368,19 @@
 					<a name="loop" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> loop</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">loop<span class="tsd-signature-symbol">(</span>self<span class="tsd-signature-symbol">: </span><a href="core_game.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">loop<span class="tsd-signature-symbol">(</span>self<span class="tsd-signature-symbol">: </span><a href="core_game.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L89">core/game.ts:89</a></li>
+									<li>Defined in core/game.ts:89</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>self: <a href="core_game.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h5>
+									<h5>self: <a href="core_game.default.html" class="tsd-signature-type">default</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -325,7 +397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L134">core/game.ts:134</a></li>
+									<li>Defined in core/game.ts:134</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -342,19 +414,19 @@
 					<a name="setscale" class="tsd-anchor"></a>
 					<h3>set<wbr>Scale</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Scale<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><a href="../interfaces/index.duck.misc.scale.html" class="tsd-signature-type" data-tsd-kind="Interface">Scale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Scale<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><a href="../interfaces/index.duck.misc.scale.html" class="tsd-signature-type">Scale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L120">core/game.ts:120</a></li>
+									<li>Defined in core/game.ts:120</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>scale: <a href="../interfaces/index.duck.misc.scale.html" class="tsd-signature-type" data-tsd-kind="Interface">Scale</a></h5>
+									<h5>scale: <a href="../interfaces/index.duck.misc.scale.html" class="tsd-signature-type">Scale</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -371,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L160">core/game.ts:160</a></li>
+									<li>Defined in core/game.ts:160</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -394,7 +466,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L85">core/game.ts:85</a></li>
+									<li>Defined in core/game.ts:85</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -411,7 +483,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/core/game.ts#L140">core/game.ts:140</a></li>
+									<li>Defined in core/game.ts:140</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -428,83 +500,14 @@
 					</ul>
 				</section>
 			</section>
+			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;],&quot;exclude&quot;:[&quot;src/helper/*.ts&quot;,&quot;src/helper/**/*.ts&quot;,&quot;src/utils/*.ts&quot;,&quot;src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;disableAliases&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;docs/&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="../modules.html">Exports</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_camera_camera.html">core/camera/camera</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_debug_debug.html">core/debug/debug</a>
-					</li>
-					<li class="current tsd-kind-module">
-						<a href="../modules/core_game.html">core/game</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_gameobjects_circle.html">core/gameobjects/circle</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_gameobjects_gameobject.html">core/gameobjects/game<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_gameobjects_rect.html">core/gameobjects/rect</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_gameobjects_roundrect.html">core/gameobjects/roundrect</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_gameobjects_sprite.html">core/gameobjects/sprite</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_group_group.html">core/group/group</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_input_input.html">core/input/input</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_interactive_text.html">core/interactive/text</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_lights_staticlight.html">core/lights/static<wbr>Light</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_loader_loader.html">core/loader/loader</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_map_map.html">core/map/map</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_map_tilemap.html">core/map/tilemap</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_math_clamp.html">core/math/clamp</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_physics_collider.html">core/physics/collider</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_scene.html">core/scene</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_sound_sound.html">core/sound/sound</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/core_storage_storage.html">core/storage/storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
-					</li>
-				</ul>
-			</nav>
+		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
+					<li class="current tsd-kind-class tsd-parent-kind-module root">
 						<a href="core_game.default.html" class="tsd-kind-icon">default</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
@@ -562,29 +565,9 @@
 	</div>
 </div>
 <footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-		</div>
-	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

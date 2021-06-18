@@ -30,7 +30,7 @@
 15. Animations
 16. Cutscenes
 17. Custom loader to load from URL or file path
-18. Docs
+18. [Docs](https://ksplatdev.github.io/DuckEngine/)
 19. Written in typescript
 20. Types are included
 21. And way more
@@ -50,6 +50,8 @@
 2. Set up webpack or parcel.
 3. Import DuckEngine.
 4. Read the docs.
+
+## [Docs](https://ksplatdev.github.io/DuckEngine/)
 
 ## Developers' Guide
 

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>core/input/input | duckengine</title>
-	<meta name="description" content="Documentation for duckengine">
+	<title>core/input/input | DuckEngine - v1.0.0</title>
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,9 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">duckengine</a>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="../index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -41,6 +43,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -52,34 +56,15 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">duckengine</a>
-				</li>
-				<li>
 					<a href="core_input_input.html">core/input/input</a>
 				</li>
 			</ul>
-			<h1>Module core/input/input</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/core_input_input.default.html" class="tsd-kind-icon">default</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
@@ -98,7 +83,7 @@
 						<a href="core_gameobjects_circle.html">core/gameobjects/circle</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="core_gameobjects_gameobject.html">core/gameobjects/game<wbr>Object</a>
+						<a href="core_gameobjects_gameobject.html">core/gameobjects/gameObject</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="core_gameobjects_rect.html">core/gameobjects/rect</a>
@@ -119,7 +104,7 @@
 						<a href="core_interactive_text.html">core/interactive/text</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="core_lights_staticlight.html">core/lights/static<wbr>Light</a>
+						<a href="core_lights_staticlight.html">core/lights/staticLight</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="core_loader_loader.html">core/loader/loader</a>
@@ -150,9 +135,27 @@
 					</li>
 				</ul>
 			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>Module core/input/input</h1>
+			<section class="tsd-panel-group tsd-index-group">
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/core_input_input.default.html" class="tsd-kind-icon">default</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;],&quot;exclude&quot;:[&quot;src/helper/*.ts&quot;,&quot;src/helper/**/*.ts&quot;,&quot;src/utils/*.ts&quot;,&quot;src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;disableAliases&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;docs/&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
+		</div>
+		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
+					<li class=" tsd-kind-class tsd-parent-kind-module root">
 						<a href="../classes/core_input_input.default.html" class="tsd-kind-icon">default</a>
 					</li>
 				</ul>
@@ -161,23 +164,9 @@
 	</div>
 </div>
 <footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-		</div>
-	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

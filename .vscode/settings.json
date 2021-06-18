@@ -18,6 +18,9 @@
 	"prettier.trailingComma": "es5",
 	"cSpell.words": [
 		"f",
-		"pers"
+		"pers",
+		"theme",
+		"twilio",
+		"typedoc"
 	]
 }

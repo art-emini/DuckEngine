@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Group | duckengine</title>
-	<meta name="description" content="Documentation for duckengine">
+	<title>Group | DuckEngine - v1.0.0</title>
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,9 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">duckengine</a>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="../index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -41,6 +43,8 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -52,9 +56,6 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">duckengine</a>
-				</li>
-				<li>
 					<a href="index.html">index</a>
 				</li>
 				<li>
@@ -64,63 +65,12 @@
 					<a href="index.duck.group.html">Group</a>
 				</li>
 			</ul>
-			<h1>Namespace Group</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#filter" class="tsd-kind-icon">Filter</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#stack" class="tsd-kind-icon">Stack</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#stackitem" class="tsd-kind-icon">Stack<wbr>Item</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="filter" class="tsd-anchor"></a>
-					<h3>Filter</h3>
-					<div class="tsd-signature tsd-kind-icon">Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;gameobject&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;lights&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;interactive&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;physics&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cameras&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/index.ts#L133">index.ts:133</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="stack" class="tsd-anchor"></a>
-					<h3>Stack</h3>
-					<div class="tsd-signature tsd-kind-icon">Stack<span class="tsd-signature-symbol">:</span> <a href="index.duck.group.html#stackitem" class="tsd-signature-type" data-tsd-kind="Type alias">StackItem</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/index.ts#L131">index.ts:131</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="stackitem" class="tsd-anchor"></a>
-					<h3>Stack<wbr>Item</h3>
-					<div class="tsd-signature tsd-kind-icon">Stack<wbr>Item<span class="tsd-signature-symbol">:</span> <a href="index.duck.html#gameobject" class="tsd-signature-type" data-tsd-kind="Type alias">GameObject</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_camera_camera.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_interactive_text.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_lights_staticlight.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_physics_collider.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ksplatdev/DuckEngine/blob/fc2716f/src/index.ts#L124">index.ts:124</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
@@ -165,15 +115,68 @@
 					</li>
 				</ul>
 			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>Namespace Group</h1>
+			<section class="tsd-panel-group tsd-index-group">
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#filter" class="tsd-kind-icon">Filter</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#stack" class="tsd-kind-icon">Stack</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#stackitem" class="tsd-kind-icon">Stack<wbr>Item</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
+					<a name="filter" class="tsd-anchor"></a>
+					<h3>Filter</h3>
+					<div class="tsd-signature tsd-kind-icon">Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"gameobject"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lights"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"interactive"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"physics"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"cameras"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:133</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">Stack<span class="tsd-signature-symbol">:</span> <a href="index.duck.group.html#stackitem" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:131</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
+					<a name="stackitem" class="tsd-anchor"></a>
+					<h3>Stack<wbr>Item</h3>
+					<div class="tsd-signature tsd-kind-icon">Stack<wbr>Item<span class="tsd-signature-symbol">:</span> <a href="index.duck.html#gameobject" class="tsd-signature-type">GameObject</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_interactive_text.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_lights_staticlight.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_physics_collider.default.html" class="tsd-signature-type">default</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:124</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;],&quot;exclude&quot;:[&quot;src/helper/*.ts&quot;,&quot;src/helper/**/*.ts&quot;,&quot;src/utils/*.ts&quot;,&quot;src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;disableAliases&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;docs/&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
+		</div>
+		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
 						<a href="index.duck.group.html#filter" class="tsd-kind-icon">Filter</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
 						<a href="index.duck.group.html#stack" class="tsd-kind-icon">Stack</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
 						<a href="index.duck.group.html#stackitem" class="tsd-kind-icon">Stack<wbr>Item</a>
 					</li>
 				</ul>
@@ -182,23 +185,9 @@
 	</div>
 </div>
 <footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-		</div>
-	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
