@@ -44,7 +44,12 @@ export namespace Duck {
 	export namespace Scene {}
 
 	export namespace Collider {
-		export type ShapeString = 'rect' | 'circle' | 'roundrect';
+		export type ShapeString =
+			| 'rect'
+			| 'circle'
+			| 'roundrect'
+			| 'spritesheet'
+			| 'sprite';
 	}
 
 	export namespace Storage {
@@ -137,6 +142,28 @@ export namespace Duck {
 			| 'interactive'
 			| 'physics'
 			| 'cameras';
+	}
+
+	export namespace SpriteSheet {}
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	namespace Helper {
+		type ArrayLengthMutationKeys =
+			| 'splice'
+			| 'push'
+			| 'pop'
+			| 'shift'
+			| 'unshift'
+			| number;
+		type ArrayItems<T extends Array<unknown>> = T extends Array<
+			infer TItems
+		>
+			? TItems
+			: never;
+		export type FixedLengthArray<T extends unknown[]> = Pick<
+			T,
+			Exclude<keyof T, ArrayLengthMutationKeys>
+		> & { [Symbol.iterator]: () => IterableIterator<ArrayItems<T>> };
 	}
 }
 

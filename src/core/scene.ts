@@ -113,13 +113,7 @@ export default class Scene extends Basic {
 					w?: number,
 					h?: number
 				) => {
-					if (w) {
-						return new Sprite(x, y, imgpath, this.game, w);
-					} else if (h) {
-						return new Sprite(x, y, imgpath, this.game, w, h);
-					} else {
-						return new Sprite(x, y, imgpath, this.game);
-					}
+					return new Sprite(x, y, imgpath, this.game, w, h);
 				},
 				rect: (
 					x: number,

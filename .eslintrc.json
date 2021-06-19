@@ -14,7 +14,7 @@
 		"indent": ["error", "tab"],
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
+		"semi": ["warn", "always"],
 		"eqeqeq": ["error", "always"],
 		"@typescript-eslint/no-namespace": 0,
 		"@typescript-eslint/explicit-module-boundary-types": 0

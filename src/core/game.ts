@@ -8,7 +8,6 @@ export default class Game {
 	public canvas: HTMLCanvasElement | null;
 	public ctx: CanvasRenderingContext2D | null | undefined;
 	public stack: Duck.Game.Stack;
-	public misc: { lastTime: number; requiredElapsed: number; elapsed: number };
 	public gameStorage: DuckStorage | undefined;
 
 	// methods
@@ -43,14 +42,6 @@ export default class Game {
 		this.stack = {
 			scenes: [],
 			defaultScene: this.config.defaultScene,
-		};
-
-		// misc
-		// for delta time
-		this.misc = {
-			lastTime: Date.now(),
-			requiredElapsed: 1000 / 100,
-			elapsed: 0,
 		};
 
 		this.gameStorage;
@@ -95,8 +86,8 @@ export default class Game {
 			}
 
 			if (scene.visible) {
-				scene.render();
 				scene.update();
+				scene.render();
 			}
 
 			if (scene.currentCamera) {

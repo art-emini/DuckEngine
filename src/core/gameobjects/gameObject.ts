@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Duck } from '../../index';
 import Game from '../game';
 import Collider from '../physics/collider';
@@ -73,7 +75,6 @@ export default class GameObject {
 		this.self = self;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public draw() {}
 
 	public setScale(scale: Duck.Misc.Scale | number) {

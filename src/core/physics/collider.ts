@@ -12,6 +12,7 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
+import Sprite from '../gameobjects/sprite';
 export default class Collider {
 	public readonly shapeType: string;
 	public shape: Duck.GameObject;
@@ -27,10 +28,7 @@ export default class Collider {
 		this.game = game;
 	}
 
-	public update(
-		shape: Duck.GameObject,
-		otherShapes: Duck.GameObject[]
-	): void {
+	public update(shape: Duck.GameObject, otherShapes: Duck.GameObject[]) {
 		this.shape = shape;
 		otherShapes.forEach((otherShape) => {
 			if (
@@ -38,6 +36,14 @@ export default class Collider {
 				otherShape.shape === 'roundrect'
 			) {
 				this.collideRectangle(otherShape as Rect);
+			}
+
+			if (otherShape.shape === 'sprite') {
+				this.collideSprite(otherShape as Sprite);
+			}
+
+			if (otherShape.shape === 'spritesheet') {
+				return;
 			}
 
 			if (otherShape.shape === 'circle') {
@@ -74,6 +80,37 @@ export default class Collider {
 			if (dy < 0) this.shape.y = rect.y + rect.h;
 			// top
 			else this.shape.y = rect.y - rect.h; // bottom
+		}
+
+		return true;
+	}
+
+	private collideSprite(sprite: Sprite) {
+		const rectCX = sprite.x + sprite.w * 0.5;
+		const rectCY = sprite.y + sprite.h * 0.5;
+
+		const thisCX = this.shape.x + this.shape.w * 0.5;
+		const thisCY = this.shape.y + this.shape.h * 0.5;
+
+		const dx = rectCX - thisCX; // x difference between centers
+		const dy = rectCY - thisCY; // y difference between centers
+		const aw = (sprite.w + this.shape.w) * 0.5; // average width
+		const ah = (sprite.h + this.shape.h) * 0.5; // average height
+
+		/* If either distance is greater than the average dimension there is no collision. */
+		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
+
+		/* To determine which region of this rectangle the rect's center
+          point is in, we have to account for the scale of the this rectangle.
+          To do that, we divide dx and dy by it's width and height respectively. */
+		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
+			if (dx < 0) this.shape.x = sprite.x + sprite.w;
+			// left
+			else this.shape.x = sprite.x - this.shape.w; // right
+		} else {
+			if (dy < 0) this.shape.y = sprite.y + sprite.h;
+			// top
+			else this.shape.y = sprite.y - this.shape.h; // bottom
 		}
 
 		return true;
