@@ -1,3 +1,7 @@
 {
-	"recommendations": ["esbenp.prettier-vscode", "2gua.rainbow-brackets"]
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"coenraads.bracket-pair-colorizer-2",
+		"dbaeumer.vscode-eslint"
+	]
 }

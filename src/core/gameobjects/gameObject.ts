@@ -20,8 +20,8 @@ export default class GameObject {
 
 	private rotAngle: number;
 
-	private collider: Collider | undefined;
-	private collidesWith: Duck.GameObject[];
+	public collider: Collider | undefined;
+	public collidesWith: Duck.GameObject[];
 	public vx: number;
 	public vy: number;
 
@@ -64,11 +64,22 @@ export default class GameObject {
 		this.physics = {
 			addCollider: (collidesWith: Duck.GameObject[]) => {
 				this.collidesWith = collidesWith;
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				this.collider = new Collider('rect', this.self!, this.game);
+
+				this.collider = new Collider(
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					this.self!,
+					collidesWith,
+					this.game
+				);
+
 				return this.collider;
 			},
 		};
+
+		// fix
+		if (this.game.ctx) {
+			this.game.ctx.globalCompositeOperation = 'source-over';
+		}
 	}
 
 	protected init(self: Duck.GameObject) {

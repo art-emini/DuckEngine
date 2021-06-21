@@ -9,7 +9,7 @@
 		"build": "sh scripts/build.sh",
 		"webpack": "webpack --config webpack.config.js",
 		"minify": "uglifyjs dist/duckengine.js -o dist/duckengine.min.js",
-		"docify": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default"
+		"build:docs": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default"
 	},
 	"repository": {
 		"type": "git",
@@ -38,7 +38,7 @@
 		"express": "^4.17.1",
 		"typedoc": "^0.21.0",
 		"typedoc-neo-theme": "^1.1.1",
-		"typescript": "^4.2.3",
+		"typescript": "^4.3.4",
 		"uglify-js": "^3.13.9",
 		"webpack": "^5.39.1",
 		"webpack-cli": "^4.7.2"

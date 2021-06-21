@@ -1,10 +1,11 @@
 // circle collision physics from https://github.com/pothonprogramming/pothonprogramming.github.io/blob/master/content/circle-collision-response/circle-collision-response.html
+// most of rect physics also from PothOnProgramming
 
 /* 
 
 TODO
 
-CREATE RECT TO RECT COLLISION RESPONSE
+CREATE CIRCLE TO RECT COLLISION RESPONSE
 
 */
 
@@ -14,23 +15,31 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
 export default class Collider {
-	public readonly shapeType: string;
 	public shape: Duck.GameObject;
+	public collidesWith: Duck.GameObject[];
 	private game: Game;
 
 	constructor(
-		shapeType: Duck.Collider.ShapeString,
 		shape: Duck.GameObject,
+		collidesWith: Duck.GameObject[],
 		game: Game
 	) {
-		this.shapeType = shapeType;
 		this.shape = shape;
+		this.collidesWith = collidesWith;
 		this.game = game;
 	}
 
-	public update(shape: Duck.GameObject, otherShapes: Duck.GameObject[]) {
+	public update(
+		shape: Duck.GameObject,
+		diffCollidesWith?: Duck.GameObject[]
+	) {
 		this.shape = shape;
-		otherShapes.forEach((otherShape) => {
+
+		if (diffCollidesWith) {
+			this.collidesWith = diffCollidesWith;
+		}
+
+		this.collidesWith.forEach((otherShape) => {
 			if (
 				otherShape.shape === 'rect' ||
 				otherShape.shape === 'roundrect'

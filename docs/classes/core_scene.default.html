@@ -71,7 +71,7 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Exports</a>
+						<a href="../modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/core_camera_camera.html">core/camera/camera</a>
@@ -120,6 +120,12 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/core_math_clamp.html">core/math/clamp</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_particles_particle.html">core/particles/particle</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_particles_particleemitter.html">core/particles/particleEmitter</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/core_physics_collider.html">core/physics/collider</a>
@@ -174,18 +180,16 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_scene.default.html#key" class="tsd-kind-icon">key</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_scene.default.html#maincamera-1" class="tsd-kind-icon">main<wbr>Camera</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_scene.default.html#mainobject" class="tsd-kind-icon">main<wbr>Object</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_scene.default.html#tools" class="tsd-kind-icon">tools</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_scene.default.html#visible" class="tsd-kind-icon">visible</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_scene.default.html#onchange" class="tsd-kind-icon">on<wbr>Change</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_scene.default.html#render" class="tsd-kind-icon">render</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_scene.default.html#setmaincamera" class="tsd-kind-icon">set<wbr>Main<wbr>Camera</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_scene.default.html#switchcamera" class="tsd-kind-icon">switch<wbr>Camera</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_scene.default.html#switchtomaincamera" class="tsd-kind-icon">switch<wbr>ToMain<wbr>Camera</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_scene.default.html#update" class="tsd-kind-icon">update</a></li>
 							</ul>
 						</section>
 					</div>
@@ -204,7 +208,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Basic.constructor</p>
 								<ul>
-									<li>Defined in core/scene.ts:81</li>
+									<li>Defined in core/scene.ts:148</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -232,7 +236,7 @@
 					<div class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:36</li>
+							<li>Defined in core/scene.ts:58</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -506,6 +510,69 @@
 								</ul>
 							</li>
 							<li class="tsd-parameter">
+								<h5>particle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-siganture">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>shape<span class="tsd-signature-symbol">: </span><a href="../modules/index.duck.collider.html#shapestring" class="tsd-signature-type">ShapeString</a>, w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, r<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fillColor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_particles_particle.default.html" class="tsd-signature-type">default</a></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>shape: <a href="../modules/index.duck.collider.html#shapestring" class="tsd-signature-type">ShapeString</a></h5>
+													</li>
+													<li>
+														<h5>w: <span class="tsd-signature-type">number</span></h5>
+													</li>
+													<li>
+														<h5>h: <span class="tsd-signature-type">number</span></h5>
+													</li>
+													<li>
+														<h5>r: <span class="tsd-signature-type">number</span></h5>
+													</li>
+													<li>
+														<h5>fillColor: <span class="tsd-signature-type">string</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="core_particles_particle.default.html" class="tsd-signature-type">default</a></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>particle<wbr>Emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-siganture">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>particle<span class="tsd-signature-symbol">: </span><a href="core_particles_particle.default.html" class="tsd-signature-type">default</a>, rangeX<span class="tsd-signature-symbol">: </span><a href="../modules/index.duck.particleemitter.html#range" class="tsd-signature-type">range</a>, rangeY<span class="tsd-signature-symbol">: </span><a href="../modules/index.duck.particleemitter.html#range" class="tsd-signature-type">range</a>, amount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_particles_particleemitter.default.html" class="tsd-signature-type">default</a></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>particle: <a href="core_particles_particle.default.html" class="tsd-signature-type">default</a></h5>
+													</li>
+													<li>
+														<h5>rangeX: <a href="../modules/index.duck.particleemitter.html#range" class="tsd-signature-type">range</a></h5>
+													</li>
+													<li>
+														<h5>rangeY: <a href="../modules/index.duck.particleemitter.html#range" class="tsd-signature-type">range</a></h5>
+													</li>
+													<li>
+														<h5>amount: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="core_particles_particleemitter.default.html" class="tsd-signature-type">default</a></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
 								<h5>sound<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter-siganture">
@@ -538,7 +605,7 @@
 					<div class="tsd-signature tsd-kind-icon">cameras<span class="tsd-signature-symbol">:</span> <a href="core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:32</li>
+							<li>Defined in core/scene.ts:54</li>
 						</ul>
 					</aside>
 				</section>
@@ -548,7 +615,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Camera<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_camera_camera.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:29</li>
+							<li>Defined in core/scene.ts:51</li>
 						</ul>
 					</aside>
 				</section>
@@ -558,7 +625,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:26</li>
+							<li>Defined in core/scene.ts:48</li>
 						</ul>
 					</aside>
 				</section>
@@ -568,7 +635,7 @@
 					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="core_game.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:24</li>
+							<li>Defined in core/scene.ts:46</li>
 						</ul>
 					</aside>
 				</section>
@@ -578,7 +645,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:23</li>
+							<li>Defined in core/scene.ts:45</li>
 						</ul>
 					</aside>
 				</section>
@@ -588,7 +655,7 @@
 					<div class="tsd-signature tsd-kind-icon">main<wbr>Camera<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_camera_camera.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:30</li>
+							<li>Defined in core/scene.ts:52</li>
 						</ul>
 					</aside>
 				</section>
@@ -598,9 +665,327 @@
 					<div class="tsd-signature tsd-kind-icon">main<wbr>Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../modules/index.duck.html#gameobject" class="tsd-signature-type">GameObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:28</li>
+							<li>Defined in core/scene.ts:50</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tools" class="tsd-anchor"></a>
+					<h3>tools</h3>
+					<div class="tsd-signature tsd-kind-icon">tools<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/scene.ts:118</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>color<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>convert<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter">
+												<h5>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter">
+														<h5>to<wbr>Hsl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>hex: <span class="tsd-signature-type">string</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+													<li class="tsd-parameter">
+														<h5>to<wbr>Rgb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>hex: <span class="tsd-signature-type">string</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span>
+																			<span class="tsd-signature-symbol"> | </span>
+																			<span class="tsd-signature-type">string</span>
+																		</h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+													<li class="tsd-parameter">
+														<h5>to<wbr>Rgba<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, alpha<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>hex: <span class="tsd-signature-type">string</span></h5>
+																			</li>
+																			<li>
+																				<h5>alpha: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li class="tsd-parameter">
+												<h5>rgb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter">
+														<h5>to<wbr>Hsl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>r<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, g<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>r: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																			<li>
+																				<h5>g: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																			<li>
+																				<h5>b: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+													<li class="tsd-parameter">
+														<h5>to<wbr>Rgba<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>color<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, alpha<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>color: <span class="tsd-signature-type">string</span></h5>
+																			</li>
+																			<li>
+																				<h5>alpha: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li class="tsd-parameter">
+												<h5>rgba<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter">
+														<h5>to<wbr>Hsla<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>r<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, g<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>r: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+																			</li>
+																			<li>
+																				<h5>g: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+																			</li>
+																			<li>
+																				<h5>b: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+																			</li>
+																			<li>
+																				<h5>a: <span class="tsd-signature-type">number</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+													<li class="tsd-parameter">
+														<h5>to<wbr>Rgb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+														<ul class="tsd-parameters">
+															<li class="tsd-parameter-siganture">
+																<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+																	<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>rgba<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+																</ul>
+																<ul class="tsd-descriptions">
+																	<li class="tsd-description">
+																		<h4 class="tsd-parameters-title">Parameters</h4>
+																		<ul class="tsd-parameters">
+																			<li>
+																				<h5>rgba: <span class="tsd-signature-type">string</span></h5>
+																			</li>
+																		</ul>
+																		<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class="tsd-parameter">
+										<h5>is<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter">
+												<h5>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-siganture">
+														<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>str: <span class="tsd-signature-type">string</span></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li class="tsd-parameter">
+												<h5>hsl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-siganture">
+														<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>str: <span class="tsd-signature-type">string</span></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li class="tsd-parameter">
+												<h5>rgb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-siganture">
+														<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>str: <span class="tsd-signature-type">string</span></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class="tsd-parameter">
+										<h5>random<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter-siganture">
+												<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+													<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+												</ul>
+												<ul class="tsd-descriptions">
+													<li class="tsd-description">
+														<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>random<wbr>Int<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-siganture">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>min: <span class="tsd-signature-type">number</span></h5>
+													</li>
+													<li>
+														<h5>max: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="visible" class="tsd-anchor"></a>
@@ -608,49 +993,13 @@
 					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/scene.ts:25</li>
+							<li>Defined in core/scene.ts:47</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="onchange" class="tsd-anchor"></a>
-					<h3>on<wbr>Change</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Basic.onChange</p>
-								<ul>
-									<li>Defined in base/render.ts:14</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="render" class="tsd-anchor"></a>
-					<h3>render</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Basic.render</p>
-								<ul>
-									<li>Defined in base/render.ts:10</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setmaincamera" class="tsd-anchor"></a>
 					<h3>set<wbr>Main<wbr>Camera</h3>
@@ -661,7 +1010,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/scene.ts:208</li>
+									<li>Defined in core/scene.ts:325</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -684,7 +1033,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/scene.ts:193</li>
+									<li>Defined in core/scene.ts:310</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -707,25 +1056,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/scene.ts:204</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="update" class="tsd-anchor"></a>
-					<h3>update</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Basic.update</p>
-								<ul>
-									<li>Defined in base/render.ts:12</li>
+									<li>Defined in core/scene.ts:321</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -733,7 +1064,7 @@
 					</ul>
 				</section>
 			</section>
-			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;entryPoints&quot;:[&quot;src/&quot;],&quot;exclude&quot;:[&quot;src/helper/*.ts&quot;,&quot;src/helper/**/*.ts&quot;,&quot;src/utils/*.ts&quot;,&quot;src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;disableAliases&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;docs/&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;listInvalidSymbolLinks&quot;:false}-->
+			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;packages&quot;:[],&quot;entryPoints&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src&quot;],&quot;exclude&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/**/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/utils/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;sort&quot;:[&quot;kind&quot;,&quot;instance-first&quot;,&quot;alphabetical&quot;],&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;treatWarningsAsErrors&quot;:false,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -771,13 +1102,10 @@
 								<a href="core_scene.default.html#mainobject" class="tsd-kind-icon">main<wbr>Object</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_scene.default.html#tools" class="tsd-kind-icon">tools</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_scene.default.html#visible" class="tsd-kind-icon">visible</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_scene.default.html#onchange" class="tsd-kind-icon">on<wbr>Change</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_scene.default.html#render" class="tsd-kind-icon">render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_scene.default.html#setmaincamera" class="tsd-kind-icon">set<wbr>Main<wbr>Camera</a>
@@ -787,9 +1115,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_scene.default.html#switchtomaincamera" class="tsd-kind-icon">switch<wbr>ToMain<wbr>Camera</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_scene.default.html#update" class="tsd-kind-icon">update</a>
 							</li>
 						</ul>
 					</li>

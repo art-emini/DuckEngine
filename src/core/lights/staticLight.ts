@@ -55,6 +55,7 @@ export default class StaticLight {
 			this.game.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
 			this.game.ctx.fillStyle = this.color;
 			this.game.ctx.fill();
+			this.game.ctx.globalCompositeOperation = 'source-over';
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'

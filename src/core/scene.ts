@@ -12,12 +12,34 @@ import Circle from './gameobjects/circle';
 import Text from './interactive/text';
 import RoundRect from './gameobjects/roundrect';
 
+// particle stuff
+import Particle from './particles/particle';
+import ParticleEmitter from './particles/particleEmitter';
+
 // other stuff
 import Sound from './sound/sound';
 import Input from './input/input';
 import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
 import Group from './group/group';
+
+// tools
+import randomInt from '../utils/randomInt';
+import randomColor from '../helper/color/randomColor';
+
+// color
+// is
+import isHex from '../helper/color/isHex';
+import isHSL from '../helper/color/isHSL';
+import isRGB from '../helper/color/isRGB';
+// convert
+import rgbToRGBA from '../helper/color/rgbToRGBA';
+import rgbToHSL from '../helper/color/rgbToHSL';
+import rgbaToHSLA from '../helper/color/rgbaToHSLA';
+import rgbaToRGB from '../helper/color/rgbaToRGB';
+import hexToRGBA from '../helper/color/hexToRGBA';
+import hexToRGB from '../helper/color/hexToRGB';
+import hexToHSL from '../helper/color/hexToHSL';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -78,6 +100,51 @@ export default class Scene extends Basic {
 			name: string,
 			defaultValues?: Duck.Group.StackItem[]
 		) => Group<Duck.Group.StackItem>;
+		particle: (
+			shape: Duck.Collider.ShapeString,
+			w: number,
+			h: number,
+			r: number,
+			fillColor: string
+		) => Particle;
+		particleEmitter: (
+			particle: Particle,
+			rangeX: Duck.ParticleEmitter.range,
+			rangeY: Duck.ParticleEmitter.range,
+			amount: number
+		) => ParticleEmitter;
+	};
+
+	public tools: {
+		randomInt: (min: number, max: number) => number;
+		color: {
+			random: () => string;
+			is: {
+				hex: (str: string) => boolean;
+				hsl: (str: string) => boolean;
+				rgb: (str: string) => boolean;
+			};
+			convert: {
+				rgb: {
+					toHsl: (r: number, g: number, b: number) => string;
+					toRgba: (color: string, alpha: number) => string;
+				};
+				rgba: {
+					toHsla: (
+						r: string | number,
+						g: string | number,
+						b: string | number,
+						a: number
+					) => string;
+					toRgb: (rgba: string) => string;
+				};
+				hex: {
+					toRgba: (hex: string, alpha: number) => string;
+					toRgb: (hex: string) => string | null;
+					toHsl: (hex: string) => string;
+				};
+			};
+		};
 	};
 
 	constructor(key: string, game: Game, visible?: boolean) {
@@ -186,6 +253,56 @@ export default class Scene extends Basic {
 			},
 			group: (name: string, defaultValues?: Duck.Group.StackItem[]) => {
 				return new Group(name, defaultValues);
+			},
+			particle: (
+				shape: Duck.Collider.ShapeString,
+				w: number,
+				h: number,
+				r: number,
+				fillColor: string
+			) => {
+				return new Particle(shape, w, h, r, fillColor, this.game);
+			},
+			particleEmitter: (
+				particle: Particle,
+				rangeX: Duck.ParticleEmitter.range,
+				rangeY: Duck.ParticleEmitter.range,
+				amount: number
+			) => {
+				return new ParticleEmitter(
+					particle,
+					rangeX,
+					rangeY,
+					amount,
+					this.game
+				);
+			},
+		};
+
+		this.tools = {
+			randomInt: randomInt,
+			color: {
+				random: randomColor,
+				is: {
+					hex: isHex,
+					hsl: isHSL,
+					rgb: isRGB,
+				},
+				convert: {
+					rgb: {
+						toHsl: rgbToHSL,
+						toRgba: rgbToRGBA,
+					},
+					rgba: {
+						toHsla: rgbaToHSLA,
+						toRgb: rgbaToRGB,
+					},
+					hex: {
+						toRgba: hexToRGBA,
+						toRgb: hexToRGB,
+						toHsl: hexToHSL,
+					},
+				},
 			},
 		};
 	}

@@ -8,7 +8,7 @@ echo "Minifying"
 npm run minify
 echo "Minified"
 echo "Building Docs"
-npm run docify
+npm run build:docs
 echo "Built Docs"
 echo "Finishing"
 cp package.json lib/package.json

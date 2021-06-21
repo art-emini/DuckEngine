@@ -11,6 +11,14 @@
 			"problemMatcher": [],
 			"label": "npm: build",
 			"detail": "sh scripts/build.sh"
+		},
+		{
+			"type": "npm",
+			"script": "build:docs",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build:docs",
+			"detail": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default"
 		}
 	]
 }

@@ -41,8 +41,6 @@ export namespace Duck {
 		}
 	}
 
-	export namespace Scene {}
-
 	export namespace Collider {
 		export type ShapeString =
 			| 'rect'
@@ -144,7 +142,9 @@ export namespace Duck {
 			| 'cameras';
 	}
 
-	export namespace SpriteSheet {}
+	export namespace ParticleEmitter {
+		export type range = Helper.FixedLengthArray<[number, number]>;
+	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	namespace Helper {
