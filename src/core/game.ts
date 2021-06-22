@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Duck } from '../index';
 import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
@@ -23,9 +24,15 @@ export default class Game {
 
 		// auto
 		if (!this.canvas || !this.ctx) {
-			this.canvas = document.createElement('canvas');
-			document.body.appendChild(this.canvas);
-			this.ctx = this.canvas.getContext('2d');
+			// check if canvas exists on document
+			if (document.querySelector('canvas')) {
+				this.canvas = document.querySelector('canvas')!;
+				this.ctx = this.canvas.getContext('2d')!;
+			} else {
+				this.canvas = document.createElement('canvas')!;
+				document.body.appendChild(this.canvas);
+				this.ctx = this.canvas.getContext('2d')!;
+			}
 		}
 
 		// set scale

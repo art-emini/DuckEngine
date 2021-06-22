@@ -199,6 +199,21 @@
 				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
 					<h2><a href="https://ksplatdev.github.io/DuckEngine/">Docs</a></h2>
 				</a>
+				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+					<h2>Typescript</h2>
+				</a>
+				<p>How to use DuckEngine with Typescript.</p>
+				<ol>
+					<li>Setup webpack/parcel and tsconfig.</li>
+					<li>Add the following to your tsconfig compilerOptions</li>
+				</ol>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;typeRoots&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;./node_modules/@types&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;path_to_duckengine.d.ts&quot;</span>
+<span style="color: #000000">    ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#developers39-guide" id="developers39-guide" style="color: inherit; text-decoration: none;">
 					<h2>Developers&#39; Guide</h2>
 				</a>
@@ -216,6 +231,10 @@
 				<pre><code class="language-bash"><span style="color: #795E26">.</span>
 <span style="color: #000000">├── CODE_OF_CONDUCT.md</span>
 <span style="color: #000000">├── CONTRIBUTING.md</span>
+<span style="color: #000000">├── global</span>
+<span style="color: #000000">│   ├── Logo.png</span>
+<span style="color: #000000">│   ├── Logo.xcf</span>
+<span style="color: #000000">│   └── README.md</span>
 <span style="color: #000000">├── LICENSE</span>
 <span style="color: #000000">├── package.json</span>
 <span style="color: #000000">├── package-lock.json</span>
@@ -250,7 +269,6 @@
 <span style="color: #000000">│   │   ├── loader</span>
 <span style="color: #000000">│   │   │   └── loader.ts</span>
 <span style="color: #000000">│   │   ├── map</span>
-<span style="color: #000000">│   │   │   ├── duckmap.ts</span>
 <span style="color: #000000">│   │   │   └── tilemap.ts</span>
 <span style="color: #000000">│   │   ├── math</span>
 <span style="color: #000000">│   │   │   └── clamp.ts</span>
@@ -294,9 +312,10 @@
 					<h4>Meaning &amp; Use</h4>
 				</a>
 				<ol>
-					<li>src - typescript files, main directory</li>
-					<li>lib - javascript files, compiled from src</li>
-					<li>dist - javascript &amp; type declaration files, bundled with webpack from lib</li>
+					<li>src - Typescript files, main directory</li>
+					<li>lib - Javascript files, compiled from src</li>
+					<li>dist - Javascript &amp; type declaration files, bundled with webpack from lib</li>
+					<li>global - Global Assets</li>
 				</ol>
 				<a href="#how-to-contribute" id="how-to-contribute" style="color: inherit; text-decoration: none;">
 					<h3>How to contribute</h3>
@@ -316,10 +335,11 @@
 					<h3>NPM Scripts</h3>
 				</a>
 				<ol>
+					<li><code>npm run test</code> - Opens the <a href="#live-demo-with-parcel">codesandbox test</a>.</li>
 					<li><code>npm run build</code> - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.</li>
+					<li><code>npm run build:docs</code> - Uses TypeDoc to build docs.</li>
 					<li><code>npm run webpack</code> - Bundles files in lib directory.</li>
 					<li><code>npm run minify</code> - Uses uglifyjs to minify bundled file.</li>
-					<li><code>npm run build:docs</code> - Uses TypeDoc to build docs.</li>
 					<li><code>npm run format</code> - Uses Prettier to format files.</li>
 					<li><code>npm run format:watch</code> - Watches for changes and formats once changes are saved.</li>
 				</ol>
@@ -330,6 +350,14 @@
 				<a href="#live-demo-with-parcel" id="live-demo-with-parcel" style="color: inherit; text-decoration: none;">
 					<h2><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel</a></h2>
 				</a>
+				<a href="#attribution" id="attribution" style="color: inherit; text-decoration: none;">
+					<h2>Attribution</h2>
+				</a>
+				<p>Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.</p>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p><a href="LICENSE">MIT</a></p>
 			</div>
 			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;packages&quot;:[],&quot;entryPoints&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src&quot;],&quot;exclude&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/**/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/utils/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;sort&quot;:[&quot;kind&quot;,&quot;instance-first&quot;,&quot;alphabetical&quot;],&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;treatWarningsAsErrors&quot;:false,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>

@@ -7,7 +7,7 @@ module.exports = {
 
 	output: {
 		path: __dirname + '/dist/',
-		filename: 'duckengine.js',
+		filename: 'index.js',
 		libraryTarget: 'module',
 	},
 	optimization: {

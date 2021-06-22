@@ -53,6 +53,22 @@
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)
 
+## Typescript
+
+How to use DuckEngine with Typescript.
+
+1. Setup webpack/parcel and tsconfig.
+2. Add the following to your tsconfig compilerOptions
+
+```json
+{
+    "typeRoots": [
+        "./node_modules/@types",
+        "path_to_duckengine.d.ts"
+    ]
+}
+```
+
 ## Developers' Guide
 
 ### Requirements
@@ -67,6 +83,10 @@
 .
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
+├── global
+│   ├── Logo.png
+│   ├── Logo.xcf
+│   └── README.md
 ├── LICENSE
 ├── package.json
 ├── package-lock.json
@@ -101,7 +121,6 @@
 │   │   ├── loader
 │   │   │   └── loader.ts
 │   │   ├── map
-│   │   │   ├── duckmap.ts
 │   │   │   └── tilemap.ts
 │   │   ├── math
 │   │   │   └── clamp.ts
@@ -144,9 +163,10 @@
 
 #### Meaning & Use
 
-1. src - typescript files, main directory
-2. lib - javascript files, compiled from src
-3. dist - javascript & type declaration files, bundled with webpack from lib
+1. src - Typescript files, main directory
+2. lib - Javascript files, compiled from src
+3. dist - Javascript & type declaration files, bundled with webpack from lib
+4. global - Global Assets
 
 ### How to contribute
 
@@ -162,15 +182,24 @@
 
 ### NPM Scripts
 
-1. `npm run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
-2. `npm run webpack` - Bundles files in lib directory.
-3. `npm run minify` - Uses uglifyjs to minify bundled file.
-4. `npm run build:docs` - Uses TypeDoc to build docs.
-5. `npm run format` - Uses Prettier to format files.
-6. `npm run format:watch` - Watches for changes and formats once changes are saved.
+1. `npm run test` - Opens the [codesandbox test](#live-demo-with-parcel).
+2. `npm run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
+3. `npm run build:docs` - Uses TypeDoc to build docs.
+4. `npm run webpack` - Bundles files in lib directory.
+5. `npm run minify` - Uses uglifyjs to minify bundled file.
+6. `npm run format` - Uses Prettier to format files.
+7. `npm run format:watch` - Watches for changes and formats once changes are saved.
 
 ## Versions
 
 DuckEngine does follow SemVer.
 
 ## [Live Demo with Parcel](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+
+## Attribution
+
+Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.
+
+## License
+
+[MIT](LICENSE)
