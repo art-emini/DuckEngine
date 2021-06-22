@@ -189,6 +189,9 @@ How to use DuckEngine with Typescript.
 5. `npm run minify` - Uses uglifyjs to minify bundled file.
 6. `npm run format` - Uses Prettier to format files.
 7. `npm run format:watch` - Watches for changes and formats once changes are saved.
+8. `npm run lint` - Uses ESLint to lint all files in the src directory.
+9. `npm run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
+10. `npm run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
 
 ## Versions
 
