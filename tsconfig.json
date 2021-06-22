@@ -8,10 +8,7 @@
 		"outDir": "lib",
 		"strict": true,
 		"declaration": true,
-		"declarationDir": "dist/",
-		"typeRoots": [
-			"dist/index.d.ts"
-		]
+		"declarationDir": "dist/"
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "lib", "dist"]

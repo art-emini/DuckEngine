@@ -11,9 +11,9 @@
 		"minify": "npx uglifyjs dist/duckengine.js -o dist/duckengine.min.js",
 		"build:docs": "npx typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default",
 		"format": "npx prettier --config .prettierrc --write \"src/**/*.ts\"",
-		"format:watch": "npx onchange \"src/**/*.ts\" \"*.json\" \"*.md\" \"private/ts/test.ts\" -- prettier --write --ignore-unknown {{changed}}",
+		"format:watch": "npx onchange \"src/**/*.ts\" \"*.json\" \"*.md\" \"examples/**/*.ts\" -- prettier --write --ignore-unknown {{changed}}",
 		"lint": "npx eslint -c .eslintrc.json src/",
-		"lint:watch": "npx onchange \"src/**/*.ts\"  \"private/ts/test.ts\" -- eslint -c .eslintrc.json --fix {{changed}}",
+		"lint:watch": "npx onchange \"src/**/*.ts\"  \"examples/**/*.ts\" -- eslint -c .eslintrc.json --fix {{changed}}",
 		"lint:fix": "npx eslint -c .eslintrc.json --fix src/"
 	},
 	"repository": {
