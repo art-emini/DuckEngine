@@ -34,20 +34,24 @@ export default class ParticleEmitter {
 
 	private create() {
 		for (let i = 0; i < this.amount; i++) {
-			const obj = new Particle(
-				this.particle.shape,
-				this.particle.w,
-				this.particle.h,
-				this.particle.r,
-				this.particle.fillColor,
-				this.game
-			);
-
-			obj.x = randomInt(this.rangeX[0], this.rangeX[1]);
-			obj.y = randomInt(this.rangeY[0], this.rangeY[1]);
-
-			this.list.push(obj);
+			this.createOne();
 		}
+	}
+
+	private createOne() {
+		const obj = new Particle(
+			this.particle.shape,
+			this.particle.w,
+			this.particle.h,
+			this.particle.r,
+			this.particle.fillColor,
+			this.game
+		);
+
+		obj.x = randomInt(this.rangeX[0], this.rangeX[1]);
+		obj.y = randomInt(this.rangeY[0], this.rangeY[1]);
+
+		this.list.push(obj);
 	}
 
 	public emit() {
@@ -56,6 +60,26 @@ export default class ParticleEmitter {
 
 	public stopEmit() {
 		this.emitting = false;
+	}
+
+	public keepEmitting(intervalMS: number, limitToMax?: boolean) {
+		setInterval(() => {
+			if (limitToMax) {
+				if (this.list.length < this.amount) {
+					this.createOne();
+				}
+			} else {
+				this.createOne();
+			}
+		}, intervalMS);
+	}
+
+	public offload(offloadY: number) {
+		this.list.forEach((particle, index) => {
+			if (particle.y < offloadY) {
+				this.list.splice(index, 1);
+			}
+		});
 	}
 
 	public draw() {
