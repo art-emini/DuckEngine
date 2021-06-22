@@ -1,23 +1,25 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": 12,
-		"sourceType": "module"
-	},
-	"plugins": ["@typescript-eslint"],
-	"rules": {
-		"indent": 0,
-		"linebreak-style": ["error", "unix"],
-		"quotes": ["error", "single"],
-		"semi": ["warn", "always"],
-		"eqeqeq": ["error", "always"],
-		"@typescript-eslint/no-namespace": 0,
-		"@typescript-eslint/explicit-module-boundary-types": 0
-	},
-	"ignorePatterns": ["lib/", "dist/", "src/helper/", "docs/"]
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "indent": 0,
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["warn", "always"],
+    "eqeqeq": ["error", "always"],
+    "@typescript-eslint/no-namespace": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "no-multiple-empty-lines": 1,
+    "prettier/prettier": ["error"]
+  },
+  "ignorePatterns": ["lib/", "dist/", "src/helper/", "docs/"]
 }

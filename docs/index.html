@@ -107,12 +107,6 @@
 						<a href="modules/core_loader_loader.html">core/loader/loader</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_map_map.html">core/map/map</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/core_map_schema.html">core/map/schema</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="modules/core_map_tilemap.html">core/map/tilemap</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -165,7 +159,7 @@
 					<li>Group Management</li>
 					<li>Keyboard, Mouse, and touch input</li>
 					<li>Storage</li>
-					<li>DuckMaps and tilemaps</li>
+					<li>Tilemaps</li>
 					<li>Particles</li>
 					<li>Sound player with sound sprites</li>
 					<li>Scenes</li>
@@ -219,7 +213,83 @@
 				<a href="#file-structure" id="file-structure" style="color: inherit; text-decoration: none;">
 					<h3>File Structure</h3>
 				</a>
-				<p>src / <br>&ensp; core / <br>&ensp; base / <br>&ensp; helper / <br>&ensp; utils / <br>&ensp; index.ts</p>
+				<pre><code class="language-bash"><span style="color: #795E26">.</span>
+<span style="color: #000000">├── CODE_OF_CONDUCT.md</span>
+<span style="color: #000000">├── CONTRIBUTING.md</span>
+<span style="color: #000000">├── LICENSE</span>
+<span style="color: #000000">├── package.json</span>
+<span style="color: #000000">├── package-lock.json</span>
+<span style="color: #000000">├── README.md</span>
+<span style="color: #000000">├── scripts</span>
+<span style="color: #000000">│   └── build.sh</span>
+<span style="color: #000000">├── SECURITY.md</span>
+<span style="color: #000000">├── src</span>
+<span style="color: #000000">│   ├── base</span>
+<span style="color: #000000">│   │   └── render.ts</span>
+<span style="color: #000000">│   ├── core</span>
+<span style="color: #000000">│   │   ├── camera</span>
+<span style="color: #000000">│   │   │   └── camera.ts</span>
+<span style="color: #000000">│   │   ├── cutscene</span>
+<span style="color: #000000">│   │   ├── debug</span>
+<span style="color: #000000">│   │   │   └── debug.ts</span>
+<span style="color: #000000">│   │   ├── gameobjects</span>
+<span style="color: #000000">│   │   │   ├── circle.ts</span>
+<span style="color: #000000">│   │   │   ├── gameObject.ts</span>
+<span style="color: #000000">│   │   │   ├── rect.ts</span>
+<span style="color: #000000">│   │   │   ├── roundrect.ts</span>
+<span style="color: #000000">│   │   │   └── sprite.ts</span>
+<span style="color: #000000">│   │   ├── game.ts</span>
+<span style="color: #000000">│   │   ├── group</span>
+<span style="color: #000000">│   │   │   └── group.ts</span>
+<span style="color: #000000">│   │   ├── input</span>
+<span style="color: #000000">│   │   │   └── input.ts</span>
+<span style="color: #000000">│   │   ├── interactive</span>
+<span style="color: #000000">│   │   │   └── text.ts</span>
+<span style="color: #000000">│   │   ├── lights</span>
+<span style="color: #000000">│   │   │   └── staticLight.ts</span>
+<span style="color: #000000">│   │   ├── loader</span>
+<span style="color: #000000">│   │   │   └── loader.ts</span>
+<span style="color: #000000">│   │   ├── map</span>
+<span style="color: #000000">│   │   │   ├── duckmap.ts</span>
+<span style="color: #000000">│   │   │   └── tilemap.ts</span>
+<span style="color: #000000">│   │   ├── math</span>
+<span style="color: #000000">│   │   │   └── clamp.ts</span>
+<span style="color: #000000">│   │   ├── particles</span>
+<span style="color: #000000">│   │   │   ├── particleEmitter.ts</span>
+<span style="color: #000000">│   │   │   └── particle.ts</span>
+<span style="color: #000000">│   │   ├── physics</span>
+<span style="color: #000000">│   │   │   └── collider.ts</span>
+<span style="color: #000000">│   │   ├── scene.ts</span>
+<span style="color: #000000">│   │   ├── sound</span>
+<span style="color: #000000">│   │   │   └── sound.ts</span>
+<span style="color: #000000">│   │   └── storage</span>
+<span style="color: #000000">│   │       └── storage.ts</span>
+<span style="color: #000000">│   ├── helper</span>
+<span style="color: #000000">│   │   ├── circleRectCollision.ts</span>
+<span style="color: #000000">│   │   ├── color</span>
+<span style="color: #000000">│   │   │   ├── getValuesHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── getValuesRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToRGBA.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── hslaToRGBA.ts</span>
+<span style="color: #000000">│   │   │   ├── hslToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── isHex.ts</span>
+<span style="color: #000000">│   │   │   ├── isHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── isRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── randomColor.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbaToHSLA.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbaToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbToHSL.ts</span>
+<span style="color: #000000">│   │   │   └── rgbToRGBA.ts</span>
+<span style="color: #000000">│   │   └── rectCollision.ts</span>
+<span style="color: #000000">│   ├── index.ts</span>
+<span style="color: #000000">│   └── utils</span>
+<span style="color: #000000">│       ├── randomInt.ts</span>
+<span style="color: #000000">│       └── validURL.ts</span>
+<span style="color: #000000">├── tsconfig.json</span>
+<span style="color: #000000">└── webpack.config.js</span>
+</code></pre>
 				<a href="#meaning-amp-use" id="meaning-amp-use" style="color: inherit; text-decoration: none;">
 					<h4>Meaning &amp; Use</h4>
 				</a>
@@ -239,7 +309,19 @@
 					<li>Run <code>npm install</code>.</li>
 					<li>Run <code>npm run build</code>.</li>
 					<li>Make your changes.</li>
+					<li>Test your changes on codesandbox by forking this <a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">codesandbox</a> and updating the duckengine.js file.</li>
 					<li>Create a pull request.</li>
+				</ol>
+				<a href="#npm-scripts" id="npm-scripts" style="color: inherit; text-decoration: none;">
+					<h3>NPM Scripts</h3>
+				</a>
+				<ol>
+					<li><code>npm run build</code> - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.</li>
+					<li><code>npm run webpack</code> - Bundles files in lib directory.</li>
+					<li><code>npm run minify</code> - Uses uglifyjs to minify bundled file.</li>
+					<li><code>npm run build:docs</code> - Uses TypeDoc to build docs.</li>
+					<li><code>npm run format</code> - Uses Prettier to format files.</li>
+					<li><code>npm run format:watch</code> - Watches for changes and formats once changes are saved.</li>
 				</ol>
 				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
 					<h2>Versions</h2>

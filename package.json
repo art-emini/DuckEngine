@@ -9,7 +9,9 @@
 		"build": "sh scripts/build.sh",
 		"webpack": "webpack --config webpack.config.js",
 		"minify": "uglifyjs dist/duckengine.js -o dist/duckengine.min.js",
-		"build:docs": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default"
+		"build:docs": "typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default",
+		"format": "npx prettier --config .prettierrc --write \"src/**/*.ts\"",
+		"format:watch": "onchange \"src/**/*.ts\" \"*.json\" \"*.md\" -- prettier --write --ignore-unknown {{changed}}"
 	},
 	"repository": {
 		"type": "git",
@@ -35,7 +37,11 @@
 		"@typescript-eslint/eslint-plugin": "^4.28.0",
 		"@typescript-eslint/parser": "^4.28.0",
 		"eslint": "^7.29.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^3.4.0",
 		"express": "^4.17.1",
+		"onchange": "^7.1.0",
+		"prettier": "^2.3.1",
 		"typedoc": "^0.21.0",
 		"typedoc-neo-theme": "^1.1.1",
 		"typescript": "^4.3.4",

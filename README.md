@@ -19,7 +19,7 @@
 4. Group Management
 5. Keyboard, Mouse, and touch input
 6. Storage
-7. DuckMaps and tilemaps
+7. Tilemaps
 8. Particles
 9. Sound player with sound sprites
 10. Scenes
@@ -63,12 +63,84 @@
 
 ### File Structure
 
-src / \
-&ensp; core / \
-&ensp; base / \
-&ensp; helper / \
-&ensp; utils / \
-&ensp; index.ts
+```bash
+.
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── package.json
+├── package-lock.json
+├── README.md
+├── scripts
+│   └── build.sh
+├── SECURITY.md
+├── src
+│   ├── base
+│   │   └── render.ts
+│   ├── core
+│   │   ├── camera
+│   │   │   └── camera.ts
+│   │   ├── cutscene
+│   │   ├── debug
+│   │   │   └── debug.ts
+│   │   ├── gameobjects
+│   │   │   ├── circle.ts
+│   │   │   ├── gameObject.ts
+│   │   │   ├── rect.ts
+│   │   │   ├── roundrect.ts
+│   │   │   └── sprite.ts
+│   │   ├── game.ts
+│   │   ├── group
+│   │   │   └── group.ts
+│   │   ├── input
+│   │   │   └── input.ts
+│   │   ├── interactive
+│   │   │   └── text.ts
+│   │   ├── lights
+│   │   │   └── staticLight.ts
+│   │   ├── loader
+│   │   │   └── loader.ts
+│   │   ├── map
+│   │   │   ├── duckmap.ts
+│   │   │   └── tilemap.ts
+│   │   ├── math
+│   │   │   └── clamp.ts
+│   │   ├── particles
+│   │   │   ├── particleEmitter.ts
+│   │   │   └── particle.ts
+│   │   ├── physics
+│   │   │   └── collider.ts
+│   │   ├── scene.ts
+│   │   ├── sound
+│   │   │   └── sound.ts
+│   │   └── storage
+│   │       └── storage.ts
+│   ├── helper
+│   │   ├── circleRectCollision.ts
+│   │   ├── color
+│   │   │   ├── getValuesHSL.ts
+│   │   │   ├── getValuesRGB.ts
+│   │   │   ├── hexToHSL.ts
+│   │   │   ├── hexToRGBA.ts
+│   │   │   ├── hexToRGB.ts
+│   │   │   ├── hslaToRGBA.ts
+│   │   │   ├── hslToRGB.ts
+│   │   │   ├── isHex.ts
+│   │   │   ├── isHSL.ts
+│   │   │   ├── isRGB.ts
+│   │   │   ├── randomColor.ts
+│   │   │   ├── rgbaToHSLA.ts
+│   │   │   ├── rgbaToRGB.ts
+│   │   │   ├── rgbToHSL.ts
+│   │   │   └── rgbToRGBA.ts
+│   │   └── rectCollision.ts
+│   ├── index.ts
+│   └── utils
+│       ├── randomInt.ts
+│       └── validURL.ts
+├── tsconfig.json
+└── webpack.config.js
+```
 
 #### Meaning & Use
 
@@ -85,7 +157,17 @@ src / \
 5. Run `npm install`.
 6. Run `npm run build`.
 7. Make your changes.
-8. Create a pull request.
+8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file.
+9. Create a pull request.
+
+### NPM Scripts
+
+1. `npm run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
+2. `npm run webpack` - Bundles files in lib directory.
+3. `npm run minify` - Uses uglifyjs to minify bundled file.
+4. `npm run build:docs` - Uses TypeDoc to build docs.
+5. `npm run format` - Uses Prettier to format files.
+6. `npm run format:watch` - Watches for changes and formats once changes are saved.
 
 ## Versions
 

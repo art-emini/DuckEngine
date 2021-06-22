@@ -1,4 +1,4 @@
-import { Duck } from '../..';
+import { Duck } from '../../index';
 import Game from '../game';
 
 export default class DuckStorage {
