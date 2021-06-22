@@ -1,5 +1,7 @@
 # DuckEngine
 
+![DuckEngine Logo](global/Logo.png)
+
 **NOT COMPLETE! Release soon!**
 
 [Live Demo with Parcel (on codesandbox)](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
