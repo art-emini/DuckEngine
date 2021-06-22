@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  format:
 
     runs-on: ubuntu-latest
 
