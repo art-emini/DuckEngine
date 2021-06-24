@@ -1,4 +1,4 @@
-# ![DuckEngine Logo](global/Logo.png)
+# ![DuckEngine](global/Logo.png)
 
 **NOT COMPLETE! Release soon!**
 
