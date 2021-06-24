@@ -8,7 +8,7 @@
 		"test": "npx open-cli https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js",
 		"build": "sh scripts/build.sh",
 		"webpack": "npx webpack --config webpack.config.js",
-		"minify": "npx uglifyjs dist/duckengine.js -o dist/duckengine.min.js",
+		"minify": "npx uglifyjs dist/index.js -o dist/index.min.js",
 		"build:docs": "npx typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --theme ./node_modules/typedoc-neo-theme/bin/default",
 		"format": "npx prettier --config .prettierrc --write \"src/**/*.ts\"",
 		"format:watch": "npx onchange \"src/**/*.ts\" \"*.json\" \"*.md\" \"examples/**/*.ts\" -- prettier --write --ignore-unknown {{changed}}",

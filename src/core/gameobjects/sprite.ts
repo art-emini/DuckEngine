@@ -10,28 +10,21 @@ export default class Sprite extends GameObject {
 	constructor(
 		x: number,
 		y: number,
+		w: number,
+		h: number,
 		imgpath: string,
-		game: Game,
-		w?: number,
-		h?: number
+		game: Game
 	) {
-		super('sprite', x, y, 0, 0, 0, imgpath, game);
+		super('sprite', x, y, w, h, 0, imgpath, game);
 		this.init(this);
-
-		if (w) {
-			this.setScale({ width: w });
-		}
-		if (h) {
-			this.setScale({ width: h });
-		}
 
 		this.path = imgpath;
 
 		this.image = new Image();
 		this.image.src = this.path;
 
-		this.w = w || this.image.width;
-		this.h = h || this.image.height;
+		this.w = w;
+		this.h = h;
 	}
 
 	public draw() {

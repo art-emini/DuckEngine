@@ -1,5 +1,5 @@
 // Yay for typescript!
-// Crazy good autocomplete with DuckEngine!
+// Intellisense with DuckEngine!
 // * No Autocomplete? Look at the root README under Typescript to setup autocomplete. -
 // * - (Note, you may not need to do this step at all if your types are in the same directory as duckengine)
 

@@ -139,15 +139,18 @@
 		<div class="col-7 offset-3 col-content">
 			<h1>DuckEngine - v1.0.0</h1>
 			<div class="tsd-panel tsd-typography">
-				<a href="#duckengine" id="duckengine" style="color: inherit; text-decoration: none;">
-					<h1>DuckEngine</h1>
+				<a href="#" id="" style="color: inherit; text-decoration: none;">
+					<h1><img src="global/Logo.png" alt="DuckEngine Logo"></h1>
 				</a>
 				<p><strong>NOT COMPLETE! Release soon!</strong></p>
 				<p><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel (on codesandbox)</a></p>
 				<p><img src="https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square" alt="Build Badge">
 					<img src="https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square" alt="Release Badge">
 					<img src="https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square" alt="License Badge">
-				<a href="https://wakatime.com/badge/github/ksplatdev/DuckEngine"><img src="https://wakatime.com/badge/github/ksplatdev/DuckEngine.svg" alt="wakatime"></a></p>
+					<a href="https://wakatime.com/badge/github/ksplatdev/DuckEngine"><img src="https://wakatime.com/badge/github/ksplatdev/DuckEngine.svg" alt="wakatime"></a>
+					<img src="https://github.com/ksplatdev/DuckEngine/actions/workflows/lint.yml/badge.svg" alt="Lint Badge">
+					<img src="https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg" alt="Format Badge">
+				<a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier"></a></p>
 				<p>2D game framework for making games on all web browsers.</p>
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h2>Features</h2>
@@ -205,7 +208,8 @@
 				<p>How to use DuckEngine with Typescript.</p>
 				<ol>
 					<li>Setup webpack/parcel and tsconfig.</li>
-					<li>Add the following to your tsconfig compilerOptions</li>
+					<li>Add the following to your tsconfig compilerOptions. <em>(not required)</em></li>
+					<li>Import DuckEngine and Duck for types.</li>
 				</ol>
 				<pre><code class="language-json"><span style="color: #000000">{</span>
 <span style="color: #000000">    </span><span style="color: #0451A5">&quot;typeRoots&quot;</span><span style="color: #000000">: [</span>
@@ -214,6 +218,13 @@
 <span style="color: #000000">    ]</span>
 <span style="color: #000000">}</span>
 </code></pre>
+				<a href="#duck-namespace" id="duck-namespace" style="color: inherit; text-decoration: none;">
+					<h3>Duck Namespace</h3>
+				</a>
+				<p>The Duck Namespace has types such as gameobject, every class config, and more.</p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h3><a href="examples/ts/myScene.ts">Example</a></h3>
+				</a>
 				<a href="#developers39-guide" id="developers39-guide" style="color: inherit; text-decoration: none;">
 					<h2>Developers&#39; Guide</h2>
 				</a>
@@ -342,6 +353,9 @@
 					<li><code>npm run minify</code> - Uses uglifyjs to minify bundled file.</li>
 					<li><code>npm run format</code> - Uses Prettier to format files.</li>
 					<li><code>npm run format:watch</code> - Watches for changes and formats once changes are saved.</li>
+					<li><code>npm run lint</code> - Uses ESLint to lint all files in the src directory.</li>
+					<li><code>npm run lint:watch</code> - Watches for changes and fixes all fixable issues found by ESLint.</li>
+					<li><code>npm run lint:fix</code> - Uses ESLint to fix all fixable issues found by ESLint.</li>
 				</ol>
 				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
 					<h2>Versions</h2>

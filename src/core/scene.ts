@@ -57,7 +57,13 @@ export default class Scene extends Basic {
 
 	public add: {
 		gameobject: {
-			sprite: (x: number, y: number, imgpath: string) => Sprite;
+			sprite: (
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				imgpath: string
+			) => Sprite;
 			rect: (
 				x: number,
 				y: number,
@@ -176,11 +182,11 @@ export default class Scene extends Basic {
 				sprite: (
 					x: number,
 					y: number,
-					imgpath: string,
-					w?: number,
-					h?: number
+					w: number,
+					h: number,
+					imgpath: string
 				) => {
-					return new Sprite(x, y, imgpath, this.game, w, h);
+					return new Sprite(x, y, w, h, imgpath, this.game);
 				},
 				rect: (
 					x: number,
