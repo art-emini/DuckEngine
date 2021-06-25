@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Controller | DuckEngine - v1.0.0</title>
+	<title>Step | DuckEngine - v1.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -62,10 +62,10 @@
 					<a href="../modules/index.duck.html">Duck</a>
 				</li>
 				<li>
-					<a href="../modules/index.duck.input.html">Input</a>
+					<a href="../modules/index.duck.cutscene.html">Cutscene</a>
 				</li>
 				<li>
-					<a href="index.duck.input.controller.html">Controller</a>
+					<a href="index.duck.cutscene.step.html">Step</a>
 				</li>
 			</ul>
 		</div>
@@ -88,7 +88,7 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.collider.html">Collider</a>
 									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.cutscene.html">Cutscene</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -97,7 +97,7 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.group.html">Group</a>
 									</li>
-									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.input.html">Input</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -123,18 +123,14 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Interface Controller</h1>
+			<h1>Interface Step</h1>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Controller</span>
+						<span class="target">Step</span>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-namespace">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">unknown</span></div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
@@ -142,15 +138,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#a" class="tsd-kind-icon">a</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#arrow_down" class="tsd-kind-icon">arrow_<wbr>down</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#arrow_left" class="tsd-kind-icon">arrow_<wbr>left</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#arrow_right" class="tsd-kind-icon">arrow_<wbr>right</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#arrow_up" class="tsd-kind-icon">arrow_<wbr>up</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#d" class="tsd-kind-icon">d</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#s" class="tsd-kind-icon">s</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#spacebar" class="tsd-kind-icon">spacebar</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.controller.html#w" class="tsd-kind-icon">w</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#affect" class="tsd-kind-icon">affect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#cameravalue" class="tsd-kind-icon">camera<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#func" class="tsd-kind-icon">func</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#moveto" class="tsd-kind-icon">move<wbr>To</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#sleepvalue" class="tsd-kind-icon">sleep<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -159,92 +152,73 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="a" class="tsd-anchor"></a>
-					<h3>a</h3>
-					<div class="tsd-signature tsd-kind-icon">a<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="affect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> affect</h3>
+					<div class="tsd-signature tsd-kind-icon">affect<span class="tsd-signature-symbol">:</span> <a href="../classes/core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../modules/index.duck.html#gameobject" class="tsd-signature-type">GameObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:95</li>
+							<li>Defined in index.ts:170</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="arrow_down" class="tsd-anchor"></a>
-					<h3>arrow_<wbr>down</h3>
-					<div class="tsd-signature tsd-kind-icon">arrow_<wbr>down<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="cameravalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> camera<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">camera<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:99</li>
+							<li>Defined in index.ts:177</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="arrow_left" class="tsd-anchor"></a>
-					<h3>arrow_<wbr>left</h3>
-					<div class="tsd-signature tsd-kind-icon">arrow_<wbr>left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="func" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> func</h3>
+					<div class="tsd-signature tsd-kind-icon">func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:100</li>
+							<li>Defined in index.ts:176</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="arrow_right" class="tsd-anchor"></a>
-					<h3>arrow_<wbr>right</h3>
-					<div class="tsd-signature tsd-kind-icon">arrow_<wbr>right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="moveto" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> move<wbr>To</h3>
+					<div class="tsd-signature tsd-kind-icon">move<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:101</li>
+							<li>Defined in index.ts:171</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> x<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> y<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sleepvalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sleep<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">sleep<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:178</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="arrow_up" class="tsd-anchor"></a>
-					<h3>arrow_<wbr>up</h3>
-					<div class="tsd-signature tsd-kind-icon">arrow_<wbr>up<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StepType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:98</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="d" class="tsd-anchor"></a>
-					<h3>d</h3>
-					<div class="tsd-signature tsd-kind-icon">d<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:97</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="s" class="tsd-anchor"></a>
-					<h3>s</h3>
-					<div class="tsd-signature tsd-kind-icon">s<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:96</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="spacebar" class="tsd-anchor"></a>
-					<h3>spacebar</h3>
-					<div class="tsd-signature tsd-kind-icon">spacebar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:102</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="w" class="tsd-anchor"></a>
-					<h3>w</h3>
-					<div class="tsd-signature tsd-kind-icon">w<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:94</li>
+							<li>Defined in index.ts:169</li>
 						</ul>
 					</aside>
 				</section>
@@ -254,50 +228,44 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="index.duck.cutscene.config.html" class="tsd-kind-icon">Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="index.duck.cutscene.instructions.html" class="tsd-kind-icon">Instructions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="index.duck.cutscene.onlistener.html" class="tsd-kind-icon">On<wbr>Listener</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="index.duck.input.controller.html" class="tsd-kind-icon">Controller</a>
+						<a href="index.duck.cutscene.step.html" class="tsd-kind-icon">Step</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#a" class="tsd-kind-icon">a</a>
+								<a href="index.duck.cutscene.step.html#affect" class="tsd-kind-icon">affect</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#arrow_down" class="tsd-kind-icon">arrow_<wbr>down</a>
+								<a href="index.duck.cutscene.step.html#cameravalue" class="tsd-kind-icon">camera<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#arrow_left" class="tsd-kind-icon">arrow_<wbr>left</a>
+								<a href="index.duck.cutscene.step.html#func" class="tsd-kind-icon">func</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#arrow_right" class="tsd-kind-icon">arrow_<wbr>right</a>
+								<a href="index.duck.cutscene.step.html#moveto" class="tsd-kind-icon">move<wbr>To</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#arrow_up" class="tsd-kind-icon">arrow_<wbr>up</a>
+								<a href="index.duck.cutscene.step.html#sleepvalue" class="tsd-kind-icon">sleep<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#d" class="tsd-kind-icon">d</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#s" class="tsd-kind-icon">s</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#spacebar" class="tsd-kind-icon">spacebar</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.controller.html#w" class="tsd-kind-icon">w</a>
+								<a href="index.duck.cutscene.step.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="index.duck.input.listener.html" class="tsd-kind-icon">Listener</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="index.duck.input.mapping.html" class="tsd-kind-icon">Mapping</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
-						<a href="../modules/index.duck.input.html#scope" class="tsd-kind-icon">Scope</a>
+						<a href="../modules/index.duck.cutscene.html#onlistenertype" class="tsd-kind-icon">On<wbr>Listener<wbr>Type</a>
 					</li>
 				</ul>
 			</nav>

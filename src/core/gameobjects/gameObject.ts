@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Duck } from '../../index';
+import randomInt from '../../utils/randomInt';
 import Game from '../game';
 import Collider from '../physics/collider';
 
 export default class GameObject {
+	public readonly id: number;
 	public readonly shape: Duck.Collider.ShapeString;
 	public x: number;
 	public y: number;
@@ -40,6 +42,7 @@ export default class GameObject {
 		fillColor: string,
 		game: Game
 	) {
+		this.id = randomInt(0, 100000);
 		this.shape = shape;
 		this.x = x;
 		this.y = y;

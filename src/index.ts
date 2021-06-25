@@ -75,6 +75,8 @@ export namespace Duck {
 		}
 	}
 	export namespace Input {
+		export type Scope = 'GLOBAL' | 'CANVAS';
+
 		export interface Mapping {
 			w?: boolean;
 			a?: boolean;
@@ -144,6 +146,75 @@ export namespace Duck {
 
 	export namespace ParticleEmitter {
 		export type range = Helper.FixedLengthArray<[number, number]>;
+	}
+
+	export namespace Cutscene {
+		export type OnListenerType = 'END' | 'START' | 'NEXT';
+
+		export interface OnListener {
+			type: OnListenerType;
+			// eslint-disable-next-line @typescript-eslint/ban-types
+			func: Function;
+		}
+
+		type StepType =
+			| 'MOVE'
+			| 'DRAW'
+			| 'FUNC'
+			| 'CAMERA_ZOOM'
+			| 'CAMERA_FOV'
+			| 'CAMERA_MOVE';
+
+		export interface Step {
+			type: StepType;
+			affect?: GameObject | Camera;
+			moveTo?: {
+				x?: number;
+				y?: number;
+			};
+			// eslint-disable-next-line @typescript-eslint/ban-types
+			func?: Function;
+			cameraValue?: number;
+			sleepValue?: number;
+		}
+		export interface Instructions {
+			init: {
+				mainObjectPos: {
+					x: number;
+					y: number;
+				};
+				otherObjectPos: {
+					x: number;
+					y: number;
+				}[];
+				cameraSettings?: {
+					FOV: number;
+					follow?: GameObject;
+					zoom: number;
+					pos?: {
+						x: number;
+						y: number;
+					};
+				};
+				otherCameraSettings?: {
+					FOV: number;
+					follow?: GameObject;
+					zoom: number;
+					pos?: {
+						x: number;
+						y: number;
+					};
+				}[];
+			};
+			steps: Step[];
+		}
+
+		export interface Config {
+			mainCamera: Camera;
+			otherCameras?: Camera[];
+			otherObjects?: GameObject[];
+			mainObject: GameObject;
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

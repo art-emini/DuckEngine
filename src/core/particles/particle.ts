@@ -101,9 +101,11 @@ export default class Particle extends GameObject {
 					break;
 
 				default:
-					new Debug.Warn(
-						'Switched Particle shape to "rect". Shape is not a "circle", "rect", "roundrect", or "sprite".'
-					);
+					if (this.game.config.debug) {
+						new Debug.Warn(
+							'Switched Particle shape to "rect". Shape is not a "circle", "rect", "roundrect", or "sprite".'
+						);
+					}
 					break;
 			}
 		} else {

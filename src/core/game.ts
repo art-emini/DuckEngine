@@ -13,7 +13,7 @@ export default class Game {
 
 	// methods
 	public scenes: {
-		add: (scene: Scene) => void;
+		add: (scenes: Scene[]) => void;
 		remove: (scene: Scene) => void;
 	};
 
@@ -59,11 +59,10 @@ export default class Game {
 
 		// methods
 		this.scenes = {
-			add: (scene: Scene, ...scenes: Scene[]) => {
+			add: (scenes: Scene[]) => {
 				scenes.forEach((scene) => {
 					this.stack.scenes.push(scene);
 				});
-				this.stack.scenes.push(scene);
 			},
 
 			remove: (scene: Scene) => {

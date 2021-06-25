@@ -40,6 +40,7 @@ import rgbaToRGB from '../helper/color/rgbaToRGB';
 import hexToRGBA from '../helper/color/hexToRGBA';
 import hexToRGB from '../helper/color/hexToRGB';
 import hexToHSL from '../helper/color/hexToHSL';
+import Cutscene from './cutscene/cutscene';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -119,6 +120,10 @@ export default class Scene extends Basic {
 			rangeY: Duck.ParticleEmitter.range,
 			amount: number
 		) => ParticleEmitter;
+		cutscene: (
+			config: Duck.Cutscene.Config,
+			instructions: Duck.Cutscene.Instructions
+		) => Cutscene;
 	};
 
 	public tools: {
@@ -282,6 +287,12 @@ export default class Scene extends Basic {
 					amount,
 					this.game
 				);
+			},
+			cutscene: (
+				config: Duck.Cutscene.Config,
+				instructions: Duck.Cutscene.Instructions
+			) => {
+				return new Cutscene(config, instructions);
 			},
 		};
 
