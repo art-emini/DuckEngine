@@ -1,7 +1,5 @@
 # ![DuckEngine](global/Logo.png)
 
-**NOT COMPLETE! Release soon!**
-
 [Live Demo with Parcel (on codesandbox)](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
@@ -45,14 +43,14 @@
 1. Download the [latest release](https://github.com/ksplatdev/DuckEngine/releases/latest).
 2. Set up webpack pr parcel.
 3. Import DuckEngine.
-4. Read the docs.
+4. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ### NPM
 
 1. Run `npm install duckengine`.
 2. Set up webpack or parcel.
 3. Import DuckEngine.
-4. Read the docs.
+4. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)
 
