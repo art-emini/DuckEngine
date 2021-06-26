@@ -91,6 +91,11 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 .
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
+├── examples
+│   ├── README.md
+│   └── ts
+│       ├── myScene.ts
+│       └── test.ts
 ├── global
 │   ├── Logo.png
 │   ├── Logo.xcf
@@ -109,6 +114,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   ├── camera
 │   │   │   └── camera.ts
 │   │   ├── cutscene
+│   │   │   └── cutscene.ts
 │   │   ├── debug
 │   │   │   └── debug.ts
 │   │   ├── gameobjects

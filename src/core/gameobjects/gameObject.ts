@@ -29,7 +29,7 @@ export default class GameObject {
 
 	// methods
 	public physics: {
-		addCollider: (collidesWith: Duck.GameObject[]) => Collider | void;
+		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
 	};
 
 	constructor(
