@@ -13,6 +13,7 @@ export default class Sound {
 		this.element.className = 'duckengine-audio-sound';
 		this.element.style.display = 'none';
 		this.element.controls = false;
+		this.element.src = this.path;
 
 		this.sprites = [];
 

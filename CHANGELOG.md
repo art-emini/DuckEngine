@@ -21,3 +21,8 @@
    1. Added CHANGELOG.md
    2. Changed Demos in [README.md](README.md).
    3. Added [Space Shooter Demo](https://codesandbox.io/s/duckengine-space-shooter-64wkg?file=/src/scene.js) in [README.md](README.md).
+
+## 1.1.1-beta
+
+1. Sound
+   1. Fixed src not being set.
