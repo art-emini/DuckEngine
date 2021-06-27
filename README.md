@@ -1,6 +1,6 @@
 # ![DuckEngine](global/Logo.png)
 
-[Live Demo with Parcel (on codesandbox)](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+[Demos](#demos)
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
@@ -10,7 +10,7 @@
 ![Format Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-2D game framework for making games on all web browsers.
+2D Game Library for the web.
 
 ## Features
 
@@ -142,31 +142,31 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   │   ├── particleEmitter.ts
 │   │   │   └── particle.ts
 │   │   ├── physics
-│   │   │   └── collider.ts
+│   │   │   ├── circleToRectIntersect.ts
+│   │   │   ├── collider.ts
+│   │   │   └── rectToRectIntersect.ts
 │   │   ├── scene.ts
 │   │   ├── sound
 │   │   │   └── sound.ts
 │   │   └── storage
 │   │       └── storage.ts
 │   ├── helper
-│   │   ├── circleRectCollision.ts
-│   │   ├── color
-│   │   │   ├── getValuesHSL.ts
-│   │   │   ├── getValuesRGB.ts
-│   │   │   ├── hexToHSL.ts
-│   │   │   ├── hexToRGBA.ts
-│   │   │   ├── hexToRGB.ts
-│   │   │   ├── hslaToRGBA.ts
-│   │   │   ├── hslToRGB.ts
-│   │   │   ├── isHex.ts
-│   │   │   ├── isHSL.ts
-│   │   │   ├── isRGB.ts
-│   │   │   ├── randomColor.ts
-│   │   │   ├── rgbaToHSLA.ts
-│   │   │   ├── rgbaToRGB.ts
-│   │   │   ├── rgbToHSL.ts
-│   │   │   └── rgbToRGBA.ts
-│   │   └── rectCollision.ts
+│   │   └── color
+│   │       ├── getValuesHSL.ts
+│   │       ├── getValuesRGB.ts
+│   │       ├── hexToHSL.ts
+│   │       ├── hexToRGBA.ts
+│   │       ├── hexToRGB.ts
+│   │       ├── hslaToRGBA.ts
+│   │       ├── hslToRGB.ts
+│   │       ├── isHex.ts
+│   │       ├── isHSL.ts
+│   │       ├── isRGB.ts
+│   │       ├── randomColor.ts
+│   │       ├── rgbaToHSLA.ts
+│   │       ├── rgbaToRGB.ts
+│   │       ├── rgbToHSL.ts
+│   │       └── rgbToRGBA.ts
 │   ├── index.ts
 │   └── utils
 │       ├── randomInt.ts
@@ -211,7 +211,13 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 
 DuckEngine does follow SemVer.
 
-## [Live Demo with Parcel](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+## Demos
+
+All demos are bundled with parcel-bundler and are all on codesandbox.
+
+### [Space Shooter Game](https://codesandbox.io/s/duckengine-space-shooter-64wkg?file=/src/scene.js)
+
+### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/duckengine.js)
 
 ## Attribution
 

@@ -42,6 +42,11 @@ import hexToRGB from '../helper/color/hexToRGB';
 import hexToHSL from '../helper/color/hexToHSL';
 import Cutscene from './cutscene/cutscene';
 
+// physics
+// intersect
+import rectToRectIntersect from './physics/rectToRectIntersect';
+import circleToRectIntersect from './physics/circleToRectIntersect';
+
 export default class Scene extends Basic {
 	public readonly key: string;
 	private game: Game;
@@ -155,6 +160,27 @@ export default class Scene extends Basic {
 					toHsl: (hex: string) => string;
 				};
 			};
+		};
+		physics: {
+			rectToRectIntersect: (
+				rect: Rect | Sprite,
+				rect2: Rect | Sprite
+			) => boolean;
+			circleToRectIntersect: (
+				circle:
+					| Circle
+					| {
+							x: number;
+							y: number;
+							w: number;
+							h: number;
+							r: number;
+					  },
+				rect:
+					| Rect
+					| Sprite
+					| { x: number; y: number; w: number; h: number }
+			) => boolean;
 		};
 	};
 
@@ -319,6 +345,31 @@ export default class Scene extends Basic {
 						toRgb: hexToRGB,
 						toHsl: hexToHSL,
 					},
+				},
+			},
+			physics: {
+				rectToRectIntersect: (
+					rect: Rect | Sprite,
+					rect2: Rect | Sprite
+				) => {
+					return rectToRectIntersect(rect, rect2);
+				},
+				circleToRectIntersect: (
+					circle:
+						| Circle
+						| {
+								x: number;
+								y: number;
+								w: number;
+								h: number;
+								r: number;
+						  },
+					rect:
+						| Rect
+						| Sprite
+						| { x: number; y: number; w: number; h: number }
+				) => {
+					return circleToRectIntersect(circle, rect);
 				},
 			},
 		};

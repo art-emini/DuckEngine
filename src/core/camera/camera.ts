@@ -6,8 +6,8 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Scene from '../scene';
 import { Duck } from '../../index';
-import rectCollision from '../../helper/rectCollision';
-import circleRectCollision from '../../helper/circleRectCollision';
+import rectToRectIntersect from '../physics/rectToRectIntersect';
+import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
 
 class Camera {
@@ -103,7 +103,7 @@ class Camera {
 	public follow(gameObject: Duck.GameObject) {
 		if (gameObject.shape === 'rect') {
 			if (this.bounds) {
-				if (rectCollision(gameObject as Rect, this.bounds)) {
+				if (rectToRectIntersect(gameObject as Rect, this.bounds)) {
 					this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
 					this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
 				}
@@ -115,7 +115,7 @@ class Camera {
 
 		if (gameObject.shape === 'circle') {
 			if (this.bounds) {
-				if (circleRectCollision(gameObject as Circle, this.bounds)) {
+				if (circleToRectIntersect(gameObject as Circle, this.bounds)) {
 					this.lookAt[0] =
 						gameObject.x - (gameObject as Circle).r / 2;
 					this.lookAt[1] =

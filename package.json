@@ -1,9 +1,12 @@
 {
 	"name": "duckengine",
-	"version": "1.0.1-beta",
-	"description": "2D game framework for making games on all web browsers.",
+	"version": "1.1.0-beta",
+	"description": "2D Game Library for the web.",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
+	"maintainers": [
+		"ksplatdev <aviatorbuzz921@gmail.com>"
+	],
 	"scripts": {
 		"test": "npx open-cli https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js",
 		"build": "sh scripts/build.sh",

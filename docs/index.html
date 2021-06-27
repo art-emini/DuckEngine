@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckEngine - v1.0.1-beta</title>
+	<title>DuckEngine - v1.1.0-beta</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="index.html" class="title">DuckEngine - v1.0.1-beta</a>
+					<a href="index.html" class="title">DuckEngine - v1.1.0-beta</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -122,7 +122,13 @@
 						<a href="modules/core_particles_particleemitter.html">core/particles/particleEmitter</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/core_physics_circletorectintersect.html">core/physics/circleToRectIntersect</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/core_physics_collider.html">core/physics/collider</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_physics_recttorectintersect.html">core/physics/rectToRectIntersect</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_scene.html">core/scene</a>
@@ -140,12 +146,12 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>DuckEngine - v1.0.1-beta</h1>
+			<h1>DuckEngine - v1.1.0-beta</h1>
 			<div class="tsd-panel tsd-typography">
 				<a href="#" id="" style="color: inherit; text-decoration: none;">
 					<h1><img src="global/Logo.png" alt="DuckEngine"></h1>
 				</a>
-				<p><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel (on codesandbox)</a></p>
+				<p><a href="#demos">Demos</a></p>
 				<p><img src="https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square" alt="Build Badge">
 					<img src="https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square" alt="Release Badge">
 					<img src="https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square" alt="License Badge">
@@ -153,7 +159,7 @@
 					<img src="https://github.com/ksplatdev/DuckEngine/actions/workflows/lint.yml/badge.svg" alt="Lint Badge">
 					<img src="https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg" alt="Format Badge">
 				<a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier"></a></p>
-				<p>2D game framework for making games on all web browsers.</p>
+				<p>2D Game Library for the web.</p>
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h2>Features</h2>
 				</a>
@@ -295,31 +301,31 @@
 <span style="color: #000000">│   │   │   ├── particleEmitter.ts</span>
 <span style="color: #000000">│   │   │   └── particle.ts</span>
 <span style="color: #000000">│   │   ├── physics</span>
-<span style="color: #000000">│   │   │   └── collider.ts</span>
+<span style="color: #000000">│   │   │   ├── circleToRectIntersect.ts</span>
+<span style="color: #000000">│   │   │   ├── collider.ts</span>
+<span style="color: #000000">│   │   │   └── rectToRectIntersect.ts</span>
 <span style="color: #000000">│   │   ├── scene.ts</span>
 <span style="color: #000000">│   │   ├── sound</span>
 <span style="color: #000000">│   │   │   └── sound.ts</span>
 <span style="color: #000000">│   │   └── storage</span>
 <span style="color: #000000">│   │       └── storage.ts</span>
 <span style="color: #000000">│   ├── helper</span>
-<span style="color: #000000">│   │   ├── circleRectCollision.ts</span>
-<span style="color: #000000">│   │   ├── color</span>
-<span style="color: #000000">│   │   │   ├── getValuesHSL.ts</span>
-<span style="color: #000000">│   │   │   ├── getValuesRGB.ts</span>
-<span style="color: #000000">│   │   │   ├── hexToHSL.ts</span>
-<span style="color: #000000">│   │   │   ├── hexToRGBA.ts</span>
-<span style="color: #000000">│   │   │   ├── hexToRGB.ts</span>
-<span style="color: #000000">│   │   │   ├── hslaToRGBA.ts</span>
-<span style="color: #000000">│   │   │   ├── hslToRGB.ts</span>
-<span style="color: #000000">│   │   │   ├── isHex.ts</span>
-<span style="color: #000000">│   │   │   ├── isHSL.ts</span>
-<span style="color: #000000">│   │   │   ├── isRGB.ts</span>
-<span style="color: #000000">│   │   │   ├── randomColor.ts</span>
-<span style="color: #000000">│   │   │   ├── rgbaToHSLA.ts</span>
-<span style="color: #000000">│   │   │   ├── rgbaToRGB.ts</span>
-<span style="color: #000000">│   │   │   ├── rgbToHSL.ts</span>
-<span style="color: #000000">│   │   │   └── rgbToRGBA.ts</span>
-<span style="color: #000000">│   │   └── rectCollision.ts</span>
+<span style="color: #000000">│   │   └── color</span>
+<span style="color: #000000">│   │       ├── getValuesHSL.ts</span>
+<span style="color: #000000">│   │       ├── getValuesRGB.ts</span>
+<span style="color: #000000">│   │       ├── hexToHSL.ts</span>
+<span style="color: #000000">│   │       ├── hexToRGBA.ts</span>
+<span style="color: #000000">│   │       ├── hexToRGB.ts</span>
+<span style="color: #000000">│   │       ├── hslaToRGBA.ts</span>
+<span style="color: #000000">│   │       ├── hslToRGB.ts</span>
+<span style="color: #000000">│   │       ├── isHex.ts</span>
+<span style="color: #000000">│   │       ├── isHSL.ts</span>
+<span style="color: #000000">│   │       ├── isRGB.ts</span>
+<span style="color: #000000">│   │       ├── randomColor.ts</span>
+<span style="color: #000000">│   │       ├── rgbaToHSLA.ts</span>
+<span style="color: #000000">│   │       ├── rgbaToRGB.ts</span>
+<span style="color: #000000">│   │       ├── rgbToHSL.ts</span>
+<span style="color: #000000">│   │       └── rgbToRGBA.ts</span>
 <span style="color: #000000">│   ├── index.ts</span>
 <span style="color: #000000">│   └── utils</span>
 <span style="color: #000000">│       ├── randomInt.ts</span>
@@ -369,8 +375,15 @@
 					<h2>Versions</h2>
 				</a>
 				<p>DuckEngine does follow SemVer.</p>
-				<a href="#live-demo-with-parcel" id="live-demo-with-parcel" style="color: inherit; text-decoration: none;">
-					<h2><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">Live Demo with Parcel</a></h2>
+				<a href="#demos" id="demos" style="color: inherit; text-decoration: none;">
+					<h2>Demos</h2>
+				</a>
+				<p>All demos are bundled with parcel-bundler and are all on codesandbox.</p>
+				<a href="#space-shooter-game" id="space-shooter-game" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://codesandbox.io/s/duckengine-space-shooter-64wkg?file=/src/scene.js">Space Shooter Game</a></h3>
+				</a>
+				<a href="#test-template" id="test-template" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/duckengine.js">Test Template</a></h3>
 				</a>
 				<a href="#attribution" id="attribution" style="color: inherit; text-decoration: none;">
 					<h2>Attribution</h2>

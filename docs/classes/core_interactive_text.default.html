@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>default | DuckEngine - v1.0.1-beta</title>
+	<title>default | DuckEngine - v1.1.0-beta</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="../index.html" class="title">DuckEngine - v1.0.1-beta</a>
+					<a href="../index.html" class="title">DuckEngine - v1.1.0-beta</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -128,7 +128,13 @@
 						<a href="../modules/core_particles_particleemitter.html">core/particles/particleEmitter</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/core_physics_circletorectintersect.html">core/physics/circleToRectIntersect</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/core_physics_collider.html">core/physics/collider</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/core_physics_recttorectintersect.html">core/physics/rectToRectIntersect</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/core_scene.html">core/scene</a>
@@ -164,18 +170,19 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="core_interactive_text.default.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_interactive_text.default.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_interactive_text.default.html#game" class="tsd-kind-icon">game</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_interactive_text.default.html#text" class="tsd-kind-icon">text</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_interactive_text.default.html#text" class="tsd-kind-icon">text</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_interactive_text.default.html#draw" class="tsd-kind-icon">draw</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_interactive_text.default.html#settext" class="tsd-kind-icon">set<wbr>Text</a></li>
 							</ul>
 						</section>
 					</div>
@@ -213,7 +220,7 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="config" class="tsd-anchor"></a>
@@ -235,9 +242,9 @@
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="text" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> text</h3>
+					<h3>text</h3>
 					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
@@ -265,6 +272,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="settext" class="tsd-anchor"></a>
+					<h3>set<wbr>Text</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Text<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/interactive/text.ts:72</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>text: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;packages&quot;:[],&quot;entryPoints&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src&quot;],&quot;exclude&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/**/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/utils/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;sort&quot;:[&quot;kind&quot;,&quot;instance-first&quot;,&quot;alphabetical&quot;],&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;treatWarningsAsErrors&quot;:false,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>
@@ -285,11 +315,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="core_interactive_text.default.html#game" class="tsd-kind-icon">game</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_interactive_text.default.html#text" class="tsd-kind-icon">text</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_interactive_text.default.html#draw" class="tsd-kind-icon">draw</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_interactive_text.default.html#settext" class="tsd-kind-icon">set<wbr>Text</a>
 							</li>
 						</ul>
 					</li>

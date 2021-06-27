@@ -1,12 +1,13 @@
-import Circle from '../core/gameobjects/circle';
-import Rect from '../core/gameobjects/rect';
+import Circle from '../gameobjects/circle';
+import Rect from '../gameobjects/rect';
+import Sprite from '../gameobjects/sprite';
 
 export default function circleRectCollision(
 	circle: Circle | { x: number; y: number; w: number; h: number; r: number },
-	rect: Rect | { x: number; y: number; w: number; h: number }
+	rect: Rect | { x: number; y: number; w: number; h: number } | Sprite
 ) {
-	var dx = Math.abs(circle.x - (rect.x + rect.w / 2));
-	var dy = Math.abs(circle.y - (rect.y + rect.h / 2));
+	let dx = Math.abs(circle.x - (rect.x + rect.w / 2));
+	let dy = Math.abs(circle.y - (rect.y + rect.h / 2));
 
 	if (dx > circle.r + rect.w / 2) {
 		return false;
@@ -22,7 +23,7 @@ export default function circleRectCollision(
 		return true;
 	}
 
-	var dx = dx - rect.w;
-	var dy = dy - rect.h;
+	dx = dx - rect.w;
+	dy = dy - rect.h;
 	return dx * dx + dy * dy <= circle.r * circle.r;
 }

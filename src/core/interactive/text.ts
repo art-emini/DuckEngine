@@ -2,7 +2,7 @@ import { Duck } from '../../index';
 import Game from '../game';
 
 export default class Text {
-	private text: string;
+	public text: string;
 	private config: Duck.Interactive.Text.Config;
 	private game: Game;
 
@@ -67,5 +67,9 @@ export default class Text {
 				);
 			}
 		}
+	}
+
+	public setText(text: string) {
+		this.text = text;
 	}
 }
