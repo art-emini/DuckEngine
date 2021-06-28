@@ -46,12 +46,13 @@ import Cutscene from './cutscene/cutscene';
 // intersect
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
+import Loader from './loader/loader';
 
 export default class Scene extends Basic {
 	public readonly key: string;
 	private game: Game;
-	public visible: boolean | false;
-	public default: boolean;
+	public visible: boolean;
+	public readonly default: boolean;
 
 	public mainObject: Duck.GameObject | undefined;
 	public currentCamera: Camera | undefined;
@@ -133,6 +134,7 @@ export default class Scene extends Basic {
 
 	public tools: {
 		randomInt: (min: number, max: number) => number;
+		loader: Loader;
 		color: {
 			random: () => string;
 			is: {
@@ -324,6 +326,7 @@ export default class Scene extends Basic {
 
 		this.tools = {
 			randomInt: randomInt,
+			loader: Loader,
 			color: {
 				random: randomColor,
 				is: {

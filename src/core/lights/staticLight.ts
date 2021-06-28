@@ -33,19 +33,7 @@ export default class StaticLight {
 		this.color = fillColor;
 
 		// convert all colors to RGBA
-
-		if (isHex(this.color)) {
-			this.color = hexToRGBA(this.color, this.alpha);
-		}
-
-		if (isRGB(this.color)) {
-			this.color = rgbToRGBA(this.color, this.alpha);
-		}
-
-		if (isHSL(this.color)) {
-			const e = getValuesHSL(this.color);
-			this.color = hslaToRGBA(e[0], e[1], e[2], this.alpha);
-		}
+		this.color = this.convertColor(this.color);
 	}
 
 	public draw() {
@@ -61,5 +49,28 @@ export default class StaticLight {
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'
 			);
 		}
+	}
+
+	public setFillColor(color: string, alpha?: number) {
+		this.color = this.convertColor(color, alpha);
+	}
+
+	private convertColor(color: string, alpha?: number) {
+		alpha = alpha || this.alpha;
+
+		if (isHex(color)) {
+			color = hexToRGBA(color, alpha);
+		}
+
+		if (isRGB(color)) {
+			color = rgbToRGBA(color, alpha);
+		}
+
+		if (isHSL(color)) {
+			const e = getValuesHSL(color);
+			color = hslaToRGBA(e[0], e[1], e[2], alpha);
+		}
+
+		return color;
 	}
 }

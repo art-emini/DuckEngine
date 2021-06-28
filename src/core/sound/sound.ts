@@ -76,4 +76,9 @@ export default class Sound {
 			new Debug.Error(`Cannot find sound sprite with key: '${key}'.`);
 		}
 	}
+
+	public setPath(path: string) {
+		this.path = path;
+		this.element.src = this.path;
+	}
 }
