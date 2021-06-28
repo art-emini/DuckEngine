@@ -122,8 +122,8 @@ export default class Scene extends Basic {
 		) => Particle;
 		particleEmitter: (
 			particle: Particle,
-			rangeX: Duck.ParticleEmitter.range,
-			rangeY: Duck.ParticleEmitter.range,
+			rangeX: Duck.ParticleEmitter.Range,
+			rangeY: Duck.ParticleEmitter.Range,
 			amount: number
 		) => ParticleEmitter;
 		cutscene: (
@@ -304,8 +304,8 @@ export default class Scene extends Basic {
 			},
 			particleEmitter: (
 				particle: Particle,
-				rangeX: Duck.ParticleEmitter.range,
-				rangeY: Duck.ParticleEmitter.range,
+				rangeX: Duck.ParticleEmitter.Range,
+				rangeY: Duck.ParticleEmitter.Range,
 				amount: number
 			) => {
 				return new ParticleEmitter(

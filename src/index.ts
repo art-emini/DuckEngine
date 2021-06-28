@@ -147,7 +147,7 @@ export namespace Duck {
 	}
 
 	export namespace ParticleEmitter {
-		export type range = Helper.FixedLengthArray<[number, number]>;
+		export type Range = Helper.FixedLengthArray<[number, number]>;
 	}
 
 	export namespace Cutscene {

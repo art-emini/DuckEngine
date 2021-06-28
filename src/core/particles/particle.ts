@@ -6,6 +6,11 @@ import GameObject from '../gameobjects/gameObject';
 export default class Particle extends GameObject {
 	private image: HTMLImageElement | undefined;
 
+	public floatVX: number;
+	public floatVY: number;
+
+	public age: number;
+
 	constructor(
 		shape: Duck.Collider.ShapeString,
 		w: number,
@@ -21,10 +26,21 @@ export default class Particle extends GameObject {
 		this.r = r;
 		this.fillColor = fillColor;
 
+		this.floatVX = 0;
+		this.floatVY = 0;
+
 		if (this.shape === 'sprite') {
 			this.image = new Image();
 			this.image.src = this.fillColor;
 		}
+
+		// age
+
+		this.age = 0;
+
+		setInterval(() => {
+			this.age++;
+		}, 1000);
 	}
 
 	public draw() {
@@ -113,5 +129,10 @@ export default class Particle extends GameObject {
 				'Cannot draw particle. CanvasRenderingContext2D is undefined.'
 			);
 		}
+
+		// float
+
+		this.x += this.floatVX;
+		this.y += this.floatVY;
 	}
 }
