@@ -92,6 +92,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 
 ```bash
 .
+├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── examples
@@ -154,22 +155,24 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   └── storage
 │   │       └── storage.ts
 │   ├── helper
-│   │   └── color
-│   │       ├── getValuesHSL.ts
-│   │       ├── getValuesRGB.ts
-│   │       ├── hexToHSL.ts
-│   │       ├── hexToRGBA.ts
-│   │       ├── hexToRGB.ts
-│   │       ├── hslaToRGBA.ts
-│   │       ├── hslToRGB.ts
-│   │       ├── isHex.ts
-│   │       ├── isHSL.ts
-│   │       ├── isRGB.ts
-│   │       ├── randomColor.ts
-│   │       ├── rgbaToHSLA.ts
-│   │       ├── rgbaToRGB.ts
-│   │       ├── rgbToHSL.ts
-│   │       └── rgbToRGBA.ts
+│   │   ├── color
+│   │   │   ├── getValuesHSL.ts
+│   │   │   ├── getValuesRGB.ts
+│   │   │   ├── hexToHSL.ts
+│   │   │   ├── hexToRGBA.ts
+│   │   │   ├── hexToRGB.ts
+│   │   │   ├── hslaToRGBA.ts
+│   │   │   ├── hslToRGB.ts
+│   │   │   ├── isHex.ts
+│   │   │   ├── isHSL.ts
+│   │   │   ├── isRGB.ts
+│   │   │   ├── randomColor.ts
+│   │   │   ├── rgbaToHSLA.ts
+│   │   │   ├── rgbaToRGB.ts
+│   │   │   ├── rgbToHSL.ts
+│   │   │   └── rgbToRGBA.ts
+│   │   ├── startup.ts
+│   │   └── version.ts
 │   ├── index.ts
 │   └── utils
 │       ├── randomInt.ts
