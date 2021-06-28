@@ -26,3 +26,7 @@
 
 1. Sound
    1. Fixed src not being set.
+
+## 1.1.2-beta
+
+1. Added version and startup message
