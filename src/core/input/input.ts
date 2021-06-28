@@ -55,13 +55,13 @@ export default class Input {
 
 	public on(
 		type: 'keydown' | 'keyup',
-		key: string,
+		description: string,
 		cb: (e: KeyboardEvent) => void
 	) {
 		document.addEventListener(type, cb);
 		this.listeners.push({
 			fn: cb,
-			key: key,
+			description: description,
 			type: type,
 		});
 		if (this.game.config.debug) {
@@ -69,9 +69,9 @@ export default class Input {
 		}
 	}
 
-	public off(key: string) {
+	public off(description: string) {
 		const foundListener = this.listeners.find(
-			(_listener) => _listener.key === key
+			(_listener) => _listener.description === description
 		);
 		if (foundListener) {
 			document.removeEventListener(

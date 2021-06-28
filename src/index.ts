@@ -106,7 +106,7 @@ export namespace Duck {
 
 		export interface Listener {
 			fn: (e: KeyboardEvent) => void;
-			key: string;
+			description: string;
 			type: 'keydown' | 'keyup';
 		}
 	}

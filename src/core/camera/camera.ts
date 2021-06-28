@@ -11,6 +11,7 @@ import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
 
 class Camera {
+	private game: Game;
 	private distance: number;
 	private lookAt: number[];
 	private ctx: CanvasRenderingContext2D | null | undefined;
@@ -30,6 +31,7 @@ class Camera {
 	private bounds: { x: number; y: number; w: number; h: number } | undefined;
 
 	constructor(game: Game, scene: Scene) {
+		this.game = game;
 		this.distance = 1000.0;
 		this.isMain = false;
 		if (scene.mainCamera === this) {
@@ -94,6 +96,42 @@ class Camera {
 		this.updateViewport();
 	}
 
+	public setZoomSmooth(intervalMS: number, smoothValue: number, z: number) {
+		let operation: 'add' | 'subtract' = 'add';
+
+		if (this.distance < z) {
+			operation = 'add';
+		} else {
+			operation = 'subtract';
+		}
+
+		const int = setInterval(() => {
+			if (operation === 'add') {
+				if (this.distance < z) {
+					this.distance += smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera Zoom with setZoomSmooth'
+						);
+					}
+				}
+			} else {
+				if (this.distance > z) {
+					this.distance -= smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera Zoom with setZoomSmooth'
+						);
+					}
+				}
+			}
+		}, intervalMS);
+	}
+
 	public moveTo(x: number, y: number) {
 		this.lookAt[0] = x;
 		this.lookAt[1] = y;
@@ -144,6 +182,42 @@ class Camera {
 
 	public setFOV(f: number) {
 		this.fieldOfView = f;
+	}
+
+	public setFOVSmooth(intervalMS: number, smoothValue: number, f: number) {
+		let operation: 'add' | 'subtract' = 'add';
+
+		if (this.fieldOfView < f) {
+			operation = 'add';
+		} else {
+			operation = 'subtract';
+		}
+
+		const int = setInterval(() => {
+			if (operation === 'add') {
+				if (this.fieldOfView < f) {
+					this.fieldOfView += smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera FOV with setFOVSmooth'
+						);
+					}
+				}
+			} else {
+				if (this.fieldOfView > f) {
+					this.fieldOfView -= smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera FOV with setFOVSmooth'
+						);
+					}
+				}
+			}
+		}, intervalMS);
 	}
 
 	public resetFOV() {
