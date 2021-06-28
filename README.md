@@ -66,7 +66,10 @@ How to use DuckEngine with Typescript.
 {
     "typeRoots": [
         "./node_modules/@types",
-        "path_to_duckengine.d.ts"
+        "path_to_duckengine_index.d.ts"
+    ],
+    "types": [
+        "DuckEngine"
     ]
 }
 ```

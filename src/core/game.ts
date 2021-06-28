@@ -3,6 +3,7 @@ import { Duck } from '../index';
 import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
 import Debug from './debug/debug';
+import startup from '../helper/startup';
 
 export default class Game {
 	public readonly config: Duck.Game.Config;
@@ -18,6 +19,8 @@ export default class Game {
 	};
 
 	constructor(config: Duck.Game.Config) {
+		console.log(startup);
+
 		this.config = config;
 		this.canvas = this.config.canvas;
 		this.ctx = this.canvas?.getContext('2d');
