@@ -19,6 +19,7 @@ export default class Input {
 			arrow_left: false,
 			arrow_right: false,
 			spacebar: false,
+			mouse: false,
 		};
 
 		this.listeners = [];
@@ -42,6 +43,13 @@ export default class Input {
 					return this.controller;
 				}
 			});
+		});
+
+		document.addEventListener('click', () => {
+			this.controller.mouse = true;
+			setTimeout(() => {
+				this.controller.mouse = false;
+			}, 10);
 		});
 	}
 

@@ -101,6 +101,7 @@ export namespace Duck {
 			arrow_left: boolean;
 			arrow_right: boolean;
 			spacebar: boolean;
+			mouse: boolean;
 		}
 
 		export interface Listener {
