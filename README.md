@@ -213,6 +213,11 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 9. `npm run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
 10. `npm run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
 
+### Branches
+
+1. main - main branch
+2. staging - stage changes to this branch
+
 ## Versions
 
 DuckEngine does follow SemVer.

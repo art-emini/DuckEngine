@@ -1,5 +1,7 @@
 # DuckEngine Changelog
 
+Old Versions that are over 5 versions behind will be removed.
+
 ## 1.0.0-beta
 
 1. Released DuckEngine
