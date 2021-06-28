@@ -16,16 +16,26 @@ export default class Group<t extends Duck.Group.StackItem> {
 	private game: Game;
 	public readonly name: string;
 
+	private listeners: Duck.Group.Listener[];
+
 	constructor(name: string, game: Game, defaultItems?: Duck.Group.Stack) {
 		this.name = name;
 		this.stack = defaultItems || [];
 		this.game = game;
+
+		this.listeners = [];
 	}
 
 	public add(item: t) {
 		this.stack.push(item);
 		if (this.game.config.debug) {
 			new Debug.Log('Added item to group.');
+		}
+
+		// listener
+		const foundListener = this.listeners.find((l) => l.type === 'ADD');
+		if (foundListener) {
+			foundListener.func(item);
 		}
 	}
 
@@ -39,6 +49,12 @@ export default class Group<t extends Duck.Group.StackItem> {
 			new Debug.Error(
 				'Cannot remove item from Group. Item does not exist in Group.'
 			);
+		}
+
+		// listener
+		const foundListener = this.listeners.find((l) => l.type === 'REMOVE');
+		if (foundListener) {
+			foundListener.func(item);
 		}
 	}
 
@@ -81,6 +97,25 @@ export default class Group<t extends Duck.Group.StackItem> {
 				);
 				return this.stack;
 				break;
+		}
+	}
+
+	public on(type: Duck.Group.ListenerType, cb: () => unknown) {
+		this.listeners.push({
+			type: type,
+			func: cb,
+		});
+	}
+
+	public off(type: Duck.Group.ListenerType) {
+		const foundListener = this.listeners.find((l) => l.type === type);
+
+		if (foundListener) {
+			this.listeners.splice(this.listeners.indexOf(foundListener), 1);
+		} else {
+			new Debug.Error(
+				'Cannot remove event listener from group. Type does not exist.'
+			);
 		}
 	}
 

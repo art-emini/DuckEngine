@@ -72,6 +72,7 @@ export namespace Duck {
 
 		export interface Config {
 			autoplay?: boolean;
+			volume?: number;
 			sprites?: Sprite[];
 		}
 	}
@@ -101,7 +102,6 @@ export namespace Duck {
 			arrow_left: boolean;
 			arrow_right: boolean;
 			spacebar: boolean;
-			mouse: boolean;
 		}
 
 		export interface Listener {
@@ -144,6 +144,13 @@ export namespace Duck {
 			| 'interactive'
 			| 'physics'
 			| 'cameras';
+
+		export type ListenerType = 'ADD' | 'REMOVE';
+
+		export interface Listener {
+			func: (item: StackItem) => unknown;
+			type: ListenerType;
+		}
 	}
 
 	export namespace ParticleEmitter {

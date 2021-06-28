@@ -24,6 +24,9 @@ export default class Sound {
 			if (options.sprites) {
 				this.sprites = options.sprites;
 			}
+			if (options.volume) {
+				this.element.volume = options.volume;
+			}
 		}
 
 		document.body.appendChild(this.element);
@@ -45,12 +48,20 @@ export default class Sound {
 		this.seek(0);
 	}
 
+	public setVolume(volume: number) {
+		this.element.volume = volume;
+	}
+
 	public get duration() {
 		return this.element.duration;
 	}
 
 	public get isPlaying() {
 		return !this.element.paused;
+	}
+
+	public get volume() {
+		return this.element.volume;
 	}
 
 	public playSprite(key: string) {

@@ -6,8 +6,8 @@ import Particle from './particle';
 
 export default class ParticleEmitter {
 	private particle: Particle;
-	private rangeX: Duck.ParticleEmitter.Range;
-	private rangeY: Duck.ParticleEmitter.Range;
+	public rangeX: Duck.ParticleEmitter.Range;
+	public rangeY: Duck.ParticleEmitter.Range;
 	public readonly amount: number;
 	private list: Particle[];
 	private game: Game;
@@ -70,6 +70,21 @@ export default class ParticleEmitter {
 
 	public stopEmit() {
 		this.emitting = false;
+	}
+
+	public emitFor(ms: number) {
+		this.emitting = true;
+		setTimeout(() => {
+			this.emitting = false;
+		}, ms);
+	}
+
+	public setRange(
+		rangeX: Duck.ParticleEmitter.Range,
+		rangeY: Duck.ParticleEmitter.Range
+	) {
+		this.rangeX = rangeX;
+		this.rangeY = rangeY;
 	}
 
 	public keepEmitting(intervalMS: number, limitTo?: number) {
