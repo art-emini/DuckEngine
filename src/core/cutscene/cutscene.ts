@@ -2,10 +2,12 @@
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
+import Game from '../game';
 
 export default class Cutscene {
 	private config: Duck.Cutscene.Config;
 	private instructions: Duck.Cutscene.Instructions;
+	private game: Game;
 
 	private steps: Duck.Cutscene.Step[];
 	private mainObject: Duck.GameObject;
@@ -21,10 +23,12 @@ export default class Cutscene {
 
 	constructor(
 		config: Duck.Cutscene.Config,
-		instructions: Duck.Cutscene.Instructions
+		instructions: Duck.Cutscene.Instructions,
+		game: Game
 	) {
 		this.config = config;
 		this.instructions = instructions;
+		this.game = game;
 
 		this.steps = this.instructions.steps;
 		this.mainObject = this.config.mainObject;
@@ -184,6 +188,9 @@ export default class Cutscene {
 			type: type,
 			func: cb,
 		});
+		if (this.game.config.debug) {
+			new Debug.Log('Added Event Listener to cutscene.');
+		}
 	}
 
 	public off(type: Duck.Cutscene.OnListenerType) {

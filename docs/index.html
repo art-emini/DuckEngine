@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckEngine - v1.1.2-beta</title>
+	<title>DuckEngine - v1.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="index.html" class="title">DuckEngine - v1.1.2-beta</a>
+					<a href="index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -146,7 +146,7 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>DuckEngine - v1.1.2-beta</h1>
+			<h1>DuckEngine - v1.0.0</h1>
 			<div class="tsd-panel tsd-typography">
 				<a href="#" id="" style="color: inherit; text-decoration: none;">
 					<h1><img src="global/Logo.png" alt="DuckEngine"></h1>
@@ -251,6 +251,7 @@
 					<h3>File Structure</h3>
 				</a>
 				<pre><code class="language-bash"><span style="color: #795E26">.</span>
+<span style="color: #000000">├── CHANGELOG.md</span>
 <span style="color: #000000">├── CODE_OF_CONDUCT.md</span>
 <span style="color: #000000">├── CONTRIBUTING.md</span>
 <span style="color: #000000">├── examples</span>
@@ -313,22 +314,24 @@
 <span style="color: #000000">│   │   └── storage</span>
 <span style="color: #000000">│   │       └── storage.ts</span>
 <span style="color: #000000">│   ├── helper</span>
-<span style="color: #000000">│   │   └── color</span>
-<span style="color: #000000">│   │       ├── getValuesHSL.ts</span>
-<span style="color: #000000">│   │       ├── getValuesRGB.ts</span>
-<span style="color: #000000">│   │       ├── hexToHSL.ts</span>
-<span style="color: #000000">│   │       ├── hexToRGBA.ts</span>
-<span style="color: #000000">│   │       ├── hexToRGB.ts</span>
-<span style="color: #000000">│   │       ├── hslaToRGBA.ts</span>
-<span style="color: #000000">│   │       ├── hslToRGB.ts</span>
-<span style="color: #000000">│   │       ├── isHex.ts</span>
-<span style="color: #000000">│   │       ├── isHSL.ts</span>
-<span style="color: #000000">│   │       ├── isRGB.ts</span>
-<span style="color: #000000">│   │       ├── randomColor.ts</span>
-<span style="color: #000000">│   │       ├── rgbaToHSLA.ts</span>
-<span style="color: #000000">│   │       ├── rgbaToRGB.ts</span>
-<span style="color: #000000">│   │       ├── rgbToHSL.ts</span>
-<span style="color: #000000">│   │       └── rgbToRGBA.ts</span>
+<span style="color: #000000">│   │   ├── color</span>
+<span style="color: #000000">│   │   │   ├── getValuesHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── getValuesRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToRGBA.ts</span>
+<span style="color: #000000">│   │   │   ├── hexToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── hslaToRGBA.ts</span>
+<span style="color: #000000">│   │   │   ├── hslToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── isHex.ts</span>
+<span style="color: #000000">│   │   │   ├── isHSL.ts</span>
+<span style="color: #000000">│   │   │   ├── isRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── randomColor.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbaToHSLA.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbaToRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── rgbToHSL.ts</span>
+<span style="color: #000000">│   │   │   └── rgbToRGBA.ts</span>
+<span style="color: #000000">│   │   ├── startup.ts</span>
+<span style="color: #000000">│   │   └── version.ts</span>
 <span style="color: #000000">│   ├── index.ts</span>
 <span style="color: #000000">│   └── utils</span>
 <span style="color: #000000">│       ├── randomInt.ts</span>
@@ -373,6 +376,13 @@
 					<li><code>npm run lint</code> - Uses ESLint to lint all files in the src directory.</li>
 					<li><code>npm run lint:watch</code> - Watches for changes and fixes all fixable issues found by ESLint.</li>
 					<li><code>npm run lint:fix</code> - Uses ESLint to fix all fixable issues found by ESLint.</li>
+				</ol>
+				<a href="#branches" id="branches" style="color: inherit; text-decoration: none;">
+					<h3>Branches</h3>
+				</a>
+				<ol>
+					<li>main - main branch</li>
+					<li>staging - stage changes to this branch</li>
 				</ol>
 				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
 					<h2>Versions</h2>

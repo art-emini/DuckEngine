@@ -53,4 +53,11 @@ export default class Sprite extends GameObject {
 		this.path = imgpath;
 		this.image.src = this.path;
 	}
+
+	public setFillColor(color: string) {
+		new Debug.Warn(
+			'Cannot fill color of a sprite. Changed the image path instead. Use setImagePath instead.'
+		);
+		this.path = color;
+	}
 }

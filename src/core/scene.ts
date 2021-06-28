@@ -256,7 +256,7 @@ export default class Scene extends Basic {
 				return new Sound(path, options);
 			},
 			input: () => {
-				return new Input();
+				return new Input(this.game);
 			},
 			camera: () => {
 				const c = new Camera(this.game, this);
@@ -289,7 +289,7 @@ export default class Scene extends Basic {
 				},
 			},
 			group: (name: string, defaultValues?: Duck.Group.StackItem[]) => {
-				return new Group(name, defaultValues);
+				return new Group(name, this.game, defaultValues);
 			},
 			particle: (
 				shape: Duck.Collider.ShapeString,
@@ -318,7 +318,7 @@ export default class Scene extends Basic {
 				config: Duck.Cutscene.Config,
 				instructions: Duck.Cutscene.Instructions
 			) => {
-				return new Cutscene(config, instructions);
+				return new Cutscene(config, instructions, this.game);
 			},
 		};
 
@@ -379,6 +379,9 @@ export default class Scene extends Basic {
 		const foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
 			this.currentCamera = foundCamera;
+			if (this.game.config.debug) {
+				new Debug.Log('Switched cameras.');
+			}
 		} else {
 			new Debug.Error(
 				'Cannot switch camera. Camera not found in the current scene.'
@@ -388,9 +391,15 @@ export default class Scene extends Basic {
 
 	public switchToMainCamera() {
 		this.currentCamera = this.mainCamera;
+		if (this.game.config.debug) {
+			new Debug.Log('Switched to main camera.');
+		}
 	}
 
 	public setMainCamera(camera: Camera) {
 		this.mainCamera = camera;
+		if (this.game.config.debug) {
+			new Debug.Log(`Set main camera to ${camera}.`);
+		}
 	}
 }

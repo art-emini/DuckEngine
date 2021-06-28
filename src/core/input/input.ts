@@ -1,10 +1,14 @@
 import { Duck } from '../../index';
+import Debug from '../debug/debug';
+import Game from '../game';
 
 export default class Input {
+	private game: Game;
 	private controller: Duck.Input.Controller;
 	private listeners: Duck.Input.Listener[];
 
-	constructor() {
+	constructor(game: Game) {
+		this.game = game;
 		this.controller = {
 			w: false,
 			a: false,
@@ -52,6 +56,9 @@ export default class Input {
 			key: key,
 			type: type,
 		});
+		if (this.game.config.debug) {
+			new Debug.Log('Added event listener to Input.');
+		}
 	}
 
 	public off(key: string) {
@@ -64,6 +71,9 @@ export default class Input {
 				foundListener.fn,
 				true
 			);
+			if (this.game.config.debug) {
+				new Debug.Log('Removed event listener from Input.');
+			}
 		}
 	}
 

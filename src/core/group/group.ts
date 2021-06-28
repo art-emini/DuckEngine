@@ -2,6 +2,7 @@
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
+import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import RoundRect from '../gameobjects/roundrect';
@@ -12,20 +13,28 @@ import Collider from '../physics/collider';
 
 export default class Group<t extends Duck.Group.StackItem> {
 	private stack: Duck.Group.Stack;
+	private game: Game;
 	public readonly name: string;
 
-	constructor(name: string, defaultItems?: Duck.Group.Stack) {
+	constructor(name: string, game: Game, defaultItems?: Duck.Group.Stack) {
 		this.name = name;
 		this.stack = defaultItems || [];
+		this.game = game;
 	}
 
 	public add(item: t) {
 		this.stack.push(item);
+		if (this.game.config.debug) {
+			new Debug.Log('Added item to group.');
+		}
 	}
 
 	public remove(item: t) {
 		if (this.find(item)) {
 			this.stack.splice(this.indexOf(item), 1);
+			if (this.game.config.debug) {
+				new Debug.Log('Removed item from group.');
+			}
 		} else {
 			new Debug.Error(
 				'Cannot remove item from Group. Item does not exist in Group.'

@@ -57,6 +57,7 @@ export namespace Duck {
 				data?: unknown[];
 				gameConfig?: boolean;
 			};
+			loadOnWindowLoad?: LoadType;
 		}
 
 		export type LoadType = 'scenes' | 'data' | 'gameConfig' | 'all';

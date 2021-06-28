@@ -10,6 +10,9 @@ export default class Game {
 	public canvas: HTMLCanvasElement | null;
 	public ctx: CanvasRenderingContext2D | null | undefined;
 	public stack: Duck.Game.Stack;
+
+	public animationFrame: number | undefined;
+
 	public gameStorage: DuckStorage | undefined;
 
 	// methods
@@ -58,7 +61,13 @@ export default class Game {
 
 		if (this.config.storage) {
 			this.gameStorage = new DuckStorage(this.config.storage, this);
+			if (this.config.storage.loadOnWindowLoad) {
+				this.gameStorage.load(this.config.storage.loadOnWindowLoad);
+			}
 		}
+
+		// animation frame
+		this.animationFrame;
 
 		// methods
 		this.scenes = {
@@ -84,6 +93,18 @@ export default class Game {
 
 	public start() {
 		this.loop(this);
+		if (this.config.debug) {
+			new Debug.Log('Started animation frame.');
+		}
+	}
+
+	public stop() {
+		if (this.animationFrame) {
+			cancelAnimationFrame(this.animationFrame);
+			if (this.config.debug) {
+				new Debug.Log('Stopped animation frame.');
+			}
+		}
 	}
 
 	private loop(self: Game) {
@@ -104,7 +125,7 @@ export default class Game {
 			}
 		});
 
-		requestAnimationFrame(() => {
+		this.animationFrame = requestAnimationFrame(() => {
 			self.loop(self);
 		});
 	}
