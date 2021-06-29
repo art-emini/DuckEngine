@@ -12,13 +12,13 @@ import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
 
 export default class Group<t extends Duck.Group.StackItem> {
-	private stack: Duck.Group.Stack;
+	private stack: t[];
 	private game: Game;
 	public readonly name: string;
 
 	private listeners: Duck.Group.Listener[];
 
-	constructor(name: string, game: Game, defaultItems?: Duck.Group.Stack) {
+	constructor(name: string, game: Game, defaultItems?: t[]) {
 		this.name = name;
 		this.stack = defaultItems || [];
 		this.game = game;
@@ -67,8 +67,20 @@ export default class Group<t extends Duck.Group.StackItem> {
 		return this.stack.indexOf(item);
 	}
 
-	public each(cb: (item: unknown, index: number) => void) {
+	public each(cb: (item: t, index: number) => void) {
 		return this.stack.forEach(cb.bind(this));
+	}
+
+	public pop() {
+		return this.stack.pop();
+	}
+
+	public shift() {
+		return this.stack.shift();
+	}
+
+	public splice(index: number, deleteCount?: number) {
+		return this.stack.splice(index, deleteCount);
 	}
 
 	public filter(filter: Duck.Group.Filter) {
@@ -121,5 +133,9 @@ export default class Group<t extends Duck.Group.StackItem> {
 
 	public get group() {
 		return this.stack;
+	}
+
+	public get length() {
+		return this.stack.length;
 	}
 }

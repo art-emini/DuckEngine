@@ -109,10 +109,10 @@ export default class Scene extends Basic {
 				alpha: number
 			) => StaticLight;
 		};
-		group: (
+		group: <t extends Duck.Group.StackItem>(
 			name: string,
-			defaultValues?: Duck.Group.StackItem[]
-		) => Group<Duck.Group.StackItem>;
+			defaultValues?: t[]
+		) => Group<t>;
 		particle: (
 			shape: Duck.Collider.ShapeString,
 			w: number,
@@ -290,8 +290,11 @@ export default class Scene extends Basic {
 					);
 				},
 			},
-			group: (name: string, defaultValues?: Duck.Group.StackItem[]) => {
-				return new Group(name, this.game, defaultValues);
+			group: <t extends Duck.Group.StackItem>(
+				name: string,
+				defaultValues?: t[]
+			) => {
+				return new Group<t>(name, this.game, defaultValues);
 			},
 			particle: (
 				shape: Duck.Collider.ShapeString,

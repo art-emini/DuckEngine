@@ -14,7 +14,7 @@ const game = new DuckEngine.Game({
 
 const main = new MainScene();
 
-game.scenes.add(main);
+game.scenes.add([main]);
 
 game.start();
 

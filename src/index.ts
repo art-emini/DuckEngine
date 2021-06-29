@@ -136,8 +136,6 @@ export namespace Duck {
 			| StaticLight
 			| Collider;
 
-		export type Stack = StackItem[];
-
 		export type Filter =
 			| 'gameobject'
 			| 'lights'
