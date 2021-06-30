@@ -194,6 +194,8 @@ export default class Scene extends Basic {
 		this.visible = visible || false;
 		this.default = false;
 
+		// set visible if key is same as defaultScene key
+
 		if (this.game.stack.defaultScene === this.key) {
 			this.default = true;
 			this.visible = true;

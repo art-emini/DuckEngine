@@ -30,6 +30,8 @@ class Camera {
 
 	private bounds: { x: number; y: number; w: number; h: number } | undefined;
 
+	public following: Duck.GameObject | undefined;
+
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
 		this.distance = 1000.0;
@@ -52,6 +54,8 @@ class Camera {
 
 		this.bounds;
 
+		this.following;
+
 		this.updateViewport();
 	}
 
@@ -59,6 +63,49 @@ class Camera {
 		this.ctx?.save();
 		this.applyScale();
 		this.applyTranslation();
+
+		if (this.following) {
+			if (this.following.shape === 'rect') {
+				if (this.bounds) {
+					if (
+						rectToRectIntersect(this.following as Rect, this.bounds)
+					) {
+						this.lookAt[0] =
+							this.following.x - (this.following as Rect).w / 2;
+						this.lookAt[1] =
+							this.following.y - (this.following as Rect).h / 2;
+					}
+				} else {
+					this.lookAt[0] =
+						this.following.x - (this.following as Rect).w / 2;
+					this.lookAt[1] =
+						this.following.y - (this.following as Rect).h / 2;
+				}
+			}
+
+			if (this.following.shape === 'circle') {
+				if (this.bounds) {
+					if (
+						circleToRectIntersect(
+							this.following as Circle,
+							this.bounds
+						)
+					) {
+						this.lookAt[0] =
+							this.following.x - (this.following as Circle).r / 2;
+						this.lookAt[1] =
+							this.following.y - (this.following as Circle).r / 2;
+					}
+				} else {
+					this.lookAt[0] =
+						this.following.x - (this.following as Circle).r / 2;
+					this.lookAt[1] =
+						this.following.y - (this.following as Circle).r / 2;
+				}
+			}
+
+			this.updateViewport();
+		}
 	}
 
 	public end() {
@@ -139,33 +186,11 @@ class Camera {
 	}
 
 	public follow(gameObject: Duck.GameObject) {
-		if (gameObject.shape === 'rect') {
-			if (this.bounds) {
-				if (rectToRectIntersect(gameObject as Rect, this.bounds)) {
-					this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
-					this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
-				}
-			} else {
-				this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
-				this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
-			}
-		}
+		this.following = gameObject;
+	}
 
-		if (gameObject.shape === 'circle') {
-			if (this.bounds) {
-				if (circleToRectIntersect(gameObject as Circle, this.bounds)) {
-					this.lookAt[0] =
-						gameObject.x - (gameObject as Circle).r / 2;
-					this.lookAt[1] =
-						gameObject.y - (gameObject as Circle).r / 2;
-				}
-			} else {
-				this.lookAt[0] = gameObject.x - (gameObject as Circle).r / 2;
-				this.lookAt[1] = gameObject.y - (gameObject as Circle).r / 2;
-			}
-		}
-
-		this.updateViewport();
+	public stopFollow() {
+		this.following = undefined;
 	}
 
 	public screenToWorld(x: number, y: number, obj: Duck.GameObject) {

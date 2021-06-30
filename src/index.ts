@@ -2,21 +2,18 @@
 
 import Camera from './core/camera/camera';
 import Game from './core/game';
-import Circle from './core/gameobjects/circle';
-import Rect from './core/gameobjects/rect';
-import RoundRect from './core/gameobjects/roundrect';
-import Sprite from './core/gameobjects/sprite';
 import Scene from './core/scene';
 import Text from './core/interactive/text';
 import StaticLight from './core/lights/staticLight';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Collider from './core/physics/collider';
+import GameObjectClass from './core/gameobjects/gameObject';
 
 // main
 
 // spec
 export namespace Duck {
-	export type GameObject = Sprite | Rect | Circle | RoundRect;
+	export type GameObject = GameObjectClass;
 	export namespace Game {
 		export interface Config {
 			canvas: HTMLCanvasElement | null;
