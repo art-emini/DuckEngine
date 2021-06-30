@@ -228,7 +228,9 @@ All demos are bundled with parcel-bundler and are all on codesandbox.
 
 ### [Space Shooter Game](https://codesandbox.io/s/duckengine-space-shooter-64wkg?file=/src/scene.js)
 
-### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/duckengine.js)
+### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+
+### [Particle Test](https://codesandbox.io/s/duckengine-particle-test-dhcr1?file=/src/scene.js)
 
 ## Attribution
 

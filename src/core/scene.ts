@@ -47,6 +47,7 @@ import Cutscene from './cutscene/cutscene';
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
 import Loader from './loader/loader';
+import randomFloat from '../utils/randomFloat';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -134,6 +135,7 @@ export default class Scene extends Basic {
 
 	public tools: {
 		randomInt: (min: number, max: number) => number;
+		randomFloat: (min: number, max: number, fixed?: number) => number;
 		loader: Loader;
 		color: {
 			random: () => string;
@@ -331,6 +333,7 @@ export default class Scene extends Basic {
 
 		this.tools = {
 			randomInt: randomInt,
+			randomFloat: randomFloat,
 			loader: Loader,
 			color: {
 				random: randomColor,
