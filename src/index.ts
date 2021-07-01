@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 // import
 
 import Camera from './core/camera/camera';
@@ -157,7 +158,6 @@ export namespace Duck {
 
 		export interface OnListener {
 			type: OnListenerType;
-			// eslint-disable-next-line @typescript-eslint/ban-types
 			func: Function;
 		}
 
@@ -176,7 +176,6 @@ export namespace Duck {
 				x?: number;
 				y?: number;
 			};
-			// eslint-disable-next-line @typescript-eslint/ban-types
 			func?: Function;
 			cameraValue?: number;
 			sleepValue?: number;
@@ -220,8 +219,6 @@ export namespace Duck {
 			mainObject: GameObject;
 		}
 	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	namespace Helper {
 		type ArrayLengthMutationKeys =
 			| 'splice'

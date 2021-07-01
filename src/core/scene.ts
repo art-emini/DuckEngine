@@ -48,6 +48,7 @@ import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
 import Loader from './loader/loader';
 import randomFloat from '../utils/randomFloat';
+import SpriteSheet from './gameobjects/spritesheet';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -93,6 +94,17 @@ export default class Scene extends Basic {
 				r: number,
 				fillColor: string
 			) => RoundRect;
+			spriteSheet: (
+				x: number,
+				y: number,
+				imagePath: string,
+				frameWidth: number,
+				frameHeight: number,
+				rows: number,
+				cols: number,
+				currentRow: number,
+				currentCol: number
+			) => SpriteSheet;
 		};
 		interactive: {
 			text: (text: string, config: Duck.Interactive.Text.Config) => Text;
@@ -251,6 +263,30 @@ export default class Scene extends Basic {
 					fillColor: string
 				) => {
 					return new RoundRect(x, y, w, h, r, fillColor, this.game);
+				},
+				spriteSheet: (
+					x: number,
+					y: number,
+					imagePath: string,
+					frameWidth: number,
+					frameHeight: number,
+					rows: number,
+					cols: number,
+					currentRow: number,
+					currentCol: number
+				) => {
+					return new SpriteSheet(
+						x,
+						y,
+						imagePath,
+						frameWidth,
+						frameHeight,
+						rows,
+						cols,
+						currentRow,
+						currentCol,
+						this.game
+					);
 				},
 			},
 			interactive: {

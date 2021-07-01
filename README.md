@@ -15,7 +15,7 @@
 ## Features
 
 1. Physics
-2. Sprites
+2. Sprites & SpriteSheets
 3. Many Game objects
 4. Group Management
 5. Keyboard, Mouse, and touch input
