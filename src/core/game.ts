@@ -15,6 +15,10 @@ export default class Game {
 
 	public gameStorage: DuckStorage | undefined;
 
+	public deltaTime: number;
+	private oldTime: number;
+	private now: number;
+
 	// methods
 	public scenes: {
 		add: (scenes: Scene[]) => void;
@@ -27,6 +31,10 @@ export default class Game {
 		this.config = config;
 		this.canvas = this.config.canvas;
 		this.ctx = this.canvas?.getContext('2d');
+
+		this.deltaTime = 0;
+		this.oldTime = 0;
+		this.now = 0;
 
 		// auto
 		if (!this.canvas || !this.ctx) {
@@ -118,6 +126,9 @@ export default class Game {
 	private loop(self: Game) {
 		self.clearFrame();
 
+		this.now = performance.now();
+		this.deltaTime = this.now - this.oldTime;
+
 		self.stack.scenes.forEach((scene) => {
 			if (scene.currentCamera) {
 				scene.currentCamera.begin();
@@ -132,6 +143,8 @@ export default class Game {
 				scene.currentCamera.end();
 			}
 		});
+
+		this.oldTime = this.now;
 
 		this.animationFrame = requestAnimationFrame(() => {
 			self.loop(self);

@@ -132,7 +132,7 @@ export default class Particle extends GameObject {
 
 		// float
 
-		this.x += this.floatVX;
-		this.y += this.floatVY;
+		(this.x += this.floatVX) * this.game.deltaTime;
+		(this.y += this.floatVY) * this.game.deltaTime;
 	}
 }

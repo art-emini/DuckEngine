@@ -110,12 +110,12 @@ export default class GameObject {
 	public setVelocity(axis: 'x' | 'y', v: number) {
 		if (axis === 'x') {
 			this.vx = v;
-			this.x += this.vx;
+			(this.x += this.vx) * this.game.deltaTime;
 		}
 
 		if (axis === 'y') {
 			this.vy = v;
-			this.y += this.vy;
+			(this.y += this.vy) * this.game.deltaTime;
 		}
 	}
 
