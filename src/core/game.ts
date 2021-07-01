@@ -51,6 +51,14 @@ export default class Game {
 			this.setBackground(this.config.background);
 		}
 
+		// mobile scaling / devicePixelRatio scaling
+		const dpr = window.devicePixelRatio || 1;
+		this.canvas.width *= dpr;
+		this.canvas.height *= dpr;
+		if (this.ctx) {
+			this.ctx.scale(dpr, dpr);
+		}
+
 		// stack
 		this.stack = {
 			scenes: [],

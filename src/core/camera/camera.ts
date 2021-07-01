@@ -258,10 +258,8 @@ class Camera {
 	}
 
 	public scrollToZoom() {
-		// Zoom and scroll around world
 		window.onwheel = (e: WheelEvent) => {
 			if (e.ctrlKey) {
-				// Your zoom/scale factor
 				let zoomLevel = this.distance - e.deltaY * 20;
 				if (zoomLevel <= 1) {
 					zoomLevel = 1;
@@ -269,21 +267,20 @@ class Camera {
 
 				this.setZoom(zoomLevel);
 			} else {
-				// Your track-pad X and Y positions
 				const x = this.lookAt[0] + e.deltaX * 2;
 				const y = this.lookAt[1] + e.deltaY * 2;
 
 				this.moveTo(x, y);
 			}
 		};
+	}
 
-		// Center camera on "R"
-		window.addEventListener('keydown', (e) => {
-			if (e.key === 'r') {
-				this.setZoom(1000);
-				this.moveTo(0, 0);
-			}
-		});
+	get defaultZoom() {
+		return 1000;
+	}
+
+	get defaultFOV() {
+		return Math.PI / 4;
 	}
 }
 
