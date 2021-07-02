@@ -11,6 +11,7 @@ import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
 import Text from './interactive/text';
 import RoundRect from './gameobjects/roundrect';
+import SpriteSheet from './gameobjects/spritesheet';
 
 // particle stuff
 import Particle from './particles/particle';
@@ -23,9 +24,13 @@ import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
 import Group from './group/group';
 
+// misc
+import Cutscene from './cutscene/cutscene';
+import Loader from './loader/loader';
+
 // tools
 import randomInt from '../utils/randomInt';
-import randomColor from '../helper/color/randomColor';
+import randomFloat from '../utils/randomFloat';
 
 // color
 // is
@@ -40,15 +45,14 @@ import rgbaToRGB from '../helper/color/rgbaToRGB';
 import hexToRGBA from '../helper/color/hexToRGBA';
 import hexToRGB from '../helper/color/hexToRGB';
 import hexToHSL from '../helper/color/hexToHSL';
-import Cutscene from './cutscene/cutscene';
+// random
+import randomColor from '../helper/color/randomColor';
+import randomColorWithAlpha from '../helper/color/randomAlphaColor';
 
 // physics
 // intersect
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
-import Loader from './loader/loader';
-import randomFloat from '../utils/randomFloat';
-import SpriteSheet from './gameobjects/spritesheet';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -151,6 +155,7 @@ export default class Scene extends Basic {
 		loader: Loader;
 		color: {
 			random: () => string;
+			randomWithAlpha: () => string;
 			is: {
 				hex: (str: string) => boolean;
 				hsl: (str: string) => boolean;
@@ -373,6 +378,7 @@ export default class Scene extends Basic {
 			loader: Loader,
 			color: {
 				random: randomColor,
+				randomWithAlpha: randomColorWithAlpha,
 				is: {
 					hex: isHex,
 					hsl: isHSL,
