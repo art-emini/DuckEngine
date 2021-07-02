@@ -32,3 +32,12 @@ Old Versions that are over 5 versions behind will be removed.
 ## 1.1.2-beta
 
 1. Added version and startup message
+
+## 1.0.0
+
+1. Game
+   1. Added stop method to stop the animationFrame
+   2. Added animationFrame property
+   3. Added delta time property
+
+2. Scene

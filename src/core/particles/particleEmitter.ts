@@ -1,4 +1,4 @@
-import { Duck } from '../..';
+import { Duck } from '../../index';
 import randomFloat from '../../utils/randomFloat';
 import randomInt from '../../utils/randomInt';
 import Game from '../game';
@@ -184,6 +184,12 @@ export default class ParticleEmitter {
 	public setFillColor(fillColor: string) {
 		this.list.forEach((particle) => {
 			particle.setFillColor(fillColor);
+		});
+	}
+
+	public setImagePath(imagePath: string) {
+		this.list.forEach((particle) => {
+			particle.setImagePath(imagePath);
 		});
 	}
 }

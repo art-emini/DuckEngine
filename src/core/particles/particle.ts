@@ -119,7 +119,7 @@ export default class Particle extends GameObject {
 				default:
 					if (this.game.config.debug) {
 						new Debug.Warn(
-							'Switched Particle shape to "rect". Shape is not a "circle", "rect", "roundrect", or "sprite".'
+							'Cannot draw Particle. Particle Shape is not a "circle", "rect", "roundrect", or "sprite".'
 						);
 					}
 					break;
@@ -134,5 +134,17 @@ export default class Particle extends GameObject {
 
 		(this.x += this.floatVX) * this.game.deltaTime;
 		(this.y += this.floatVY) * this.game.deltaTime;
+	}
+
+	public setImagePath(imagePath: string) {
+		if (this.image) {
+			this.image.src = imagePath;
+		} else {
+			if (this.game.config.debug) {
+				new Debug.Warn(
+					'Cannot setImagePath to particle. Particle shape is not a sprite.'
+				);
+			}
+		}
 	}
 }
