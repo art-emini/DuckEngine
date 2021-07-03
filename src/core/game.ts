@@ -19,6 +19,10 @@ export default class Game {
 	private oldTime: number;
 	private now: number;
 
+	public isInFullscreen: boolean;
+	private oldWidth: number;
+	private oldHeight: number;
+
 	// methods
 	public scenes: {
 		add: (scenes: Scene[]) => void;
@@ -66,6 +70,34 @@ export default class Game {
 		if (this.ctx) {
 			this.ctx.scale(dpr, dpr);
 		}
+
+		// fullscreen scale
+		this.isInFullscreen = false;
+		this.oldWidth = this.canvas.width;
+		this.oldHeight = this.canvas.height;
+
+		// resize listener & smartScale
+		window.onresize = () => {
+			if (this.isInFullscreen && this.canvas) {
+				this.scaleToWindow();
+			}
+			if (this.canvas && this.config.smartScale) {
+				if (window.innerWidth <= this.canvas.width) {
+					this.canvas.width = window.innerWidth;
+				}
+				if (window.innerHeight <= this.canvas.height) {
+					this.canvas.height = window.innerHeight;
+				}
+
+				if (window.innerWidth > this.canvas.width) {
+					this.canvas.width = this.oldWidth;
+				}
+
+				if (window.innerHeight > this.canvas.height) {
+					this.canvas.height = this.oldHeight;
+				}
+			}
+		};
 
 		// stack
 		this.stack = {
@@ -152,8 +184,8 @@ export default class Game {
 	}
 
 	public clearFrame() {
-		if (this.canvas) {
-			this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		if (this.canvas && this.ctx) {
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		} else {
 			new Debug.Error('Canvas is undefined');
 		}
@@ -207,6 +239,69 @@ export default class Game {
 			new Debug.Error(
 				`Cannot switch to scene with key "${key}. Scene not found."`
 			);
+		}
+	}
+
+	public fullscreen() {
+		if (this.canvas && document.fullscreenEnabled) {
+			this.canvas
+				.requestFullscreen()
+				.then(() => {
+					this.isInFullscreen = false;
+					if (this.canvas) {
+						this.scaleToWindow();
+					}
+				})
+				.catch(
+					() =>
+						new Debug.Error(
+							'User must interact with the page before fullscreen API can be used.'
+						)
+				);
+
+			// on un fullscreen
+			this.canvas.onfullscreenchange = () => {
+				if (!document.fullscreenElement) {
+					this.resetScale();
+					this.isInFullscreen = false;
+				}
+			};
+		}
+
+		if (!document.fullscreenEnabled) {
+			new Debug.Warn(
+				'Fullscreen is not supported/enabled on this browser.'
+			);
+		}
+	}
+
+	public unfullscreen() {
+		if (document.fullscreenElement) {
+			setTimeout(() => {
+				document
+					.exitFullscreen()
+					.then(() => {
+						if (this.canvas) {
+							this.canvas.width = this.oldWidth;
+							this.canvas.height = this.oldHeight;
+						}
+					})
+					.catch((e) => new Debug.Error(e));
+			}, 1000);
+		}
+	}
+
+	public resetScale() {
+		if (this.canvas) {
+			this.canvas.width = this.oldWidth;
+			this.canvas.height = this.oldHeight;
+		}
+	}
+
+	public scaleToWindow() {
+		if (this.canvas) {
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
 		}
 	}
 }

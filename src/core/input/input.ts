@@ -77,6 +77,11 @@ export default class Input {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	public onClick(cb: (e: MouseEvent) => any) {
+		document.addEventListener('click', cb);
+	}
+
 	// place in update loop in your scene
 
 	public get inputs() {

@@ -24,6 +24,7 @@ export namespace Duck {
 			storage?: Storage.Config;
 			defaultScene: string;
 			background?: string;
+			smartScale?: boolean;
 		}
 
 		export interface Stack {
