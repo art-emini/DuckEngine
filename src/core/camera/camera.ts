@@ -9,6 +9,7 @@ import { Duck } from '../../index';
 import rectToRectIntersect from '../physics/rectToRectIntersect';
 import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
+import randomInt from '../../utils/randomInt';
 
 class Camera {
 	private game: Game;
@@ -255,6 +256,34 @@ class Camera {
 
 	public setBounds(bounds: { x: number; y: number; w: number; h: number }) {
 		this.bounds = bounds;
+	}
+
+	public shake(intervalMS: number, timeMS: number, v: number) {
+		const int = setInterval(() => {
+			const r = randomInt(1, 4);
+
+			if (r === 1) {
+				this.lookAt[0] += v;
+			}
+
+			if (r === 2) {
+				this.lookAt[0] -= v;
+			}
+
+			if (r === 3) {
+				this.lookAt[1] += v;
+			}
+
+			if (r === 2) {
+				this.lookAt[1] += v;
+			}
+
+			this.updateViewport();
+		}, intervalMS);
+
+		setTimeout(() => {
+			clearInterval(int);
+		}, timeMS);
 	}
 
 	public scrollToZoom() {

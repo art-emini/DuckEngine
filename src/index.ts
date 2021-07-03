@@ -167,7 +167,8 @@ export namespace Duck {
 			| 'FUNC'
 			| 'CAMERA_ZOOM'
 			| 'CAMERA_FOV'
-			| 'CAMERA_MOVE';
+			| 'CAMERA_MOVE'
+			| 'CAMERA_SHAKE';
 
 		export interface Step {
 			type: StepType;
@@ -178,6 +179,8 @@ export namespace Duck {
 			};
 			func?: Function;
 			cameraValue?: number;
+			cameraIntervalMS?: number;
+			cameraTimeMS?: number;
 			sleepValue?: number;
 		}
 		export interface Instructions {

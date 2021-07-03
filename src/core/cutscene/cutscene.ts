@@ -164,6 +164,20 @@ export default class Cutscene {
 					);
 				}
 			}
+
+			if (
+				step.type === 'CAMERA_SHAKE' &&
+				step.cameraIntervalMS &&
+				step.cameraTimeMS &&
+				step.cameraValue &&
+				step.affect
+			) {
+				(step.affect as Camera).shake(
+					step.cameraIntervalMS,
+					step.cameraTimeMS,
+					step.cameraValue
+				);
+			}
 		}
 	}
 
