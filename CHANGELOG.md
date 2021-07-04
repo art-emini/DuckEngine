@@ -81,17 +81,24 @@ Old Versions that are over 5 versions behind will be removed.
 9. Gameobjects
    1. Added spritesheet to gameobject
    2. Implemented delta time
-10. Collider
+10. Sprite Gameobject
+    1. Added applyFilter method
+    2. Made image and path properties public
+11. StaticLight
+    1. Made use of convertColorToRGBA helper
+    2. Fixed 3 letter hex codes not working in conversion process
+    3. Made alpha parameter required in setFillColor
+12. Collider
     1. SpriteSheets now work
-11. Helpers
+13. Helpers
     1. Added new color helpers
     2. Added randomColor and randomColorWithAlpha to color helpers
     3. Added convertColorToRGBA to color helpers
-12. Input
+14. Input
     1. Added onClick method
-13. Demos
+15. Demos
     1. Added particle test demo
-14. Misc
+16. Misc
     1. Updated examples
     2. Updated changelog
     3. Updated readme
@@ -99,3 +106,4 @@ Old Versions that are over 5 versions behind will be removed.
     5. Updated dev dependencies
     6. Updated version to 1.0.0
     7. Made more properties on most classes public
+    8. Changed hexToRGBA due to not working with 3 letter hex codes

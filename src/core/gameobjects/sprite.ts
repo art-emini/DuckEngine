@@ -4,8 +4,8 @@ import Debug from '../debug/debug';
 import GameObject from './gameObject';
 
 export default class Sprite extends GameObject {
-	private image: HTMLImageElement;
-	private path: string;
+	public image: HTMLImageElement;
+	public path: string;
 
 	constructor(
 		x: number,
@@ -59,5 +59,35 @@ export default class Sprite extends GameObject {
 			'Cannot fill color of a sprite. Changed the image path instead. Use setImagePath instead.'
 		);
 		this.path = color;
+	}
+
+	public applyFilter(filter: 'lightness', value: number) {
+		if (this.game.ctx) {
+			if (filter === 'lightness') {
+				const id = this.game.ctx.getImageData(
+					this.x,
+					this.y,
+					this.w,
+					this.h
+				);
+				const data = id.data;
+
+				for (let i = 0; i < data.length; i++) {
+					const red = data[i];
+					const green = data[i + 1];
+					const blue = data[i + 2];
+
+					const brightenedRed = value * red;
+					const brightenedGreen = value * green;
+					const brightenedBlue = value * blue;
+
+					data[i] = brightenedRed;
+					data[i + 1] = brightenedGreen;
+					data[i + 2] = brightenedBlue;
+				}
+
+				this.game.ctx.putImageData(id, this.x, this.y);
+			}
+		}
 	}
 }

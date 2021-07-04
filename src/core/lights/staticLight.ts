@@ -1,10 +1,4 @@
-import getValuesHSL from '../../helper/color/getValuesHSL';
-import hexToRGBA from '../../helper/color/hexToRGBA';
-import hslaToRGBA from '../../helper/color/hslaToRGBA';
-import isHex from '../../helper/color/isHex';
-import isHSL from '../../helper/color/isHSL';
-import isRGB from '../../helper/color/isRGB';
-import rgbToRGBA from '../../helper/color/rgbToRGBA';
+import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
 
@@ -33,7 +27,7 @@ export default class StaticLight {
 		this.color = fillColor;
 
 		// convert all colors to RGBA
-		this.color = this.convertColor(this.color);
+		this.color = convertColorToRGBA(this.color, this.alpha);
 	}
 
 	public draw() {
@@ -51,26 +45,7 @@ export default class StaticLight {
 		}
 	}
 
-	public setFillColor(color: string, alpha?: number) {
-		this.color = this.convertColor(color, alpha);
-	}
-
-	private convertColor(color: string, alpha?: number) {
-		alpha = alpha || this.alpha;
-
-		if (isHex(color)) {
-			color = hexToRGBA(color, alpha);
-		}
-
-		if (isRGB(color)) {
-			color = rgbToRGBA(color, alpha);
-		}
-
-		if (isHSL(color)) {
-			const e = getValuesHSL(color);
-			color = hslaToRGBA(e[0], e[1], e[2], alpha);
-		}
-
-		return color;
+	public setFillColor(color: string, alpha: number) {
+		this.color = convertColorToRGBA(color, alpha);
 	}
 }
