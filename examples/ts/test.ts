@@ -12,7 +12,7 @@ const game = new DuckEngine.Game({
 	background: '#fff',
 });
 
-const main = new MainScene();
+const main = new MainScene(game);
 
 game.scenes.add([main]);
 

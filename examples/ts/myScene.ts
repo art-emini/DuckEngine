@@ -1,32 +1,20 @@
 // import duckengine and duck for types
 import DuckEngine, { Duck } from '../../dist';
-import Camera from '../../dist/core/camera/camera';
-import Group from '../../dist/core/group/group';
-
-// input type
-import Input from '../../dist/core/input/input';
-
-// particle types
-import Particle from '../../dist/core/particles/particle';
-import ParticleEmitter from '../../dist/core/particles/particleEmitter';
-
-// import game from test.ts
-import game from './test';
 
 export default class MainScene extends DuckEngine.Scene {
 	public myRect: Duck.GameObject;
 	public myCircle: Duck.GameObject;
-	public gameObjects: Group<Duck.GameObject>;
+	public gameObjects: Duck.Class.Group<Duck.GameObject>;
 
-	public myCamera: Camera;
+	public myCamera: Duck.Class.Camera;
 
-	public myParticle: Particle;
-	public myParticleEmitter: ParticleEmitter;
+	public myParticle: Duck.Class.Particle;
+	public myParticleEmitter: Duck.Class.ParticleEmitter;
 
-	public myInput: Input;
+	public myInput: Duck.Class.Input;
 	private mySpeed = 1;
 
-	constructor() {
+	constructor(game: Duck.Class.Game) {
 		super('main', game);
 
 		// gameobjects

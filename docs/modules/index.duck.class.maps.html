@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cutscene | DuckEngine - v1.0.0-rc</title>
+	<title>Maps | DuckEngine - v1.0.0-rc</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -62,7 +62,10 @@
 					<a href="index.duck.html">Duck</a>
 				</li>
 				<li>
-					<a href="index.duck.cutscene.html">Cutscene</a>
+					<a href="index.duck.class.html">Class</a>
+				</li>
+				<li>
+					<a href="index.duck.class.maps.html">Maps</a>
 				</li>
 			</ul>
 		</div>
@@ -82,13 +85,27 @@
 							<li class="current tsd-kind-namespace tsd-parent-kind-module">
 								<a href="index.duck.html">Duck</a>
 								<ul>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.class.html">Class</a>
+										<ul>
+											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.duck.class.gameobjects.html">GameObjects</a>
+											</li>
+											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.duck.class.interactive.html">Interactive</a>
+											</li>
+											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.duck.class.lights.html">Lights</a>
+											</li>
+											<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.duck.class.maps.html">Maps</a>
+											</li>
+										</ul>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.collider.html">Collider</a>
 									</li>
-									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.cutscene.html">Cutscene</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -123,23 +140,14 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Namespace Cutscene</h1>
+			<h1>Namespace Maps</h1>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.cutscene.config.html" class="tsd-kind-icon">Config</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.cutscene.instructions.html" class="tsd-kind-icon">Instructions</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.cutscene.onlistener.html" class="tsd-kind-icon">On<wbr>Listener</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.cutscene.step.html" class="tsd-kind-icon">Step</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.cutscene.html#onlistenertype" class="tsd-kind-icon">On<wbr>Listener<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.class.maps.html#tilemap" class="tsd-kind-icon">Tile<wbr>Map</a></li>
 							</ul>
 						</section>
 					</div>
@@ -148,12 +156,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="onlistenertype" class="tsd-anchor"></a>
-					<h3>On<wbr>Listener<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">On<wbr>Listener<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"END"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"START"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"NEXT"</span></div>
+					<a name="tilemap" class="tsd-anchor"></a>
+					<h3>Tile<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">Tile<wbr>Map<span class="tsd-signature-symbol">:</span> <a href="../classes/core_map_tilemap.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:215</li>
+							<li>Defined in index.ts:61</li>
 						</ul>
 					</aside>
 				</section>
@@ -163,20 +171,8 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="../interfaces/index.duck.cutscene.config.html" class="tsd-kind-icon">Config</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="../interfaces/index.duck.cutscene.instructions.html" class="tsd-kind-icon">Instructions</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="../interfaces/index.duck.cutscene.onlistener.html" class="tsd-kind-icon">On<wbr>Listener</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="../interfaces/index.duck.cutscene.step.html" class="tsd-kind-icon">Step</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
-						<a href="index.duck.cutscene.html#onlistenertype" class="tsd-kind-icon">On<wbr>Listener<wbr>Type</a>
+						<a href="index.duck.class.maps.html#tilemap" class="tsd-kind-icon">Tile<wbr>Map</a>
 					</li>
 				</ul>
 			</nav>

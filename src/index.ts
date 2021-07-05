@@ -1,19 +1,76 @@
 /* eslint-disable @typescript-eslint/ban-types */
 // import
 
-import Camera from './core/camera/camera';
-import Game from './core/game';
-import Scene from './core/scene';
-import Text from './core/interactive/text';
-import StaticLight from './core/lights/staticLight';
+import CameraClass from './core/camera/camera';
+import GameClass from './core/game';
+import SceneClass from './core/scene';
+import TextClass from './core/interactive/text';
+import StaticLightClass from './core/lights/staticLight';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Collider from './core/physics/collider';
+import ColliderClass from './core/physics/collider';
 import GameObjectClass from './core/gameobjects/gameObject';
+import CutsceneClass from './core/cutscene/cutscene';
+import CircleClass from './core/gameobjects/circle';
+import RectClass from './core/gameobjects/rect';
+import RoundRectClass from './core/gameobjects/roundrect';
+import SpriteClass from './core/gameobjects/sprite';
+import SpriteSheetClass from './core/gameobjects/spritesheet';
+import GroupClass from './core/group/group';
+import InputClass from './core/input/input';
+import LoaderClass from './core/loader/loader';
+import TileMapClass from './core/map/tilemap';
+import ParticleClass from './core/particles/particle';
+import ParticleEmitterClass from './core/particles/particleEmitter';
+import SoundClass from './core/sound/sound';
+import DuckStorageClass from './core/storage/storage';
 
 // main
 
 // spec
 export namespace Duck {
+	export namespace Class {
+		export type Scene = SceneClass;
+		export type Game = GameClass;
+
+		export type Camera = CameraClass;
+		export type Cutscene = CutsceneClass;
+
+		export namespace GameObjects {
+			export type Circle = CircleClass;
+			export type Rect = RectClass;
+			export type RoundRect = RoundRectClass;
+			export type Sprite = SpriteClass;
+			export type SpriteSheet = SpriteSheetClass;
+			export type GameObject = Duck.GameObject;
+		}
+
+		export type Group<t extends Duck.Group.StackItem> = GroupClass<t>;
+		export type Input = InputClass;
+
+		export namespace Interactive {
+			export type Text = TextClass;
+		}
+
+		export namespace Lights {
+			export type StaticLight = StaticLightClass;
+		}
+
+		export type Loader = LoaderClass;
+
+		export namespace Maps {
+			export type TileMap = TileMapClass;
+		}
+
+		export type Particle = ParticleClass;
+		export type ParticleEmitter = ParticleEmitterClass;
+
+		export type Collider = ColliderClass;
+
+		export type Sound = SoundClass;
+
+		export type DuckStorage = DuckStorageClass;
+	}
+
 	export type GameObject = GameObjectClass;
 	export namespace Game {
 		export interface Config {
@@ -28,7 +85,7 @@ export namespace Duck {
 		}
 
 		export interface Stack {
-			scenes: Scene[];
+			scenes: SceneClass[];
 			defaultScene: string;
 		}
 	}
@@ -52,7 +109,7 @@ export namespace Duck {
 	export namespace Storage {
 		export interface Config {
 			save: {
-				scenes?: Scene[];
+				scenes?: SceneClass[];
 				data?: unknown[];
 				gameConfig?: boolean;
 			};
@@ -130,10 +187,10 @@ export namespace Duck {
 	export namespace Group {
 		export type StackItem =
 			| GameObject
-			| Camera
-			| Text
-			| StaticLight
-			| Collider;
+			| CameraClass
+			| TextClass
+			| StaticLightClass
+			| ColliderClass;
 
 		export type Filter =
 			| 'gameobject'
@@ -173,7 +230,7 @@ export namespace Duck {
 
 		export interface Step {
 			type: StepType;
-			affect?: GameObject | Camera;
+			affect?: GameObject | CameraClass;
 			moveTo?: {
 				x?: number;
 				y?: number;
@@ -217,8 +274,8 @@ export namespace Duck {
 		}
 
 		export interface Config {
-			mainCamera: Camera;
-			otherCameras?: Camera[];
+			mainCamera: CameraClass;
+			otherCameras?: CameraClass[];
 			otherObjects?: GameObject[];
 			mainObject: GameObject;
 		}
@@ -246,8 +303,8 @@ export namespace Duck {
 // export
 
 const DuckEngine = {
-	Game: Game,
-	Scene: Scene,
+	Game: GameClass,
+	Scene: SceneClass,
 };
 
 export default DuckEngine;

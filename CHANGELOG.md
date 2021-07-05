@@ -98,7 +98,9 @@ Old Versions that are over 5 versions behind will be removed.
     1. Added onClick method
 15. Demos
     1. Added particle test demo
-16. Misc
+16. Typescript
+    1. Added namespace Class to Duck namespace, all classes are in this namespace
+17. Misc
     1. Updated examples
     2. Updated changelog
     3. Updated readme
