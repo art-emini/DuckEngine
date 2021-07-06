@@ -120,6 +120,21 @@ export default class SpriteSheet extends GameObject {
 		}, 1000 / fps);
 	}
 
+	public animateNoFPS(switchRowOnEnd?: boolean) {
+		if (this.animating) {
+			this.nextCol();
+
+			if (this.currentCol === this.cols && !switchRowOnEnd) {
+				this.currentCol = 1; // draw subtracts one so it equals 0
+			}
+
+			if (this.currentCol === this.cols && switchRowOnEnd) {
+				this.currentCol = 1; // draw subtracts one so it equals 0
+				this.nextRow();
+			}
+		}
+	}
+
 	public stopAnimation() {
 		this.animating = false;
 
