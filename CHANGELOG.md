@@ -70,37 +70,39 @@ Old Versions that are over 5 versions behind will be removed.
    5. Added offloadMaxAge and offloadMaxAmount method
    6. Changed limitMax property on keepEmitting to a number
    7. Added setImagePath method
-7. Sound
+7. Maps
+   1. Implemented tilemap
+8. Sound
    1. Fixed source not being set
    2. Added volume option to option parameter in constructor
-8. Group
-   1. Added event listeners
-   2. Added pop, shift, and splice methods
-   3. Added length getter
-   4. Type parameter is now correctly being used
-9. Gameobjects
-   1. Added spritesheet to gameobject
-   2. Implemented delta time
-10. Sprite Gameobject
+9. Group
+    1. Added event listeners
+    2. Added pop, shift, and splice methods
+    3. Added length getter
+    4. Type parameter is now correctly being used
+10. Gameobjects
+    1. Added spritesheet to gameobject
+    2. Implemented delta time
+11. Sprite Gameobject
     1. Added applyFilter method
     2. Made image and path properties public
-11. StaticLight
+12. StaticLight
     1. Made use of convertColorToRGBA helper
     2. Fixed 3 letter hex codes not working in conversion process
     3. Made alpha parameter required in setFillColor
-12. Collider
+13. Collider
     1. SpriteSheets now work
-13. Helpers
+14. Helpers
     1. Added new color helpers
     2. Added randomColor and randomColorWithAlpha to color helpers
     3. Added convertColorToRGBA to color helpers
-14. Input
+15. Input
     1. Added onClick method
-15. Demos
+16. Demos
     1. Added particle test demo
-16. Typescript
+17. Typescript
     1. Added namespace Class to Duck namespace, all classes are in this namespace
-17. Misc
+18. Misc
     1. Updated examples
     2. Updated changelog
     3. Updated readme

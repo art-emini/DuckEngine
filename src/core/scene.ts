@@ -53,6 +53,7 @@ import randomColorWithAlpha from '../helper/color/randomAlphaColor';
 // intersect
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
+import TileMap from './map/tilemap';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -147,6 +148,14 @@ export default class Scene extends Basic {
 			config: Duck.Cutscene.Config,
 			instructions: Duck.Cutscene.Instructions
 		) => Cutscene;
+		tilemap: (
+			tileW: number,
+			tileH: number,
+			rows: number,
+			cols: number,
+			map: Duck.Tilemap.Map,
+			atlas: Duck.Tilemap.Atlas
+		) => TileMap;
 	};
 
 	public tools: {
@@ -369,6 +378,24 @@ export default class Scene extends Basic {
 				instructions: Duck.Cutscene.Instructions
 			) => {
 				return new Cutscene(config, instructions, this.game);
+			},
+			tilemap: (
+				tileW: number,
+				tileH: number,
+				rows: number,
+				cols: number,
+				map: Duck.Tilemap.Map,
+				atlas: Duck.Tilemap.Atlas
+			) => {
+				return new TileMap(
+					tileW,
+					tileH,
+					rows,
+					cols,
+					map,
+					atlas,
+					this.game
+				);
 			},
 		};
 

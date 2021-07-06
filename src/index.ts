@@ -280,6 +280,14 @@ export namespace Duck {
 			mainObject: GameObject;
 		}
 	}
+
+	export namespace Tilemap {
+		export type Map = number[][];
+		export interface Atlas {
+			[key: number]: HTMLImageElement | 'EMPTY';
+		}
+	}
+
 	namespace Helper {
 		type ArrayLengthMutationKeys =
 			| 'splice'
