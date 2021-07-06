@@ -111,3 +111,4 @@ Old Versions that are over 5 versions behind will be removed.
     6. Updated version to 1.0.0
     7. Made more properties on most classes public
     8. Changed hexToRGBA due to not working with 3 letter hex codes
+    9. Updated [security.md](SECURITY.md)

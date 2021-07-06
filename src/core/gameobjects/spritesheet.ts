@@ -99,17 +99,18 @@ export default class SpriteSheet extends GameObject {
 
 		this.animationInterval = setInterval(() => {
 			if (this.animating) {
-				if (this.currentCol < stopCol - 1) {
+				if (this.currentCol !== stopCol) {
 					this.nextCol();
 
-					if (this.currentCol === this.cols && !switchRowOnEnd) {
-						this.currentCol = 1; // draw subtracts one so it equals 0
+					if (this.currentCol === stopCol && !switchRowOnEnd) {
+						this.currentCol = stopCol; // draw subtracts one so it equals 0
 					}
 
 					if (this.currentCol === this.cols && switchRowOnEnd) {
-						if (this.currentRow < stopRow) {
-							this.currentCol = 1; // draw subtracts one so it equals 0
+						if (this.currentRow !== stopRow) {
 							this.nextRow();
+						} else {
+							this.currentCol = stopCol; // draw subtracts one so it equals 0
 						}
 					}
 				} else {

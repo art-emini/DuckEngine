@@ -232,6 +232,8 @@ All demos are bundled with parcel-bundler and are all on codesandbox.
 
 ### [Particle Test](https://codesandbox.io/s/duckengine-particle-test-dhcr1?file=/src/scene.js)
 
+### [Tilemap test](https://codesandbox.io/s/duckengine-tilemap-test-ryqqz?file=/src/scene.js)
+
 ## Attribution
 
 Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.
