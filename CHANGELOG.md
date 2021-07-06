@@ -48,6 +48,7 @@ Old Versions that are over 5 versions behind will be removed.
    1. Added loader to tools
    2. Added randomFloat to tools
    3. Added randomColorWithAlpha to color tools
+   4. Added once method to run a function one time in a loop
 3. Camera
    1. Added setFOVSmooth and setZoomSmooth methods
    2. Added getters defaultFOV and defaultZoom
@@ -96,13 +97,15 @@ Old Versions that are over 5 versions behind will be removed.
     1. Added new color helpers
     2. Added randomColor and randomColorWithAlpha to color helpers
     3. Added convertColorToRGBA to color helpers
-15. Input
+15. Base
+    1. Added once class
+16. Input
     1. Added onClick method
-16. Demos
+17. Demos
     1. Added particle test demo
-17. Typescript
+18. Typescript
     1. Added namespace Class to Duck namespace, all classes are in this namespace
-18. Misc
+19. Misc
     1. Updated examples
     2. Updated changelog
     3. Updated readme

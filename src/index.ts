@@ -23,6 +23,8 @@ import ParticleClass from './core/particles/particle';
 import ParticleEmitterClass from './core/particles/particleEmitter';
 import SoundClass from './core/sound/sound';
 import DuckStorageClass from './core/storage/storage';
+import OnceClass from './base/once';
+import RenderClass from './base/render';
 
 // main
 
@@ -69,6 +71,11 @@ export namespace Duck {
 		export type Sound = SoundClass;
 
 		export type DuckStorage = DuckStorageClass;
+
+		export namespace Base {
+			export type Once = OnceClass;
+			export type Render = RenderClass;
+		}
 	}
 
 	export type GameObject = GameObjectClass;

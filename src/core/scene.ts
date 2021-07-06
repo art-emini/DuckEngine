@@ -54,6 +54,7 @@ import randomColorWithAlpha from '../helper/color/randomAlphaColor';
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
 import TileMap from './map/tilemap';
+import Once from '../base/once';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -481,5 +482,11 @@ export default class Scene extends Basic {
 		if (this.game.config.debug) {
 			new Debug.Log(`Set main camera to ${camera}.`);
 		}
+	}
+
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	public once(func: Function, run?: boolean) {
+		const one = new Once(func, run);
+		return one;
 	}
 }
