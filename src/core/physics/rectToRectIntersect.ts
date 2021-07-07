@@ -1,9 +1,18 @@
 import Rect from '../gameobjects/rect';
+import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
 
 export default function rectToRectIntersect(
-	rect: Rect | Sprite,
-	rect2: Rect | Sprite | { x: number; y: number; w: number; h: number }
+	rect:
+		| Rect
+		| Sprite
+		| RoundRect
+		| { x: number; y: number; w: number; h: number },
+	rect2:
+		| Rect
+		| Sprite
+		| RoundRect
+		| { x: number; y: number; w: number; h: number }
 ) {
 	const rectCX = rect2.x + rect2.w * 0.5;
 	const rectCY = rect2.y + rect2.h * 0.5;

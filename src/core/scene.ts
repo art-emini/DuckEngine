@@ -55,6 +55,7 @@ import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
 import TileMap from './map/tilemap';
 import Once from '../base/once';
+import Button from './interactive/button';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -114,6 +115,16 @@ export default class Scene extends Basic {
 		};
 		interactive: {
 			text: (text: string, config: Duck.Interactive.Text.Config) => Text;
+			button: (
+				shape: Duck.Interactive.Button.Shape,
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				r: number,
+				fillColor: string,
+				text: Text
+			) => Button;
 		};
 		sound: (path: string, options?: Duck.Sound.Config) => Sound;
 		input: () => Input;
@@ -307,6 +318,29 @@ export default class Scene extends Basic {
 			interactive: {
 				text: (text: string, config: Duck.Interactive.Text.Config) => {
 					return new Text(text, config, this.game);
+				},
+				button: (
+					shape: Duck.Interactive.Button.Shape,
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					r: number,
+					fillColor: string,
+					text: Text
+				) => {
+					return new Button(
+						shape,
+						x,
+						y,
+						w,
+						h,
+						r,
+						fillColor,
+						text,
+						this.game,
+						this
+					);
 				},
 			},
 			sound: (path: string, options?: Duck.Sound.Config) => {

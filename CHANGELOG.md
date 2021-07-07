@@ -101,11 +101,13 @@ Old Versions that are over 5 versions behind will be removed.
     1. Added once class
 16. Input
     1. Added onClick method
-17. Demos
+17. Text
+    1. Text x and y properties are now separate from config property.
+18. Demos
     1. Added particle test demo
-18. Typescript
+19. Typescript
     1. Added namespace Class to Duck namespace, all classes are in this namespace
-19. Misc
+20. Misc
     1. Updated examples
     2. Updated changelog
     3. Updated readme

@@ -208,6 +208,10 @@ export default class Game {
 	public setBackground(background: string) {
 		if (this.canvas) {
 			this.canvas.style.background = background;
+		} else {
+			new Debug.Error(
+				'Cannot set background of undefined. Canvas is undefined.'
+			);
 		}
 	}
 
@@ -221,12 +225,12 @@ export default class Game {
 				f2.onChange();
 			} else {
 				new Debug.Error(
-					`Cannot switch to scene with key "${key2}.  Scene not found."`
+					`Cannot switch to scene with scene key "${key2}. Scene not found."`
 				);
 			}
 		} else {
 			new Debug.Error(
-				`Cannot switch from scene with key "${key}.  Scene not found."`
+				`Cannot switch from scene from scene key "${key}. Scene not found."`
 			);
 		}
 	}

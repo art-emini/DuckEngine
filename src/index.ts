@@ -189,6 +189,25 @@ export namespace Duck {
 				};
 			}
 		}
+
+		export namespace Button {
+			export type Shape = 'rect' | 'roundrect' | 'sprite';
+
+			export type ListenerType = 'CLICK' | 'HOVER' | 'NOTHOVER';
+
+			export interface ListenerReturn {
+				x: number;
+				y: number;
+				type: ListenerType;
+			}
+
+			export type ListenerFunc = (e: ListenerReturn) => void;
+
+			export interface Listener {
+				type: ListenerType;
+				func: ListenerFunc;
+			}
+		}
 	}
 
 	export namespace Group {
