@@ -160,10 +160,10 @@ export namespace Duck {
 			a: boolean;
 			s: boolean;
 			d: boolean;
-			arrow_up: boolean;
-			arrow_down: boolean;
-			arrow_left: boolean;
-			arrow_right: boolean;
+			ArrowUp: boolean;
+			ArrowDown: boolean;
+			ArrowLeft: boolean;
+			ArrowRight: boolean;
 			spacebar: boolean;
 		}
 

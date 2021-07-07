@@ -14,10 +14,10 @@ export default class Input {
 			a: false,
 			s: false,
 			d: false,
-			arrow_up: false,
-			arrow_down: false,
-			arrow_left: false,
-			arrow_right: false,
+			ArrowUp: false,
+			ArrowDown: false,
+			ArrowLeft: false,
+			ArrowRight: false,
 			spacebar: false,
 		};
 
@@ -29,17 +29,23 @@ export default class Input {
 	private listener() {
 		document.addEventListener('keydown', (e) => {
 			Object.keys(this.controller).forEach((key) => {
-				if (e.key.toLowerCase() === key) {
+				if (e.key.toLowerCase() === key.toLowerCase()) {
 					this.controller[key] = true;
+				}
+				if (e.keyCode === 32) {
+					this.controller.spacebar = true;
 				}
 			});
 		});
 
 		document.addEventListener('keyup', (e) => {
 			Object.keys(this.controller).forEach((key) => {
-				if (e.key.toLowerCase() === key) {
+				if (e.key.toLowerCase() === key.toLowerCase()) {
 					this.controller[key] = false;
 					return this.controller;
+				}
+				if (e.keyCode === 32) {
+					this.controller.spacebar = false;
 				}
 			});
 		});
