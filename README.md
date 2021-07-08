@@ -23,18 +23,19 @@
 7. Tilemaps
 8. Particles
 9. Sound player with sound sprites
-10. Scenes
-11. Cameras
-12. Multi-Camera Switching
-13. Scene Unique Stack / Entity Manager
-14. Game Stack / Global Scene Manager
-15. Animations
-16. Cutscenes
-17. Custom loader to load from URL or file path
-18. [Docs](https://ksplatdev.github.io/DuckEngine/)
-19. Written in typescript
-20. Types are included
-21. And way more
+10. Text and Button UIs
+11. Scenes
+12. Cameras
+13. Multi-Camera Switching
+14. Scene Unique Stack / Entity Manager
+15. Game Stack / Global Scene Manager
+16. Animations
+17. Cutscenes
+18. Custom loader to load from URL or file path
+19. [Docs](https://ksplatdev.github.io/DuckEngine/)
+20. Written in typescript
+21. Types are included
+22. And way more
 
 ## Download
 

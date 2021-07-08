@@ -1,3 +1,4 @@
+import { Duck } from '../../index';
 import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
@@ -7,7 +8,7 @@ export default class StaticLight {
 	public y: number;
 	public r: number;
 	private color: string;
-	private alpha: number;
+	private alpha: Duck.Helper.AlphaRange;
 	private game: Game;
 
 	constructor(
@@ -15,7 +16,7 @@ export default class StaticLight {
 		y: number,
 		r: number,
 		fillColor: string,
-		alpha: number,
+		alpha: Duck.Helper.AlphaRange,
 		game: Game
 	) {
 		this.x = x;
@@ -45,7 +46,7 @@ export default class StaticLight {
 		}
 	}
 
-	public setFillColor(color: string, alpha: number) {
+	public setFillColor(color: string, alpha: Duck.Helper.AlphaRange) {
 		this.color = convertColorToRGBA(color, alpha);
 	}
 }

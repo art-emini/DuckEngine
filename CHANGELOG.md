@@ -99,14 +99,20 @@ Old Versions that are over 5 versions behind will be removed.
     3. Added convertColorToRGBA to color helpers
 15. Base
     1. Added once class
-16. Input
-    1. Added onClick method
+16. Interactive
+    1. Input
+        1. Added onClick method
+    2. Added Button  
 17. Text
     1. Text x and y properties are now separate from config property.
 18. Demos
     1. Added particle test demo
 19. Typescript
     1. Added namespace Class to Duck namespace, all classes are in this namespace
+    2. Exported child namespace helper of Duck Namespace
+    3. Added AlphaRange type to helper namespace
+    4. Added NonNullable type generic to helper namespace
+    5. Added DefaultValue type generic to helper namespace
 20. Misc
     1. Updated examples
     2. Updated changelog

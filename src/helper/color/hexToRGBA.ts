@@ -1,7 +1,8 @@
+import { Duck } from '../../index';
 import Debug from '../../core/debug/debug';
 import isHex from './isHex';
 
-export default function hexToRGBA(hex: string, alpha: number) {
+export default function hexToRGBA(hex: string, alpha: Duck.Helper.AlphaRange) {
 	if (isHex(hex)) {
 		hex = hex.replace('#', '');
 		if (hex.length === 3) {

@@ -81,7 +81,7 @@ export default class Game {
 			if (this.isInFullscreen && this.canvas) {
 				this.scaleToWindow();
 			}
-			if (this.canvas && this.config.smartScale) {
+			if (this.canvas && this.config.smartScale && dpr === 1) {
 				if (window.innerWidth <= this.canvas.width) {
 					this.canvas.width = window.innerWidth;
 				}

@@ -136,7 +136,7 @@ export default class Scene extends Basic {
 				y: number,
 				r: number,
 				fillColor: string,
-				alpha: number
+				alpha: Duck.Helper.AlphaRange
 			) => StaticLight;
 		};
 		group: <t extends Duck.Group.StackItem>(
@@ -176,7 +176,7 @@ export default class Scene extends Basic {
 		loader: Loader;
 		color: {
 			random: () => string;
-			randomWithAlpha: () => string;
+			randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) => string;
 			is: {
 				hex: (str: string) => boolean;
 				hsl: (str: string) => boolean;
@@ -185,19 +185,25 @@ export default class Scene extends Basic {
 			convert: {
 				rgb: {
 					toHsl: (r: number, g: number, b: number) => string;
-					toRgba: (color: string, alpha: number) => string;
+					toRgba: (
+						color: string,
+						alpha: Duck.Helper.AlphaRange
+					) => string;
 				};
 				rgba: {
 					toHsla: (
 						r: string | number,
 						g: string | number,
 						b: string | number,
-						a: number
+						a: Duck.Helper.AlphaRange
 					) => string;
 					toRgb: (rgba: string) => string;
 				};
 				hex: {
-					toRgba: (hex: string, alpha: number) => string;
+					toRgba: (
+						hex: string,
+						alpha: Duck.Helper.AlphaRange
+					) => string;
 					toRgb: (hex: string) => string | null;
 					toHsl: (hex: string) => string;
 				};
@@ -367,7 +373,7 @@ export default class Scene extends Basic {
 					y: number,
 					r: number,
 					fillColor: string,
-					alpha: number
+					alpha: Duck.Helper.AlphaRange
 				) => {
 					return new StaticLight(
 						x,
@@ -440,7 +446,8 @@ export default class Scene extends Basic {
 			loader: Loader,
 			color: {
 				random: randomColor,
-				randomWithAlpha: randomColorWithAlpha,
+				randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) =>
+					randomColorWithAlpha(alpha),
 				is: {
 					hex: isHex,
 					hsl: isHSL,

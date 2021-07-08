@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Group | DuckEngine - v1.0.0-rc</title>
+	<title>TouchInput | DuckEngine - v1.0.0-rc</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -62,7 +62,7 @@
 					<a href="index.duck.html">Duck</a>
 				</li>
 				<li>
-					<a href="index.duck.group.html">Group</a>
+					<a href="index.duck.touchinput.html">TouchInput</a>
 				</li>
 			</ul>
 		</div>
@@ -94,7 +94,7 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.game.html">Game</a>
 									</li>
-									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.group.html">Group</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -121,7 +121,7 @@
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.tilemap.html">Tilemap</a>
 									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="index.duck.touchinput.html">TouchInput</a>
 									</li>
 								</ul>
@@ -132,22 +132,24 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Namespace Group</h1>
+			<h1>Namespace TouchInput</h1>
 			<section class="tsd-panel-group tsd-index-group">
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.group.listener.html" class="tsd-kind-icon">Listener</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.touchinput.controller.html" class="tsd-kind-icon">Controller</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.touchinput.controls.html" class="tsd-kind-icon">Controls</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.touchinput.ontouch.html" class="tsd-kind-icon">On<wbr>Touch</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-namespace"><a href="../interfaces/index.duck.touchinput.styles.html" class="tsd-kind-icon">Styles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#filter" class="tsd-kind-icon">Filter</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#listenertype" class="tsd-kind-icon">Listener<wbr>Type</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.group.html#stackitem" class="tsd-kind-icon">Stack<wbr>Item</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.touchinput.html#buttontype" class="tsd-kind-icon">Button<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.duck.touchinput.html#pos" class="tsd-kind-icon">Pos</a></li>
 							</ul>
 						</section>
 					</div>
@@ -156,32 +158,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="filter" class="tsd-anchor"></a>
-					<h3>Filter</h3>
-					<div class="tsd-signature tsd-kind-icon">Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"gameobject"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lights"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"interactive"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"physics"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"cameras"</span></div>
+					<a name="buttontype" class="tsd-anchor"></a>
+					<h3>Button<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Button<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"up"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"down"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"left"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"right"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:224</li>
+							<li>Defined in index.ts:387</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="listenertype" class="tsd-anchor"></a>
-					<h3>Listener<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">Listener<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"ADD"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"REMOVE"</span></div>
+					<a name="pos" class="tsd-anchor"></a>
+					<h3>Pos</h3>
+					<div class="tsd-signature tsd-kind-icon">Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"TOP-LEFT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"TOP-RIGHT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"BOTTOM-LEFT"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"BOTTOM-RIGHT"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:231</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
-					<a name="stackitem" class="tsd-anchor"></a>
-					<h3>Stack<wbr>Item</h3>
-					<div class="tsd-signature tsd-kind-icon">Stack<wbr>Item<span class="tsd-signature-symbol">:</span> <a href="index.duck.html#gameobject" class="tsd-signature-type">GameObject</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_interactive_text.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_lights_staticlight.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_physics_collider.default.html" class="tsd-signature-type">default</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:217</li>
+							<li>Defined in index.ts:321</li>
 						</ul>
 					</aside>
 				</section>
@@ -192,16 +184,22 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
-						<a href="../interfaces/index.duck.group.listener.html" class="tsd-kind-icon">Listener</a>
+						<a href="../interfaces/index.duck.touchinput.controller.html" class="tsd-kind-icon">Controller</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="../interfaces/index.duck.touchinput.controls.html" class="tsd-kind-icon">Controls</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="../interfaces/index.duck.touchinput.ontouch.html" class="tsd-kind-icon">On<wbr>Touch</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace root">
+						<a href="../interfaces/index.duck.touchinput.styles.html" class="tsd-kind-icon">Styles</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
-						<a href="index.duck.group.html#filter" class="tsd-kind-icon">Filter</a>
+						<a href="index.duck.touchinput.html#buttontype" class="tsd-kind-icon">Button<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
-						<a href="index.duck.group.html#listenertype" class="tsd-kind-icon">Listener<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
-						<a href="index.duck.group.html#stackitem" class="tsd-kind-icon">Stack<wbr>Item</a>
+						<a href="index.duck.touchinput.html#pos" class="tsd-kind-icon">Pos</a>
 					</li>
 				</ul>
 			</nav>

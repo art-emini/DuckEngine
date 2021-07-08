@@ -32,7 +32,13 @@ export default class MainScene extends DuckEngine.Scene {
 		this.myCamera.setFOVSmooth(50, 0.1, Math.PI / 4); // Math.PI / 4 is default FOV
 
 		// particles
-		this.myParticle = this.add.particle('circle', 0, 0, 5, '#000');
+		this.myParticle = this.add.particle(
+			'circle',
+			0,
+			0,
+			5,
+			this.tools.color.randomWithAlpha(0.5)
+		);
 		this.myParticleEmitter = this.add.particleEmitter(
 			this.myParticle,
 			[0, 10],
