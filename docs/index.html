@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckEngine - v1.0.0-rc</title>
+	<title>DuckEngine - v1.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="index.html" class="title">DuckEngine - v1.0.0-rc</a>
+					<a href="index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -152,7 +152,7 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>DuckEngine - v1.0.0-rc</h1>
+			<h1>DuckEngine - v1.0.0</h1>
 			<div class="tsd-panel tsd-typography">
 				<a href="#" id="" style="color: inherit; text-decoration: none;">
 					<h1><img src="global/Logo.png" alt="DuckEngine"></h1>
@@ -174,15 +174,17 @@
 					<li>Sprites &amp; SpriteSheets</li>
 					<li>Many Game objects</li>
 					<li>Group Management</li>
-					<li>Keyboard, Mouse, and touch input</li>
+					<li>Keyboard, and Mouse input</li>
+					<li>Scenes</li>
+					<li>Cameras</li>
+					<li>Multi-Camera Switching</li>
+					<li>Mobile Scaling / DevicePixel ratio scaling</li>
+					<li>Smart scaling</li>
 					<li>Storage</li>
 					<li>Tilemaps</li>
 					<li>Particles</li>
 					<li>Sound player with sound sprites</li>
 					<li>Text and Button UIs</li>
-					<li>Scenes</li>
-					<li>Cameras</li>
-					<li>Multi-Camera Switching</li>
 					<li>Scene Unique Stack / Entity Manager</li>
 					<li>Game Stack / Global Scene Manager</li>
 					<li>Animations</li>
@@ -223,9 +225,9 @@
 				<p>How to use DuckEngine with Typescript.</p>
 				<ol>
 					<li>Setup webpack/parcel and tsconfig.</li>
-					<li>Add the following to your tsconfig compilerOptions. <em>(not required)</em></li>
 					<li>Import DuckEngine and Duck for types.</li>
 				</ol>
+				<p>Not working ? Add the following to your tsconfig.json</p>
 				<pre><code class="language-json"><span style="color: #000000">{</span>
 <span style="color: #000000">    </span><span style="color: #0451A5">&quot;typeRoots&quot;</span><span style="color: #000000">: [</span>
 <span style="color: #000000">        </span><span style="color: #A31515">&quot;./node_modules/@types&quot;</span><span style="color: #000000">,</span>
@@ -239,9 +241,9 @@
 				<a href="#duck-namespace" id="duck-namespace" style="color: inherit; text-decoration: none;">
 					<h3>Duck Namespace</h3>
 				</a>
-				<p>The Duck Namespace has types such as gameobject, every class config, and more.</p>
-				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-					<h3><a href="examples/ts/myScene.ts">Example</a></h3>
+				<p>The Duck Namespace has types such as gameobject, every class config, all classes, and more.</p>
+				<a href="#typescript-example" id="typescript-example" style="color: inherit; text-decoration: none;">
+					<h3><a href="examples/ts/myScene.ts">Typescript Example</a></h3>
 				</a>
 				<a href="#developers39-guide" id="developers39-guide" style="color: inherit; text-decoration: none;">
 					<h2>Developers&#39; Guide</h2>
@@ -251,7 +253,7 @@
 				</a>
 				<ol>
 					<li>Knowledge of TypeScript, Git, and HTML Canvas.</li>
-					<li>Reading and agreeing to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.</li>
+					<li>Reading and agreeing to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a> documents.</li>
 					<li>Basic knowledge of how DuckEngine works.</li>
 				</ol>
 				<a href="#file-structure" id="file-structure" style="color: inherit; text-decoration: none;">
@@ -279,6 +281,7 @@
 <span style="color: #000000">├── SECURITY.md</span>
 <span style="color: #000000">├── src</span>
 <span style="color: #000000">│   ├── base</span>
+<span style="color: #000000">│   │   ├── once.ts</span>
 <span style="color: #000000">│   │   └── render.ts</span>
 <span style="color: #000000">│   ├── core</span>
 <span style="color: #000000">│   │   ├── camera</span>
@@ -292,6 +295,7 @@
 <span style="color: #000000">│   │   │   ├── gameObject.ts</span>
 <span style="color: #000000">│   │   │   ├── rect.ts</span>
 <span style="color: #000000">│   │   │   ├── roundrect.ts</span>
+<span style="color: #000000">│   │   │   ├── spritesheet.ts</span>
 <span style="color: #000000">│   │   │   └── sprite.ts</span>
 <span style="color: #000000">│   │   ├── game.ts</span>
 <span style="color: #000000">│   │   ├── group</span>
@@ -299,6 +303,7 @@
 <span style="color: #000000">│   │   ├── input</span>
 <span style="color: #000000">│   │   │   └── input.ts</span>
 <span style="color: #000000">│   │   ├── interactive</span>
+<span style="color: #000000">│   │   │   ├── button.ts</span>
 <span style="color: #000000">│   │   │   └── text.ts</span>
 <span style="color: #000000">│   │   ├── lights</span>
 <span style="color: #000000">│   │   │   └── staticLight.ts</span>
@@ -322,6 +327,7 @@
 <span style="color: #000000">│   │       └── storage.ts</span>
 <span style="color: #000000">│   ├── helper</span>
 <span style="color: #000000">│   │   ├── color</span>
+<span style="color: #000000">│   │   │   ├── convertColorToRGBA.ts</span>
 <span style="color: #000000">│   │   │   ├── getValuesHSL.ts</span>
 <span style="color: #000000">│   │   │   ├── getValuesRGB.ts</span>
 <span style="color: #000000">│   │   │   ├── hexToHSL.ts</span>
@@ -332,6 +338,7 @@
 <span style="color: #000000">│   │   │   ├── isHex.ts</span>
 <span style="color: #000000">│   │   │   ├── isHSL.ts</span>
 <span style="color: #000000">│   │   │   ├── isRGB.ts</span>
+<span style="color: #000000">│   │   │   ├── randomAlphaColor.ts</span>
 <span style="color: #000000">│   │   │   ├── randomColor.ts</span>
 <span style="color: #000000">│   │   │   ├── rgbaToHSLA.ts</span>
 <span style="color: #000000">│   │   │   ├── rgbaToRGB.ts</span>
@@ -341,6 +348,7 @@
 <span style="color: #000000">│   │   └── version.ts</span>
 <span style="color: #000000">│   ├── index.ts</span>
 <span style="color: #000000">│   └── utils</span>
+<span style="color: #000000">│       ├── randomFloat.ts</span>
 <span style="color: #000000">│       ├── randomInt.ts</span>
 <span style="color: #000000">│       └── validURL.ts</span>
 <span style="color: #000000">├── tsconfig.json</span>
@@ -359,21 +367,22 @@
 					<h3>How to contribute</h3>
 				</a>
 				<ol>
-					<li>Reading and agree to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.</li>
+					<li>Reading and agree to the <a href="CONTRIBUTING.md">Contributing</a> and <a href="CODE_OF_CONDUCT.md">Code of Conduct</a> documents.</li>
 					<li>Fork the repository.</li>
-					<li>Clone the fork to your computer.</li>
-					<li>CD into the cloned directory.</li>
+					<li>Clone the fork to your device.</li>
+					<li>CD (change directories) into the cloned directory.</li>
 					<li>Run <code>npm install</code>.</li>
-					<li>Run <code>npm run build</code>.</li>
+					<li>Run <code>npm run build</code> or <code>ctrl + shift + b</code> for vscode users.</li>
 					<li>Make your changes.</li>
-					<li>Test your changes on codesandbox by forking this <a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">codesandbox</a> and updating the duckengine.js file.</li>
+					<li>Test your changes on codesandbox by forking this <a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">codesandbox</a> and updating the duckengine.js file. (Or any other way you would like to test it.)</li>
 					<li>Create a pull request.</li>
+					<li>Wait for it to be reviewed and maybe merged.</li>
 				</ol>
 				<a href="#npm-scripts" id="npm-scripts" style="color: inherit; text-decoration: none;">
 					<h3>NPM Scripts</h3>
 				</a>
 				<ol>
-					<li><code>npm run test</code> - Opens the <a href="#live-demo-with-parcel">codesandbox test</a>.</li>
+					<li><code>npm run test</code> - Opens the <a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">codesandbox test</a>.</li>
 					<li><code>npm run build</code> - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.</li>
 					<li><code>npm run build:docs</code> - Uses TypeDoc to build docs.</li>
 					<li><code>npm run webpack</code> - Bundles files in lib directory.</li>
@@ -394,7 +403,7 @@
 				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
 					<h2>Versions</h2>
 				</a>
-				<p>DuckEngine does follow SemVer.</p>
+				<p>DuckEngine follows <a href="https://semver.org/">SemVer</a>.</p>
 				<a href="#demos" id="demos" style="color: inherit; text-decoration: none;">
 					<h2>Demos</h2>
 				</a>
@@ -419,6 +428,10 @@
 					<h2>License</h2>
 				</a>
 				<p><a href="LICENSE">MIT</a></p>
+				<a href="#author" id="author" style="color: inherit; text-decoration: none;">
+					<h2>Author</h2>
+				</a>
+				<p>ksplat</p>
 			</div>
 			<!--{&quot;options&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;tsconfig&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine&quot;,&quot;packages&quot;:[],&quot;entryPoints&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src&quot;],&quot;exclude&quot;:[&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/helper/**/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/utils/*.ts&quot;,&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/src/base/*.ts&quot;],&quot;externalPattern&quot;:[&quot;**/node_modules/**&quot;],&quot;excludeExternals&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludeInternal&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;watch&quot;:false,&quot;preserveWatchOutput&quot;:false,&quot;emit&quot;:false,&quot;out&quot;:&quot;/home/ksplat/Documents/Coding/Main Projects/DuckEngine/docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;pretty&quot;:true,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;highlightTheme&quot;:&quot;light-plus&quot;,&quot;name&quot;:&quot;DuckEngine&quot;,&quot;includeVersion&quot;:true,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;sort&quot;:[&quot;kind&quot;,&quot;instance-first&quot;,&quot;alphabetical&quot;],&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;showConfig&quot;:false,&quot;plugin&quot;:[],&quot;logger&quot;:&quot;console&quot;,&quot;logLevel&quot;:1,&quot;treatWarningsAsErrors&quot;:false,&quot;listInvalidSymbolLinks&quot;:false}-->
 		</div>

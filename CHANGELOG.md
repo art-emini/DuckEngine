@@ -97,6 +97,7 @@ Old Versions that are over 5 versions behind will be removed.
     1. Added new color helpers
     2. Added randomColor and randomColorWithAlpha to color helpers
     3. Added convertColorToRGBA to color helpers
+    4. Added version and startup helpers
 15. Base
     1. Added once class
 16. Interactive

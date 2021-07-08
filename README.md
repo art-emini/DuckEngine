@@ -18,24 +18,26 @@
 2. Sprites & SpriteSheets
 3. Many Game objects
 4. Group Management
-5. Keyboard, Mouse, and touch input
-6. Storage
-7. Tilemaps
-8. Particles
-9. Sound player with sound sprites
-10. Text and Button UIs
-11. Scenes
-12. Cameras
-13. Multi-Camera Switching
-14. Scene Unique Stack / Entity Manager
-15. Game Stack / Global Scene Manager
-16. Animations
-17. Cutscenes
-18. Custom loader to load from URL or file path
-19. [Docs](https://ksplatdev.github.io/DuckEngine/)
-20. Written in typescript
-21. Types are included
-22. And way more
+5. Keyboard, and Mouse input
+6. Scenes
+7. Cameras
+8. Multi-Camera Switching
+9. Mobile Scaling / DevicePixel ratio scaling
+10. Smart scaling
+11. Storage
+12. Tilemaps
+13. Particles
+14. Sound player with sound sprites
+15. Text and Button UIs
+16. Scene Unique Stack / Entity Manager
+17. Game Stack / Global Scene Manager
+18. Animations
+19. Cutscenes
+20. Custom loader to load from URL or file path
+21. [Docs](https://ksplatdev.github.io/DuckEngine/)
+22. Written in typescript
+23. Types are included
+24. And way more
 
 ## Download
 
@@ -60,8 +62,9 @@
 How to use DuckEngine with Typescript.
 
 1. Setup webpack/parcel and tsconfig.
-2. Add the following to your tsconfig compilerOptions. *(not required)*
-3. Import DuckEngine and Duck for types.
+2. Import DuckEngine and Duck for types.
+
+Not working ? Add the following to your tsconfig.json
 
 ```json
 {
@@ -77,16 +80,16 @@ How to use DuckEngine with Typescript.
 
 ### Duck Namespace
 
-The Duck Namespace has types such as gameobject, every class config, and more.
+The Duck Namespace has types such as gameobject, every class config, all classes, and more.
 
-### [Example](examples/ts/myScene.ts)
+### [Typescript Example](examples/ts/myScene.ts)
 
 ## Developers' Guide
 
 ### Requirements
 
 1. Knowledge of TypeScript, Git, and HTML Canvas.
-2. Reading and agreeing to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
+2. Reading and agreeing to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
 3. Basic knowledge of how DuckEngine works.
 
 ### File Structure
@@ -114,6 +117,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 ├── SECURITY.md
 ├── src
 │   ├── base
+│   │   ├── once.ts
 │   │   └── render.ts
 │   ├── core
 │   │   ├── camera
@@ -127,6 +131,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   │   ├── gameObject.ts
 │   │   │   ├── rect.ts
 │   │   │   ├── roundrect.ts
+│   │   │   ├── spritesheet.ts
 │   │   │   └── sprite.ts
 │   │   ├── game.ts
 │   │   ├── group
@@ -134,6 +139,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   ├── input
 │   │   │   └── input.ts
 │   │   ├── interactive
+│   │   │   ├── button.ts
 │   │   │   └── text.ts
 │   │   ├── lights
 │   │   │   └── staticLight.ts
@@ -157,6 +163,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │       └── storage.ts
 │   ├── helper
 │   │   ├── color
+│   │   │   ├── convertColorToRGBA.ts
 │   │   │   ├── getValuesHSL.ts
 │   │   │   ├── getValuesRGB.ts
 │   │   │   ├── hexToHSL.ts
@@ -167,6 +174,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   │   ├── isHex.ts
 │   │   │   ├── isHSL.ts
 │   │   │   ├── isRGB.ts
+│   │   │   ├── randomAlphaColor.ts
 │   │   │   ├── randomColor.ts
 │   │   │   ├── rgbaToHSLA.ts
 │   │   │   ├── rgbaToRGB.ts
@@ -176,6 +184,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 │   │   └── version.ts
 │   ├── index.ts
 │   └── utils
+│       ├── randomFloat.ts
 │       ├── randomInt.ts
 │       └── validURL.ts
 ├── tsconfig.json
@@ -191,19 +200,20 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 
 ### How to contribute
 
-1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
+1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
 2. Fork the repository.
-3. Clone the fork to your computer.
-4. CD into the cloned directory.
+3. Clone the fork to your device.
+4. CD (change directories) into the cloned directory.
 5. Run `npm install`.
-6. Run `npm run build`.
+6. Run `npm run build` or `ctrl + shift + b` for vscode users.
 7. Make your changes.
-8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file.
+8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
 9. Create a pull request.
+10. Wait for it to be reviewed and maybe merged.
 
 ### NPM Scripts
 
-1. `npm run test` - Opens the [codesandbox test](#live-demo-with-parcel).
+1. `npm run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
 2. `npm run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
 3. `npm run build:docs` - Uses TypeDoc to build docs.
 4. `npm run webpack` - Bundles files in lib directory.
@@ -221,7 +231,7 @@ The Duck Namespace has types such as gameobject, every class config, and more.
 
 ## Versions
 
-DuckEngine does follow SemVer.
+DuckEngine follows [SemVer](https://semver.org/).
 
 ## Demos
 
@@ -242,3 +252,7 @@ Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.
 ## License
 
 [MIT](LICENSE)
+
+## Author
+
+ksplat
