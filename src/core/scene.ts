@@ -11,6 +11,7 @@ import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
 import Text from './interactive/text';
 import RoundRect from './gameobjects/roundrect';
+import SpriteSheet from './gameobjects/spritesheet';
 
 // particle stuff
 import Particle from './particles/particle';
@@ -23,9 +24,13 @@ import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
 import Group from './group/group';
 
+// misc
+import Cutscene from './cutscene/cutscene';
+import Loader from './loader/loader';
+
 // tools
 import randomInt from '../utils/randomInt';
-import randomColor from '../helper/color/randomColor';
+import randomFloat from '../utils/randomFloat';
 
 // color
 // is
@@ -40,18 +45,23 @@ import rgbaToRGB from '../helper/color/rgbaToRGB';
 import hexToRGBA from '../helper/color/hexToRGBA';
 import hexToRGB from '../helper/color/hexToRGB';
 import hexToHSL from '../helper/color/hexToHSL';
-import Cutscene from './cutscene/cutscene';
+// random
+import randomColor from '../helper/color/randomColor';
+import randomColorWithAlpha from '../helper/color/randomAlphaColor';
 
 // physics
 // intersect
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
+import TileMap from './map/tilemap';
+import Once from '../base/once';
+import Button from './interactive/button';
 
 export default class Scene extends Basic {
 	public readonly key: string;
 	private game: Game;
-	public visible: boolean | false;
-	public default: boolean;
+	public visible: boolean;
+	public readonly default: boolean;
 
 	public mainObject: Duck.GameObject | undefined;
 	public currentCamera: Camera | undefined;
@@ -91,9 +101,30 @@ export default class Scene extends Basic {
 				r: number,
 				fillColor: string
 			) => RoundRect;
+			spriteSheet: (
+				x: number,
+				y: number,
+				imagePath: string,
+				frameWidth: number,
+				frameHeight: number,
+				rows: number,
+				cols: number,
+				currentRow: number,
+				currentCol: number
+			) => SpriteSheet;
 		};
 		interactive: {
 			text: (text: string, config: Duck.Interactive.Text.Config) => Text;
+			button: (
+				shape: Duck.Interactive.Button.Shape,
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				r: number,
+				fillColor: string,
+				text: Text
+			) => Button;
 		};
 		sound: (path: string, options?: Duck.Sound.Config) => Sound;
 		input: () => Input;
@@ -105,13 +136,13 @@ export default class Scene extends Basic {
 				y: number,
 				r: number,
 				fillColor: string,
-				alpha: number
+				alpha: Duck.Helper.AlphaRange
 			) => StaticLight;
 		};
-		group: (
+		group: <t extends Duck.Group.StackItem>(
 			name: string,
-			defaultValues?: Duck.Group.StackItem[]
-		) => Group<Duck.Group.StackItem>;
+			defaultValues?: t[]
+		) => Group<t>;
 		particle: (
 			shape: Duck.Collider.ShapeString,
 			w: number,
@@ -121,20 +152,31 @@ export default class Scene extends Basic {
 		) => Particle;
 		particleEmitter: (
 			particle: Particle,
-			rangeX: Duck.ParticleEmitter.range,
-			rangeY: Duck.ParticleEmitter.range,
+			rangeX: Duck.ParticleEmitter.Range,
+			rangeY: Duck.ParticleEmitter.Range,
 			amount: number
 		) => ParticleEmitter;
 		cutscene: (
 			config: Duck.Cutscene.Config,
 			instructions: Duck.Cutscene.Instructions
 		) => Cutscene;
+		tilemap: (
+			tileW: number,
+			tileH: number,
+			rows: number,
+			cols: number,
+			map: Duck.Tilemap.Map,
+			atlas: Duck.Tilemap.Atlas
+		) => TileMap;
 	};
 
 	public tools: {
 		randomInt: (min: number, max: number) => number;
+		randomFloat: (min: number, max: number, fixed?: number) => number;
+		loader: Loader;
 		color: {
 			random: () => string;
+			randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) => string;
 			is: {
 				hex: (str: string) => boolean;
 				hsl: (str: string) => boolean;
@@ -143,19 +185,25 @@ export default class Scene extends Basic {
 			convert: {
 				rgb: {
 					toHsl: (r: number, g: number, b: number) => string;
-					toRgba: (color: string, alpha: number) => string;
+					toRgba: (
+						color: string,
+						alpha: Duck.Helper.AlphaRange
+					) => string;
 				};
 				rgba: {
 					toHsla: (
 						r: string | number,
 						g: string | number,
 						b: string | number,
-						a: number
+						a: Duck.Helper.AlphaRange
 					) => string;
 					toRgb: (rgba: string) => string;
 				};
 				hex: {
-					toRgba: (hex: string, alpha: number) => string;
+					toRgba: (
+						hex: string,
+						alpha: Duck.Helper.AlphaRange
+					) => string;
 					toRgb: (hex: string) => string | null;
 					toHsl: (hex: string) => string;
 				};
@@ -191,6 +239,8 @@ export default class Scene extends Basic {
 		this.game = game;
 		this.visible = visible || false;
 		this.default = false;
+
+		// set visible if key is same as defaultScene key
 
 		if (this.game.stack.defaultScene === this.key) {
 			this.default = true;
@@ -246,17 +296,64 @@ export default class Scene extends Basic {
 				) => {
 					return new RoundRect(x, y, w, h, r, fillColor, this.game);
 				},
+				spriteSheet: (
+					x: number,
+					y: number,
+					imagePath: string,
+					frameWidth: number,
+					frameHeight: number,
+					rows: number,
+					cols: number,
+					currentRow: number,
+					currentCol: number
+				) => {
+					return new SpriteSheet(
+						x,
+						y,
+						imagePath,
+						frameWidth,
+						frameHeight,
+						rows,
+						cols,
+						currentRow,
+						currentCol,
+						this.game
+					);
+				},
 			},
 			interactive: {
 				text: (text: string, config: Duck.Interactive.Text.Config) => {
 					return new Text(text, config, this.game);
+				},
+				button: (
+					shape: Duck.Interactive.Button.Shape,
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					r: number,
+					fillColor: string,
+					text: Text
+				) => {
+					return new Button(
+						shape,
+						x,
+						y,
+						w,
+						h,
+						r,
+						fillColor,
+						text,
+						this.game,
+						this
+					);
 				},
 			},
 			sound: (path: string, options?: Duck.Sound.Config) => {
 				return new Sound(path, options);
 			},
 			input: () => {
-				return new Input();
+				return new Input(this.game);
 			},
 			camera: () => {
 				const c = new Camera(this.game, this);
@@ -276,7 +373,7 @@ export default class Scene extends Basic {
 					y: number,
 					r: number,
 					fillColor: string,
-					alpha: number
+					alpha: Duck.Helper.AlphaRange
 				) => {
 					return new StaticLight(
 						x,
@@ -288,8 +385,11 @@ export default class Scene extends Basic {
 					);
 				},
 			},
-			group: (name: string, defaultValues?: Duck.Group.StackItem[]) => {
-				return new Group(name, defaultValues);
+			group: <t extends Duck.Group.StackItem>(
+				name: string,
+				defaultValues?: t[]
+			) => {
+				return new Group<t>(name, this.game, defaultValues);
 			},
 			particle: (
 				shape: Duck.Collider.ShapeString,
@@ -302,8 +402,8 @@ export default class Scene extends Basic {
 			},
 			particleEmitter: (
 				particle: Particle,
-				rangeX: Duck.ParticleEmitter.range,
-				rangeY: Duck.ParticleEmitter.range,
+				rangeX: Duck.ParticleEmitter.Range,
+				rangeY: Duck.ParticleEmitter.Range,
 				amount: number
 			) => {
 				return new ParticleEmitter(
@@ -318,14 +418,36 @@ export default class Scene extends Basic {
 				config: Duck.Cutscene.Config,
 				instructions: Duck.Cutscene.Instructions
 			) => {
-				return new Cutscene(config, instructions);
+				return new Cutscene(config, instructions, this.game);
+			},
+			tilemap: (
+				tileW: number,
+				tileH: number,
+				rows: number,
+				cols: number,
+				map: Duck.Tilemap.Map,
+				atlas: Duck.Tilemap.Atlas
+			) => {
+				return new TileMap(
+					tileW,
+					tileH,
+					rows,
+					cols,
+					map,
+					atlas,
+					this.game
+				);
 			},
 		};
 
 		this.tools = {
 			randomInt: randomInt,
+			randomFloat: randomFloat,
+			loader: Loader,
 			color: {
 				random: randomColor,
+				randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) =>
+					randomColorWithAlpha(alpha),
 				is: {
 					hex: isHex,
 					hsl: isHSL,
@@ -379,6 +501,9 @@ export default class Scene extends Basic {
 		const foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
 			this.currentCamera = foundCamera;
+			if (this.game.config.debug) {
+				new Debug.Log('Switched cameras.');
+			}
 		} else {
 			new Debug.Error(
 				'Cannot switch camera. Camera not found in the current scene.'
@@ -388,9 +513,21 @@ export default class Scene extends Basic {
 
 	public switchToMainCamera() {
 		this.currentCamera = this.mainCamera;
+		if (this.game.config.debug) {
+			new Debug.Log('Switched to main camera.');
+		}
 	}
 
 	public setMainCamera(camera: Camera) {
 		this.mainCamera = camera;
+		if (this.game.config.debug) {
+			new Debug.Log(`Set main camera to ${camera}.`);
+		}
+	}
+
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	public once(func: Function, run?: boolean) {
+		const one = new Once(func, run);
+		return one;
 	}
 }

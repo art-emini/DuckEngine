@@ -1,22 +1,87 @@
+/* eslint-disable @typescript-eslint/ban-types */
 // import
 
-import Camera from './core/camera/camera';
-import Game from './core/game';
-import Circle from './core/gameobjects/circle';
-import Rect from './core/gameobjects/rect';
-import RoundRect from './core/gameobjects/roundrect';
-import Sprite from './core/gameobjects/sprite';
-import Scene from './core/scene';
-import Text from './core/interactive/text';
-import StaticLight from './core/lights/staticLight';
+import CameraClass from './core/camera/camera';
+import GameClass from './core/game';
+import SceneClass from './core/scene';
+import TextClass from './core/interactive/text';
+import StaticLightClass from './core/lights/staticLight';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Collider from './core/physics/collider';
+import ColliderClass from './core/physics/collider';
+import GameObjectClass from './core/gameobjects/gameObject';
+import CutsceneClass from './core/cutscene/cutscene';
+import CircleClass from './core/gameobjects/circle';
+import RectClass from './core/gameobjects/rect';
+import RoundRectClass from './core/gameobjects/roundrect';
+import SpriteClass from './core/gameobjects/sprite';
+import SpriteSheetClass from './core/gameobjects/spritesheet';
+import GroupClass from './core/group/group';
+import InputClass from './core/input/input';
+import LoaderClass from './core/loader/loader';
+import TileMapClass from './core/map/tilemap';
+import ParticleClass from './core/particles/particle';
+import ParticleEmitterClass from './core/particles/particleEmitter';
+import SoundClass from './core/sound/sound';
+import DuckStorageClass from './core/storage/storage';
+import OnceClass from './base/once';
+import RenderClass from './base/render';
+import ButtonClass from './core/interactive/button';
 
 // main
 
 // spec
 export namespace Duck {
-	export type GameObject = Sprite | Rect | Circle | RoundRect;
+	export namespace Class {
+		export type Scene = SceneClass;
+		export type Game = GameClass;
+
+		export type Camera = CameraClass;
+		export type Cutscene = CutsceneClass;
+
+		export namespace GameObjects {
+			export type Circle = CircleClass;
+			export type Rect = RectClass;
+			export type RoundRect = RoundRectClass;
+			export type Sprite = SpriteClass;
+			export type SpriteSheet = SpriteSheetClass;
+			export type GameObject = Duck.GameObject;
+		}
+
+		export type Group<t extends Duck.Group.StackItem> = GroupClass<t>;
+
+		export type Input = InputClass;
+
+		export namespace Interactive {
+			export type Text = TextClass;
+			export type Button = ButtonClass;
+		}
+
+		export namespace Lights {
+			export type StaticLight = StaticLightClass;
+		}
+
+		export type Loader = LoaderClass;
+
+		export namespace Maps {
+			export type TileMap = TileMapClass;
+		}
+
+		export type Particle = ParticleClass;
+		export type ParticleEmitter = ParticleEmitterClass;
+
+		export type Collider = ColliderClass;
+
+		export type Sound = SoundClass;
+
+		export type DuckStorage = DuckStorageClass;
+
+		export namespace Base {
+			export type Once = OnceClass;
+			export type Render = RenderClass;
+		}
+	}
+
+	export type GameObject = GameObjectClass;
 	export namespace Game {
 		export interface Config {
 			canvas: HTMLCanvasElement | null;
@@ -26,10 +91,11 @@ export namespace Duck {
 			storage?: Storage.Config;
 			defaultScene: string;
 			background?: string;
+			smartScale?: boolean;
 		}
 
 		export interface Stack {
-			scenes: Scene[];
+			scenes: SceneClass[];
 			defaultScene: string;
 		}
 	}
@@ -53,10 +119,11 @@ export namespace Duck {
 	export namespace Storage {
 		export interface Config {
 			save: {
-				scenes?: Scene[];
+				scenes?: SceneClass[];
 				data?: unknown[];
 				gameConfig?: boolean;
 			};
+			loadOnWindowLoad?: LoadType;
 		}
 
 		export type LoadType = 'scenes' | 'data' | 'gameConfig' | 'all';
@@ -71,6 +138,7 @@ export namespace Duck {
 
 		export interface Config {
 			autoplay?: boolean;
+			volume?: number;
 			sprites?: Sprite[];
 		}
 	}
@@ -95,16 +163,16 @@ export namespace Duck {
 			a: boolean;
 			s: boolean;
 			d: boolean;
-			arrow_up: boolean;
-			arrow_down: boolean;
-			arrow_left: boolean;
-			arrow_right: boolean;
+			ArrowUp: boolean;
+			ArrowDown: boolean;
+			ArrowLeft: boolean;
+			ArrowRight: boolean;
 			spacebar: boolean;
 		}
 
 		export interface Listener {
 			fn: (e: KeyboardEvent) => void;
-			key: string;
+			description: string;
 			type: 'keydown' | 'keyup';
 		}
 	}
@@ -124,17 +192,34 @@ export namespace Duck {
 				};
 			}
 		}
+
+		export namespace Button {
+			export type Shape = 'rect' | 'roundrect' | 'sprite';
+
+			export type ListenerType = 'CLICK' | 'HOVER' | 'NOTHOVER';
+
+			export interface ListenerReturn {
+				x: number;
+				y: number;
+				type: ListenerType;
+			}
+
+			export type ListenerFunc = (e: ListenerReturn) => void;
+
+			export interface Listener {
+				type: ListenerType;
+				func: ListenerFunc;
+			}
+		}
 	}
 
 	export namespace Group {
 		export type StackItem =
 			| GameObject
-			| Camera
-			| Text
-			| StaticLight
-			| Collider;
-
-		export type Stack = StackItem[];
+			| CameraClass
+			| TextClass
+			| StaticLightClass
+			| ColliderClass;
 
 		export type Filter =
 			| 'gameobject'
@@ -142,10 +227,17 @@ export namespace Duck {
 			| 'interactive'
 			| 'physics'
 			| 'cameras';
+
+		export type ListenerType = 'ADD' | 'REMOVE';
+
+		export interface Listener {
+			func: (item: StackItem) => unknown;
+			type: ListenerType;
+		}
 	}
 
 	export namespace ParticleEmitter {
-		export type range = Helper.FixedLengthArray<[number, number]>;
+		export type Range = Helper.FixedLengthArray<[number, number]>;
 	}
 
 	export namespace Cutscene {
@@ -153,7 +245,6 @@ export namespace Duck {
 
 		export interface OnListener {
 			type: OnListenerType;
-			// eslint-disable-next-line @typescript-eslint/ban-types
 			func: Function;
 		}
 
@@ -163,18 +254,20 @@ export namespace Duck {
 			| 'FUNC'
 			| 'CAMERA_ZOOM'
 			| 'CAMERA_FOV'
-			| 'CAMERA_MOVE';
+			| 'CAMERA_MOVE'
+			| 'CAMERA_SHAKE';
 
 		export interface Step {
 			type: StepType;
-			affect?: GameObject | Camera;
+			affect?: GameObject | CameraClass;
 			moveTo?: {
 				x?: number;
 				y?: number;
 			};
-			// eslint-disable-next-line @typescript-eslint/ban-types
 			func?: Function;
 			cameraValue?: number;
+			cameraIntervalMS?: number;
+			cameraTimeMS?: number;
 			sleepValue?: number;
 		}
 		export interface Instructions {
@@ -210,15 +303,91 @@ export namespace Duck {
 		}
 
 		export interface Config {
-			mainCamera: Camera;
-			otherCameras?: Camera[];
+			mainCamera: CameraClass;
+			otherCameras?: CameraClass[];
 			otherObjects?: GameObject[];
 			mainObject: GameObject;
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	namespace Helper {
+	export namespace Tilemap {
+		export type Map = number[][];
+		export interface Atlas {
+			[key: number]: HTMLImageElement | 'EMPTY';
+		}
+	}
+
+	export namespace TouchInput {
+		export type Pos =
+			| 'TOP-LEFT'
+			| 'TOP-RIGHT'
+			| 'BOTTOM-LEFT'
+			| 'BOTTOM-RIGHT';
+
+		export interface Controller {
+			up: boolean;
+			down: boolean;
+			left: boolean;
+			right: boolean;
+		}
+
+		export interface Controls {
+			up?: boolean;
+			down?: boolean;
+			left?: boolean;
+			right?: boolean;
+		}
+
+		export interface OnTouch {
+			up?: (e: TouchEvent) => void;
+			down?: (e: TouchEvent) => void;
+			left?: (e: TouchEvent) => void;
+			right?: (e: TouchEvent) => void;
+		}
+
+		export interface Styles {
+			buttonW: string;
+			buttonH: string;
+			border?: string;
+			borderRadius?: string;
+			zIndex?: Helper.DefaultValue<undefined, number>;
+			spacing?: Helper.DefaultValue<undefined, number>;
+			textColor?: Helper.DefaultValue<undefined, string>;
+			bgColor?: Helper.DefaultValue<undefined, string>;
+			up?: {
+				innerHTML: string;
+				w?: string;
+				h?: string;
+				textColor?: string;
+				bgColor?: string;
+			};
+			down?: {
+				innerHTML: string;
+				w?: string;
+				h?: string;
+				textColor?: string;
+				bgColor?: string;
+			};
+			left?: {
+				innerHTML: string;
+				w?: string;
+				h?: string;
+				textColor?: string;
+				bgColor?: string;
+			};
+			right?: {
+				innerHTML: string;
+				w?: string;
+				h?: string;
+				textColor?: string;
+				bgColor?: string;
+			};
+		}
+
+		export type ButtonType = 'up' | 'down' | 'left' | 'right';
+	}
+
+	export namespace Helper {
 		type ArrayLengthMutationKeys =
 			| 'splice'
 			| 'push'
@@ -235,14 +404,128 @@ export namespace Duck {
 			T,
 			Exclude<keyof T, ArrayLengthMutationKeys>
 		> & { [Symbol.iterator]: () => IterableIterator<ArrayItems<T>> };
+
+		export type NonNullable<T> = T extends null | undefined ? never : T;
+		export type DefaultValue<
+			Type,
+			Default,
+			ExtraRule = null
+		> = Type extends null | undefined | false | 0 | ExtraRule | ''
+			? Default
+			: Type;
+
+		//#region Long Type
+		export type AlphaRange =
+			| 0
+			| 0.01
+			| 0.02
+			| 0.03
+			| 0.04
+			| 0.05
+			| 0.06
+			| 0.07
+			| 0.08
+			| 0.09
+			| 0.1
+			| 0.11
+			| 0.12
+			| 0.13
+			| 0.14
+			| 0.15
+			| 0.16
+			| 0.17
+			| 0.18
+			| 0.19
+			| 0.2
+			| 0.21
+			| 0.22
+			| 0.23
+			| 0.24
+			| 0.25
+			| 0.26
+			| 0.27
+			| 0.28
+			| 0.29
+			| 0.3
+			| 0.31
+			| 0.32
+			| 0.33
+			| 0.34
+			| 0.35
+			| 0.36
+			| 0.37
+			| 0.38
+			| 0.39
+			| 0.4
+			| 0.41
+			| 0.42
+			| 0.43
+			| 0.44
+			| 0.45
+			| 0.46
+			| 0.47
+			| 0.48
+			| 0.49
+			| 0.5
+			| 0.51
+			| 0.52
+			| 0.53
+			| 0.54
+			| 0.55
+			| 0.56
+			| 0.57
+			| 0.58
+			| 0.59
+			| 0.6
+			| 0.61
+			| 0.62
+			| 0.63
+			| 0.64
+			| 0.65
+			| 0.66
+			| 0.67
+			| 0.68
+			| 0.69
+			| 0.7
+			| 0.71
+			| 0.72
+			| 0.73
+			| 0.74
+			| 0.75
+			| 0.76
+			| 0.77
+			| 0.78
+			| 0.79
+			| 0.8
+			| 0.81
+			| 0.82
+			| 0.83
+			| 0.84
+			| 0.85
+			| 0.86
+			| 0.87
+			| 0.88
+			| 0.89
+			| 0.9
+			| 0.91
+			| 0.92
+			| 0.93
+			| 0.94
+			| 0.95
+			| 0.96
+			| 0.97
+			| 0.98
+			| 0.99
+			| 1;
+		//#endregion Long Type
 	}
 }
 
 // export
 
 const DuckEngine = {
-	Game: Game,
-	Scene: Scene,
+	Game: GameClass,
+	Scene: SceneClass,
 };
 
 export default DuckEngine;

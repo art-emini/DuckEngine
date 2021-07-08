@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Listener | DuckEngine - v1.1.2-beta</title>
+	<title>Listener | DuckEngine - v1.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="../index.html" class="title">DuckEngine - v1.1.2-beta</a>
+					<a href="../index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -86,6 +86,9 @@
 								<a href="../modules/index.duck.html">Duck</a>
 								<ul>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.class.html">Class</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.collider.html">Collider</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -96,6 +99,9 @@
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.group.html">Group</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.helper.html">Helper</a>
 									</li>
 									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.input.html">Input</a>
@@ -114,6 +120,12 @@
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.storage.html">Storage</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.tilemap.html">Tilemap</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.touchinput.html">TouchInput</a>
 									</li>
 								</ul>
 							</li>
@@ -138,8 +150,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.listener.html#description" class="tsd-kind-icon">description</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.listener.html#fn" class="tsd-kind-icon">fn</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.listener.html#key" class="tsd-kind-icon">key</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.input.listener.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
@@ -149,12 +161,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="description" class="tsd-anchor"></a>
+					<h3>description</h3>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:175</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="fn" class="tsd-anchor"></a>
 					<h3>fn</h3>
 					<div class="tsd-signature tsd-kind-icon">fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:106</li>
+							<li>Defined in index.ts:174</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -180,22 +202,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:107</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="type" class="tsd-anchor"></a>
 					<h3>type</h3>
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"keydown"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"keyup"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:108</li>
+							<li>Defined in index.ts:176</li>
 						</ul>
 					</aside>
 				</section>
@@ -214,10 +226,10 @@
 						<a href="index.duck.input.listener.html" class="tsd-kind-icon">Listener</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.listener.html#fn" class="tsd-kind-icon">fn</a>
+								<a href="index.duck.input.listener.html#description" class="tsd-kind-icon">description</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="index.duck.input.listener.html#key" class="tsd-kind-icon">key</a>
+								<a href="index.duck.input.listener.html#fn" class="tsd-kind-icon">fn</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="index.duck.input.listener.html#type" class="tsd-kind-icon">type</a>

@@ -9,8 +9,10 @@ import { Duck } from '../../index';
 import rectToRectIntersect from '../physics/rectToRectIntersect';
 import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
+import randomInt from '../../utils/randomInt';
 
 class Camera {
+	private game: Game;
 	private distance: number;
 	private lookAt: number[];
 	private ctx: CanvasRenderingContext2D | null | undefined;
@@ -29,7 +31,10 @@ class Camera {
 
 	private bounds: { x: number; y: number; w: number; h: number } | undefined;
 
+	public following: Duck.GameObject | undefined;
+
 	constructor(game: Game, scene: Scene) {
+		this.game = game;
 		this.distance = 1000.0;
 		this.isMain = false;
 		if (scene.mainCamera === this) {
@@ -50,6 +55,8 @@ class Camera {
 
 		this.bounds;
 
+		this.following;
+
 		this.updateViewport();
 	}
 
@@ -57,6 +64,49 @@ class Camera {
 		this.ctx?.save();
 		this.applyScale();
 		this.applyTranslation();
+
+		if (this.following) {
+			if (this.following.shape === 'rect') {
+				if (this.bounds) {
+					if (
+						rectToRectIntersect(this.following as Rect, this.bounds)
+					) {
+						this.lookAt[0] =
+							this.following.x - (this.following as Rect).w / 2;
+						this.lookAt[1] =
+							this.following.y - (this.following as Rect).h / 2;
+					}
+				} else {
+					this.lookAt[0] =
+						this.following.x - (this.following as Rect).w / 2;
+					this.lookAt[1] =
+						this.following.y - (this.following as Rect).h / 2;
+				}
+			}
+
+			if (this.following.shape === 'circle') {
+				if (this.bounds) {
+					if (
+						circleToRectIntersect(
+							this.following as Circle,
+							this.bounds
+						)
+					) {
+						this.lookAt[0] =
+							this.following.x - (this.following as Circle).r / 2;
+						this.lookAt[1] =
+							this.following.y - (this.following as Circle).r / 2;
+					}
+				} else {
+					this.lookAt[0] =
+						this.following.x - (this.following as Circle).r / 2;
+					this.lookAt[1] =
+						this.following.y - (this.following as Circle).r / 2;
+				}
+			}
+
+			this.updateViewport();
+		}
 	}
 
 	public end() {
@@ -94,6 +144,42 @@ class Camera {
 		this.updateViewport();
 	}
 
+	public setZoomSmooth(intervalMS: number, smoothValue: number, z: number) {
+		let operation: 'add' | 'subtract' = 'add';
+
+		if (this.distance < z) {
+			operation = 'add';
+		} else {
+			operation = 'subtract';
+		}
+
+		const int = setInterval(() => {
+			if (operation === 'add') {
+				if (this.distance < z) {
+					this.distance += smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera Zoom with setZoomSmooth'
+						);
+					}
+				}
+			} else {
+				if (this.distance > z) {
+					this.distance -= smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera Zoom with setZoomSmooth'
+						);
+					}
+				}
+			}
+		}, intervalMS);
+	}
+
 	public moveTo(x: number, y: number) {
 		this.lookAt[0] = x;
 		this.lookAt[1] = y;
@@ -101,33 +187,11 @@ class Camera {
 	}
 
 	public follow(gameObject: Duck.GameObject) {
-		if (gameObject.shape === 'rect') {
-			if (this.bounds) {
-				if (rectToRectIntersect(gameObject as Rect, this.bounds)) {
-					this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
-					this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
-				}
-			} else {
-				this.lookAt[0] = gameObject.x - (gameObject as Rect).w / 2;
-				this.lookAt[1] = gameObject.y - (gameObject as Rect).h / 2;
-			}
-		}
+		this.following = gameObject;
+	}
 
-		if (gameObject.shape === 'circle') {
-			if (this.bounds) {
-				if (circleToRectIntersect(gameObject as Circle, this.bounds)) {
-					this.lookAt[0] =
-						gameObject.x - (gameObject as Circle).r / 2;
-					this.lookAt[1] =
-						gameObject.y - (gameObject as Circle).r / 2;
-				}
-			} else {
-				this.lookAt[0] = gameObject.x - (gameObject as Circle).r / 2;
-				this.lookAt[1] = gameObject.y - (gameObject as Circle).r / 2;
-			}
-		}
-
-		this.updateViewport();
+	public stopFollow() {
+		this.following = undefined;
 	}
 
 	public screenToWorld(x: number, y: number, obj: Duck.GameObject) {
@@ -146,6 +210,42 @@ class Camera {
 		this.fieldOfView = f;
 	}
 
+	public setFOVSmooth(intervalMS: number, smoothValue: number, f: number) {
+		let operation: 'add' | 'subtract' = 'add';
+
+		if (this.fieldOfView < f) {
+			operation = 'add';
+		} else {
+			operation = 'subtract';
+		}
+
+		const int = setInterval(() => {
+			if (operation === 'add') {
+				if (this.fieldOfView < f) {
+					this.fieldOfView += smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera FOV with setFOVSmooth'
+						);
+					}
+				}
+			} else {
+				if (this.fieldOfView > f) {
+					this.fieldOfView -= smoothValue;
+				} else {
+					clearInterval(int);
+					if (this.game.config.debug) {
+						new Debug.Log(
+							'Reached target camera FOV with setFOVSmooth'
+						);
+					}
+				}
+			}
+		}, intervalMS);
+	}
+
 	public resetFOV() {
 		this.fieldOfView = Math.PI / 4.0;
 	}
@@ -158,11 +258,37 @@ class Camera {
 		this.bounds = bounds;
 	}
 
+	public shake(intervalMS: number, timeMS: number, v: number) {
+		const int = setInterval(() => {
+			const r = randomInt(1, 4);
+
+			if (r === 1) {
+				this.lookAt[0] += v;
+			}
+
+			if (r === 2) {
+				this.lookAt[0] -= v;
+			}
+
+			if (r === 3) {
+				this.lookAt[1] += v;
+			}
+
+			if (r === 2) {
+				this.lookAt[1] += v;
+			}
+
+			this.updateViewport();
+		}, intervalMS);
+
+		setTimeout(() => {
+			clearInterval(int);
+		}, timeMS);
+	}
+
 	public scrollToZoom() {
-		// Zoom and scroll around world
 		window.onwheel = (e: WheelEvent) => {
 			if (e.ctrlKey) {
-				// Your zoom/scale factor
 				let zoomLevel = this.distance - e.deltaY * 20;
 				if (zoomLevel <= 1) {
 					zoomLevel = 1;
@@ -170,21 +296,20 @@ class Camera {
 
 				this.setZoom(zoomLevel);
 			} else {
-				// Your track-pad X and Y positions
 				const x = this.lookAt[0] + e.deltaX * 2;
 				const y = this.lookAt[1] + e.deltaY * 2;
 
 				this.moveTo(x, y);
 			}
 		};
+	}
 
-		// Center camera on "R"
-		window.addEventListener('keydown', (e) => {
-			if (e.key === 'r') {
-				this.setZoom(1000);
-				this.moveTo(0, 0);
-			}
-		});
+	get defaultZoom() {
+		return 1000;
+	}
+
+	get defaultFOV() {
+		return Math.PI / 4;
 	}
 }
 
