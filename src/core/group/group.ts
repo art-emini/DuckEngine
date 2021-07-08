@@ -2,6 +2,7 @@
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
+import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import RoundRect from '../gameobjects/roundrect';
@@ -11,25 +12,49 @@ import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
 
 export default class Group<t extends Duck.Group.StackItem> {
-	private stack: Duck.Group.Stack;
+	private stack: t[];
+	private game: Game;
 	public readonly name: string;
 
-	constructor(name: string, defaultItems?: Duck.Group.Stack) {
+	private listeners: Duck.Group.Listener[];
+
+	constructor(name: string, game: Game, defaultItems?: t[]) {
 		this.name = name;
 		this.stack = defaultItems || [];
+		this.game = game;
+
+		this.listeners = [];
 	}
 
 	public add(item: t) {
 		this.stack.push(item);
+		if (this.game.config.debug) {
+			new Debug.Log('Added item to group.');
+		}
+
+		// listener
+		const foundListener = this.listeners.find((l) => l.type === 'ADD');
+		if (foundListener) {
+			foundListener.func(item);
+		}
 	}
 
 	public remove(item: t) {
 		if (this.find(item)) {
 			this.stack.splice(this.indexOf(item), 1);
+			if (this.game.config.debug) {
+				new Debug.Log('Removed item from group.');
+			}
 		} else {
 			new Debug.Error(
 				'Cannot remove item from Group. Item does not exist in Group.'
 			);
+		}
+
+		// listener
+		const foundListener = this.listeners.find((l) => l.type === 'REMOVE');
+		if (foundListener) {
+			foundListener.func(item);
 		}
 	}
 
@@ -42,8 +67,20 @@ export default class Group<t extends Duck.Group.StackItem> {
 		return this.stack.indexOf(item);
 	}
 
-	public each(cb: (item: unknown, index: number) => void) {
+	public each(cb: (item: t, index: number) => void) {
 		return this.stack.forEach(cb.bind(this));
+	}
+
+	public pop() {
+		return this.stack.pop();
+	}
+
+	public shift() {
+		return this.stack.shift();
+	}
+
+	public splice(index: number, deleteCount?: number) {
+		return this.stack.splice(index, deleteCount);
 	}
 
 	public filter(filter: Duck.Group.Filter) {
@@ -75,7 +112,30 @@ export default class Group<t extends Duck.Group.StackItem> {
 		}
 	}
 
+	public on(type: Duck.Group.ListenerType, cb: () => unknown) {
+		this.listeners.push({
+			type: type,
+			func: cb,
+		});
+	}
+
+	public off(type: Duck.Group.ListenerType) {
+		const foundListener = this.listeners.find((l) => l.type === type);
+
+		if (foundListener) {
+			this.listeners.splice(this.listeners.indexOf(foundListener), 1);
+		} else {
+			new Debug.Error(
+				'Cannot remove event listener from group. Type does not exist.'
+			);
+		}
+	}
+
 	public get group() {
 		return this.stack;
+	}
+
+	public get length() {
+		return this.stack.length;
 	}
 }

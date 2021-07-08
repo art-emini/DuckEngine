@@ -47,12 +47,11 @@ export default class Collider {
 				this.collideRectangle(otherShape as Rect);
 			}
 
-			if (otherShape.shape === 'sprite') {
+			if (
+				otherShape.shape === 'sprite' ||
+				otherShape.shape === 'spritesheet'
+			) {
 				this.collideSprite(otherShape as Sprite);
-			}
-
-			if (otherShape.shape === 'spritesheet') {
-				return;
 			}
 
 			if (otherShape.shape === 'circle') {

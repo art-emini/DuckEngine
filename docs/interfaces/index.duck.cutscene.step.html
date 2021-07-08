@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Step | DuckEngine - v1.1.2-beta</title>
+	<title>Step | DuckEngine - v1.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="../index.html" class="title">DuckEngine - v1.1.2-beta</a>
+					<a href="../index.html" class="title">DuckEngine - v1.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -86,6 +86,9 @@
 								<a href="../modules/index.duck.html">Duck</a>
 								<ul>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.class.html">Class</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.collider.html">Collider</a>
 									</li>
 									<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
@@ -96,6 +99,9 @@
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.group.html">Group</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.helper.html">Helper</a>
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.input.html">Input</a>
@@ -114,6 +120,12 @@
 									</li>
 									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 										<a href="../modules/index.duck.storage.html">Storage</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.tilemap.html">Tilemap</a>
+									</li>
+									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+										<a href="../modules/index.duck.touchinput.html">TouchInput</a>
 									</li>
 								</ul>
 							</li>
@@ -139,6 +151,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#affect" class="tsd-kind-icon">affect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#cameraintervalms" class="tsd-kind-icon">camera<wbr>IntervalMS</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#cameratimems" class="tsd-kind-icon">camera<wbr>TimeMS</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#cameravalue" class="tsd-kind-icon">camera<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#func" class="tsd-kind-icon">func</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="index.duck.cutscene.step.html#moveto" class="tsd-kind-icon">move<wbr>To</a></li>
@@ -154,10 +168,30 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="affect" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> affect</h3>
-					<div class="tsd-signature tsd-kind-icon">affect<span class="tsd-signature-symbol">:</span> <a href="../classes/core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../modules/index.duck.html#gameobject" class="tsd-signature-type">GameObject</a></div>
+					<div class="tsd-signature tsd-kind-icon">affect<span class="tsd-signature-symbol">:</span> <a href="../classes/core_camera_camera.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_gameobjects_gameobject.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:170</li>
+							<li>Defined in index.ts:262</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="cameraintervalms" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> camera<wbr>IntervalMS</h3>
+					<div class="tsd-signature tsd-kind-icon">camera<wbr>IntervalMS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:269</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="cameratimems" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> camera<wbr>TimeMS</h3>
+					<div class="tsd-signature tsd-kind-icon">camera<wbr>TimeMS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:270</li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">camera<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:177</li>
+							<li>Defined in index.ts:268</li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +211,7 @@
 					<div class="tsd-signature tsd-kind-icon">func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:176</li>
+							<li>Defined in index.ts:267</li>
 						</ul>
 					</aside>
 				</section>
@@ -187,7 +221,7 @@
 					<div class="tsd-signature tsd-kind-icon">move<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:171</li>
+							<li>Defined in index.ts:263</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -208,7 +242,7 @@
 					<div class="tsd-signature tsd-kind-icon">sleep<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:178</li>
+							<li>Defined in index.ts:271</li>
 						</ul>
 					</aside>
 				</section>
@@ -218,7 +252,7 @@
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StepType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:169</li>
+							<li>Defined in index.ts:261</li>
 						</ul>
 					</aside>
 				</section>
@@ -244,6 +278,12 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="index.duck.cutscene.step.html#affect" class="tsd-kind-icon">affect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="index.duck.cutscene.step.html#cameraintervalms" class="tsd-kind-icon">camera<wbr>IntervalMS</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="index.duck.cutscene.step.html#cameratimems" class="tsd-kind-icon">camera<wbr>TimeMS</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="index.duck.cutscene.step.html#cameravalue" class="tsd-kind-icon">camera<wbr>Value</a>

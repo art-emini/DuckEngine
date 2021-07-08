@@ -1,10 +1,5 @@
-import getValuesHSL from '../../helper/color/getValuesHSL';
-import hexToRGBA from '../../helper/color/hexToRGBA';
-import hslaToRGBA from '../../helper/color/hslaToRGBA';
-import isHex from '../../helper/color/isHex';
-import isHSL from '../../helper/color/isHSL';
-import isRGB from '../../helper/color/isRGB';
-import rgbToRGBA from '../../helper/color/rgbToRGBA';
+import { Duck } from '../../index';
+import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
 
@@ -13,7 +8,7 @@ export default class StaticLight {
 	public y: number;
 	public r: number;
 	private color: string;
-	private alpha: number;
+	private alpha: Duck.Helper.AlphaRange;
 	private game: Game;
 
 	constructor(
@@ -21,7 +16,7 @@ export default class StaticLight {
 		y: number,
 		r: number,
 		fillColor: string,
-		alpha: number,
+		alpha: Duck.Helper.AlphaRange,
 		game: Game
 	) {
 		this.x = x;
@@ -33,19 +28,7 @@ export default class StaticLight {
 		this.color = fillColor;
 
 		// convert all colors to RGBA
-
-		if (isHex(this.color)) {
-			this.color = hexToRGBA(this.color, this.alpha);
-		}
-
-		if (isRGB(this.color)) {
-			this.color = rgbToRGBA(this.color, this.alpha);
-		}
-
-		if (isHSL(this.color)) {
-			const e = getValuesHSL(this.color);
-			this.color = hslaToRGBA(e[0], e[1], e[2], this.alpha);
-		}
+		this.color = convertColorToRGBA(this.color, this.alpha);
 	}
 
 	public draw() {
@@ -61,5 +44,9 @@ export default class StaticLight {
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'
 			);
 		}
+	}
+
+	public setFillColor(color: string, alpha: Duck.Helper.AlphaRange) {
+		this.color = convertColorToRGBA(color, alpha);
 	}
 }

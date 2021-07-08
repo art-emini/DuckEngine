@@ -10,7 +10,18 @@ export default class Game {
 	public canvas: HTMLCanvasElement | null;
 	public ctx: CanvasRenderingContext2D | null | undefined;
 	public stack: Duck.Game.Stack;
+
+	public animationFrame: number | undefined;
+
 	public gameStorage: DuckStorage | undefined;
+
+	public deltaTime: number;
+	private oldTime: number;
+	private now: number;
+
+	public isInFullscreen: boolean;
+	private oldWidth: number;
+	private oldHeight: number;
 
 	// methods
 	public scenes: {
@@ -24,6 +35,10 @@ export default class Game {
 		this.config = config;
 		this.canvas = this.config.canvas;
 		this.ctx = this.canvas?.getContext('2d');
+
+		this.deltaTime = 0;
+		this.oldTime = 0;
+		this.now = 0;
 
 		// auto
 		if (!this.canvas || !this.ctx) {
@@ -48,6 +63,42 @@ export default class Game {
 			this.setBackground(this.config.background);
 		}
 
+		// mobile scaling / devicePixelRatio scaling
+		const dpr = window.devicePixelRatio || 1;
+		this.canvas.width *= dpr;
+		this.canvas.height *= dpr;
+		if (this.ctx) {
+			this.ctx.scale(dpr, dpr);
+		}
+
+		// fullscreen scale
+		this.isInFullscreen = false;
+		this.oldWidth = this.canvas.width;
+		this.oldHeight = this.canvas.height;
+
+		// resize listener & smartScale
+		window.onresize = () => {
+			if (this.isInFullscreen && this.canvas) {
+				this.scaleToWindow();
+			}
+			if (this.canvas && this.config.smartScale && dpr === 1) {
+				if (window.innerWidth <= this.canvas.width) {
+					this.canvas.width = window.innerWidth;
+				}
+				if (window.innerHeight <= this.canvas.height) {
+					this.canvas.height = window.innerHeight;
+				}
+
+				if (window.innerWidth > this.canvas.width) {
+					this.canvas.width = this.oldWidth;
+				}
+
+				if (window.innerHeight > this.canvas.height) {
+					this.canvas.height = this.oldHeight;
+				}
+			}
+		};
+
 		// stack
 		this.stack = {
 			scenes: [],
@@ -58,7 +109,13 @@ export default class Game {
 
 		if (this.config.storage) {
 			this.gameStorage = new DuckStorage(this.config.storage, this);
+			if (this.config.storage.loadOnWindowLoad) {
+				this.gameStorage.load(this.config.storage.loadOnWindowLoad);
+			}
 		}
+
+		// animation frame
+		this.animationFrame;
 
 		// methods
 		this.scenes = {
@@ -84,10 +141,25 @@ export default class Game {
 
 	public start() {
 		this.loop(this);
+		if (this.config.debug) {
+			new Debug.Log('Started animation frame.');
+		}
+	}
+
+	public stop() {
+		if (this.animationFrame) {
+			cancelAnimationFrame(this.animationFrame);
+			if (this.config.debug) {
+				new Debug.Log('Stopped animation frame.');
+			}
+		}
 	}
 
 	private loop(self: Game) {
 		self.clearFrame();
+
+		this.now = performance.now();
+		this.deltaTime = this.now - this.oldTime;
 
 		self.stack.scenes.forEach((scene) => {
 			if (scene.currentCamera) {
@@ -104,14 +176,16 @@ export default class Game {
 			}
 		});
 
-		requestAnimationFrame(() => {
+		this.oldTime = this.now;
+
+		this.animationFrame = requestAnimationFrame(() => {
 			self.loop(self);
 		});
 	}
 
 	public clearFrame() {
-		if (this.canvas) {
-			this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		if (this.canvas && this.ctx) {
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		} else {
 			new Debug.Error('Canvas is undefined');
 		}
@@ -134,6 +208,10 @@ export default class Game {
 	public setBackground(background: string) {
 		if (this.canvas) {
 			this.canvas.style.background = background;
+		} else {
+			new Debug.Error(
+				'Cannot set background of undefined. Canvas is undefined.'
+			);
 		}
 	}
 
@@ -147,12 +225,12 @@ export default class Game {
 				f2.onChange();
 			} else {
 				new Debug.Error(
-					`Cannot switch to scene with key "${key2}.  Scene not found."`
+					`Cannot switch to scene with scene key "${key2}. Scene not found."`
 				);
 			}
 		} else {
 			new Debug.Error(
-				`Cannot switch from scene with key "${key}.  Scene not found."`
+				`Cannot switch from scene from scene key "${key}. Scene not found."`
 			);
 		}
 	}
@@ -165,6 +243,69 @@ export default class Game {
 			new Debug.Error(
 				`Cannot switch to scene with key "${key}. Scene not found."`
 			);
+		}
+	}
+
+	public fullscreen() {
+		if (this.canvas && document.fullscreenEnabled) {
+			this.canvas
+				.requestFullscreen()
+				.then(() => {
+					this.isInFullscreen = false;
+					if (this.canvas) {
+						this.scaleToWindow();
+					}
+				})
+				.catch(
+					() =>
+						new Debug.Error(
+							'User must interact with the page before fullscreen API can be used.'
+						)
+				);
+
+			// on un fullscreen
+			this.canvas.onfullscreenchange = () => {
+				if (!document.fullscreenElement) {
+					this.resetScale();
+					this.isInFullscreen = false;
+				}
+			};
+		}
+
+		if (!document.fullscreenEnabled) {
+			new Debug.Warn(
+				'Fullscreen is not supported/enabled on this browser.'
+			);
+		}
+	}
+
+	public unfullscreen() {
+		if (document.fullscreenElement) {
+			setTimeout(() => {
+				document
+					.exitFullscreen()
+					.then(() => {
+						if (this.canvas) {
+							this.canvas.width = this.oldWidth;
+							this.canvas.height = this.oldHeight;
+						}
+					})
+					.catch((e) => new Debug.Error(e));
+			}, 1000);
+		}
+	}
+
+	public resetScale() {
+		if (this.canvas) {
+			this.canvas.width = this.oldWidth;
+			this.canvas.height = this.oldHeight;
+		}
+	}
+
+	public scaleToWindow() {
+		if (this.canvas) {
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
 		}
 	}
 }

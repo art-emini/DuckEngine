@@ -1,10 +1,11 @@
+import { Duck } from '../../index';
 import hslToRGB from './hslToRGB';
 
 export default function hslaToRGBA(
 	h: number | string,
 	s: number | string,
 	l: number | string,
-	alpha: number
+	alpha: Duck.Helper.AlphaRange
 ) {
 	h = parseInt(h as string);
 	l = parseInt(l as string);

@@ -4,6 +4,8 @@ import Game from '../game';
 export default class Text {
 	public text: string;
 	private config: Duck.Interactive.Text.Config;
+	public x: number;
+	public y: number;
 	private game: Game;
 
 	constructor(
@@ -13,6 +15,8 @@ export default class Text {
 	) {
 		this.text = text;
 		this.config = config;
+		this.x = this.config.x;
+		this.y = this.config.y;
 		this.game = game;
 	}
 
@@ -28,8 +32,8 @@ export default class Text {
 
 				this.game.ctx.fillText(
 					this.text,
-					this.config.x,
-					this.config.y,
+					this.x,
+					this.y,
 					this.config.styles.maxWidth
 				);
 			}
@@ -39,8 +43,8 @@ export default class Text {
 
 				this.game.ctx.strokeText(
 					this.text,
-					this.config.x,
-					this.config.y,
+					this.x,
+					this.y,
 					this.config.styles.maxWidth
 				);
 			}
@@ -54,15 +58,15 @@ export default class Text {
 
 				this.game.ctx.fillText(
 					this.text,
-					this.config.x,
-					this.config.y,
+					this.x,
+					this.y,
 					this.config.styles.maxWidth
 				);
 
 				this.game.ctx.strokeText(
 					this.text,
-					this.config.x,
-					this.config.y,
+					this.x,
+					this.y,
 					this.config.styles.maxWidth
 				);
 			}
