@@ -180,6 +180,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   ├── rgbaToRGB.ts
 │   │   │   ├── rgbToHSL.ts
 │   │   │   └── rgbToRGBA.ts
+│   │   ├── dprScale.ts
 │   │   ├── startup.ts
 │   │   └── version.ts
 │   ├── index.ts

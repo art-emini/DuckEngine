@@ -92,6 +92,7 @@ export namespace Duck {
 			defaultScene: string;
 			background?: string;
 			smartScale?: boolean;
+			dprScale?: boolean;
 		}
 
 		export interface Stack {

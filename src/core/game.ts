@@ -4,6 +4,7 @@ import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
 import Debug from './debug/debug';
 import startup from '../helper/startup';
+import dprScale from '../helper/dprScale';
 
 export default class Game {
 	public readonly config: Duck.Game.Config;
@@ -64,11 +65,18 @@ export default class Game {
 		}
 
 		// mobile scaling / devicePixelRatio scaling
-		const dpr = window.devicePixelRatio || 1;
-		this.canvas.width *= dpr;
-		this.canvas.height *= dpr;
-		if (this.ctx) {
-			this.ctx.scale(dpr, dpr);
+		if (this.config.dprScale) {
+			dprScale(
+				this.canvas,
+				this.ctx,
+				this.config.scale?.width || this.canvas.width,
+				this.config.scale?.height || this.canvas.height
+			);
+			if (this.config.debug) {
+				new Debug.Log(
+					`Scaled with devicePixelRatio of ${window.devicePixelRatio}`
+				);
+			}
 		}
 
 		// fullscreen scale
@@ -81,7 +89,11 @@ export default class Game {
 			if (this.isInFullscreen && this.canvas) {
 				this.scaleToWindow();
 			}
-			if (this.canvas && this.config.smartScale && dpr === 1) {
+			if (
+				this.canvas &&
+				this.config.smartScale &&
+				window.devicePixelRatio === 1
+			) {
 				if (window.innerWidth <= this.canvas.width) {
 					this.canvas.width = window.innerWidth;
 				}

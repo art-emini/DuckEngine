@@ -123,15 +123,30 @@ class Camera {
 
 	private updateViewport() {
 		if (this.ctx) {
-			this.aspectRatio = this.ctx.canvas.width / this.ctx.canvas.height;
+			// dpr scaling
+			let cWidth = this.ctx.canvas.width;
+			let cHeight = this.ctx.canvas.height;
+
+			if (this.game.config.dprScale && window.devicePixelRatio > 1) {
+				cWidth = Number(this.ctx.canvas.style.width.replace('px', ''));
+				window.devicePixelRatio;
+				cHeight = Number(
+					this.ctx.canvas.style.height.replace('px', '')
+				);
+
+				// set zoom for dpr scaling
+				this.distance = 1000 / window.devicePixelRatio;
+			}
+
+			this.aspectRatio = cWidth / cHeight;
 			this.viewport.w = this.distance * Math.tan(this.fieldOfView);
 			this.viewport.h = this.viewport.w / this.aspectRatio;
 			this.viewport.left = this.lookAt[0] - this.viewport.w / 2.0;
 			this.viewport.top = this.lookAt[1] - this.viewport.h / 2.0;
 			this.viewport.right = this.viewport.left + this.viewport.w;
 			this.viewport.bottom = this.viewport.top + this.viewport.h;
-			this.viewport.scale[0] = this.ctx.canvas.width / this.viewport.w;
-			this.viewport.scale[1] = this.ctx.canvas.height / this.viewport.h;
+			this.viewport.scale[0] = cWidth / this.viewport.w;
+			this.viewport.scale[1] = cHeight / this.viewport.h;
 		} else {
 			new Debug.Error(
 				'Cannot update camera. CanvasRenderingContext2D is undefined.'
@@ -305,7 +320,16 @@ class Camera {
 	}
 
 	get defaultZoom() {
-		return 1000;
+		if (this.game.config.dprScale) {
+			if (this.game.config.debug) {
+				new Debug.Log(
+					'Getter defaultZoom returned default zoom with dpr scaling. (info)'
+				);
+			}
+			return 1000 / window.devicePixelRatio;
+		} else {
+			return 1000;
+		}
 	}
 
 	get defaultFOV() {
