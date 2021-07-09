@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 export default class Render {
 	constructor() {}
 
-	public render() {}
+	public render(deltaTime: number) {}
 
-	public update() {}
+	public update(deltaTime: number) {}
 
 	public onChange() {}
 }

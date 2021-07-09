@@ -36,6 +36,18 @@ export default class DuckStorage {
 				gameConfig: localStorage.getItem('duckengine-save-gameConfig'),
 			};
 
+			if (res.scenes) {
+				res.scenes = JSON.parse(res.scenes);
+			}
+
+			if (res.data) {
+				res.data = JSON.parse(res.data);
+			}
+
+			if (res.gameConfig) {
+				res.gameConfig = JSON.parse(res.gameConfig);
+			}
+
 			return res;
 		}
 

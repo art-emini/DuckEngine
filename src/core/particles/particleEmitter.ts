@@ -1,6 +1,6 @@
 import { Duck } from '../../index';
-import randomFloat from '../../utils/randomFloat';
-import randomInt from '../../utils/randomInt';
+import randomFloat from '../math/randomFloat';
+import randomInt from '../math/randomInt';
 import Game from '../game';
 import Particle from './particle';
 

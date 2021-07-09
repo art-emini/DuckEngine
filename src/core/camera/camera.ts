@@ -9,7 +9,7 @@ import { Duck } from '../../index';
 import rectToRectIntersect from '../physics/rectToRectIntersect';
 import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
-import randomInt from '../../utils/randomInt';
+import randomInt from '../math/randomInt';
 
 class Camera {
 	private game: Game;
@@ -65,22 +65,19 @@ class Camera {
 		this.applyScale();
 		this.applyTranslation();
 
+		// follow
 		if (this.following) {
 			if (this.following.shape === 'rect') {
 				if (this.bounds) {
 					if (
 						rectToRectIntersect(this.following as Rect, this.bounds)
 					) {
-						this.lookAt[0] =
-							this.following.x - (this.following as Rect).w / 2;
-						this.lookAt[1] =
-							this.following.y - (this.following as Rect).h / 2;
+						this.lookAt[0] = this.following.getCenterX();
+						this.lookAt[1] = this.following.getCenterY();
 					}
 				} else {
-					this.lookAt[0] =
-						this.following.x - (this.following as Rect).w / 2;
-					this.lookAt[1] =
-						this.following.y - (this.following as Rect).h / 2;
+					this.lookAt[0] = this.following.getCenterX();
+					this.lookAt[1] = this.following.getCenterY();
 				}
 			}
 
@@ -92,16 +89,12 @@ class Camera {
 							this.bounds
 						)
 					) {
-						this.lookAt[0] =
-							this.following.x - (this.following as Circle).r / 2;
-						this.lookAt[1] =
-							this.following.y - (this.following as Circle).r / 2;
+						this.lookAt[0] = this.following.getCenterX();
+						this.lookAt[1] = this.following.getCenterY();
 					}
 				} else {
-					this.lookAt[0] =
-						this.following.x - (this.following as Circle).r / 2;
-					this.lookAt[1] =
-						this.following.y - (this.following as Circle).r / 2;
+					this.lookAt[0] = this.following.getCenterX();
+					this.lookAt[1] = this.following.getCenterY();
 				}
 			}
 
@@ -127,9 +120,9 @@ class Camera {
 			let cWidth = this.ctx.canvas.width;
 			let cHeight = this.ctx.canvas.height;
 
-			if (this.game.config.dprScale && window.devicePixelRatio > 1) {
+			if (this.game.config.dprScale && window.devicePixelRatio !== 1) {
 				cWidth = Number(this.ctx.canvas.style.width.replace('px', ''));
-				window.devicePixelRatio;
+
 				cHeight = Number(
 					this.ctx.canvas.style.height.replace('px', '')
 				);

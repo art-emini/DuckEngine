@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>default | DuckEngine - v1.0.1</title>
+	<title>default | DuckEngine - v1.1.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="../index.html" class="title">DuckEngine - v1.0.1</a>
+					<a href="../index.html" class="title">DuckEngine - v1.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -121,6 +121,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#clearframe" class="tsd-kind-icon">clear<wbr>Frame</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#fullscreen" class="tsd-kind-icon">fullscreen</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#lockpointer" class="tsd-kind-icon">lock<wbr>Pointer</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="core_game.default.html#loop" class="tsd-kind-icon">loop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#resetscale" class="tsd-kind-icon">reset<wbr>Scale</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#scaletowindow" class="tsd-kind-icon">scale<wbr>ToWindow</a></li>
@@ -131,6 +132,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#stop" class="tsd-kind-icon">stop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#switchscene" class="tsd-kind-icon">switch<wbr>Scene</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#unfullscreen" class="tsd-kind-icon">unfullscreen</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_game.default.html#unlockpointer" class="tsd-kind-icon">unlock<wbr>Pointer</a></li>
 							</ul>
 						</section>
 					</div>
@@ -378,6 +380,23 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="lockpointer" class="tsd-anchor"></a>
+					<h3>lock<wbr>Pointer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">lock<wbr>Pointer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/game.ts:310</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="loop" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> loop</h3>
@@ -411,7 +430,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/game.ts:310</li>
+									<li>Defined in core/game.ts:322</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -428,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/game.ts:317</li>
+									<li>Defined in core/game.ts:347</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -574,7 +593,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/game.ts:294</li>
+									<li>Defined in core/game.ts:297</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="unlockpointer" class="tsd-anchor"></a>
+					<h3>unlock<wbr>Pointer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">unlock<wbr>Pointer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/game.ts:316</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -640,6 +676,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_game.default.html#fullscreen" class="tsd-kind-icon">fullscreen</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_game.default.html#lockpointer" class="tsd-kind-icon">lock<wbr>Pointer</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="core_game.default.html#loop" class="tsd-kind-icon">loop</a>
 							</li>
@@ -669,6 +708,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_game.default.html#unfullscreen" class="tsd-kind-icon">unfullscreen</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_game.default.html#unlockpointer" class="tsd-kind-icon">unlock<wbr>Pointer</a>
 							</li>
 						</ul>
 					</li>

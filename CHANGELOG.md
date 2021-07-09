@@ -2,6 +2,33 @@
 
 Old Versions that are over 5 versions behind will be removed.
 
+## 1.1.0
+
+1. Game
+   1. Added deltaTime parameter to scene update and render methods
+   2. Fixed mobile dpr scaling while fullscreen
+   3. Removed timeout/delay when exiting fullscreen with unfullscreen method
+2. Base / Render (Scene extends this class)
+   1. Added deltaTime argument to update and render methods
+3. Input
+   1. Added onKeyDown and onKeyUp methods
+   2. Added onMouseMove method
+4. Sound
+   1. Added mute and unmute methods
+   2. Added isMuted getter
+   3. Changed typedefs in options to Helper.defaultValue for better understanding of the default values
+   4. Fixed volume option set to 0 but not muted bug
+   5. Made path and element properties public
+5. DuckStorage
+   1. Now JSON parses data correctly when load type is "all"
+6. Base
+   1. Added Amount class to run a function a certain amount of times
+   2. Made ran properties in Once class public
+7. Camera
+   1. Changed how following a gameobjects aligns the viewport
+8. Misc
+   1. Moved randomInt and randomFloat utils to core/math folder
+
 ## 1.0.1
 
 1. Game

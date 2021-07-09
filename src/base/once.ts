@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 export default class Once {
 	private func: Function;
-	private ran: boolean;
+	public ran: boolean;
 
 	constructor(func: Function, run?: boolean) {
 		this.func = func;

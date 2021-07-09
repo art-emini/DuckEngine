@@ -1,4 +1,4 @@
-import { Duck } from '../index';
+import { Duck } from '../../index';
 
 export default function randomFloat(min: number, max: number, fixed?: number) {
 	const num = Math.random() * (max - min) + min;

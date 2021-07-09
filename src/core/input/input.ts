@@ -83,8 +83,38 @@ export default class Input {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public onClick(cb: (e: MouseEvent) => any) {
+	public onKeyDown(key: string, cb: () => void) {
+		document.addEventListener('keydown', (e) => {
+			if (e.key === key) {
+				cb();
+			}
+		});
+	}
+
+	public onKeyUp(key: string, cb: () => void) {
+		document.addEventListener('keyup', (e) => {
+			if (e.key === key) {
+				cb();
+			}
+		});
+	}
+
+	public onMouseMove(cb: (mousePos: { x: number; y: number }) => void) {
+		if (this.game.canvas) {
+			this.game.canvas.addEventListener('mousemove', (e) => {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				const rect = this.game.canvas!.getBoundingClientRect();
+				const mousePos = {
+					x: e.clientX - rect.left,
+					y: e.clientY - rect.top,
+				};
+
+				cb(mousePos);
+			});
+		}
+	}
+
+	public onClick(cb: (e: MouseEvent) => void) {
 		document.addEventListener('click', cb);
 	}
 
