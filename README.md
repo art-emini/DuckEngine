@@ -117,6 +117,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 ├── SECURITY.md
 ├── src
 │   ├── base
+│   │   ├── amount.ts
 │   │   ├── once.ts
 │   │   └── render.ts
 │   ├── core
@@ -148,7 +149,9 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── map
 │   │   │   └── tilemap.ts
 │   │   ├── math
-│   │   │   └── clamp.ts
+│   │   │   ├── clamp.ts
+│   │   │   ├── randomFloat.ts
+│   │   │   └── randomInt.ts
 │   │   ├── particles
 │   │   │   ├── particleEmitter.ts
 │   │   │   └── particle.ts
@@ -185,8 +188,6 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   └── version.ts
 │   ├── index.ts
 │   └── utils
-│       ├── randomFloat.ts
-│       ├── randomInt.ts
 │       └── validURL.ts
 ├── tsconfig.json
 └── webpack.config.js
