@@ -29,8 +29,8 @@ import Cutscene from './cutscene/cutscene';
 import Loader from './loader/loader';
 
 // tools
-import randomInt from '../utils/randomInt';
-import randomFloat from '../utils/randomFloat';
+import randomInt from './math/randomInt';
+import randomFloat from './math/randomFloat';
 
 // color
 // is
@@ -56,6 +56,7 @@ import circleToRectIntersect from './physics/circleToRectIntersect';
 import TileMap from './map/tilemap';
 import Once from '../base/once';
 import Button from './interactive/button';
+import Amount from '../base/amount';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -529,5 +530,14 @@ export default class Scene extends Basic {
 	public once(func: Function, run?: boolean) {
 		const one = new Once(func, run);
 		return one;
+	}
+
+	public runAmount(
+		func: (currentCount: number) => void,
+		maxAmount: number,
+		run?: boolean
+	) {
+		const amount = new Amount(func, maxAmount, this.game, run);
+		return amount;
 	}
 }

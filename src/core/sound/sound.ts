@@ -2,8 +2,8 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 
 export default class Sound {
-	private path: string;
-	private element: HTMLAudioElement;
+	public path: string;
+	public element: HTMLAudioElement;
 	private sprites: Duck.Sound.Sprite[];
 
 	constructor(path: string, options?: Duck.Sound.Config) {
@@ -14,20 +14,14 @@ export default class Sound {
 		this.element.style.display = 'none';
 		this.element.controls = false;
 		this.element.src = this.path;
+		this.element.volume = options?.volume || 1;
+		this.element.autoplay = options?.autoplay || false;
 
-		this.sprites = [];
-
-		if (options) {
-			if (options.autoplay) {
-				this.element.autoplay = true;
-			}
-			if (options.sprites) {
-				this.sprites = options.sprites;
-			}
-			if (options.volume) {
-				this.element.volume = options.volume;
-			}
+		if (options?.volume === 0) {
+			this.mute();
 		}
+
+		this.sprites = options?.sprites || [];
 
 		document.body.appendChild(this.element);
 	}
@@ -38,6 +32,14 @@ export default class Sound {
 
 	public pause() {
 		this.element.pause();
+	}
+
+	public mute() {
+		this.element.muted = true;
+	}
+
+	public unmute() {
+		this.element.muted = false;
 	}
 
 	public seek(timeInSeconds: number) {
@@ -64,6 +66,10 @@ export default class Sound {
 		return this.element.volume;
 	}
 
+	public get isMuted() {
+		return this.element.muted;
+	}
+
 	public playSprite(key: string) {
 		const foundSprite = this.sprites.find((_sprite) => _sprite.key === key);
 
@@ -77,14 +83,14 @@ export default class Sound {
 			const int = setInterval(() => {
 				if (foundSprite) {
 					if (this.element.currentTime >= foundSprite.endSeconds) {
-						this.restart();
-						this.pause();
 						clearInterval(int);
+						this.pause();
+						this.restart();
 					}
 				}
 			}, 1000);
 		} else {
-			new Debug.Error(`Cannot find sound sprite with key: '${key}'.`);
+			new Debug.Error(`Cannot find sound sprite with key: "${key}".`);
 		}
 	}
 

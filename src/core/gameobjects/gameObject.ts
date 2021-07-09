@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Duck } from '../../index';
-import randomInt from '../../utils/randomInt';
+import randomInt from '../math/randomInt';
 import Game from '../game';
 import Collider from '../physics/collider';
 

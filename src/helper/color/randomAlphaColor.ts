@@ -1,5 +1,5 @@
 import { Duck } from '../../index';
-import randomFloat from '../../utils/randomFloat';
+import randomFloat from '../../core/math/randomFloat';
 import convertColorToRGBA from './convertColorToRGBA';
 import randomColor from './randomColor';
 

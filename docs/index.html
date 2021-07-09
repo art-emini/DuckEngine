@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckEngine - v1.0.1</title>
+	<title>DuckEngine - v1.1.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="index.html" class="title">DuckEngine - v1.0.1</a>
+					<a href="index.html" class="title">DuckEngine - v1.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -122,6 +122,12 @@
 						<a href="modules/core_math_clamp.html">core/math/clamp</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/core_math_randomfloat.html">core/math/randomFloat</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_math_randomint.html">core/math/randomInt</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/core_particles_particle.html">core/particles/particle</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -152,7 +158,7 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>DuckEngine - v1.0.1</h1>
+			<h1>DuckEngine - v1.1.0</h1>
 			<div class="tsd-panel tsd-typography">
 				<a href="#" id="" style="color: inherit; text-decoration: none;">
 					<h1><img src="global/Logo.png" alt="DuckEngine"></h1>
@@ -281,6 +287,7 @@
 <span style="color: #000000">├── SECURITY.md</span>
 <span style="color: #000000">├── src</span>
 <span style="color: #000000">│   ├── base</span>
+<span style="color: #000000">│   │   ├── amount.ts</span>
 <span style="color: #000000">│   │   ├── once.ts</span>
 <span style="color: #000000">│   │   └── render.ts</span>
 <span style="color: #000000">│   ├── core</span>
@@ -312,7 +319,9 @@
 <span style="color: #000000">│   │   ├── map</span>
 <span style="color: #000000">│   │   │   └── tilemap.ts</span>
 <span style="color: #000000">│   │   ├── math</span>
-<span style="color: #000000">│   │   │   └── clamp.ts</span>
+<span style="color: #000000">│   │   │   ├── clamp.ts</span>
+<span style="color: #000000">│   │   │   ├── randomFloat.ts</span>
+<span style="color: #000000">│   │   │   └── randomInt.ts</span>
 <span style="color: #000000">│   │   ├── particles</span>
 <span style="color: #000000">│   │   │   ├── particleEmitter.ts</span>
 <span style="color: #000000">│   │   │   └── particle.ts</span>
@@ -349,8 +358,6 @@
 <span style="color: #000000">│   │   └── version.ts</span>
 <span style="color: #000000">│   ├── index.ts</span>
 <span style="color: #000000">│   └── utils</span>
-<span style="color: #000000">│       ├── randomFloat.ts</span>
-<span style="color: #000000">│       ├── randomInt.ts</span>
 <span style="color: #000000">│       └── validURL.ts</span>
 <span style="color: #000000">├── tsconfig.json</span>
 <span style="color: #000000">└── webpack.config.js</span>
