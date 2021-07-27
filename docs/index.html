@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DuckEngine - v1.1.0</title>
+	<title>DuckEngine - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="index.html" class="title">DuckEngine - v1.1.0</a>
+					<a href="index.html" class="title">DuckEngine - v1.2.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -77,13 +77,22 @@
 						<a href="modules/core_debug_debug.html">core/debug/debug</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/core_effect_effect.html">core/effect/effect</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_effect_preset_explosion.html">core/effect/preset/explosion</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_effect_preset_smoke.html">core/effect/preset/smoke</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/core_game.html">core/game</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_gameobjects_circle.html">core/gameobjects/circle</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_gameobjects_gameobject.html">core/gameobjects/gameObject</a>
+						<a href="modules/core_gameobjects_gameObject.html">core/gameobjects/gameObject</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_gameobjects_rect.html">core/gameobjects/rect</a>
@@ -110,10 +119,13 @@
 						<a href="modules/core_interactive_text.html">core/interactive/text</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_lights_staticlight.html">core/lights/staticLight</a>
+						<a href="modules/core_lights_staticLight.html">core/lights/staticLight</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_loader_loader.html">core/loader/loader</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_map_map.html">core/map/map</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_map_tilemap.html">core/map/tilemap</a>
@@ -122,25 +134,28 @@
 						<a href="modules/core_math_clamp.html">core/math/clamp</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_math_randomfloat.html">core/math/randomFloat</a>
+						<a href="modules/core_math_randomFloat.html">core/math/randomFloat</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_math_randomint.html">core/math/randomInt</a>
+						<a href="modules/core_math_randomInt.html">core/math/randomInt</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_particles_particle.html">core/particles/particle</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_particles_particleemitter.html">core/particles/particleEmitter</a>
+						<a href="modules/core_particles_particleContainer.html">core/particles/particleContainer</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_physics_circletorectintersect.html">core/physics/circleToRectIntersect</a>
+						<a href="modules/core_particles_particleEmitter.html">core/particles/particleEmitter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core_physics_circleToRectIntersect.html">core/physics/circleToRectIntersect</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_physics_collider.html">core/physics/collider</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/core_physics_recttorectintersect.html">core/physics/rectToRectIntersect</a>
+						<a href="modules/core_physics_rectToRectIntersect.html">core/physics/rectToRectIntersect</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/core_scene.html">core/scene</a>
@@ -158,7 +173,7 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>DuckEngine - v1.1.0</h1>
+			<h1>DuckEngine - v1.2.0</h1>
 			<div class="tsd-panel tsd-typography">
 				<a href="#" id="" style="color: inherit; text-decoration: none;">
 					<h1><img src="global/Logo.png" alt="DuckEngine"></h1>
@@ -188,7 +203,8 @@
 					<li>Smart scaling</li>
 					<li>Storage</li>
 					<li>Tilemaps</li>
-					<li>Particles</li>
+					<li>Particles, ParticleEmitter and Containers</li>
+					<li>Effects with Presets</li>
 					<li>Sound player with sound sprites</li>
 					<li>Text and Button UIs</li>
 					<li>Scene Unique Stack / Entity Manager</li>
@@ -297,6 +313,11 @@
 <span style="color: #000000">│   │   │   └── cutscene.ts</span>
 <span style="color: #000000">│   │   ├── debug</span>
 <span style="color: #000000">│   │   │   └── debug.ts</span>
+<span style="color: #000000">│   │   ├── effect</span>
+<span style="color: #000000">│   │   │   ├── effect.ts</span>
+<span style="color: #000000">│   │   │   └── preset</span>
+<span style="color: #000000">│   │   │       ├── explosion.ts</span>
+<span style="color: #000000">│   │   │       └── smoke.ts</span>
 <span style="color: #000000">│   │   ├── gameobjects</span>
 <span style="color: #000000">│   │   │   ├── circle.ts</span>
 <span style="color: #000000">│   │   │   ├── gameObject.ts</span>
@@ -317,12 +338,14 @@
 <span style="color: #000000">│   │   ├── loader</span>
 <span style="color: #000000">│   │   │   └── loader.ts</span>
 <span style="color: #000000">│   │   ├── map</span>
+<span style="color: #000000">│   │   │   ├── map.ts</span>
 <span style="color: #000000">│   │   │   └── tilemap.ts</span>
 <span style="color: #000000">│   │   ├── math</span>
 <span style="color: #000000">│   │   │   ├── clamp.ts</span>
 <span style="color: #000000">│   │   │   ├── randomFloat.ts</span>
 <span style="color: #000000">│   │   │   └── randomInt.ts</span>
 <span style="color: #000000">│   │   ├── particles</span>
+<span style="color: #000000">│   │   │   ├── particleContainer.ts</span>
 <span style="color: #000000">│   │   │   ├── particleEmitter.ts</span>
 <span style="color: #000000">│   │   │   └── particle.ts</span>
 <span style="color: #000000">│   │   ├── physics</span>
@@ -358,6 +381,7 @@
 <span style="color: #000000">│   │   └── version.ts</span>
 <span style="color: #000000">│   ├── index.ts</span>
 <span style="color: #000000">│   └── utils</span>
+<span style="color: #000000">│       ├── swapElement.ts</span>
 <span style="color: #000000">│       └── validURL.ts</span>
 <span style="color: #000000">├── tsconfig.json</span>
 <span style="color: #000000">└── webpack.config.js</span>
