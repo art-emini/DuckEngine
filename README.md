@@ -26,18 +26,19 @@
 10. Smart scaling
 11. Storage
 12. Tilemaps
-13. Particles
-14. Sound player with sound sprites
-15. Text and Button UIs
-16. Scene Unique Stack / Entity Manager
-17. Game Stack / Global Scene Manager
-18. Animations
-19. Cutscenes
-20. Custom loader to load from URL or file path
-21. [Docs](https://ksplatdev.github.io/DuckEngine/)
-22. Written in typescript
-23. Types are included
-24. And way more
+13. Particles, ParticleEmitter and Containers
+14. Effects with Presets
+15. Sound player with sound sprites
+16. Text and Button UIs
+17. Scene Unique Stack / Entity Manager
+18. Game Stack / Global Scene Manager
+19. Animations
+20. Cutscenes
+21. Custom loader to load from URL or file path
+22. [Docs](https://ksplatdev.github.io/DuckEngine/)
+23. Written in typescript
+24. Types are included
+25. And way more
 
 ## Download
 
@@ -127,6 +128,11 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   └── cutscene.ts
 │   │   ├── debug
 │   │   │   └── debug.ts
+│   │   ├── effect
+│   │   │   ├── effect.ts
+│   │   │   └── preset
+│   │   │       ├── explosion.ts
+│   │   │       └── smoke.ts
 │   │   ├── gameobjects
 │   │   │   ├── circle.ts
 │   │   │   ├── gameObject.ts
@@ -147,12 +153,14 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── loader
 │   │   │   └── loader.ts
 │   │   ├── map
+│   │   │   ├── map.ts
 │   │   │   └── tilemap.ts
 │   │   ├── math
 │   │   │   ├── clamp.ts
 │   │   │   ├── randomFloat.ts
 │   │   │   └── randomInt.ts
 │   │   ├── particles
+│   │   │   ├── particleContainer.ts
 │   │   │   ├── particleEmitter.ts
 │   │   │   └── particle.ts
 │   │   ├── physics
@@ -188,6 +196,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   └── version.ts
 │   ├── index.ts
 │   └── utils
+│       ├── swapElement.ts
 │       └── validURL.ts
 ├── tsconfig.json
 └── webpack.config.js

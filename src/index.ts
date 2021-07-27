@@ -26,6 +26,10 @@ import DuckStorageClass from './core/storage/storage';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
 import ButtonClass from './core/interactive/button';
+import ParticleContainerClass from './core/particles/particleContainer';
+import EffectClass from './core/effect/effect';
+import ExplosionEffectClass from './core/effect/preset/explosion';
+import SmokeEffectClass from './core/effect/preset/smoke';
 
 // main
 
@@ -68,12 +72,19 @@ export namespace Duck {
 
 		export type Particle = ParticleClass;
 		export type ParticleEmitter = ParticleEmitterClass;
+		export type ParticleContainer = ParticleContainerClass;
 
 		export type Collider = ColliderClass;
 
 		export type Sound = SoundClass;
 
 		export type DuckStorage = DuckStorageClass;
+
+		export type Effect = EffectClass;
+		export namespace PresetEffects {
+			export type ExplosionEffect = ExplosionEffectClass;
+			export type SmokeEffect = SmokeEffectClass;
+		}
 
 		export namespace Base {
 			export type Once = OnceClass;
@@ -314,78 +325,21 @@ export namespace Duck {
 	export namespace Tilemap {
 		export type Map = number[][];
 		export interface Atlas {
-			[key: number]: HTMLImageElement | 'EMPTY';
+			[key: number]: HTMLImageElement | string;
 		}
 	}
 
-	export namespace TouchInput {
-		export type Pos =
-			| 'TOP-LEFT'
-			| 'TOP-RIGHT'
-			| 'BOTTOM-LEFT'
-			| 'BOTTOM-RIGHT';
-
-		export interface Controller {
-			up: boolean;
-			down: boolean;
-			left: boolean;
-			right: boolean;
+	export namespace ParticleContainer {
+		export interface Bounds {
+			x: number;
+			y: number;
+			w: number;
+			h: number;
 		}
 
-		export interface Controls {
-			up?: boolean;
-			down?: boolean;
-			left?: boolean;
-			right?: boolean;
+		export interface Physics {
+			bounciness: number;
 		}
-
-		export interface OnTouch {
-			up?: (e: TouchEvent) => void;
-			down?: (e: TouchEvent) => void;
-			left?: (e: TouchEvent) => void;
-			right?: (e: TouchEvent) => void;
-		}
-
-		export interface Styles {
-			buttonW: string;
-			buttonH: string;
-			border?: string;
-			borderRadius?: string;
-			zIndex?: Helper.DefaultValue<undefined, number>;
-			spacing?: Helper.DefaultValue<undefined, number>;
-			textColor?: Helper.DefaultValue<undefined, string>;
-			bgColor?: Helper.DefaultValue<undefined, string>;
-			up?: {
-				innerHTML: string;
-				w?: string;
-				h?: string;
-				textColor?: string;
-				bgColor?: string;
-			};
-			down?: {
-				innerHTML: string;
-				w?: string;
-				h?: string;
-				textColor?: string;
-				bgColor?: string;
-			};
-			left?: {
-				innerHTML: string;
-				w?: string;
-				h?: string;
-				textColor?: string;
-				bgColor?: string;
-			};
-			right?: {
-				innerHTML: string;
-				w?: string;
-				h?: string;
-				textColor?: string;
-				bgColor?: string;
-			};
-		}
-
-		export type ButtonType = 'up' | 'down' | 'left' | 'right';
 	}
 
 	export namespace Helper {

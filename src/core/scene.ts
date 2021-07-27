@@ -57,6 +57,9 @@ import TileMap from './map/tilemap';
 import Once from '../base/once';
 import Button from './interactive/button';
 import Amount from '../base/amount';
+import Effect from './effect/effect';
+import ExplosionEffect from './effect/preset/explosion';
+import SmokeEffect from './effect/preset/smoke';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -169,6 +172,31 @@ export default class Scene extends Basic {
 			map: Duck.Tilemap.Map,
 			atlas: Duck.Tilemap.Atlas
 		) => TileMap;
+		effect: (
+			rangeX: Duck.ParticleEmitter.Range,
+			rangeY: Duck.ParticleEmitter.Range,
+			particleEmitter: ParticleEmitter
+		) => Effect;
+		presetEffect: {
+			explosionEffect: (
+				rangeX: Duck.ParticleEmitter.Range,
+				rangeY: Duck.ParticleEmitter.Range,
+				particleAmount: number | undefined,
+				speedRange: [1, 1] | undefined,
+				maxAge: number | undefined,
+				color: string | undefined
+			) => ExplosionEffect;
+			smokeEffect: (
+				rangeX: Duck.ParticleEmitter.Range,
+				rangeY: Duck.ParticleEmitter.Range,
+				particleAmount: number | undefined,
+				speedRangeX: [-0.1, 0.4] | undefined,
+				speedRangeY: [-0.1, 0.4] | undefined,
+				maxAge: number | undefined,
+				color: '#2e2e2e' | undefined,
+				interval: 50 | undefined
+			) => SmokeEffect;
+		};
 	};
 
 	public tools: {
@@ -438,6 +466,55 @@ export default class Scene extends Basic {
 					atlas,
 					this.game
 				);
+			},
+			effect: (
+				rangeX: Duck.ParticleEmitter.Range,
+				rangeY: Duck.ParticleEmitter.Range,
+				particleEmitter: ParticleEmitter
+			) => {
+				return new Effect(rangeX, rangeY, particleEmitter, this.game);
+			},
+			presetEffect: {
+				explosionEffect: (
+					rangeX: Duck.ParticleEmitter.Range,
+					rangeY: Duck.ParticleEmitter.Range,
+					particleAmount = 50,
+					speedRange = [1, 1],
+					maxAge = 3,
+					color = '#FFA500'
+				) => {
+					return new ExplosionEffect(
+						rangeX,
+						rangeY,
+						this.game,
+						particleAmount,
+						speedRange,
+						maxAge,
+						color
+					);
+				},
+				smokeEffect: (
+					rangeX: Duck.ParticleEmitter.Range,
+					rangeY: Duck.ParticleEmitter.Range,
+					particleAmount = 50,
+					speedRangeX = [-0.1, 0.4],
+					speedRangeY = [-0.1, 0.4],
+					maxAge = 20,
+					color = '#2e2e2e',
+					interval = 50
+				) => {
+					return new SmokeEffect(
+						rangeX,
+						rangeY,
+						this.game,
+						particleAmount,
+						speedRangeX,
+						speedRangeY,
+						maxAge,
+						color,
+						interval
+					);
+				},
 			},
 		};
 

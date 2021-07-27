@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>default | DuckEngine - v1.1.0</title>
+	<title>default | DuckEngine - v1.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -25,7 +25,7 @@
 					</ul>
 					<ul class="results-priority" style="display:none">
 					</ul>
-					<a href="../index.html" class="title">DuckEngine - v1.1.0</a>
+					<a href="../index.html" class="title">DuckEngine - v1.2.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -110,8 +110,8 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#duration" class="tsd-kind-icon">duration</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#ismuted" class="tsd-kind-icon">is<wbr>Muted</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#isplaying" class="tsd-kind-icon">is<wbr>Playing</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#isMuted" class="tsd-kind-icon">is<wbr>Muted</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#isPlaying" class="tsd-kind-icon">is<wbr>Playing</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_sound_sound.default.html#volume" class="tsd-kind-icon">volume</a></li>
 							</ul>
 						</section>
@@ -121,11 +121,11 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#mute" class="tsd-kind-icon">mute</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#pause" class="tsd-kind-icon">pause</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#play" class="tsd-kind-icon">play</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#playsprite" class="tsd-kind-icon">play<wbr>Sprite</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#playSprite" class="tsd-kind-icon">play<wbr>Sprite</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#restart" class="tsd-kind-icon">restart</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#seek" class="tsd-kind-icon">seek</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#setpath" class="tsd-kind-icon">set<wbr>Path</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#setvolume" class="tsd-kind-icon">set<wbr>Volume</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#setPath" class="tsd-kind-icon">set<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#setVolume" class="tsd-kind-icon">set<wbr>Volume</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_sound_sound.default.html#unmute" class="tsd-kind-icon">unmute</a></li>
 							</ul>
 						</section>
@@ -138,13 +138,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/index.duck.sound.config.html" class="tsd-signature-type">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_sound_sound.default.html" class="tsd-signature-type">default</a></li>
+						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/index.Duck.Sound.Config.html" class="tsd-signature-type">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_sound_sound.default.html" class="tsd-signature-type">default</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/sound/sound.ts:7</li>
+									<li>Defined in core/sound/sound.ts:9</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,7 +153,7 @@
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/index.duck.sound.config.html" class="tsd-signature-type">Config</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/index.Duck.Sound.Config.html" class="tsd-signature-type">Config</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_sound_sound.default.html" class="tsd-signature-type">default</a></h4>
@@ -186,7 +186,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="sprites" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> sprites</h3>
-					<div class="tsd-signature tsd-kind-icon">sprites<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.duck.sound.sprite.html" class="tsd-signature-type">Sprite</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">sprites<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Sound.Sprite.html" class="tsd-signature-type">Sprite</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in core/sound/sound.ts:7</li>
@@ -214,7 +214,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="ismuted" class="tsd-anchor"></a>
+					<a name="isMuted" class="tsd-anchor"></a>
 					<h3>is<wbr>Muted</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isMuted<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
@@ -231,7 +231,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="isplaying" class="tsd-anchor"></a>
+					<a name="isPlaying" class="tsd-anchor"></a>
 					<h3>is<wbr>Playing</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isPlaying<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
@@ -319,7 +319,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="playsprite" class="tsd-anchor"></a>
+					<a name="playSprite" class="tsd-anchor"></a>
 					<h3>play<wbr>Sprite</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">play<wbr>Sprite<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
@@ -382,7 +382,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setpath" class="tsd-anchor"></a>
+					<a name="setPath" class="tsd-anchor"></a>
 					<h3>set<wbr>Path</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">set<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
@@ -405,7 +405,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setvolume" class="tsd-anchor"></a>
+					<a name="setVolume" class="tsd-anchor"></a>
 					<h3>set<wbr>Volume</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">set<wbr>Volume<span class="tsd-signature-symbol">(</span>volume<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
@@ -471,10 +471,10 @@
 								<a href="core_sound_sound.default.html#duration" class="tsd-kind-icon">duration</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="core_sound_sound.default.html#ismuted" class="tsd-kind-icon">is<wbr>Muted</a>
+								<a href="core_sound_sound.default.html#isMuted" class="tsd-kind-icon">is<wbr>Muted</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="core_sound_sound.default.html#isplaying" class="tsd-kind-icon">is<wbr>Playing</a>
+								<a href="core_sound_sound.default.html#isPlaying" class="tsd-kind-icon">is<wbr>Playing</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="core_sound_sound.default.html#volume" class="tsd-kind-icon">volume</a>
@@ -489,7 +489,7 @@
 								<a href="core_sound_sound.default.html#play" class="tsd-kind-icon">play</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_sound_sound.default.html#playsprite" class="tsd-kind-icon">play<wbr>Sprite</a>
+								<a href="core_sound_sound.default.html#playSprite" class="tsd-kind-icon">play<wbr>Sprite</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_sound_sound.default.html#restart" class="tsd-kind-icon">restart</a>
@@ -498,10 +498,10 @@
 								<a href="core_sound_sound.default.html#seek" class="tsd-kind-icon">seek</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_sound_sound.default.html#setpath" class="tsd-kind-icon">set<wbr>Path</a>
+								<a href="core_sound_sound.default.html#setPath" class="tsd-kind-icon">set<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_sound_sound.default.html#setvolume" class="tsd-kind-icon">set<wbr>Volume</a>
+								<a href="core_sound_sound.default.html#setVolume" class="tsd-kind-icon">set<wbr>Volume</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_sound_sound.default.html#unmute" class="tsd-kind-icon">unmute</a>

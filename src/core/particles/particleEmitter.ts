@@ -3,6 +3,7 @@ import randomFloat from '../math/randomFloat';
 import randomInt from '../math/randomInt';
 import Game from '../game';
 import Particle from './particle';
+import ParticleContainer from './particleContainer';
 
 export default class ParticleEmitter {
 	private particle: Particle;
@@ -15,6 +16,8 @@ export default class ParticleEmitter {
 
 	private floatRangeX: Duck.ParticleEmitter.Range;
 	private floatRangeY: Duck.ParticleEmitter.Range;
+
+	private container: ParticleContainer | undefined;
 
 	constructor(
 		particle: Particle,
@@ -34,6 +37,8 @@ export default class ParticleEmitter {
 
 		this.floatRangeX = [0, 0];
 		this.floatRangeY = [0, 0];
+
+		this.container;
 
 		// create particles
 		this.create();
@@ -129,6 +134,9 @@ export default class ParticleEmitter {
 	public draw() {
 		if (this.emitting) {
 			this.list.forEach((particle) => {
+				if (this.container) {
+					this.container.update(particle);
+				}
 				particle.draw();
 			});
 		}
@@ -191,5 +199,16 @@ export default class ParticleEmitter {
 		this.list.forEach((particle) => {
 			particle.setImagePath(imagePath);
 		});
+	}
+
+	public addContainer(
+		x: number,
+		y: number,
+		w: number,
+		h: number,
+		physics: Duck.ParticleContainer.Physics
+	) {
+		this.container = new ParticleContainer(x, y, w, h, physics, this.game);
+		return this.container;
 	}
 }
