@@ -9,7 +9,6 @@ import Debug from './debug/debug';
 import Sprite from './gameobjects/sprite';
 import Rect from './gameobjects/rect';
 import Circle from './gameobjects/circle';
-import Text from './interactive/text';
 import RoundRect from './gameobjects/roundrect';
 import SpriteSheet from './gameobjects/spritesheet';
 
@@ -53,17 +52,26 @@ import randomColorWithAlpha from '../helper/color/randomAlphaColor';
 // intersect
 import rectToRectIntersect from './physics/rectToRectIntersect';
 import circleToRectIntersect from './physics/circleToRectIntersect';
+
+// maps
 import TileMap from './map/tilemap';
+
+// base
 import Once from '../base/once';
-import Button from './interactive/button';
 import Amount from '../base/amount';
+
+// ui
+import Button from './interactive/button';
+import Text from './interactive/text';
+
+// effects
 import Effect from './effect/effect';
 import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
 
 export default class Scene extends Basic {
 	public readonly key: string;
-	private game: Game;
+	protected game: Game;
 	public visible: boolean;
 	public readonly default: boolean;
 
