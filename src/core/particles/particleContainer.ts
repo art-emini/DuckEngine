@@ -9,17 +9,17 @@ export default class ParticleContainer {
 	public y: number;
 	public w: number;
 	public h: number;
-	private physics: Duck.ParticleContainer.Physics;
+	private physics: Duck.Types.ParticleContainer.Physics;
 	private game: Game;
 
-	public bounds: Duck.ParticleContainer.Bounds;
+	public bounds: Duck.Types.ParticleContainer.Bounds;
 
 	constructor(
 		x: number,
 		y: number,
 		w: number,
 		h: number,
-		physics: Duck.ParticleContainer.Physics,
+		physics: Duck.Types.ParticleContainer.Physics,
 		game: Game
 	) {
 		this.x = x;

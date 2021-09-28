@@ -2,14 +2,17 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Map from './map';
 
-export default class TileMap extends Map<Duck.Tilemap.Map, Duck.Tilemap.Atlas> {
+export default class TileMap extends Map<
+	Duck.Types.Tilemap.Map,
+	Duck.Types.Tilemap.Atlas
+> {
 	constructor(
 		tileW: number,
 		tileH: number,
 		rows: number,
 		cols: number,
-		map: Duck.Tilemap.Map,
-		atlas: Duck.Tilemap.Atlas,
+		map: Duck.Types.Tilemap.Map,
+		atlas: Duck.Types.Tilemap.Atlas,
 		game: Game
 	) {
 		super(tileW, tileH, rows, cols, map, atlas, game);

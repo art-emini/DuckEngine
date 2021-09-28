@@ -8,7 +8,7 @@ export default class StaticLight {
 	public y: number;
 	public r: number;
 	private color: string;
-	private alpha: Duck.Helper.AlphaRange;
+	private alpha: Duck.Types.Helper.AlphaRange;
 	private game: Game;
 
 	constructor(
@@ -16,7 +16,7 @@ export default class StaticLight {
 		y: number,
 		r: number,
 		fillColor: string,
-		alpha: Duck.Helper.AlphaRange,
+		alpha: Duck.Types.Helper.AlphaRange,
 		game: Game
 	) {
 		this.x = x;
@@ -46,7 +46,7 @@ export default class StaticLight {
 		}
 	}
 
-	public setFillColor(color: string, alpha: Duck.Helper.AlphaRange) {
+	public setFillColor(color: string, alpha: Duck.Types.Helper.AlphaRange) {
 		this.color = convertColorToRGBA(color, alpha);
 	}
 }

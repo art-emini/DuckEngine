@@ -4,8 +4,8 @@ import Game from '../game';
 
 export default class Input {
 	private game: Game;
-	private controller: Duck.Input.Controller;
-	private listeners: Duck.Input.Listener[];
+	private controller: Duck.Types.Input.Controller;
+	private listeners: Duck.Types.Input.Listener[];
 
 	constructor(game: Game) {
 		this.game = game;

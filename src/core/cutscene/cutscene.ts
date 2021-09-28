@@ -5,13 +5,13 @@ import Debug from '../debug/debug';
 import Game from '../game';
 
 export default class Cutscene {
-	private config: Duck.Cutscene.Config;
-	private instructions: Duck.Cutscene.Instructions;
+	private config: Duck.Types.Cutscene.Config;
+	private instructions: Duck.Types.Cutscene.Instructions;
 	private game: Game;
 
-	private steps: Duck.Cutscene.Step[];
-	private mainObject: Duck.GameObject;
-	private otherObjects: Duck.GameObject[];
+	private steps: Duck.Types.Cutscene.Step[];
+	private mainObject: Duck.GameObjects.GameObject;
+	private otherObjects: Duck.GameObjects.GameObject[];
 	private camera: Camera;
 	private otherCameras: Camera[];
 
@@ -19,11 +19,11 @@ export default class Cutscene {
 
 	public running: boolean;
 
-	private listeners: Duck.Cutscene.OnListener[];
+	private listeners: Duck.Types.Cutscene.OnListener[];
 
 	constructor(
-		config: Duck.Cutscene.Config,
-		instructions: Duck.Cutscene.Instructions,
+		config: Duck.Types.Cutscene.Config,
+		instructions: Duck.Types.Cutscene.Instructions,
 		game: Game
 	) {
 		this.config = config;
@@ -128,15 +128,17 @@ export default class Cutscene {
 			const step = this.steps[this.index];
 
 			if (step.type === 'DRAW' && step.affect) {
-				return (step.affect as Duck.GameObject).draw();
+				return (step.affect as Duck.GameObjects.GameObject).draw();
 			}
 
 			if (step.type === 'MOVE' && step.moveTo) {
 				if (step.moveTo.x) {
-					(step.affect as Duck.GameObject).x = step.moveTo.x;
+					(step.affect as Duck.GameObjects.GameObject).x =
+						step.moveTo.x;
 				}
 				if (step.moveTo.y) {
-					(step.affect as Duck.GameObject).y = step.moveTo.y;
+					(step.affect as Duck.GameObjects.GameObject).y =
+						step.moveTo.y;
 				}
 			}
 
@@ -197,7 +199,7 @@ export default class Cutscene {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
-	public on(type: Duck.Cutscene.OnListenerType, cb: Function) {
+	public on(type: Duck.Types.Cutscene.OnListenerType, cb: Function) {
 		this.listeners.push({
 			type: type,
 			func: cb,
@@ -207,7 +209,7 @@ export default class Cutscene {
 		}
 	}
 
-	public off(type: Duck.Cutscene.OnListenerType) {
+	public off(type: Duck.Types.Cutscene.OnListenerType) {
 		const found = this.listeners.find((l) => l.type === type);
 		if (found) {
 			this.listeners.splice(this.listeners.indexOf(found), 1);

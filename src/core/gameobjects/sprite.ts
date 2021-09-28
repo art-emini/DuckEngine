@@ -37,7 +37,7 @@ export default class Sprite extends GameObject {
 		}
 	}
 
-	public setScale(scale: Duck.Misc.Scale) {
+	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (scale.width) {
 			this.w = scale.width;
 			this.halfW = this.w / 2;

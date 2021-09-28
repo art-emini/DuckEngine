@@ -3,14 +3,14 @@ import Game from '../game';
 
 export default class Text {
 	public text: string;
-	private config: Duck.Interactive.Text.Config;
+	private config: Duck.Types.Interactive.Text.Config;
 	public x: number;
 	public y: number;
 	private game: Game;
 
 	constructor(
 		text: string,
-		config: Duck.Interactive.Text.Config,
+		config: Duck.Types.Interactive.Text.Config,
 		game: Game
 	) {
 		this.text = text;

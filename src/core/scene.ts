@@ -75,7 +75,7 @@ export default class Scene extends Basic {
 	public visible: boolean;
 	public readonly default: boolean;
 
-	public mainObject: Duck.GameObject | undefined;
+	public mainObject: Duck.GameObjects.GameObject | undefined;
 	public currentCamera: Camera | undefined;
 	public mainCamera: Camera | undefined;
 
@@ -126,9 +126,12 @@ export default class Scene extends Basic {
 			) => SpriteSheet;
 		};
 		interactive: {
-			text: (text: string, config: Duck.Interactive.Text.Config) => Text;
+			text: (
+				text: string,
+				config: Duck.Types.Interactive.Text.Config
+			) => Text;
 			button: (
-				shape: Duck.Interactive.Button.Shape,
+				shape: Duck.Types.Interactive.Button.Shape,
 				x: number,
 				y: number,
 				w: number,
@@ -138,7 +141,7 @@ export default class Scene extends Basic {
 				text: Text
 			) => Button;
 		};
-		sound: (path: string, options?: Duck.Sound.Config) => Sound;
+		sound: (path: string, options?: Duck.Types.Sound.Config) => Sound;
 		input: () => Input;
 		camera: () => Camera;
 		mainCamera: () => Camera;
@@ -148,15 +151,15 @@ export default class Scene extends Basic {
 				y: number,
 				r: number,
 				fillColor: string,
-				alpha: Duck.Helper.AlphaRange
+				alpha: Duck.Types.Helper.AlphaRange
 			) => StaticLight;
 		};
-		group: <t extends Duck.Group.StackItem>(
+		group: <t extends Duck.Types.Group.StackItem>(
 			name: string,
 			defaultValues?: t[]
 		) => Group<t>;
 		particle: (
-			shape: Duck.Collider.ShapeString,
+			shape: Duck.Types.Collider.ShapeString,
 			w: number,
 			h: number,
 			r: number,
@@ -164,39 +167,39 @@ export default class Scene extends Basic {
 		) => Particle;
 		particleEmitter: (
 			particle: Particle,
-			rangeX: Duck.ParticleEmitter.Range,
-			rangeY: Duck.ParticleEmitter.Range,
+			rangeX: Duck.Types.ParticleEmitter.Range,
+			rangeY: Duck.Types.ParticleEmitter.Range,
 			amount: number
 		) => ParticleEmitter;
 		cutscene: (
-			config: Duck.Cutscene.Config,
-			instructions: Duck.Cutscene.Instructions
+			config: Duck.Types.Cutscene.Config,
+			instructions: Duck.Types.Cutscene.Instructions
 		) => Cutscene;
 		tilemap: (
 			tileW: number,
 			tileH: number,
 			rows: number,
 			cols: number,
-			map: Duck.Tilemap.Map,
-			atlas: Duck.Tilemap.Atlas
+			map: Duck.Types.Tilemap.Map,
+			atlas: Duck.Types.Tilemap.Atlas
 		) => TileMap;
 		effect: (
-			rangeX: Duck.ParticleEmitter.Range,
-			rangeY: Duck.ParticleEmitter.Range,
+			rangeX: Duck.Types.ParticleEmitter.Range,
+			rangeY: Duck.Types.ParticleEmitter.Range,
 			particleEmitter: ParticleEmitter
 		) => Effect;
 		presetEffect: {
 			explosionEffect: (
-				rangeX: Duck.ParticleEmitter.Range,
-				rangeY: Duck.ParticleEmitter.Range,
+				rangeX: Duck.Types.ParticleEmitter.Range,
+				rangeY: Duck.Types.ParticleEmitter.Range,
 				particleAmount: number | undefined,
 				speedRange: [1, 1] | undefined,
 				maxAge: number | undefined,
 				color: string | undefined
 			) => ExplosionEffect;
 			smokeEffect: (
-				rangeX: Duck.ParticleEmitter.Range,
-				rangeY: Duck.ParticleEmitter.Range,
+				rangeX: Duck.Types.ParticleEmitter.Range,
+				rangeY: Duck.Types.ParticleEmitter.Range,
 				particleAmount: number | undefined,
 				speedRangeX: [-0.1, 0.4] | undefined,
 				speedRangeY: [-0.1, 0.4] | undefined,
@@ -213,7 +216,7 @@ export default class Scene extends Basic {
 		loader: Loader;
 		color: {
 			random: () => string;
-			randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) => string;
+			randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) => string;
 			is: {
 				hex: (str: string) => boolean;
 				hsl: (str: string) => boolean;
@@ -224,7 +227,7 @@ export default class Scene extends Basic {
 					toHsl: (r: number, g: number, b: number) => string;
 					toRgba: (
 						color: string,
-						alpha: Duck.Helper.AlphaRange
+						alpha: Duck.Types.Helper.AlphaRange
 					) => string;
 				};
 				rgba: {
@@ -232,14 +235,14 @@ export default class Scene extends Basic {
 						r: string | number,
 						g: string | number,
 						b: string | number,
-						a: Duck.Helper.AlphaRange
+						a: Duck.Types.Helper.AlphaRange
 					) => string;
 					toRgb: (rgba: string) => string;
 				};
 				hex: {
 					toRgba: (
 						hex: string,
-						alpha: Duck.Helper.AlphaRange
+						alpha: Duck.Types.Helper.AlphaRange
 					) => string;
 					toRgb: (hex: string) => string | null;
 					toHsl: (hex: string) => string;
@@ -359,11 +362,14 @@ export default class Scene extends Basic {
 				},
 			},
 			interactive: {
-				text: (text: string, config: Duck.Interactive.Text.Config) => {
+				text: (
+					text: string,
+					config: Duck.Types.Interactive.Text.Config
+				) => {
 					return new Text(text, config, this.game);
 				},
 				button: (
-					shape: Duck.Interactive.Button.Shape,
+					shape: Duck.Types.Interactive.Button.Shape,
 					x: number,
 					y: number,
 					w: number,
@@ -386,7 +392,7 @@ export default class Scene extends Basic {
 					);
 				},
 			},
-			sound: (path: string, options?: Duck.Sound.Config) => {
+			sound: (path: string, options?: Duck.Types.Sound.Config) => {
 				return new Sound(path, options);
 			},
 			input: () => {
@@ -410,7 +416,7 @@ export default class Scene extends Basic {
 					y: number,
 					r: number,
 					fillColor: string,
-					alpha: Duck.Helper.AlphaRange
+					alpha: Duck.Types.Helper.AlphaRange
 				) => {
 					return new StaticLight(
 						x,
@@ -422,14 +428,14 @@ export default class Scene extends Basic {
 					);
 				},
 			},
-			group: <t extends Duck.Group.StackItem>(
+			group: <t extends Duck.Types.Group.StackItem>(
 				name: string,
 				defaultValues?: t[]
 			) => {
 				return new Group<t>(name, this.game, defaultValues);
 			},
 			particle: (
-				shape: Duck.Collider.ShapeString,
+				shape: Duck.Types.Collider.ShapeString,
 				w: number,
 				h: number,
 				r: number,
@@ -439,8 +445,8 @@ export default class Scene extends Basic {
 			},
 			particleEmitter: (
 				particle: Particle,
-				rangeX: Duck.ParticleEmitter.Range,
-				rangeY: Duck.ParticleEmitter.Range,
+				rangeX: Duck.Types.ParticleEmitter.Range,
+				rangeY: Duck.Types.ParticleEmitter.Range,
 				amount: number
 			) => {
 				return new ParticleEmitter(
@@ -452,8 +458,8 @@ export default class Scene extends Basic {
 				);
 			},
 			cutscene: (
-				config: Duck.Cutscene.Config,
-				instructions: Duck.Cutscene.Instructions
+				config: Duck.Types.Cutscene.Config,
+				instructions: Duck.Types.Cutscene.Instructions
 			) => {
 				return new Cutscene(config, instructions, this.game);
 			},
@@ -462,8 +468,8 @@ export default class Scene extends Basic {
 				tileH: number,
 				rows: number,
 				cols: number,
-				map: Duck.Tilemap.Map,
-				atlas: Duck.Tilemap.Atlas
+				map: Duck.Types.Tilemap.Map,
+				atlas: Duck.Types.Tilemap.Atlas
 			) => {
 				return new TileMap(
 					tileW,
@@ -476,16 +482,16 @@ export default class Scene extends Basic {
 				);
 			},
 			effect: (
-				rangeX: Duck.ParticleEmitter.Range,
-				rangeY: Duck.ParticleEmitter.Range,
+				rangeX: Duck.Types.ParticleEmitter.Range,
+				rangeY: Duck.Types.ParticleEmitter.Range,
 				particleEmitter: ParticleEmitter
 			) => {
 				return new Effect(rangeX, rangeY, particleEmitter, this.game);
 			},
 			presetEffect: {
 				explosionEffect: (
-					rangeX: Duck.ParticleEmitter.Range,
-					rangeY: Duck.ParticleEmitter.Range,
+					rangeX: Duck.Types.ParticleEmitter.Range,
+					rangeY: Duck.Types.ParticleEmitter.Range,
 					particleAmount = 50,
 					speedRange = [1, 1],
 					maxAge = 3,
@@ -502,8 +508,8 @@ export default class Scene extends Basic {
 					);
 				},
 				smokeEffect: (
-					rangeX: Duck.ParticleEmitter.Range,
-					rangeY: Duck.ParticleEmitter.Range,
+					rangeX: Duck.Types.ParticleEmitter.Range,
+					rangeY: Duck.Types.ParticleEmitter.Range,
 					particleAmount = 50,
 					speedRangeX = [-0.1, 0.4],
 					speedRangeY = [-0.1, 0.4],
@@ -532,7 +538,7 @@ export default class Scene extends Basic {
 			loader: Loader,
 			color: {
 				random: randomColor,
-				randomWithAlpha: (alpha?: Duck.Helper.AlphaRange) =>
+				randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) =>
 					randomColorWithAlpha(alpha),
 				is: {
 					hex: isHex,

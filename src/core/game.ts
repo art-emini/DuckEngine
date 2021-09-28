@@ -7,10 +7,10 @@ import startup from '../helper/startup';
 import dprScale from '../helper/dprScale';
 
 export default class Game {
-	public readonly config: Duck.Game.Config;
+	public readonly config: Duck.Types.Game.Config;
 	public canvas: HTMLCanvasElement | null;
 	public ctx: CanvasRenderingContext2D | null | undefined;
-	public stack: Duck.Game.Stack;
+	public stack: Duck.Types.Game.Stack;
 
 	public animationFrame: number | undefined;
 
@@ -30,7 +30,7 @@ export default class Game {
 		remove: (scene: Scene) => void;
 	};
 
-	constructor(config: Duck.Game.Config) {
+	constructor(config: Duck.Types.Game.Config) {
 		console.log(startup);
 
 		this.config = config;
@@ -203,7 +203,7 @@ export default class Game {
 		}
 	}
 
-	public setScale(scale: Duck.Misc.Scale) {
+	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (this.canvas) {
 			if (scale.width) {
 				this.canvas.width = scale.width;

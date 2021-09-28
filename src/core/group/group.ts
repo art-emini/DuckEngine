@@ -11,12 +11,12 @@ import Text from '../interactive/text';
 import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
 
-export default class Group<t extends Duck.Group.StackItem> {
+export default class Group<t extends Duck.Types.Group.StackItem> {
 	private stack: t[];
 	private game: Game;
 	public readonly name: string;
 
-	private listeners: Duck.Group.Listener[];
+	private listeners: Duck.Types.Group.Listener[];
 
 	constructor(name: string, game: Game, defaultItems?: t[]) {
 		this.name = name;
@@ -83,7 +83,7 @@ export default class Group<t extends Duck.Group.StackItem> {
 		return this.stack.splice(index, deleteCount);
 	}
 
-	public filter(filter: Duck.Group.Filter) {
+	public filter(filter: Duck.Types.Group.Filter) {
 		switch (filter) {
 			case 'cameras':
 				return this.stack.filter((item) => item instanceof Camera);
@@ -112,14 +112,14 @@ export default class Group<t extends Duck.Group.StackItem> {
 		}
 	}
 
-	public on(type: Duck.Group.ListenerType, cb: () => unknown) {
+	public on(type: Duck.Types.Group.ListenerType, cb: () => unknown) {
 		this.listeners.push({
 			type: type,
 			func: cb,
 		});
 	}
 
-	public off(type: Duck.Group.ListenerType) {
+	public off(type: Duck.Types.Group.ListenerType) {
 		const foundListener = this.listeners.find((l) => l.type === type);
 
 		if (foundListener) {

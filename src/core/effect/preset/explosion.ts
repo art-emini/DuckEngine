@@ -9,8 +9,8 @@ export default class ExplosionEffect extends Effect {
 	private maxAge: number;
 
 	constructor(
-		rangeX: Duck.ParticleEmitter.Range,
-		rangeY: Duck.ParticleEmitter.Range,
+		rangeX: Duck.Types.ParticleEmitter.Range,
+		rangeY: Duck.Types.ParticleEmitter.Range,
 		game: Game,
 		particleAmount = 50,
 		speedRange = [1, 1],

@@ -2,10 +2,10 @@ import { Duck } from '../../index';
 import Game from '../game';
 
 export default class DuckStorage {
-	private config: Duck.Storage.Config;
+	private config: Duck.Types.Storage.Config;
 	private game: Game;
 
-	constructor(config: Duck.Storage.Config, game: Game) {
+	constructor(config: Duck.Types.Storage.Config, game: Game) {
 		this.config = config;
 		this.game = game;
 	}
@@ -28,7 +28,7 @@ export default class DuckStorage {
 		}
 	}
 
-	public load(loadType: Duck.Storage.LoadType) {
+	public load(loadType: Duck.Types.Storage.LoadType) {
 		if (loadType === 'all') {
 			const res = {
 				scenes: localStorage.getItem('duckengine-save-scenes'),

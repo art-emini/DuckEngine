@@ -15,13 +15,13 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
 export default class Collider {
-	public shape: Duck.GameObject;
-	public collidesWith: Duck.GameObject[];
+	public shape: Duck.GameObjects.GameObject;
+	public collidesWith: Duck.GameObjects.GameObject[];
 	private game: Game;
 
 	constructor(
-		shape: Duck.GameObject,
-		collidesWith: Duck.GameObject[],
+		shape: Duck.GameObjects.GameObject,
+		collidesWith: Duck.GameObjects.GameObject[],
 		game: Game
 	) {
 		this.shape = shape;
@@ -30,8 +30,8 @@ export default class Collider {
 	}
 
 	public update(
-		shape: Duck.GameObject,
-		diffCollidesWith?: Duck.GameObject[]
+		shape: Duck.GameObjects.GameObject,
+		diffCollidesWith?: Duck.GameObjects.GameObject[]
 	) {
 		this.shape = shape;
 

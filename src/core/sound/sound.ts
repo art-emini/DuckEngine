@@ -4,9 +4,9 @@ import Debug from '../debug/debug';
 export default class Sound {
 	public path: string;
 	public element: HTMLAudioElement;
-	private sprites: Duck.Sound.Sprite[];
+	private sprites: Duck.Types.Sound.Sprite[];
 
-	constructor(path: string, options?: Duck.Sound.Config) {
+	constructor(path: string, options?: Duck.Types.Sound.Config) {
 		this.path = path;
 		this.element = document.createElement('audio');
 

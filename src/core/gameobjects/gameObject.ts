@@ -7,7 +7,7 @@ import Collider from '../physics/collider';
 
 export default class GameObject {
 	public readonly id: number;
-	public readonly shape: Duck.Collider.ShapeString;
+	public readonly shape: Duck.Types.Collider.ShapeString;
 	public x: number;
 	public y: number;
 	public w: number;
@@ -15,7 +15,7 @@ export default class GameObject {
 	public r: number;
 	public fillColor: string;
 	protected game: Game;
-	private self: Duck.GameObject | undefined;
+	private self: Duck.GameObjects.GameObject | undefined;
 
 	protected halfW: number;
 	protected halfH: number;
@@ -23,17 +23,17 @@ export default class GameObject {
 	private rotAngle: number;
 
 	public collider: Collider | undefined;
-	public collidesWith: Duck.GameObject[];
+	public collidesWith: Duck.GameObjects.GameObject[];
 	public vx: number;
 	public vy: number;
 
 	// methods
 	public physics: {
-		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
+		addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider;
 	};
 
 	constructor(
-		shape: Duck.Collider.ShapeString,
+		shape: Duck.Types.Collider.ShapeString,
 		x: number,
 		y: number,
 		w: number,
@@ -65,7 +65,7 @@ export default class GameObject {
 
 		// methods
 		this.physics = {
-			addCollider: (collidesWith: Duck.GameObject[]) => {
+			addCollider: (collidesWith: Duck.Types.GameObject[]) => {
 				this.collidesWith = collidesWith;
 
 				this.collider = new Collider(
@@ -85,13 +85,13 @@ export default class GameObject {
 		}
 	}
 
-	protected init(self: Duck.GameObject) {
+	protected init(self: Duck.Types.GameObject) {
 		this.self = self;
 	}
 
 	public draw() {}
 
-	public setScale(scale: Duck.Misc.Scale | number) {
+	public setScale(scale: Duck.Types.Misc.Scale | number) {
 		if (typeof scale !== 'number') {
 			if (scale.width) {
 				this.w = scale.width;

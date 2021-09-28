@@ -31,7 +31,7 @@ class Camera {
 
 	private bounds: { x: number; y: number; w: number; h: number } | undefined;
 
-	public following: Duck.GameObject | undefined;
+	public following: Duck.GameObjects.GameObject | undefined;
 
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
@@ -194,7 +194,7 @@ class Camera {
 		this.updateViewport();
 	}
 
-	public follow(gameObject: Duck.GameObject) {
+	public follow(gameObject: Duck.GameObjects.GameObject) {
 		this.following = gameObject;
 	}
 
@@ -202,13 +202,21 @@ class Camera {
 		this.following = undefined;
 	}
 
-	public screenToWorld(x: number, y: number, obj: Duck.GameObject) {
+	public screenToWorld(
+		x: number,
+		y: number,
+		obj: Duck.GameObjects.GameObject
+	) {
 		obj.x = x / this.viewport.scale[0] + this.viewport.left;
 		obj.y = y / this.viewport.scale[1] + this.viewport.top;
 		return obj;
 	}
 
-	public worldToScreen(x: number, y: number, obj: Duck.GameObject) {
+	public worldToScreen(
+		x: number,
+		y: number,
+		obj: Duck.GameObjects.GameObject
+	) {
 		obj.x = (x - this.viewport.left) * this.viewport.scale[0];
 		obj.y = (y - this.viewport.top) * this.viewport.scale[1];
 		return obj;

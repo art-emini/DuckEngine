@@ -12,7 +12,7 @@ export default class Particle extends GameObject {
 	public age: number;
 
 	constructor(
-		shape: Duck.Collider.ShapeString,
+		shape: Duck.Types.Collider.ShapeString,
 		w: number,
 		h: number,
 		r: number,

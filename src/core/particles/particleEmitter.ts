@@ -7,22 +7,22 @@ import ParticleContainer from './particleContainer';
 
 export default class ParticleEmitter {
 	private particle: Particle;
-	public rangeX: Duck.ParticleEmitter.Range;
-	public rangeY: Duck.ParticleEmitter.Range;
+	public rangeX: Duck.Types.ParticleEmitter.Range;
+	public rangeY: Duck.Types.ParticleEmitter.Range;
 	public readonly amount: number;
 	private list: Particle[];
 	private game: Game;
 	public emitting: boolean;
 
-	private floatRangeX: Duck.ParticleEmitter.Range;
-	private floatRangeY: Duck.ParticleEmitter.Range;
+	private floatRangeX: Duck.Types.ParticleEmitter.Range;
+	private floatRangeY: Duck.Types.ParticleEmitter.Range;
 
 	private container: ParticleContainer | undefined;
 
 	constructor(
 		particle: Particle,
-		rangeX: Duck.ParticleEmitter.Range,
-		rangeY: Duck.ParticleEmitter.Range,
+		rangeX: Duck.Types.ParticleEmitter.Range,
+		rangeY: Duck.Types.ParticleEmitter.Range,
 		amount: number,
 		game: Game
 	) {
@@ -85,8 +85,8 @@ export default class ParticleEmitter {
 	}
 
 	public setRange(
-		rangeX: Duck.ParticleEmitter.Range,
-		rangeY: Duck.ParticleEmitter.Range
+		rangeX: Duck.Types.ParticleEmitter.Range,
+		rangeY: Duck.Types.ParticleEmitter.Range
 	) {
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
@@ -177,8 +177,8 @@ export default class ParticleEmitter {
 	}
 
 	public float(
-		rangeVX: Duck.ParticleEmitter.Range,
-		rangeVY: Duck.ParticleEmitter.Range
+		rangeVX: Duck.Types.ParticleEmitter.Range,
+		rangeVY: Duck.Types.ParticleEmitter.Range
 	) {
 		this.floatRangeX = rangeVX;
 		this.floatRangeY = rangeVY;
@@ -206,7 +206,7 @@ export default class ParticleEmitter {
 		y: number,
 		w: number,
 		h: number,
-		physics: Duck.ParticleContainer.Physics
+		physics: Duck.Types.ParticleContainer.Physics
 	) {
 		this.container = new ParticleContainer(x, y, w, h, physics, this.game);
 		return this.container;

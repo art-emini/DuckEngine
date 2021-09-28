@@ -9,7 +9,7 @@ import rgbToRGBA from './rgbToRGBA';
 
 export default function convertColorToRGBA(
 	color: string,
-	alpha: Duck.Helper.AlphaRange
+	alpha: Duck.Types.Helper.AlphaRange
 ) {
 	let res = '';
 

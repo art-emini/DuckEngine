@@ -6,7 +6,7 @@ import Scene from '../scene';
 import Text from './text';
 
 export default class Button {
-	public shape: Duck.Interactive.Button.Shape;
+	public shape: Duck.Types.Interactive.Button.Shape;
 	public x: number;
 	public y: number;
 	public w: number;
@@ -18,12 +18,12 @@ export default class Button {
 	private scene: Scene;
 
 	public hovering: boolean;
-	private listeners: Duck.Interactive.Button.Listener[];
+	private listeners: Duck.Types.Interactive.Button.Listener[];
 
 	private image: HTMLImageElement | undefined;
 
 	constructor(
-		shape: Duck.Interactive.Button.Shape,
+		shape: Duck.Types.Interactive.Button.Shape,
 		x: number,
 		y: number,
 		w: number,
@@ -205,8 +205,8 @@ export default class Button {
 	}
 
 	public on(
-		type: Duck.Interactive.Button.ListenerType,
-		func: Duck.Interactive.Button.ListenerFunc
+		type: Duck.Types.Interactive.Button.ListenerType,
+		func: Duck.Types.Interactive.Button.ListenerFunc
 	) {
 		this.listeners.push({
 			type,
@@ -214,7 +214,7 @@ export default class Button {
 		});
 	}
 
-	public off(type: Duck.Interactive.Button.ListenerType) {
+	public off(type: Duck.Types.Interactive.Button.ListenerType) {
 		const f = this.listeners.find(
 			(l) => l.type.toLowerCase() === type.toLowerCase()
 		);

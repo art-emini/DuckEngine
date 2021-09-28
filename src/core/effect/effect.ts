@@ -3,17 +3,17 @@ import Game from '../game';
 import ParticleEmitter from '../particles/particleEmitter';
 
 export default class Effect {
-	public rangeX: Duck.ParticleEmitter.Range;
-	public rangeY: Duck.ParticleEmitter.Range;
+	public rangeX: Duck.Types.ParticleEmitter.Range;
+	public rangeY: Duck.Types.ParticleEmitter.Range;
 	public particleEmitter: ParticleEmitter;
 	protected game: Game;
 
-	public following: Duck.GameObject | undefined;
+	public following: Duck.GameObjects.GameObject | undefined;
 	protected randomMaxOffset: number;
 
 	constructor(
-		rangeX: Duck.ParticleEmitter.Range,
-		rangeY: Duck.ParticleEmitter.Range,
+		rangeX: Duck.Types.ParticleEmitter.Range,
+		rangeY: Duck.Types.ParticleEmitter.Range,
 		particleEmitter: ParticleEmitter,
 		game: Game
 	) {
@@ -45,11 +45,11 @@ export default class Effect {
 		this.particleEmitter.draw();
 
 		if (this.following) {
-			const rangeX: Duck.ParticleEmitter.Range = [
+			const rangeX: Duck.Types.ParticleEmitter.Range = [
 				this.following.x,
 				this.following.x + this.randomMaxOffset,
 			];
-			const rangeY: Duck.ParticleEmitter.Range = [
+			const rangeY: Duck.Types.ParticleEmitter.Range = [
 				this.following.y,
 				this.following.y + this.randomMaxOffset,
 			];
@@ -59,7 +59,7 @@ export default class Effect {
 		}
 	}
 
-	public follow(object: Duck.GameObject, randomMaxOffset = 5) {
+	public follow(object: Duck.Types.GameObject, randomMaxOffset = 5) {
 		this.following = object;
 		this.randomMaxOffset = randomMaxOffset;
 	}
