@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      - run: npm ci
+      - run: npx yarn install --frozen-lockfile
       - run: echo "Linting"
-      - run: npm run lint
+      - run: npx yarn run lint
       - run: echo "Fixing"
-      - run: npm run lint:fix
+      - run: npx yarn run lint:fix
       - run: echo "Done"

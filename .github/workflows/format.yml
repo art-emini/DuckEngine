@@ -17,5 +17,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      - run: npm ci
-      - run: npm run format
+      - run: npx yarn install --frozen-lockfile
+      - run: npx yarn run format
