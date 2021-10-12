@@ -329,8 +329,10 @@ export namespace Duck {
 
 		export namespace ParticleContainer {
 			export interface Bounds {
-				x: number;
-				y: number;
+				position: {
+					x: number;
+					y: number;
+				};
 				w: number;
 				h: number;
 			}

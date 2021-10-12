@@ -258,8 +258,7 @@ export default class Scene extends Basic {
 				circle:
 					| Circle
 					| {
-							x: number;
-							y: number;
+							position: { x: number; y: number };
 							w: number;
 							h: number;
 							r: number;
@@ -267,7 +266,11 @@ export default class Scene extends Basic {
 				rect:
 					| Rect
 					| Sprite
-					| { x: number; y: number; w: number; h: number }
+					| {
+							position: { x: number; y: number };
+							w: number;
+							h: number;
+					  }
 			) => boolean;
 		};
 	};
@@ -572,8 +575,7 @@ export default class Scene extends Basic {
 					circle:
 						| Circle
 						| {
-								x: number;
-								y: number;
+								position: { x: number; y: number };
 								w: number;
 								h: number;
 								r: number;
@@ -581,7 +583,11 @@ export default class Scene extends Basic {
 					rect:
 						| Rect
 						| Sprite
-						| { x: number; y: number; w: number; h: number }
+						| {
+								position: { x: number; y: number };
+								w: number;
+								h: number;
+						  }
 				) => {
 					return circleToRectIntersect(circle, rect);
 				},

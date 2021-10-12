@@ -2,12 +2,12 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
+import Vector2 from '../math/vector2';
 
 export default class Particle extends GameObject {
 	private image: HTMLImageElement | undefined;
 
-	public floatVX: number;
-	public floatVY: number;
+	public floatVelocity: Vector2;
 
 	public age: number;
 
@@ -26,8 +26,7 @@ export default class Particle extends GameObject {
 		this.r = r;
 		this.fillColor = fillColor;
 
-		this.floatVX = 0;
-		this.floatVY = 0;
+		this.floatVelocity = Vector2.ZERO;
 
 		if (this.shape === 'sprite') {
 			this.image = new Image();
@@ -49,8 +48,8 @@ export default class Particle extends GameObject {
 				case 'circle':
 					this.game.ctx.beginPath();
 					this.game.ctx.arc(
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y,
 						this.r,
 						0,
 						2 * Math.PI,
@@ -62,7 +61,12 @@ export default class Particle extends GameObject {
 
 				case 'rect':
 					this.game.ctx.fillStyle = this.fillColor;
-					this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
+					this.game.ctx.fillRect(
+						this.position.x,
+						this.position.y,
+						this.w,
+						this.h
+					);
 					break;
 
 				case 'roundrect':
@@ -70,33 +74,36 @@ export default class Particle extends GameObject {
 					if (this.h < 2 * this.r) this.r = this.h / 2;
 					this.game.ctx.fillStyle = this.fillColor;
 					this.game.ctx.beginPath();
-					this.game.ctx.moveTo(this.x + this.r, this.y);
+					this.game.ctx.moveTo(
+						this.position.x + this.r,
+						this.position.y
+					);
 					this.game.ctx.arcTo(
-						this.x + this.w,
-						this.y,
-						this.x + this.w,
-						this.y + this.h,
+						this.position.x + this.w,
+						this.position.y,
+						this.position.x + this.w,
+						this.position.y + this.h,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x + this.w,
-						this.y + this.h,
-						this.x,
-						this.y + this.h,
+						this.position.x + this.w,
+						this.position.y + this.h,
+						this.position.x,
+						this.position.y + this.h,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x,
-						this.y + this.h,
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y + this.h,
+						this.position.x,
+						this.position.y,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x,
-						this.y,
-						this.x + this.w,
-						this.y,
+						this.position.x,
+						this.position.y,
+						this.position.x + this.w,
+						this.position.y,
 						this.r
 					);
 					this.game.ctx.closePath();
@@ -107,8 +114,8 @@ export default class Particle extends GameObject {
 					if (this.image) {
 						this.game.ctx.drawImage(
 							this.image,
-							this.x,
-							this.y,
+							this.position.x,
+							this.position.y,
 							this.w,
 							this.h
 						);
@@ -132,8 +139,8 @@ export default class Particle extends GameObject {
 
 		// float
 
-		(this.x += this.floatVX) * this.game.deltaTime;
-		(this.y += this.floatVY) * this.game.deltaTime;
+		(this.position.x += this.floatVelocity.x) * this.game.deltaTime;
+		(this.position.y += this.floatVelocity.y) * this.game.deltaTime;
 	}
 
 	public setImagePath(imagePath: string) {

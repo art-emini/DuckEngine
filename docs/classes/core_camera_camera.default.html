@@ -109,6 +109,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_camera_camera.default.html#following" class="tsd-kind-icon">following</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#game" class="tsd-kind-icon">game</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_camera_camera.default.html#isMain" class="tsd-kind-icon">is<wbr>Main</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#lerpX" class="tsd-kind-icon">lerpX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#lerpY" class="tsd-kind-icon">lerpY</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#lookAt" class="tsd-kind-icon">look<wbr>At</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#viewport" class="tsd-kind-icon">viewport</a></li>
 							</ul>
@@ -127,7 +129,6 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#applyTranslation" class="tsd-kind-icon">apply<wbr>Translation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#begin" class="tsd-kind-icon">begin</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#end" class="tsd-kind-icon">end</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#follow" class="tsd-kind-icon">follow</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#moveTo" class="tsd-kind-icon">move<wbr>To</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#resetFOV" class="tsd-kind-icon">resetFOV</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#resetZoom" class="tsd-kind-icon">reset<wbr>Zoom</a></li>
@@ -139,6 +140,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#setZoom" class="tsd-kind-icon">set<wbr>Zoom</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#setZoomSmooth" class="tsd-kind-icon">set<wbr>Zoom<wbr>Smooth</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#shake" class="tsd-kind-icon">shake</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#startFollow" class="tsd-kind-icon">start<wbr>Follow</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#stopFollow" class="tsd-kind-icon">stop<wbr>Follow</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="core_camera_camera.default.html#updateViewport" class="tsd-kind-icon">update<wbr>Viewport</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_camera_camera.default.html#worldToScreen" class="tsd-kind-icon">world<wbr>ToScreen</a></li>
@@ -159,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:36</li>
+									<li>Defined in core/camera/camera.ts:41</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -184,7 +186,7 @@
 					<div class="tsd-signature tsd-kind-icon">aspect<wbr>Ratio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:29</li>
+							<li>Defined in core/camera/camera.ts:30</li>
 						</ul>
 					</aside>
 				</section>
@@ -194,7 +196,7 @@
 					<div class="tsd-signature tsd-kind-icon">bounds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:32</li>
+							<li>Defined in core/camera/camera.ts:33</li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">CanvasRenderingContext2D</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:18</li>
+							<li>Defined in core/camera/camera.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -214,7 +216,7 @@
 					<div class="tsd-signature tsd-kind-icon">distance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:16</li>
+							<li>Defined in core/camera/camera.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -224,7 +226,7 @@
 					<div class="tsd-signature tsd-kind-icon">field<wbr>OfView<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:19</li>
+							<li>Defined in core/camera/camera.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -234,7 +236,7 @@
 					<div class="tsd-signature tsd-kind-icon">following<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:34</li>
+							<li>Defined in core/camera/camera.ts:37</li>
 						</ul>
 					</aside>
 				</section>
@@ -244,7 +246,7 @@
 					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="core_game.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:15</li>
+							<li>Defined in core/camera/camera.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -254,7 +256,27 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Main<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:30</li>
+							<li>Defined in core/camera/camera.ts:31</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="lerpX" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> lerpX</h3>
+					<div class="tsd-signature tsd-kind-icon">lerpX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/camera/camera.ts:38</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="lerpY" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> lerpY</h3>
+					<div class="tsd-signature tsd-kind-icon">lerpY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/camera/camera.ts:39</li>
 						</ul>
 					</aside>
 				</section>
@@ -264,7 +286,7 @@
 					<div class="tsd-signature tsd-kind-icon">look<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:17</li>
+							<li>Defined in core/camera/camera.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -274,7 +296,7 @@
 					<div class="tsd-signature tsd-kind-icon">viewport<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/camera/camera.ts:20</li>
+							<li>Defined in core/camera/camera.ts:21</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -317,7 +339,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:336</li>
+									<li>Defined in core/camera/camera.ts:383</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -334,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:323</li>
+									<li>Defined in core/camera/camera.ts:370</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -354,7 +376,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:109</li>
+									<li>Defined in core/camera/camera.ts:146</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -371,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:113</li>
+									<li>Defined in core/camera/camera.ts:150</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -388,7 +410,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:63</li>
+									<li>Defined in core/camera/camera.ts:68</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -405,32 +427,9 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:105</li>
+									<li>Defined in core/camera/camera.ts:142</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="follow" class="tsd-anchor"></a>
-					<h3>follow</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">follow<span class="tsd-signature-symbol">(</span>gameObject<span class="tsd-signature-symbol">: </span><a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in core/camera/camera.ts:197</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>gameObject: <a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a></h5>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -445,7 +444,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:191</li>
+									<li>Defined in core/camera/camera.ts:228</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -471,7 +470,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:265</li>
+									<li>Defined in core/camera/camera.ts:308</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -488,7 +487,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:269</li>
+									<li>Defined in core/camera/camera.ts:312</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -505,7 +504,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:205</li>
+									<li>Defined in core/camera/camera.ts:248</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -534,7 +533,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:305</li>
+									<li>Defined in core/camera/camera.ts:352</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -551,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:273</li>
+									<li>Defined in core/camera/camera.ts:316</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -563,13 +562,18 @@
 											<h5>h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 										</li>
 										<li class="tsd-parameter">
+											<h5>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+											<ul class="tsd-parameters">
+												<li class="tsd-parameter">
+													<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+												</li>
+												<li class="tsd-parameter">
+													<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+												</li>
+											</ul>
+										</li>
+										<li class="tsd-parameter">
 											<h5>w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 										</li>
 									</ul>
 								</li>
@@ -588,7 +592,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:225</li>
+									<li>Defined in core/camera/camera.ts:268</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -611,7 +615,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:229</li>
+									<li>Defined in core/camera/camera.ts:272</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -640,7 +644,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:150</li>
+									<li>Defined in core/camera/camera.ts:187</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -663,7 +667,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:155</li>
+									<li>Defined in core/camera/camera.ts:192</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -692,7 +696,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:277</li>
+									<li>Defined in core/camera/camera.ts:324</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -712,6 +716,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="startFollow" class="tsd-anchor"></a>
+					<h3>start<wbr>Follow</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Follow<span class="tsd-signature-symbol">(</span>gameObject<span class="tsd-signature-symbol">: </span><a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a>, lerpX<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, lerpY<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/camera/camera.ts:234</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gameObject: <a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a></h5>
+								</li>
+								<li>
+									<h5>lerpX: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></h5>
+								</li>
+								<li>
+									<h5>lerpY: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="stopFollow" class="tsd-anchor"></a>
 					<h3>stop<wbr>Follow</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -721,7 +754,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:201</li>
+									<li>Defined in core/camera/camera.ts:244</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -738,7 +771,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:117</li>
+									<li>Defined in core/camera/camera.ts:154</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -755,7 +788,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/camera/camera.ts:215</li>
+									<li>Defined in core/camera/camera.ts:258</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -813,6 +846,12 @@
 								<a href="core_camera_camera.default.html#isMain" class="tsd-kind-icon">is<wbr>Main</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="core_camera_camera.default.html#lerpX" class="tsd-kind-icon">lerpX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="core_camera_camera.default.html#lerpY" class="tsd-kind-icon">lerpY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="core_camera_camera.default.html#lookAt" class="tsd-kind-icon">look<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -835,9 +874,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_camera_camera.default.html#end" class="tsd-kind-icon">end</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_camera_camera.default.html#follow" class="tsd-kind-icon">follow</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_camera_camera.default.html#moveTo" class="tsd-kind-icon">move<wbr>To</a>
@@ -871,6 +907,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_camera_camera.default.html#shake" class="tsd-kind-icon">shake</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_camera_camera.default.html#startFollow" class="tsd-kind-icon">start<wbr>Follow</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_camera_camera.default.html#stopFollow" class="tsd-kind-icon">stop<wbr>Follow</a>

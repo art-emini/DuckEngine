@@ -30,8 +30,10 @@ export default class ParticleContainer {
 		this.game = game;
 
 		this.bounds = {
-			x: this.x,
-			y: this.y,
+			position: {
+				x: this.x,
+				y: this.y,
+			},
 			w: this.w,
 			h: this.h,
 		};
@@ -53,43 +55,47 @@ export default class ParticleContainer {
 
 	public handleRect(particle: Particle) {
 		const obj = {
-			x: particle.x,
-			y: particle.y,
+			position: {
+				x: particle.position.x,
+				y: particle.position.y,
+			},
 			w: particle.w,
 			h: particle.h,
 		};
 
 		if (!rectToRectIntersect(obj, this.bounds)) {
 			// top
-			if (particle.y < this.bounds.y) {
-				particle.vy = 0 + this.physics.bounciness;
-				particle.floatVY = 0 + this.physics.bounciness;
+			if (particle.position.y < this.bounds.position.y) {
+				particle.velocity.y = 0 + this.physics.bounciness;
+				particle.floatVelocity.y = 0 + this.physics.bounciness;
 			}
 
 			// left
-			if (particle.x < this.bounds.x) {
-				particle.vx = 0 + this.physics.bounciness;
-				particle.floatVX = 0 + this.physics.bounciness;
+			if (particle.position.x < this.bounds.position.x) {
+				particle.velocity.x = 0 + this.physics.bounciness;
+				particle.floatVelocity.x = 0 + this.physics.bounciness;
 			}
 
 			// bottom
-			if (particle.y + particle.h > this.bounds.h) {
-				particle.vy = 0 - this.physics.bounciness;
-				particle.floatVY = 0 - this.physics.bounciness;
+			if (particle.position.y + particle.h > this.bounds.h) {
+				particle.velocity.y = 0 - this.physics.bounciness;
+				particle.floatVelocity.y = 0 - this.physics.bounciness;
 			}
 
 			// right
-			if (particle.x + particle.w > this.bounds.w) {
-				particle.vx = 0 - this.physics.bounciness;
-				particle.floatVX = 0 - this.physics.bounciness;
+			if (particle.position.x + particle.w > this.bounds.w) {
+				particle.velocity.x = 0 - this.physics.bounciness;
+				particle.floatVelocity.x = 0 - this.physics.bounciness;
 			}
 		}
 	}
 
 	public handleCircle(particle: Particle) {
 		const obj = {
-			x: particle.x,
-			y: particle.y,
+			position: {
+				x: particle.position.x,
+				y: particle.position.y,
+			},
 			w: particle.w,
 			h: particle.h,
 			r: particle.r,
@@ -97,27 +103,27 @@ export default class ParticleContainer {
 
 		if (!circleRectCollision(obj, this.bounds)) {
 			// top
-			if (particle.y < this.bounds.y) {
-				particle.vy = 0 + this.physics.bounciness;
-				particle.floatVY = 0 + this.physics.bounciness;
+			if (particle.position.y < this.bounds.position.y) {
+				particle.velocity.y = 0 + this.physics.bounciness;
+				particle.floatVelocity.y = 0 + this.physics.bounciness;
 			}
 
 			// left
-			if (particle.x < this.bounds.x) {
-				particle.vx = 0 + this.physics.bounciness;
-				particle.floatVX = 0 + this.physics.bounciness;
+			if (particle.position.x < this.bounds.position.x) {
+				particle.velocity.x = 0 + this.physics.bounciness;
+				particle.floatVelocity.x = 0 + this.physics.bounciness;
 			}
 
 			// bottom
-			if (particle.y + particle.r > this.bounds.h) {
-				particle.vy = 0 - this.physics.bounciness;
-				particle.floatVY = 0 - this.physics.bounciness;
+			if (particle.position.y + particle.r > this.bounds.h) {
+				particle.velocity.y = 0 - this.physics.bounciness;
+				particle.floatVelocity.y = 0 - this.physics.bounciness;
 			}
 
 			// right
-			if (particle.x + particle.r > this.bounds.w) {
-				particle.vx = 0 - this.physics.bounciness;
-				particle.floatVX = 0 - this.physics.bounciness;
+			if (particle.position.x + particle.r > this.bounds.w) {
+				particle.velocity.x = 0 - this.physics.bounciness;
+				particle.floatVelocity.x = 0 - this.physics.bounciness;
 			}
 		}
 	}

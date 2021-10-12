@@ -46,12 +46,12 @@ export default class Effect {
 
 		if (this.following) {
 			const rangeX: Duck.Types.ParticleEmitter.Range = [
-				this.following.x,
-				this.following.x + this.randomMaxOffset,
+				this.following.position.x,
+				this.following.position.x + this.randomMaxOffset,
 			];
 			const rangeY: Duck.Types.ParticleEmitter.Range = [
-				this.following.y,
-				this.following.y + this.randomMaxOffset,
+				this.following.position.y,
+				this.following.position.y + this.randomMaxOffset,
 			];
 
 			this.particleEmitter.rangeX = rangeX;
