@@ -20,12 +20,9 @@ export default class GameObject {
 	protected halfW: number;
 	protected halfH: number;
 
-	private rotAngle: number;
-
 	public collider: Collider | undefined;
 	public collidesWith: Duck.GameObjects.GameObject[];
-	public vx: number;
-	public vy: number;
+	public velocity: Vector2;
 
 	// methods
 	public physics: {
@@ -55,12 +52,9 @@ export default class GameObject {
 		this.halfW = this.w / 2;
 		this.halfH = this.h / 2;
 
-		this.rotAngle = 0;
-
 		this.collider;
 		this.collidesWith = [];
-		this.vx = 0;
-		this.vy = 0;
+		this.velocity = Vector2.ZERO;
 
 		// methods
 		this.physics = {
@@ -90,6 +84,15 @@ export default class GameObject {
 
 	public draw() {}
 
+	public _update() {
+		(this.position.x += this.velocity.x) * this.game.deltaTime;
+		(this.position.y += this.velocity.y) * this.game.deltaTime;
+
+		// set to none
+		this.velocity.x = 0;
+		this.velocity.y = 0;
+	}
+
 	public setScale(scale: Duck.Types.Misc.Scale | number) {
 		if (typeof scale !== 'number') {
 			if (scale.width) {
@@ -108,14 +111,15 @@ export default class GameObject {
 
 	public setVelocity(axis: 'x' | 'y', v: number) {
 		if (axis === 'x') {
-			this.vx = v;
-			(this.position.x += this.vx) * this.game.deltaTime;
+			this.velocity.x = v;
 		}
 
 		if (axis === 'y') {
-			this.vy = v;
-			(this.position.y += this.vy) * this.game.deltaTime;
+			this.velocity.y = v;
 		}
+
+		// normalize vector
+		this.velocity.normalize();
 	}
 
 	public setFillColor(fillColor: string) {

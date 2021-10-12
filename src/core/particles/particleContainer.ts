@@ -66,26 +66,26 @@ export default class ParticleContainer {
 		if (!rectToRectIntersect(obj, this.bounds)) {
 			// top
 			if (particle.position.y < this.bounds.position.y) {
-				particle.vy = 0 + this.physics.bounciness;
-				particle.floatVY = 0 + this.physics.bounciness;
+				particle.velocity.y = 0 + this.physics.bounciness;
+				particle.floatVelocity.y = 0 + this.physics.bounciness;
 			}
 
 			// left
 			if (particle.position.x < this.bounds.position.x) {
-				particle.vx = 0 + this.physics.bounciness;
-				particle.floatVX = 0 + this.physics.bounciness;
+				particle.velocity.x = 0 + this.physics.bounciness;
+				particle.floatVelocity.x = 0 + this.physics.bounciness;
 			}
 
 			// bottom
 			if (particle.position.y + particle.h > this.bounds.h) {
-				particle.vy = 0 - this.physics.bounciness;
-				particle.floatVY = 0 - this.physics.bounciness;
+				particle.velocity.y = 0 - this.physics.bounciness;
+				particle.floatVelocity.y = 0 - this.physics.bounciness;
 			}
 
 			// right
 			if (particle.position.x + particle.w > this.bounds.w) {
-				particle.vx = 0 - this.physics.bounciness;
-				particle.floatVX = 0 - this.physics.bounciness;
+				particle.velocity.x = 0 - this.physics.bounciness;
+				particle.floatVelocity.x = 0 - this.physics.bounciness;
 			}
 		}
 	}
@@ -104,26 +104,26 @@ export default class ParticleContainer {
 		if (!circleRectCollision(obj, this.bounds)) {
 			// top
 			if (particle.position.y < this.bounds.position.y) {
-				particle.vy = 0 + this.physics.bounciness;
-				particle.floatVY = 0 + this.physics.bounciness;
+				particle.velocity.y = 0 + this.physics.bounciness;
+				particle.floatVelocity.y = 0 + this.physics.bounciness;
 			}
 
 			// left
 			if (particle.position.x < this.bounds.position.x) {
-				particle.vx = 0 + this.physics.bounciness;
-				particle.floatVX = 0 + this.physics.bounciness;
+				particle.velocity.x = 0 + this.physics.bounciness;
+				particle.floatVelocity.x = 0 + this.physics.bounciness;
 			}
 
 			// bottom
 			if (particle.position.y + particle.r > this.bounds.h) {
-				particle.vy = 0 - this.physics.bounciness;
-				particle.floatVY = 0 - this.physics.bounciness;
+				particle.velocity.y = 0 - this.physics.bounciness;
+				particle.floatVelocity.y = 0 - this.physics.bounciness;
 			}
 
 			// right
 			if (particle.position.x + particle.r > this.bounds.w) {
-				particle.vx = 0 - this.physics.bounciness;
-				particle.floatVX = 0 - this.physics.bounciness;
+				particle.velocity.x = 0 - this.physics.bounciness;
+				particle.floatVelocity.x = 0 - this.physics.bounciness;
 			}
 		}
 	}

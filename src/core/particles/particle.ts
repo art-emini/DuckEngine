@@ -2,12 +2,12 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
+import Vector2 from '../math/vector2';
 
 export default class Particle extends GameObject {
 	private image: HTMLImageElement | undefined;
 
-	public floatVX: number;
-	public floatVY: number;
+	public floatVelocity: Vector2;
 
 	public age: number;
 
@@ -26,8 +26,7 @@ export default class Particle extends GameObject {
 		this.r = r;
 		this.fillColor = fillColor;
 
-		this.floatVX = 0;
-		this.floatVY = 0;
+		this.floatVelocity = Vector2.ZERO;
 
 		if (this.shape === 'sprite') {
 			this.image = new Image();
@@ -140,8 +139,8 @@ export default class Particle extends GameObject {
 
 		// float
 
-		(this.position.x += this.floatVX) * this.game.deltaTime;
-		(this.position.y += this.floatVY) * this.game.deltaTime;
+		(this.position.x += this.floatVelocity.x) * this.game.deltaTime;
+		(this.position.y += this.floatVelocity.y) * this.game.deltaTime;
 	}
 
 	public setImagePath(imagePath: string) {
