@@ -265,7 +265,9 @@ export namespace Duck {
 				| 'CAMERA_ZOOM'
 				| 'CAMERA_FOV'
 				| 'CAMERA_MOVE'
-				| 'CAMERA_SHAKE';
+				| 'CAMERA_SHAKE'
+				| 'CAMERA_START_FOLLOW'
+				| 'CAMERA_STOP_FOLLOW';
 
 			export interface Step {
 				type: StepType;
@@ -279,6 +281,9 @@ export namespace Duck {
 				cameraIntervalMS?: number;
 				cameraTimeMS?: number;
 				sleepValue?: number;
+				cameraFollow?: GameObject;
+				cameraFollowLerpX?: number;
+				cameraFollowLerpY?: number;
 			}
 			export interface Instructions {
 				init: {
@@ -298,6 +303,8 @@ export namespace Duck {
 							x: number;
 							y: number;
 						};
+						followLerpX: number;
+						followLerpY: number;
 					};
 					otherCameraSettings?: {
 						FOV: number;
@@ -307,6 +314,8 @@ export namespace Duck {
 							x: number;
 							y: number;
 						};
+						followLerpX: number;
+						followLerpY: number;
 					}[];
 				};
 				steps: Step[];

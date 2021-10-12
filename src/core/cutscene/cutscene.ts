@@ -122,7 +122,9 @@ export default class Cutscene {
 			// follow
 			if (this.instructions.init.cameraSettings?.follow) {
 				this.camera.startFollow(
-					this.instructions.init.cameraSettings.follow
+					this.instructions.init.cameraSettings.follow,
+					this.instructions.init.cameraSettings.followLerpX,
+					this.instructions.init.cameraSettings.followLerpY
 				);
 			}
 
@@ -156,7 +158,7 @@ export default class Cutscene {
 				(step.affect as Camera).setZoom(step.cameraValue);
 			}
 
-			if (step.moveTo) {
+			if (step.moveTo && step.affect) {
 				if (
 					step.type === 'CAMERA_MOVE' &&
 					step.moveTo.x &&
@@ -181,6 +183,44 @@ export default class Cutscene {
 					step.cameraTimeMS,
 					step.cameraValue
 				);
+			}
+
+			if (
+				step.type === 'CAMERA_START_FOLLOW' &&
+				step.cameraFollow &&
+				step.affect
+			) {
+				// no lerp
+				if (!step.cameraFollowLerpX && !step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(step.cameraFollow);
+				}
+				// only lerpX
+				if (step.cameraFollowLerpX && !step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						step.cameraFollowLerpX
+					);
+				}
+				// only lerpY
+				if (!step.cameraFollowLerpX && step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						1,
+						step.cameraFollowLerpY
+					);
+				}
+				// lerp both
+				if (step.cameraFollowLerpX && step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						step.cameraFollowLerpX,
+						step.cameraFollowLerpY
+					);
+				}
+			}
+
+			if (step.type === 'CAMERA_STOP_FOLLOW' && step.affect) {
+				(step.affect as Camera).stopFollow();
 			}
 		}
 	}
