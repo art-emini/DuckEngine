@@ -4,12 +4,12 @@ import { Duck } from '../../index';
 import randomInt from '../math/randomInt';
 import Game from '../game';
 import Collider from '../physics/collider';
+import Vector2 from '../math/vector2';
 
 export default class GameObject {
 	public readonly id: number;
 	public readonly shape: Duck.Types.Collider.ShapeString;
-	public x: number;
-	public y: number;
+	public position: Vector2;
 	public w: number;
 	public h: number;
 	public r: number;
@@ -44,8 +44,7 @@ export default class GameObject {
 	) {
 		this.id = randomInt(0, 100000);
 		this.shape = shape;
-		this.x = x;
-		this.y = y;
+		this.position = new Vector2(x, y);
 		this.w = w;
 		this.h = h;
 		this.r = r;
@@ -110,12 +109,12 @@ export default class GameObject {
 	public setVelocity(axis: 'x' | 'y', v: number) {
 		if (axis === 'x') {
 			this.vx = v;
-			(this.x += this.vx) * this.game.deltaTime;
+			(this.position.x += this.vx) * this.game.deltaTime;
 		}
 
 		if (axis === 'y') {
 			this.vy = v;
-			(this.y += this.vy) * this.game.deltaTime;
+			(this.position.y += this.vy) * this.game.deltaTime;
 		}
 	}
 
@@ -126,34 +125,34 @@ export default class GameObject {
 	// position methods
 
 	public getTop() {
-		return this.y;
+		return this.position.y;
 	}
 
 	public getBottom() {
-		return this.y + this.h;
+		return this.position.y + this.h;
 	}
 
 	public getLeft() {
-		return this.x;
+		return this.position.x;
 	}
 
 	public getRight() {
-		return this.x + this.w;
+		return this.position.x + this.w;
 	}
 
 	public getCenterY() {
 		if (this.shape === 'circle') {
-			return this.y + this.r;
+			return this.position.y + this.r;
 		} else {
-			return this.y + this.h / 2;
+			return this.position.y + this.h / 2;
 		}
 	}
 
 	public getCenterX() {
 		if (this.shape === 'circle') {
-			return this.x + this.r;
+			return this.position.x + this.r;
 		} else {
-			return this.x + this.w / 2;
+			return this.position.x + this.w / 2;
 		}
 	}
 }

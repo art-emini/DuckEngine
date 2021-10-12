@@ -3,11 +3,21 @@ import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
 
 export default function circleRectCollision(
-	circle: Circle | { x: number; y: number; w: number; h: number; r: number },
-	rect: Rect | { x: number; y: number; w: number; h: number } | Sprite
+	circle:
+		| Circle
+		| {
+				position: { x: number; y: number };
+				w: number;
+				h: number;
+				r: number;
+		  },
+	rect:
+		| Rect
+		| { position: { x: number; y: number }; w: number; h: number }
+		| Sprite
 ) {
-	let dx = Math.abs(circle.x - (rect.x + rect.w / 2));
-	let dy = Math.abs(circle.y - (rect.y + rect.h / 2));
+	let dx = Math.abs(circle.position.x - (rect.position.x + rect.w / 2));
+	let dy = Math.abs(circle.position.y - (rect.position.y + rect.h / 2));
 
 	if (dx > circle.r + rect.w / 2) {
 		return false;

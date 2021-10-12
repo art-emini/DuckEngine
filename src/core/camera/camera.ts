@@ -10,6 +10,7 @@ import rectToRectIntersect from '../physics/rectToRectIntersect';
 import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
 import randomInt from '../math/randomInt';
+import lerp from '../math/lerp';
 
 class Camera {
 	private game: Game;
@@ -29,9 +30,13 @@ class Camera {
 	private aspectRatio: number | undefined;
 	public readonly isMain: boolean;
 
-	private bounds: { x: number; y: number; w: number; h: number } | undefined;
+	private bounds:
+		| { position: { x: number; y: number }; w: number; h: number }
+		| undefined;
 
 	public following: Duck.GameObjects.GameObject | undefined;
+	private lerpX = 1;
+	private lerpY = 1;
 
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
@@ -72,12 +77,28 @@ class Camera {
 					if (
 						rectToRectIntersect(this.following as Rect, this.bounds)
 					) {
-						this.lookAt[0] = this.following.getCenterX();
-						this.lookAt[1] = this.following.getCenterY();
+						this.lookAt[0] = lerp(
+							this.lookAt[0],
+							this.following.getCenterX(),
+							this.lerpX
+						);
+						this.lookAt[1] = lerp(
+							this.lookAt[1],
+							this.following.getCenterY(),
+							this.lerpY
+						);
 					}
 				} else {
-					this.lookAt[0] = this.following.getCenterX();
-					this.lookAt[1] = this.following.getCenterY();
+					this.lookAt[0] = lerp(
+						this.lookAt[0],
+						this.following.getCenterX(),
+						this.lerpX
+					);
+					this.lookAt[1] = lerp(
+						this.lookAt[1],
+						this.following.getCenterY(),
+						this.lerpY
+					);
 				}
 			}
 
@@ -89,12 +110,28 @@ class Camera {
 							this.bounds
 						)
 					) {
-						this.lookAt[0] = this.following.getCenterX();
-						this.lookAt[1] = this.following.getCenterY();
+						this.lookAt[0] = lerp(
+							this.lookAt[0],
+							this.following.getCenterX(),
+							this.lerpX
+						);
+						this.lookAt[1] = lerp(
+							this.lookAt[1],
+							this.following.getCenterY(),
+							this.lerpY
+						);
 					}
 				} else {
-					this.lookAt[0] = this.following.getCenterX();
-					this.lookAt[1] = this.following.getCenterY();
+					this.lookAt[0] = lerp(
+						this.lookAt[0],
+						this.following.getCenterX(),
+						this.lerpX
+					);
+					this.lookAt[1] = lerp(
+						this.lookAt[1],
+						this.following.getCenterY(),
+						this.lerpY
+					);
 				}
 			}
 
@@ -194,8 +231,14 @@ class Camera {
 		this.updateViewport();
 	}
 
-	public follow(gameObject: Duck.GameObjects.GameObject) {
+	public startFollow(
+		gameObject: Duck.GameObjects.GameObject,
+		lerpX = 1,
+		lerpY = 1
+	) {
 		this.following = gameObject;
+		this.lerpX = lerpX;
+		this.lerpY = lerpY;
 	}
 
 	public stopFollow() {
@@ -207,8 +250,8 @@ class Camera {
 		y: number,
 		obj: Duck.GameObjects.GameObject
 	) {
-		obj.x = x / this.viewport.scale[0] + this.viewport.left;
-		obj.y = y / this.viewport.scale[1] + this.viewport.top;
+		obj.position.x = x / this.viewport.scale[0] + this.viewport.left;
+		obj.position.y = y / this.viewport.scale[1] + this.viewport.top;
 		return obj;
 	}
 
@@ -217,8 +260,8 @@ class Camera {
 		y: number,
 		obj: Duck.GameObjects.GameObject
 	) {
-		obj.x = (x - this.viewport.left) * this.viewport.scale[0];
-		obj.y = (y - this.viewport.top) * this.viewport.scale[1];
+		obj.position.x = (x - this.viewport.left) * this.viewport.scale[0];
+		obj.position.y = (y - this.viewport.top) * this.viewport.scale[1];
 		return obj;
 	}
 
@@ -270,7 +313,11 @@ class Camera {
 		this.distance = 1000.0;
 	}
 
-	public setBounds(bounds: { x: number; y: number; w: number; h: number }) {
+	public setBounds(bounds: {
+		position: { x: number; y: number };
+		w: number;
+		h: number;
+	}) {
 		this.bounds = bounds;
 	}
 

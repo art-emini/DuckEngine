@@ -151,8 +151,8 @@ export default class SpriteSheet extends GameObject {
 				(this.currentRow - 1) * this.frameHeight, // source y
 				this.frameWidth, // source width
 				this.frameHeight, // source height
-				this.x, // target x
-				this.y, // target y
+				this.position.x, // target x
+				this.position.y, // target y
 				this.frameWidth, // target width
 				this.frameHeight // target height
 			);

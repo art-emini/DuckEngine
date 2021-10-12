@@ -17,7 +17,12 @@ export default class Rect extends GameObject {
 	public draw() {
 		if (this.game.ctx) {
 			this.game.ctx.fillStyle = this.fillColor;
-			this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
+			this.game.ctx.fillRect(
+				this.position.x,
+				this.position.y,
+				this.w,
+				this.h
+			);
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
