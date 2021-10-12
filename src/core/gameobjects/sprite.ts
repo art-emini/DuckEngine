@@ -29,7 +29,13 @@ export default class Sprite extends GameObject {
 
 	public draw() {
 		if (this.game.ctx) {
-			this.game.ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
+			this.game.ctx.drawImage(
+				this.image,
+				this.position.x,
+				this.position.y,
+				this.w,
+				this.h
+			);
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
@@ -65,8 +71,8 @@ export default class Sprite extends GameObject {
 		if (this.game.ctx) {
 			if (filter === 'lightness') {
 				const id = this.game.ctx.getImageData(
-					this.x,
-					this.y,
+					this.position.x,
+					this.position.y,
 					this.w,
 					this.h
 				);
@@ -86,7 +92,11 @@ export default class Sprite extends GameObject {
 					data[i + 2] = brightenedBlue;
 				}
 
-				this.game.ctx.putImageData(id, this.x, this.y);
+				this.game.ctx.putImageData(
+					id,
+					this.position.x,
+					this.position.y
+				);
 			}
 		}
 	}

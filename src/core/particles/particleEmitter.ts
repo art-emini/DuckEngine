@@ -60,11 +60,19 @@ export default class ParticleEmitter {
 			this.game
 		);
 
-		obj.x = randomInt(this.rangeX[0], this.rangeX[1]);
-		obj.y = randomInt(this.rangeY[0], this.rangeY[1]);
+		obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);
+		obj.position.y = randomInt(this.rangeY[0], this.rangeY[1]);
 
-		obj.floatVX = randomFloat(this.floatRangeX[0], this.floatRangeX[1], 1);
-		obj.floatVY = randomFloat(this.floatRangeY[0], this.floatRangeY[1], 1);
+		obj.floatVelocity.x = randomFloat(
+			this.floatRangeX[0],
+			this.floatRangeX[1],
+			1
+		);
+		obj.floatVelocity.y = randomFloat(
+			this.floatRangeY[0],
+			this.floatRangeY[1],
+			1
+		);
 
 		this.list.push(obj);
 	}
@@ -112,11 +120,11 @@ export default class ParticleEmitter {
 
 	public offload(offloadY: number, offloadX?: number) {
 		this.list.forEach((particle, index) => {
-			if (particle.y < offloadY) {
+			if (particle.position.y < offloadY) {
 				this.list.splice(index, 1);
 			}
 			if (offloadX) {
-				if (particle.x > offloadX) {
+				if (particle.position.x > offloadX) {
 					this.list.splice(index, 1);
 				}
 			}
@@ -184,8 +192,8 @@ export default class ParticleEmitter {
 		this.floatRangeY = rangeVY;
 
 		this.list.forEach((particle) => {
-			particle.floatVX = randomFloat(rangeVX[0], rangeVX[1], 1);
-			particle.floatVY = randomFloat(rangeVY[0], rangeVY[1], 1);
+			particle.floatVelocity.x = randomFloat(rangeVX[0], rangeVX[1], 1);
+			particle.floatVelocity.y = randomFloat(rangeVY[0], rangeVY[1], 1);
 		});
 	}
 

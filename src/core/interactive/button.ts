@@ -65,8 +65,16 @@ export default class Button {
 
 				if (
 					rectToRectIntersect(
-						{ x: this.x, y: this.y, w: this.w, h: this.h },
-						{ x: mousePos.x, y: mousePos.y, w: 1, h: 1 }
+						{
+							position: { x: this.x, y: this.y },
+							w: this.w,
+							h: this.h,
+						},
+						{
+							position: { x: mousePos.x, y: mousePos.y },
+							w: 1,
+							h: 1,
+						}
 					) &&
 					this.scene.visible
 				) {
@@ -95,8 +103,16 @@ export default class Button {
 
 				if (
 					rectToRectIntersect(
-						{ x: this.x, y: this.y, w: this.w, h: this.h },
-						{ x: mousePos.x, y: mousePos.y, w: 1, h: 1 }
+						{
+							position: { x: this.x, y: this.y },
+							w: this.w,
+							h: this.h,
+						},
+						{
+							position: { x: mousePos.x, y: mousePos.y },
+							w: 1,
+							h: 1,
+						}
 					) &&
 					this.scene.visible
 				) {

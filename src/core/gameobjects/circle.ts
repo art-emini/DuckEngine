@@ -17,7 +17,14 @@ export default class Circle extends GameObject {
 	public draw() {
 		if (this.game.ctx) {
 			this.game.ctx.beginPath();
-			this.game.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+			this.game.ctx.arc(
+				this.position.x,
+				this.position.y,
+				this.r,
+				0,
+				2 * Math.PI,
+				false
+			);
 			this.game.ctx.fillStyle = this.fillColor;
 			this.game.ctx.fill();
 		} else {

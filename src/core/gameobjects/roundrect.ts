@@ -22,33 +22,33 @@ export default class RoundRect extends GameObject {
 			if (this.h < 2 * this.r) this.r = this.h / 2;
 			this.game.ctx.fillStyle = this.fillColor;
 			this.game.ctx.beginPath();
-			this.game.ctx.moveTo(this.x + this.r, this.y);
+			this.game.ctx.moveTo(this.position.x + this.r, this.position.y);
 			this.game.ctx.arcTo(
-				this.x + this.w,
-				this.y,
-				this.x + this.w,
-				this.y + this.h,
+				this.position.x + this.w,
+				this.position.y,
+				this.position.x + this.w,
+				this.position.y + this.h,
 				this.r
 			);
 			this.game.ctx.arcTo(
-				this.x + this.w,
-				this.y + this.h,
-				this.x,
-				this.y + this.h,
+				this.position.x + this.w,
+				this.position.y + this.h,
+				this.position.x,
+				this.position.y + this.h,
 				this.r
 			);
 			this.game.ctx.arcTo(
-				this.x,
-				this.y + this.h,
-				this.x,
-				this.y,
+				this.position.x,
+				this.position.y + this.h,
+				this.position.x,
+				this.position.y,
 				this.r
 			);
 			this.game.ctx.arcTo(
-				this.x,
-				this.y,
-				this.x + this.w,
-				this.y,
+				this.position.x,
+				this.position.y,
+				this.position.x + this.w,
+				this.position.y,
 				this.r
 			);
 			this.game.ctx.closePath();

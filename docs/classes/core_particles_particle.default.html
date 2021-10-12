@@ -110,8 +110,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#collider" class="tsd-kind-icon">collider</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#collidesWith" class="tsd-kind-icon">collides<wbr>With</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#fillColor" class="tsd-kind-icon">fill<wbr>Color</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particle.default.html#floatVX" class="tsd-kind-icon">floatVX</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particle.default.html#floatVY" class="tsd-kind-icon">floatVY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particle.default.html#floatVelocity" class="tsd-kind-icon">float<wbr>Velocity</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_particles_particle.default.html#game" class="tsd-kind-icon">game</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#h" class="tsd-kind-icon">h</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_particles_particle.default.html#halfH" class="tsd-kind-icon">halfH</a></li>
@@ -119,18 +118,17 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particle.default.html#image" class="tsd-kind-icon">image</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#physics" class="tsd-kind-icon">physics</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#position" class="tsd-kind-icon">position</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#r" class="tsd-kind-icon">r</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#shape" class="tsd-kind-icon">shape</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#vx" class="tsd-kind-icon">vx</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#vy" class="tsd-kind-icon">vy</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#velocity" class="tsd-kind-icon">velocity</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#w" class="tsd-kind-icon">w</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#x" class="tsd-kind-icon">x</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#y" class="tsd-kind-icon">y</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#_update" class="tsd-kind-icon">_update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="core_particles_particle.default.html#draw" class="tsd-kind-icon">draw</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#getBottom" class="tsd-kind-icon">get<wbr>Bottom</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_particles_particle.default.html#getCenterX" class="tsd-kind-icon">get<wbr>CenterX</a></li>
@@ -209,7 +207,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collider">collider</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:25</li>
+							<li>Defined in core/gameobjects/gameObject.ts:23</li>
 						</ul>
 					</aside>
 				</section>
@@ -220,7 +218,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collidesWith">collidesWith</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:26</li>
+							<li>Defined in core/gameobjects/gameObject.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -236,19 +234,9 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="floatVX" class="tsd-anchor"></a>
-					<h3>floatVX</h3>
-					<div class="tsd-signature tsd-kind-icon">floatVX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in core/particles/particle.ts:9</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="floatVY" class="tsd-anchor"></a>
-					<h3>floatVY</h3>
-					<div class="tsd-signature tsd-kind-icon">floatVY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="floatVelocity" class="tsd-anchor"></a>
+					<h3>float<wbr>Velocity</h3>
+					<div class="tsd-signature tsd-kind-icon">float<wbr>Velocity<span class="tsd-signature-symbol">:</span> <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in core/particles/particle.ts:10</li>
@@ -306,7 +294,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#id">id</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:9</li>
+							<li>Defined in core/gameobjects/gameObject.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -316,7 +304,7 @@
 					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLImageElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particle.ts:7</li>
+							<li>Defined in core/particles/particle.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -327,7 +315,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#physics">physics</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:31</li>
+							<li>Defined in core/gameobjects/gameObject.ts:28</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -342,7 +330,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:32</li>
+												<li>Defined in core/gameobjects/gameObject.ts:29</li>
 											</ul>
 										</aside>
 										<h4 class="tsd-parameters-title">Parameters</h4>
@@ -356,6 +344,17 @@
 							</ul>        </li>
 						</ul>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="position" class="tsd-anchor"></a>
+					<h3>position</h3>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#position">position</a></p>
+						<ul>
+							<li>Defined in core/gameobjects/gameObject.ts:12</li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="r" class="tsd-anchor"></a>
@@ -375,29 +374,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:10</li>
+							<li>Defined in core/gameobjects/gameObject.ts:11</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="vx" class="tsd-anchor"></a>
-					<h3>vx</h3>
-					<div class="tsd-signature tsd-kind-icon">vx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="velocity" class="tsd-anchor"></a>
+					<h3>velocity</h3>
+					<div class="tsd-signature tsd-kind-icon">velocity<span class="tsd-signature-symbol">:</span> <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#vx">vx</a></p>
+						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#velocity">velocity</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:27</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="vy" class="tsd-anchor"></a>
-					<h3>vy</h3>
-					<div class="tsd-signature tsd-kind-icon">vy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#vy">vy</a></p>
-						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:28</li>
+							<li>Defined in core/gameobjects/gameObject.ts:25</li>
 						</ul>
 					</aside>
 				</section>
@@ -412,31 +400,27 @@
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
-					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#x">x</a></p>
-						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:11</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="y" class="tsd-anchor"></a>
-					<h3>y</h3>
-					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#y">y</a></p>
-						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:12</li>
-						</ul>
-					</aside>
-				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="_update" class="tsd-anchor"></a>
+					<h3>_update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">_update<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_update">_update</a></p>
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:87</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="draw" class="tsd-anchor"></a>
 					<h3>draw</h3>
@@ -448,7 +432,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#draw">draw</a></p>
 								<ul>
-									<li>Defined in core/particles/particle.ts:46</li>
+									<li>Defined in core/particles/particle.ts:45</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -466,7 +450,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getBottom">getBottom</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:132</li>
+									<li>Defined in core/gameobjects/gameObject.ts:135</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -484,7 +468,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterX">getCenterX</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:152</li>
+									<li>Defined in core/gameobjects/gameObject.ts:155</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -502,7 +486,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterY">getCenterY</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:144</li>
+									<li>Defined in core/gameobjects/gameObject.ts:147</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -520,7 +504,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getLeft">getLeft</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:136</li>
+									<li>Defined in core/gameobjects/gameObject.ts:139</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -538,7 +522,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getRight">getRight</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:140</li>
+									<li>Defined in core/gameobjects/gameObject.ts:143</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -556,7 +540,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getTop">getTop</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:128</li>
+									<li>Defined in core/gameobjects/gameObject.ts:131</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -574,7 +558,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#init">init</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:88</li>
+									<li>Defined in core/gameobjects/gameObject.ts:81</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -598,7 +582,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setFillColor">setFillColor</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:122</li>
+									<li>Defined in core/gameobjects/gameObject.ts:125</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -621,7 +605,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particle.ts:139</li>
+									<li>Defined in core/particles/particle.ts:146</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -645,7 +629,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setScale">setScale</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:94</li>
+									<li>Defined in core/gameobjects/gameObject.ts:96</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -669,7 +653,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setVelocity">setVelocity</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:110</li>
+									<li>Defined in core/gameobjects/gameObject.ts:112</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -712,10 +696,7 @@
 								<a href="core_particles_particle.default.html#fillColor" class="tsd-kind-icon">fill<wbr>Color</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_particles_particle.default.html#floatVX" class="tsd-kind-icon">floatVX</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_particles_particle.default.html#floatVY" class="tsd-kind-icon">floatVY</a>
+								<a href="core_particles_particle.default.html#floatVelocity" class="tsd-kind-icon">float<wbr>Velocity</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="core_particles_particle.default.html#game" class="tsd-kind-icon">game</a>
@@ -739,25 +720,22 @@
 								<a href="core_particles_particle.default.html#physics" class="tsd-kind-icon">physics</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_particles_particle.default.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_particles_particle.default.html#r" class="tsd-kind-icon">r</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_particles_particle.default.html#shape" class="tsd-kind-icon">shape</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_particles_particle.default.html#vx" class="tsd-kind-icon">vx</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_particles_particle.default.html#vy" class="tsd-kind-icon">vy</a>
+								<a href="core_particles_particle.default.html#velocity" class="tsd-kind-icon">velocity</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_particles_particle.default.html#w" class="tsd-kind-icon">w</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_particles_particle.default.html#x" class="tsd-kind-icon">x</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="core_particles_particle.default.html#y" class="tsd-kind-icon">y</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_particles_particle.default.html#_update" class="tsd-kind-icon">_update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="core_particles_particle.default.html#draw" class="tsd-kind-icon">draw</a>

@@ -46,12 +46,14 @@ export default class Cutscene {
 	}
 
 	private init() {
-		this.mainObject.x = this.instructions.init.mainObjectPos.x;
-		this.mainObject.y = this.instructions.init.mainObjectPos.y;
+		this.mainObject.position.x = this.instructions.init.mainObjectPos.x;
+		this.mainObject.position.y = this.instructions.init.mainObjectPos.y;
 
 		this.otherObjects.forEach((otherObject, index) => {
-			otherObject.x = this.instructions.init.otherObjectPos[index].x;
-			otherObject.y = this.instructions.init.otherObjectPos[index].y;
+			otherObject.position.x =
+				this.instructions.init.otherObjectPos[index].x;
+			otherObject.position.y =
+				this.instructions.init.otherObjectPos[index].y;
 		});
 	}
 
@@ -119,7 +121,7 @@ export default class Cutscene {
 
 			// follow
 			if (this.instructions.init.cameraSettings?.follow) {
-				this.camera.follow(
+				this.camera.startFollow(
 					this.instructions.init.cameraSettings.follow
 				);
 			}
@@ -133,11 +135,11 @@ export default class Cutscene {
 
 			if (step.type === 'MOVE' && step.moveTo) {
 				if (step.moveTo.x) {
-					(step.affect as Duck.GameObjects.GameObject).x =
+					(step.affect as Duck.GameObjects.GameObject).position.x =
 						step.moveTo.x;
 				}
 				if (step.moveTo.y) {
-					(step.affect as Duck.GameObjects.GameObject).y =
+					(step.affect as Duck.GameObjects.GameObject).position.y =
 						step.moveTo.y;
 				}
 			}

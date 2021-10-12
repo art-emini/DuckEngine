@@ -63,11 +63,11 @@ export default class Collider {
 	}
 
 	private collideRectangle(rect: Rect) {
-		const rectCX = rect.x + rect.w * 0.5;
-		const rectCY = rect.y + rect.h * 0.5;
+		const rectCX = rect.position.x + rect.w * 0.5;
+		const rectCY = rect.position.y + rect.h * 0.5;
 
-		const thisCX = this.shape.x + this.shape.w * 0.5;
-		const thisCY = this.shape.y + this.shape.h * 0.5;
+		const thisCX = this.shape.position.x + this.shape.w * 0.5;
+		const thisCY = this.shape.position.y + this.shape.h * 0.5;
 
 		const dx = rectCX - thisCX; // x difference between centers
 		const dy = rectCY - thisCY; // y difference between centers
@@ -81,24 +81,24 @@ export default class Collider {
           point is in, we have to account for the scale of the this rectangle.
           To do that, we divide dx and dy by it's width and height respectively. */
 		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
-			if (dx < 0) this.shape.x = rect.x + rect.w;
+			if (dx < 0) this.shape.position.x = rect.position.x + rect.w;
 			// left
-			else this.shape.x = rect.x - rect.w; // right
+			else this.shape.position.x = rect.position.x - rect.w; // right
 		} else {
-			if (dy < 0) this.shape.y = rect.y + rect.h;
+			if (dy < 0) this.shape.position.y = rect.position.y + rect.h;
 			// top
-			else this.shape.y = rect.y - rect.h; // bottom
+			else this.shape.position.y = rect.position.y - rect.h; // bottom
 		}
 
 		return true;
 	}
 
 	private collideSprite(sprite: Sprite) {
-		const rectCX = sprite.x + sprite.w * 0.5;
-		const rectCY = sprite.y + sprite.h * 0.5;
+		const rectCX = sprite.position.x + sprite.w * 0.5;
+		const rectCY = sprite.position.y + sprite.h * 0.5;
 
-		const thisCX = this.shape.x + this.shape.w * 0.5;
-		const thisCY = this.shape.y + this.shape.h * 0.5;
+		const thisCX = this.shape.position.x + this.shape.w * 0.5;
+		const thisCY = this.shape.position.y + this.shape.h * 0.5;
 
 		const dx = rectCX - thisCX; // x difference between centers
 		const dy = rectCY - thisCY; // y difference between centers
@@ -112,13 +112,13 @@ export default class Collider {
           point is in, we have to account for the scale of the this rectangle.
           To do that, we divide dx and dy by it's width and height respectively. */
 		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
-			if (dx < 0) this.shape.x = sprite.x + sprite.w;
+			if (dx < 0) this.shape.position.x = sprite.position.x + sprite.w;
 			// left
-			else this.shape.x = sprite.x - this.shape.w; // right
+			else this.shape.position.x = sprite.position.x - this.shape.w; // right
 		} else {
-			if (dy < 0) this.shape.y = sprite.y + sprite.h;
+			if (dy < 0) this.shape.position.y = sprite.position.y + sprite.h;
 			// top
-			else this.shape.y = sprite.y - this.shape.h; // bottom
+			else this.shape.position.y = sprite.position.y - this.shape.h; // bottom
 		}
 
 		return true;
@@ -126,8 +126,8 @@ export default class Collider {
 
 	private collideCircle(circle2: Circle) {
 		/* first we get the x and y distance between the two circles. */
-		const distance_x = this.shape.x - circle2.x;
-		const distance_y = this.shape.y - circle2.y;
+		const distance_x = this.shape.position.x - circle2.position.x;
+		const distance_y = this.shape.position.y - circle2.position.y;
 		/* Then we get the sum of their radii. */
 		const radii_sum = (this.shape as Circle).r + circle2.r;
 
@@ -144,15 +144,15 @@ export default class Collider {
 	}
 
 	private resolveCircle(c2: Circle) {
-		const distance_x = this.shape.x - c2.x;
-		const distance_y = this.shape.y - c2.y;
+		const distance_x = this.shape.position.x - c2.position.x;
+		const distance_y = this.shape.position.y - c2.position.y;
 		const radii_sum = (this.shape as Circle).r + c2.r;
 		const length =
 			Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
 		const unit_x = distance_x / length;
 		const unit_y = distance_y / length;
 
-		this.shape.x = c2.x + (radii_sum + 1) * unit_x;
-		this.shape.y = c2.y + (radii_sum + 1) * unit_y;
+		this.shape.position.x = c2.position.x + (radii_sum + 1) * unit_x;
+		this.shape.position.y = c2.position.y + (radii_sum + 1) * unit_y;
 	}
 }
