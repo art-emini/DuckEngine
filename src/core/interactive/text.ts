@@ -1,18 +1,20 @@
 import { Duck } from '../../index';
 import Game from '../game';
+import GameObject from '../gameobjects/gameObject';
 
-export default class Text {
+export default class Text extends GameObject {
 	public text: string;
 	private config: Duck.Types.Interactive.Text.Config;
 	public x: number;
 	public y: number;
-	private game: Game;
+	public game: Game;
 
 	constructor(
 		text: string,
 		config: Duck.Types.Interactive.Text.Config,
 		game: Game
 	) {
+		super('rect', config.x, config.y, 0, 0, 0, text, game);
 		this.text = text;
 		this.config = config;
 		this.x = this.config.x;

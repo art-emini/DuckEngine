@@ -8,8 +8,8 @@ import dprScale from '../helper/dprScale';
 
 export default class Game {
 	public readonly config: Duck.Types.Game.Config;
-	public canvas: HTMLCanvasElement | null;
-	public ctx: CanvasRenderingContext2D | null | undefined;
+	public canvas: HTMLCanvasElement;
+	public ctx: CanvasRenderingContext2D;
 	public stack: Duck.Types.Game.Stack;
 
 	public animationFrame: number | undefined;
@@ -34,25 +34,13 @@ export default class Game {
 		console.log(startup);
 
 		this.config = config;
-		this.canvas = this.config.canvas;
-		this.ctx = this.canvas?.getContext('2d');
+
+		this.canvas = this.config.canvas || Duck.AutoCanvas().canvas;
+		this.ctx = this.canvas.getContext('2d') || Duck.AutoCanvas().ctx;
 
 		this.deltaTime = 0;
 		this.oldTime = 0;
 		this.now = 0;
-
-		// auto
-		if (!this.canvas || !this.ctx) {
-			// check if canvas exists on document
-			if (document.querySelector('canvas')) {
-				this.canvas = document.querySelector('canvas')!;
-				this.ctx = this.canvas.getContext('2d')!;
-			} else {
-				this.canvas = document.createElement('canvas')!;
-				document.body.appendChild(this.canvas);
-				this.ctx = this.canvas.getContext('2d')!;
-			}
-		}
 
 		// set scale
 		if (this.config.scale) {
@@ -180,9 +168,14 @@ export default class Game {
 
 			if (scene.visible) {
 				scene.update(this.deltaTime);
+				scene.__tick();
+
 				// displayList
-				scene.displayList.forEach((renderableObject) => {
-					renderableObject._draw();
+				const depthSorted = scene.displayList.depthSort();
+				depthSorted.forEach((renderableObject) => {
+					if (renderableObject.visible) {
+						renderableObject._draw();
+					}
 				});
 			}
 

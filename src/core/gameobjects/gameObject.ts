@@ -5,6 +5,7 @@ import randomInt from '../math/randomInt';
 import Game from '../game';
 import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
+import clamp from '../math/clamp';
 
 export default class GameObject {
 	public readonly id: number;
@@ -17,6 +18,9 @@ export default class GameObject {
 	protected game: Game;
 	private self: Duck.GameObjects.GameObject | undefined;
 
+	public visible: boolean;
+	public zIndex: number;
+
 	protected halfW: number;
 	protected halfH: number;
 
@@ -24,9 +28,17 @@ export default class GameObject {
 	public collidesWith: Duck.GameObjects.GameObject[];
 	public velocity: Vector2;
 
+	public bounds: {
+		x: number;
+		y: number;
+		w: number;
+		h: number;
+	};
+
 	// methods
 	public physics: {
 		addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider;
+		setBounds: (x: number, y: number, w: number, h: number) => void;
 	};
 
 	constructor(
@@ -49,12 +61,23 @@ export default class GameObject {
 		this.self;
 		this.game = game;
 
+		this.visible = true;
+		this.zIndex = 2;
+
 		this.halfW = this.w / 2;
 		this.halfH = this.h / 2;
 
 		this.collider;
 		this.collidesWith = [];
+
 		this.velocity = Vector2.ZERO;
+
+		this.bounds = {
+			x: -1000000,
+			y: -1000000,
+			w: 1000000,
+			h: 1000000,
+		};
 
 		// methods
 		this.physics = {
@@ -70,6 +93,12 @@ export default class GameObject {
 
 				return this.collider;
 			},
+			setBounds: (x: number, y: number, w: number, h: number) => {
+				this.bounds.x = x;
+				this.bounds.y = y;
+				this.bounds.w = w;
+				this.bounds.h = h;
+			},
 		};
 
 		// fix
@@ -84,9 +113,17 @@ export default class GameObject {
 
 	public _draw() {}
 
+	/**
+	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
+	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
+	 */
 	public _update() {
 		(this.position.x += this.velocity.x) * this.game.deltaTime;
 		(this.position.y += this.velocity.y) * this.game.deltaTime;
+
+		// clamp to bounds
+		this.position.x = clamp(this.position.x, this.bounds.x, this.bounds.w);
+		this.position.y = clamp(this.position.y, this.bounds.y, this.bounds.h);
 
 		// set to none
 		this.velocity.x = 0;

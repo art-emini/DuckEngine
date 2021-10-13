@@ -2,34 +2,35 @@
 import DuckEngine, { Duck } from '../../dist';
 
 export default class MainScene extends DuckEngine.Scene {
-	public myRect: Duck.GameObject;
-	public myCircle: Duck.GameObject;
-	public gameObjects: Duck.Class.Group<Duck.GameObject>;
+	public myRect: Duck.GameObjects.GameObject;
+	public myCircle: Duck.GameObjects.GameObject;
+	public gameObjects: Duck.Group<Duck.GameObjects.GameObject>;
 
-	public myCamera: Duck.Class.Camera;
+	public myCamera: Duck.Camera;
 
-	public myParticle: Duck.Class.Particle;
-	public myParticleEmitter: Duck.Class.ParticleEmitter;
+	public myParticle: Duck.Particle;
+	public myParticleEmitter: Duck.ParticleEmitter;
 
-	public myInput: Duck.Class.Input;
+	public myInput: Duck.Input;
 	private mySpeed = 1;
 
-	constructor(game: Duck.Class.Game) {
+	constructor(game: Duck.Game) {
 		super('main', game);
 
 		// gameobjects
 		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#fff');
 		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#fff');
 
-		this.gameObjects = this.add.group<Duck.GameObject>('gameObjects', [
-			this.myRect,
-			this.myCircle,
-		]);
+		this.gameObjects = this.add.group<Duck.GameObjects.GameObject>(
+			'gameObjects',
+			[this.myRect, this.myCircle]
+		);
 
 		// camera
 		this.myCamera = this.add.mainCamera();
 		this.myCamera.setFOV(1.1);
-		this.myCamera.setFOVSmooth(50, 0.1, Math.PI / 4); // Math.PI / 4 is default FOV
+		this.myCamera.setFOVSmooth(50, 0.1, this.myCamera.defaultFOV);
+		this.myCamera.startFollow(this.myRect, 0.1, 0.1);
 
 		// particles
 		this.myParticle = this.add.particle(
@@ -69,12 +70,6 @@ export default class MainScene extends DuckEngine.Scene {
 		});
 	}
 
-	public render() {
-		this.gameObjects.each((gameobject) => {
-			gameobject.draw();
-		});
-	}
-
 	public update() {
 		if (this.myInput.inputs.w) {
 			this.myRect.setVelocity('y', -this.mySpeed);
@@ -93,8 +88,5 @@ export default class MainScene extends DuckEngine.Scene {
 		this.myParticleEmitter.offload(-100, 600);
 		this.myParticleEmitter.offloadMaxAge(10);
 		this.myParticleEmitter.offloadMaxAmount(100);
-
-		// camera
-		this.myCamera.follow(this.myRect);
 	}
 }

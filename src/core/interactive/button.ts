@@ -1,11 +1,12 @@
 import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
+import GameObject from '../gameobjects/gameObject';
 import rectToRectIntersect from '../physics/rectToRectIntersect';
 import Scene from '../scene';
 import Text from './text';
 
-export default class Button {
+export default class Button extends GameObject {
 	public shape: Duck.Types.Interactive.Button.Shape;
 	public x: number;
 	public y: number;
@@ -14,7 +15,7 @@ export default class Button {
 	public r: number;
 	public fillColor: string;
 	public text: Text;
-	private game: Game;
+	public game: Game;
 	private scene: Scene;
 
 	public hovering: boolean;
@@ -34,6 +35,7 @@ export default class Button {
 		game: Game,
 		scene: Scene
 	) {
+		super(shape, x, y, w, h, r, fillColor, game);
 		this.shape = shape;
 		this.x = x;
 		this.y = y;

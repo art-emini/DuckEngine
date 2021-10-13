@@ -103,6 +103,18 @@
 								<a href="core_gameobjects_spritesheet.default.html" class="tsd-signature-type">default</a>
 							</li>
 							<li>
+								<a href="core_interactive_button.default.html" class="tsd-signature-type">default</a>
+							</li>
+							<li>
+								<a href="core_interactive_text.default.html" class="tsd-signature-type">default</a>
+							</li>
+							<li>
+								<a href="core_lights_staticLight.default.html" class="tsd-signature-type">default</a>
+							</li>
+							<li>
+								<a href="core_misc_canvasModulate.default.html" class="tsd-signature-type">default</a>
+							</li>
+							<li>
 								<a href="core_particles_particle.default.html" class="tsd-signature-type">default</a>
 							</li>
 						</ul>
@@ -121,11 +133,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#bounds" class="tsd-kind-icon">bounds</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#collider" class="tsd-kind-icon">collider</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#collidesWith" class="tsd-kind-icon">collides<wbr>With</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#fillColor" class="tsd-kind-icon">fill<wbr>Color</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core_gameobjects_gameObject.default.html#game" class="tsd-kind-icon">game</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#h" class="tsd-kind-icon">h</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#h-1" class="tsd-kind-icon">h</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core_gameobjects_gameObject.default.html#halfH" class="tsd-kind-icon">halfH</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core_gameobjects_gameObject.default.html#halfW" class="tsd-kind-icon">halfW</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#id" class="tsd-kind-icon">id</a></li>
@@ -135,7 +148,9 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_gameobjects_gameObject.default.html#self" class="tsd-kind-icon">self</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#shape" class="tsd-kind-icon">shape</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#velocity" class="tsd-kind-icon">velocity</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#w" class="tsd-kind-icon">w</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#visible" class="tsd-kind-icon">visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#w-1" class="tsd-kind-icon">w</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_gameobjects_gameObject.default.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -170,7 +185,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:32</li>
+									<li>Defined in core/gameobjects/gameObject.ts:44</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -208,12 +223,39 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="bounds" class="tsd-anchor"></a>
+					<h3>bounds</h3>
+					<div class="tsd-signature tsd-kind-icon">bounds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/gameobjects/gameObject.ts:31</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="collider" class="tsd-anchor"></a>
 					<h3>collider</h3>
 					<div class="tsd-signature tsd-kind-icon">collider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_physics_collider.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:23</li>
+							<li>Defined in core/gameobjects/gameObject.ts:27</li>
 						</ul>
 					</aside>
 				</section>
@@ -223,7 +265,7 @@
 					<div class="tsd-signature tsd-kind-icon">collides<wbr>With<span class="tsd-signature-symbol">:</span> <a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:24</li>
+							<li>Defined in core/gameobjects/gameObject.ts:28</li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +275,7 @@
 					<div class="tsd-signature tsd-kind-icon">fill<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:16</li>
+							<li>Defined in core/gameobjects/gameObject.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -243,17 +285,17 @@
 					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="core_game.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:17</li>
+							<li>Defined in core/gameobjects/gameObject.ts:18</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="h" class="tsd-anchor"></a>
+					<a name="h-1" class="tsd-anchor"></a>
 					<h3>h</h3>
 					<div class="tsd-signature tsd-kind-icon">h<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:14</li>
+							<li>Defined in core/gameobjects/gameObject.ts:15</li>
 						</ul>
 					</aside>
 				</section>
@@ -263,7 +305,7 @@
 					<div class="tsd-signature tsd-kind-icon">halfH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:21</li>
+							<li>Defined in core/gameobjects/gameObject.ts:25</li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +315,7 @@
 					<div class="tsd-signature tsd-kind-icon">halfW<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:20</li>
+							<li>Defined in core/gameobjects/gameObject.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +325,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:10</li>
+							<li>Defined in core/gameobjects/gameObject.ts:11</li>
 						</ul>
 					</aside>
 				</section>
@@ -293,7 +335,7 @@
 					<div class="tsd-signature tsd-kind-icon">physics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:28</li>
+							<li>Defined in core/gameobjects/gameObject.ts:39</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -308,7 +350,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:29</li>
+												<li>Defined in core/gameobjects/gameObject.ts:40</li>
 											</ul>
 										</aside>
 										<h4 class="tsd-parameters-title">Parameters</h4>
@@ -320,6 +362,36 @@
 										<h4 class="tsd-returns-title">Returns <a href="core_physics_collider.default.html" class="tsd-signature-type">default</a></h4>
 									</li>
 							</ul>        </li>
+							<li class="tsd-parameter">
+								<h5>set<wbr>Bounds<span class="tsd-signature-symbol">: </span>function</h5>
+								<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon">set<wbr>Bounds<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<aside class="tsd-sources">
+											<ul>
+												<li>Defined in core/gameobjects/gameObject.ts:41</li>
+											</ul>
+										</aside>
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>x: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>y: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>w: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>h: <span class="tsd-signature-type">number</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+							</ul>        </li>
 						</ul>
 					</div>
 				</section>
@@ -329,7 +401,7 @@
 					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:12</li>
+							<li>Defined in core/gameobjects/gameObject.ts:13</li>
 						</ul>
 					</aside>
 				</section>
@@ -339,7 +411,7 @@
 					<div class="tsd-signature tsd-kind-icon">r<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:15</li>
+							<li>Defined in core/gameobjects/gameObject.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -349,7 +421,7 @@
 					<div class="tsd-signature tsd-kind-icon">self<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:18</li>
+							<li>Defined in core/gameobjects/gameObject.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -359,7 +431,7 @@
 					<div class="tsd-signature tsd-kind-icon">shape<span class="tsd-signature-symbol">:</span> <a href="../modules/index.Duck.Types.Collider.html#ShapeString" class="tsd-signature-type">ShapeString</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:11</li>
+							<li>Defined in core/gameobjects/gameObject.ts:12</li>
 						</ul>
 					</aside>
 				</section>
@@ -369,17 +441,37 @@
 					<div class="tsd-signature tsd-kind-icon">velocity<span class="tsd-signature-symbol">:</span> <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:25</li>
+							<li>Defined in core/gameobjects/gameObject.ts:29</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="w" class="tsd-anchor"></a>
+					<a name="visible" class="tsd-anchor"></a>
+					<h3>visible</h3>
+					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/gameobjects/gameObject.ts:21</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="w-1" class="tsd-anchor"></a>
 					<h3>w</h3>
 					<div class="tsd-signature tsd-kind-icon">w<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:13</li>
+							<li>Defined in core/gameobjects/gameObject.ts:14</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="zIndex" class="tsd-anchor"></a>
+					<h3>z<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">z<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/gameobjects/gameObject.ts:22</li>
 						</ul>
 					</aside>
 				</section>
@@ -396,7 +488,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:85</li>
+									<li>Defined in core/gameobjects/gameObject.ts:114</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -413,9 +505,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:87</li>
+									<li>Defined in core/gameobjects/gameObject.ts:120</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Updates the gameobject&#39;s position by the velocity. Sets velocity to 0 on every tick.
+										DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -430,7 +528,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:135</li>
+									<li>Defined in core/gameobjects/gameObject.ts:172</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -447,7 +545,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:155</li>
+									<li>Defined in core/gameobjects/gameObject.ts:192</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -464,7 +562,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:147</li>
+									<li>Defined in core/gameobjects/gameObject.ts:184</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -481,7 +579,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:139</li>
+									<li>Defined in core/gameobjects/gameObject.ts:176</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -498,7 +596,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:143</li>
+									<li>Defined in core/gameobjects/gameObject.ts:180</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -515,7 +613,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:131</li>
+									<li>Defined in core/gameobjects/gameObject.ts:168</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -532,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:81</li>
+									<li>Defined in core/gameobjects/gameObject.ts:110</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -555,7 +653,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:125</li>
+									<li>Defined in core/gameobjects/gameObject.ts:162</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -578,7 +676,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:96</li>
+									<li>Defined in core/gameobjects/gameObject.ts:133</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -601,7 +699,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:112</li>
+									<li>Defined in core/gameobjects/gameObject.ts:149</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -632,6 +730,9 @@
 								<a href="core_gameobjects_gameObject.default.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_gameobjects_gameObject.default.html#bounds" class="tsd-kind-icon">bounds</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_gameobjects_gameObject.default.html#collider" class="tsd-kind-icon">collider</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -644,7 +745,7 @@
 								<a href="core_gameobjects_gameObject.default.html#game" class="tsd-kind-icon">game</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_gameobjects_gameObject.default.html#h" class="tsd-kind-icon">h</a>
+								<a href="core_gameobjects_gameObject.default.html#h-1" class="tsd-kind-icon">h</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="core_gameobjects_gameObject.default.html#halfH" class="tsd-kind-icon">halfH</a>
@@ -674,7 +775,13 @@
 								<a href="core_gameobjects_gameObject.default.html#velocity" class="tsd-kind-icon">velocity</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_gameobjects_gameObject.default.html#w" class="tsd-kind-icon">w</a>
+								<a href="core_gameobjects_gameObject.default.html#visible" class="tsd-kind-icon">visible</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_gameobjects_gameObject.default.html#w-1" class="tsd-kind-icon">w</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_gameobjects_gameObject.default.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_gameobjects_gameObject.default.html#_draw" class="tsd-kind-icon">_draw</a>

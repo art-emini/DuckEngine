@@ -8,17 +8,35 @@ Only the previous two versions' changelogs will show.
    1. Removed props x, y and changed to position Vector2
    2. Removed props vx, vy and changed to velocity Vector2
    3. Renamed draw method to _draw which is public but shouldn't be used
-2. Particles
+   4. Added zIndex and visible properties
+2. Map
+   1. Added id, zIndex, and visible properties
+3. Particles
    1. Removed props floatVX, floatVY and changed to floatVelocity Vector2
-3. Core
+4. Core
    1. Removed render method of scene
    2. Added displayList property
    3. Game loop uses displayList to render renderable objects
-4. Scene
+   4. Added id, zIndex, and visible properties to all renderable objects
+5. Game
+   1. Improved Auto canvas
+6. Scene
    1. Removed render method
    2. Added preload method
-5. Misc
-   1. Rewritten types, moved all types into Duck.Types and all classes into Duck
+   3. Added misc.canvasModulate to add
+7. Interactive
+   1. Changed Button and Text to extend GameObject
+8. StaticLight
+   1. Now extends GameObject
+   2. Renamed setFillColor to setFillColorAlpha
+9. Effect
+   1. Added id, zIndex, and visible properties
+10. New GameObjects
+    1. Added gameobject class canvasModulate
+11. Misc
+    1. Rewritten types, moved all types into Duck.Types and all classes into Duck
+    2. Added renderableObject type which is any class that has a _draw method
+    3. Canvas and context types is never undefined
 
 ## 1.2.0
 

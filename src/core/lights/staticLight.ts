@@ -2,14 +2,18 @@ import { Duck } from '../../index';
 import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
+import GameObject from '../gameobjects/gameObject';
 
-export default class StaticLight {
+export default class StaticLight extends GameObject {
 	public x: number;
 	public y: number;
 	public r: number;
 	private color: string;
 	private alpha: Duck.Types.Helper.AlphaRange;
-	private game: Game;
+	public game: Game;
+
+	public visible: boolean;
+	public zIndex: number;
 
 	constructor(
 		x: number,
@@ -19,11 +23,15 @@ export default class StaticLight {
 		alpha: Duck.Types.Helper.AlphaRange,
 		game: Game
 	) {
+		super('circle', x, y, 0, 0, r, fillColor, game);
 		this.x = x;
 		this.y = y;
 		this.r = r;
 		this.alpha = alpha;
 		this.game = game;
+
+		this.visible = true;
+		this.zIndex = 2;
 
 		this.color = fillColor;
 
@@ -46,7 +54,10 @@ export default class StaticLight {
 		}
 	}
 
-	public setFillColor(color: string, alpha: Duck.Types.Helper.AlphaRange) {
+	public setFillColorAlpha(
+		color: string,
+		alpha: Duck.Types.Helper.AlphaRange
+	) {
 		this.color = convertColorToRGBA(color, alpha);
 	}
 }

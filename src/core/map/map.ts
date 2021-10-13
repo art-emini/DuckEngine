@@ -3,6 +3,7 @@
 /* This class is extended by all map classes for code reusability */
 
 import Game from '../game';
+import randomInt from '../math/randomInt';
 
 export default class Map<
 	map extends number[][],
@@ -10,13 +11,17 @@ export default class Map<
 		[key: number]: HTMLImageElement | string;
 	}
 > {
+	public readonly id: number;
 	protected tileW: number;
 	protected tileH: number;
 	protected rows: number;
 	protected cols: number;
 	protected map: map;
 	protected atlas: atlas;
-	protected game: Game;
+	public game: Game;
+
+	public visible: boolean;
+	public zIndex: number;
 
 	constructor(
 		tileW: number,
@@ -27,6 +32,7 @@ export default class Map<
 		atlas: atlas,
 		game: Game
 	) {
+		this.id = randomInt(0, 100000);
 		this.tileW = tileW;
 		this.tileH = tileH;
 		this.rows = rows;
@@ -34,6 +40,9 @@ export default class Map<
 		this.map = map;
 		this.atlas = atlas;
 		this.game = game;
+
+		this.visible = true;
+		this.zIndex = 2;
 	}
 
 	public _draw() {}

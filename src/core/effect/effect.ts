@@ -1,12 +1,17 @@
 import { Duck } from '../../index';
 import Game from '../game';
+import randomInt from '../math/randomInt';
 import ParticleEmitter from '../particles/particleEmitter';
 
 export default class Effect {
+	public readonly id: number;
 	public rangeX: Duck.Types.ParticleEmitter.Range;
 	public rangeY: Duck.Types.ParticleEmitter.Range;
 	public particleEmitter: ParticleEmitter;
-	protected game: Game;
+	public game: Game;
+
+	public visible: boolean;
+	public zIndex: number;
 
 	public following: Duck.GameObjects.GameObject | undefined;
 	protected randomMaxOffset: number;
@@ -17,10 +22,14 @@ export default class Effect {
 		particleEmitter: ParticleEmitter,
 		game: Game
 	) {
+		this.id = randomInt(0, 100000);
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
 		this.particleEmitter = particleEmitter;
 		this.game = game;
+
+		this.visible = true;
+		this.zIndex = 2;
 
 		this.particleEmitter.rangeX = rangeX;
 		this.particleEmitter.rangeY = rangeY;

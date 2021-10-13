@@ -34,6 +34,31 @@ import SmokeEffectClass from './core/effect/preset/smoke';
 
 // spec
 export namespace Duck {
+	export const AutoCanvas = () => {
+		let canvas: HTMLCanvasElement = document.querySelector(
+			'canvas'
+		) as HTMLCanvasElement;
+
+		let ctx: CanvasRenderingContext2D = canvas.getContext(
+			'2d'
+		) as CanvasRenderingContext2D;
+
+		// check if canvas exists on document
+		if (document.querySelector('canvas')) {
+			canvas = document.querySelector('canvas') as HTMLCanvasElement;
+			ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+		} else {
+			canvas = document.createElement('canvas') as HTMLCanvasElement;
+			document.body.appendChild(canvas);
+			ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+		}
+
+		return {
+			canvas,
+			ctx,
+		};
+	};
+
 	export type Scene = SceneClass;
 	export type Game = GameClass;
 

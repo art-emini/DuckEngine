@@ -81,7 +81,7 @@ export default class ParticleEmitter {
 		this.list.push(obj);
 
 		// add to display list
-		this.scene.displayList.push(obj);
+		this.scene.displayList.add(obj);
 	}
 
 	public emit() {
@@ -126,7 +126,7 @@ export default class ParticleEmitter {
 
 		// remove from display list
 		(
-			this.scene.displayList.filter(
+			this.scene.displayList.list.filter(
 				(renderableObject) => renderableObject instanceof Particle
 			) as Particle[]
 		).pop();
@@ -145,7 +145,7 @@ export default class ParticleEmitter {
 		});
 
 		// remove from displayList
-		this.scene.displayList.forEach((renderableObject, index) => {
+		this.scene.displayList.each((renderableObject, index) => {
 			if (renderableObject instanceof Particle) {
 				if (renderableObject.position.y < offloadY) {
 					this.scene.displayList.splice(index, 1);
@@ -167,7 +167,7 @@ export default class ParticleEmitter {
 		});
 
 		// remove from displayList
-		this.scene.displayList.forEach((renderableObject, index) => {
+		this.scene.displayList.each((renderableObject, index) => {
 			if (renderableObject instanceof Particle) {
 				if (renderableObject.age >= ageInSeconds) {
 					this.scene.displayList.splice(index, 1);

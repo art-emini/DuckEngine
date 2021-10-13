@@ -68,6 +68,9 @@ import Text from './interactive/text';
 import Effect from './effect/effect';
 import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
+import DisplayList from './models/displayList';
+import GameObject from './gameobjects/gameObject';
+import CanvasModulate from './misc/canvasModulate';
 
 export default class Scene extends Basic {
 	public readonly key: string;
@@ -81,7 +84,7 @@ export default class Scene extends Basic {
 
 	public cameras: Camera[];
 
-	public displayList: Duck.Types.Renderable[];
+	public displayList: DisplayList;
 
 	// methods
 
@@ -126,6 +129,15 @@ export default class Scene extends Basic {
 				currentRow: number,
 				currentCol: number
 			) => SpriteSheet;
+		};
+		misc: {
+			canvasModulate: (
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				fillColor: string
+			) => CanvasModulate;
 		};
 		interactive: {
 			text: (
@@ -299,7 +311,7 @@ export default class Scene extends Basic {
 		this.mainCamera;
 		this.cameras = [];
 
-		this.displayList = [];
+		this.displayList = new DisplayList();
 
 		// push to stack
 		this.game.stack.scenes.push(this);
@@ -315,7 +327,7 @@ export default class Scene extends Basic {
 					imgpath: string
 				) => {
 					const sprite = new Sprite(x, y, w, h, imgpath, this.game);
-					this.displayList.push(sprite);
+					this.displayList.add(sprite);
 					return sprite;
 				},
 				rect: (
@@ -326,7 +338,7 @@ export default class Scene extends Basic {
 					fillColor: string
 				) => {
 					const rect = new Rect(x, y, w, h, fillColor, this.game);
-					this.displayList.push(rect);
+					this.displayList.add(rect);
 					return rect;
 				},
 				circle: (
@@ -336,7 +348,7 @@ export default class Scene extends Basic {
 					fillColor: string
 				) => {
 					const circle = new Circle(x, y, r, fillColor, this.game);
-					this.displayList.push(circle);
+					this.displayList.add(circle);
 					return circle;
 				},
 				roundRect: (
@@ -356,7 +368,7 @@ export default class Scene extends Basic {
 						fillColor,
 						this.game
 					);
-					this.displayList.push(roundRect);
+					this.displayList.add(roundRect);
 					return roundRect;
 				},
 				spriteSheet: (
@@ -382,8 +394,28 @@ export default class Scene extends Basic {
 						currentCol,
 						this.game
 					);
-					this.displayList.push(spriteSheet);
+					this.displayList.add(spriteSheet);
 					return spriteSheet;
+				},
+			},
+			misc: {
+				canvasModulate: (
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					fillColor: string
+				) => {
+					const myCanvasModulate = new CanvasModulate(
+						x,
+						y,
+						w,
+						h,
+						fillColor,
+						this.game
+					);
+					this.displayList.add(myCanvasModulate);
+					return myCanvasModulate;
 				},
 			},
 			interactive: {
@@ -392,7 +424,7 @@ export default class Scene extends Basic {
 					config: Duck.Types.Interactive.Text.Config
 				) => {
 					const myText = new Text(text, config, this.game);
-					this.displayList.push(myText);
+					this.displayList.add(myText);
 					return myText;
 				},
 				button: (
@@ -417,7 +449,7 @@ export default class Scene extends Basic {
 						this.game,
 						this
 					);
-					this.displayList.push(myButton);
+					this.displayList.add(myButton);
 					return myButton;
 				},
 			},
@@ -455,7 +487,7 @@ export default class Scene extends Basic {
 						alpha,
 						this.game
 					);
-					this.displayList.push(myStaticLight);
+					this.displayList.add(myStaticLight);
 					return myStaticLight;
 				},
 			},
@@ -480,7 +512,7 @@ export default class Scene extends Basic {
 					fillColor,
 					this.game
 				);
-				this.displayList.push(myParticle);
+				this.displayList.add(myParticle);
 				return myParticle;
 			},
 			particleEmitter: (
@@ -521,7 +553,7 @@ export default class Scene extends Basic {
 					atlas,
 					this.game
 				);
-				this.displayList.push(myTileMap);
+				this.displayList.add(myTileMap);
 				return myTileMap;
 			},
 			effect: (
@@ -535,7 +567,7 @@ export default class Scene extends Basic {
 					particleEmitter,
 					this.game
 				);
-				this.displayList.push(myEffect);
+				this.displayList.add(myEffect);
 				return myEffect;
 			},
 			presetEffect: {
@@ -557,7 +589,7 @@ export default class Scene extends Basic {
 						color,
 						this
 					);
-					this.displayList.push(myExplosionEffect);
+					this.displayList.add(myExplosionEffect);
 					return myExplosionEffect;
 				},
 				smokeEffect: (
@@ -582,7 +614,7 @@ export default class Scene extends Basic {
 						interval,
 						this
 					);
-					this.displayList.push(mySmokeEffect);
+					this.displayList.add(mySmokeEffect);
 					return mySmokeEffect;
 				},
 			},
@@ -646,6 +678,18 @@ export default class Scene extends Basic {
 				},
 			},
 		};
+	}
+
+	/**
+	 * Calls all visible gameobjects' _update method
+	 */
+	public __tick() {
+		const visibleObjects = this.displayList.visibilityFilter(true);
+		visibleObjects.forEach((r) => {
+			if (r instanceof GameObject) {
+				r._update();
+			}
+		});
 	}
 
 	public switchCamera(camera: Camera) {

@@ -7,7 +7,7 @@ import DuckEngine from '../../dist';
 import MainScene from './myScene';
 
 const game = new DuckEngine.Game({
-	canvas: null,
+	canvas: null, // null -> grabs canvas element from document if exists, if doesn't, it creates a canvas and appends it to the body
 	defaultScene: 'main',
 	background: '#fff',
 });
