@@ -81,6 +81,8 @@ export default class Scene extends Basic {
 
 	public cameras: Camera[];
 
+	public displayList: Duck.Types.Renderable[];
+
 	// methods
 
 	public add: {
@@ -297,6 +299,8 @@ export default class Scene extends Basic {
 		this.mainCamera;
 		this.cameras = [];
 
+		this.displayList = [];
+
 		// push to stack
 		this.game.stack.scenes.push(this);
 
@@ -310,7 +314,9 @@ export default class Scene extends Basic {
 					h: number,
 					imgpath: string
 				) => {
-					return new Sprite(x, y, w, h, imgpath, this.game);
+					const sprite = new Sprite(x, y, w, h, imgpath, this.game);
+					this.displayList.push(sprite);
+					return sprite;
 				},
 				rect: (
 					x: number,
@@ -319,7 +325,9 @@ export default class Scene extends Basic {
 					h: number,
 					fillColor: string
 				) => {
-					return new Rect(x, y, w, h, fillColor, this.game);
+					const rect = new Rect(x, y, w, h, fillColor, this.game);
+					this.displayList.push(rect);
+					return rect;
 				},
 				circle: (
 					x: number,
@@ -327,7 +335,9 @@ export default class Scene extends Basic {
 					r: number,
 					fillColor: string
 				) => {
-					return new Circle(x, y, r, fillColor, this.game);
+					const circle = new Circle(x, y, r, fillColor, this.game);
+					this.displayList.push(circle);
+					return circle;
 				},
 				roundRect: (
 					x: number,
@@ -337,7 +347,17 @@ export default class Scene extends Basic {
 					r: number,
 					fillColor: string
 				) => {
-					return new RoundRect(x, y, w, h, r, fillColor, this.game);
+					const roundRect = new RoundRect(
+						x,
+						y,
+						w,
+						h,
+						r,
+						fillColor,
+						this.game
+					);
+					this.displayList.push(roundRect);
+					return roundRect;
 				},
 				spriteSheet: (
 					x: number,
@@ -350,7 +370,7 @@ export default class Scene extends Basic {
 					currentRow: number,
 					currentCol: number
 				) => {
-					return new SpriteSheet(
+					const spriteSheet = new SpriteSheet(
 						x,
 						y,
 						imagePath,
@@ -362,6 +382,8 @@ export default class Scene extends Basic {
 						currentCol,
 						this.game
 					);
+					this.displayList.push(spriteSheet);
+					return spriteSheet;
 				},
 			},
 			interactive: {
@@ -369,7 +391,9 @@ export default class Scene extends Basic {
 					text: string,
 					config: Duck.Types.Interactive.Text.Config
 				) => {
-					return new Text(text, config, this.game);
+					const myText = new Text(text, config, this.game);
+					this.displayList.push(myText);
+					return myText;
 				},
 				button: (
 					shape: Duck.Types.Interactive.Button.Shape,
@@ -381,7 +405,7 @@ export default class Scene extends Basic {
 					fillColor: string,
 					text: Text
 				) => {
-					return new Button(
+					const myButton = new Button(
 						shape,
 						x,
 						y,
@@ -393,6 +417,8 @@ export default class Scene extends Basic {
 						this.game,
 						this
 					);
+					this.displayList.push(myButton);
+					return myButton;
 				},
 			},
 			sound: (path: string, options?: Duck.Types.Sound.Config) => {
@@ -421,7 +447,7 @@ export default class Scene extends Basic {
 					fillColor: string,
 					alpha: Duck.Types.Helper.AlphaRange
 				) => {
-					return new StaticLight(
+					const myStaticLight = new StaticLight(
 						x,
 						y,
 						r,
@@ -429,6 +455,8 @@ export default class Scene extends Basic {
 						alpha,
 						this.game
 					);
+					this.displayList.push(myStaticLight);
+					return myStaticLight;
 				},
 			},
 			group: <t extends Duck.Types.Group.StackItem>(
@@ -444,7 +472,16 @@ export default class Scene extends Basic {
 				r: number,
 				fillColor: string
 			) => {
-				return new Particle(shape, w, h, r, fillColor, this.game);
+				const myParticle = new Particle(
+					shape,
+					w,
+					h,
+					r,
+					fillColor,
+					this.game
+				);
+				this.displayList.push(myParticle);
+				return myParticle;
 			},
 			particleEmitter: (
 				particle: Particle,
@@ -457,7 +494,8 @@ export default class Scene extends Basic {
 					rangeX,
 					rangeY,
 					amount,
-					this.game
+					this.game,
+					this
 				);
 			},
 			cutscene: (
@@ -474,7 +512,7 @@ export default class Scene extends Basic {
 				map: Duck.Types.Tilemap.Map,
 				atlas: Duck.Types.Tilemap.Atlas
 			) => {
-				return new TileMap(
+				const myTileMap = new TileMap(
 					tileW,
 					tileH,
 					rows,
@@ -483,13 +521,22 @@ export default class Scene extends Basic {
 					atlas,
 					this.game
 				);
+				this.displayList.push(myTileMap);
+				return myTileMap;
 			},
 			effect: (
 				rangeX: Duck.Types.ParticleEmitter.Range,
 				rangeY: Duck.Types.ParticleEmitter.Range,
 				particleEmitter: ParticleEmitter
 			) => {
-				return new Effect(rangeX, rangeY, particleEmitter, this.game);
+				const myEffect = new Effect(
+					rangeX,
+					rangeY,
+					particleEmitter,
+					this.game
+				);
+				this.displayList.push(myEffect);
+				return myEffect;
 			},
 			presetEffect: {
 				explosionEffect: (
@@ -500,15 +547,18 @@ export default class Scene extends Basic {
 					maxAge = 3,
 					color = '#FFA500'
 				) => {
-					return new ExplosionEffect(
+					const myExplosionEffect = new ExplosionEffect(
 						rangeX,
 						rangeY,
 						this.game,
 						particleAmount,
 						speedRange,
 						maxAge,
-						color
+						color,
+						this
 					);
+					this.displayList.push(myExplosionEffect);
+					return myExplosionEffect;
 				},
 				smokeEffect: (
 					rangeX: Duck.Types.ParticleEmitter.Range,
@@ -520,7 +570,7 @@ export default class Scene extends Basic {
 					color = '#2e2e2e',
 					interval = 50
 				) => {
-					return new SmokeEffect(
+					const mySmokeEffect = new SmokeEffect(
 						rangeX,
 						rangeY,
 						this.game,
@@ -529,8 +579,11 @@ export default class Scene extends Basic {
 						speedRangeY,
 						maxAge,
 						color,
-						interval
+						interval,
+						this
 					);
+					this.displayList.push(mySmokeEffect);
+					return mySmokeEffect;
 				},
 			},
 		};

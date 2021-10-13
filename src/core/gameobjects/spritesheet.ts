@@ -143,7 +143,7 @@ export default class SpriteSheet extends GameObject {
 		}
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.drawImage(
 				this.image, // image

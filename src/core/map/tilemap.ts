@@ -18,7 +18,7 @@ export default class TileMap extends Map<
 		super(tileW, tileH, rows, cols, map, atlas, game);
 	}
 
-	public draw() {
+	public _draw() {
 		for (let row = 0; row < this.rows; row++) {
 			for (let col = 0; col < this.cols; col++) {
 				const number = this.map[row][col];

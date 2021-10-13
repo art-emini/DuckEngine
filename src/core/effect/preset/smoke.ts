@@ -2,6 +2,7 @@ import { Duck } from '../../../index';
 import Game from '../../game';
 import Particle from '../../particles/particle';
 import ParticleEmitter from '../../particles/particleEmitter';
+import Scene from '../../scene';
 import Effect from '../effect';
 
 export default class SmokeEffect extends Effect {
@@ -16,7 +17,8 @@ export default class SmokeEffect extends Effect {
 		speedRangeY = [-0.1, -0.4],
 		maxAge = 20,
 		color = '#2e2e2e',
-		interval = 50
+		interval = 50,
+		scene: Scene
 	) {
 		const particle = new Particle('circle', 0, 0, 5, color, game);
 
@@ -25,7 +27,8 @@ export default class SmokeEffect extends Effect {
 			rangeX,
 			rangeY,
 			particleAmount,
-			game
+			game,
+			scene
 		);
 
 		super(rangeX, rangeY, particleEmitter, game);
@@ -39,8 +42,8 @@ export default class SmokeEffect extends Effect {
 		this.particleEmitter.keepEmitting(interval);
 	}
 
-	public draw() {
-		this.particleEmitter.draw();
+	public _draw() {
+		this.particleEmitter._draw();
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}
 }

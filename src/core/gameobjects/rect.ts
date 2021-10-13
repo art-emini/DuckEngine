@@ -14,7 +14,7 @@ export default class Rect extends GameObject {
 		super('rect', x, y, w, h, 0, fillColor, game);
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.fillStyle = this.fillColor;
 			this.game.ctx.fillRect(

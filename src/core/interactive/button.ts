@@ -152,7 +152,7 @@ export default class Button {
 		}
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			switch (this.shape) {
 				case 'rect':
@@ -217,7 +217,7 @@ export default class Button {
 			}
 		}
 
-		this.text.draw();
+		this.text._draw();
 	}
 
 	public on(

@@ -4,6 +4,7 @@ import randomInt from '../math/randomInt';
 import Game from '../game';
 import Particle from './particle';
 import ParticleContainer from './particleContainer';
+import Scene from '../scene';
 
 export default class ParticleEmitter {
 	private particle: Particle;
@@ -12,6 +13,7 @@ export default class ParticleEmitter {
 	public readonly amount: number;
 	private list: Particle[];
 	private game: Game;
+	public scene: Scene;
 	public emitting: boolean;
 
 	private floatRangeX: Duck.Types.ParticleEmitter.Range;
@@ -24,7 +26,8 @@ export default class ParticleEmitter {
 		rangeX: Duck.Types.ParticleEmitter.Range,
 		rangeY: Duck.Types.ParticleEmitter.Range,
 		amount: number,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		this.particle = particle;
 		this.rangeX = rangeX;
@@ -32,6 +35,7 @@ export default class ParticleEmitter {
 		this.amount = amount;
 		this.list = [];
 		this.game = game;
+		this.scene = scene;
 
 		this.emitting = false;
 
@@ -75,6 +79,9 @@ export default class ParticleEmitter {
 		);
 
 		this.list.push(obj);
+
+		// add to display list
+		this.scene.displayList.push(obj);
 	}
 
 	public emit() {
@@ -116,6 +123,13 @@ export default class ParticleEmitter {
 		if (this.list.length >= limit) {
 			this.list.pop();
 		}
+
+		// remove from display list
+		(
+			this.scene.displayList.filter(
+				(renderableObject) => renderableObject instanceof Particle
+			) as Particle[]
+		).pop();
 	}
 
 	public offload(offloadY: number, offloadX?: number) {
@@ -129,6 +143,20 @@ export default class ParticleEmitter {
 				}
 			}
 		});
+
+		// remove from displayList
+		this.scene.displayList.forEach((renderableObject, index) => {
+			if (renderableObject instanceof Particle) {
+				if (renderableObject.position.y < offloadY) {
+					this.scene.displayList.splice(index, 1);
+				}
+				if (offloadX) {
+					if (renderableObject.position.x > offloadX) {
+						this.scene.displayList.splice(index, 1);
+					}
+				}
+			}
+		});
 	}
 
 	public offloadMaxAge(ageInSeconds: number) {
@@ -137,15 +165,24 @@ export default class ParticleEmitter {
 				this.list.splice(index, 1);
 			}
 		});
+
+		// remove from displayList
+		this.scene.displayList.forEach((renderableObject, index) => {
+			if (renderableObject instanceof Particle) {
+				if (renderableObject.age >= ageInSeconds) {
+					this.scene.displayList.splice(index, 1);
+				}
+			}
+		});
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.emitting) {
 			this.list.forEach((particle) => {
 				if (this.container) {
 					this.container.update(particle);
 				}
-				particle.draw();
+				particle._draw();
 			});
 		}
 	}

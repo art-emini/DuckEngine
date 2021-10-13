@@ -14,7 +14,7 @@ export default class Circle extends GameObject {
 		this.init(this);
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.beginPath();
 			this.game.ctx.arc(

@@ -27,7 +27,7 @@ export default class Sprite extends GameObject {
 		this.h = h;
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.drawImage(
 				this.image,

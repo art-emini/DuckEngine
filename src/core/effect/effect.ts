@@ -41,8 +41,8 @@ export default class Effect {
 		this.particleEmitter.emitFor(ms);
 	}
 
-	public draw() {
-		this.particleEmitter.draw();
+	public _draw() {
+		this.particleEmitter._draw();
 
 		if (this.following) {
 			const rangeX: Duck.Types.ParticleEmitter.Range = [

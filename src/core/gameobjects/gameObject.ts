@@ -82,7 +82,7 @@ export default class GameObject {
 		this.self = self;
 	}
 
-	public draw() {}
+	public _draw() {}
 
 	public _update() {
 		(this.position.x += this.velocity.x) * this.game.deltaTime;

@@ -16,7 +16,7 @@ export default class RoundRect extends GameObject {
 		super('roundrect', x, y, w, h, r, fillColor, game);
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			if (this.w < 2 * this.r) this.r = this.w / 2;
 			if (this.h < 2 * this.r) this.r = this.h / 2;

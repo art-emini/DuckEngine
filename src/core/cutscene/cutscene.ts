@@ -132,7 +132,7 @@ export default class Cutscene {
 			const step = this.steps[this.index];
 
 			if (step.type === 'DRAW' && step.affect) {
-				return (step.affect as Duck.GameObjects.GameObject).draw();
+				return (step.affect as Duck.GameObjects.GameObject)._draw();
 			}
 
 			if (step.type === 'MOVE' && step.moveTo) {

@@ -20,7 +20,7 @@ export default class Text {
 		this.game = game;
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.font = this.config.styles.fontCSS;
 

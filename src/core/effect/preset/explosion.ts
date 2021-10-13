@@ -3,6 +3,7 @@ import Game from '../../game';
 import randomFloat from '../../math/randomFloat';
 import Particle from '../../particles/particle';
 import ParticleEmitter from '../../particles/particleEmitter';
+import Scene from '../../scene';
 import Effect from '../effect';
 
 export default class ExplosionEffect extends Effect {
@@ -15,7 +16,8 @@ export default class ExplosionEffect extends Effect {
 		particleAmount = 50,
 		speedRange = [1, 1],
 		maxAge = 3,
-		color = '#FFA500'
+		color = '#FFA500',
+		scene: Scene
 	) {
 		const particle = new Particle('circle', 0, 0, 5, color, game);
 
@@ -24,7 +26,8 @@ export default class ExplosionEffect extends Effect {
 			rangeX,
 			rangeY,
 			particleAmount,
-			game
+			game,
+			scene
 		);
 
 		super(rangeX, rangeY, particleEmitter, game);
@@ -37,8 +40,8 @@ export default class ExplosionEffect extends Effect {
 		this.particleEmitter.float([min, max], [min, max]);
 	}
 
-	public draw() {
-		this.particleEmitter.draw();
+	public _draw() {
+		this.particleEmitter._draw();
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}
 }

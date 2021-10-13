@@ -31,7 +31,7 @@ export default class StaticLight {
 		this.color = convertColorToRGBA(this.color, this.alpha);
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.globalCompositeOperation = 'lighter';
 			this.game.ctx.beginPath();

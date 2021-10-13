@@ -3,7 +3,7 @@
 export default class Render {
 	constructor() {}
 
-	public render(deltaTime: number) {}
+	public preload() {}
 
 	public update(deltaTime: number) {}
 

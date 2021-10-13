@@ -36,7 +36,7 @@ export default class Map<
 		this.game = game;
 	}
 
-	public draw() {}
+	public _draw() {}
 
 	public selectByNumber(number: number) {
 		for (let row = 0; row < this.rows; row++) {

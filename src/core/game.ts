@@ -180,7 +180,10 @@ export default class Game {
 
 			if (scene.visible) {
 				scene.update(this.deltaTime);
-				scene.render(this.deltaTime);
+				// displayList
+				scene.displayList.forEach((renderableObject) => {
+					renderableObject._draw();
+				});
 			}
 
 			if (scene.currentCamera) {

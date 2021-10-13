@@ -42,7 +42,7 @@ export default class Particle extends GameObject {
 		}, 1000);
 	}
 
-	public draw() {
+	public _draw() {
 		if (this.game.ctx) {
 			switch (this.shape) {
 				case 'circle':
