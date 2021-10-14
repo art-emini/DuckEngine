@@ -123,11 +123,12 @@ export namespace Duck {
 		export namespace Game {
 			export interface Config {
 				canvas: HTMLCanvasElement | null;
+				defaultScene: string;
+				roundPixels?: boolean;
 				scale?: Misc.Scale;
 				physics?: boolean;
 				debug?: boolean;
 				storage?: Storage.Config;
-				defaultScene: string;
 				background?: string;
 				smartScale?: boolean;
 				dprScale?: boolean;

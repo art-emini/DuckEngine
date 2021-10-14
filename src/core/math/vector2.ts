@@ -55,6 +55,12 @@ export default class Vector2 {
 		return this;
 	}
 
+	public round() {
+		this.x = Math.round(this.x);
+		this.y = Math.round(this.y);
+		return this;
+	}
+
 	public angleBetween(vector: Vector2) {
 		return Math.atan2(
 			this.x * vector.y - this.y * vector.x,

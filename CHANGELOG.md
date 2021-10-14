@@ -20,6 +20,7 @@ Only the previous two versions' changelogs will show.
    4. Added id, zIndex, and visible properties to all renderable objects
 5. Game
    1. Improved Auto canvas
+   2. Added roundPixels option to config
 6. Scene
    1. Removed render method
    2. Added preload method
@@ -34,7 +35,7 @@ Only the previous two versions' changelogs will show.
 10. New GameObjects
     1. Added gameobject class canvasModulate
 11. Misc
-    1. Rewritten types, moved all types into Duck.Types and all classes into Duck
+    1. Rewritten types, moved all types into Duck.Types and all type classes into Duck
     2. Added renderableObject type which is any class that has a _draw method
     3. Canvas and context types is never undefined
 

@@ -2,6 +2,7 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
+import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
 
 export default class Particle extends GameObject {
@@ -141,6 +142,27 @@ export default class Particle extends GameObject {
 
 		(this.position.x += this.floatVelocity.x) * this.game.deltaTime;
 		(this.position.y += this.floatVelocity.y) * this.game.deltaTime;
+	}
+
+	/**
+	 * @memberof Particle
+	 * *Modified from gameobject*
+	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
+	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
+	 */
+	public _update() {
+		(this.position.x += this.velocity.x) * this.game.deltaTime;
+		(this.position.y += this.velocity.y) * this.game.deltaTime;
+
+		// clamp to bounds
+		this.position.x = clamp(this.position.x, this.bounds.x, this.bounds.w);
+		this.position.y = clamp(this.position.y, this.bounds.y, this.bounds.h);
+
+		// set to none
+		this.velocity.x = 0;
+		this.velocity.y = 0;
+
+		// don't round pixels for particles
 	}
 
 	public setImagePath(imagePath: string) {

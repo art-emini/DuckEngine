@@ -6,6 +6,7 @@ import Game from '../game';
 import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
+import Particle from '../particles/particle';
 
 export default class GameObject {
 	public readonly id: number;
@@ -128,6 +129,11 @@ export default class GameObject {
 		// set to none
 		this.velocity.x = 0;
 		this.velocity.y = 0;
+
+		// roundPixels
+		if (this.game.config.roundPixels) {
+			this.position.round();
+		}
 	}
 
 	public setScale(scale: Duck.Types.Misc.Scale | number) {
