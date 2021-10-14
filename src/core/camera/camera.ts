@@ -11,9 +11,18 @@ import circleToRectIntersect from '../physics/circleToRectIntersect';
 import Debug from '../debug/debug';
 import randomInt from '../math/randomInt';
 import lerp from '../math/lerp';
+import circleRectCollision from '../physics/circleToRectIntersect';
+import RoundRect from '../gameobjects/roundrect';
+import Sprite from '../gameobjects/sprite';
+import SpriteSheet from '../gameobjects/spritesheet';
+import StaticLight from '../lights/staticLight';
+import Button from '../interactive/button';
+import Text from '../interactive/text';
+import Particle from '../particles/particle';
 
-class Camera {
-	private game: Game;
+export default class Camera {
+	public game: Game;
+	public scene: Scene;
 	private distance: number;
 	private lookAt: number[];
 	private ctx: CanvasRenderingContext2D | null | undefined;
@@ -40,6 +49,7 @@ class Camera {
 
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
+		this.scene = scene;
 		this.distance = 1000.0;
 		this.isMain = false;
 		if (scene.mainCamera === this) {
@@ -367,6 +377,89 @@ class Camera {
 		};
 	}
 
+	public cull(renderableObjects: Duck.Types.Renderable[]) {
+		const visibleObjects = this.scene.displayList.visibilityFilter(true);
+
+		const culledObjects = visibleObjects.filter((r) =>
+			renderableObjects.find((_r) => _r.id === r.id)
+		);
+		const nonCulledObjects = visibleObjects.filter(
+			(r) => !culledObjects.includes(r)
+		);
+
+		for (const culledObject of culledObjects) {
+			culledObject.visible = true;
+		}
+
+		for (const nonCulledObject of nonCulledObjects) {
+			nonCulledObject.visible = false;
+		}
+	}
+
+	public autoCull() {
+		const objects = this.scene.displayList.list;
+
+		const culledObjects = objects.filter((r) => {
+			if (
+				r instanceof Rect ||
+				r instanceof RoundRect ||
+				r instanceof Sprite ||
+				r instanceof SpriteSheet ||
+				r instanceof Button ||
+				r instanceof Text
+			) {
+				if (
+					rectToRectIntersect(r, {
+						position: {
+							x: this.viewport.left,
+							y: this.viewport.top,
+						},
+						w: this.viewport.w,
+						h: this.viewport.h,
+					})
+				) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			if (
+				r instanceof Circle ||
+				r instanceof StaticLight ||
+				r instanceof Particle
+			) {
+				if (
+					circleRectCollision(r, {
+						position: {
+							x: this.viewport.left,
+							y: this.viewport.top,
+						},
+						w: this.viewport.w,
+						h: this.viewport.h,
+					})
+				) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			return false;
+		});
+		const nonCulledObjects = objects.filter(
+			(r) => !culledObjects.includes(r)
+		);
+
+		for (const culledObject of culledObjects) {
+			culledObject.visible = true;
+		}
+
+		for (const nonCulledObject of nonCulledObjects) {
+			nonCulledObject.visible = false;
+		}
+	}
+
 	get defaultZoom() {
 		if (this.game.config.dprScale) {
 			if (this.game.config.debug) {
@@ -384,5 +477,3 @@ class Camera {
 		return Math.PI / 4;
 	}
 }
-
-export default Camera;

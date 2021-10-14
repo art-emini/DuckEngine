@@ -118,10 +118,7 @@ export namespace Duck {
 		export type GameObject = GameObjectClass;
 		export type Renderable =
 			| GameObjectClass
-			| Duck.Interactive.Button
-			| Duck.Interactive.Text
 			| Duck.Effect
-			| Duck.Lights.StaticLight
 			| Duck.Maps.TileMap;
 		export namespace Game {
 			export interface Config {
