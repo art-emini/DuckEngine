@@ -1,11 +1,21 @@
 import { Duck } from '../../index';
 import Debug from '../debug/debug';
 
+/**
+ * @class Sound
+ * @classdesc Creates a Sound class.
+ * @description The Sound Class. Plays audio
+ * @since 1.0.0-beta
+ */
 export default class Sound {
 	public path: string;
 	public element: HTMLAudioElement;
 	private sprites: Duck.Types.Sound.Sprite[];
 
+	/**
+	 * @param {string} path Path to sound file
+	 * @param {Duck.Types.Sound.Config} [options] Sound Configuration
+	 */
 	constructor(path: string, options?: Duck.Types.Sound.Config) {
 		this.path = path;
 		this.element = document.createElement('audio');
@@ -26,50 +36,112 @@ export default class Sound {
 		document.body.appendChild(this.element);
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Plays the audio
+	 * @since 1.0.0-beta
+	 */
 	public play() {
 		this.element.play();
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Pauses the audio
+	 * @since 1.0.0-beta
+	 */
 	public pause() {
 		this.element.pause();
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Mutes the audio
+	 * @since 1.1.0
+	 */
 	public mute() {
 		this.element.muted = true;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Unmutes the audio
+	 * @since 1.1.0
+	 */
 	public unmute() {
 		this.element.muted = false;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Seeks the audio
+	 * @param {number} timeInSeconds Time in seconds to seek to
+	 * @since 1.0.0-beta
+	 */
 	public seek(timeInSeconds: number) {
 		this.element.currentTime = timeInSeconds;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Restarts the audio
+	 * @since 1.0.0-beta
+	 */
 	public restart() {
 		this.seek(0);
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Sets the volume of the audio
+	 * @since 1.0.0-beta
+	 */
 	public setVolume(volume: number) {
 		this.element.volume = volume;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Gets the duration of the sound
+	 * @since 1.0.0-beta
+	 */
 	public get duration() {
 		return this.element.duration;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Gets the playing state of the sound
+	 * @since 1.0.0-beta
+	 */
 	public get isPlaying() {
 		return !this.element.paused;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Gets the volume of the sound
+	 * @since 1.0.0-beta
+	 */
 	public get volume() {
 		return this.element.volume;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Gets the mute state of the sound
+	 * @since 1.0.0-beta
+	 */
 	public get isMuted() {
 		return this.element.muted;
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Plays a sound sprite based on the key
+	 * @param {string} key Key of the sound sprite
+	 * @since 1.0.0-beta
+	 */
 	public playSprite(key: string) {
 		const foundSprite = this.sprites.find((_sprite) => _sprite.key === key);
 
@@ -94,6 +166,12 @@ export default class Sound {
 		}
 	}
 
+	/**
+	 * @memberof Sound
+	 * @description Sets the audio src/path
+	 * @param {string} path Audio src/path
+	 * @since 1.0.0-beta
+	 */
 	public setPath(path: string) {
 		this.path = path;
 		this.element.src = this.path;

@@ -33,6 +33,11 @@ import SmokeEffectClass from './core/effect/preset/smoke';
 // main
 
 // spec
+/**
+ * @namespace Duck
+ * All Types, Type Classes, Classes, and Config is stored here.
+ * @since 1.0.0-beta
+ */
 export namespace Duck {
 	export const AutoCanvas = () => {
 		let canvas: HTMLCanvasElement = document.querySelector(
@@ -518,6 +523,12 @@ export namespace Duck {
 
 // export
 
+/**
+ * @namespace
+ * @property {Game} game Game Class
+ * @property {Scene} scene Scene Class
+ * @description Main Export of DuckEngine
+ */
 const DuckEngine = {
 	Game: GameClass,
 	Scene: SceneClass,

@@ -2,6 +2,14 @@ import Rect from '../gameobjects/rect';
 import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
 
+/**
+ * @function
+ * @description Returns a boolean based on if a rectangle is intersecting with a rectangle
+ * @param {Rect |Sprite | RoundRect | { position: { x:number; y:number }; w:number; h:number }} rect
+ * @param {Rect |Sprite| RoundRect | { position: { x:number; y:number }; w:number; h:number }} rect2
+ * @returns boolean
+ * @since 1.1.0-beta
+ */
 export default function rectToRectIntersect(
 	rect:
 		| Rect

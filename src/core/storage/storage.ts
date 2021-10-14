@@ -1,15 +1,34 @@
 import { Duck } from '../../index';
 import Game from '../game';
 
+/**
+ * @class DuckStorage
+ * @classdesc Creates a DuckStorage
+ * @description The DuckStorage Class. Stores data such as scenes, gameConfig, and custom data.
+ * @since 1.0.0-beta
+ */
 export default class DuckStorage {
 	private config: Duck.Types.Storage.Config;
-	private game: Game;
+	public game: Game;
 
+	/**
+	 * @constructor DuckStorage
+	 * @description Creates a DuckStorage instance.
+	 * @param {Duck.Types.Storage.Config} config DuckStorage Configuration
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(config: Duck.Types.Storage.Config, game: Game) {
 		this.config = config;
 		this.game = game;
 	}
 
+	/**
+	 * @memberof DuckStorage
+	 * @description Saves scenes, gameConfig, and custom data if passed
+	 * @param {unknown[]} [data] Custom data, optional
+	 * @since 1.0.0-beta
+	 */
 	public save(data?: unknown[]) {
 		if (this.config.save.scenes) {
 			localStorage.setItem(
@@ -28,6 +47,12 @@ export default class DuckStorage {
 		}
 	}
 
+	/**
+	 * @memberof DuckStorage
+	 * @description Loads data based on loadType
+	 * @param  {Duck.Types.Storage.LoadType} loadType What to load: 'all' | 'scenes' | 'gameConfig' | 'data'
+	 * @since 1.0.0-beta
+	 */
 	public load(loadType: Duck.Types.Storage.LoadType) {
 		if (loadType === 'all') {
 			const res = {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Duck } from '../index';
 import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
@@ -6,8 +5,15 @@ import Debug from './debug/debug';
 import startup from '../helper/startup';
 import dprScale from '../helper/dprScale';
 
+/**
+ * @class Game
+ * @classdesc Creates a DuckEngine Game
+ * @description The Game Class. Stores many important methods and properties.
+ * @since 1.0.0-beta
+ */
 export default class Game {
 	public readonly config: Duck.Types.Game.Config;
+
 	public canvas: HTMLCanvasElement;
 	public ctx: CanvasRenderingContext2D;
 	public stack: Duck.Types.Game.Stack;
@@ -30,6 +36,12 @@ export default class Game {
 		remove: (scene: Scene) => void;
 	};
 
+	/**
+	 * @constructor Game
+	 * @description Creates a Game instance.
+	 * @param {Duck.Types.Game.Config} config Configuration
+	 * @since 1.0.0-beta
+	 */
 	constructor(config: Duck.Types.Game.Config) {
 		console.log(startup);
 
@@ -119,12 +131,24 @@ export default class Game {
 
 		// methods
 		this.scenes = {
+			/**
+			 * @memberof Game#scenes
+			 * @description Adds scenes to the Game stack
+			 * @param {Scene[]} scenes Scenes to add to the Game stack
+			 * @since 1.0.0-beta
+			 */
 			add: (scenes: Scene[]) => {
 				scenes.forEach((scene) => {
 					this.stack.scenes.push(scene);
 				});
 			},
 
+			/**
+			 * @memberof Game#scenes
+			 * @description Removes a scene from the Game stack
+			 * @param {Scene} scene Scene to remove from the Game stack
+			 * @since 1.0.0-beta
+			 */
 			remove: (scene: Scene) => {
 				const f = this.stack.scenes.find(
 					(_scene) => _scene.key === scene.key
@@ -139,6 +163,11 @@ export default class Game {
 		};
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Starts the game loop
+	 * @since 1.0.0-beta
+	 */
 	public start() {
 		this.loop(this);
 		if (this.config.debug) {
@@ -146,6 +175,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Stops the game loop
+	 * @since 1.0.0
+	 */
 	public stop() {
 		if (this.animationFrame) {
 			cancelAnimationFrame(this.animationFrame);
@@ -155,6 +189,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Core loop
+	 * @since 1.0.0-beta
+	 */
 	private loop(self: Game) {
 		self.clearFrame();
 
@@ -191,6 +230,11 @@ export default class Game {
 		});
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Clears the current frame on the canvas
+	 * @since 1.0.0
+	 */
 	public clearFrame() {
 		if (this.canvas && this.ctx) {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -198,7 +242,12 @@ export default class Game {
 			new Debug.Error('Canvas is undefined');
 		}
 	}
-
+	/**
+	 * @memberof Game
+	 * @description Sets the scale of the canvas
+	 * @param {Duck.Types.Misc.Scale} scale Scale to set the canvas to
+	 * @since 1.0.0-beta
+	 */
 	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (this.canvas) {
 			if (scale.width) {
@@ -213,6 +262,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Sets the style background color of the canvas
+	 * @param {string} background Background color
+	 */
 	public setBackground(background: string) {
 		if (this.canvas) {
 			this.canvas.style.background = background;
@@ -223,6 +277,13 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Switches the current scene by the key
+	 * @param {string} key Key of the scene to switch from
+	 * @param {string} key2 Key of the scene to switch to
+	 * @since 1.0.0-beta
+	 */
 	public switchScene(key: string, key2: string) {
 		const f = this.stack.scenes.find((_scene) => _scene.key === key);
 		const f2 = this.stack.scenes.find((_scene) => _scene.key === key2);
@@ -243,6 +304,12 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Sets a scene to visible. Keeps the current scene visible
+	 * @param {string} key Key of the scene to show
+	 * @since 1.0.0-beta
+	 */
 	public showScene(key: string) {
 		const f = this.stack.scenes.find((_scene) => _scene.key === key);
 		if (f) {
@@ -254,6 +321,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Fullscreens the canvas and scales canvas
+	 * @since 1.0.0
+	 */
 	public fullscreen() {
 		if (this.canvas && document.fullscreenEnabled) {
 			this.canvas
@@ -290,6 +362,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Unfullscreens the canvas and scales canvas
+	 * @since 1.0.0
+	 */
 	public unfullscreen() {
 		if (document.fullscreenElement) {
 			document
@@ -303,18 +380,33 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Locks the pointer on the canvas
+	 * @since 1.0.0
+	 */
 	public lockPointer() {
 		if (this.canvas) {
 			this.canvas.requestPointerLock();
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Unlocks the pointer from the canvas
+	 * @since 1.0.0
+	 */
 	public unlockPointer() {
 		if (document.pointerLockElement) {
 			document.exitPointerLock();
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Resets the canvas scale to before scaled
+	 * @since 1.0.0
+	 */
 	public resetScale() {
 		if (this.canvas) {
 			if (window.devicePixelRatio === 1) {
@@ -340,6 +432,11 @@ export default class Game {
 		}
 	}
 
+	/**
+	 * @memberof Game
+	 * @description Scales the canvas to fit the whole window
+	 * @since 1.0.0
+	 */
 	public scaleToWindow() {
 		if (this.canvas) {
 			if (window.devicePixelRatio === 1) {

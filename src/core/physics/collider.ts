@@ -14,11 +14,26 @@ import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
+
+/**
+ * @class Collider
+ * @classdesc Creates a DuckEngine Collider
+ * @description The Collider Class. Collision Handler and Resolver
+ * @since 1.0.0-beta
+ */
 export default class Collider {
 	public shape: Duck.GameObjects.GameObject;
 	public collidesWith: Duck.GameObjects.GameObject[];
 	private game: Game;
 
+	/**
+	 * @constructor Collider
+	 * @description Creates a Collider instance
+	 * @param {Duck.GameObjects.GameObject} shape Gameobject to append the collider to
+	 * @param {Duck.GameObjects.GameObject[]} collidesWith What the gameobject collides with
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		shape: Duck.GameObjects.GameObject,
 		collidesWith: Duck.GameObjects.GameObject[],
@@ -29,6 +44,12 @@ export default class Collider {
 		this.game = game;
 	}
 
+	/**
+	 * @memberof Collider
+	 * @param {Duck.GameObjects.GameObject} shape The gameobject that the collider is attached
+	 * @param {Duck.GameObjects.GameObject[]} [diffCollidesWith] Overwrite what the gameobject collides with, optional
+	 * @since 1.0.0-beta
+	 */
 	public update(
 		shape: Duck.GameObjects.GameObject,
 		diffCollidesWith?: Duck.GameObjects.GameObject[]

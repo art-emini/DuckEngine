@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import Game from './game';
 import Basic from '../base/render';
 import { Duck } from '../index';
@@ -72,6 +73,12 @@ import DisplayList from './models/displayList';
 import GameObject from './gameobjects/gameObject';
 import CanvasModulate from './misc/canvasModulate';
 
+/**
+ * @class Scene
+ * @classdesc Creates a DuckEngine Scene
+ * @description The Scene Class. Main rendering happens here
+ * @since 1.0.0-beta
+ */
 export default class Scene extends Basic {
 	public readonly key: string;
 	protected game: Game;
@@ -289,6 +296,14 @@ export default class Scene extends Basic {
 		};
 	};
 
+	/**
+	 * @constructor Scene
+	 * @description Creates a Scene instance.
+	 * @param {string} key Key/Identifier or name of scene
+	 * @param {Game} game Game instance
+	 * @param {boolean} [visible=false] Is the scene visible, defaults to false
+	 * @since 1.0.0-beta
+	 */
 	constructor(key: string, game: Game, visible?: boolean) {
 		super();
 
@@ -317,6 +332,11 @@ export default class Scene extends Basic {
 		this.game.stack.scenes.push(this);
 
 		// methods
+		/**
+		 * @memberof Scene
+		 * @description Adds anything to a scene
+		 * @since 1.0.0-beta
+		 */
 		this.add = {
 			gameobject: {
 				sprite: (
@@ -620,6 +640,11 @@ export default class Scene extends Basic {
 			},
 		};
 
+		/**
+		 * @memberof Scene
+		 * @description Tools such as generating random numbers, colors, and converting colors are located here
+		 * @since 1.0.0-beta
+		 */
 		this.tools = {
 			randomInt: randomInt,
 			randomFloat: randomFloat,
@@ -681,7 +706,10 @@ export default class Scene extends Basic {
 	}
 
 	/**
-	 * Calls all visible gameobjects' _update method
+	 * @memberof Scene
+	 * @description Calls all visible gameobjects' _update method
+	 * *Do not call manually, this is called in game loop*
+	 * @since 2.0.0
 	 */
 	public __tick() {
 		const visibleObjects = this.displayList.visibilityFilter(true);
@@ -692,6 +720,12 @@ export default class Scene extends Basic {
 		});
 	}
 
+	/**
+	 * @memberof Scene
+	 * @description Switches the active camera to a passed camera
+	 * @param {Camera} camera Camera to switch to
+	 * @memberof 1.0.0-beta
+	 */
 	public switchCamera(camera: Camera) {
 		const foundCamera = this.cameras.find((_camera) => _camera === camera);
 		if (foundCamera) {
@@ -706,6 +740,11 @@ export default class Scene extends Basic {
 		}
 	}
 
+	/**
+	 * @memberof Scene
+	 * @description Switches the active camera to the main camera
+	 * @since 1.0.0-beta
+	 */
 	public switchToMainCamera() {
 		this.currentCamera = this.mainCamera;
 		if (this.game.config.debug) {
@@ -713,6 +752,12 @@ export default class Scene extends Basic {
 		}
 	}
 
+	/**
+	 * @memberof Scene
+	 * @description Sets a camera as the main camera
+	 * @param {Camera} camera Camera to set the main camera as
+	 * @since 1.0.0-beta
+	 */
 	public setMainCamera(camera: Camera) {
 		this.mainCamera = camera;
 		if (this.game.config.debug) {
@@ -720,12 +765,26 @@ export default class Scene extends Basic {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-types
+	/**
+	 * @memberof Scene
+	 * @description Runs a function once no matter if it is in a loop or not
+	 * @param {Function} func Function to run
+	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @since 1.0.0
+	 */
 	public once(func: Function, run?: boolean) {
 		const one = new Once(func, run);
 		return one;
 	}
 
+	/**
+	 * @memberof Scene
+	 * @description Allows a function to only be ran a max amount of times
+	 * @param {(currentCount:number) => void} func Function to call
+	 * @param {number} maxAmount Max amount of times to allow the function to be called
+	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @since 1.1.0
+	 */
 	public runAmount(
 		func: (currentCount: number) => void,
 		maxAmount: number,
