@@ -2,6 +2,12 @@ import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 
+/**
+ * @class Rect
+ * @classdesc Creates a DuckEngine Rect
+ * @description The Rect Class. Represents a rectangle
+ * @since 1.0.0-beta
+ */
 export default class Rect extends GameObject {
 	constructor(
 		x: number,
@@ -14,6 +20,12 @@ export default class Rect extends GameObject {
 		super('rect', x, y, w, h, 0, fillColor, game);
 	}
 
+	/**
+	 * @description Draws the rect.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.fillStyle = this.fillColor;

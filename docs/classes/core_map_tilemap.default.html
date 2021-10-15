@@ -81,6 +81,15 @@
 		</div>
 		<div class="col-7 offset-3 col-content">
 			<h1>Class default</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-tags">
+					<dl class="tsd-comment-tags"><dt>classdesc</dt>
+						<dd><p>Creates a DuckEngine TileMap</p>
+						</dd><dt>description</dt>
+						<dd><p>The TileMap Class. Creates a tilemap of images</p>
+						</dd><dt>since</dt>
+						<dd><p>1.0.0</p>
+					</dd></dl>
+			</div></section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -107,13 +116,13 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#atlas" class="tsd-kind-icon">atlas</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_map_tilemap.default.html#cols" class="tsd-kind-icon">cols</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#cols" class="tsd-kind-icon">cols</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#game" class="tsd-kind-icon">game</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#map" class="tsd-kind-icon">map</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_map_tilemap.default.html#rows" class="tsd-kind-icon">rows</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_map_tilemap.default.html#tileH" class="tsd-kind-icon">tileH</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_map_tilemap.default.html#tileW" class="tsd-kind-icon">tileW</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#rows" class="tsd-kind-icon">rows</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#tileH" class="tsd-kind-icon">tileH</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#tileW" class="tsd-kind-icon">tileW</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#visible" class="tsd-kind-icon">visible</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_map_tilemap.default.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a></li>
 							</ul>
@@ -143,31 +152,73 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in core/map/tilemap.ts:9</li>
+									<li>Defined in core/map/tilemap.ts:28</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Creates a tilemap of images with a 2D array and atlas</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>tileW: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How wide a tile is</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>tileH: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How tall a tile is</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>rows: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How many rows are there</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>cols: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How many columns are there</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>map: <a href="../modules/index.Duck.Types.Tilemap.html#Map" class="tsd-signature-type">Map</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>An Array with nested arrays that represents the map</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>atlas: <a href="../interfaces/index.Duck.Types.Tilemap.Atlas.html" class="tsd-signature-type">Atlas</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>An object with numbers as their keys that are used to find the asset to use for the map</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>game: <a href="core_game.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Game instance</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_map_tilemap.default.html" class="tsd-signature-type">default</a></h4>
@@ -184,18 +235,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#atlas">atlas</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:20</li>
+							<li>Defined in core/map/map.ts:26</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="cols" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> cols</h3>
+					<h3>cols</h3>
 					<div class="tsd-signature tsd-kind-icon">cols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#cols">cols</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:18</li>
+							<li>Defined in core/map/map.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -206,7 +257,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#game">game</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:21</li>
+							<li>Defined in core/map/map.ts:27</li>
 						</ul>
 					</aside>
 				</section>
@@ -217,7 +268,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#id">id</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:14</li>
+							<li>Defined in core/map/map.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -228,40 +279,40 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#map">map</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:19</li>
+							<li>Defined in core/map/map.ts:25</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="rows" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> rows</h3>
+					<h3>rows</h3>
 					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#rows">rows</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:17</li>
+							<li>Defined in core/map/map.ts:23</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tileH" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> tileH</h3>
+					<h3>tileH</h3>
 					<div class="tsd-signature tsd-kind-icon">tileH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#tileH">tileH</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:16</li>
+							<li>Defined in core/map/map.ts:22</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tileW" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> tileW</h3>
+					<h3>tileW</h3>
 					<div class="tsd-signature tsd-kind-icon">tileW<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#tileW">tileW</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:15</li>
+							<li>Defined in core/map/map.ts:21</li>
 						</ul>
 					</aside>
 				</section>
@@ -272,7 +323,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#visible">visible</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:23</li>
+							<li>Defined in core/map/map.ts:29</li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +334,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#zIndex">zIndex</a></p>
 						<ul>
-							<li>Defined in core/map/map.ts:24</li>
+							<li>Defined in core/map/map.ts:30</li>
 						</ul>
 					</aside>
 				</section>
@@ -301,9 +352,15 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#_draw">_draw</a></p>
 								<ul>
-									<li>Defined in core/map/tilemap.ts:21</li>
+									<li>Defined in core/map/tilemap.ts:46</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Draws the tilemap.</p>
+										<p>DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -319,19 +376,30 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#getColOf">getColOf</a></p>
 								<ul>
-									<li>Defined in core/map/map.ts:71</li>
+									<li>Defined in core/map/map.ts:114</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>Map</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the col of the first element it finds in the map</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>number: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The number</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">number</span>
 							</h4>
+							<p>number | undefined</p>
 						</li>
 					</ul>
 				</section>
@@ -346,19 +414,30 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#getRowOf">getRowOf</a></p>
 								<ul>
-									<li>Defined in core/map/map.ts:64</li>
+									<li>Defined in core/map/map.ts:101</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>Map</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the row of the first element it finds in the map</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>number: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The number</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">number</span>
 							</h4>
+							<p>number | undefined</p>
 						</li>
 					</ul>
 				</section>
@@ -373,13 +452,25 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_map_map.default.html">default</a>.<a href="core_map_map.default.html#selectByNumber">selectByNumber</a></p>
 								<ul>
-									<li>Defined in core/map/map.ts:50</li>
+									<li>Defined in core/map/map.ts:81</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>Map</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the first element in the map that has the same passed number</p>
+									</dd><dt>since</dt>
+									<dd><p>1.2.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>number: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The number</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
@@ -388,6 +479,7 @@
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">HTMLImageElement</span>
 							</h4>
+							<p>HTMLImageElement | undefined</p>
 						</li>
 					</ul>
 				</section>
@@ -408,7 +500,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#atlas" class="tsd-kind-icon">atlas</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#cols" class="tsd-kind-icon">cols</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -420,13 +512,13 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#map" class="tsd-kind-icon">map</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#rows" class="tsd-kind-icon">rows</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#tileH" class="tsd-kind-icon">tileH</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_map_tilemap.default.html#tileW" class="tsd-kind-icon">tileW</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">

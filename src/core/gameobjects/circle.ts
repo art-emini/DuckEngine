@@ -2,6 +2,12 @@ import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 
+/**
+ * @class Circle
+ * @classdesc Creates a DuckEngine Circle
+ * @description The Circle Class. Represents a circle
+ * @since 1.0.0-beta
+ */
 export default class Circle extends GameObject {
 	constructor(
 		x: number,
@@ -14,6 +20,12 @@ export default class Circle extends GameObject {
 		this.init(this);
 	}
 
+	/**
+	 * @description Draws the circle.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.beginPath();

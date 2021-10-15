@@ -2,11 +2,23 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import Game from '../game';
 
+/**
+ * @class Input
+ * @classdesc Creates a DuckEngine Input
+ * @description The Input Class. Main inputs are captured here
+ * @since 1.0.0-beta
+ */
 export default class Input {
 	private game: Game;
 	private controller: Duck.Types.Input.Controller;
 	private listeners: Duck.Types.Input.Listener[];
 
+	/**
+	 * @constructor
+	 * @description Creates an Input instance.
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(game: Game) {
 		this.game = game;
 		this.controller = {
@@ -51,6 +63,14 @@ export default class Input {
 		});
 	}
 
+	/**
+	 * @memberof Input
+	 * @description Adds an key event listener to Input
+	 * @param {'keydown' | 'keyup'} type Listener type, 'keydown' or 'keyup'
+	 * @param {string} description Description of what the key event does or the key of the event listener, used to disable the event
+	 * @param {(e: KeyboardEvent) => void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
 	public on(
 		type: 'keydown' | 'keyup',
 		description: string,
@@ -67,6 +87,12 @@ export default class Input {
 		}
 	}
 
+	/**
+	 * @memberof Input
+	 * @description Removes an key event listener from Input
+	 * @param {string} description Description of what the key event does or the key of the event listener, used to disable the event
+	 * @since 1.0.0-beta
+	 */
 	public off(description: string) {
 		const foundListener = this.listeners.find(
 			(_listener) => _listener.description === description
@@ -83,22 +109,42 @@ export default class Input {
 		}
 	}
 
-	public onKeyDown(key: string, cb: () => void) {
+	/**
+	 * @memberof Input
+	 * @description Adds a keydown event listener to the DOM
+	 * @param {string} key Key string to check for
+	 * @param {(e:KeyboardEvent)=>void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
+	public onKeyDown(key: string, cb: (e: KeyboardEvent) => void) {
 		document.addEventListener('keydown', (e) => {
 			if (e.key === key) {
-				cb();
+				cb(e);
 			}
 		});
 	}
 
-	public onKeyUp(key: string, cb: () => void) {
+	/**
+	 * @memberof Input
+	 * @description Adds a keyup event listener to the DOM
+	 * @param {string} key Key string to check for
+	 * @param {(e:KeyboardEvent)=>void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
+	public onKeyUp(key: string, cb: (e: KeyboardEvent) => void) {
 		document.addEventListener('keyup', (e) => {
 			if (e.key === key) {
-				cb();
+				cb(e);
 			}
 		});
 	}
 
+	/**
+	 * @memberof Input
+	 * @description Adds a mouseMove event listener to the DOM
+	 * @param {(mousePos: { x:number; y:number }) => void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
 	public onMouseMove(cb: (mousePos: { x: number; y: number }) => void) {
 		if (this.game.canvas) {
 			this.game.canvas.addEventListener('mousemove', (e) => {
@@ -114,12 +160,22 @@ export default class Input {
 		}
 	}
 
+	/**
+	 * @memberof Input
+	 * @description Adds a click event to the DOM
+	 * @param {(e: MouseEvent) => void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
 	public onClick(cb: (e: MouseEvent) => void) {
 		document.addEventListener('click', cb);
 	}
 
-	// place in update loop in your scene
-
+	/**
+	 * @memberof Input
+	 * @description Gets the current state of the InputController, place in update loop
+	 * @returns Duck.Types.Input.Controller
+	 * @since 1.0.0-beta
+	 */
 	public get inputs() {
 		return this.controller;
 	}

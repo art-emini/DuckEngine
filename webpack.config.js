@@ -1,7 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
+const version = require('./package.json').version
 
-const license = `
-/*
+const banner = `
+DuckEngine ${version}
+
+https://github.com/ksplatdev/DuckEngine
+
 MIT License
 
 Copyright (c) 2021 Bleart Emini
@@ -23,7 +28,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
 `
 
 module.exports = {
@@ -36,6 +40,11 @@ module.exports = {
 		filename: 'index.js',
 		libraryTarget: 'module',
 	},
+	plugins: [
+		new webpack.BannerPlugin({
+			banner
+		})
+	],
 	optimization: {
 		minimize: false,
 	},

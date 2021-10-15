@@ -25,24 +25,28 @@ Only the previous two versions' changelogs will show.
    1. Removed render method
    2. Added preload method
    3. Added misc.canvasModulate to add
-7. Interactive
-   1. Changed Button and Text to extend GameObject
-8. StaticLight
+7. StaticLight
    1. Now extends GameObject
    2. Renamed setFillColor to setFillColorAlpha
-9. Map
+8. Input
+   1. Added KeyBoard event parameter to callback for onKeyUp, and onKeyDown
+9. Interactive
+   1. All interactive UI gameobjects now extend GameObject
+   2. Button zIndex is 3
+   3. Text zIndex is 4
+10. Map
     1. Changed all properties to be public
-10. Effect
+11. Effect
     1. Added id, zIndex, and visible properties
-11. Math
+12. Math
     1. Added lerp function
     2. Added Vector2 Class
     3. Removed return type from randomFloat
-12. New GameObjects
+13. New GameObjects
     1. Added gameobject class canvasModulate
-13. ParticleEmitter
+14. ParticleEmitter
     1. Removed draw method
-14. Misc
+15. Misc
     1. Rewritten types, moved all types into Duck.Types and all type classes into Duck
     2. Added renderableObject type which is any class that has a _draw method
     3. Canvas and context types is never undefined

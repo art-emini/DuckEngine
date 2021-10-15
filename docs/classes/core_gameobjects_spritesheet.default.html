@@ -81,6 +81,15 @@
 		</div>
 		<div class="col-7 offset-3 col-content">
 			<h1>Class default</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-tags">
+					<dl class="tsd-comment-tags"><dt>classdesc</dt>
+						<dd><p>Creates a DuckEngine SpriteSheet</p>
+						</dd><dt>description</dt>
+						<dd><p>The SpriteSheet Class. Represents a image with multiple frames</p>
+						</dd><dt>since</dt>
+						<dd><p>1.0.0-beta</p>
+					</dd></dl>
+			</div></section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -117,7 +126,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#fillColor" class="tsd-kind-icon">fill<wbr>Color</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_gameobjects_spritesheet.default.html#frameHeight" class="tsd-kind-icon">frame<wbr>Height</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_gameobjects_spritesheet.default.html#frameWidth" class="tsd-kind-icon">frame<wbr>Width</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_gameobjects_spritesheet.default.html#game" class="tsd-kind-icon">game</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#game" class="tsd-kind-icon">game</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#h-1" class="tsd-kind-icon">h</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_gameobjects_spritesheet.default.html#halfH" class="tsd-kind-icon">halfH</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="core_gameobjects_spritesheet.default.html#halfW" class="tsd-kind-icon">halfW</a></li>
@@ -175,40 +184,99 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:18</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:39</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Creates a SpriteSheet instance</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>X position</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Y position</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>imagePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Image path</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>frameWidth: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How wide one frame is</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>frameHeight: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How tall one frame is</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>rows: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How many rows are there in the image</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>cols: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>How many columns are there in the image</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>currentRow: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>The initial row to set it to</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>currentCol: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>The initial column to set it to</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>game: <a href="core_game.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Game instance</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_gameobjects_spritesheet.default.html" class="tsd-signature-type">default</a></h4>
@@ -224,7 +292,7 @@
 					<div class="tsd-signature tsd-kind-icon">animating<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:14</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -234,7 +302,7 @@
 					<div class="tsd-signature tsd-kind-icon">animation<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:16</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:22</li>
 						</ul>
 					</aside>
 				</section>
@@ -245,9 +313,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#bounds">bounds</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:32</li>
+							<li>Defined in core/gameobjects/gameObject.ts:151</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The bounds of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>2.0.0</p>
+						</dd></dl>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -273,9 +350,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collider">collider</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:28</li>
+							<li>Defined in core/gameobjects/gameObject.ts:127</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The Collider instance of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="collidesWith" class="tsd-anchor"></a>
@@ -284,9 +370,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collidesWith">collidesWith</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:29</li>
+							<li>Defined in core/gameobjects/gameObject.ts:135</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Gameobjects that can collide with the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="cols" class="tsd-anchor"></a>
@@ -294,7 +389,7 @@
 					<div class="tsd-signature tsd-kind-icon">cols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:10</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -304,7 +399,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Col<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:12</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -314,7 +409,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Row<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:11</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -325,9 +420,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#fillColor">fillColor</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:18</li>
+							<li>Defined in core/gameobjects/gameObject.ts:71</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The fillColor of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="frameHeight" class="tsd-anchor"></a>
@@ -335,7 +439,7 @@
 					<div class="tsd-signature tsd-kind-icon">frame<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:7</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:13</li>
 						</ul>
 					</aside>
 				</section>
@@ -345,20 +449,29 @@
 					<div class="tsd-signature tsd-kind-icon">frame<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:6</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:12</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="game" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> game</h3>
+					<h3>game</h3>
 					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="core_game.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#game">game</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:19</li>
+							<li>Defined in core/gameobjects/gameObject.ts:79</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The Game instance</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="h-1" class="tsd-anchor"></a>
@@ -367,9 +480,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#h-1">h</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:16</li>
+							<li>Defined in core/gameobjects/gameObject.ts:55</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The height of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="halfH" class="tsd-anchor"></a>
@@ -378,9 +500,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#halfH">halfH</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:26</li>
+							<li>Defined in core/gameobjects/gameObject.ts:119</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Half of the height or the full radius</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="halfW" class="tsd-anchor"></a>
@@ -389,9 +520,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#halfW">halfW</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:25</li>
+							<li>Defined in core/gameobjects/gameObject.ts:111</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Half of the width or the full radius</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -400,9 +540,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#id">id</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:12</li>
+							<li>Defined in core/gameobjects/gameObject.ts:23</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The unique identifier for a GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="image" class="tsd-anchor"></a>
@@ -410,7 +559,7 @@
 					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLImageElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:5</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:11</li>
 						</ul>
 					</aside>
 				</section>
@@ -421,9 +570,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#physics">physics</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:40</li>
+							<li>Defined in core/gameobjects/gameObject.ts:166</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Object that has all the physics method</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0</p>
+						</dd></dl>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -436,13 +594,25 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:41</li>
+												<li>Defined in core/gameobjects/gameObject.ts:173</li>
 											</ul>
 										</aside>
+										<div class="tsd-comment tsd-typography tsd-comment-tags">
+											<dl class="tsd-comment-tags"><dt>memberof</dt>
+												<dd><p>GameObject#physics</p>
+												</dd><dt>description</dt>
+												<dd><p>Adds a collider to the GameObject</p>
+												</dd><dt>since</dt>
+												<dd><p>1.0.0-beta</p>
+											</dd></dl>
+										</div>
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
 												<h5>collidesWith: <a href="core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">[]</span></h5>
+												<div class="tsd-comment tsd-typography tsd-comment-text">
+													<p>What the GameObject collides with</p>
+												</div>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <a href="core_physics_collider.default.html" class="tsd-signature-type">default</a></h4>
@@ -457,22 +627,43 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:42</li>
+												<li>Defined in core/gameobjects/gameObject.ts:184</li>
 											</ul>
 										</aside>
+										<div class="tsd-comment tsd-typography tsd-comment-tags">
+											<dl class="tsd-comment-tags"><dt>memberof</dt>
+												<dd><p>GameObject#physics</p>
+												</dd><dt>description</dt>
+												<dd><p>Adds bounds to the GameObject</p>
+												</dd><dt>since</dt>
+												<dd><p>2.0.0</p>
+											</dd></dl>
+										</div>
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
 												<h5>x: <span class="tsd-signature-type">number</span></h5>
+												<div class="tsd-comment tsd-typography tsd-comment-text">
+													<p>X position</p>
+												</div>
 											</li>
 											<li>
 												<h5>y: <span class="tsd-signature-type">number</span></h5>
+												<div class="tsd-comment tsd-typography tsd-comment-text">
+													<p>Y position</p>
+												</div>
 											</li>
 											<li>
 												<h5>w: <span class="tsd-signature-type">number</span></h5>
+												<div class="tsd-comment tsd-typography tsd-comment-text">
+													<p>Width of the bounds</p>
+												</div>
 											</li>
 											<li>
 												<h5>h: <span class="tsd-signature-type">number</span></h5>
+												<div class="tsd-comment tsd-typography tsd-comment-text">
+													<p>Height of the bounds</p>
+												</div>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -488,9 +679,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#position">position</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:14</li>
+							<li>Defined in core/gameobjects/gameObject.ts:39</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The current global position of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>2.0.0</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="r" class="tsd-anchor"></a>
@@ -499,9 +699,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#r">r</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:17</li>
+							<li>Defined in core/gameobjects/gameObject.ts:63</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The radius of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="rows" class="tsd-anchor"></a>
@@ -509,7 +718,7 @@
 					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/gameobjects/spritesheet.ts:9</li>
+							<li>Defined in core/gameobjects/spritesheet.ts:15</li>
 						</ul>
 					</aside>
 				</section>
@@ -520,9 +729,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:13</li>
+							<li>Defined in core/gameobjects/gameObject.ts:31</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The shape of the GameObject, &#39;rect&#39;, &#39;circle&#39;, &#39;roundrect&#39;, &#39;sprite&#39;, or &#39;spritesheet&#39;</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="velocity" class="tsd-anchor"></a>
@@ -531,9 +749,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#velocity">velocity</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:30</li>
+							<li>Defined in core/gameobjects/gameObject.ts:143</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The velocity of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>2.0.0</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="visible" class="tsd-anchor"></a>
@@ -542,9 +769,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#visible">visible</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:22</li>
+							<li>Defined in core/gameobjects/gameObject.ts:95</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Determines if a GameObject should be rendered or not</p>
+							</dd><dt>since</dt>
+							<dd><p>2.0.0</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="w-1" class="tsd-anchor"></a>
@@ -553,9 +789,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#w-1">w</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:15</li>
+							<li>Defined in core/gameobjects/gameObject.ts:47</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>The width of the GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>1.0.0-beta</p>
+						</dd></dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="zIndex" class="tsd-anchor"></a>
@@ -564,9 +809,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#zIndex">zIndex</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:23</li>
+							<li>Defined in core/gameobjects/gameObject.ts:103</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography tsd-comment-tags">
+						<dl class="tsd-comment-tags"><dt>memberof</dt>
+							<dd><p>GameObject</p>
+							</dd><dt>description</dt>
+							<dd><p>Determines the depth or zIndex of a GameObject</p>
+							</dd><dt>since</dt>
+							<dd><p>2.0.0</p>
+						</dd></dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -582,9 +836,15 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_draw">_draw</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:146</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:225</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Draws the spritesheet.</p>
+										<p>DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -600,7 +860,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_update">_update</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:129</li>
+									<li>Defined in core/gameobjects/gameObject.ts:283</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -623,13 +883,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:65</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:108</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Animates the spritesheet</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>fps: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Frames per second</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> switchRowOnEnd: <span class="tsd-signature-type">boolean</span></h5>
@@ -649,16 +921,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:82</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:133</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Animates the spritesheet for a duration</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>fps: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Frames per second</p>
+									</div>
 								</li>
 								<li>
 									<h5>timeMS: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Duration in milliseconds</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> switchRowOnEnd: <span class="tsd-signature-type">boolean</span></h5>
@@ -678,25 +965,49 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:89</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:151</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Animates the spritesheet in between frames</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>fps: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Frames per second</p>
+									</div>
 								</li>
 								<li>
 									<h5>col: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Start column</p>
+									</div>
 								</li>
 								<li>
 									<h5>row: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Start row</p>
+									</div>
 								</li>
 								<li>
 									<h5>stopCol: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>End column</p>
+									</div>
 								</li>
 								<li>
 									<h5>stopRow: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>End row</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> switchRowOnEnd: <span class="tsd-signature-type">boolean</span></h5>
@@ -716,9 +1027,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:123</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:191</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Animates the spritesheet with no set fps, works only with a being called in any loop</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -740,10 +1060,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getBottom">getBottom</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:186</li>
+									<li>Defined in core/gameobjects/gameObject.ts:371</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the bottom most coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -758,10 +1088,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterX">getCenterX</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:206</li>
+									<li>Defined in core/gameobjects/gameObject.ts:415</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the centerX coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -776,10 +1116,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterY">getCenterY</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:198</li>
+									<li>Defined in core/gameobjects/gameObject.ts:401</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the centerY coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -794,10 +1144,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getLeft">getLeft</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:190</li>
+									<li>Defined in core/gameobjects/gameObject.ts:381</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the left most coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -812,10 +1172,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getRight">getRight</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:194</li>
+									<li>Defined in core/gameobjects/gameObject.ts:391</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the right most coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -830,10 +1200,20 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getTop">getTop</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:182</li>
+									<li>Defined in core/gameobjects/gameObject.ts:361</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the top most coordinate of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>number</p>
 						</li>
 					</ul>
 				</section>
@@ -848,7 +1228,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#init">init</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:111</li>
+									<li>Defined in core/gameobjects/gameObject.ts:265</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -871,9 +1251,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:49</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:75</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Changes the current column to the next</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -888,9 +1277,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:55</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:86</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Changes the current row to the next</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -906,13 +1304,25 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setFillColor">setFillColor</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:176</li>
+									<li>Defined in core/gameobjects/gameObject.ts:349</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the fill color of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>fillColor: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Fill color</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -930,9 +1340,18 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setScale">setScale</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:147</li>
+									<li>Defined in core/gameobjects/gameObject.ts:307</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the scale of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -954,16 +1373,31 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setVelocity">setVelocity</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:163</li>
+									<li>Defined in core/gameobjects/gameObject.ts:330</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the velocity of an axis</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>axis: <span class="tsd-signature-type">"x"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"y"</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>&#39;x&#39; or &#39;y&#39; axis</p>
+									</div>
 								</li>
 								<li>
 									<h5>v: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Velocity value</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -980,9 +1414,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:61</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:97</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Stops the animation</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -997,9 +1440,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/gameobjects/spritesheet.ts:138</li>
+									<li>Defined in core/gameobjects/spritesheet.ts:211</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>SpriteSheet</p>
+									</dd><dt>description</dt>
+									<dd><p>Stops the animation</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -1051,7 +1503,7 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="core_gameobjects_spritesheet.default.html#frameWidth" class="tsd-kind-icon">frame<wbr>Width</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_gameobjects_spritesheet.default.html#game" class="tsd-kind-icon">game</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">

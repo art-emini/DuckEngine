@@ -42,6 +42,12 @@ export default class SmokeEffect extends Effect {
 		this.particleEmitter.keepEmitting(interval);
 	}
 
+	/**
+	 * @description Draws the effect.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}

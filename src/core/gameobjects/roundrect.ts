@@ -3,6 +3,12 @@ import Game from '../game';
 
 import GameObject from './gameObject';
 
+/**
+ * @class RoundRect
+ * @classdesc Creates a DuckEngine GameObject
+ * @description The RoundRect Class. Represents a smooth cornered rect
+ * @since 1.0.0-beta
+ */
 export default class RoundRect extends GameObject {
 	constructor(
 		x: number,
@@ -16,6 +22,12 @@ export default class RoundRect extends GameObject {
 		super('roundrect', x, y, w, h, r, fillColor, game);
 	}
 
+	/**
+	 * @description Draws the roundrect.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			if (this.w < 2 * this.r) this.r = this.w / 2;

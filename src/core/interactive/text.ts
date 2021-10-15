@@ -2,13 +2,27 @@ import { Duck } from '../../index';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
 
+/**
+ * @class Text
+ * @classdesc Creates a DuckEngine Text
+ * @description The Button Class. Renders Text to the canvas
+ * @extends GameObject
+ * @since 1.0.0-beta
+ */
 export default class Text extends GameObject {
 	public text: string;
 	private config: Duck.Types.Interactive.Text.Config;
 	public x: number;
 	public y: number;
 	public game: Game;
-
+	/**
+	 * @constructor
+	 * @description Creates a Text instance.
+	 * @param {string} text Text string
+	 * @param {Duck.Types.Interactive.Text.Config} config Text configuration, styles, position and more
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		text: string,
 		config: Duck.Types.Interactive.Text.Config,
@@ -20,8 +34,16 @@ export default class Text extends GameObject {
 		this.x = this.config.x;
 		this.y = this.config.y;
 		this.game = game;
+
+		this.zIndex = 4;
 	}
 
+	/**
+	 * @description Draws the text.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.font = this.config.styles.fontCSS;
@@ -75,6 +97,12 @@ export default class Text extends GameObject {
 		}
 	}
 
+	/**
+	 * @memberof Text
+	 * @description Sets the text string
+	 * @param {string} text
+	 * @since 1.0.0-beta
+	 */
 	public setText(text: string) {
 		this.text = text;
 	}

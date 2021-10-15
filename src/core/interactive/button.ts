@@ -6,6 +6,13 @@ import rectToRectIntersect from '../physics/rectToRectIntersect';
 import Scene from '../scene';
 import Text from './text';
 
+/**
+ * @class Button
+ * @classdesc Creates a DuckEngine Button
+ * @description The Button Class. Acts like a Button
+ * @extends GameObject
+ * @since 1.0.0
+ */
 export default class Button extends GameObject {
 	public shape: Duck.Types.Interactive.Button.Shape;
 	public x: number;
@@ -23,6 +30,21 @@ export default class Button extends GameObject {
 
 	private image: HTMLImageElement | undefined;
 
+	/**
+	 * @constructor
+	 * @description Creates a Button instance
+	 * @param {Duck.Types.Interactive.Button.Shape} shape Shape of the button, 'rect' or 'roundrect'
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width
+	 * @param {number} h Height
+	 * @param {number} r Radius
+	 * @param {string} fillColor Fill Color of the button
+	 * @param {Text} text Text instance to render on top of the button
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0
+	 */
 	constructor(
 		shape: Duck.Types.Interactive.Button.Shape,
 		x: number,
@@ -48,6 +70,8 @@ export default class Button extends GameObject {
 		this.scene = scene;
 
 		this.hovering = false;
+
+		this.zIndex = 3;
 
 		this.listeners = [];
 
@@ -154,6 +178,12 @@ export default class Button extends GameObject {
 		}
 	}
 
+	/**
+	 * @description Draws the button.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			switch (this.shape) {
@@ -218,10 +248,15 @@ export default class Button extends GameObject {
 					break;
 			}
 		}
-
-		this.text._draw();
 	}
 
+	/**
+	 * @memberof Button
+	 * @description Adds an event listener to the button
+	 * @param {Duck.Types.Interactive.Button.ListenerType} type Listener Type, type of event
+	 * @param {Duck.Types.Interactive.Button.ListenerFunc} func Callback function, called on event
+	 * @since 1.0.0
+	 */
 	public on(
 		type: Duck.Types.Interactive.Button.ListenerType,
 		func: Duck.Types.Interactive.Button.ListenerFunc
@@ -232,6 +267,12 @@ export default class Button extends GameObject {
 		});
 	}
 
+	/**
+	 * @memberof Button
+	 * @description Removes an event listener from the button
+	 * @param {Duck.Types.Interactive.Button.ListenerType} type Listener Type, type of event
+	 * @since 1.0.0
+	 */
 	public off(type: Duck.Types.Interactive.Button.ListenerType) {
 		const f = this.listeners.find(
 			(l) => l.type.toLowerCase() === type.toLowerCase()

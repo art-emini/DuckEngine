@@ -3,6 +3,12 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 
+/**
+ * @class Sprite
+ * @classdesc Creates a DuckEngine Sprite
+ * @description The Sprite Class. Represents a gameobject image
+ * @since 1.0.0-beta
+ */
 export default class Sprite extends GameObject {
 	public image: HTMLImageElement;
 	public path: string;
@@ -27,6 +33,12 @@ export default class Sprite extends GameObject {
 		this.h = h;
 	}
 
+	/**
+	 * @description Draws the sprite.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.drawImage(
@@ -43,6 +55,12 @@ export default class Sprite extends GameObject {
 		}
 	}
 
+	/**
+	 * @memberof Sprite
+	 * @description Sets the scale of the Sprite
+	 * @param {Duck.Types.Misc.Scale|number} scale
+	 * @since 1.0.0-beta
+	 */
 	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (scale.width) {
 			this.w = scale.width;
@@ -55,18 +73,31 @@ export default class Sprite extends GameObject {
 		}
 	}
 
+	/**
+	 * @memberof Sprite
+	 * @description Sets the image path of the sprite
+	 * @param {string} imgpath Image Path
+	 * @since 1.0.0-beta
+	 */
 	public setImagePath(imgpath: string) {
 		this.path = imgpath;
 		this.image.src = this.path;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public setFillColor(color: string) {
 		new Debug.Warn(
 			'Cannot fill color of a sprite. Changed the image path instead. Use setImagePath instead.'
 		);
-		this.path = color;
 	}
 
+	/**
+	 * @memberof Sprite
+	 * @description Applies a filter to the Sprite image
+	 * @param {'lightness'} filter Filter, 'lightness'
+	 * @param {number} value Value
+	 * @since 1.0.0-beta
+	 */
 	public applyFilter(filter: 'lightness', value: number) {
 		if (this.game.ctx) {
 			if (filter === 'lightness') {

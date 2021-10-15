@@ -6,29 +6,148 @@ import Game from '../game';
 import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
-import Particle from '../particles/particle';
 
+/**
+ * @class GameObject
+ * @classdesc Creates a DuckEngine GameObject
+ * @description The GameObject Class. All GameObjects extend this class
+ * @since 1.0.0-beta
+ */
 export default class GameObject {
+	/**
+	 * @memberof GameObject
+	 * @description The unique identifier for a GameObject
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public readonly id: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description The shape of the GameObject, 'rect', 'circle', 'roundrect', 'sprite', or 'spritesheet'
+	 * @type Duck.Types.Collider.ShapeString
+	 * @since 1.0.0-beta
+	 */
 	public readonly shape: Duck.Types.Collider.ShapeString;
+
+	/**
+	 * @memberof GameObject
+	 * @description The current global position of the GameObject
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public position: Vector2;
+
+	/**
+	 * @memberof GameObject
+	 * @description The width of the GameObject
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public w: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description The height of the GameObject
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public h: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description The radius of the GameObject
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public r: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description The fillColor of the GameObject
+	 * @type string
+	 * @since 1.0.0-beta
+	 */
 	public fillColor: string;
-	protected game: Game;
+
+	/**
+	 * @memberof GameObject
+	 * @description The Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
+	public game: Game;
+
+	/**
+	 * @memberof GameObject
+	 * @description An instance of itself, used for colliders
+	 * @type GameObject
+	 * @since 1.0.0-beta
+	 */
 	private self: Duck.GameObjects.GameObject | undefined;
 
+	/**
+	 * @memberof GameObject
+	 * @description Determines if a GameObject should be rendered or not
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public visible: boolean;
+
+	/**
+	 * @memberof GameObject
+	 * @description Determines the depth or zIndex of a GameObject
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public zIndex: number;
 
+	/**
+	 * @memberof GameObject
+	 * @description Half of the width or the full radius
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	protected halfW: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description Half of the height or the full radius
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	protected halfH: number;
 
+	/**
+	 * @memberof GameObject
+	 * @description The Collider instance of the GameObject
+	 * @type Collider | undefined
+	 * @since 1.0.0-beta
+	 */
 	public collider: Collider | undefined;
+
+	/**
+	 * @memberof GameObject
+	 * @description Gameobjects that can collide with the GameObject
+	 * @type GameObject[]
+	 * @since 1.0.0-beta
+	 */
 	public collidesWith: Duck.GameObjects.GameObject[];
+
+	/**
+	 * @memberof GameObject
+	 * @description The velocity of the GameObject
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public velocity: Vector2;
 
+	/**
+	 * @memberof GameObject
+	 * @description The bounds of the GameObject
+	 * @type \{ x: number; y: number; w: number; h: number; }
+	 * @since 2.0.0
+	 */
 	public bounds: {
 		x: number;
 		y: number;
@@ -37,11 +156,46 @@ export default class GameObject {
 	};
 
 	// methods
+
+	/**
+	 * @memberof GameObject
+	 * @description Object that has all the physics method
+	 * @type \{ addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider; setBounds: (x: number, y: number, w: number, h: number) => void }
+	 * @since 1.0.0
+	 */
 	public physics: {
+		/**
+		 * @memberof GameObject#physics
+		 * @description Adds a collider to the GameObject
+		 * @param {Duck.GameObjects.GameObject[]} collidesWith What the GameObject collides with
+		 * @since 1.0.0-beta
+		 */
 		addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider;
+
+		/**
+		 * @memberof GameObject#physics
+		 * @description Adds bounds to the GameObject
+		 * @param {number} x X position
+		 * @param {number} y Y position
+		 * @param {number} w Width of the bounds
+		 * @param {number} h Height of the bounds
+		 * @since 2.0.0
+		 */
 		setBounds: (x: number, y: number, w: number, h: number) => void;
 	};
-
+	/**
+	 * @constructor
+	 * @description Creates a GameObject instance.
+	 * @param {Duck.Types.Collider.ShapeString} shape Shape of the gameobject
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width
+	 * @param {number} h Height
+	 * @param {number} r Radius
+	 * @param {string} fillColor Fill color or image path
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		shape: Duck.Types.Collider.ShapeString,
 		x: number,
@@ -144,6 +298,12 @@ export default class GameObject {
 		}
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Sets the scale of the GameObject
+	 * @param {Duck.Types.Misc.Scale|number} scale
+	 * @since 1.0.0-beta
+	 */
 	public setScale(scale: Duck.Types.Misc.Scale | number) {
 		if (typeof scale !== 'number') {
 			if (scale.width) {
@@ -160,6 +320,13 @@ export default class GameObject {
 		}
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Sets the velocity of an axis
+	 * @param {'x'|'y'} axis 'x' or 'y' axis
+	 * @param {number} v Velocity value
+	 * @since 1.0.0-beta
+	 */
 	public setVelocity(axis: 'x' | 'y', v: number) {
 		if (axis === 'x') {
 			this.velocity.x = v;
@@ -173,28 +340,64 @@ export default class GameObject {
 		this.velocity.normalize();
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Sets the fill color of the GameObject
+	 * @param {string} fillColor Fill color
+	 * @since 1.0.0-beta
+	 */
 	public setFillColor(fillColor: string) {
 		this.fillColor = fillColor;
 	}
 
 	// position methods
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the top most coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getTop() {
 		return this.position.y;
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the bottom most coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getBottom() {
 		return this.position.y + this.h;
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the left most coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getLeft() {
 		return this.position.x;
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the right most coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getRight() {
 		return this.position.x + this.w;
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the centerY coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getCenterY() {
 		if (this.shape === 'circle') {
 			return this.position.y + this.r;
@@ -203,6 +406,12 @@ export default class GameObject {
 		}
 	}
 
+	/**
+	 * @memberof GameObject
+	 * @description Gets the centerX coordinate of the GameObject
+	 * @returns number
+	 * @since 1.0.0-beta
+	 */
 	public getCenterX() {
 		if (this.shape === 'circle') {
 			return this.position.x + this.r;
