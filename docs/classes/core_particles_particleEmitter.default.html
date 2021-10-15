@@ -81,6 +81,15 @@
 		</div>
 		<div class="col-7 offset-3 col-content">
 			<h1>Class default</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-tags">
+					<dl class="tsd-comment-tags"><dt>classdesc</dt>
+						<dd><p>Creates a DuckEngine ParticleEmitter</p>
+						</dd><dt>description</dt>
+						<dd><p>The ParticleEmitter Class. Emits, creates, and destroys particles</p>
+						</dd><dt>since</dt>
+						<dd><p>1.0.0-beta</p>
+					</dd></dl>
+			</div></section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -106,8 +115,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#emitting" class="tsd-kind-icon">emitting</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#floatRangeX" class="tsd-kind-icon">float<wbr>RangeX</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#floatRangeY" class="tsd-kind-icon">float<wbr>RangeY</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#game" class="tsd-kind-icon">game</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#list" class="tsd-kind-icon">list</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#game" class="tsd-kind-icon">game</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#list" class="tsd-kind-icon">list</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#particle" class="tsd-kind-icon">particle</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#rangeX" class="tsd-kind-icon">rangeX</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#rangeY" class="tsd-kind-icon">rangeY</a></li>
@@ -117,7 +126,6 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#_draw" class="tsd-kind-icon">_draw</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_particles_particleEmitter.default.html#addContainer" class="tsd-kind-icon">add<wbr>Container</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="core_particles_particleEmitter.default.html#createOne" class="tsd-kind-icon">create<wbr>One</a></li>
@@ -151,28 +159,64 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:24</li>
+									<li>Defined in core/particles/particleEmitter.ts:42</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd></dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>particle: <a href="core_particles_particle.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Base particle that is cloned and modified from</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>rangeX: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Where the new emitted particles x position is. A range of 2 values</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>rangeY: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Where the new emitted particles y position is. A range of 2 values</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>amount: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Amount of starting particles</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>game: <a href="core_game.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Game instance</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Scene instance</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_particles_particleEmitter.default.html" class="tsd-signature-type">default</a></h4>
@@ -188,7 +232,7 @@
 					<div class="tsd-signature tsd-kind-icon">amount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:13</li>
+							<li>Defined in core/particles/particleEmitter.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -198,7 +242,7 @@
 					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="core_particles_particleContainer.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:22</li>
+							<li>Defined in core/particles/particleEmitter.ts:29</li>
 						</ul>
 					</aside>
 				</section>
@@ -208,7 +252,7 @@
 					<div class="tsd-signature tsd-kind-icon">emitting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:17</li>
+							<li>Defined in core/particles/particleEmitter.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -218,7 +262,7 @@
 					<div class="tsd-signature tsd-kind-icon">float<wbr>RangeX<span class="tsd-signature-symbol">:</span> <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:19</li>
+							<li>Defined in core/particles/particleEmitter.ts:26</li>
 						</ul>
 					</aside>
 				</section>
@@ -228,27 +272,27 @@
 					<div class="tsd-signature tsd-kind-icon">float<wbr>RangeY<span class="tsd-signature-symbol">:</span> <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:20</li>
+							<li>Defined in core/particles/particleEmitter.ts:27</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="game" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> game</h3>
+					<h3>game</h3>
 					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="core_game.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:15</li>
+							<li>Defined in core/particles/particleEmitter.ts:21</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="list" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> list</h3>
+					<h3>list</h3>
 					<div class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">:</span> <a href="core_particles_particle.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:14</li>
+							<li>Defined in core/particles/particleEmitter.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -258,7 +302,7 @@
 					<div class="tsd-signature tsd-kind-icon">particle<span class="tsd-signature-symbol">:</span> <a href="core_particles_particle.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:10</li>
+							<li>Defined in core/particles/particleEmitter.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -268,7 +312,7 @@
 					<div class="tsd-signature tsd-kind-icon">rangeX<span class="tsd-signature-symbol">:</span> <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:11</li>
+							<li>Defined in core/particles/particleEmitter.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -278,7 +322,7 @@
 					<div class="tsd-signature tsd-kind-icon">rangeY<span class="tsd-signature-symbol">:</span> <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:12</li>
+							<li>Defined in core/particles/particleEmitter.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -288,30 +332,13 @@
 					<div class="tsd-signature tsd-kind-icon">scene<span class="tsd-signature-symbol">:</span> <a href="core_scene.default.html" class="tsd-signature-type">default</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in core/particles/particleEmitter.ts:16</li>
+							<li>Defined in core/particles/particleEmitter.ts:22</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="_draw" class="tsd-anchor"></a>
-					<h3>_draw</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_draw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:179</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="addContainer" class="tsd-anchor"></a>
 					<h3>add<wbr>Container</h3>
@@ -322,25 +349,49 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:249</li>
+									<li>Defined in core/particles/particleEmitter.ts:346</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Adds a <a href="../modules/index.Duck.html#ParticleContainer">ParticleContainer</a></p>
+									</dd><dt>since</dt>
+									<dd><p>1.2.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>X bounds of ParticleContainer</p>
+									</div>
 								</li>
 								<li>
 									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Y bounds of ParticleContainer</p>
+									</div>
 								</li>
 								<li>
 									<h5>w: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Width of ParticleContainer</p>
+									</div>
 								</li>
 								<li>
 									<h5>h: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Height of ParticleContainer</p>
+									</div>
 								</li>
 								<li>
 									<h5>physics: <a href="../interfaces/index.Duck.Types.ParticleContainer.Physics.html" class="tsd-signature-type">Physics</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Physics configuration for ParticleContainer</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_particles_particleContainer.default.html" class="tsd-signature-type">default</a></h4>
@@ -357,7 +408,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:51</li>
+									<li>Defined in core/particles/particleEmitter.ts:69</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -374,7 +425,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:57</li>
+									<li>Defined in core/particles/particleEmitter.ts:75</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -391,9 +442,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:87</li>
+									<li>Defined in core/particles/particleEmitter.ts:110</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Starts emitting particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -408,13 +468,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:95</li>
+									<li>Defined in core/particles/particleEmitter.ts:129</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Starts emitting particles for a certain duration</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>ms: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Duration in milliseconds</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -431,16 +503,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:224</li>
+									<li>Defined in core/particles/particleEmitter.ts:299</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the floatVelocity of all particles in between a range</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>rangeVX: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>A range of 2 values for the floatVelocity.x, randomly chosen between that range</p>
+									</div>
 								</li>
 								<li>
 									<h5>rangeVY: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>A range of 2 values for the floatVelocity.y, randomly chosen between that range</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -457,13 +544,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:110</li>
+									<li>Defined in core/particles/particleEmitter.ts:158</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Spawns new particles after the initial particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>intervalMS: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>How often a new particle gets spawned</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> limitTo: <span class="tsd-signature-type">number</span></h5>
@@ -483,13 +582,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:135</li>
+									<li>Defined in core/particles/particleEmitter.ts:195</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Offloads particles based on position</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>offloadY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The max y position of when a particle is offloaded</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> offloadX: <span class="tsd-signature-type">number</span></h5>
@@ -509,13 +620,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:162</li>
+									<li>Defined in core/particles/particleEmitter.ts:228</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Offloads particles based on how many seconds they existed for</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>ageInSeconds: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Max amount of seconds a particle existed for</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -532,9 +655,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:122</li>
+									<li>Defined in core/particles/particleEmitter.ts:175</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Pops particles from the list if too many particles exist</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -555,13 +687,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:237</li>
+									<li>Defined in core/particles/particleEmitter.ts:318</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the fillColor of all particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>fillColor: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Color</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -578,13 +722,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:243</li>
+									<li>Defined in core/particles/particleEmitter.ts:330</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the imagePath of all particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>imagePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Image path</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -601,16 +757,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:102</li>
+									<li>Defined in core/particles/particleEmitter.ts:143</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the new particles&#39; position range</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>rangeX: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Where the new emitted particles x position is. A range of 2 values</p>
+									</div>
 								</li>
 								<li>
 									<h5>rangeY: <a href="../modules/index.Duck.Types.ParticleEmitter.html#Range" class="tsd-signature-type">Range</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Where the new emitted particles y position is. A range of 2 values</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -627,16 +798,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:190</li>
+									<li>Defined in core/particles/particleEmitter.ts:252</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Sets the velocity of all particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>axis: <span class="tsd-signature-type">"x"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"y"</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>&#39;x&#39; or &#39;y&#39; axis to change the velocity of all particles</p>
+									</div>
 								</li>
 								<li>
 									<h5>v: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Value to set the velocity of all particles</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -653,9 +839,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:91</li>
+									<li>Defined in core/particles/particleEmitter.ts:119</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Stops emitting particles</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -670,13 +865,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/particles/particleEmitter.ts:196</li>
+									<li>Defined in core/particles/particleEmitter.ts:264</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>ParticleEmitter</p>
+									</dd><dt>description</dt>
+									<dd><p>Wobbles the particle on a random direction and axis</p>
+									</dd><dt>since</dt>
+									<dd><p>1.0.0-beta</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>v: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Value to set the wobble velocity to</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -712,10 +919,10 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="core_particles_particleEmitter.default.html#floatRangeY" class="tsd-kind-icon">float<wbr>RangeY</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_particles_particleEmitter.default.html#game" class="tsd-kind-icon">game</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_particles_particleEmitter.default.html#list" class="tsd-kind-icon">list</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
@@ -729,9 +936,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="core_particles_particleEmitter.default.html#scene" class="tsd-kind-icon">scene</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_particles_particleEmitter.default.html#_draw" class="tsd-kind-icon">_draw</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core_particles_particleEmitter.default.html#addContainer" class="tsd-kind-icon">add<wbr>Container</a>

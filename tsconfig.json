@@ -3,7 +3,7 @@
 		"target": "es6",
 		"module": "es6",
 		"moduleResolution": "node",
-		"removeComments": true,
+		"removeComments": false,
 		"noImplicitAny": true,
 		"outDir": "lib",
 		"strict": true,

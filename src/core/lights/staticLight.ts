@@ -4,6 +4,12 @@ import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
 
+/**
+ * @class StaticLight
+ * @classdesc Creates a DuckEngine StaticLight
+ * @description The StaticLight Class. A static light
+ * @since 1.0.0-beta
+ */
 export default class StaticLight extends GameObject {
 	public x: number;
 	public y: number;
@@ -15,6 +21,17 @@ export default class StaticLight extends GameObject {
 	public visible: boolean;
 	public zIndex: number;
 
+	/**
+	 * @constructor
+	 * @description Creates an instance of a StaticLight
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} r Radius
+	 * @param {string} fillColor Color
+	 * @param {Duck.Types.Helper.AlphaRange} alpha Alpha
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,
@@ -39,6 +56,12 @@ export default class StaticLight extends GameObject {
 		this.color = convertColorToRGBA(this.color, this.alpha);
 	}
 
+	/**
+	 * @description Draws the StaticLight.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.globalCompositeOperation = 'lighter';
@@ -54,6 +77,13 @@ export default class StaticLight extends GameObject {
 		}
 	}
 
+	/**
+	 * @memberof StaticLight
+	 * @description Sets the fillColor with alpha
+	 * @param  {string} color Fill Color
+	 * @param  {Duck.Types.Helper.AlphaRange} alpha Alpha
+	 * @since 2.0.0
+	 */
 	public setFillColorAlpha(
 		color: string,
 		alpha: Duck.Types.Helper.AlphaRange

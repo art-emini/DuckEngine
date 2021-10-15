@@ -41,7 +41,6 @@ export default class ExplosionEffect extends Effect {
 	}
 
 	public _draw() {
-		this.particleEmitter._draw();
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}
 }

@@ -43,7 +43,6 @@ export default class SmokeEffect extends Effect {
 	}
 
 	public _draw() {
-		this.particleEmitter._draw();
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}
 }

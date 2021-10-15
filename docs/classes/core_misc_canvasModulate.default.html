@@ -81,6 +81,15 @@
 		</div>
 		<div class="col-7 offset-3 col-content">
 			<h1>Class default</h1>
+			<section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography tsd-comment-tags">
+					<dl class="tsd-comment-tags"><dt>classdesc</dt>
+						<dd><p>Creates a DuckEngine CanvasModulate <a href="../modules/index.Duck.GameObjects.html#GameObject">GameObject</a></p>
+						</dd><dt>description</dt>
+						<dd><p>The CanvasModulate Class. A large rectangle with a special zIndex to use as a background, works with lights</p>
+						</dd><dt>since</dt>
+						<dd><p>2.0.0</p>
+					</dd></dl>
+			</div></section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -158,28 +167,63 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in core/misc/canvasModulate.ts:6</li>
+									<li>Defined in core/misc/canvasModulate.ts:23</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Creates a CanvasModulate instance.</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>X position</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Y position</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>w: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Width</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>h: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Height</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>fillColor: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Color to fill the CanvasModulate with</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>game: <a href="core_game.default.html" class="tsd-signature-type">default</a></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+										<div class="lead">
+											<p>Game instance</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_misc_canvasModulate.default.html" class="tsd-signature-type">default</a></h4>
@@ -463,9 +507,15 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_draw">_draw</a></p>
 								<ul>
-									<li>Defined in core/misc/canvasModulate.ts:19</li>
+									<li>Defined in core/misc/canvasModulate.ts:42</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>description</dt>
+									<dd><p>Draws the CanvasModulate gameobject.</p>
+										<p>DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList</p>
+								</dd></dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -481,13 +531,13 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_update">_update</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:121</li>
+									<li>Defined in core/gameobjects/gameObject.ts:129</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
 								<dl class="tsd-comment-tags"><dt>description</dt>
-									<dd><p>Updates the gameobject&#39;s position by the velocity. Sets velocity to 0 on every tick.
-										DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)</p>
+									<dd><p>Updates the gameobject&#39;s position by the velocity. Sets velocity to 0 on every tick.</p>
+										<p>DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)</p>
 								</dd></dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -505,7 +555,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getBottom">getBottom</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:178</li>
+									<li>Defined in core/gameobjects/gameObject.ts:186</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -523,7 +573,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterX">getCenterX</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:198</li>
+									<li>Defined in core/gameobjects/gameObject.ts:206</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -541,7 +591,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterY">getCenterY</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:190</li>
+									<li>Defined in core/gameobjects/gameObject.ts:198</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -559,7 +609,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getLeft">getLeft</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:182</li>
+									<li>Defined in core/gameobjects/gameObject.ts:190</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -577,7 +627,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getRight">getRight</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:186</li>
+									<li>Defined in core/gameobjects/gameObject.ts:194</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -595,7 +645,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getTop">getTop</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:174</li>
+									<li>Defined in core/gameobjects/gameObject.ts:182</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -637,7 +687,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setFillColor">setFillColor</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:168</li>
+									<li>Defined in core/gameobjects/gameObject.ts:176</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -661,7 +711,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setScale">setScale</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:139</li>
+									<li>Defined in core/gameobjects/gameObject.ts:147</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -685,7 +735,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setVelocity">setVelocity</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:155</li>
+									<li>Defined in core/gameobjects/gameObject.ts:163</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>

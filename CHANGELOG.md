@@ -30,14 +30,24 @@ Only the previous two versions' changelogs will show.
 8. StaticLight
    1. Now extends GameObject
    2. Renamed setFillColor to setFillColorAlpha
-9. Effect
-   1. Added id, zIndex, and visible properties
-10. New GameObjects
+9. Map
+    1. Changed all properties to be public
+10. Effect
+    1. Added id, zIndex, and visible properties
+11. Math
+    1. Added lerp function
+    2. Added Vector2 Class
+    3. Removed return type from randomFloat
+12. New GameObjects
     1. Added gameobject class canvasModulate
-11. Misc
+13. ParticleEmitter
+    1. Removed draw method
+14. Misc
     1. Rewritten types, moved all types into Duck.Types and all type classes into Duck
     2. Added renderableObject type which is any class that has a _draw method
     3. Canvas and context types is never undefined
+    4. Added jsdoc comments
+    5. Made game property, of most classes that had it, public
 
 ## 1.2.0
 

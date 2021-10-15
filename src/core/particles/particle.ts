@@ -5,13 +5,37 @@ import GameObject from '../gameobjects/gameObject';
 import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
 
+/**
+ * @class Particle
+ * @classdesc Creates a DuckEngine Particle
+ * @description The Particle Class. A particle that can be emitted by a {@link ParticleEmitter}
+ * @extends GameObject
+ * @since 1.0.0-beta
+ */
 export default class Particle extends GameObject {
 	private image: HTMLImageElement | undefined;
 
 	public floatVelocity: Vector2;
 
+	/**
+	 * @memberof Particle
+	 * @description The age of the particle in seconds
+	 * @property
+	 * @since 1.0.0
+	 */
 	public age: number;
 
+	/**
+	 * @constructor
+	 * @description Creates a Particle instance
+	 * @param {Duck.Types.Collider.ShapeString} shape Shape of the particle
+	 * @param {number} w Width of the particle
+	 * @param {number} h Height of the particle
+	 * @param {number} r Radius of the particle
+	 * @param {string} fillColor Color to fill the particle with
+	 * @param {Game} game Game instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		shape: Duck.Types.Collider.ShapeString,
 		w: number,
@@ -43,6 +67,11 @@ export default class Particle extends GameObject {
 		}, 1000);
 	}
 
+	/**
+	 * @memberof Particle
+	 * @description Draws the particle. Do not call manually, called automatically in scene loop
+	 * @since 1.0.0-beta
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			switch (this.shape) {
@@ -149,6 +178,7 @@ export default class Particle extends GameObject {
 	 * *Modified from gameobject*
 	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
 	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
+	 * @since 2.0.0
 	 */
 	public _update() {
 		(this.position.x += this.velocity.x) * this.game.deltaTime;
@@ -164,7 +194,12 @@ export default class Particle extends GameObject {
 
 		// don't round pixels for particles
 	}
-
+	/**
+	 * @memberof Particle
+	 * @description Sets the particle's image src. Only works if particle's shape was initially 'sprite'
+	 * @param {string} imagePath Image path
+	 * @since 1.0.0-beta
+	 */
 	public setImagePath(imagePath: string) {
 		if (this.image) {
 			this.image.src = imagePath;

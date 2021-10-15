@@ -708,7 +708,9 @@ export default class Scene extends Basic {
 	/**
 	 * @memberof Scene
 	 * @description Calls all visible gameobjects' _update method
+	 *
 	 * *Do not call manually, this is called in game loop*
+	 *
 	 * @since 2.0.0
 	 */
 	public __tick() {

@@ -112,11 +112,19 @@ export default class GameObject {
 		this.self = self;
 	}
 
+	/**
+	 * @description Draws the gameobject.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
 	public _draw() {}
 
 	/**
 	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
+	 *
 	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
+	 *
 	 */
 	public _update() {
 		(this.position.x += this.velocity.x) * this.game.deltaTime;

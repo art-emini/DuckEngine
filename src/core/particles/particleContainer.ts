@@ -4,6 +4,12 @@ import circleRectCollision from '../physics/circleToRectIntersect';
 import rectToRectIntersect from '../physics/rectToRectIntersect';
 import Particle from './particle';
 
+/**
+ * @class ParticleContainer
+ * @classdesc Creates a DuckEngine ParticleContainer
+ * @description The ParticleContainer Class. Keeps particles from leaving an area
+ * @since 1.2.0
+ */
 export default class ParticleContainer {
 	public x: number;
 	public y: number;
@@ -13,7 +19,16 @@ export default class ParticleContainer {
 	private game: Game;
 
 	public bounds: Duck.Types.ParticleContainer.Bounds;
-
+	/**
+	 * @constructor
+	 * @description Creates a ParticleContainer instance
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width
+	 * @param {number} h Height
+	 * @param {Duck.Types.ParticleContainer.Physics} physics Physics configuration
+	 * @param {Game} game Game instance
+	 */
 	constructor(
 		x: number,
 		y: number,
@@ -39,6 +54,15 @@ export default class ParticleContainer {
 		};
 	}
 
+	/**
+	 * @memberof ParticleContainer
+	 * @description Updates the current particle
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN PARTICLE EMITTER _draw METHOD
+	 *
+	 * @param {Particle} particle Current particle in a particleEmitter loop
+	 * @since 1.2.0
+	 */
 	public update(particle: Particle) {
 		if (particle.shape === 'circle') {
 			this.handleCircle(particle);
@@ -53,7 +77,7 @@ export default class ParticleContainer {
 		}
 	}
 
-	public handleRect(particle: Particle) {
+	private handleRect(particle: Particle) {
 		const obj = {
 			position: {
 				x: particle.position.x,
@@ -90,7 +114,7 @@ export default class ParticleContainer {
 		}
 	}
 
-	public handleCircle(particle: Particle) {
+	private handleCircle(particle: Particle) {
 		const obj = {
 			position: {
 				x: particle.position.x,
