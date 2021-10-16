@@ -34,19 +34,23 @@ Only the previous two versions' changelogs will show.
    1. All interactive UI gameobjects now extend GameObject
    2. Button zIndex is 3
    3. Text zIndex is 4
-10. Map
+10. Camera
+    1. Made viewport property public
+    2. Changed follow method to startFollow
+    3. Added lerp to follow
+11. Map
     1. Changed all properties to be public
-11. Effect
+12. Effect
     1. Added id, zIndex, and visible properties
-12. Math
+13. Math
     1. Added lerp function
     2. Added Vector2 Class
     3. Removed return type from randomFloat
-13. New GameObjects
+14. New GameObjects
     1. Added gameobject class canvasModulate
-14. ParticleEmitter
+15. ParticleEmitter
     1. Removed draw method
-15. Misc
+16. Misc
     1. Rewritten types, moved all types into Duck.Types and all type classes into Duck
     2. Added renderableObject type which is any class that has a _draw method
     3. Canvas and context types is never undefined

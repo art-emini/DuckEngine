@@ -20,6 +20,12 @@ import Button from '../interactive/button';
 import Text from '../interactive/text';
 import Particle from '../particles/particle';
 
+/**
+ * @class Camera
+ * @classdesc Creates a DuckEngine Camera
+ * @description The Camera Class. Creates and uses a viewport that acts like a camera
+ * @since 1.0.0-beta
+ */
 export default class Camera {
 	public game: Game;
 	public scene: Scene;
@@ -27,7 +33,7 @@ export default class Camera {
 	private lookAt: number[];
 	private ctx: CanvasRenderingContext2D | null | undefined;
 	private fieldOfView: number;
-	private viewport: {
+	public viewport: {
 		left: number;
 		right: number;
 		top: number;
@@ -47,6 +53,13 @@ export default class Camera {
 	private lerpX = 1;
 	private lerpY = 1;
 
+	/**
+	 * @constructor
+	 * @description Creates a camera instance.
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
 		this.scene = scene;
@@ -75,6 +88,14 @@ export default class Camera {
 		this.updateViewport();
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Begins camera path
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME -> SCENE LOOP AUTOMATICALLY
+	 *
+	 * @since 1.0.0-beta
+	 */
 	public begin() {
 		this.ctx?.save();
 		this.applyScale();
@@ -149,6 +170,14 @@ export default class Camera {
 		}
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Ends camera path
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME -> SCENE LOOP AUTOMATICALLY
+	 *
+	 * @since 1.0.0-beta
+	 */
 	public end() {
 		this.ctx?.restore();
 	}
@@ -194,11 +223,25 @@ export default class Camera {
 		}
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Sets the zoom
+	 * @param {number} z Zoom value
+	 * @since 1.0.0-beta
+	 */
 	public setZoom(z: number) {
 		this.distance = z;
 		this.updateViewport();
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Sets the zoom smoothly
+	 * @param {number} intervalMS How often zoom is modified by smoothValue
+	 * @param {number} smoothValue The number that is added to zoom on an interval
+	 * @param {number} z Target Zoom value
+	 * @since 1.0.0-beta
+	 */
 	public setZoomSmooth(intervalMS: number, smoothValue: number, z: number) {
 		let operation: 'add' | 'subtract' = 'add';
 
@@ -235,12 +278,27 @@ export default class Camera {
 		}, intervalMS);
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Moves the camera to a position
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @since 1.0.0-beta
+	 */
 	public moveTo(x: number, y: number) {
 		this.lookAt[0] = x;
 		this.lookAt[1] = y;
 		this.updateViewport();
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Follows a GameObject
+	 * @param {Duck.GameObjects.GameObject} gameObject Game object to follow
+	 * @param {number} [lerpX=1] Lerp on the x axis, optional -> defaults: 1
+	 * @param {number} [lerpY=1] Lerp on the y axis, optional -> defaults: 1
+	 * @since 1.0.0-beta
+	 */
 	public startFollow(
 		gameObject: Duck.GameObjects.GameObject,
 		lerpX = 1,
@@ -251,10 +309,24 @@ export default class Camera {
 		this.lerpY = lerpY;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Stops following a gameobject
+	 * @since 1.0.0-beta
+	 */
 	public stopFollow() {
 		this.following = undefined;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Transforms a coordinate pair from screen coordinates (relative to the canvas) into world coordinates,
+	 * useful for interacting with {@link Button} while having a camera
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {Duck.GameObjects.GameObject} obj GameObject
+	 * @since 1.0.0-beta
+	 */
 	public screenToWorld(
 		x: number,
 		y: number,
@@ -265,6 +337,15 @@ export default class Camera {
 		return obj;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Transforms a coordinate pair from world coordinates into screen coordinates (relative to the canvas) -
+	 * useful for placing DOM elements over the scene.
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {Duck.GameObjects.GameObject} obj GameObject
+	 * @since 1.0.0-beta
+	 */
 	public worldToScreen(
 		x: number,
 		y: number,
@@ -275,10 +356,24 @@ export default class Camera {
 		return obj;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Sets the FOV
+	 * @param {number} f FOV value
+	 * @since 1.0.0-beta
+	 */
 	public setFOV(f: number) {
 		this.fieldOfView = f;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Sets the FOV smoothly
+	 * @param {number} intervalMS How often FOV is modified by smoothValue
+	 * @param {number} smoothValue The number that is added to FOV on an interval
+	 * @param {number} f Target FOV value
+	 * @since 1.0.0-beta
+	 */
 	public setFOVSmooth(intervalMS: number, smoothValue: number, f: number) {
 		let operation: 'add' | 'subtract' = 'add';
 
@@ -315,14 +410,30 @@ export default class Camera {
 		}, intervalMS);
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Resets the FOV to the default value
+	 * @since 1.0.0-beta
+	 */
 	public resetFOV() {
 		this.fieldOfView = Math.PI / 4.0;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Resets the Zoom to the default value
+	 * @since 1.0.0-beta
+	 */
 	public resetZoom() {
 		this.distance = 1000.0;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Bounds of the Camera, an area the camera can be in
+	 * @param {{ position: { x:number; y:number }; w:number; h:number; }} bounds An object with the bounds
+	 * @since 1.0.0-beta
+	 */
 	public setBounds(bounds: {
 		position: { x: number; y: number };
 		w: number;
@@ -331,6 +442,14 @@ export default class Camera {
 		this.bounds = bounds;
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Shakes the camera
+	 * @param {number} intervalMS How often (in milliseconds) the passed value is added/subtracted from the Camera viewport position
+	 * @param {number} timeMS For how long in milliseconds the shake lasts
+	 * @param {number} v Value to be added/subtracted from the Camera viewport position
+	 * @since 1.0.0
+	 */
 	public shake(intervalMS: number, timeMS: number, v: number) {
 		const int = setInterval(() => {
 			const r = randomInt(1, 4);
@@ -359,6 +478,11 @@ export default class Camera {
 		}, timeMS);
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Adds a scroll event that changes the zoom value
+	 * @since 1.0.0-beta
+	 */
 	public scrollToZoom() {
 		window.onwheel = (e: WheelEvent) => {
 			if (e.ctrlKey) {
@@ -377,6 +501,12 @@ export default class Camera {
 		};
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Culls/Renders objects that are passed and does not render other object that are not passed
+	 * @param {Duck.Types.Renderable[]} renderableObjects Objects that should be culled/rendered
+	 * @since 2.0.0
+	 */
 	public cull(renderableObjects: Duck.Types.Renderable[]) {
 		const visibleObjects = this.scene.displayList.visibilityFilter(true);
 
@@ -396,6 +526,12 @@ export default class Camera {
 		}
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description A form of Frustum Culling that gets all objects visible to the player by the viewport's width and height and culls those objects
+	 * and does not render objects outside/not-visible to the player/camera
+	 * @since 2.0.0
+	 */
 	public autoCull() {
 		const objects = this.scene.displayList.list;
 
@@ -460,6 +596,11 @@ export default class Camera {
 		}
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Returns the default zoom, also uses DPR scaling if enabled
+	 * @since 1.0.0
+	 */
 	get defaultZoom() {
 		if (this.game.config.dprScale) {
 			if (this.game.config.debug) {
@@ -473,6 +614,11 @@ export default class Camera {
 		}
 	}
 
+	/**
+	 * @memberof Camera
+	 * @description Returns the default FOV
+	 * @since 1.0.0
+	 */
 	get defaultFOV() {
 		return Math.PI / 4;
 	}
