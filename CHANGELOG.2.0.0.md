@@ -59,6 +59,7 @@
   - Button default zIndex is set to 3
   - Text default zIndex is set to 4
   - Text width and height properties are correctly set using context.measureText
+  - Buttons now can be interacted with even with an active camera
 - Camera
   - Made viewport property public
   - Renamed follow method to startFollow
@@ -94,6 +95,7 @@
 ## Fixed
 
 - Fixed "bouncy" and "laggy" rect to round-rect collision response [#16](https://github.com/ksplatdev/DuckEngine/issues/16)
+- Fixed Button unable to be interacted with if there is an active camera
 
 ## Bugs
 

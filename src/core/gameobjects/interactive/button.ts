@@ -89,10 +89,22 @@ export default class Button extends GameObject {
 					y: e.clientY - rect.top,
 				};
 
+				const buttonPos = { x: this.x, y: this.y };
+
+				if (this.scene.currentCamera) {
+					const coords = this.scene.currentCamera.worldToScreen(
+						this.x,
+						this.y,
+						this
+					);
+					buttonPos.x = coords.position.x;
+					buttonPos.y = coords.position.y;
+				}
+
 				if (
 					rectToRectIntersect(
 						{
-							position: { x: this.x, y: this.y },
+							position: buttonPos,
 							w: this.w,
 							h: this.h,
 						},
@@ -127,10 +139,22 @@ export default class Button extends GameObject {
 					y: e.clientY - rect.top,
 				};
 
+				const buttonPos = { x: this.x, y: this.y };
+
+				if (this.scene.currentCamera) {
+					const coords = this.scene.currentCamera.worldToScreen(
+						this.x,
+						this.y,
+						this
+					);
+					buttonPos.x = coords.position.x;
+					buttonPos.y = coords.position.y;
+				}
+
 				if (
 					rectToRectIntersect(
 						{
-							position: { x: this.x, y: this.y },
+							position: buttonPos,
 							w: this.w,
 							h: this.h,
 						},
