@@ -9,13 +9,27 @@ import GameObject from '../gameObject';
  * @classdesc Creates a DuckEngine Raycast
  * @description The Raycast Class. Creates a Raycast that can be used to test for collisions
  * @extends GameObject
- * @since 1.0.0-beta
+ * @since 2.0.0
  */
 export default class Raycast extends GameObject {
+	/**
+	 * @memberof Raycast
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
 
 	private state: Duck.Types.Raycast.State;
 
+	/**
+	 * @constructor
+	 * @description Creates a Raycast instance.
+	 * @param {Vector2} begin Start position Vector2 of raycast
+	 * @param {Vector2} end End position Vector2 of raycast
+	 * @param {Scene} scene Scene instance
+	 * @param {Game} game Game instance
+	 */
 	constructor(begin: Vector2, end: Vector2, scene: Scene, game: Game) {
 		super('raycast', begin.x, begin.y, end.x, end.y, 0, '#ffffff', game);
 
@@ -30,18 +44,31 @@ export default class Raycast extends GameObject {
 		};
 	}
 
-	public show(strokeColor: string, strokeWidth: number) {
+	/**
+	 * @memberof Raycast
+	 * @description Draws a line representing the raycast, purely for debug
+	 * @param {string} lineColor Line color
+	 * @param {number} lineWidth Line width
+	 * @since 2.0.0
+	 */
+	public show(lineColor: string, lineWidth: number) {
 		// set line stroke and line width
-		this.game.ctx.strokeStyle = strokeColor;
-		this.game.ctx.lineWidth = strokeWidth;
+		this.game.ctx.strokeStyle = lineColor;
+		this.game.ctx.lineWidth = lineWidth;
 
 		// draw a red line
 		this.game.ctx.beginPath();
-		this.game.ctx.moveTo(200, 100);
-		this.game.ctx.lineTo(300, 200);
+		this.game.ctx.moveTo(this.position.x, this.position.y);
+		this.game.ctx.lineTo(this.w, this.h);
 		this.game.ctx.stroke();
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Casts the ray from the passed begin and to the end Vector2, sets state based on if intersecting or not
+	 * @param {GameObject[]} objects Objects to check if intersecting with
+	 * @since 2.0.0
+	 */
 	public cast(objects: GameObject[]) {
 		objects.forEach((object) => {
 			if (object.shape !== 'circle') {
@@ -191,22 +218,52 @@ export default class Raycast extends GameObject {
 		};
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Returns the Raycast intersecting state
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
 	public get isIntersecting() {
 		return this.state.colliding;
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Returns the Raycast intersecting top state
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
 	public get isIntersectingTop() {
 		return this.state.collidingTop;
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Returns the Raycast intersecting bottom state
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
 	public get isIntersectingBottom() {
 		return this.state.collidingBottom;
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Returns the Raycast intersecting left state
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
 	public get isIntersectingLeft() {
 		return this.state.collidingLeft;
 	}
 
+	/**
+	 * @memberof Raycast
+	 * @description Returns the Raycast intersecting right state
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
 	public get isIntersectingRight() {
 		return this.state.collidingRight;
 	}
