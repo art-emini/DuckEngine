@@ -251,7 +251,12 @@ export namespace Duck {
 			| Duck.TypeClasses.Maps.TileMap;
 		export namespace Game {
 			export interface Config {
-				canvas: HTMLCanvasElement | null;
+				canvas:
+					| HTMLCanvasElement
+					| {
+							canvas: HTMLCanvasElement;
+							ctx: CanvasRenderingContext2D;
+					  };
 				defaultScene: string;
 				roundPixels?: boolean;
 				scale?: Misc.Scale;

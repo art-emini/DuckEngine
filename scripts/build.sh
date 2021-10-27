@@ -1,3 +1,7 @@
+[ -d "./dist" ] && rm -rfv ./dist/*
+[ -d "./lib" ] && rm -rfv ./lib/*
+[ -d "./docs" ] && rm -rfv ./docs/*
+
 echo "Compiling"
 tsc
 echo "Compiled"
@@ -12,4 +16,5 @@ npm run build:docs
 echo "Built Docs"
 echo "Finishing"
 cp package.json lib/package.json
+cp LICENSE lib/LICENSE
 echo "Done"

@@ -69,6 +69,7 @@ Only the previous two versions' changelogs will show.
     6. Moved particles and interactive folder from src/core to src/core/gameobjects
     7. All classes can be found and used in Duck.Classes
     8. All type classes have been moved/added to Duck.TypeClasses
+    9. Modified start up message
 18. Bug Fixes
     1. Fixed "bouncy" and laggy rect to round-rect collision response
 

@@ -47,8 +47,19 @@ export default class Game {
 
 		this.config = config;
 
-		this.canvas = this.config.canvas || Duck.AutoCanvas().canvas;
-		this.ctx = this.canvas.getContext('2d') || Duck.AutoCanvas().ctx;
+		if (!this.config.canvas) {
+			new Debug.Error(
+				'You must pass in an HTMLCanvasElement or pass in the return value of Duck.AutoCanvas()!'
+			);
+		}
+
+		if (this.config.canvas instanceof HTMLCanvasElement) {
+			this.canvas = this.config.canvas;
+			this.ctx = this.canvas.getContext('2d') || Duck.AutoCanvas().ctx;
+		} else {
+			this.canvas = this.config.canvas.canvas;
+			this.ctx = this.config.canvas.ctx;
+		}
 
 		this.deltaTime = 0;
 		this.oldTime = 0;

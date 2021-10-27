@@ -4,17 +4,17 @@ import DuckEngine, { Duck } from '../../dist';
 export default class MainScene extends DuckEngine.Scene {
 	public myRect: Duck.TypeClasses.GameObjects.GameObject;
 	public myCircle: Duck.TypeClasses.GameObjects.GameObject;
-	public gameObjects: Duck.Group<Duck.TypeClasses.GameObjects.GameObject>;
+	public gameObjects: Duck.TypeClasses.Misc.Group<Duck.TypeClasses.GameObjects.GameObject>;
 
-	public myCamera: Duck.Camera;
+	public myCamera: Duck.TypeClasses.Cameras.Camera;
 
-	public myParticle: Duck.Particle;
-	public myParticleEmitter: Duck.ParticleEmitter;
+	public myParticle: Duck.TypeClasses.GameObjects.Particles.Particle;
+	public myParticleEmitter: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
 
-	public myInput: Duck.Input;
+	public myInput: Duck.TypeClasses.Input.Input;
 	private mySpeed = 1;
 
-	constructor(game: Duck.Game) {
+	constructor(game: Duck.TypeClasses.Game) {
 		super('main', game);
 
 		// gameobjects
