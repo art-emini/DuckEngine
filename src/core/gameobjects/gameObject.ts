@@ -144,6 +144,18 @@ export default class GameObject {
 
 	/**
 	 * @memberof GameObject
+	 * @description The vertices of the GameObject, as numbers
+	 * @type Vector2[]
+	 * @since 2.0.0
+	 */
+	public vertices: Vector2[];
+	private topLeftVertex: Vector2;
+	private topRightVertex: Vector2;
+	private bottomLeftVertex: Vector2;
+	private bottomRightVertex: Vector2;
+
+	/**
+	 * @memberof GameObject
 	 * @description The bounds of the GameObject
 	 * @type \{ x: number; y: number; w: number; h: number; }
 	 * @since 2.0.0
@@ -227,6 +239,27 @@ export default class GameObject {
 
 		this.velocity = Vector2.ZERO;
 
+		this.vertices = [];
+		this.topLeftVertex = Vector2.ZERO;
+		this.topRightVertex = Vector2.ZERO;
+		this.bottomLeftVertex = Vector2.ZERO;
+		this.bottomRightVertex = Vector2.ZERO;
+
+		// populate vertices
+		if (this.shape !== 'circle') {
+			this.topLeftVertex = new Vector2(this.position.x, this.position.y);
+			this.topRightVertex = new Vector2(this.w, this.position.y);
+			this.bottomLeftVertex = new Vector2(this.position.x, this.h);
+			this.bottomRightVertex = new Vector2(this.w, this.h);
+
+			this.vertices = [
+				this.topLeftVertex,
+				this.topRightVertex,
+				this.bottomLeftVertex,
+				this.bottomRightVertex,
+			];
+		}
+
 		this.bounds = {
 			x: -1000000,
 			y: -1000000,
@@ -296,6 +329,30 @@ export default class GameObject {
 		if (this.game.config.roundPixels) {
 			this.position.round();
 		}
+
+		// update vertices
+		// top left
+		this.topLeftVertex.x = this.position.x;
+		this.topLeftVertex.y = this.position.y;
+
+		// top right
+		this.topRightVertex.x = this.w;
+		this.topRightVertex.y = this.position.y;
+
+		// bottom left
+		this.bottomLeftVertex.x = this.position.x;
+		this.bottomLeftVertex.y = this.h;
+
+		// bottom right
+		this.bottomRightVertex.x = this.w;
+		this.bottomRightVertex.y = this.h;
+
+		this.vertices = [
+			this.topLeftVertex,
+			this.topRightVertex,
+			this.bottomLeftVertex,
+			this.bottomRightVertex,
+		];
 	}
 
 	/**

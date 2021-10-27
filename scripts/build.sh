@@ -1,9 +1,9 @@
 echo "Compiling"
 tsc
 echo "Compiled"
-echo "Merging Files"
+echo "Bundling Files"
 npm run webpack
-echo "Merged"
+echo "Bundled"
 echo "Minifying"
 npm run minify
 echo "Minified"

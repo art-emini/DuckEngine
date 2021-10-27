@@ -533,4 +533,18 @@ export default class Vector2 {
 	public static get RIGHT() {
 		return new Vector2(1, 0);
 	}
+
+	/**
+	 * @memberof Vector2
+	 * @static
+	 * @description Returns a Vector2 with passed parameters, if no parameters are passed, a Vector2.ZERO is returned
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public static CREATE(x?: number, y?: number) {
+		if (!x && !y) return this.ZERO; // none
+		if (x && !y) return new Vector2(x); // only x
+		if (!x && y) return new Vector2(0, y); // only y
+		return new Vector2(x, y); // both
+	}
 }

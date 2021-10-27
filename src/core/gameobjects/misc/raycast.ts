@@ -1,0 +1,213 @@
+import { Duck } from '../../..';
+import Game from '../../game';
+import Vector2 from '../../math/vector2';
+import Scene from '../../scene';
+import GameObject from '../gameObject';
+
+/**
+ * @class Raycast
+ * @classdesc Creates a DuckEngine Raycast
+ * @description The Raycast Class. Creates a Raycast that can be used to test for collisions
+ * @extends GameObject
+ * @since 1.0.0-beta
+ */
+export default class Raycast extends GameObject {
+	public scene: Scene;
+
+	private state: Duck.Types.Raycast.State;
+
+	constructor(begin: Vector2, end: Vector2, scene: Scene, game: Game) {
+		super('raycast', begin.x, begin.y, end.x, end.y, 0, '#ffffff', game);
+
+		this.scene = scene;
+
+		this.state = {
+			colliding: false,
+			collidingTop: false,
+			collidingBottom: false,
+			collidingLeft: false,
+			collidingRight: false,
+		};
+	}
+
+	public show(strokeColor: string, strokeWidth: number) {
+		// set line stroke and line width
+		this.game.ctx.strokeStyle = strokeColor;
+		this.game.ctx.lineWidth = strokeWidth;
+
+		// draw a red line
+		this.game.ctx.beginPath();
+		this.game.ctx.moveTo(200, 100);
+		this.game.ctx.lineTo(300, 200);
+		this.game.ctx.stroke();
+	}
+
+	public cast(objects: GameObject[]) {
+		objects.forEach((object) => {
+			if (object.shape !== 'circle') {
+				this.checkIntersectingRect(
+					this.w,
+					this.h,
+					this.position.x,
+					this.position.y,
+					object.position.x,
+					object.position.y,
+					object.w,
+					object.h,
+					object
+				);
+			} else {
+				// circle's x and y are in the center
+				// get correct x and y
+				const objX = object.position.x - object.r;
+				const objY = object.position.y - object.r;
+
+				const diameter = object.r * 2;
+
+				this.checkIntersectingRect(
+					this.w,
+					this.h,
+					this.position.x,
+					this.position.y,
+					objX,
+					objY,
+					diameter,
+					diameter,
+					object
+				);
+			}
+		});
+	}
+
+	private checkIntersectingRect(
+		x1: number,
+		y1: number,
+		x2: number,
+		y2: number,
+		rx: number,
+		ry: number,
+		rw: number,
+		rh: number,
+		obj: GameObject
+	) {
+		const left = this.isIntersectingLine(
+			x1,
+			y1,
+			x2,
+			y2,
+			rx,
+			ry,
+			rx,
+			ry + rh,
+			obj
+		);
+		const right = this.isIntersectingLine(
+			x1,
+			y1,
+			x2,
+			y2,
+			rx + rw,
+			ry,
+			rx + rw,
+			ry + rh,
+			obj
+		);
+		const top = this.isIntersectingLine(
+			x1,
+			y1,
+			x2,
+			y2,
+			rx,
+			ry,
+			rx + rw,
+			ry,
+			obj
+		);
+		const bottom = this.isIntersectingLine(
+			x1,
+			y1,
+			x2,
+			y2,
+			rx,
+			ry + rh,
+			rx + rw,
+			ry + rh,
+			obj
+		);
+
+		// set states
+		this.state.collidingLeft = left;
+		this.state.collidingRight = right;
+		this.state.collidingTop = top;
+		this.state.collidingBottom = bottom;
+
+		// if any of the above are true, the ray is intersecting
+		if (left || right || top || bottom) {
+			this.state.colliding = left || right || top || bottom;
+			return true;
+		}
+		this.state.colliding = false;
+		return false;
+	}
+
+	private isIntersectingLine(
+		x1: number,
+		y1: number,
+		x2: number,
+		y2: number,
+		x3: number,
+		y3: number,
+		x4: number,
+		y4: number,
+		obj: GameObject
+	) {
+		const uA =
+			((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) /
+			((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+
+		const uB =
+			((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) /
+			((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+
+		// if uA and uB are between 0-1, lines are colliding
+		if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
+			const intersectionX = x1 + uA * (x2 - x1);
+			const intersectionY = y1 + uA * (y2 - y1);
+
+			return this.createStateValue(intersectionX, intersectionY, obj);
+		} else {
+			return false;
+		}
+	}
+
+	private createStateValue(
+		x: number,
+		y: number,
+		obj: GameObject
+	): Duck.Types.Raycast.StateValue {
+		return {
+			intersection: new Vector2(x, y),
+			with: obj,
+		};
+	}
+
+	public get isIntersecting() {
+		return this.state.colliding;
+	}
+
+	public get isIntersectingTop() {
+		return this.state.collidingTop;
+	}
+
+	public get isIntersectingBottom() {
+		return this.state.collidingBottom;
+	}
+
+	public get isIntersectingLeft() {
+		return this.state.collidingLeft;
+	}
+
+	public get isIntersectingRight() {
+		return this.state.collidingRight;
+	}
+}

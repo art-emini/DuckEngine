@@ -72,6 +72,10 @@ import SmokeEffect from './effect/preset/smoke';
 import DisplayList from './models/displayList';
 import GameObject from './gameobjects/gameObject';
 import CanvasModulate from './misc/canvasModulate';
+import Vector2 from './math/vector2';
+import clamp from './math/clamp';
+import lerp from './math/lerp';
+import Raycast from './gameobjects/misc/raycast';
 
 /**
  * @class Scene
@@ -97,6 +101,9 @@ export default class Scene extends Basic {
 
 	public add: {
 		gameobject: {
+			misc: {
+				raycast: (begin: Vector2, end: Vector2) => Raycast;
+			};
 			sprite: (
 				x: number,
 				y: number,
@@ -232,8 +239,6 @@ export default class Scene extends Basic {
 	};
 
 	public tools: {
-		randomInt: (min: number, max: number) => number;
-		randomFloat: (min: number, max: number, fixed?: number) => number;
 		loader: Loader;
 		color: {
 			random: () => string;
@@ -294,6 +299,13 @@ export default class Scene extends Basic {
 					  }
 			) => boolean;
 		};
+		math: {
+			createVector: (x?: number, y?: number) => Vector2;
+			clamp: (x: number, min: number, max: number) => number;
+			lerp: (start: number, end: number, amount: number) => number;
+			randomInt: (min: number, max: number) => number;
+			randomFloat: (min: number, max: number, fixed?: number) => number;
+		};
 	};
 
 	/**
@@ -339,6 +351,17 @@ export default class Scene extends Basic {
 		 */
 		this.add = {
 			gameobject: {
+				misc: {
+					raycast: (begin: Vector2, end: Vector2) => {
+						const myRayCast = new Raycast(
+							begin,
+							end,
+							this,
+							this.game
+						);
+						return myRayCast;
+					},
+				},
 				sprite: (
 					x: number,
 					y: number,
@@ -646,8 +669,6 @@ export default class Scene extends Basic {
 		 * @since 1.0.0-beta
 		 */
 		this.tools = {
-			randomInt: randomInt,
-			randomFloat: randomFloat,
 			loader: Loader,
 			color: {
 				random: randomColor,
@@ -701,6 +722,13 @@ export default class Scene extends Basic {
 				) => {
 					return circleToRectIntersect(circle, rect);
 				},
+			},
+			math: {
+				createVector: Vector2.CREATE,
+				clamp: clamp,
+				lerp: lerp,
+				randomInt: randomInt,
+				randomFloat: randomFloat,
 			},
 		};
 	}

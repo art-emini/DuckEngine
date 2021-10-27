@@ -9,6 +9,7 @@ Only the previous two versions' changelogs will show.
    2. Removed props vx, vy and changed to velocity Vector2
    3. Renamed draw method to _draw which is public but shouldn't be used
    4. Added zIndex and visible properties
+   5. Added misc gameobject Raycast
 2. Map
    1. Added id, zIndex, and visible properties
 3. Particles
@@ -25,6 +26,11 @@ Only the previous two versions' changelogs will show.
    1. Removed render method
    2. Added preload method
    3. Added misc.canvasModulate to add
+   4. Tools
+      1. Moved randomInt and randomFloat to tools.math
+      2. Added tools.math
+   5. Add -> gameobjects
+      1. Added misc -> raycast to add a raycast
 7. StaticLight
    1. Now extends GameObject
    2. Renamed setFillColor to setFillColorAlpha

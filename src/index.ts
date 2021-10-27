@@ -29,6 +29,7 @@ import ParticleContainerClass from './core/particles/particleContainer';
 import EffectClass from './core/effect/effect';
 import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
+import Vector2 from './core/math/vector2';
 
 // main
 
@@ -158,7 +159,8 @@ export namespace Duck {
 				| 'circle'
 				| 'roundrect'
 				| 'spritesheet'
-				| 'sprite';
+				| 'sprite'
+				| 'raycast';
 		}
 
 		export namespace Storage {
@@ -383,6 +385,21 @@ export namespace Duck {
 
 			export interface Physics {
 				bounciness: number;
+			}
+		}
+
+		export namespace Raycast {
+			export interface State {
+				colliding: StateValue | false;
+				collidingTop: StateValue | false;
+				collidingBottom: StateValue | false;
+				collidingLeft: StateValue | false;
+				collidingRight: StateValue | false;
+			}
+
+			export interface StateValue {
+				intersection: Vector2;
+				with: GameObject;
 			}
 		}
 
