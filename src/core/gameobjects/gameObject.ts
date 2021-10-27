@@ -438,11 +438,6 @@ export default class GameObject {
 		this.internalRaycasts.bottom.cast(this.collidesWith);
 		this.internalRaycasts.left.cast(this.collidesWith);
 		this.internalRaycasts.right.cast(this.collidesWith);
-
-		this.internalRaycasts.top.show('#00ff00', 3);
-		this.internalRaycasts.bottom.show('#00ff00', 3);
-		this.internalRaycasts.left.show('#00ff00', 3);
-		this.internalRaycasts.right.show('#00ff00', 3);
 	}
 
 	/**
