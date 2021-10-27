@@ -6,7 +6,7 @@ import Game from '../game';
 import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
-import Raycast from './misc/raycast';
+import Raycast from '../misc/raycast';
 
 /**
  * @class GameObject

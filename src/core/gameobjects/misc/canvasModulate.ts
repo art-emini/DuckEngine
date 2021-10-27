@@ -1,6 +1,6 @@
-import Debug from '../debug/debug';
-import Game from '../game';
-import GameObject from '../gameobjects/gameObject';
+import Debug from '../../debug/debug';
+import Game from '../../game';
+import GameObject from '../gameObject';
 
 /**
  * @class CanvasModulate

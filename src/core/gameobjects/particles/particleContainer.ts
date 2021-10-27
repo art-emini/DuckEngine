@@ -16,7 +16,7 @@ export default class ParticleContainer {
 	public w: number;
 	public h: number;
 	private physics: Duck.Types.ParticleContainer.Physics;
-	private game: Game;
+	public game: Game;
 
 	public bounds: Duck.Types.ParticleContainer.Bounds;
 	/**

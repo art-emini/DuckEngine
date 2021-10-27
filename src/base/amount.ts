@@ -9,7 +9,7 @@ import Game from '../core/game';
 export default class Amount {
 	private func: (currentCount: number) => void;
 	public reachedMaxAmount: boolean;
-	private game: Game;
+	public game: Game;
 
 	public currentCount: number;
 	public readonly maxAmount: number;

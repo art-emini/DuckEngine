@@ -31,9 +31,9 @@ import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
 import Vector2Class from './core/math/vector2';
 import DisplayListClass from './core/models/displayList';
-import CanvasModulateClass from './core/misc/canvasModulate';
+import CanvasModulateClass from './core/gameobjects/misc/canvasModulate';
 import MapClass from './core/map/map';
-import RaycastClass from './core/gameobjects/misc/raycast';
+import RaycastClass from './core/misc/raycast';
 import AmountClass from './base/amount';
 
 // main
@@ -94,6 +94,7 @@ export namespace Duck {
 
 			export namespace Misc {
 				export const Raycast = RaycastClass;
+				export const CanvasModulate = CanvasModulateClass;
 			}
 		}
 
@@ -108,7 +109,6 @@ export namespace Duck {
 
 		export namespace Misc {
 			export const Storage = DuckStorageClass;
-			export const CanvasModulate = CanvasModulateClass;
 			export const Loader = LoaderClass;
 			export const Group = GroupClass;
 			export const Cutscene = CutsceneClass;
@@ -178,6 +178,7 @@ export namespace Duck {
 
 			export namespace Misc {
 				export type Raycast = RaycastClass;
+				export type CanvasModulate = CanvasModulateClass;
 			}
 		}
 
@@ -192,7 +193,6 @@ export namespace Duck {
 
 		export namespace Misc {
 			export type Storage = DuckStorageClass;
-			export type CanvasModulate = CanvasModulateClass;
 			export type Loader = LoaderClass;
 			export type Group<t extends Duck.Types.Group.StackItem> =
 				GroupClass<t>;
@@ -243,6 +243,7 @@ export namespace Duck {
 			export type Input = InputClass;
 		}
 	}
+
 	export namespace Types {
 		export type GameObject = GameObjectClass;
 		export type Renderable =

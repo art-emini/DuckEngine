@@ -1,4 +1,5 @@
 import { Duck } from '../../../index';
+import extractNumbers from '../../../utils/extractNumbers';
 import Game from '../../game';
 import GameObject from '../gameObject';
 
@@ -12,8 +13,6 @@ import GameObject from '../gameObject';
 export default class Text extends GameObject {
 	public text: string;
 	private config: Duck.Types.Interactive.Text.Config;
-	public x: number;
-	public y: number;
 	public game: Game;
 	/**
 	 * @constructor
@@ -31,9 +30,12 @@ export default class Text extends GameObject {
 		super('rect', config.x, config.y, 0, 0, 0, text, game);
 		this.text = text;
 		this.config = config;
-		this.x = this.config.x;
-		this.y = this.config.y;
 		this.game = game;
+
+		// set w and h
+		this.game.ctx.font = this.config.styles.fontCSS;
+		this.w = game.ctx.measureText(text).width;
+		this.h = extractNumbers(config.styles.fontCSS);
 
 		this.zIndex = 4;
 	}
@@ -56,8 +58,8 @@ export default class Text extends GameObject {
 
 				this.game.ctx.fillText(
 					this.text,
-					this.x,
-					this.y,
+					this.position.x,
+					this.position.y,
 					this.config.styles.maxWidth
 				);
 			}
@@ -67,8 +69,8 @@ export default class Text extends GameObject {
 
 				this.game.ctx.strokeText(
 					this.text,
-					this.x,
-					this.y,
+					this.position.x,
+					this.position.y,
 					this.config.styles.maxWidth
 				);
 			}
@@ -82,15 +84,15 @@ export default class Text extends GameObject {
 
 				this.game.ctx.fillText(
 					this.text,
-					this.x,
-					this.y,
+					this.position.x,
+					this.position.y,
 					this.config.styles.maxWidth
 				);
 
 				this.game.ctx.strokeText(
 					this.text,
-					this.x,
-					this.y,
+					this.position.x,
+					this.position.y,
 					this.config.styles.maxWidth
 				);
 			}

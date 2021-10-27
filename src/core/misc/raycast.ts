@@ -1,7 +1,7 @@
-import { Duck } from '../../..';
-import Game from '../../game';
-import Vector2 from '../../math/vector2';
-import GameObject from '../gameObject';
+import { Duck } from '../../index';
+import Game from '../game';
+import Vector2 from '../math/vector2';
+import GameObject from '../gameobjects/gameObject';
 
 /**
  * @class Raycast

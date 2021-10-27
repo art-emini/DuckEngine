@@ -9,7 +9,7 @@ import Game from '../game';
  * @since 1.0.0-beta
  */
 export default class Input {
-	private game: Game;
+	public game: Game;
 	private controller: Duck.Types.Input.Controller;
 	private listeners: Duck.Types.Input.Listener[];
 

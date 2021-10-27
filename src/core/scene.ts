@@ -71,11 +71,11 @@ import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
 import DisplayList from './models/displayList';
 import GameObject from './gameobjects/gameObject';
-import CanvasModulate from './misc/canvasModulate';
+import CanvasModulate from './gameobjects/misc/canvasModulate';
 import Vector2 from './math/vector2';
 import clamp from './math/clamp';
 import lerp from './math/lerp';
-import Raycast from './gameobjects/misc/raycast';
+import Raycast from './misc/raycast';
 
 /**
  * @class Scene

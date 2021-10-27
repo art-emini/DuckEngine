@@ -24,7 +24,7 @@ import Sprite from '../gameobjects/sprite';
 export default class Collider {
 	public shape: Duck.TypeClasses.GameObjects.GameObject;
 	public collidesWith: Duck.TypeClasses.GameObjects.GameObject[];
-	private game: Game;
+	public game: Game;
 
 	/**
 	 * @constructor Collider
