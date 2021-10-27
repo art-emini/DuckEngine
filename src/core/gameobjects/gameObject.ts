@@ -6,6 +6,7 @@ import Game from '../game';
 import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
+import Raycast from './misc/raycast';
 
 /**
  * @class GameObject
@@ -128,7 +129,7 @@ export default class GameObject {
 
 	/**
 	 * @memberof GameObject
-	 * @description Gameobjects that can collide with the GameObject
+	 * @description Gameobjects that can collide with the GameObject, also used for internalRaycasts
 	 * @type GameObject[]
 	 * @since 1.0.0-beta
 	 */
@@ -153,6 +154,13 @@ export default class GameObject {
 	private topRightVertex: Vector2;
 	private bottomLeftVertex: Vector2;
 	private bottomRightVertex: Vector2;
+
+	private internalRaycasts: {
+		top: Raycast;
+		bottom: Raycast;
+		left: Raycast;
+		right: Raycast;
+	};
 
 	/**
 	 * @memberof GameObject
@@ -260,6 +268,48 @@ export default class GameObject {
 			];
 		}
 
+		// setup internal raycasts
+		const middle = this.getCenter();
+
+		let width = this.w / 2;
+		let height = this.h / 2;
+
+		if (this.shape === 'circle') {
+			width = this.r;
+			height = this.r;
+		}
+
+		this.internalRaycasts = {
+			top: new Raycast(
+				middle,
+				Vector2.fromVec(
+					middle.clone().setValues(middle.x, middle.y - (height + 1))
+				),
+				this.game
+			),
+			bottom: new Raycast(
+				middle,
+				Vector2.fromVec(
+					middle.clone().setValues(middle.x, middle.y + (height + 1))
+				),
+				this.game
+			),
+			left: new Raycast(
+				middle,
+				Vector2.fromVec(
+					middle.clone().setValues(middle.x - (width + 1), middle.y)
+				),
+				this.game
+			),
+			right: new Raycast(
+				middle,
+				Vector2.fromVec(
+					middle.clone().setValues(middle.x + (width + 1), middle.y)
+				),
+				this.game
+			),
+		};
+
 		this.bounds = {
 			x: -1000000,
 			y: -1000000,
@@ -353,6 +403,46 @@ export default class GameObject {
 			this.bottomLeftVertex,
 			this.bottomRightVertex,
 		];
+
+		// internal raycasts
+		const middle = this.getCenter();
+
+		let width = this.w / 2;
+		let height = this.h / 2;
+
+		if (this.shape === 'circle') {
+			width = this.r;
+			height = this.r;
+		}
+
+		this.internalRaycasts.top.position = middle;
+		this.internalRaycasts.bottom.position = middle;
+		this.internalRaycasts.left.position = middle;
+		this.internalRaycasts.right.position = middle;
+
+		this.internalRaycasts.top.positionEnd = Vector2.fromVec(
+			middle.clone().setValues(middle.x, middle.y - (height + 1))
+		);
+		this.internalRaycasts.bottom.positionEnd = Vector2.fromVec(
+			middle.clone().setValues(middle.x, middle.y + (height + 1))
+		);
+		this.internalRaycasts.left.positionEnd = Vector2.fromVec(
+			middle.clone().setValues(middle.x - (width + 1), middle.y)
+		);
+		this.internalRaycasts.right.positionEnd = Vector2.fromVec(
+			middle.clone().setValues(middle.x + (width + 1), middle.y)
+		);
+
+		// cast internal raycasts
+		this.internalRaycasts.top.cast(this.collidesWith);
+		this.internalRaycasts.bottom.cast(this.collidesWith);
+		this.internalRaycasts.left.cast(this.collidesWith);
+		this.internalRaycasts.right.cast(this.collidesWith);
+
+		this.internalRaycasts.top.show('#00ff00', 3);
+		this.internalRaycasts.bottom.show('#00ff00', 3);
+		this.internalRaycasts.left.show('#00ff00', 3);
+		this.internalRaycasts.right.show('#00ff00', 3);
 	}
 
 	/**
@@ -451,6 +541,23 @@ export default class GameObject {
 
 	/**
 	 * @memberof GameObject
+	 * @description Gets the center coordinates of the GameObject
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public getCenter() {
+		if (this.shape === 'circle') {
+			return new Vector2(this.position.x, this.position.y);
+		} else {
+			return new Vector2(
+				this.position.x + this.w / 2,
+				this.position.y + this.h / 2
+			);
+		}
+	}
+
+	/**
+	 * @memberof GameObject
 	 * @description Gets the centerY coordinate of the GameObject
 	 * @returns number
 	 * @since 1.0.0-beta
@@ -475,5 +582,53 @@ export default class GameObject {
 		} else {
 			return this.position.x + this.w / 2;
 		}
+	}
+
+	/**
+	 * @memberof GameObject
+	 * @description Checks if any one of the internal raycasts is colliding with this.collidesWith
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
+	public get isColliding() {
+		return (
+			this.internalRaycasts.top.isIntersecting ||
+			this.internalRaycasts.bottom.isIntersecting ||
+			this.internalRaycasts.left.isIntersecting ||
+			this.internalRaycasts.right.isIntersecting
+		);
+	}
+
+	/**
+	 * @memberof GameObject
+	 * @description Checks if the bottom internal raycasts is colliding with this.collidesWith
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
+	public get isOnFloor() {
+		return this.internalRaycasts.bottom.isIntersecting;
+	}
+
+	/**
+	 * @memberof GameObject
+	 * @description Checks if the top internal raycasts is colliding with this.collidesWith
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
+	public get isOnCeiling() {
+		return this.internalRaycasts.top.isIntersecting;
+	}
+
+	/**
+	 * @memberof GameObject
+	 * @description Checks if the left or right internal raycasts is colliding with this.collidesWith
+	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @since 2.0.0
+	 */
+	public get isOnWall() {
+		return (
+			this.internalRaycasts.left.isIntersecting ||
+			this.internalRaycasts.right.isIntersecting
+		);
 	}
 }

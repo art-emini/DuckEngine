@@ -1,7 +1,6 @@
 import { Duck } from '../../..';
 import Game from '../../game';
 import Vector2 from '../../math/vector2';
-import Scene from '../../scene';
 import GameObject from '../gameObject';
 
 /**
@@ -11,16 +10,26 @@ import GameObject from '../gameObject';
  * @extends GameObject
  * @since 2.0.0
  */
-export default class Raycast extends GameObject {
-	/**
-	 * @memberof Raycast
-	 * @description Scene instance
-	 * @type Scene
-	 * @since 2.0.0
-	 */
-	public scene: Scene;
+export default class Raycast {
+	public game: Game;
 
 	private state: Duck.Types.Raycast.State;
+
+	/**
+	 * @memberof Raycast
+	 * @description The start position of the Raycast
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
+
+	public position: Vector2;
+	/**
+	 * @memberof Raycast
+	 * @description The end position of the Raycast
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
+	public positionEnd: Vector2;
 
 	/**
 	 * @constructor
@@ -30,10 +39,11 @@ export default class Raycast extends GameObject {
 	 * @param {Scene} scene Scene instance
 	 * @param {Game} game Game instance
 	 */
-	constructor(begin: Vector2, end: Vector2, scene: Scene, game: Game) {
-		super('raycast', begin.x, begin.y, end.x, end.y, 0, '#ffffff', game);
+	constructor(begin: Vector2, end: Vector2, game: Game) {
+		this.game = game;
 
-		this.scene = scene;
+		this.position = begin;
+		this.positionEnd = end;
 
 		this.state = {
 			colliding: false,
@@ -59,7 +69,7 @@ export default class Raycast extends GameObject {
 		// draw a red line
 		this.game.ctx.beginPath();
 		this.game.ctx.moveTo(this.position.x, this.position.y);
-		this.game.ctx.lineTo(this.w, this.h);
+		this.game.ctx.lineTo(this.positionEnd.x, this.positionEnd.y);
 		this.game.ctx.stroke();
 	}
 
@@ -73,8 +83,8 @@ export default class Raycast extends GameObject {
 		objects.forEach((object) => {
 			if (object.shape !== 'circle') {
 				this.checkIntersectingRect(
-					this.w,
-					this.h,
+					this.positionEnd.x,
+					this.positionEnd.y,
 					this.position.x,
 					this.position.y,
 					object.position.x,
@@ -92,8 +102,8 @@ export default class Raycast extends GameObject {
 				const diameter = object.r * 2;
 
 				this.checkIntersectingRect(
-					this.w,
-					this.h,
+					this.positionEnd.x,
+					this.positionEnd.y,
 					this.position.x,
 					this.position.y,
 					objX,
@@ -216,6 +226,13 @@ export default class Raycast extends GameObject {
 			intersection: new Vector2(x, y),
 			with: obj,
 		};
+	}
+
+	public setPosition(begin: Vector2, end?: Vector2) {
+		this.position.setValuesVec(begin);
+		if (end) {
+			this.positionEnd.setValuesVec(end);
+		}
 	}
 
 	/**

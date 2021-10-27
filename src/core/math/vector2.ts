@@ -30,6 +30,19 @@ export default class Vector2 {
 
 	/**
 	 * @memberof Vector2
+	 * @description Sets the values of the Vector2 based on another Vector2
+	 * @param {number} vector Vector2 to use to set the position
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public setValuesVec(vector: Vector2) {
+		this.x = vector.x;
+		this.y = vector.y;
+		return this;
+	}
+
+	/**
+	 * @memberof Vector2
 	 * @description Adds a Vector2
 	 * @param {Vector2} vector Vector2 to be added to
 	 * @returns Vector2
@@ -538,6 +551,8 @@ export default class Vector2 {
 	 * @memberof Vector2
 	 * @static
 	 * @description Returns a Vector2 with passed parameters, if no parameters are passed, a Vector2.ZERO is returned
+	 * @param {number} [x] X position, optional -> defaults: 0
+	 * @param {number} [y] Y position, optional -> defaults: 0
 	 * @returns Vector2
 	 * @since 2.0.0
 	 */
@@ -546,5 +561,17 @@ export default class Vector2 {
 		if (x && !y) return new Vector2(x); // only x
 		if (!x && y) return new Vector2(0, y); // only y
 		return new Vector2(x, y); // both
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @static
+	 * @description Returns a Vector2 with values from a passed Vector2
+	 * @param {Vector2} vector Vector2 to create a Vector2 from
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public static fromVec(vector: Vector2) {
+		return new Vector2(vector.x, vector.y);
 	}
 }

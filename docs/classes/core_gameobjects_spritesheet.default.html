@@ -145,6 +145,15 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#isColliding" class="tsd-kind-icon">is<wbr>Colliding</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#isOnCeiling" class="tsd-kind-icon">is<wbr>OnCeiling</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#isOnFloor" class="tsd-kind-icon">is<wbr>OnFloor</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#isOnWall" class="tsd-kind-icon">is<wbr>OnWall</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="core_gameobjects_spritesheet.default.html#_draw" class="tsd-kind-icon">_draw</a></li>
@@ -154,6 +163,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_gameobjects_spritesheet.default.html#animateFrames" class="tsd-kind-icon">animate<wbr>Frames</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_gameobjects_spritesheet.default.html#animateNoFPS" class="tsd-kind-icon">animate<wbr>NoFPS</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#getBottom" class="tsd-kind-icon">get<wbr>Bottom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#getCenter" class="tsd-kind-icon">get<wbr>Center</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#getCenterX" class="tsd-kind-icon">get<wbr>CenterX</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#getCenterY" class="tsd-kind-icon">get<wbr>CenterY</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="core_gameobjects_spritesheet.default.html#getLeft" class="tsd-kind-icon">get<wbr>Left</a></li>
@@ -314,7 +324,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#bounds">bounds</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:163</li>
+							<li>Defined in core/gameobjects/gameObject.ts:171</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -351,7 +361,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collider">collider</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:127</li>
+							<li>Defined in core/gameobjects/gameObject.ts:128</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -371,14 +381,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#collidesWith">collidesWith</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:135</li>
+							<li>Defined in core/gameobjects/gameObject.ts:136</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
 						<dl class="tsd-comment-tags"><dt>memberof</dt>
 							<dd><p>GameObject</p>
 							</dd><dt>description</dt>
-							<dd><p>Gameobjects that can collide with the GameObject</p>
+							<dd><p>Gameobjects that can collide with the GameObject, also used for internalRaycasts</p>
 							</dd><dt>since</dt>
 							<dd><p>1.0.0-beta</p>
 						</dd></dl>
@@ -421,7 +431,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#fillColor">fillColor</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:71</li>
+							<li>Defined in core/gameobjects/gameObject.ts:72</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -461,7 +471,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#game">game</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:79</li>
+							<li>Defined in core/gameobjects/gameObject.ts:80</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -481,7 +491,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#h-1">h</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:55</li>
+							<li>Defined in core/gameobjects/gameObject.ts:56</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -501,7 +511,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#halfH">halfH</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:119</li>
+							<li>Defined in core/gameobjects/gameObject.ts:120</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -521,7 +531,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#halfW">halfW</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:111</li>
+							<li>Defined in core/gameobjects/gameObject.ts:112</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -541,7 +551,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#id">id</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:23</li>
+							<li>Defined in core/gameobjects/gameObject.ts:24</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -571,7 +581,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#physics">physics</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:178</li>
+							<li>Defined in core/gameobjects/gameObject.ts:186</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -595,7 +605,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:185</li>
+												<li>Defined in core/gameobjects/gameObject.ts:193</li>
 											</ul>
 										</aside>
 										<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -628,7 +638,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in core/gameobjects/gameObject.ts:196</li>
+												<li>Defined in core/gameobjects/gameObject.ts:204</li>
 											</ul>
 										</aside>
 										<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -680,7 +690,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#position">position</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:39</li>
+							<li>Defined in core/gameobjects/gameObject.ts:40</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -700,7 +710,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#r">r</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:63</li>
+							<li>Defined in core/gameobjects/gameObject.ts:64</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -730,7 +740,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:31</li>
+							<li>Defined in core/gameobjects/gameObject.ts:32</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -750,7 +760,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#velocity">velocity</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:143</li>
+							<li>Defined in core/gameobjects/gameObject.ts:144</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -770,7 +780,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#vertices">vertices</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:151</li>
+							<li>Defined in core/gameobjects/gameObject.ts:152</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -790,7 +800,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#visible">visible</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:95</li>
+							<li>Defined in core/gameobjects/gameObject.ts:96</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -810,7 +820,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#w-1">w</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:47</li>
+							<li>Defined in core/gameobjects/gameObject.ts:48</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -830,7 +840,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#zIndex">zIndex</a></p>
 						<ul>
-							<li>Defined in core/gameobjects/gameObject.ts:103</li>
+							<li>Defined in core/gameobjects/gameObject.ts:104</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -842,6 +852,129 @@
 							<dd><p>2.0.0</p>
 						</dd></dl>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="isColliding" class="tsd-anchor"></a>
+					<h3>is<wbr>Colliding</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isColliding<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:593</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Checks if any one of the internal raycasts is colliding with this.collidesWith</p>
+									</dd><dt>since</dt>
+									<dd><p>2.0.0</p>
+								</dd></dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a>
+							</h4>
+							<p>false | Duck.Types.Raycast.StateValue</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="isOnCeiling" class="tsd-anchor"></a>
+					<h3>is<wbr>OnCeiling</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isOnCeiling<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:618</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Checks if the top internal raycasts is colliding with this.collidesWith</p>
+									</dd><dt>since</dt>
+									<dd><p>2.0.0</p>
+								</dd></dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a>
+							</h4>
+							<p>false | Duck.Types.Raycast.StateValue</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="isOnFloor" class="tsd-anchor"></a>
+					<h3>is<wbr>OnFloor</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isOnFloor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:608</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Checks if the bottom internal raycasts is colliding with this.collidesWith</p>
+									</dd><dt>since</dt>
+									<dd><p>2.0.0</p>
+								</dd></dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a>
+							</h4>
+							<p>false | Duck.Types.Raycast.StateValue</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="isOnWall" class="tsd-anchor"></a>
+					<h3>is<wbr>OnWall</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isOnWall<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:628</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Checks if the left or right internal raycasts is colliding with this.collidesWith</p>
+									</dd><dt>since</dt>
+									<dd><p>2.0.0</p>
+								</dd></dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="../interfaces/index.Duck.Types.Raycast.StateValue.html" class="tsd-signature-type">StateValue</a>
+							</h4>
+							<p>false | Duck.Types.Raycast.StateValue</p>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -881,7 +1014,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#_update">_update</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:316</li>
+									<li>Defined in core/gameobjects/gameObject.ts:366</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1081,7 +1214,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getBottom">getBottom</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:428</li>
+									<li>Defined in core/gameobjects/gameObject.ts:518</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1099,6 +1232,34 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getCenter" class="tsd-anchor"></a>
+					<h3>get<wbr>Center</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Center<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenter">getCenter</a></p>
+								<ul>
+									<li>Defined in core/gameobjects/gameObject.ts:548</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-tags">
+								<dl class="tsd-comment-tags"><dt>memberof</dt>
+									<dd><p>GameObject</p>
+									</dd><dt>description</dt>
+									<dd><p>Gets the center coordinates of the GameObject</p>
+									</dd><dt>since</dt>
+									<dd><p>2.0.0</p>
+								</dd></dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="core_math_vector2.default.html" class="tsd-signature-type">default</a></h4>
+							<p>Vector2</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="getCenterX" class="tsd-anchor"></a>
 					<h3>get<wbr>CenterX</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -1109,7 +1270,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterX">getCenterX</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:472</li>
+									<li>Defined in core/gameobjects/gameObject.ts:579</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1137,7 +1298,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getCenterY">getCenterY</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:458</li>
+									<li>Defined in core/gameobjects/gameObject.ts:565</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1165,7 +1326,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getLeft">getLeft</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:438</li>
+									<li>Defined in core/gameobjects/gameObject.ts:528</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1193,7 +1354,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getRight">getRight</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:448</li>
+									<li>Defined in core/gameobjects/gameObject.ts:538</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1221,7 +1382,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#getTop">getTop</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:418</li>
+									<li>Defined in core/gameobjects/gameObject.ts:508</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1249,7 +1410,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#init">init</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:298</li>
+									<li>Defined in core/gameobjects/gameObject.ts:348</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1325,7 +1486,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setFillColor">setFillColor</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:406</li>
+									<li>Defined in core/gameobjects/gameObject.ts:496</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1361,7 +1522,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setScale">setScale</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:364</li>
+									<li>Defined in core/gameobjects/gameObject.ts:454</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1394,7 +1555,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_gameobjects_gameObject.default.html">default</a>.<a href="core_gameobjects_gameObject.default.html#setVelocity">setVelocity</a></p>
 								<ul>
-									<li>Defined in core/gameobjects/gameObject.ts:387</li>
+									<li>Defined in core/gameobjects/gameObject.ts:477</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
@@ -1572,6 +1733,18 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_gameobjects_spritesheet.default.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a>
 							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_gameobjects_spritesheet.default.html#isColliding" class="tsd-kind-icon">is<wbr>Colliding</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_gameobjects_spritesheet.default.html#isOnCeiling" class="tsd-kind-icon">is<wbr>OnCeiling</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_gameobjects_spritesheet.default.html#isOnFloor" class="tsd-kind-icon">is<wbr>OnFloor</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_gameobjects_spritesheet.default.html#isOnWall" class="tsd-kind-icon">is<wbr>OnWall</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="core_gameobjects_spritesheet.default.html#_draw" class="tsd-kind-icon">_draw</a>
 							</li>
@@ -1592,6 +1765,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_gameobjects_spritesheet.default.html#getBottom" class="tsd-kind-icon">get<wbr>Bottom</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="core_gameobjects_spritesheet.default.html#getCenter" class="tsd-kind-icon">get<wbr>Center</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="core_gameobjects_spritesheet.default.html#getCenterX" class="tsd-kind-icon">get<wbr>CenterX</a>

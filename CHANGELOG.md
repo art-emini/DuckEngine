@@ -10,6 +10,7 @@ Only the previous two versions' changelogs will show.
    3. Renamed draw method to _draw which is public but shouldn't be used
    4. Added zIndex and visible properties
    5. Added misc gameobject Raycast
+   6. Added isColliding, isOnFloor, isOnCeiling, and isOnWall methods
 2. Map
    1. Added id, zIndex, and visible properties
 3. Particles
@@ -62,6 +63,8 @@ Only the previous two versions' changelogs will show.
     3. Canvas and context types is never undefined
     4. Added jsdoc comments
     5. Made game property, of most classes that had it, public
+17. Bug Fixes
+    1. Fixed "bouncy" and laggy rect to round-rect collision response
 
 ## 1.2.0
 

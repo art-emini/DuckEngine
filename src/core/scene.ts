@@ -353,12 +353,7 @@ export default class Scene extends Basic {
 			gameobject: {
 				misc: {
 					raycast: (begin: Vector2, end: Vector2) => {
-						const myRayCast = new Raycast(
-							begin,
-							end,
-							this,
-							this.game
-						);
+						const myRayCast = new Raycast(begin, end, this.game);
 						return myRayCast;
 					},
 				},

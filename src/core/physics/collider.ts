@@ -104,11 +104,11 @@ export default class Collider {
 		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
 			if (dx < 0) this.shape.position.x = rect.position.x + rect.w;
 			// left
-			else this.shape.position.x = rect.position.x - rect.w; // right
+			else this.shape.position.x = rect.position.x - this.shape.w; // right
 		} else {
 			if (dy < 0) this.shape.position.y = rect.position.y + rect.h;
 			// top
-			else this.shape.position.y = rect.position.y - rect.h; // bottom
+			else this.shape.position.y = rect.position.y - this.shape.h; // bottom
 		}
 
 		return true;
