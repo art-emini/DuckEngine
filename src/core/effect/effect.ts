@@ -1,7 +1,7 @@
 import { Duck } from '../../index';
 import Game from '../game';
 import randomInt from '../math/randomInt';
-import ParticleEmitter from '../particles/particleEmitter';
+import ParticleEmitter from '../gameobjects/particles/particleEmitter';
 
 /**
  * @class Effect
@@ -19,7 +19,7 @@ export default class Effect {
 	public visible: boolean;
 	public zIndex: number;
 
-	public following: Duck.GameObjects.GameObject | undefined;
+	public following: Duck.TypeClasses.GameObjects.GameObject | undefined;
 	protected randomMaxOffset: number;
 	/**
 	 * @constructor

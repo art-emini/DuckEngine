@@ -16,8 +16,8 @@ export default class Cutscene {
 	public game: Game;
 
 	private steps: Duck.Types.Cutscene.Step[];
-	private mainObject: Duck.GameObjects.GameObject;
-	private otherObjects: Duck.GameObjects.GameObject[];
+	private mainObject: Duck.TypeClasses.GameObjects.GameObject;
+	private otherObjects: Duck.TypeClasses.GameObjects.GameObject[];
 	private camera: Camera;
 	private otherCameras: Camera[];
 
@@ -161,17 +161,21 @@ export default class Cutscene {
 			const step = this.steps[this.index];
 
 			if (step.type === 'DRAW' && step.affect) {
-				return (step.affect as Duck.GameObjects.GameObject)._draw();
+				return (
+					step.affect as Duck.TypeClasses.GameObjects.GameObject
+				)._draw();
 			}
 
 			if (step.type === 'MOVE' && step.moveTo) {
 				if (step.moveTo.x) {
-					(step.affect as Duck.GameObjects.GameObject).position.x =
-						step.moveTo.x;
+					(
+						step.affect as Duck.TypeClasses.GameObjects.GameObject
+					).position.x = step.moveTo.x;
 				}
 				if (step.moveTo.y) {
-					(step.affect as Duck.GameObjects.GameObject).position.y =
-						step.moveTo.y;
+					(
+						step.affect as Duck.TypeClasses.GameObjects.GameObject
+					).position.y = step.moveTo.y;
 				}
 			}
 

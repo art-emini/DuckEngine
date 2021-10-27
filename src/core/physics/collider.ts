@@ -22,21 +22,21 @@ import Sprite from '../gameobjects/sprite';
  * @since 1.0.0-beta
  */
 export default class Collider {
-	public shape: Duck.GameObjects.GameObject;
-	public collidesWith: Duck.GameObjects.GameObject[];
+	public shape: Duck.TypeClasses.GameObjects.GameObject;
+	public collidesWith: Duck.TypeClasses.GameObjects.GameObject[];
 	private game: Game;
 
 	/**
 	 * @constructor Collider
 	 * @description Creates a Collider instance
-	 * @param {Duck.GameObjects.GameObject} shape Gameobject to append the collider to
-	 * @param {Duck.GameObjects.GameObject[]} collidesWith What the gameobject collides with
+	 * @param {Duck.TypeClasses.GameObjects.GameObject} shape Gameobject to append the collider to
+	 * @param {Duck.TypeClasses.GameObjects.GameObject[]} collidesWith What the gameobject collides with
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
-		shape: Duck.GameObjects.GameObject,
-		collidesWith: Duck.GameObjects.GameObject[],
+		shape: Duck.TypeClasses.GameObjects.GameObject,
+		collidesWith: Duck.TypeClasses.GameObjects.GameObject[],
 		game: Game
 	) {
 		this.shape = shape;
@@ -46,13 +46,13 @@ export default class Collider {
 
 	/**
 	 * @memberof Collider
-	 * @param {Duck.GameObjects.GameObject} shape The gameobject that the collider is attached
-	 * @param {Duck.GameObjects.GameObject[]} [diffCollidesWith] Overwrite what the gameobject collides with, optional
+	 * @param {Duck.TypeClasses.GameObjects.GameObject} shape The gameobject that the collider is attached
+	 * @param {Duck.TypeClasses.GameObjects.GameObject[]} [diffCollidesWith] Overwrite what the gameobject collides with, optional
 	 * @since 1.0.0-beta
 	 */
 	public update(
-		shape: Duck.GameObjects.GameObject,
-		diffCollidesWith?: Duck.GameObjects.GameObject[]
+		shape: Duck.TypeClasses.GameObjects.GameObject,
+		diffCollidesWith?: Duck.TypeClasses.GameObjects.GameObject[]
 	) {
 		this.shape = shape;
 

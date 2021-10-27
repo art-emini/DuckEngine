@@ -7,7 +7,7 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
-import Text from '../interactive/text';
+import Text from '../gameobjects/interactive/text';
 import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
 

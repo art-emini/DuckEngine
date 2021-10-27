@@ -4,7 +4,7 @@
 import CameraClass from './core/camera/camera';
 import GameClass from './core/game';
 import SceneClass from './core/scene';
-import TextClass from './core/interactive/text';
+import TextClass from './core/gameobjects/interactive/text';
 import StaticLightClass from './core/lights/staticLight';
 import ColliderClass from './core/physics/collider';
 import GameObjectClass from './core/gameobjects/gameObject';
@@ -18,18 +18,23 @@ import GroupClass from './core/group/group';
 import InputClass from './core/input/input';
 import LoaderClass from './core/loader/loader';
 import TileMapClass from './core/map/tilemap';
-import ParticleClass from './core/particles/particle';
-import ParticleEmitterClass from './core/particles/particleEmitter';
-import SoundClass from './core/sound/sound';
+import ParticleClass from './core/gameobjects/particles/particle';
+import ParticleEmitterClass from './core/gameobjects/particles/particleEmitter';
+import SoundPlayerClass from './core/sound/soundPlayer';
 import DuckStorageClass from './core/storage/storage';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
-import ButtonClass from './core/interactive/button';
-import ParticleContainerClass from './core/particles/particleContainer';
+import ButtonClass from './core/gameobjects/interactive/button';
+import ParticleContainerClass from './core/gameobjects/particles/particleContainer';
 import EffectClass from './core/effect/effect';
 import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
-import Vector2 from './core/math/vector2';
+import Vector2Class from './core/math/vector2';
+import DisplayListClass from './core/models/displayList';
+import CanvasModulateClass from './core/misc/canvasModulate';
+import MapClass from './core/map/map';
+import RaycastClass from './core/gameobjects/misc/raycast';
+import AmountClass from './base/amount';
 
 // main
 
@@ -65,67 +70,185 @@ export namespace Duck {
 		};
 	};
 
-	export type Scene = SceneClass;
-	export type Game = GameClass;
+	export namespace Classes {
+		export const Game = GameClass;
+		export const Scene = SceneClass;
 
-	export type Camera = CameraClass;
-	export type Cutscene = CutsceneClass;
+		export namespace Gameobjects {
+			export const GameObject = GameObjectClass;
+			export const Circle = CircleClass;
+			export const Rect = RectClass;
+			export const RoundRect = RoundRectClass;
+			export const Sprite = SpriteClass;
+			export const SpriteSheet = SpriteSheetClass;
 
-	export namespace GameObjects {
-		export type Circle = CircleClass;
-		export type Rect = RectClass;
-		export type RoundRect = RoundRectClass;
-		export type Sprite = SpriteClass;
-		export type SpriteSheet = SpriteSheetClass;
-		export type GameObject = GameObjectClass;
+			export namespace Particles {
+				export const Particle = ParticleClass;
+				export const ParticleEmitter = ParticleEmitterClass;
+				export const ParticleContainer = ParticleContainerClass;
+			}
+			export namespace Interactive {
+				export const Button = ButtonClass;
+				export const Text = TextClass;
+			}
+
+			export namespace Misc {
+				export const Raycast = RaycastClass;
+			}
+		}
+
+		export namespace Effects {
+			export const Effect = EffectClass;
+
+			export namespace Presets {
+				export const ExplosionEffect = ExplosionEffectClass;
+				export const SmokeEffect = SmokeEffectClass;
+			}
+		}
+
+		export namespace Misc {
+			export const Storage = DuckStorageClass;
+			export const CanvasModulate = CanvasModulateClass;
+			export const Loader = LoaderClass;
+			export const Group = GroupClass;
+			export const Cutscene = CutsceneClass;
+		}
+
+		export namespace Base {
+			export const Amount = AmountClass;
+			export const Once = OnceClass;
+			export const Render = RenderClass;
+		}
+
+		export namespace Sound {
+			export const SoundPlayer = SoundPlayerClass;
+		}
+
+		export namespace Cameras {
+			export const Camera = CameraClass;
+		}
+
+		export namespace Physics {
+			export const Collider = ColliderClass;
+		}
+
+		export namespace Models {
+			export const DisplayList = DisplayListClass;
+		}
+
+		export namespace Map {
+			export const Map = MapClass;
+			export const TileMap = TileMapClass;
+		}
+
+		export namespace Math {
+			export const Vector2 = Vector2Class;
+		}
+
+		export namespace Lights {
+			export const StaticLight = StaticLightClass;
+		}
+
+		export namespace Input {
+			export const Input = InputClass;
+		}
 	}
 
-	export type Group<t extends Duck.Types.Group.StackItem> = GroupClass<t>;
+	export namespace TypeClasses {
+		export type Game = GameClass;
+		export type Scene = SceneClass;
 
-	export type Input = InputClass;
+		export namespace GameObjects {
+			export type GameObject = GameObjectClass;
+			export type Circle = CircleClass;
+			export type Rect = RectClass;
+			export type RoundRect = RoundRectClass;
+			export type Sprite = SpriteClass;
+			export type SpriteSheet = SpriteSheetClass;
 
-	export namespace Interactive {
-		export type Text = TextClass;
-		export type Button = ButtonClass;
+			export namespace Particles {
+				export type Particle = ParticleClass;
+				export type ParticleEmitter = ParticleEmitterClass;
+				export type ParticleContainer = ParticleContainerClass;
+			}
+			export namespace Interactive {
+				export type Button = ButtonClass;
+				export type Text = TextClass;
+			}
+
+			export namespace Misc {
+				export type Raycast = RaycastClass;
+			}
+		}
+
+		export namespace Effects {
+			export type Effect = EffectClass;
+
+			export namespace Presets {
+				export type ExplosionEffect = ExplosionEffectClass;
+				export type SmokeEffect = SmokeEffectClass;
+			}
+		}
+
+		export namespace Misc {
+			export type Storage = DuckStorageClass;
+			export type CanvasModulate = CanvasModulateClass;
+			export type Loader = LoaderClass;
+			export type Group<t extends Duck.Types.Group.StackItem> =
+				GroupClass<t>;
+			export type Cutscene = CutsceneClass;
+		}
+
+		export namespace Base {
+			export type Amount = AmountClass;
+			export type Once = OnceClass;
+			export type Render = RenderClass;
+		}
+
+		export namespace Sound {
+			export type SoundPlayer = SoundPlayerClass;
+		}
+
+		export namespace Cameras {
+			export type Camera = CameraClass;
+		}
+
+		export namespace Physics {
+			export type Collider = ColliderClass;
+		}
+
+		export namespace Models {
+			export type DisplayList = DisplayListClass;
+		}
+
+		export namespace Maps {
+			export type Map<
+				map extends number[][],
+				atlas extends {
+					[key: number]: HTMLImageElement | string;
+				}
+			> = MapClass<map, atlas>;
+			export type TileMap = TileMapClass;
+		}
+
+		export namespace Math {
+			export type Vector2 = Vector2Class;
+		}
+
+		export namespace Lights {
+			export type StaticLight = StaticLightClass;
+		}
+
+		export namespace Input {
+			export type Input = InputClass;
+		}
 	}
-
-	export namespace Lights {
-		export type StaticLight = StaticLightClass;
-	}
-
-	export type Loader = LoaderClass;
-
-	export namespace Maps {
-		export type TileMap = TileMapClass;
-	}
-
-	export type Particle = ParticleClass;
-	export type ParticleEmitter = ParticleEmitterClass;
-	export type ParticleContainer = ParticleContainerClass;
-
-	export type Collider = ColliderClass;
-
-	export type Sound = SoundClass;
-
-	export type DuckStorage = DuckStorageClass;
-
-	export type Effect = EffectClass;
-	export namespace PresetEffects {
-		export type ExplosionEffect = ExplosionEffectClass;
-		export type SmokeEffect = SmokeEffectClass;
-	}
-
-	export namespace Base {
-		export type Once = OnceClass;
-		export type Render = RenderClass;
-	}
-
 	export namespace Types {
 		export type GameObject = GameObjectClass;
 		export type Renderable =
 			| GameObjectClass
-			| Duck.Effect
-			| Duck.Maps.TileMap;
+			| Duck.TypeClasses.Effects.Effect
+			| Duck.TypeClasses.Maps.TileMap;
 		export namespace Game {
 			export interface Config {
 				canvas: HTMLCanvasElement | null;
@@ -398,7 +521,7 @@ export namespace Duck {
 			}
 
 			export interface StateValue {
-				intersection: Vector2;
+				intersection: Vector2Class;
 				with: GameObject;
 			}
 		}

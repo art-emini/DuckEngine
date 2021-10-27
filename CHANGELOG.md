@@ -32,6 +32,7 @@ Only the previous two versions' changelogs will show.
       2. Added tools.math
    5. Add -> gameobjects
       1. Added misc -> raycast to add a raycast
+   6. Renamed this.add.sound to this.add.soundPlayer
 7. StaticLight
    1. Now extends GameObject
    2. Renamed setFillColor to setFillColorAlpha
@@ -57,13 +58,18 @@ Only the previous two versions' changelogs will show.
     1. Added gameobject class canvasModulate
 15. ParticleEmitter
     1. Removed draw method
-16. Misc
+16. Sound
+    1. Renamed class to soundPlayer
+17. Misc
     1. Rewritten types, moved all types into Duck.Types and all type classes into Duck
     2. Added renderableObject type which is any class that has a _draw method
     3. Canvas and context types is never undefined
     4. Added jsdoc comments
     5. Made game property, of most classes that had it, public
-17. Bug Fixes
+    6. Moved particles and interactive folder from src/core to src/core/gameobjects
+    7. All classes can be found and used in Duck.Classes
+    8. All type classes have been moved/added to Duck.TypeClasses
+18. Bug Fixes
     1. Fixed "bouncy" and laggy rect to round-rect collision response
 
 ## 1.2.0

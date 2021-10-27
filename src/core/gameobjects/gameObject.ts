@@ -85,7 +85,7 @@ export default class GameObject {
 	 * @type GameObject
 	 * @since 1.0.0-beta
 	 */
-	private self: Duck.GameObjects.GameObject | undefined;
+	private self: Duck.TypeClasses.GameObjects.GameObject | undefined;
 
 	/**
 	 * @memberof GameObject
@@ -133,7 +133,7 @@ export default class GameObject {
 	 * @type GameObject[]
 	 * @since 1.0.0-beta
 	 */
-	public collidesWith: Duck.GameObjects.GameObject[];
+	public collidesWith: Duck.TypeClasses.GameObjects.GameObject[];
 
 	/**
 	 * @memberof GameObject
@@ -180,17 +180,19 @@ export default class GameObject {
 	/**
 	 * @memberof GameObject
 	 * @description Object that has all the physics method
-	 * @type \{ addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider; setBounds: (x: number, y: number, w: number, h: number) => void }
+	 * @type \{ addCollider: (collidesWith: Duck.TypeClasses.GameObjects.GameObject[]) => Collider; setBounds: (x: number, y: number, w: number, h: number) => void }
 	 * @since 1.0.0
 	 */
 	public physics: {
 		/**
 		 * @memberof GameObject#physics
 		 * @description Adds a collider to the GameObject
-		 * @param {Duck.GameObjects.GameObject[]} collidesWith What the GameObject collides with
+		 * @param {Duck.TypeClasses.GameObjects.GameObject[]} collidesWith What the GameObject collides with
 		 * @since 1.0.0-beta
 		 */
-		addCollider: (collidesWith: Duck.GameObjects.GameObject[]) => Collider;
+		addCollider: (
+			collidesWith: Duck.TypeClasses.GameObjects.GameObject[]
+		) => Collider;
 
 		/**
 		 * @memberof GameObject#physics

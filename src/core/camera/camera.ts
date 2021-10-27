@@ -16,9 +16,9 @@ import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
 import SpriteSheet from '../gameobjects/spritesheet';
 import StaticLight from '../lights/staticLight';
-import Button from '../interactive/button';
-import Text from '../interactive/text';
-import Particle from '../particles/particle';
+import Button from '../gameobjects/interactive/button';
+import Text from '../gameobjects/interactive/text';
+import Particle from '../gameobjects/particles/particle';
 
 /**
  * @class Camera
@@ -49,7 +49,7 @@ export default class Camera {
 		| { position: { x: number; y: number }; w: number; h: number }
 		| undefined;
 
-	public following: Duck.GameObjects.GameObject | undefined;
+	public following: Duck.TypeClasses.GameObjects.GameObject | undefined;
 	private lerpX = 1;
 	private lerpY = 1;
 
@@ -294,13 +294,13 @@ export default class Camera {
 	/**
 	 * @memberof Camera
 	 * @description Follows a GameObject
-	 * @param {Duck.GameObjects.GameObject} gameObject Game object to follow
+	 * @param {Duck.TypeClasses.GameObjects.GameObject} gameObject Game object to follow
 	 * @param {number} [lerpX=1] Lerp on the x axis, optional -> defaults: 1
 	 * @param {number} [lerpY=1] Lerp on the y axis, optional -> defaults: 1
 	 * @since 1.0.0-beta
 	 */
 	public startFollow(
-		gameObject: Duck.GameObjects.GameObject,
+		gameObject: Duck.TypeClasses.GameObjects.GameObject,
 		lerpX = 1,
 		lerpY = 1
 	) {
@@ -324,13 +324,13 @@ export default class Camera {
 	 * useful for interacting with {@link Button} while having a camera
 	 * @param {number} x X position
 	 * @param {number} y Y position
-	 * @param {Duck.GameObjects.GameObject} obj GameObject
+	 * @param {Duck.TypeClasses.GameObjects.GameObject} obj GameObject
 	 * @since 1.0.0-beta
 	 */
 	public screenToWorld(
 		x: number,
 		y: number,
-		obj: Duck.GameObjects.GameObject
+		obj: Duck.TypeClasses.GameObjects.GameObject
 	) {
 		obj.position.x = x / this.viewport.scale[0] + this.viewport.left;
 		obj.position.y = y / this.viewport.scale[1] + this.viewport.top;
@@ -343,13 +343,13 @@ export default class Camera {
 	 * useful for placing DOM elements over the scene.
 	 * @param {number} x X position
 	 * @param {number} y Y position
-	 * @param {Duck.GameObjects.GameObject} obj GameObject
+	 * @param {Duck.TypeClasses.GameObjects.GameObject} obj GameObject
 	 * @since 1.0.0-beta
 	 */
 	public worldToScreen(
 		x: number,
 		y: number,
-		obj: Duck.GameObjects.GameObject
+		obj: Duck.TypeClasses.GameObjects.GameObject
 	) {
 		obj.position.x = (x - this.viewport.left) * this.viewport.scale[0];
 		obj.position.y = (y - this.viewport.top) * this.viewport.scale[1];

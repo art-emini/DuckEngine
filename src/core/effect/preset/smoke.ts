@@ -1,7 +1,7 @@
 import { Duck } from '../../../index';
 import Game from '../../game';
-import Particle from '../../particles/particle';
-import ParticleEmitter from '../../particles/particleEmitter';
+import Particle from '../../gameobjects/particles/particle';
+import ParticleEmitter from '../../gameobjects/particles/particleEmitter';
 import Scene from '../../scene';
 import Effect from '../effect';
 

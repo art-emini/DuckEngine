@@ -1,5 +1,3 @@
-import { Duck } from '../../index';
-
 /**
  * @function
  * @description Returns a random float between two ranges

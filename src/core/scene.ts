@@ -14,11 +14,11 @@ import RoundRect from './gameobjects/roundrect';
 import SpriteSheet from './gameobjects/spritesheet';
 
 // particle stuff
-import Particle from './particles/particle';
-import ParticleEmitter from './particles/particleEmitter';
+import Particle from './gameobjects/particles/particle';
+import ParticleEmitter from './gameobjects/particles/particleEmitter';
 
 // other stuff
-import Sound from './sound/sound';
+import SoundPlayer from './sound/soundPlayer';
 import Input from './input/input';
 import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
@@ -62,8 +62,8 @@ import Once from '../base/once';
 import Amount from '../base/amount';
 
 // ui
-import Button from './interactive/button';
-import Text from './interactive/text';
+import Button from './gameobjects/interactive/button';
+import Text from './gameobjects/interactive/text';
 
 // effects
 import Effect from './effect/effect';
@@ -89,7 +89,7 @@ export default class Scene extends Basic {
 	public visible: boolean;
 	public readonly default: boolean;
 
-	public mainObject: Duck.GameObjects.GameObject | undefined;
+	public mainObject: Duck.TypeClasses.GameObjects.GameObject | undefined;
 	public currentCamera: Camera | undefined;
 	public mainCamera: Camera | undefined;
 
@@ -169,7 +169,10 @@ export default class Scene extends Basic {
 				text: Text
 			) => Button;
 		};
-		sound: (path: string, options?: Duck.Types.Sound.Config) => Sound;
+		soundPlayer: (
+			path: string,
+			options?: Duck.Types.Sound.Config
+		) => SoundPlayer;
 		input: () => Input;
 		camera: () => Camera;
 		mainCamera: () => Camera;
@@ -491,8 +494,8 @@ export default class Scene extends Basic {
 					return myButton;
 				},
 			},
-			sound: (path: string, options?: Duck.Types.Sound.Config) => {
-				return new Sound(path, options);
+			soundPlayer: (path: string, options?: Duck.Types.Sound.Config) => {
+				return new SoundPlayer(path, options);
 			},
 			input: () => {
 				return new Input(this.game);
