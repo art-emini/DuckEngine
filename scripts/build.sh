@@ -17,4 +17,5 @@ echo "Built Docs"
 echo "Finishing"
 cp package.json lib/package.json
 cp LICENSE lib/LICENSE
+cp -a global/ docs/global
 echo "Done"
