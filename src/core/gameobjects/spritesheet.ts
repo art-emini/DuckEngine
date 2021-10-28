@@ -12,17 +12,17 @@ import GameObject from './gameObject';
 export default class SpriteSheet extends GameObject<'image'> {
 	public scene: Scene;
 
-	private frameWidth: number;
-	private frameHeight: number;
+	protected frameWidth: number;
+	protected frameHeight: number;
 
-	private rows: number;
-	private cols: number;
+	protected rows: number;
+	protected cols: number;
 	public currentRow: number;
 	public currentCol: number;
 
 	public animating: boolean;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private animationInterval: any | undefined;
+	protected animationInterval: any | undefined;
 
 	/**
 	 * @memberof SpriteSheet

@@ -8,7 +8,7 @@ import Game from '../game';
  * @since 1.0.0-beta
  */
 export default class DuckStorage {
-	private config: Duck.Types.Storage.Config;
+	protected config: Duck.Types.Storage.Config;
 	public game: Game;
 
 	/**

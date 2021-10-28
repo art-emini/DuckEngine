@@ -15,7 +15,7 @@ export default class ParticleContainer {
 	public y: number;
 	public w: number;
 	public h: number;
-	private physics: Duck.Types.ParticleContainer.Physics;
+	protected physics: Duck.Types.ParticleContainer.Physics;
 	public game: Game;
 
 	public bounds: Duck.Types.ParticleContainer.Bounds;
@@ -77,7 +77,7 @@ export default class ParticleContainer {
 		}
 	}
 
-	private handleRect(particle: Particle) {
+	protected handleRect(particle: Particle) {
 		const obj = {
 			position: {
 				x: particle.position.x,
@@ -114,7 +114,7 @@ export default class ParticleContainer {
 		}
 	}
 
-	private handleCircle(particle: Particle) {
+	protected handleCircle(particle: Particle) {
 		const obj = {
 			position: {
 				x: particle.position.x,

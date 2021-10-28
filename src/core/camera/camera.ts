@@ -29,10 +29,10 @@ import Particle from '../gameobjects/particles/particle';
 export default class Camera {
 	public game: Game;
 	public scene: Scene;
-	private distance: number;
-	private lookAt: number[];
-	private ctx: CanvasRenderingContext2D | null | undefined;
-	private fieldOfView: number;
+	protected distance: number;
+	protected lookAt: number[];
+	protected ctx: CanvasRenderingContext2D | null | undefined;
+	protected fieldOfView: number;
 	public viewport: {
 		left: number;
 		right: number;
@@ -42,18 +42,18 @@ export default class Camera {
 		h: number;
 		scale: number[];
 	};
-	private aspectRatio: number | undefined;
+	protected aspectRatio: number | undefined;
 	public readonly isMain: boolean;
 
-	private bounds:
+	protected bounds:
 		| { position: { x: number; y: number }; w: number; h: number }
 		| undefined;
 
 	public following:
 		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
 		| undefined;
-	private lerpX = 1;
-	private lerpY = 1;
+	protected lerpX = 1;
+	protected lerpY = 1;
 
 	/**
 	 * @constructor
@@ -184,15 +184,15 @@ export default class Camera {
 		this.ctx?.restore();
 	}
 
-	private applyScale() {
+	protected applyScale() {
 		this.ctx?.scale(this.viewport.scale[0], this.viewport.scale[1]);
 	}
 
-	private applyTranslation() {
+	protected applyTranslation() {
 		this.ctx?.translate(-this.viewport.left, -this.viewport.top);
 	}
 
-	private updateViewport() {
+	protected updateViewport() {
 		if (this.ctx) {
 			// dpr scaling
 			let cWidth = this.ctx.canvas.width;

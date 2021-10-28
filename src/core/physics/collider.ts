@@ -83,7 +83,7 @@ export default class Collider {
 		});
 	}
 
-	private collideRectangle(rect: Rect) {
+	protected collideRectangle(rect: Rect) {
 		const rectCX = rect.position.x + rect.w * 0.5;
 		const rectCY = rect.position.y + rect.h * 0.5;
 
@@ -114,7 +114,7 @@ export default class Collider {
 		return true;
 	}
 
-	private collideSprite(sprite: Sprite) {
+	protected collideSprite(sprite: Sprite) {
 		const rectCX = sprite.position.x + sprite.w * 0.5;
 		const rectCY = sprite.position.y + sprite.h * 0.5;
 
@@ -145,7 +145,7 @@ export default class Collider {
 		return true;
 	}
 
-	private collideCircle(circle2: Circle) {
+	protected collideCircle(circle2: Circle) {
 		/* first we get the x and y distance between the two circles. */
 		const distance_x = this.shape.position.x - circle2.position.x;
 		const distance_y = this.shape.position.y - circle2.position.y;
@@ -164,7 +164,7 @@ export default class Collider {
 		return false;
 	}
 
-	private resolveCircle(c2: Circle) {
+	protected resolveCircle(c2: Circle) {
 		const distance_x = this.shape.position.x - c2.position.x;
 		const distance_y = this.shape.position.y - c2.position.y;
 		const radii_sum = (this.shape as Circle).r + c2.r;

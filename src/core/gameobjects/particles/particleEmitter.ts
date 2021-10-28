@@ -13,7 +13,7 @@ import Scene from '../../scene';
  * @since 1.0.0-beta
  */
 export default class ParticleEmitter {
-	private particle: Particle;
+	protected particle: Particle;
 	public rangeX: Duck.Types.ParticleEmitter.Range;
 	public rangeY: Duck.Types.ParticleEmitter.Range;
 	public readonly amount: number;
@@ -23,10 +23,10 @@ export default class ParticleEmitter {
 
 	public emitting: boolean;
 
-	private floatRangeX: Duck.Types.ParticleEmitter.Range;
-	private floatRangeY: Duck.Types.ParticleEmitter.Range;
+	protected floatRangeX: Duck.Types.ParticleEmitter.Range;
+	protected floatRangeY: Duck.Types.ParticleEmitter.Range;
 
-	private container: ParticleContainer | undefined;
+	protected container: ParticleContainer | undefined;
 
 	/**
 	 * @constructor
@@ -66,13 +66,13 @@ export default class ParticleEmitter {
 		this.create();
 	}
 
-	private create() {
+	protected create() {
 		for (let i = 0; i < this.amount; i++) {
 			this.createOne();
 		}
 	}
 
-	private createOne() {
+	protected createOne() {
 		const obj = new Particle(
 			this.particle.shape,
 			this.particle.w,

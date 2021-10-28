@@ -13,7 +13,7 @@ import GameObject from '../gameobjects/gameObject';
 export default class Raycast {
 	public game: Game;
 
-	private state: Duck.Types.Raycast.State;
+	protected state: Duck.Types.Raycast.State;
 
 	/**
 	 * @memberof Raycast
@@ -116,7 +116,7 @@ export default class Raycast {
 		});
 	}
 
-	private checkIntersectingRect(
+	protected checkIntersectingRect(
 		x1: number,
 		y1: number,
 		x2: number,
@@ -187,7 +187,7 @@ export default class Raycast {
 		return false;
 	}
 
-	private isIntersectingLine(
+	protected isIntersectingLine(
 		x1: number,
 		y1: number,
 		x2: number,
@@ -217,7 +217,7 @@ export default class Raycast {
 		}
 	}
 
-	private createStateValue(
+	protected createStateValue(
 		x: number,
 		y: number,
 		obj: GameObject<Duck.Types.Texture.Type>

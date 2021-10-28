@@ -15,8 +15,8 @@ export default class StaticLight extends GameObject<'color'> {
 	public x: number;
 	public y: number;
 	public r: number;
-	private color: string;
-	private alpha: Duck.Types.Helper.AlphaRange;
+	protected color: string;
+	protected alpha: Duck.Types.Helper.AlphaRange;
 	public game: Game;
 
 	public visible: boolean;

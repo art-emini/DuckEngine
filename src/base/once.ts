@@ -7,7 +7,7 @@
  * @since 1.0.0
  */
 export default class Once {
-	private func: Function;
+	protected func: Function;
 	public ran: boolean;
 
 	/**

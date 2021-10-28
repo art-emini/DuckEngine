@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import Game from './game';
-import Basic from '../base/render';
+import Render from '../base/render';
 import { Duck } from '../index';
 
 // debug
@@ -83,7 +83,7 @@ import Raycast from './misc/raycast';
  * @description The Scene Class. Main rendering happens here
  * @since 1.0.0-beta
  */
-export default class Scene extends Basic {
+export default class Scene extends Render {
 	public readonly key: string;
 	protected game: Game;
 	public visible: boolean;

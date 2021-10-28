@@ -13,7 +13,7 @@ import GameObject from '../gameObject';
  */
 export default class Text extends GameObject<'color'> {
 	public text: string;
-	private config: Duck.Types.Interactive.Text.Config;
+	protected config: Duck.Types.Interactive.Text.Config;
 	public game: Game;
 	/**
 	 * @constructor

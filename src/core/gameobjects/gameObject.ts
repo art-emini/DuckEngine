@@ -86,7 +86,7 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 	 * @type GameObject
 	 * @since 1.0.0-beta
 	 */
-	private self:
+	protected self:
 		| Duck.TypeClasses.GameObjects.GameObject<textureType>
 		| undefined;
 
@@ -153,12 +153,12 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 	 * @since 2.0.0
 	 */
 	public vertices: Vector2[];
-	private topLeftVertex: Vector2;
-	private topRightVertex: Vector2;
-	private bottomLeftVertex: Vector2;
-	private bottomRightVertex: Vector2;
+	protected topLeftVertex: Vector2;
+	protected topRightVertex: Vector2;
+	protected bottomLeftVertex: Vector2;
+	protected bottomRightVertex: Vector2;
 
-	private internalRaycasts: {
+	protected internalRaycasts: {
 		top: Raycast;
 		bottom: Raycast;
 		left: Raycast;

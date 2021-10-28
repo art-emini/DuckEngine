@@ -19,11 +19,11 @@ import Collider from '../physics/collider';
  * @since 1.0.0-beta
  */
 export default class Group<t extends Duck.Types.Group.StackItem> {
-	private stack: t[];
+	protected stack: t[];
 	public game: Game;
 	public readonly name: string;
 
-	private listeners: Duck.Types.Group.Listener[];
+	protected listeners: Duck.Types.Group.Listener[];
 
 	/**
 	 * @constructor

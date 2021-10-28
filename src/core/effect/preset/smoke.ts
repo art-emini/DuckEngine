@@ -6,7 +6,7 @@ import Scene from '../../scene';
 import Effect from '../effect';
 
 export default class SmokeEffect extends Effect {
-	private maxAge: number;
+	protected maxAge: number;
 
 	constructor(
 		rangeX: Duck.Types.ParticleEmitter.Range,

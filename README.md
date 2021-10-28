@@ -105,21 +105,17 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 
 ```bash
 .
+├── CHANGELOG.1.2.0.md
+├── CHANGELOG.2.0.0.md
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
-├── examples
-│   ├── README.md
-│   └── ts
-│       ├── myScene.ts
-│       └── test.ts
 ├── global
 │   ├── Logo.png
 │   ├── Logo.xcf
 │   └── README.md
 ├── LICENSE
 ├── package.json
-├── package-lock.json
 ├── README.md
 ├── scripts
 │   └── build.sh
@@ -144,18 +140,25 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── gameobjects
 │   │   │   ├── circle.ts
 │   │   │   ├── gameObject.ts
+│   │   │   ├── interactive
+│   │   │   │   ├── button.ts
+│   │   │   │   └── text.ts
+│   │   │   ├── misc
+│   │   │   │   └── canvasModulate.ts
+│   │   │   ├── particles
+│   │   │   │   ├── particleContainer.ts
+│   │   │   │   ├── particleEmitter.ts
+│   │   │   │   └── particle.ts
 │   │   │   ├── rect.ts
 │   │   │   ├── roundrect.ts
 │   │   │   ├── spritesheet.ts
-│   │   │   └── sprite.ts
+│   │   │   ├── sprite.ts
+│   │   │   └── webgl
 │   │   ├── game.ts
 │   │   ├── group
 │   │   │   └── group.ts
 │   │   ├── input
 │   │   │   └── input.ts
-│   │   ├── interactive
-│   │   │   ├── button.ts
-│   │   │   └── text.ts
 │   │   ├── lights
 │   │   │   └── staticLight.ts
 │   │   ├── loader
@@ -165,19 +168,22 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   └── tilemap.ts
 │   │   ├── math
 │   │   │   ├── clamp.ts
+│   │   │   ├── lerp.ts
 │   │   │   ├── randomFloat.ts
-│   │   │   └── randomInt.ts
-│   │   ├── particles
-│   │   │   ├── particleContainer.ts
-│   │   │   ├── particleEmitter.ts
-│   │   │   └── particle.ts
+│   │   │   ├── randomInt.ts
+│   │   │   └── vector2.ts
+│   │   ├── misc
+│   │   │   └── raycast.ts
+│   │   ├── models
+│   │   │   ├── displayList.ts
+│   │   │   └── texture.ts
 │   │   ├── physics
 │   │   │   ├── circleToRectIntersect.ts
 │   │   │   ├── collider.ts
 │   │   │   └── rectToRectIntersect.ts
 │   │   ├── scene.ts
 │   │   ├── sound
-│   │   │   └── sound.ts
+│   │   │   └── soundPlayer.ts
 │   │   └── storage
 │   │       └── storage.ts
 │   ├── helper
@@ -204,10 +210,14 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   └── version.ts
 │   ├── index.ts
 │   └── utils
+│       ├── cloneClass.ts
+│       ├── degToRadians.ts
+│       ├── extractNumbers.ts
 │       ├── swapElement.ts
 │       └── validURL.ts
 ├── tsconfig.json
-└── webpack.config.js
+├── webpack.config.js
+└── yarn.lock
 ```
 
 #### Meaning & Use
@@ -223,25 +233,26 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 2. Fork the repository.
 3. Clone the fork to your device.
 4. CD (change directories) into the cloned directory.
-5. Run `npm install`.
-6. Run `npm run build` or `ctrl + shift + b` for vscode users.
+5. Run `yarn upgrade`.
+6. Run `yarn run build` or `ctrl + shift + b` for vscode users.
 7. Make your changes.
 8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
 9. Create a pull request.
 10. Wait for it to be reviewed and maybe merged.
 
-### NPM Scripts
+### Dev Scripts
 
-1. `npm run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
-2. `npm run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
-3. `npm run build:docs` - Uses TypeDoc to build docs.
-4. `npm run webpack` - Bundles files in lib directory.
-5. `npm run minify` - Uses uglifyjs to minify bundled file.
-6. `npm run format` - Uses Prettier to format files.
-7. `npm run format:watch` - Watches for changes and formats once changes are saved.
-8. `npm run lint` - Uses ESLint to lint all files in the src directory.
-9. `npm run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
-10. `npm run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
+1. `yarn run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
+2. `yarn run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
+3. `yarn run build:docs` - Uses TypeDoc to build docs.
+4. `yarn run webpack` - Bundles files in lib directory.
+5. `yarn run minify` - Uses uglifyjs to minify bundled file.
+6. `yarn run format` - Uses Prettier to format files.
+7. `yarn run format:watch` - Watches for changes and formats once changes are saved.
+8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
+9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
+10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
+11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure)
 
 ### Branches
 
@@ -266,7 +277,7 @@ All demos are bundled with parcel-bundler and are all on codesandbox.
 
 ## Attribution
 
-Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.
+Cube found in logo by José Manuel de Laá from the Noun Project.
 
 ## License
 
@@ -274,4 +285,4 @@ Cube (Cube found in logo) by José Manuel de Laá from the Noun Project.
 
 ## Author
 
-ksplat
+Bleart Emini

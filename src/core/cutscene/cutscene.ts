@@ -11,21 +11,21 @@ import Game from '../game';
  * @since 1.0.0-beta
  */
 export default class Cutscene {
-	private config: Duck.Types.Cutscene.Config;
-	private instructions: Duck.Types.Cutscene.Instructions;
+	protected config: Duck.Types.Cutscene.Config;
+	protected instructions: Duck.Types.Cutscene.Instructions;
 	public game: Game;
 
-	private steps: Duck.Types.Cutscene.Step[];
-	private mainObject: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
-	private otherObjects: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
-	private camera: Camera;
-	private otherCameras: Camera[];
+	protected steps: Duck.Types.Cutscene.Step[];
+	protected mainObject: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	protected otherObjects: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
+	protected camera: Camera;
+	protected otherCameras: Camera[];
 
 	public index: number;
 
 	public running: boolean;
 
-	private listeners: Duck.Types.Cutscene.OnListener[];
+	protected listeners: Duck.Types.Cutscene.OnListener[];
 
 	/**
 	 * @constructor
@@ -59,7 +59,7 @@ export default class Cutscene {
 		this.init();
 	}
 
-	private init() {
+	protected init() {
 		this.mainObject.position.x = this.instructions.init.mainObjectPos.x;
 		this.mainObject.position.y = this.instructions.init.mainObjectPos.y;
 

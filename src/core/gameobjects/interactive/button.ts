@@ -26,7 +26,7 @@ export default class Button extends GameObject<'either'> {
 	public scene: Scene;
 
 	public hovering: boolean;
-	private listeners: Duck.Types.Interactive.Button.Listener[];
+	protected listeners: Duck.Types.Interactive.Button.Listener[];
 
 	/**
 	 * @constructor

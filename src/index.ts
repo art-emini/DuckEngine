@@ -259,20 +259,129 @@ export namespace Duck {
 			| Duck.TypeClasses.Maps.TileMap;
 		export namespace Game {
 			export interface Config {
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Canvas element to render to or return value from Duck.AutoCanvas()
+				 * @type HTMLCanvasElement | { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; }
+				 * @since 1.0.0-beta
+				 */
 				canvas:
 					| HTMLCanvasElement
 					| {
 							canvas: HTMLCanvasElement;
 							ctx: CanvasRenderingContext2D;
 					  };
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Key of scene that is defaulted to be visible
+				 * @type string
+				 * @since 1.0.0-beta
+				 */
 				defaultScene: string;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Rounds pixels from floats to integers, effects gameobjects (excluding particles)
+				 * @type boolean
+				 * @since 2.0.0
+				 */
 				roundPixels?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if rendering renderable objects is paused if tab is not focused, uses window.onblur and window.onfocus
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				pauseRenderingOnBlur?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Function to call when rendering is paused, rendering pauses when this.stop is called or
+				 * if pauseRenderingOnBlur is true and the window.blur event was fired
+				 * @type (reason: 'windowBlur' | 'gameStop') => void
+				 * @since 2.0.0
+				 */
+				onPauseRendering?: (reason: 'windowBlur' | 'gameStop') => void;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Function to call when rendering is resumed/started, rendering resumes/starts when this.start is called or
+				 * if the window.focus event was fired
+				 * @type (reason: 'windowFocus' | 'gameStart') => void
+				 * @since 2.0.0
+				 */
+				onResumeRendering?: (
+					reason: 'windowFocus' | 'gameStart'
+				) => void;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Scale of the canvas, the size of the canvas
+				 * @type Duck.Types.Misc.Scale
+				 * @since 1.0.0-beta
+				 */
 				scale?: Misc.Scale;
-				physics?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if DuckEngine logs out events that are occurring
+				 * @type boolean
+				 * @since 1.0.0-beta
+				 */
 				debug?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if DuckEngine silences/prevents pauseRenderingOnBlur, onPauseRendering, and onResumeRendering configurations
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				debugRendering?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Custom splash screen options, shows while the game is starting/loading, default img: https://i.ibb.co/bdN4CCN/Logo-Splash.png
+				 * default extraDuration: 500
+				 * @type { img: string | 'default'; extraDuration?: number; }
+				 * @since 2.0.0
+				 */
+				splashScreen?: {
+					img: string | 'default';
+					extraDuration?: number;
+				};
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description DuckStorage config, creates an instance if passed
+				 * @type Duck.Types.Storage.Config
+				 * @since 1.0.0-beta
+				 */
 				storage?: Storage.Config;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description CSS background color of the canvas (hint: to fill a scene with a background color, use scene.add.misc.canvasModulate)
+				 * @type string
+				 * @since 1.0.0-beta
+				 */
 				background?: string;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if the canvas is scaled down to the window size if the window size is smaller than the canvas
+				 * @type boolean
+				 * @since 1.0.0
+				 */
 				smartScale?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Uses the device pixel ratio to scale the canvas accordingly
+				 * @type boolean
+				 * @since 1.0.0
+				 */
 				dprScale?: boolean;
 			}
 
@@ -431,7 +540,7 @@ export namespace Duck {
 				func: Function;
 			}
 
-			type StepType =
+			export type StepType =
 				| 'MOVE'
 				| 'DRAW'
 				| 'FUNC'

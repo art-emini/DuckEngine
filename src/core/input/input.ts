@@ -10,8 +10,8 @@ import Game from '../game';
  */
 export default class Input {
 	public game: Game;
-	private controller: Duck.Types.Input.Controller;
-	private listeners: Duck.Types.Input.Listener[];
+	protected controller: Duck.Types.Input.Controller;
+	protected listeners: Duck.Types.Input.Listener[];
 
 	/**
 	 * @constructor
@@ -38,7 +38,7 @@ export default class Input {
 		this.listener();
 	}
 
-	private listener() {
+	protected listener() {
 		document.addEventListener('keydown', (e) => {
 			Object.keys(this.controller).forEach((key) => {
 				if (e.key.toLowerCase() === key.toLowerCase()) {

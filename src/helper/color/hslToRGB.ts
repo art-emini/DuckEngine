@@ -9,7 +9,7 @@ export default function hslToRGB(
 	s = parseInt(s as string);
 	l = parseInt(l as string);
 
-	if (s == 0) {
+	if (s === 0) {
 		r = g = b = l; // achromatic
 	} else {
 		const hue2rgb = function hue2rgb(p: number, q: number, t: number) {

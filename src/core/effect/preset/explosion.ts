@@ -7,7 +7,7 @@ import Scene from '../../scene';
 import Effect from '../effect';
 
 export default class ExplosionEffect extends Effect {
-	private maxAge: number;
+	protected maxAge: number;
 
 	constructor(
 		rangeX: Duck.Types.ParticleEmitter.Range,

@@ -7,7 +7,7 @@ export default function rgbToHsl(r: number, g: number, b: number) {
 		s,
 		l = (max + min) / 2;
 
-	if (max == min) {
+	if (max === min) {
 		h = s = 0; // achromatic
 	} else {
 		const d = max - min;

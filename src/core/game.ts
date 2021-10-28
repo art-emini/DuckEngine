@@ -23,18 +23,23 @@ export default class Game {
 	public gameStorage: DuckStorage | undefined;
 
 	public deltaTime: number;
-	private oldTime: number;
-	private now: number;
+	protected oldTime: number;
+	protected now: number;
 
 	public isInFullscreen: boolean;
-	private oldWidth: number;
-	private oldHeight: number;
+	protected oldWidth: number;
+	protected oldHeight: number;
 
 	// methods
 	public scenes: {
 		add: (scenes: Scene[]) => void;
 		remove: (scene: Scene) => void;
 	};
+
+	public isRendering: boolean;
+	public isLoaded: boolean;
+
+	public splashScreen: string;
 
 	/**
 	 * @constructor Game
@@ -122,6 +127,41 @@ export default class Game {
 			}
 		};
 
+		this.isRendering = false;
+		this.isLoaded = false;
+
+		// blur and focus listener
+		window.onfocus = () => {
+			if (
+				this.config.pauseRenderingOnBlur &&
+				!this.config.debugRendering
+			) {
+				this.isRendering = true;
+				if (this.config.onResumeRendering) {
+					this.config.onResumeRendering('windowFocus');
+				}
+			}
+		};
+		window.onblur = () => {
+			if (
+				this.config.pauseRenderingOnBlur &&
+				!this.config.debugRendering
+			) {
+				this.isRendering = false;
+				if (this.config.onPauseRendering) {
+					this.config.onPauseRendering('windowBlur');
+				}
+			}
+		};
+
+		this.splashScreen =
+			this.config.splashScreen?.img ||
+			'https://i.ibb.co/bdN4CCN/Logo-Splash.png';
+
+		if (this.config.splashScreen?.img === 'default') {
+			this.splashScreen = 'https://i.ibb.co/bdN4CCN/Logo-Splash.png';
+		}
+
 		// stack
 		this.stack = {
 			scenes: [],
@@ -180,14 +220,28 @@ export default class Game {
 	 * @since 1.0.0-beta
 	 */
 	public async start() {
-		// load scenes
+		// show loading splash screen
+		await this.drawSplashScreen();
 
+		// load scenes
 		for await (const scene of this.stack.scenes) {
 			// preload assets
 			await scene.preload();
 
 			// create assets
 			scene.create();
+		}
+
+		// set states
+		this.isRendering = true;
+		this.isLoaded = true;
+
+		if (this.config.debug) {
+			new Debug.Log('Game loaded.');
+		}
+
+		if (this.config.onResumeRendering && !this.config.debugRendering) {
+			this.config.onResumeRendering('gameStart');
 		}
 
 		this.loop(this);
@@ -204,6 +258,15 @@ export default class Game {
 	public stop() {
 		if (this.animationFrame) {
 			cancelAnimationFrame(this.animationFrame);
+
+			// set states
+			this.isRendering = false;
+			this.isLoaded = false;
+
+			if (this.config.onPauseRendering && !this.config.debugRendering) {
+				this.config.onPauseRendering('gameStop');
+			}
+
 			if (this.config.debug) {
 				new Debug.Log('Stopped animation frame.');
 			}
@@ -215,40 +278,64 @@ export default class Game {
 	 * @description Core loop
 	 * @since 1.0.0-beta
 	 */
-	private loop(self: Game) {
+	protected loop(self: Game) {
 		self.clearFrame();
 
 		this.now = performance.now();
 		this.deltaTime = this.now - this.oldTime;
 
-		self.stack.scenes.forEach((scene) => {
-			if (scene.visible) {
-				if (scene.currentCamera) {
-					scene.currentCamera.begin();
-				}
-
-				scene.update(this.deltaTime);
-				scene.__tick();
-
-				// displayList
-				const depthSorted = scene.displayList.depthSort();
-				depthSorted.forEach((renderableObject) => {
-					if (renderableObject.visible) {
-						renderableObject._draw();
+		if (this.isRendering) {
+			self.stack.scenes.forEach((scene) => {
+				if (scene.visible) {
+					if (scene.currentCamera) {
+						scene.currentCamera.begin();
 					}
-				});
 
-				if (scene.currentCamera) {
-					scene.currentCamera.end();
+					scene.update(this.deltaTime);
+					scene.__tick();
+
+					// displayList
+					const depthSorted = scene.displayList.depthSort();
+					depthSorted.forEach((renderableObject) => {
+						if (renderableObject.visible) {
+							renderableObject._draw();
+						}
+					});
+
+					if (scene.currentCamera) {
+						scene.currentCamera.end();
+					}
 				}
-			}
-		});
+			});
+		}
 
 		this.oldTime = this.now;
 
 		this.animationFrame = requestAnimationFrame(() => {
 			self.loop(self);
 		});
+	}
+
+	/**
+	 * @memberof Game
+	 * @description Draws the splash screen to the canvas if isLoaded is false
+	 * @since 2.0.0
+	 */
+	protected async drawSplashScreen() {
+		if (!this.isLoaded) {
+			this.canvas.style.backgroundImage = `url('${this.splashScreen}')`;
+			await this.sleep(this.config.splashScreen?.extraDuration || 500);
+			if (this.config.background) {
+				this.canvas.style.backgroundImage = 'none';
+				this.setBackground(this.config.background);
+			} else {
+				this.canvas.style.backgroundImage = 'none';
+			}
+		}
+	}
+
+	protected sleep(ms: number) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
 	/**

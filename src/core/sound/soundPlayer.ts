@@ -10,7 +10,7 @@ import Debug from '../debug/debug';
 export default class SoundPlayer {
 	public path: string;
 	public element: HTMLAudioElement;
-	private sprites: Duck.Types.Sound.Sprite[];
+	protected sprites: Duck.Types.Sound.Sprite[];
 
 	/**
 	 * @param {string} path Path to sound file

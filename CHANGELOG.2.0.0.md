@@ -34,8 +34,14 @@
       - Added CanvasModulate with zIndex of 1 witch fills up the entire canvas with a color
 - Game
   - Added roundPixels option to config
+  - Added isRendering property
+  - Added pauseRenderingOnBlur to config
+  - Added onPauseRendering to config
+  - Added onResumeRendering to config
+  - Added splashScreen object config to config
   - Added start sequence to start method
     - Start Sequence:
+      - Show splash screen
       - Preload all assets from all scenes
       - Create all assets from all scenes
 - Scene
@@ -80,6 +86,7 @@
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created
+  - All private properties and methods in all classes are either public or protected
 - Game
   - Improved AutoCanvas
   - Typescript: canvas and ctx properties are never undefined
