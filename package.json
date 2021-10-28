@@ -39,6 +39,7 @@
 	},
 	"homepage": "https://github.com/ksplatdev/DuckEngine#readme",
 	"devDependencies": {
+		"@types/css-font-loading-module": "^0.0.6",
 		"@typescript-eslint/eslint-plugin": "^4.31.1",
 		"@typescript-eslint/parser": "^4.31.1",
 		"eslint": "^7.32.0",

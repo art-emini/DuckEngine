@@ -49,7 +49,9 @@ export default class Camera {
 		| { position: { x: number; y: number }; w: number; h: number }
 		| undefined;
 
-	public following: Duck.TypeClasses.GameObjects.GameObject | undefined;
+	public following:
+		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		| undefined;
 	private lerpX = 1;
 	private lerpY = 1;
 
@@ -294,13 +296,13 @@ export default class Camera {
 	/**
 	 * @memberof Camera
 	 * @description Follows a GameObject
-	 * @param {Duck.TypeClasses.GameObjects.GameObject} gameObject Game object to follow
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} gameObject Game object to follow
 	 * @param {number} [lerpX=1] Lerp on the x axis, optional -> defaults: 1
 	 * @param {number} [lerpY=1] Lerp on the y axis, optional -> defaults: 1
 	 * @since 1.0.0-beta
 	 */
 	public startFollow(
-		gameObject: Duck.TypeClasses.GameObjects.GameObject,
+		gameObject: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
 		lerpX = 1,
 		lerpY = 1
 	) {
@@ -320,17 +322,16 @@ export default class Camera {
 
 	/**
 	 * @memberof Camera
-	 * @description Transforms a coordinate pair from screen coordinates (relative to the canvas) into world coordinates,
-	 * useful for interacting with {@link Button} while having a camera
+	 * @description Transforms a coordinate pair from screen coordinates (relative to the canvas) into world coordinates
 	 * @param {number} x X position
 	 * @param {number} y Y position
-	 * @param {Duck.TypeClasses.GameObjects.GameObject} obj GameObject
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} obj GameObject
 	 * @since 1.0.0-beta
 	 */
 	public screenToWorld(
 		x: number,
 		y: number,
-		obj: Duck.TypeClasses.GameObjects.GameObject
+		obj: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
 	) {
 		obj.position.x = x / this.viewport.scale[0] + this.viewport.left;
 		obj.position.y = y / this.viewport.scale[1] + this.viewport.top;
@@ -340,16 +341,16 @@ export default class Camera {
 	/**
 	 * @memberof Camera
 	 * @description Transforms a coordinate pair from world coordinates into screen coordinates (relative to the canvas) -
-	 * useful for placing DOM elements over the scene.
+	 * useful for interacting with a {@link Button} while having a camera
 	 * @param {number} x X position
 	 * @param {number} y Y position
-	 * @param {Duck.TypeClasses.GameObjects.GameObject} obj GameObject
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} obj GameObject
 	 * @since 1.0.0-beta
 	 */
 	public worldToScreen(
 		x: number,
 		y: number,
-		obj: Duck.TypeClasses.GameObjects.GameObject
+		obj: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
 	) {
 		obj.position.x = (x - this.viewport.left) * this.viewport.scale[0];
 		obj.position.y = (y - this.viewport.top) * this.viewport.scale[1];

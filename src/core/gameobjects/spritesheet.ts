@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Game from '../game';
+import Scene from '../scene';
 import GameObject from './gameObject';
 
 /**
@@ -7,8 +9,9 @@ import GameObject from './gameObject';
  * @description The SpriteSheet Class. Represents a image with multiple frames
  * @since 1.0.0-beta
  */
-export default class SpriteSheet extends GameObject {
-	private image: HTMLImageElement;
+export default class SpriteSheet extends GameObject<'image'> {
+	public scene: Scene;
+
 	private frameWidth: number;
 	private frameHeight: number;
 
@@ -26,7 +29,7 @@ export default class SpriteSheet extends GameObject {
 	 * @description Creates a SpriteSheet instance
 	 * @param {number} x X position
 	 * @param {number} y Y position
-	 * @param {string} imagePath Image path
+	 * @param {string} textureKey The key of the preloaded texture used from Scene.loader.loadImage(path, key)
 	 * @param {number} frameWidth How wide one frame is
 	 * @param {number} frameHeight How tall one frame is
 	 * @param {number} rows How many rows are there in the image
@@ -39,20 +42,29 @@ export default class SpriteSheet extends GameObject {
 	constructor(
 		x: number,
 		y: number,
-		imagePath: string,
+		textureKey: string,
 		frameWidth: number,
 		frameHeight: number,
 		rows: number,
 		cols: number,
 		currentRow: number,
 		currentCol: number,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
-		super('spritesheet', x, y, frameWidth, frameHeight, 0, imagePath, game);
+		super(
+			'spritesheet',
+			x,
+			y,
+			frameWidth,
+			frameHeight,
+			0,
+			scene.loader.imageStack.find((t) => t.key === textureKey)!.value,
+			game
+		);
 		this.init(this);
 
-		this.image = new Image();
-		this.image.src = imagePath;
+		this.scene = scene;
 
 		this.frameWidth = frameWidth;
 		this.frameHeight = frameHeight;
@@ -225,7 +237,7 @@ export default class SpriteSheet extends GameObject {
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.drawImage(
-				this.image, // image
+				this.texture.texture, // image
 				(this.currentCol - 1) * this.frameWidth, // source x
 				(this.currentRow - 1) * this.frameHeight, // source y
 				this.frameWidth, // source width

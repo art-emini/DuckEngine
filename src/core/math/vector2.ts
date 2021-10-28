@@ -307,14 +307,10 @@ export default class Vector2 {
 	 * @since 2.0.0
 	 */
 	public normalize() {
-		const length = Math.sqrt(this.x * this.x + this.y * this.y);
+		const mag = this.magnitude();
 
-		if (length === 0) {
-			this.x = 1;
-			this.y = 0;
-		} else {
-			this.x /= length;
-			this.y /= length;
+		if (mag > 0) {
+			this.divideNumber(mag);
 		}
 
 		return this;

@@ -144,7 +144,7 @@ export default class Game {
 		this.scenes = {
 			/**
 			 * @memberof Game#scenes
-			 * @description Adds scenes to the Game stack
+			 * @description Add a scenes to the Game stack
 			 * @param {Scene[]} scenes Scenes to add to the Game stack
 			 * @since 1.0.0-beta
 			 */
@@ -179,7 +179,17 @@ export default class Game {
 	 * @description Starts the game loop
 	 * @since 1.0.0-beta
 	 */
-	public start() {
+	public async start() {
+		// load scenes
+
+		for await (const scene of this.stack.scenes) {
+			// preload assets
+			await scene.preload();
+
+			// create assets
+			scene.create();
+		}
+
 		this.loop(this);
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
@@ -212,11 +222,11 @@ export default class Game {
 		this.deltaTime = this.now - this.oldTime;
 
 		self.stack.scenes.forEach((scene) => {
-			if (scene.currentCamera) {
-				scene.currentCamera.begin();
-			}
-
 			if (scene.visible) {
+				if (scene.currentCamera) {
+					scene.currentCamera.begin();
+				}
+
 				scene.update(this.deltaTime);
 				scene.__tick();
 
@@ -227,10 +237,10 @@ export default class Game {
 						renderableObject._draw();
 					}
 				});
-			}
 
-			if (scene.currentCamera) {
-				scene.currentCamera.end();
+				if (scene.currentCamera) {
+					scene.currentCamera.end();
+				}
 			}
 		});
 

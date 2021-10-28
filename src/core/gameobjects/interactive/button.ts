@@ -5,6 +5,7 @@ import GameObject from '../gameObject';
 import rectToRectIntersect from '../../physics/rectToRectIntersect';
 import Scene from '../../scene';
 import Text from './text';
+import Texture from '../../models/texture';
 
 /**
  * @class Button
@@ -13,33 +14,30 @@ import Text from './text';
  * @extends GameObject
  * @since 1.0.0
  */
-export default class Button extends GameObject {
+export default class Button extends GameObject<'either'> {
 	public shape: Duck.Types.Interactive.Button.Shape;
 	public x: number;
 	public y: number;
 	public w: number;
 	public h: number;
 	public r: number;
-	public fillColor: string;
 	public text: Text;
 	public game: Game;
-	private scene: Scene;
+	public scene: Scene;
 
 	public hovering: boolean;
 	private listeners: Duck.Types.Interactive.Button.Listener[];
 
-	private image: HTMLImageElement | undefined;
-
 	/**
 	 * @constructor
 	 * @description Creates a Button instance
-	 * @param {Duck.Types.Interactive.Button.Shape} shape Shape of the button, 'rect' or 'roundrect'
+	 * @param {Duck.Types.Interactive.Button.Shape} shape Shape of the button, 'rect', 'roundrect', or 'sprite'
 	 * @param {number} x X position
 	 * @param {number} y Y position
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @param {number} r Radius
-	 * @param {string} fillColor Fill Color of the button
+	 * @param {string} fillColorOrIMGPath Fill Color or Image path of the button
 	 * @param {Text} text Text instance to render on top of the button
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
@@ -52,19 +50,27 @@ export default class Button extends GameObject {
 		w: number,
 		h: number,
 		r: number,
-		fillColor: string,
+		fillColorOrIMGPath: string,
 		text: Text,
 		game: Game,
 		scene: Scene
 	) {
-		super(shape, x, y, w, h, r, fillColor, game);
+		super(
+			shape,
+			x,
+			y,
+			w,
+			h,
+			r,
+			Texture.fromEither(fillColorOrIMGPath, w, h),
+			game
+		);
 		this.shape = shape;
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
 		this.r = r;
-		this.fillColor = fillColor;
 		this.text = text;
 		this.game = game;
 		this.scene = scene;
@@ -74,11 +80,6 @@ export default class Button extends GameObject {
 		this.zIndex = 3;
 
 		this.listeners = [];
-
-		if (this.shape === 'sprite') {
-			this.image = new Image();
-			this.image.src = this.fillColor;
-		}
 
 		if (this.game.canvas) {
 			this.game.canvas.addEventListener('click', (e) => {
@@ -212,14 +213,14 @@ export default class Button extends GameObject {
 		if (this.game.ctx) {
 			switch (this.shape) {
 				case 'rect':
-					this.game.ctx.fillStyle = this.fillColor;
+					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
 					break;
 
 				case 'roundrect':
 					if (this.w < 2 * this.r) this.r = this.w / 2;
 					if (this.h < 2 * this.r) this.r = this.h / 2;
-					this.game.ctx.fillStyle = this.fillColor;
+					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.beginPath();
 					this.game.ctx.moveTo(this.x + this.r, this.y);
 					this.game.ctx.arcTo(
@@ -256,8 +257,7 @@ export default class Button extends GameObject {
 
 				case 'sprite':
 					this.game.ctx.drawImage(
-						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-						this.image!,
+						this.texture.texture as HTMLImageElement,
 						this.x,
 						this.y,
 						this.w,

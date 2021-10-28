@@ -1,5 +1,6 @@
 import Debug from '../debug/debug';
 import Game from '../game';
+import Texture from '../models/texture';
 
 import GameObject from './gameObject';
 
@@ -9,7 +10,7 @@ import GameObject from './gameObject';
  * @description The RoundRect Class. Represents a smooth cornered rect
  * @since 1.0.0-beta
  */
-export default class RoundRect extends GameObject {
+export default class RoundRect extends GameObject<'color'> {
 	constructor(
 		x: number,
 		y: number,
@@ -19,7 +20,17 @@ export default class RoundRect extends GameObject {
 		fillColor: string,
 		game: Game
 	) {
-		super('roundrect', x, y, w, h, r, fillColor, game);
+		super(
+			'roundrect',
+			x,
+			y,
+			w,
+			h,
+			r,
+			Texture.fromColor(fillColor, w, h),
+			game
+		);
+		this.init(this);
 	}
 
 	/**
@@ -32,7 +43,7 @@ export default class RoundRect extends GameObject {
 		if (this.game.ctx) {
 			if (this.w < 2 * this.r) this.r = this.w / 2;
 			if (this.h < 2 * this.r) this.r = this.h / 2;
-			this.game.ctx.fillStyle = this.fillColor;
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.beginPath();
 			this.game.ctx.moveTo(this.position.x + this.r, this.position.y);
 			this.game.ctx.arcTo(

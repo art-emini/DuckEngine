@@ -78,7 +78,7 @@ export default class ParticleEmitter {
 			this.particle.w,
 			this.particle.h,
 			this.particle.r,
-			this.particle.fillColor,
+			this.particle.originalFillColorOrIMGPath,
 			this.game
 		);
 

@@ -89,13 +89,17 @@ export default class Scene extends Basic {
 	public visible: boolean;
 	public readonly default: boolean;
 
-	public mainObject: Duck.TypeClasses.GameObjects.GameObject | undefined;
+	public mainObject:
+		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		| undefined;
 	public currentCamera: Camera | undefined;
 	public mainCamera: Camera | undefined;
 
 	public cameras: Camera[];
 
 	public displayList: DisplayList;
+
+	public loader: Loader;
 
 	// methods
 
@@ -109,7 +113,7 @@ export default class Scene extends Basic {
 				y: number,
 				w: number,
 				h: number,
-				imgpath: string
+				textureKey: string
 			) => Sprite;
 			rect: (
 				x: number,
@@ -135,7 +139,7 @@ export default class Scene extends Basic {
 			spriteSheet: (
 				x: number,
 				y: number,
-				imagePath: string,
+				textureKey: string,
 				frameWidth: number,
 				frameHeight: number,
 				rows: number,
@@ -242,7 +246,7 @@ export default class Scene extends Basic {
 	};
 
 	public tools: {
-		loader: Loader;
+		loader: typeof Loader;
 		color: {
 			random: () => string;
 			randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) => string;
@@ -304,6 +308,7 @@ export default class Scene extends Basic {
 		};
 		math: {
 			createVector: (x?: number, y?: number) => Vector2;
+			vector: typeof Vector2;
 			clamp: (x: number, min: number, max: number) => number;
 			lerp: (start: number, end: number, amount: number) => number;
 			randomInt: (min: number, max: number) => number;
@@ -343,8 +348,7 @@ export default class Scene extends Basic {
 
 		this.displayList = new DisplayList();
 
-		// push to stack
-		this.game.stack.scenes.push(this);
+		this.loader = new Loader(this);
 
 		// methods
 		/**
@@ -365,9 +369,17 @@ export default class Scene extends Basic {
 					y: number,
 					w: number,
 					h: number,
-					imgpath: string
+					textureKey: string
 				) => {
-					const sprite = new Sprite(x, y, w, h, imgpath, this.game);
+					const sprite = new Sprite(
+						x,
+						y,
+						w,
+						h,
+						textureKey,
+						this.game,
+						this
+					);
 					this.displayList.add(sprite);
 					return sprite;
 				},
@@ -415,7 +427,7 @@ export default class Scene extends Basic {
 				spriteSheet: (
 					x: number,
 					y: number,
-					imagePath: string,
+					textureKey: string,
 					frameWidth: number,
 					frameHeight: number,
 					rows: number,
@@ -426,14 +438,15 @@ export default class Scene extends Basic {
 					const spriteSheet = new SpriteSheet(
 						x,
 						y,
-						imagePath,
+						textureKey,
 						frameWidth,
 						frameHeight,
 						rows,
 						cols,
 						currentRow,
 						currentCol,
-						this.game
+						this.game,
+						this
 					);
 					this.displayList.add(spriteSheet);
 					return spriteSheet;
@@ -722,7 +735,10 @@ export default class Scene extends Basic {
 				},
 			},
 			math: {
-				createVector: Vector2.CREATE,
+				createVector: (x?: number, y?: number) => {
+					return Vector2.CREATE(x, y);
+				},
+				vector: Vector2,
 				clamp: clamp,
 				lerp: lerp,
 				randomInt: randomInt,

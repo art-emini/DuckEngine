@@ -19,7 +19,9 @@ export default class Effect {
 	public visible: boolean;
 	public zIndex: number;
 
-	public following: Duck.TypeClasses.GameObjects.GameObject | undefined;
+	public following:
+		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		| undefined;
 	protected randomMaxOffset: number;
 	/**
 	 * @constructor
@@ -105,11 +107,14 @@ export default class Effect {
 	/**
 	 * @memberof Effect
 	 * @description Makes the effect follow the GameObject
-	 * @param {Duck.Types.GameObject} object GameObject to follow
+	 * @param {Duck.Types.GameObject<Duck.Types.Texture.Type>} object GameObject to follow
 	 * @param {number} [randomMaxOffset] A random offset of the effect relative to the GameObject
 	 * @since 1.2.0
 	 */
-	public follow(object: Duck.Types.GameObject, randomMaxOffset = 5) {
+	public follow(
+		object: Duck.Types.GameObject<Duck.Types.Texture.Type>,
+		randomMaxOffset = 5
+	) {
 		this.following = object;
 		this.randomMaxOffset = randomMaxOffset;
 	}

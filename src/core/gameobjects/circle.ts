@@ -1,6 +1,7 @@
 import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
+import Texture from '../models/texture';
 
 /**
  * @class Circle
@@ -8,7 +9,7 @@ import GameObject from './gameObject';
  * @description The Circle Class. Represents a circle
  * @since 1.0.0-beta
  */
-export default class Circle extends GameObject {
+export default class Circle extends GameObject<'color'> {
 	constructor(
 		x: number,
 		y: number,
@@ -16,7 +17,16 @@ export default class Circle extends GameObject {
 		fillColor: string,
 		game: Game
 	) {
-		super('circle', x, y, 0, 0, r, fillColor, game);
+		super(
+			'circle',
+			x,
+			y,
+			0,
+			0,
+			r,
+			Texture.fromColor(fillColor, r, r),
+			game
+		);
 		this.init(this);
 	}
 
@@ -37,7 +47,7 @@ export default class Circle extends GameObject {
 				2 * Math.PI,
 				false
 			);
-			this.game.ctx.fillStyle = this.fillColor;
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fill();
 		} else {
 			new Debug.Error(

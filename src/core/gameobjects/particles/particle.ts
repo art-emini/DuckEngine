@@ -4,6 +4,7 @@ import Game from '../../game';
 import GameObject from '../gameObject';
 import clamp from '../../math/clamp';
 import Vector2 from '../../math/vector2';
+import Texture from '../../models/texture';
 
 /**
  * @class Particle
@@ -12,10 +13,10 @@ import Vector2 from '../../math/vector2';
  * @extends GameObject
  * @since 1.0.0-beta
  */
-export default class Particle extends GameObject {
-	private image: HTMLImageElement | undefined;
-
+export default class Particle extends GameObject<'either'> {
 	public floatVelocity: Vector2;
+
+	public originalFillColorOrIMGPath: string;
 
 	/**
 	 * @memberof Particle
@@ -32,7 +33,7 @@ export default class Particle extends GameObject {
 	 * @param {number} w Width of the particle
 	 * @param {number} h Height of the particle
 	 * @param {number} r Radius of the particle
-	 * @param {string} fillColor Color to fill the particle with
+	 * @param {string} fillColorOrIMGPath Color to fill the particle with, can be an image path
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
@@ -41,22 +42,27 @@ export default class Particle extends GameObject {
 		w: number,
 		h: number,
 		r: number,
-		fillColor: string,
+		fillColorOrIMGPath: string,
 		game: Game
 	) {
-		super(shape, 0, 0, w, h, r, fillColor, game);
+		super(
+			shape,
+			0,
+			0,
+			w,
+			h,
+			r,
+			Texture.fromEither(fillColorOrIMGPath, w, h),
+			game
+		);
+
+		this.originalFillColorOrIMGPath = fillColorOrIMGPath;
 
 		this.w = w;
 		this.h = h;
 		this.r = r;
-		this.fillColor = fillColor;
 
 		this.floatVelocity = Vector2.ZERO;
-
-		if (this.shape === 'sprite') {
-			this.image = new Image();
-			this.image.src = this.fillColor;
-		}
 
 		// age
 
@@ -85,12 +91,12 @@ export default class Particle extends GameObject {
 						2 * Math.PI,
 						false
 					);
-					this.game.ctx.fillStyle = this.fillColor;
+					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.fill();
 					break;
 
 				case 'rect':
-					this.game.ctx.fillStyle = this.fillColor;
+					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.fillRect(
 						this.position.x,
 						this.position.y,
@@ -102,7 +108,7 @@ export default class Particle extends GameObject {
 				case 'roundrect':
 					if (this.w < 2 * this.r) this.r = this.w / 2;
 					if (this.h < 2 * this.r) this.r = this.h / 2;
-					this.game.ctx.fillStyle = this.fillColor;
+					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.beginPath();
 					this.game.ctx.moveTo(
 						this.position.x + this.r,
@@ -141,15 +147,13 @@ export default class Particle extends GameObject {
 					break;
 
 				case 'sprite':
-					if (this.image) {
-						this.game.ctx.drawImage(
-							this.image,
-							this.position.x,
-							this.position.y,
-							this.w,
-							this.h
-						);
-					}
+					this.game.ctx.drawImage(
+						this.texture.texture as HTMLImageElement,
+						this.position.x,
+						this.position.y,
+						this.w,
+						this.h
+					);
 
 					break;
 
@@ -194,6 +198,7 @@ export default class Particle extends GameObject {
 
 		// don't round pixels for particles
 	}
+
 	/**
 	 * @memberof Particle
 	 * @description Sets the particle's image src. Only works if particle's shape was initially 'sprite'
@@ -201,14 +206,6 @@ export default class Particle extends GameObject {
 	 * @since 1.0.0-beta
 	 */
 	public setImagePath(imagePath: string) {
-		if (this.image) {
-			this.image.src = imagePath;
-		} else {
-			if (this.game.config.debug) {
-				new Debug.Warn(
-					'Cannot setImagePath to particle. Particle shape is not a sprite.'
-				);
-			}
-		}
+		this.texture.setImagePath(imagePath);
 	}
 }

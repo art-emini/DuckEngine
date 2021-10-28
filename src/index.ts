@@ -35,6 +35,7 @@ import CanvasModulateClass from './core/gameobjects/misc/canvasModulate';
 import MapClass from './core/map/map';
 import RaycastClass from './core/misc/raycast';
 import AmountClass from './base/amount';
+import TextureClass from './core/models/texture';
 
 // main
 
@@ -134,6 +135,7 @@ export namespace Duck {
 
 		export namespace Models {
 			export const DisplayList = DisplayListClass;
+			export const Texture = TextureClass;
 		}
 
 		export namespace Map {
@@ -159,7 +161,9 @@ export namespace Duck {
 		export type Scene = SceneClass;
 
 		export namespace GameObjects {
-			export type GameObject = GameObjectClass;
+			export type GameObject<
+				textureType extends Duck.Types.Texture.Type
+			> = GameObjectClass<textureType>;
 			export type Circle = CircleClass;
 			export type Rect = RectClass;
 			export type RoundRect = RoundRectClass;
@@ -219,6 +223,8 @@ export namespace Duck {
 
 		export namespace Models {
 			export type DisplayList = DisplayListClass;
+			export type Texture<type extends Duck.Types.Texture.Type> =
+				TextureClass<type>;
 		}
 
 		export namespace Maps {
@@ -245,9 +251,10 @@ export namespace Duck {
 	}
 
 	export namespace Types {
-		export type GameObject = GameObjectClass;
+		export type GameObject<textureType extends Duck.Types.Texture.Type> =
+			GameObjectClass<textureType>;
 		export type Renderable =
-			| GameObjectClass
+			| GameObjectClass<Duck.Types.Texture.Type>
 			| Duck.TypeClasses.Effects.Effect
 			| Duck.TypeClasses.Maps.TileMap;
 		export namespace Game {
@@ -391,7 +398,7 @@ export namespace Duck {
 
 		export namespace Group {
 			export type StackItem =
-				| GameObject
+				| GameObject<Duck.Types.Texture.Type>
 				| CameraClass
 				| TextClass
 				| StaticLightClass
@@ -437,7 +444,7 @@ export namespace Duck {
 
 			export interface Step {
 				type: StepType;
-				affect?: GameObject | CameraClass;
+				affect?: GameObject<Duck.Types.Texture.Type> | CameraClass;
 				moveTo?: {
 					x?: number;
 					y?: number;
@@ -447,7 +454,7 @@ export namespace Duck {
 				cameraIntervalMS?: number;
 				cameraTimeMS?: number;
 				sleepValue?: number;
-				cameraFollow?: GameObject;
+				cameraFollow?: GameObject<Duck.Types.Texture.Type>;
 				cameraFollowLerpX?: number;
 				cameraFollowLerpY?: number;
 			}
@@ -463,7 +470,7 @@ export namespace Duck {
 					}[];
 					cameraSettings?: {
 						FOV: number;
-						follow?: GameObject;
+						follow?: GameObject<Duck.Types.Texture.Type>;
 						zoom: number;
 						pos?: {
 							x: number;
@@ -474,7 +481,7 @@ export namespace Duck {
 					};
 					otherCameraSettings?: {
 						FOV: number;
-						follow?: GameObject;
+						follow?: GameObject<Duck.Types.Texture.Type>;
 						zoom: number;
 						pos?: {
 							x: number;
@@ -490,8 +497,8 @@ export namespace Duck {
 			export interface Config {
 				mainCamera: CameraClass;
 				otherCameras?: CameraClass[];
-				otherObjects?: GameObject[];
-				mainObject: GameObject;
+				otherObjects?: GameObject<Duck.Types.Texture.Type>[];
+				mainObject: GameObject<Duck.Types.Texture.Type>;
 			}
 		}
 
@@ -528,8 +535,28 @@ export namespace Duck {
 
 			export interface StateValue {
 				intersection: Vector2Class;
-				with: GameObject;
+				with: GameObject<Duck.Types.Texture.Type>;
 			}
+		}
+
+		export namespace Loader {
+			export type StackItemType =
+				| 'texture'
+				| 'json'
+				| 'font'
+				| 'html'
+				| 'xml'
+				| 'audio';
+
+			export interface StackItem<t> {
+				type: StackItemType;
+				value: t;
+				key: string;
+			}
+		}
+
+		export namespace Texture {
+			export type Type = 'image' | 'color' | 'either';
 		}
 
 		export namespace Helper {

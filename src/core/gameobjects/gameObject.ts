@@ -7,6 +7,7 @@ import Collider from '../physics/collider';
 import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
 import Raycast from '../misc/raycast';
+import Texture from '../models/texture';
 
 /**
  * @class GameObject
@@ -14,7 +15,7 @@ import Raycast from '../misc/raycast';
  * @description The GameObject Class. All GameObjects extend this class
  * @since 1.0.0-beta
  */
-export default class GameObject {
+export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof GameObject
 	 * @description The unique identifier for a GameObject
@@ -65,11 +66,11 @@ export default class GameObject {
 
 	/**
 	 * @memberof GameObject
-	 * @description The fillColor of the GameObject
-	 * @type string
+	 * @description The texture of the GameObject
+	 * @type Texture
 	 * @since 1.0.0-beta
 	 */
-	public fillColor: string;
+	public texture: Texture<textureType>;
 
 	/**
 	 * @memberof GameObject
@@ -85,7 +86,9 @@ export default class GameObject {
 	 * @type GameObject
 	 * @since 1.0.0-beta
 	 */
-	private self: Duck.TypeClasses.GameObjects.GameObject | undefined;
+	private self:
+		| Duck.TypeClasses.GameObjects.GameObject<textureType>
+		| undefined;
 
 	/**
 	 * @memberof GameObject
@@ -133,7 +136,7 @@ export default class GameObject {
 	 * @type GameObject[]
 	 * @since 1.0.0-beta
 	 */
-	public collidesWith: Duck.TypeClasses.GameObjects.GameObject[];
+	public collidesWith: Duck.TypeClasses.GameObjects.GameObject<textureType>[];
 
 	/**
 	 * @memberof GameObject
@@ -187,11 +190,11 @@ export default class GameObject {
 		/**
 		 * @memberof GameObject#physics
 		 * @description Adds a collider to the GameObject
-		 * @param {Duck.TypeClasses.GameObjects.GameObject[]} collidesWith What the GameObject collides with
+		 * @param {Duck.TypeClasses.GameObjects.GameObject<textureType>[]} collidesWith What the GameObject collides with
 		 * @since 1.0.0-beta
 		 */
 		addCollider: (
-			collidesWith: Duck.TypeClasses.GameObjects.GameObject[]
+			collidesWith: Duck.TypeClasses.GameObjects.GameObject<textureType>[]
 		) => Collider;
 
 		/**
@@ -205,6 +208,7 @@ export default class GameObject {
 		 */
 		setBounds: (x: number, y: number, w: number, h: number) => void;
 	};
+
 	/**
 	 * @constructor
 	 * @description Creates a GameObject instance.
@@ -214,7 +218,7 @@ export default class GameObject {
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @param {number} r Radius
-	 * @param {string} fillColor Fill color or image path
+	 * @param {string} fillColor Fill color or Texture instance
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
@@ -225,7 +229,7 @@ export default class GameObject {
 		w: number,
 		h: number,
 		r: number,
-		fillColor: string,
+		texture: Texture<textureType>,
 		game: Game
 	) {
 		this.id = randomInt(0, 100000);
@@ -234,7 +238,7 @@ export default class GameObject {
 		this.w = w;
 		this.h = h;
 		this.r = r;
-		this.fillColor = fillColor;
+		this.texture = texture;
 		this.self;
 		this.game = game;
 
@@ -321,7 +325,9 @@ export default class GameObject {
 
 		// methods
 		this.physics = {
-			addCollider: (collidesWith: Duck.Types.GameObject[]) => {
+			addCollider: (
+				collidesWith: Duck.Types.GameObject<textureType>[]
+			) => {
 				this.collidesWith = collidesWith;
 
 				this.collider = new Collider(
@@ -347,7 +353,7 @@ export default class GameObject {
 		}
 	}
 
-	protected init(self: Duck.Types.GameObject) {
+	protected init(self: Duck.Types.GameObject<textureType>) {
 		this.self = self;
 	}
 
@@ -479,9 +485,6 @@ export default class GameObject {
 		if (axis === 'y') {
 			this.velocity.y = v;
 		}
-
-		// normalize vector
-		this.velocity.normalize();
 	}
 
 	/**
@@ -491,7 +494,7 @@ export default class GameObject {
 	 * @since 1.0.0-beta
 	 */
 	public setFillColor(fillColor: string) {
-		this.fillColor = fillColor;
+		(this.texture.texture as string) = fillColor;
 	}
 
 	// position methods

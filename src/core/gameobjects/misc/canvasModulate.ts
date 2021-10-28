@@ -1,5 +1,6 @@
 import Debug from '../../debug/debug';
 import Game from '../../game';
+import Texture from '../../models/texture';
 import GameObject from '../gameObject';
 
 /**
@@ -9,7 +10,7 @@ import GameObject from '../gameObject';
  * @extends GameObject
  * @since 2.0.0
  */
-export default class CanvasModulate extends GameObject {
+export default class CanvasModulate extends GameObject<'color'> {
 	/**
 	 * @constructor
 	 * @description Creates a CanvasModulate instance.
@@ -28,7 +29,7 @@ export default class CanvasModulate extends GameObject {
 		fillColor: string,
 		game: Game
 	) {
-		super('rect', x, y, w, h, 0, fillColor, game);
+		super('rect', x, y, w, h, 0, Texture.fromColor(fillColor, w, h), game);
 
 		this.zIndex = 1;
 	}
@@ -41,7 +42,7 @@ export default class CanvasModulate extends GameObject {
 	 */
 	public _draw() {
 		if (this.game.ctx) {
-			this.game.ctx.fillStyle = this.fillColor;
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fillRect(
 				this.position.x,
 				this.position.y,

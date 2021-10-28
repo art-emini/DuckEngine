@@ -113,6 +113,9 @@
 												<a href="index.Duck.Types.Interactive.html">Interactive</a>
 											</li>
 											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.Duck.Types.Loader.html">Loader</a>
+											</li>
+											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 												<a href="index.Duck.Types.Misc.html">Misc</a>
 											</li>
 											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
@@ -129,6 +132,9 @@
 											</li>
 											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 												<a href="index.Duck.Types.Storage.html">Storage</a>
+											</li>
+											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+												<a href="index.Duck.Types.Texture.html">Texture</a>
 											</li>
 											<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
 												<a href="index.Duck.Types.Tilemap.html">Tilemap</a>
@@ -157,19 +163,21 @@
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Helper.html" class="tsd-kind-icon">Helper</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Input.html" class="tsd-kind-icon">Input</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Interactive.html" class="tsd-kind-icon">Interactive</a></li>
+								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Loader.html" class="tsd-kind-icon">Loader</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Misc.html" class="tsd-kind-icon">Misc</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.ParticleContainer.html" class="tsd-kind-icon">Particle<wbr>Container</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.ParticleEmitter.html" class="tsd-kind-icon">Particle<wbr>Emitter</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Raycast.html" class="tsd-kind-icon">Raycast</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Sound.html" class="tsd-kind-icon">Sound</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Storage.html" class="tsd-kind-icon">Storage</a></li>
+								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Texture.html" class="tsd-kind-icon">Texture</a></li>
 								<li class="tsd-kind-namespace tsd-parent-kind-namespace"><a href="index.Duck.Types.Tilemap.html" class="tsd-kind-icon">Tilemap</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.Duck.Types.html#GameObject" class="tsd-kind-icon">Game<wbr>Object</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter"><a href="index.Duck.Types.html#GameObject" class="tsd-kind-icon">Game<wbr>Object</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-namespace"><a href="index.Duck.Types.html#Renderable" class="tsd-kind-icon">Renderable</a></li>
 							</ul>
 						</section>
@@ -178,23 +186,29 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter">
 					<a name="GameObject" class="tsd-anchor"></a>
 					<h3>Game<wbr>Object</h3>
-					<div class="tsd-signature tsd-kind-icon">Game<wbr>Object<span class="tsd-signature-symbol">:</span> <a href="../classes/core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a></div>
+					<div class="tsd-signature tsd-kind-icon">Game<wbr>Object&lt;textureType&gt;<span class="tsd-signature-symbol">:</span> <a href="../classes/core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">textureType</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:248</li>
+							<li>Defined in index.ts:254</li>
 						</ul>
 					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>textureType<span class="tsd-signature-symbol">: </span><a href="index.Duck.Types.Texture.html#Type" class="tsd-signature-type">Type</a></h4>
+						</li>
+					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace">
 					<a name="Renderable" class="tsd-anchor"></a>
 					<h3>Renderable</h3>
-					<div class="tsd-signature tsd-kind-icon">Renderable<span class="tsd-signature-symbol">:</span> <a href="../classes/core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol"> | </span><a href="index.Duck.TypeClasses.Effects.html#Effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol"> | </span><a href="index.Duck.TypeClasses.Maps.html#TileMap" class="tsd-signature-type">TileMap</a></div>
+					<div class="tsd-signature tsd-kind-icon">Renderable<span class="tsd-signature-symbol">:</span> <a href="../classes/core_gameobjects_gameObject.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">&lt;</span><a href="index.Duck.Types.Texture.html#Type" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="index.Duck.TypeClasses.Effects.html#Effect" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol"> | </span><a href="index.Duck.TypeClasses.Maps.html#TileMap" class="tsd-signature-type">TileMap</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:249</li>
+							<li>Defined in index.ts:256</li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +218,7 @@
 		<div class="col-2 col-menu secondary-menu">
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter root">
 						<a href="index.Duck.Types.html#GameObject" class="tsd-kind-icon">Game<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace root">

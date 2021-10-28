@@ -108,9 +108,26 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#audioStack" class="tsd-kind-icon">audio<wbr>Stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#fontStack" class="tsd-kind-icon">font<wbr>Stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#htmlStack" class="tsd-kind-icon">html<wbr>Stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#imageStack" class="tsd-kind-icon">image<wbr>Stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#jsonStack" class="tsd-kind-icon">json<wbr>Stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#scene" class="tsd-kind-icon">scene</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_loader_loader.default.html#xmlStack" class="tsd-kind-icon">xml<wbr>Stack</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="core_loader_loader.default.html#load" class="tsd-kind-icon">load</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadAudio" class="tsd-kind-icon">load<wbr>Audio</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadFont" class="tsd-kind-icon">load<wbr>Font</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadHTML" class="tsd-kind-icon">loadHTML</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadJSON" class="tsd-kind-icon">loadJSON</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadTexture" class="tsd-kind-icon">load<wbr>Texture</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_loader_loader.default.html#loadXML" class="tsd-kind-icon">loadXML</a></li>
 							</ul>
 						</section>
 					</div>
@@ -122,39 +139,230 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_loader_loader.default.html" class="tsd-signature-type">default</a></li>
+						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>scene<span class="tsd-signature-symbol">: </span><a href="core_scene.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_loader_loader.default.html" class="tsd-signature-type">default</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:25</li>
+								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>scene: <a href="core_scene.default.html" class="tsd-signature-type">default</a></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_loader_loader.default.html" class="tsd-signature-type">default</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="audioStack" class="tsd-anchor"></a>
+					<h3>audio<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">audio<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLAudioElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:23</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="fontStack" class="tsd-anchor"></a>
+					<h3>font<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FontFace</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:22</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="htmlStack" class="tsd-anchor"></a>
+					<h3>html<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">html<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:20</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="imageStack" class="tsd-anchor"></a>
+					<h3>image<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">image<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><a href="core_models_texture.default.html" class="tsd-signature-type">default</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"image"</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="jsonStack" class="tsd-anchor"></a>
+					<h3>json<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">json<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="scene" class="tsd-anchor"></a>
+					<h3>scene</h3>
+					<div class="tsd-signature tsd-kind-icon">scene<span class="tsd-signature-symbol">:</span> <a href="core_scene.default.html" class="tsd-signature-type">default</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="xmlStack" class="tsd-anchor"></a>
+					<h3>xml<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">xml<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Duck.Types.Loader.StackItem.html" class="tsd-signature-type">StackItem</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in core/loader/loader.ts:21</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="load" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> load</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">load<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLImageElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadAudio" class="tsd-anchor"></a>
+					<h3>load<wbr>Audio</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Audio<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLAudioElement</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in core/loader/loader.ts:21</li>
+									<li>Defined in core/loader/loader.ts:130</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>pathOrURL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLAudioElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadFont" class="tsd-anchor"></a>
+					<h3>load<wbr>Font</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Font<span class="tsd-signature-symbol">(</span>fontFamily<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, descriptors<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">FontFaceDescriptors</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FontFace</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:111</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fontFamily: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>pathOrURL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> descriptors: <span class="tsd-signature-type">FontFaceDescriptors</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FontFace</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadHTML" class="tsd-anchor"></a>
+					<h3>loadHTML</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">loadHTML<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:83</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>pathOrURL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadJSON" class="tsd-anchor"></a>
+					<h3>loadJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">loadJSON<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:70</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>pathOrURL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadTexture" class="tsd-anchor"></a>
+					<h3>load<wbr>Texture</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Texture<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLImageElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:45</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-tags">
 								<dl class="tsd-comment-tags"><dt>memberof</dt>
 									<dd><p>Loader</p>
 									</dd><dt>description</dt>
-									<dd><p>Loads an image</p>
-									</dd><dt>static</dt>
-									<dd></dd><dt>since</dt>
+									<dd><p>Loads an image and creates a texture</p>
+									</dd><dt>since</dt>
 									<dd><p>1.0.0-beta</p>
 								</dd></dl>
 							</div>
@@ -166,8 +374,52 @@
 										<p>Path to the file or the URL</p>
 									</div>
 								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Key of the texture, used to load the texture in sprites and spritesheet</p>
+									</div>
+								</li>
+								<li>
+									<h5>w: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Width of image</p>
+									</div>
+								</li>
+								<li>
+									<h5>h: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>Height of image</p>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLImageElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadXML" class="tsd-anchor"></a>
+					<h3>loadXML</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">loadXML<span class="tsd-signature-symbol">(</span>pathOrURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in core/loader/loader.ts:97</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>pathOrURL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -185,8 +437,44 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="core_loader_loader.default.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="core_loader_loader.default.html#load" class="tsd-kind-icon">load</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#audioStack" class="tsd-kind-icon">audio<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#fontStack" class="tsd-kind-icon">font<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#htmlStack" class="tsd-kind-icon">html<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#imageStack" class="tsd-kind-icon">image<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#jsonStack" class="tsd-kind-icon">json<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#scene" class="tsd-kind-icon">scene</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#xmlStack" class="tsd-kind-icon">xml<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadAudio" class="tsd-kind-icon">load<wbr>Audio</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadFont" class="tsd-kind-icon">load<wbr>Font</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadHTML" class="tsd-kind-icon">loadHTML</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadJSON" class="tsd-kind-icon">loadJSON</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadTexture" class="tsd-kind-icon">load<wbr>Texture</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_loader_loader.default.html#loadXML" class="tsd-kind-icon">loadXML</a>
 							</li>
 						</ul>
 					</li>

@@ -8,14 +8,12 @@
  * @since 1.0.0-beta
  */
 export default class Render {
-	constructor() {}
-
 	/**
 	 * @memberof Render
 	 * @description Preloads assets, gets called before DuckEngine loads
 	 * @since 2.0.0
 	 */
-	public preload() {}
+	public async preload() {}
 
 	/**
 	 * @memberof Render

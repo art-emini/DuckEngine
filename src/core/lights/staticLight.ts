@@ -3,6 +3,7 @@ import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
+import Texture from '../models/texture';
 
 /**
  * @class StaticLight
@@ -10,7 +11,7 @@ import GameObject from '../gameobjects/gameObject';
  * @description The StaticLight Class. A static light
  * @since 1.0.0-beta
  */
-export default class StaticLight extends GameObject {
+export default class StaticLight extends GameObject<'color'> {
 	public x: number;
 	public y: number;
 	public r: number;
@@ -40,7 +41,16 @@ export default class StaticLight extends GameObject {
 		alpha: Duck.Types.Helper.AlphaRange,
 		game: Game
 	) {
-		super('circle', x, y, 0, 0, r, fillColor, game);
+		super(
+			'circle',
+			x,
+			y,
+			0,
+			0,
+			r,
+			Texture.fromColor(fillColor, r, r),
+			game
+		);
 		this.x = x;
 		this.y = y;
 		this.r = r;
@@ -54,6 +64,8 @@ export default class StaticLight extends GameObject {
 
 		// convert all colors to RGBA
 		this.color = convertColorToRGBA(this.color, this.alpha);
+
+		this.texture.texture = this.color;
 	}
 
 	/**
@@ -67,7 +79,7 @@ export default class StaticLight extends GameObject {
 			this.game.ctx.globalCompositeOperation = 'lighter';
 			this.game.ctx.beginPath();
 			this.game.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-			this.game.ctx.fillStyle = this.color;
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fill();
 			this.game.ctx.globalCompositeOperation = 'source-over';
 		} else {

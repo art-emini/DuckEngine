@@ -1,6 +1,7 @@
 import { Duck } from '../../../index';
 import extractNumbers from '../../../utils/extractNumbers';
 import Game from '../../game';
+import Texture from '../../models/texture';
 import GameObject from '../gameObject';
 
 /**
@@ -10,7 +11,7 @@ import GameObject from '../gameObject';
  * @extends GameObject
  * @since 1.0.0-beta
  */
-export default class Text extends GameObject {
+export default class Text extends GameObject<'color'> {
 	public text: string;
 	private config: Duck.Types.Interactive.Text.Config;
 	public game: Game;
@@ -27,7 +28,16 @@ export default class Text extends GameObject {
 		config: Duck.Types.Interactive.Text.Config,
 		game: Game
 	) {
-		super('rect', config.x, config.y, 0, 0, 0, text, game);
+		super(
+			'rect',
+			config.x,
+			config.y,
+			0,
+			0,
+			0,
+			Texture.fromColor(text, 0, 0),
+			game
+		);
 		this.text = text;
 		this.config = config;
 		this.game = game;
@@ -36,6 +46,11 @@ export default class Text extends GameObject {
 		this.game.ctx.font = this.config.styles.fontCSS;
 		this.w = game.ctx.measureText(text).width;
 		this.h = extractNumbers(config.styles.fontCSS);
+
+		this.texture.setScale({
+			width: this.w,
+			height: this.h,
+		});
 
 		this.zIndex = 4;
 	}

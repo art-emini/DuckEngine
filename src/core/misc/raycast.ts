@@ -76,10 +76,10 @@ export default class Raycast {
 	/**
 	 * @memberof Raycast
 	 * @description Casts the ray from the passed begin and to the end Vector2, sets state based on if intersecting or not
-	 * @param {GameObject[]} objects Objects to check if intersecting with
+	 * @param {GameObject<Duck.Types.Texture.Type>[]} objects Objects to check if intersecting with
 	 * @since 2.0.0
 	 */
-	public cast(objects: GameObject[]) {
+	public cast(objects: GameObject<Duck.Types.Texture.Type>[]) {
 		objects.forEach((object) => {
 			if (object.shape !== 'circle') {
 				this.checkIntersectingRect(
@@ -125,7 +125,7 @@ export default class Raycast {
 		ry: number,
 		rw: number,
 		rh: number,
-		obj: GameObject
+		obj: GameObject<Duck.Types.Texture.Type>
 	) {
 		const left = this.isIntersectingLine(
 			x1,
@@ -196,7 +196,7 @@ export default class Raycast {
 		y3: number,
 		x4: number,
 		y4: number,
-		obj: GameObject
+		obj: GameObject<Duck.Types.Texture.Type>
 	) {
 		const uA =
 			((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) /
@@ -220,7 +220,7 @@ export default class Raycast {
 	private createStateValue(
 		x: number,
 		y: number,
-		obj: GameObject
+		obj: GameObject<Duck.Types.Texture.Type>
 	): Duck.Types.Raycast.StateValue {
 		return {
 			intersection: new Vector2(x, y),

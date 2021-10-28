@@ -1,6 +1,7 @@
 import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
+import Texture from '../models/texture';
 
 /**
  * @class Rect
@@ -8,7 +9,7 @@ import GameObject from './gameObject';
  * @description The Rect Class. Represents a rectangle
  * @since 1.0.0-beta
  */
-export default class Rect extends GameObject {
+export default class Rect extends GameObject<'color'> {
 	constructor(
 		x: number,
 		y: number,
@@ -17,7 +18,8 @@ export default class Rect extends GameObject {
 		fillColor: string,
 		game: Game
 	) {
-		super('rect', x, y, w, h, 0, fillColor, game);
+		super('rect', x, y, w, h, 0, Texture.fromColor(fillColor, w, h), game);
+		this.init(this);
 	}
 
 	/**
@@ -28,7 +30,7 @@ export default class Rect extends GameObject {
 	 */
 	public _draw() {
 		if (this.game.ctx) {
-			this.game.ctx.fillStyle = this.fillColor;
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fillRect(
 				this.position.x,
 				this.position.y,
