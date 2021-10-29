@@ -138,6 +138,8 @@
   - Removed adding itself to game scene stack as that produced duplicate scenes
 - Math
   - Removed Duck.Types.Helper.alphaValue return type from randomFloat
+- StaticLight
+  - Removed x and y props, now is position vector2
 - ParticleEmitter
   - Removed draw method
 

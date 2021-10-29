@@ -12,9 +12,6 @@ import Texture from '../models/texture';
  * @since 1.0.0-beta
  */
 export default class StaticLight extends GameObject<'color'> {
-	public x: number;
-	public y: number;
-	public r: number;
 	protected color: string;
 	protected alpha: Duck.Types.Helper.AlphaRange;
 	public game: Game;
@@ -51,8 +48,6 @@ export default class StaticLight extends GameObject<'color'> {
 			Texture.fromColor(fillColor, r, r),
 			game
 		);
-		this.x = x;
-		this.y = y;
 		this.r = r;
 		this.alpha = alpha;
 		this.game = game;
@@ -78,7 +73,14 @@ export default class StaticLight extends GameObject<'color'> {
 		if (this.game.ctx) {
 			this.game.ctx.globalCompositeOperation = 'lighter';
 			this.game.ctx.beginPath();
-			this.game.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+			this.game.ctx.arc(
+				this.position.x,
+				this.position.y,
+				this.r,
+				0,
+				2 * Math.PI,
+				false
+			);
 			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fill();
 			this.game.ctx.globalCompositeOperation = 'source-over';
