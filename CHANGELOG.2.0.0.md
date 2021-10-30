@@ -39,6 +39,7 @@
   - Added onPauseRendering to config
   - Added onResumeRendering to config
   - Added splashScreen object config to config
+  - Added fps property which is the current fps
   - Added start sequence to start method
     - Start Sequence:
       - Show splash screen
@@ -95,6 +96,7 @@
   - Typescript: canvas and ctx properties are never undefined
   - Moved scene.currentCamera.begin and end to if visible condition
   - Changed start method to be async
+  - Changed how delta time is calculated
 - Scene
   - Tools
     - Moved randomInt and randomFloat to math

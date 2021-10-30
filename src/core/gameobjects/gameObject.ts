@@ -9,6 +9,7 @@ import clamp from '../math/clamp';
 import Raycast from '../misc/raycast';
 import Texture from '../models/texture';
 import Scene from '../scene';
+import Debug from '../debug/debug';
 
 /**
  * @class GameObject
@@ -307,6 +308,12 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 			addCollider: (
 				collidesWith: Duck.Types.GameObject<textureType>[]
 			) => {
+				if (!this.game.config.physics) {
+					new Debug.Error(
+						'Cannot add collider to GameObject. Game Config.physics must be enabled!'
+					);
+				}
+
 				this.collidesWith = collidesWith;
 
 				this.collider = new Collider(
