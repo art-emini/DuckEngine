@@ -94,7 +94,6 @@ export namespace Duck {
 			}
 
 			export namespace Misc {
-				export const Raycast = RaycastClass;
 				export const CanvasModulate = CanvasModulateClass;
 			}
 		}
@@ -113,6 +112,7 @@ export namespace Duck {
 			export const Loader = LoaderClass;
 			export const Group = GroupClass;
 			export const Cutscene = CutsceneClass;
+			export const Raycast = RaycastClass;
 		}
 
 		export namespace Base {
@@ -181,7 +181,6 @@ export namespace Duck {
 			}
 
 			export namespace Misc {
-				export type Raycast = RaycastClass;
 				export type CanvasModulate = CanvasModulateClass;
 			}
 		}
@@ -201,6 +200,7 @@ export namespace Duck {
 			export type Group<t extends Duck.Types.Group.StackItem> =
 				GroupClass<t>;
 			export type Cutscene = CutsceneClass;
+			export type Raycast = RaycastClass;
 		}
 
 		export namespace Base {

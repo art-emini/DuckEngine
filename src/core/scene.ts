@@ -106,7 +106,13 @@ export default class Scene extends Render {
 	public add: {
 		gameobject: {
 			misc: {
-				raycast: (begin: Vector2, end: Vector2) => Raycast;
+				canvasModulate: (
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					fillColor: string
+				) => CanvasModulate;
 			};
 			sprite: (
 				x: number,
@@ -149,13 +155,7 @@ export default class Scene extends Render {
 			) => SpriteSheet;
 		};
 		misc: {
-			canvasModulate: (
-				x: number,
-				y: number,
-				w: number,
-				h: number,
-				fillColor: string
-			) => CanvasModulate;
+			raycast: (begin: Vector2, end: Vector2) => Raycast;
 		};
 		interactive: {
 			text: (
@@ -359,9 +359,23 @@ export default class Scene extends Render {
 		this.add = {
 			gameobject: {
 				misc: {
-					raycast: (begin: Vector2, end: Vector2) => {
-						const myRayCast = new Raycast(begin, end, this.game);
-						return myRayCast;
+					canvasModulate: (
+						x: number,
+						y: number,
+						w: number,
+						h: number,
+						fillColor: string
+					) => {
+						const myCanvasModulate = new CanvasModulate(
+							x,
+							y,
+							w,
+							h,
+							fillColor,
+							this.game
+						);
+						this.displayList.add(myCanvasModulate);
+						return myCanvasModulate;
 					},
 				},
 				sprite: (
@@ -453,23 +467,9 @@ export default class Scene extends Render {
 				},
 			},
 			misc: {
-				canvasModulate: (
-					x: number,
-					y: number,
-					w: number,
-					h: number,
-					fillColor: string
-				) => {
-					const myCanvasModulate = new CanvasModulate(
-						x,
-						y,
-						w,
-						h,
-						fillColor,
-						this.game
-					);
-					this.displayList.add(myCanvasModulate);
-					return myCanvasModulate;
+				raycast: (begin: Vector2, end: Vector2) => {
+					const myRayCast = new Raycast(begin, end, this.game);
+					return myRayCast;
 				},
 			},
 			interactive: {
