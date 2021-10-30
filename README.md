@@ -54,7 +54,7 @@
 ### NPM
 
 1. Run `npm install duckengine`.
-2. Setup an asset bundler like webpack or parcel..
+2. Setup an asset bundler like webpack or parcel.
 3. Import DuckEngine.
 4. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
@@ -112,6 +112,8 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 ├── CONTRIBUTING.md
 ├── global
 │   ├── Logo.png
+│   ├── Logo_Splash.png
+│   ├── Logo_Splash.xcf
 │   ├── Logo.xcf
 │   └── README.md
 ├── LICENSE
