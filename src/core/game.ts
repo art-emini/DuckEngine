@@ -25,6 +25,7 @@ export default class Game {
 	public deltaTime: number;
 	protected oldTime: number;
 	protected now: number;
+	public fps: number;
 
 	public isInFullscreen: boolean;
 	protected oldWidth: number;
@@ -69,6 +70,7 @@ export default class Game {
 		this.deltaTime = 0;
 		this.oldTime = 0;
 		this.now = 0;
+		this.fps = 0;
 
 		// set scale
 		if (this.config.scale) {
@@ -282,7 +284,8 @@ export default class Game {
 		self.clearFrame();
 
 		this.now = performance.now();
-		this.deltaTime = this.now - this.oldTime;
+		this.deltaTime = (this.now - this.oldTime) / 1000;
+		this.fps = 1 / this.deltaTime;
 
 		if (this.isRendering) {
 			self.stack.scenes.forEach((scene) => {

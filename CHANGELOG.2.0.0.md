@@ -56,6 +56,8 @@
   - Add
     - Added misc to gameobjects property
     - Added raycast to gameobjects.misc property
+- Physics
+  - Added PhysicsServer class
 - Input
   - Added Keyboard event parameter to callback for onKeyUp and onKeyDown methods
 - Loader
@@ -83,6 +85,7 @@
 
 - GameObjects
   - Renamed draw method to _draw which is a public method, but should *not* be called manually
+  - Collider should not be updated manually, automatically updated in scene.physicsServer
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created
@@ -96,6 +99,11 @@
   - Tools
     - Moved randomInt and randomFloat to math
   - Renamed this.add.sound to this.add.soundPlayer
+- Physics
+  - Collider
+    - Changed collider.shape to collider.object
+    - Changed collider.update diffCollidesWith parameter to be required and renamed to updatedCollidesWith
+  - Reworked how colliders are updated and used by implementing PhysicsServer
 - StaticLight
   - Made class extend GameObject class
 - Interactive
@@ -139,6 +147,8 @@
 - Math
   - Removed Duck.Types.Helper.alphaValue return type from randomFloat
 - StaticLight
+  - Removed x and y props, now is position vector2
+- Interactive
   - Removed x and y props, now is position vector2
 - ParticleEmitter
   - Removed draw method

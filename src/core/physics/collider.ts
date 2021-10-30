@@ -22,43 +22,45 @@ import Sprite from '../gameobjects/sprite';
  * @since 1.0.0-beta
  */
 export default class Collider {
-	public shape: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	public object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
 	public collidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
 	public game: Game;
 
 	/**
 	 * @constructor Collider
 	 * @description Creates a Collider instance
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} shape Gameobject to append the collider to
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} object Gameobject to append the collider to
 	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]} collidesWith What the gameobject collides with
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
-		shape: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
+		object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
 		collidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[],
 		game: Game
 	) {
-		this.shape = shape;
+		this.object = object;
 		this.collidesWith = collidesWith;
 		this.game = game;
 	}
 
 	/**
 	 * @memberof Collider
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} shape The gameobject that the collider is attached
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]} [diffCollidesWith] Overwrite what the gameobject collides with, optional
+	 * @description Updates the collider and checks for collisions with the updated version of the object, and collides with.
+	 *
+	 * DO NOT CALL MANUALLY! CALLED IN PHYSICS SERVER!
+	 *
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} object The gameobject that the collider is attached
+	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]} updatedCollidesWith Updated version of what the object collides with
 	 * @since 1.0.0-beta
 	 */
-	public update(
-		shape: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
-		diffCollidesWith?: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]
+	public __update(
+		object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
+		updatedCollidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]
 	) {
-		this.shape = shape;
+		this.object = object;
 
-		if (diffCollidesWith) {
-			this.collidesWith = diffCollidesWith;
-		}
+		this.collidesWith = updatedCollidesWith;
 
 		this.collidesWith.forEach((otherShape) => {
 			if (
@@ -87,13 +89,13 @@ export default class Collider {
 		const rectCX = rect.position.x + rect.w * 0.5;
 		const rectCY = rect.position.y + rect.h * 0.5;
 
-		const thisCX = this.shape.position.x + this.shape.w * 0.5;
-		const thisCY = this.shape.position.y + this.shape.h * 0.5;
+		const thisCX = this.object.position.x + this.object.w * 0.5;
+		const thisCY = this.object.position.y + this.object.h * 0.5;
 
 		const dx = rectCX - thisCX; // x difference between centers
 		const dy = rectCY - thisCY; // y difference between centers
-		const aw = (rect.w + this.shape.w) * 0.5; // average width
-		const ah = (rect.h + this.shape.h) * 0.5; // average height
+		const aw = (rect.w + this.object.w) * 0.5; // average width
+		const ah = (rect.h + this.object.h) * 0.5; // average height
 
 		/* If either distance is greater than the average dimension there is no collision. */
 		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
@@ -101,14 +103,14 @@ export default class Collider {
 		/* To determine which region of this rectangle the rect's center
           point is in, we have to account for the scale of the this rectangle.
           To do that, we divide dx and dy by it's width and height respectively. */
-		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
-			if (dx < 0) this.shape.position.x = rect.position.x + rect.w;
+		if (Math.abs(dx / this.object.w) > Math.abs(dy / this.object.h)) {
+			if (dx < 0) this.object.position.x = rect.position.x + rect.w;
 			// left
-			else this.shape.position.x = rect.position.x - this.shape.w; // right
+			else this.object.position.x = rect.position.x - this.object.w; // right
 		} else {
-			if (dy < 0) this.shape.position.y = rect.position.y + rect.h;
+			if (dy < 0) this.object.position.y = rect.position.y + rect.h;
 			// top
-			else this.shape.position.y = rect.position.y - this.shape.h; // bottom
+			else this.object.position.y = rect.position.y - this.object.h; // bottom
 		}
 
 		return true;
@@ -118,13 +120,13 @@ export default class Collider {
 		const rectCX = sprite.position.x + sprite.w * 0.5;
 		const rectCY = sprite.position.y + sprite.h * 0.5;
 
-		const thisCX = this.shape.position.x + this.shape.w * 0.5;
-		const thisCY = this.shape.position.y + this.shape.h * 0.5;
+		const thisCX = this.object.position.x + this.object.w * 0.5;
+		const thisCY = this.object.position.y + this.object.h * 0.5;
 
 		const dx = rectCX - thisCX; // x difference between centers
 		const dy = rectCY - thisCY; // y difference between centers
-		const aw = (sprite.w + this.shape.w) * 0.5; // average width
-		const ah = (sprite.h + this.shape.h) * 0.5; // average height
+		const aw = (sprite.w + this.object.w) * 0.5; // average width
+		const ah = (sprite.h + this.object.h) * 0.5; // average height
 
 		/* If either distance is greater than the average dimension there is no collision. */
 		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
@@ -132,14 +134,14 @@ export default class Collider {
 		/* To determine which region of this rectangle the rect's center
           point is in, we have to account for the scale of the this rectangle.
           To do that, we divide dx and dy by it's width and height respectively. */
-		if (Math.abs(dx / this.shape.w) > Math.abs(dy / this.shape.h)) {
-			if (dx < 0) this.shape.position.x = sprite.position.x + sprite.w;
+		if (Math.abs(dx / this.object.w) > Math.abs(dy / this.object.h)) {
+			if (dx < 0) this.object.position.x = sprite.position.x + sprite.w;
 			// left
-			else this.shape.position.x = sprite.position.x - this.shape.w; // right
+			else this.object.position.x = sprite.position.x - this.object.w; // right
 		} else {
-			if (dy < 0) this.shape.position.y = sprite.position.y + sprite.h;
+			if (dy < 0) this.object.position.y = sprite.position.y + sprite.h;
 			// top
-			else this.shape.position.y = sprite.position.y - this.shape.h; // bottom
+			else this.object.position.y = sprite.position.y - this.object.h; // bottom
 		}
 
 		return true;
@@ -147,10 +149,10 @@ export default class Collider {
 
 	protected collideCircle(circle2: Circle) {
 		/* first we get the x and y distance between the two circles. */
-		const distance_x = this.shape.position.x - circle2.position.x;
-		const distance_y = this.shape.position.y - circle2.position.y;
+		const distance_x = this.object.position.x - circle2.position.x;
+		const distance_y = this.object.position.y - circle2.position.y;
 		/* Then we get the sum of their radii. */
-		const radii_sum = (this.shape as Circle).r + circle2.r;
+		const radii_sum = (this.object as Circle).r + circle2.r;
 
 		/* Then we test to see if the square of their distance is greater than the
         square of their radii. If it is, then there is no collision. If it isn't,
@@ -165,15 +167,15 @@ export default class Collider {
 	}
 
 	protected resolveCircle(c2: Circle) {
-		const distance_x = this.shape.position.x - c2.position.x;
-		const distance_y = this.shape.position.y - c2.position.y;
-		const radii_sum = (this.shape as Circle).r + c2.r;
+		const distance_x = this.object.position.x - c2.position.x;
+		const distance_y = this.object.position.y - c2.position.y;
+		const radii_sum = (this.object as Circle).r + c2.r;
 		const length =
 			Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
 		const unit_x = distance_x / length;
 		const unit_y = distance_y / length;
 
-		this.shape.position.x = c2.position.x + (radii_sum + 1) * unit_x;
-		this.shape.position.y = c2.position.y + (radii_sum + 1) * unit_y;
+		this.object.position.x = c2.position.x + (radii_sum + 1) * unit_x;
+		this.object.position.y = c2.position.y + (radii_sum + 1) * unit_y;
 	}
 }

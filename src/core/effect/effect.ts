@@ -11,6 +11,7 @@ import ParticleEmitter from '../gameobjects/particles/particleEmitter';
  */
 export default class Effect {
 	public readonly id: number;
+	public readonly shape: string;
 	public rangeX: Duck.Types.ParticleEmitter.Range;
 	public rangeY: Duck.Types.ParticleEmitter.Range;
 	public particleEmitter: ParticleEmitter;
@@ -39,6 +40,7 @@ export default class Effect {
 		game: Game
 	) {
 		this.id = randomInt(0, 100000);
+		this.shape = 'effect';
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
 		this.particleEmitter = particleEmitter;

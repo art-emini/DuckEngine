@@ -8,6 +8,7 @@ import Vector2 from '../math/vector2';
 import clamp from '../math/clamp';
 import Raycast from '../misc/raycast';
 import Texture from '../models/texture';
+import Scene from '../scene';
 
 /**
  * @class GameObject
@@ -79,6 +80,14 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 	 * @since 1.0.0-beta
 	 */
 	public game: Game;
+
+	/**
+	 * @memberof GameObject
+	 * @description The Scene instance
+	 * @type Game
+	 * @since 2.0.0-beta
+	 */
+	public scene: Scene;
 
 	/**
 	 * @memberof GameObject
@@ -208,6 +217,7 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 	 * @param {number} r Radius
 	 * @param {string} fillColor Fill color or Texture instance
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
@@ -218,7 +228,8 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 		h: number,
 		r: number,
 		texture: Texture<textureType>,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		this.id = randomInt(0, 100000);
 		this.shape = shape;
@@ -229,6 +240,7 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 		this.texture = texture;
 		this.self;
 		this.game = game;
+		this.scene = scene;
 
 		this.visible = true;
 		this.zIndex = 2;
@@ -334,6 +346,8 @@ export default class GameObject<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
+	 * Clamps position to bounds if exists. Rounds pixels if roundPixels game config is set to true.
+	 * Casts internal raycasts. Updates physics server
 	 *
 	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
 	 *

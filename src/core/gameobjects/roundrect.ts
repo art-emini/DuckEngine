@@ -1,6 +1,7 @@
 import Debug from '../debug/debug';
 import Game from '../game';
 import Texture from '../models/texture';
+import Scene from '../scene';
 
 import GameObject from './gameObject';
 
@@ -18,7 +19,8 @@ export default class RoundRect extends GameObject<'color'> {
 		h: number,
 		r: number,
 		fillColor: string,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		super(
 			'roundrect',
@@ -28,7 +30,8 @@ export default class RoundRect extends GameObject<'color'> {
 			h,
 			r,
 			Texture.fromColor(fillColor, w, h),
-			game
+			game,
+			scene
 		);
 		this.init(this);
 	}

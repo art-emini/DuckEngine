@@ -76,6 +76,7 @@ import Vector2 from './math/vector2';
 import clamp from './math/clamp';
 import lerp from './math/lerp';
 import Raycast from './misc/raycast';
+import PhysicsServer from './physics/server/physicsServer';
 
 /**
  * @class Scene
@@ -100,6 +101,8 @@ export default class Scene extends Render {
 	public displayList: DisplayList;
 
 	public loader: Loader;
+
+	public physicsServer: PhysicsServer | undefined;
 
 	// methods
 
@@ -350,7 +353,12 @@ export default class Scene extends Render {
 
 		this.loader = new Loader(this);
 
+		if (this.game.config.physics) {
+			this.physicsServer = new PhysicsServer(this.game, this);
+		}
+
 		// methods
+
 		/**
 		 * @memberof Scene
 		 * @description Adds anything to a scene
@@ -372,7 +380,8 @@ export default class Scene extends Render {
 							w,
 							h,
 							fillColor,
-							this.game
+							this.game,
+							this
 						);
 						this.displayList.add(myCanvasModulate);
 						return myCanvasModulate;
@@ -404,7 +413,15 @@ export default class Scene extends Render {
 					h: number,
 					fillColor: string
 				) => {
-					const rect = new Rect(x, y, w, h, fillColor, this.game);
+					const rect = new Rect(
+						x,
+						y,
+						w,
+						h,
+						fillColor,
+						this.game,
+						this
+					);
 					this.displayList.add(rect);
 					return rect;
 				},
@@ -414,7 +431,14 @@ export default class Scene extends Render {
 					r: number,
 					fillColor: string
 				) => {
-					const circle = new Circle(x, y, r, fillColor, this.game);
+					const circle = new Circle(
+						x,
+						y,
+						r,
+						fillColor,
+						this.game,
+						this
+					);
 					this.displayList.add(circle);
 					return circle;
 				},
@@ -433,7 +457,8 @@ export default class Scene extends Render {
 						h,
 						r,
 						fillColor,
-						this.game
+						this.game,
+						this
 					);
 					this.displayList.add(roundRect);
 					return roundRect;
@@ -477,7 +502,7 @@ export default class Scene extends Render {
 					text: string,
 					config: Duck.Types.Interactive.Text.Config
 				) => {
-					const myText = new Text(text, config, this.game);
+					const myText = new Text(text, config, this.game, this);
 					this.displayList.add(myText);
 					return myText;
 				},
@@ -539,7 +564,8 @@ export default class Scene extends Render {
 						r,
 						fillColor,
 						alpha,
-						this.game
+						this.game,
+						this
 					);
 					this.displayList.add(myStaticLight);
 					return myStaticLight;
@@ -564,7 +590,8 @@ export default class Scene extends Render {
 					h,
 					r,
 					fillColor,
-					this.game
+					this.game,
+					this
 				);
 				this.displayList.add(myParticle);
 				return myParticle;
@@ -676,7 +703,7 @@ export default class Scene extends Render {
 
 		/**
 		 * @memberof Scene
-		 * @description Tools such as generating random numbers, colors, and converting colors are located here
+		 * @description Tools such as generating random numbers, colors, converting colors, and math tools are located here
 		 * @since 1.0.0-beta
 		 */
 		this.tools = {
@@ -762,6 +789,8 @@ export default class Scene extends Render {
 				r._update();
 			}
 		});
+
+		this.physicsServer?.__tick();
 	}
 
 	/**

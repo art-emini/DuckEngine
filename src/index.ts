@@ -298,6 +298,14 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if physics are enabled or not, creates a web worker for PhysicsServer
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				physics?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
 				 * @description Function to call when rendering is paused, rendering pauses when this.stop is called or
 				 * if pauseRenderingOnBlur is true and the window.blur event was fired
 				 * @type (reason: 'windowBlur' | 'gameStop') => void

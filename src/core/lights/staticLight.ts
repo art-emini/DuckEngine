@@ -4,6 +4,7 @@ import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
 import Texture from '../models/texture';
+import Scene from '../scene';
 
 /**
  * @class StaticLight
@@ -28,6 +29,7 @@ export default class StaticLight extends GameObject<'color'> {
 	 * @param {string} fillColor Color
 	 * @param {Duck.Types.Helper.AlphaRange} alpha Alpha
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
@@ -36,7 +38,8 @@ export default class StaticLight extends GameObject<'color'> {
 		r: number,
 		fillColor: string,
 		alpha: Duck.Types.Helper.AlphaRange,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		super(
 			'circle',
@@ -46,7 +49,8 @@ export default class StaticLight extends GameObject<'color'> {
 			0,
 			r,
 			Texture.fromColor(fillColor, r, r),
-			game
+			game,
+			scene
 		);
 		this.r = r;
 		this.alpha = alpha;
