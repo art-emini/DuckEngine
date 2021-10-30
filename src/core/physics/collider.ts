@@ -1,19 +1,12 @@
 // circle collision physics from https://github.com/pothonprogramming/pothonprogramming.github.io/blob/master/content/circle-collision-response/circle-collision-response.html
 // most of rect physics also from PothOnProgramming
 
-/* 
-
-TODO
-
-CREATE CIRCLE TO RECT COLLISION RESPONSE
-
-*/
-
 import { Duck } from '../../index';
 import Game from '../game';
 import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
+import PhysicsBody from './physicsBody';
 
 /**
  * @class Collider
@@ -22,20 +15,20 @@ import Sprite from '../gameobjects/sprite';
  * @since 1.0.0-beta
  */
 export default class Collider {
-	public object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
-	public collidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
+	public object: PhysicsBody<Duck.Types.Texture.Type>;
+	public collidesWith: PhysicsBody<Duck.Types.Texture.Type>[];
 	public game: Game;
 
 	/**
 	 * @constructor Collider
 	 * @description Creates a Collider instance
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} object Gameobject to append the collider to
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]} collidesWith What the gameobject collides with
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object PhysicsBody to append the collider to
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>[]} collidesWith What the PhysicsBody collides with
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
-		object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
+		object: PhysicsBody<Duck.Types.Texture.Type>,
 		collidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[],
 		game: Game
 	) {
@@ -50,13 +43,13 @@ export default class Collider {
 	 *
 	 * DO NOT CALL MANUALLY! CALLED IN PHYSICS SERVER!
 	 *
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} object The gameobject that the collider is attached
-	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]} updatedCollidesWith Updated version of what the object collides with
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object The PhysicsBody that the collider is attached
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>[]} updatedCollidesWith Updated version of what the object collides with
 	 * @since 1.0.0-beta
 	 */
 	public __update(
-		object: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>,
-		updatedCollidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[]
+		object: PhysicsBody<Duck.Types.Texture.Type>,
+		updatedCollidesWith: PhysicsBody<Duck.Types.Texture.Type>[]
 	) {
 		this.object = object;
 

@@ -36,6 +36,7 @@ import MapClass from './core/map/map';
 import RaycastClass from './core/misc/raycast';
 import AmountClass from './base/amount';
 import TextureClass from './core/models/texture';
+import PhysicsServerClass from './core/physics/server/physicsServer';
 
 // main
 
@@ -131,6 +132,7 @@ export namespace Duck {
 
 		export namespace Physics {
 			export const Collider = ColliderClass;
+			export const PhysicsServer = PhysicsServerClass;
 		}
 
 		export namespace Models {
@@ -219,6 +221,7 @@ export namespace Duck {
 
 		export namespace Physics {
 			export type Collider = ColliderClass;
+			export type PhysicsServer = PhysicsServerClass;
 		}
 
 		export namespace Models {
@@ -298,11 +301,16 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Game.Config
-				 * @description Determines if physics are enabled or not, creates a web worker for PhysicsServer
+				 * @description Physics Options
 				 * @type boolean
 				 * @since 2.0.0
 				 */
-				physics?: boolean;
+				physics?: {
+					enabled: boolean;
+					gravity?: Duck.Types.Math.Vector2Like;
+					customTick?: boolean;
+					debug?: boolean;
+				};
 
 				/**
 				 * @memberof Duck.Types.Game.Config
@@ -412,8 +420,7 @@ export namespace Duck {
 				| 'circle'
 				| 'roundrect'
 				| 'spritesheet'
-				| 'sprite'
-				| 'raycast';
+				| 'sprite';
 		}
 
 		export namespace Storage {
@@ -674,6 +681,46 @@ export namespace Duck {
 
 		export namespace Texture {
 			export type Type = 'image' | 'color' | 'either';
+		}
+
+		export namespace PhysicsBody {
+			export interface Config {
+				type: RigidBody | StaticBody | KinematicBody;
+				physicsEnabled: boolean;
+			}
+
+			/**
+			 * @memberof Duck.Types.PhysicsBody.KinematicBody
+			 * @description A type of PhysicsBody that can be moved and can be effected by gravity and friction.
+			 * @since 2.0.0
+			 */
+			export type KinematicBody = 'KinematicBody';
+
+			/**
+			 * @memberof Duck.Types.PhysicsBody.KinematicBody
+			 * @description A type of PhysicsBody that cannot be moved but can be effected by gravity and friction.
+			 * @since 2.0.0
+			 */
+			export type RigidBody = 'RigidBody';
+
+			/**
+			 * @memberof Duck.Types.PhysicsBody.KinematicBody
+			 * @description A type of PhysicsBody that cannot be moved and cannot be effected by gravity and friction.
+			 * @since 2.0.0
+			 */
+			export type StaticBody = 'StaticBody';
+		}
+
+		export namespace Math {
+			export interface Vector2Like {
+				x: number;
+				y: number;
+			}
+
+			export interface BoundsLike extends Vector2Like {
+				w: number;
+				h: number;
+			}
 		}
 
 		export namespace Helper {

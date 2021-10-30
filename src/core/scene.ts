@@ -353,7 +353,7 @@ export default class Scene extends Render {
 
 		this.loader = new Loader(this);
 
-		if (this.game.config.physics) {
+		if (this.game.config.physics?.enabled) {
 			this.physicsServer = new PhysicsServer(this.game, this);
 		}
 
@@ -790,7 +790,9 @@ export default class Scene extends Render {
 			}
 		});
 
-		this.physicsServer?.__tick();
+		if (!this.game.config.physics?.customTick) {
+			this.physicsServer?.__tick();
+		}
 	}
 
 	/**

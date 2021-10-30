@@ -1,3 +1,6 @@
+import degToRadians from '../../utils/degToRadians';
+import clamp from './clamp';
+
 /**
  * @class Vector2
  * @classdesc Creates a Vector2
@@ -464,6 +467,7 @@ export default class Vector2 {
 		this.x += dy;
 		return this;
 	}
+
 	/**
 	 * @memberof Vector2
 	 * @description Gets the dot product using three different Vector2s
@@ -484,6 +488,99 @@ export default class Vector2 {
 		const ac = a.dot(c);
 		const bc = b.dot(c);
 		return resultVector.setValues(b.x * ac - a.x * bc, b.y * ac - a.y * bc);
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @description Clamps the values to a min and max
+	 * @param {number} min The min value
+	 * @param {number} max The max value
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public clamp(min: number, max: number) {
+		this.x = clamp(this.x, min, max);
+		this.y = clamp(this.y, min, max);
+
+		return this;
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @description Clamps the values to a min
+	 * @param {number} min The min value
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public clampMin(min: number) {
+		if (this.x < min) {
+			this.x = min;
+		}
+		if (this.y < min) {
+			this.y = min;
+		}
+
+		return this;
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @description Clamps the values to a max
+	 * @param {number} max The max value
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public clampMax(max: number) {
+		if (this.x > max) {
+			this.x = max;
+		}
+		if (this.y > max) {
+			this.y = max;
+		}
+
+		return this;
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @description Rotates the Vector2 based on degrees
+	 * @param {number} degrees The angle in degrees
+	 * @param {Vector2} [center] The center Vector relative to the Vector, optional -> defaults: Vector2.ZERO
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public rotate(degrees: number, center = Vector2.ZERO) {
+		const radians = degToRadians(degrees);
+
+		const cx = center.x || 0;
+		const cy = center.y || 0;
+
+		const c = Math.cos(radians),
+			s = Math.sin(radians);
+
+		const x = this.x - cx;
+		const y = this.y - cy;
+
+		this.x = x * c - y * s + cx;
+		this.y = x * s + y * c + cy;
+
+		return this;
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @description Reflects the Vector2, returns the opposite value on a number line
+	 *
+	 * @example new Vector2(100, 50).reflect() // Vector2(-100, -50)
+	 *
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public reflect() {
+		this.x *= -1;
+		this.y *= -1;
+
+		return this;
 	}
 
 	// STATIC

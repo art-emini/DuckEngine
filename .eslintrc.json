@@ -32,6 +32,7 @@
 		"docs/",
 		"release",
 		"webpack.config.js",
-		"webpack.window.config.js"
+		"webpack.window.config.js",
+		"tests/**/*"
 	]
 }

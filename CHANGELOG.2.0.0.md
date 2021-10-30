@@ -59,6 +59,7 @@
     - Added raycast to gameobjects.misc property
 - Physics
   - Added PhysicsServer class
+  - Added PhysicsBody class
 - Input
   - Added Keyboard event parameter to callback for onKeyUp and onKeyDown methods
 - Loader
@@ -87,6 +88,7 @@
 - GameObjects
   - Renamed draw method to _draw which is a public method, but should *not* be called manually
   - Collider should not be updated manually, automatically updated in scene.physicsServer
+  - Moved most methods and properties to PhysicsBody
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created
@@ -141,6 +143,7 @@
   - Removed props x and y and changed to position which is a Vector2
   - Removed props vx and vy and changed to velocity which is a Vector2
   - Removed fillColor prop (now is called texture)
+  - Removed most methods and properties from GameObject as it now extends PhysicsBody which as all removed methods and properties and more
 - Particle
   - Removed props floatVX and floatVY and changed to floatVelocity Vector2
 - Scene
