@@ -15,6 +15,7 @@
     - Added textureKey parameter which is the key of a preloaded texture loaded with scene.loader
   - Particle
     - Added texture color and image support
+  - Now extends PhysicsObject which adds a lot more methods and properties (check [docs](https://ksplatdev.github.io/DuckEngine/))
 - Map
   - Added id, zIndex, and visible properties
 - Core
@@ -60,6 +61,7 @@
 - Physics
   - Added PhysicsServer class
   - Added PhysicsBody class
+  - Added Hitbox class
 - Input
   - Added Keyboard event parameter to callback for onKeyUp and onKeyDown methods
 - Loader
@@ -107,6 +109,9 @@
   - Collider
     - Changed collider.shape to collider.object
     - Changed collider.update diffCollidesWith parameter to be required and renamed to updatedCollidesWith
+    - Changed collider.update to collider.__update which shouldn't be called manually as it is called by PhysicsServer
+    - Changed collider.shape to collider.hitbox
+    - Reworked how colliders work
   - Reworked how colliders are updated and used by implementing PhysicsServer
 - StaticLight
   - Made class extend GameObject class

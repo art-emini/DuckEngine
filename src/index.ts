@@ -37,6 +37,7 @@ import RaycastClass from './core/misc/raycast';
 import AmountClass from './base/amount';
 import TextureClass from './core/models/texture';
 import PhysicsServerClass from './core/physics/server/physicsServer';
+import PhysicsBodyClass from './core/physics/physicsBody';
 
 // main
 
@@ -133,6 +134,7 @@ export namespace Duck {
 		export namespace Physics {
 			export const Collider = ColliderClass;
 			export const PhysicsServer = PhysicsServerClass;
+			export const PhysicsBody = PhysicsBodyClass;
 		}
 
 		export namespace Models {
@@ -222,6 +224,9 @@ export namespace Duck {
 		export namespace Physics {
 			export type Collider = ColliderClass;
 			export type PhysicsServer = PhysicsServerClass;
+			export type PhysicsBody<
+				textureType extends Duck.Types.Texture.Type
+			> = PhysicsBodyClass<textureType>;
 		}
 
 		export namespace Models {

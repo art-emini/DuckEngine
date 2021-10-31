@@ -1,3 +1,4 @@
+import { Duck } from '../..';
 import degToRadians from '../../utils/degToRadians';
 import clamp from './clamp';
 
@@ -654,6 +655,33 @@ export default class Vector2 {
 		if (x && !y) return new Vector2(x); // only x
 		if (!x && y) return new Vector2(0, y); // only y
 		return new Vector2(x, y); // both
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @static
+	 * @description Returns a Vector2 with passed vector2Like object
+	 * @param {Duck.Types.Math.Vector2Like} vector2Like An object with x and y properties
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public static fromVector2Like(vector2Like: Duck.Types.Math.Vector2Like) {
+		return new Vector2(vector2Like.x, vector2Like.y);
+	}
+
+	/**
+	 * @memberof Vector2
+	 * @static
+	 * @description Returns a Vector2Like object with passed Vector2
+	 * @param {Vector2} vector2 A Vector2 to convert to Vector2Like object
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public static toVector2Like(vector2: Vector2) {
+		return {
+			x: vector2.x,
+			y: vector2.y,
+		};
 	}
 
 	/**

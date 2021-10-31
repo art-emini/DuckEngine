@@ -14,8 +14,10 @@ export default class PhysicsServer {
 	public __tick() {
 		this.scene.displayList.visibilityFilter(true).forEach((r) => {
 			if (r instanceof GameObject) {
-				if (r.collider && r.collidesWith) {
-					r.collider.__update(r, r.collidesWith);
+				if (r.collider && r.collidesWith && r.hitbox) {
+					r.hitbox.__update(r);
+
+					r.collider.__update(r.hitbox, r.collidesWith);
 				}
 			}
 		});

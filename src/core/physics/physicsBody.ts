@@ -6,7 +6,14 @@ import Vector2 from '../math/vector2';
 import Raycast from '../misc/raycast';
 import Scene from '../scene';
 import Collider from './collider';
+import Hitbox from './models/hitbox';
 
+/**
+ * @class PhysicsBody
+ * @classdesc Creates a DuckEngine PhysicsBody
+ * @description The PhysicsBody Class. The GameObject class extends this class
+ * @since 2.0.0
+ */
 export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
@@ -109,7 +116,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description The Collider instance of the GameObject
+	 * @description The Collider instance of the PhysicsBody
 	 * @type Collider | undefined
 	 * @since 2.0.0
 	 */
@@ -117,20 +124,34 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Gameobjects that can collide with the GameObject, also used for internalRaycasts
-	 * @type GameObject[]
+	 * @description The Collider Hitbox of the PhysicsBody
+	 * @type Hitbox | undefined
+	 * @since 2.0.0
+	 */
+	public hitbox: Hitbox | undefined;
+
+	/**
+	 * @memberof PhysicsBody
+	 * @description PhysicsBody that can collide with the PhysicsBody, also used for internalRaycasts
+	 * @type PhysicsBody[]
 	 * @since 2.0.0
 	 */
 	public collidesWith: Duck.TypeClasses.GameObjects.GameObject<textureType>[];
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description The velocity of the GameObject
+	 * @description The velocity of the PhysicsBody
 	 * @type Vector2
 	 * @since 2.0.0
 	 */
 	public velocity: Vector2;
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description The bounds of the PhysicsBody
+	 * @type Duck.Types.Math.BoundsLike
+	 * @since 2.0.0
+	 */
 	public bounds: Duck.Types.Math.BoundsLike;
 
 	protected internalRaycasts: {
@@ -157,7 +178,17 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		 */
 		addCollider: (
 			collidesWith: Duck.TypeClasses.GameObjects.GameObject<textureType>[]
-		) => Collider;
+		) => Collider | undefined;
+
+		/**
+		 * @memberof PhysicsBody#physics
+		 * @description Adds a hitbox to the PhysicsBody
+		 * @param {number} [w] Width of hitbox, optional -> defaults: PhysicsBody.w or PhysicsBody.r * 2
+		 * @param {number} [h] Height of hitbox, optional -> defaults: PhysicsBody.h or PhysicsBody.r * 2
+		 * @param {Vector2} [offset=Vector2.ZERO] Offset of hitbox, optional -> defaults: Vector2.ZERO
+		 * @since 2.0.0
+		 */
+		addHitbox: (w?: number, h?: number, offset?: Vector2) => Hitbox;
 
 		/**
 		 * @memberof GameObject#physics
@@ -171,6 +202,20 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		setBounds: (x: number, y: number, w: number, h: number) => void;
 	};
 
+	/**
+	 * @constructor
+	 * @description Creates a PhysicsBody instance. Extended by GameObject
+	 * @param {Duck.Types.Collider.ShapeString} shape Shape of PhysicsBody
+	 * @param {number} id ID from GameObject ID
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width
+	 * @param {number} h Height
+	 * @param {number} r Radius
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 2.0.0
+	 */
 	constructor(
 		shape: Duck.Types.Collider.ShapeString,
 		id: number,
@@ -265,22 +310,51 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			addCollider: (
 				collidesWith: Duck.Types.GameObject<textureType>[]
 			) => {
+				if (!this.hitbox) {
+					new Debug.Error(
+						'Cannot add collider to PhysicsObject. No hitbox exists. Create a hitbox first using PhysicsObject.physics.addHitbox'
+					);
+					return undefined;
+				}
+
 				if (!this.game.config.physics?.enabled) {
 					new Debug.Error(
-						'Cannot add collider to GameObject. Game Config.physics.enabled must be truthy!'
+						'Cannot add collider to PhysicsObject. Game Config.physics.enabled must be truthy!'
 					);
 				}
 
 				this.collidesWith = collidesWith;
 
 				this.collider = new Collider(
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					this.self!,
+					this.hitbox,
 					collidesWith,
 					this.game
 				);
 
 				return this.collider;
+			},
+			addHitbox: (w?: number, h?: number, offset = Vector2.ZERO) => {
+				if (!this.game.config.physics?.enabled) {
+					new Debug.Error(
+						'Cannot add hitbox to PhysicsObject. Game Config.physics.enabled must be truthy!'
+					);
+				}
+
+				this.hitbox = new Hitbox(
+					this.position,
+					w || 0,
+					h || 0,
+					offset,
+					this,
+					this.game,
+					this.scene
+				);
+
+				if (!w && !h) {
+					this.hitbox.auto(offset);
+				}
+
+				return this.hitbox;
 			},
 			setBounds: (x: number, y: number, w: number, h: number) => {
 				this.bounds.x = x;
@@ -326,6 +400,18 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		// roundPixels
 		if (this.game.config.roundPixels) {
 			this.position.round();
+		}
+
+		// apply gravity
+		if (this.game.config.physics?.gravity) {
+			if (
+				this.options.type === 'KinematicBody' ||
+				this.options.type === 'RigidBody'
+			) {
+				this.applyGravity(
+					Vector2.fromVector2Like(this.game.config.physics.gravity)
+				);
+			}
 		}
 
 		// internal raycasts
@@ -527,6 +613,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			return;
 		}
 		this.velocity.reflect();
+	}
+
+	public autoFitHitbox(offset = Vector2.ZERO) {
+		this.hitbox?.auto(offset);
+	}
+
+	public scaleHitbox(scale: Vector2) {
+		this.hitbox?.scale(scale);
 	}
 
 	/**
