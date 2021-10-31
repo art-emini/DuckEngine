@@ -62,6 +62,8 @@
   - Added PhysicsServer class
   - Added PhysicsBody class
   - Added Hitbox class
+  - Collider
+    - Added support for group class as a collidesWith
 - Input
   - Added Keyboard event parameter to callback for onKeyUp and onKeyDown methods
 - Loader
@@ -112,7 +114,6 @@
     - Changed collider.update to collider.__update which shouldn't be called manually as it is called by PhysicsServer
     - Changed collider.shape to collider.hitbox
     - Reworked how colliders work
-  - Reworked how colliders are updated and used by implementing PhysicsServer
 - StaticLight
   - Made class extend GameObject class
 - Interactive

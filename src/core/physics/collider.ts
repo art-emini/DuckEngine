@@ -3,8 +3,9 @@
 
 import { Duck } from '../../index';
 import Game from '../game';
+import GameObject from '../gameobjects/gameObject';
+import Group from '../group/group';
 import Hitbox from './models/hitbox';
-import PhysicsBody from './physicsBody';
 
 /**
  * @class Collider
@@ -14,20 +15,24 @@ import PhysicsBody from './physicsBody';
  */
 export default class Collider {
 	public hitbox: Hitbox;
-	public collidesWith: PhysicsBody<Duck.Types.Texture.Type>[];
+	public collidesWith:
+		| GameObject<Duck.Types.Texture.Type>[]
+		| Group<GameObject<Duck.Types.Texture.Type>>;
 	public game: Game;
 
 	/**
 	 * @constructor Collider
 	 * @description Creates a Collider instance
 	 * @param {Hitbox} hitbox Hitbox to append the collider to
-	 * @param {PhysicsBody<Duck.Types.Texture.Type>[]} collidesWith What the PhysicsBody collides with
+	 * @param {GameObject<Duck.Types.Texture.Type>[] | Group<GameObject<Duck.Types.Texture.Type>>} collidesWith What the PhysicsBody collides with
 	 * @param {Game} game Game instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
 		hitbox: Hitbox,
-		collidesWith: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[],
+		collidesWith:
+			| GameObject<Duck.Types.Texture.Type>[]
+			| Group<GameObject<Duck.Types.Texture.Type>>,
 		game: Game
 	) {
 		this.hitbox = hitbox;
@@ -42,22 +47,32 @@ export default class Collider {
 	 * DO NOT CALL MANUALLY! CALLED IN PHYSICS SERVER!
 	 *
 	 * @param {Hitbox} hitbox The updated hitbox that the collider is attached
-	 * @param {PhysicsBody<Duck.Types.Texture.Type>[]} updatedCollidesWith Updated version of what the object collides with
-	 * @since 1.0.0-beta
+	 * @param {GameObject<Duck.Types.Texture.Type>[] | Group<GameObject<Duck.Types.Texture.Type>>} updatedCollidesWith Updated version of what the object collides with
+	 * @since 2.0.0
 	 */
 	public __update(
 		hitbox: Hitbox,
-		updatedCollidesWith: PhysicsBody<Duck.Types.Texture.Type>[]
+		updatedCollidesWith:
+			| GameObject<Duck.Types.Texture.Type>[]
+			| Group<GameObject<Duck.Types.Texture.Type>>
 	) {
 		this.hitbox = hitbox;
 
 		this.collidesWith = updatedCollidesWith;
 
-		this.collidesWith.forEach((otherShape) => {
-			if (otherShape.hitbox) {
-				this.collideHitboxes(otherShape.hitbox);
-			}
-		});
+		if (Array.isArray(this.collidesWith)) {
+			this.collidesWith.forEach((otherObject) => {
+				if (otherObject.hitbox) {
+					this.collideHitboxes(otherObject.hitbox);
+				}
+			});
+		} else {
+			this.collidesWith.each((otherObject) => {
+				if (otherObject.hitbox) {
+					this.collideHitboxes(otherObject.hitbox);
+				}
+			});
+		}
 	}
 
 	protected collideHitboxes(hitbox2: Hitbox) {

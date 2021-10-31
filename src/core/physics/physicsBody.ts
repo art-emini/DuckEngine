@@ -1,6 +1,7 @@
 import { Duck } from '../..';
 import Debug from '../debug/debug';
 import Game from '../game';
+import Group from '../group/group';
 import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
 import Raycast from '../misc/raycast';
@@ -124,19 +125,21 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
+	 * @description An array or group of GameObjects that can collide with the PhysicsBody, also used for internalRaycasts.cast
+	 * @type Duck.TypeClasses.GameObjects.GameObject<textureType>[] | Group<Duck.TypeClasses.GameObjects.GameObject<textureType>>
+	 * @since 2.0.0
+	 */
+	public collidesWith:
+		| Duck.TypeClasses.GameObjects.GameObject<textureType>[]
+		| Group<Duck.TypeClasses.GameObjects.GameObject<textureType>>;
+
+	/**
+	 * @memberof PhysicsBody
 	 * @description The Collider Hitbox of the PhysicsBody
 	 * @type Hitbox | undefined
 	 * @since 2.0.0
 	 */
 	public hitbox: Hitbox | undefined;
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description PhysicsBody that can collide with the PhysicsBody, also used for internalRaycasts
-	 * @type PhysicsBody[]
-	 * @since 2.0.0
-	 */
-	public collidesWith: Duck.TypeClasses.GameObjects.GameObject<textureType>[];
 
 	/**
 	 * @memberof PhysicsBody
@@ -308,7 +311,9 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		// methods
 		this.physics = {
 			addCollider: (
-				collidesWith: Duck.Types.GameObject<textureType>[]
+				collidesWith:
+					| Duck.Types.GameObject<textureType>[]
+					| Group<Duck.Types.GameObject<textureType>>
 			) => {
 				if (!this.hitbox) {
 					new Debug.Error(
