@@ -8,7 +8,6 @@ import Group from '../group/group';
  * @class Raycast
  * @classdesc Creates a DuckEngine Raycast
  * @description The Raycast Class. Creates a Raycast that can be used to test for collisions
- * @extends GameObject
  * @since 2.0.0
  */
 export default class Raycast {

@@ -68,6 +68,8 @@ export default class Particle extends GameObject<'either'> {
 
 		this.floatVelocity = Vector2.ZERO;
 
+		this.zIndex = Duck.Layers.Rendering.zIndex.particle;
+
 		// age
 
 		this.age = 0;

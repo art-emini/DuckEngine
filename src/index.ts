@@ -38,13 +38,14 @@ import AmountClass from './base/amount';
 import TextureClass from './core/models/texture';
 import PhysicsServerClass from './core/physics/server/physicsServer';
 import PhysicsBodyClass from './core/physics/physicsBody';
+import HitboxClass from './core/physics/models/hitbox';
 
 // main
 
 // spec
 /**
  * @namespace Duck
- * All Types, Type Classes, Classes, and Config is stored here.
+ * All Types, Type Classes, Classes, Layers, and Config is stored here.
  * @since 1.0.0-beta
  */
 export namespace Duck {
@@ -135,6 +136,9 @@ export namespace Duck {
 			export const Collider = ColliderClass;
 			export const PhysicsServer = PhysicsServerClass;
 			export const PhysicsBody = PhysicsBodyClass;
+			export namespace Models {
+				export const Hitbox = HitboxClass;
+			}
 		}
 
 		export namespace Models {
@@ -227,6 +231,9 @@ export namespace Duck {
 			export type PhysicsBody<
 				textureType extends Duck.Types.Texture.Type
 			> = PhysicsBodyClass<textureType>;
+			export namespace Models {
+				export type Hitbox = HitboxClass;
+			}
 		}
 
 		export namespace Models {
@@ -258,11 +265,25 @@ export namespace Duck {
 		}
 	}
 
+	export namespace Layers {
+		export namespace Rendering {
+			export const zIndex = {
+				canvasModulate: 1,
+				gameobject: 2,
+				particle: 3,
+				button: 4,
+				text: 5,
+				graphicDebug: 6,
+			};
+		}
+	}
+
 	export namespace Types {
 		export type GameObject<textureType extends Duck.Types.Texture.Type> =
 			GameObjectClass<textureType>;
 		export type Renderable =
 			| GameObjectClass<Duck.Types.Texture.Type>
+			| HitboxClass
 			| Duck.TypeClasses.Effects.Effect
 			| Duck.TypeClasses.Maps.TileMap;
 		export namespace Game {
@@ -689,8 +710,10 @@ export namespace Duck {
 		}
 
 		export namespace PhysicsBody {
+			export type Type = RigidBody | StaticBody | KinematicBody;
+
 			export interface Config {
-				type: RigidBody | StaticBody | KinematicBody;
+				type: Type;
 				physicsEnabled: boolean;
 			}
 

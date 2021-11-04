@@ -157,6 +157,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 */
 	public bounds: Duck.Types.Math.BoundsLike;
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Determines if the PhysicsBody._update is called by the Scene.physicsServer used by Scene.physicsList
+	 * @type boolean
+	 * @since 2.0.0
+	 */
+	public enabled: boolean;
+
 	protected internalRaycasts: {
 		top: Raycast;
 		bottom: Raycast;
@@ -259,6 +267,8 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		this.collider = undefined;
 		this.collidesWith = [];
 
+		this.enabled = true;
+
 		this.bounds = {
 			x: -Infinity,
 			y: -Infinity,
@@ -338,7 +348,12 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 				return this.collider;
 			},
-			addHitbox: (w?: number, h?: number, offset = Vector2.ZERO) => {
+			addHitbox: (
+				w?: number,
+				h?: number,
+				offset = Vector2.ZERO,
+				debugColor?: string
+			) => {
 				if (!this.game.config.physics?.enabled) {
 					new Debug.Error(
 						'Cannot add hitbox to PhysicsObject. Game Config.physics.enabled must be truthy!'
@@ -346,18 +361,22 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 				}
 
 				this.hitbox = new Hitbox(
+					this.id,
 					this.position,
 					w || 0,
 					h || 0,
 					offset,
 					this,
 					this.game,
-					this.scene
+					this.scene,
+					debugColor
 				);
 
 				if (!w && !h) {
 					this.hitbox.auto(offset);
 				}
+
+				this.scene.displayList.add(this.hitbox);
 
 				return this.hitbox;
 			},
@@ -368,6 +387,11 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 				this.bounds.h = h;
 			},
 		};
+	}
+
+	public setEnabled(enabled: boolean) {
+		this.enabled = enabled;
+		return this.enabled;
 	}
 
 	/**
@@ -457,7 +481,18 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Sets the velocity based on an axis
+	 * @description Sets the PhysicsBody type, PhysicsBody type determines what can be applied and what effects the body
+	 * @param {Duck.Types.PhysicsBody.Type} type The type of the PhysicsBody, 'KinematicBody' | 'RigidBody' | 'StaticBody'
+	 * @since 2.0.0
+	 */
+	public setType(type: Duck.Types.PhysicsBody.Type) {
+		this.options.type = type;
+		return this.options;
+	}
+
+	/**
+	 * @memberof PhysicsBody
+	 * @description Sets the velocity based on an axis, PhysicsBody.options.type must be KinematicBody
 	 * @param {'x'|'y'} axis The axis to set the velocity of
 	 * @param {number} v The value to set the velocity axis as
 	 * @since 2.0.0
@@ -481,7 +516,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Sets the velocity.x
+	 * @description Sets the velocity.x, PhysicsBody.options.type must be KinematicBody
 	 * @param {number} v The value to set the velocity.x as
 	 * @since 2.0.0
 	 */
@@ -497,7 +532,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Sets the velocity.y
+	 * @description Sets the velocity.y, PhysicsBody.options.type must be KinematicBody
 	 * @param {number} v The value to set the velocity.y as
 	 * @since 2.0.0
 	 */
@@ -513,7 +548,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Accelerates the velocity by an amount
+	 * @description Accelerates the velocity by an amount, PhysicsBody.options.type must be KinematicBody
 	 * @param {Vector2} target The target velocity
 	 * @param {number} amount The value to increase the velocity by
 	 * @since 2.0.0
@@ -530,7 +565,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Applies friction to the velocity by an amount
+	 * @description Applies friction to the velocity by an amount, PhysicsBody.options.type must be KinematicBody or RigidBody
 	 * @param {number} frictionAmount The value to decrease the velocity by
 	 * @since 2.0.0
 	 */
@@ -549,7 +584,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Applies gravity to the velocity by a Vector2
+	 * @description Applies gravity to the velocity by a Vector2, PhysicsBody.options.type must be KinematicBody or RigidBody
 	 * @param {Vector2} gravity The Vector2 to add to the velocity by
 	 * @since 2.0.0
 	 */
@@ -573,7 +608,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Applies gravity to the velocity by a Vector2
+	 * @description Applies gravity to the velocity by a Vector2, PhysicsBody.options.type must be KinematicBody or RigidBody
 	 * @param {Duck.Types.Math.BoundsLike} [bounds=PhysicsBody.bounds] The bounds of the PhysicsBody, optional -> defaults: PhysicsBody.bounds, if none
 	 * are set, it is infinite
 	 * @param {number} [restitution=1] How much energy is lost when bouncing, a number between 0-1 to loose energy,
@@ -600,7 +635,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Reflects the velocity, sets the velocity as the opposite value of the velocity
+	 * @description Reflects the velocity, sets the velocity as the opposite value of the velocity, PhysicsBody.options.type must be KinematicBody or RigidBody
 	 *
 	 * @example myPhysicsBody.setVelocity('x', 3);
 	 * myPhysicsBody.reflect(); // velocity: 0, -3
@@ -620,10 +655,22 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		this.velocity.reflect();
 	}
 
-	public autoFitHitbox(offset = Vector2.ZERO) {
+	/**
+	 * @memberof PhysicsBody
+	 * @description Auto scales the PhysicsBody.hitbox to fit the shape
+	 * @param {Vector2} [offset] Position offset, optional -> defaults: undefined
+	 * @since 2.0.0
+	 */
+	public autoFitHitbox(offset?: Vector2) {
 		this.hitbox?.auto(offset);
 	}
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Scales the PhysicsBody.hitbox
+	 * @param {Vector2} scale Scale Vector2, x is width, y is height
+	 * @since 2.0.0
+	 */
 	public scaleHitbox(scale: Vector2) {
 		this.hitbox?.scale(scale);
 	}

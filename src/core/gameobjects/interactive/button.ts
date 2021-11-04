@@ -64,7 +64,7 @@ export default class Button extends GameObject<'either'> {
 
 		this.hovering = false;
 
-		this.zIndex = 3;
+		this.zIndex = Duck.Layers.Rendering.zIndex.button;
 
 		this.listeners = [];
 

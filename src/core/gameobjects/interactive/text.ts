@@ -56,7 +56,7 @@ export default class Text extends GameObject<'color'> {
 			height: this.h,
 		});
 
-		this.zIndex = 4;
+		this.zIndex = Duck.Layers.Rendering.zIndex.text;
 	}
 
 	/**

@@ -42,6 +42,7 @@
   - Added splashScreen object config to config
   - Added fps property which is the current fps
   - Added start sequence to start method
+  - Added physics option to config
     - Start Sequence:
       - Show splash screen
       - Preload all assets from all scenes
@@ -86,6 +87,7 @@
   - Added Duck.Classes which holds all of the classes as constants
   - Added Duck.Types which holds all of the types needed by classes
   - Added Loader and Texture namespaces to Duck.Types
+  - Added Duck.Layers
 
 ## Changed
 
@@ -118,8 +120,8 @@
   - Made class extend GameObject class
 - Interactive
   - Button and Text now extend the GameObject class
-  - Button default zIndex is set to 3
-  - Text default zIndex is set to 4
+  - Button default zIndex is set to 4
+  - Text default zIndex is set to 5
   - Text width and height properties are correctly set using context.measureText
   - Buttons now can be interacted with even with an active camera
   - Button.scene is now a public property

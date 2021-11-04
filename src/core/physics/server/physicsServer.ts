@@ -1,5 +1,5 @@
 import Game from '../../game';
-import GameObject from '../../gameobjects/gameObject';
+import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
 
 export default class PhysicsServer {
@@ -12,12 +12,20 @@ export default class PhysicsServer {
 	}
 
 	public __tick() {
-		this.scene.displayList.visibilityFilter(true).forEach((r) => {
-			if (r instanceof GameObject) {
-				if (r.collider && r.collidesWith && r.hitbox) {
-					r.hitbox.__update(r);
+		this.scene.physicsList.enabledFilter(true).forEach((r) => {
+			r._update();
 
-					r.collider.__update(r.hitbox, r.collidesWith);
+			if (r.collider && r.collidesWith && r.hitbox) {
+				r.hitbox._update(r);
+
+				r.collider._update(r.hitbox, r.collidesWith);
+
+				if (this.game.config.physics?.gravity) {
+					r.applyGravity(
+						Vector2.fromVector2Like(
+							this.game.config.physics.gravity
+						)
+					);
 				}
 			}
 		});

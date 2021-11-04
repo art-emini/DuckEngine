@@ -50,7 +50,7 @@ export default class Collider {
 	 * @param {GameObject<Duck.Types.Texture.Type>[] | Group<GameObject<Duck.Types.Texture.Type>>} updatedCollidesWith Updated version of what the object collides with
 	 * @since 2.0.0
 	 */
-	public __update(
+	public _update(
 		hitbox: Hitbox,
 		updatedCollidesWith:
 			| GameObject<Duck.Types.Texture.Type>[]

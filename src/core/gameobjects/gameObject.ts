@@ -79,7 +79,7 @@ export default class GameObject<
 		this.texture = texture;
 
 		this.visible = true;
-		this.zIndex = 2;
+		this.zIndex = Duck.Layers.Rendering.zIndex.gameobject;
 
 		// fix
 		if (this.game.ctx) {

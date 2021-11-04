@@ -1,3 +1,4 @@
+import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
 import Texture from '../../models/texture';
@@ -44,7 +45,7 @@ export default class CanvasModulate extends GameObject<'color'> {
 			scene
 		);
 
-		this.zIndex = 1;
+		this.zIndex = Duck.Layers.Rendering.zIndex.canvasModulate;
 	}
 
 	/**
