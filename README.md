@@ -105,6 +105,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 
 ```bash
 .
+├── branch_guidelines.md
 ├── CHANGELOG.1.2.0.md
 ├── CHANGELOG.2.0.0.md
 ├── CHANGELOG.md
@@ -178,10 +179,14 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   └── raycast.ts
 │   │   ├── models
 │   │   │   ├── displayList.ts
+│   │   │   ├── physicsList.ts
 │   │   │   └── texture.ts
 │   │   ├── physics
 │   │   │   ├── circleToRectIntersect.ts
 │   │   │   ├── collider.ts
+│   │   │   ├── models
+│   │   │   │   ├── area.ts
+│   │   │   │   └── hitbox.ts
 │   │   │   ├── physicsBody.ts
 │   │   │   ├── rectToRectIntersect.ts
 │   │   │   └── server
