@@ -10,8 +10,6 @@ import GameObject from './gameObject';
  * @since 1.0.0-beta
  */
 export default class SpriteSheet extends GameObject<'image'> {
-	public scene: Scene;
-
 	protected frameWidth: number;
 	protected frameHeight: number;
 
@@ -60,11 +58,10 @@ export default class SpriteSheet extends GameObject<'image'> {
 			frameHeight,
 			0,
 			scene.loader.imageStack.find((t) => t.key === textureKey)!.value,
-			game
+			game,
+			scene
 		);
 		this.init(this);
-
-		this.scene = scene;
 
 		this.frameWidth = frameWidth;
 		this.frameHeight = frameHeight;

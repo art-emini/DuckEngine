@@ -20,7 +20,7 @@ export default class SmokeEffect extends Effect {
 		interval = 50,
 		scene: Scene
 	) {
-		const particle = new Particle('circle', 0, 0, 5, color, game);
+		const particle = new Particle('circle', 0, 0, 5, color, game, scene);
 
 		const particleEmitter = new ParticleEmitter(
 			particle,

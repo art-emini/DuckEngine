@@ -70,12 +70,15 @@ import Effect from './effect/effect';
 import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
 import DisplayList from './models/displayList';
-import GameObject from './gameobjects/gameObject';
 import CanvasModulate from './gameobjects/misc/canvasModulate';
 import Vector2 from './math/vector2';
 import clamp from './math/clamp';
 import lerp from './math/lerp';
 import Raycast from './misc/raycast';
+import PhysicsServer from './physics/server/physicsServer';
+import PhysicsList from './models/physicsList';
+import Area from './physics/models/area';
+import PhysicsBody from './physics/physicsBody';
 
 /**
  * @class Scene
@@ -98,8 +101,11 @@ export default class Scene extends Render {
 	public cameras: Camera[];
 
 	public displayList: DisplayList;
+	public physicsList: PhysicsList;
 
 	public loader: Loader;
+
+	public physicsServer: PhysicsServer | undefined;
 
 	// methods
 
@@ -156,6 +162,13 @@ export default class Scene extends Render {
 		};
 		misc: {
 			raycast: (begin: Vector2, end: Vector2) => Raycast;
+			area: (
+				x: number,
+				y: number,
+				w: number,
+				h: number,
+				collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
+			) => Area;
 		};
 		interactive: {
 			text: (
@@ -347,10 +360,16 @@ export default class Scene extends Render {
 		this.cameras = [];
 
 		this.displayList = new DisplayList();
+		this.physicsList = new PhysicsList();
 
 		this.loader = new Loader(this);
 
+		if (this.game.config.physics?.enabled) {
+			this.physicsServer = new PhysicsServer(this.game, this);
+		}
+
 		// methods
+
 		/**
 		 * @memberof Scene
 		 * @description Adds anything to a scene
@@ -372,9 +391,11 @@ export default class Scene extends Render {
 							w,
 							h,
 							fillColor,
-							this.game
+							this.game,
+							this
 						);
 						this.displayList.add(myCanvasModulate);
+						this.physicsList.add(myCanvasModulate);
 						return myCanvasModulate;
 					},
 				},
@@ -395,6 +416,7 @@ export default class Scene extends Render {
 						this
 					);
 					this.displayList.add(sprite);
+					this.physicsList.add(sprite);
 					return sprite;
 				},
 				rect: (
@@ -404,8 +426,17 @@ export default class Scene extends Render {
 					h: number,
 					fillColor: string
 				) => {
-					const rect = new Rect(x, y, w, h, fillColor, this.game);
+					const rect = new Rect(
+						x,
+						y,
+						w,
+						h,
+						fillColor,
+						this.game,
+						this
+					);
 					this.displayList.add(rect);
+					this.physicsList.add(rect);
 					return rect;
 				},
 				circle: (
@@ -414,8 +445,16 @@ export default class Scene extends Render {
 					r: number,
 					fillColor: string
 				) => {
-					const circle = new Circle(x, y, r, fillColor, this.game);
+					const circle = new Circle(
+						x,
+						y,
+						r,
+						fillColor,
+						this.game,
+						this
+					);
 					this.displayList.add(circle);
+					this.physicsList.add(circle);
 					return circle;
 				},
 				roundRect: (
@@ -433,9 +472,11 @@ export default class Scene extends Render {
 						h,
 						r,
 						fillColor,
-						this.game
+						this.game,
+						this
 					);
 					this.displayList.add(roundRect);
+					this.physicsList.add(roundRect);
 					return roundRect;
 				},
 				spriteSheet: (
@@ -463,6 +504,7 @@ export default class Scene extends Render {
 						this
 					);
 					this.displayList.add(spriteSheet);
+					this.physicsList.add(spriteSheet);
 					return spriteSheet;
 				},
 			},
@@ -471,14 +513,34 @@ export default class Scene extends Render {
 					const myRayCast = new Raycast(begin, end, this.game);
 					return myRayCast;
 				},
+				area: (
+					x: number,
+					y: number,
+					w: number,
+					h: number,
+					collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
+				) => {
+					const myArea = new Area(
+						x,
+						y,
+						w,
+						h,
+						collisionFilter,
+						this.game,
+						this
+					);
+					this.physicsList.add(myArea);
+					return myArea;
+				},
 			},
 			interactive: {
 				text: (
 					text: string,
 					config: Duck.Types.Interactive.Text.Config
 				) => {
-					const myText = new Text(text, config, this.game);
+					const myText = new Text(text, config, this.game, this);
 					this.displayList.add(myText);
+					this.physicsList.add(myText);
 					return myText;
 				},
 				button: (
@@ -504,6 +566,7 @@ export default class Scene extends Render {
 						this
 					);
 					this.displayList.add(myButton);
+					this.physicsList.add(myButton);
 					return myButton;
 				},
 			},
@@ -539,9 +602,11 @@ export default class Scene extends Render {
 						r,
 						fillColor,
 						alpha,
-						this.game
+						this.game,
+						this
 					);
 					this.displayList.add(myStaticLight);
+					this.physicsList.add(myStaticLight);
 					return myStaticLight;
 				},
 			},
@@ -564,9 +629,11 @@ export default class Scene extends Render {
 					h,
 					r,
 					fillColor,
-					this.game
+					this.game,
+					this
 				);
 				this.displayList.add(myParticle);
+				this.physicsList.add(myParticle);
 				return myParticle;
 			},
 			particleEmitter: (
@@ -676,7 +743,7 @@ export default class Scene extends Render {
 
 		/**
 		 * @memberof Scene
-		 * @description Tools such as generating random numbers, colors, and converting colors are located here
+		 * @description Tools such as generating random numbers, colors, converting colors, and math tools are located here
 		 * @since 1.0.0-beta
 		 */
 		this.tools = {
@@ -749,19 +816,16 @@ export default class Scene extends Render {
 
 	/**
 	 * @memberof Scene
-	 * @description Calls all visible gameobjects' _update method
+	 * @description Calls all visible gameobjects' _update method, calls physics server __tick method if game.config.physics is true
 	 *
-	 * *Do not call manually, this is called in game loop*
+	 * *Do not call manually, this is called in physicsServer.__tick()*
 	 *
 	 * @since 2.0.0
 	 */
 	public __tick() {
-		const visibleObjects = this.displayList.visibilityFilter(true);
-		visibleObjects.forEach((r) => {
-			if (r instanceof GameObject) {
-				r._update();
-			}
-		});
+		if (!this.game.config.physics?.customTick) {
+			this.physicsServer?.__tick();
+		}
 	}
 
 	/**

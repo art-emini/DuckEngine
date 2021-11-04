@@ -5,6 +5,7 @@ import GameObject from '../gameObject';
 import clamp from '../../math/clamp';
 import Vector2 from '../../math/vector2';
 import Texture from '../../models/texture';
+import Scene from '../../scene';
 
 /**
  * @class Particle
@@ -35,6 +36,7 @@ export default class Particle extends GameObject<'either'> {
 	 * @param {number} r Radius of the particle
 	 * @param {string} fillColorOrIMGPath Color to fill the particle with, can be an image path
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
@@ -43,7 +45,8 @@ export default class Particle extends GameObject<'either'> {
 		h: number,
 		r: number,
 		fillColorOrIMGPath: string,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		super(
 			shape,
@@ -53,7 +56,8 @@ export default class Particle extends GameObject<'either'> {
 			h,
 			r,
 			Texture.fromEither(fillColorOrIMGPath, w, h),
-			game
+			game,
+			scene
 		);
 
 		this.originalFillColorOrIMGPath = fillColorOrIMGPath;
@@ -63,6 +67,8 @@ export default class Particle extends GameObject<'either'> {
 		this.r = r;
 
 		this.floatVelocity = Vector2.ZERO;
+
+		this.zIndex = Duck.Layers.Rendering.zIndex.particle;
 
 		// age
 

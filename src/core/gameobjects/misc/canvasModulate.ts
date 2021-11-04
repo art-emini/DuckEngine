@@ -1,6 +1,8 @@
+import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
 import Texture from '../../models/texture';
+import Scene from '../../scene';
 import GameObject from '../gameObject';
 
 /**
@@ -20,6 +22,7 @@ export default class CanvasModulate extends GameObject<'color'> {
 	 * @param {number} h Height
 	 * @param {string} fillColor Color to fill the CanvasModulate with
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 */
 	constructor(
 		x: number,
@@ -27,11 +30,22 @@ export default class CanvasModulate extends GameObject<'color'> {
 		w: number,
 		h: number,
 		fillColor: string,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
-		super('rect', x, y, w, h, 0, Texture.fromColor(fillColor, w, h), game);
+		super(
+			'rect',
+			x,
+			y,
+			w,
+			h,
+			0,
+			Texture.fromColor(fillColor, w, h),
+			game,
+			scene
+		);
 
-		this.zIndex = 1;
+		this.zIndex = Duck.Layers.Rendering.zIndex.canvasModulate;
 	}
 
 	/**

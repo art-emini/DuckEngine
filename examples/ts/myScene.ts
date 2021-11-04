@@ -2,9 +2,11 @@
 import DuckEngine, { Duck } from '../../dist';
 
 export default class MainScene extends DuckEngine.Scene {
-	public myRect: Duck.TypeClasses.GameObjects.GameObject;
-	public myCircle: Duck.TypeClasses.GameObjects.GameObject;
-	public gameObjects: Duck.TypeClasses.Misc.Group<Duck.TypeClasses.GameObjects.GameObject>;
+	public myRect: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	public myCircle: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	public gameObjects: Duck.TypeClasses.Misc.Group<
+		Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+	>;
 
 	public myCamera: Duck.TypeClasses.Cameras.Camera;
 
@@ -21,11 +23,15 @@ export default class MainScene extends DuckEngine.Scene {
 		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#fff');
 		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#fff');
 
-		this.gameObjects =
-			this.add.group<Duck.TypeClasses.GameObjects.GameObject>(
-				'gameObjects',
-				[this.myRect, this.myCircle]
-			);
+		this.gameObjects = this.add.group<
+			Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		>('gameObjects', [this.myRect, this.myCircle]);
+
+		// colliders and hitboxes
+		this.myRect.physics.addHitbox();
+		this.myCircle.physics.addHitbox();
+
+		this.myRect.physics.addCollider([this.myCircle]);
 
 		// camera
 		this.myCamera = this.add.mainCamera();

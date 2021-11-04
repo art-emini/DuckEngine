@@ -12,8 +12,6 @@ import Scene from '../scene';
  * @since 1.0.0-beta
  */
 export default class Sprite extends GameObject<'image'> {
-	public scene: Scene;
-
 	constructor(
 		x: number,
 		y: number,
@@ -31,7 +29,8 @@ export default class Sprite extends GameObject<'image'> {
 			h,
 			0,
 			scene.loader.imageStack.find((t) => t.key === textureKey)!.value,
-			game
+			game,
+			scene
 		);
 		this.init(this);
 

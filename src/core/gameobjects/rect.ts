@@ -2,6 +2,7 @@ import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 import Texture from '../models/texture';
+import Scene from '../scene';
 
 /**
  * @class Rect
@@ -16,9 +17,20 @@ export default class Rect extends GameObject<'color'> {
 		w: number,
 		h: number,
 		fillColor: string,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
-		super('rect', x, y, w, h, 0, Texture.fromColor(fillColor, w, h), game);
+		super(
+			'rect',
+			x,
+			y,
+			w,
+			h,
+			0,
+			Texture.fromColor(fillColor, w, h),
+			game,
+			scene
+		);
 		this.init(this);
 	}
 

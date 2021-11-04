@@ -2,12 +2,12 @@ import { Duck } from '../../index';
 import Game from '../game';
 import Vector2 from '../math/vector2';
 import GameObject from '../gameobjects/gameObject';
+import Group from '../group/group';
 
 /**
  * @class Raycast
  * @classdesc Creates a DuckEngine Raycast
  * @description The Raycast Class. Creates a Raycast that can be used to test for collisions
- * @extends GameObject
  * @since 2.0.0
  */
 export default class Raycast {
@@ -76,44 +76,85 @@ export default class Raycast {
 	/**
 	 * @memberof Raycast
 	 * @description Casts the ray from the passed begin and to the end Vector2, sets state based on if intersecting or not
-	 * @param {GameObject<Duck.Types.Texture.Type>[]} objects Objects to check if intersecting with
+	 * @param {GameObject<Duck.Types.Texture.Type>[] | Group<GameObject<Duck.Types.Texture.Type>>} objects Objects to check if intersecting with
 	 * @since 2.0.0
 	 */
-	public cast(objects: GameObject<Duck.Types.Texture.Type>[]) {
-		objects.forEach((object) => {
-			if (object.shape !== 'circle') {
-				this.checkIntersectingRect(
-					this.positionEnd.x,
-					this.positionEnd.y,
-					this.position.x,
-					this.position.y,
-					object.position.x,
-					object.position.y,
-					object.w,
-					object.h,
-					object
-				);
-			} else {
-				// circle's x and y are in the center
-				// get correct x and y
-				const objX = object.position.x - object.r;
-				const objY = object.position.y - object.r;
+	public cast(
+		objects:
+			| GameObject<Duck.Types.Texture.Type>[]
+			| Group<GameObject<Duck.Types.Texture.Type>>
+	) {
+		if (Array.isArray(objects)) {
+			objects.forEach((object) => {
+				if (object.shape !== 'circle') {
+					this.checkIntersectingRect(
+						this.positionEnd.x,
+						this.positionEnd.y,
+						this.position.x,
+						this.position.y,
+						object.position.x,
+						object.position.y,
+						object.w,
+						object.h,
+						object
+					);
+				} else {
+					// circle's x and y are in the center
+					// get correct x and y
+					const objX = object.position.x - object.r;
+					const objY = object.position.y - object.r;
 
-				const diameter = object.r * 2;
+					const diameter = object.r * 2;
 
-				this.checkIntersectingRect(
-					this.positionEnd.x,
-					this.positionEnd.y,
-					this.position.x,
-					this.position.y,
-					objX,
-					objY,
-					diameter,
-					diameter,
-					object
-				);
-			}
-		});
+					this.checkIntersectingRect(
+						this.positionEnd.x,
+						this.positionEnd.y,
+						this.position.x,
+						this.position.y,
+						objX,
+						objY,
+						diameter,
+						diameter,
+						object
+					);
+				}
+			});
+		} else {
+			objects.each((object) => {
+				if (object.shape !== 'circle') {
+					this.checkIntersectingRect(
+						this.positionEnd.x,
+						this.positionEnd.y,
+						this.position.x,
+						this.position.y,
+						object.position.x,
+						object.position.y,
+						object.w,
+						object.h,
+						object
+					);
+				} else {
+					// circle's x and y are in the center
+					// get correct x and y
+					const objX = object.position.x - object.r;
+					const objY = object.position.y - object.r;
+
+					const diameter = object.r * 2;
+
+					this.checkIntersectingRect(
+						this.positionEnd.x,
+						this.positionEnd.y,
+						this.position.x,
+						this.position.y,
+						objX,
+						objY,
+						diameter,
+						diameter,
+						object
+					);
+				}
+			});
+		}
 	}
 
 	protected checkIntersectingRect(

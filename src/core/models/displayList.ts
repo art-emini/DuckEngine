@@ -3,8 +3,8 @@ import Debug from '../debug/debug';
 
 /**
  * @class DisplayList
- * @classdesc Creates a DisplayList Scene
- * @description The DisplayList Class. Keeps track of all renderableObjects
+ * @classdesc Creates a DisplayList that manages Renderable objects
+ * @description The DisplayList Class. Keeps track of all Renderable objects
  * @since 2.0.0
  */
 export default class DisplayList {

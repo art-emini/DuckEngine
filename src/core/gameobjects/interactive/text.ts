@@ -2,6 +2,7 @@ import { Duck } from '../../../index';
 import extractNumbers from '../../../utils/extractNumbers';
 import Game from '../../game';
 import Texture from '../../models/texture';
+import Scene from '../../scene';
 import GameObject from '../gameObject';
 
 /**
@@ -21,12 +22,14 @@ export default class Text extends GameObject<'color'> {
 	 * @param {string} text Text string
 	 * @param {Duck.Types.Interactive.Text.Config} config Text configuration, styles, position and more
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
 		text: string,
 		config: Duck.Types.Interactive.Text.Config,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		super(
 			'rect',
@@ -36,7 +39,8 @@ export default class Text extends GameObject<'color'> {
 			0,
 			0,
 			Texture.fromColor(text, 0, 0),
-			game
+			game,
+			scene
 		);
 		this.text = text;
 		this.config = config;
@@ -52,7 +56,7 @@ export default class Text extends GameObject<'color'> {
 			height: this.h,
 		});
 
-		this.zIndex = 4;
+		this.zIndex = Duck.Layers.Rendering.zIndex.text;
 	}
 
 	/**
