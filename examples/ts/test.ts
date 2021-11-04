@@ -10,6 +10,9 @@ const game = new DuckEngine.Game({
 	canvas: Duck.AutoCanvas(), //  grabs canvas element from document if exists, if doesn't, it creates a canvas and appends it to the body
 	defaultScene: 'main',
 	background: '#fff',
+	physics: {
+		enabled: true,
+	},
 });
 
 const main = new MainScene(game);

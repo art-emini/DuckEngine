@@ -182,7 +182,10 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── physics
 │   │   │   ├── circleToRectIntersect.ts
 │   │   │   ├── collider.ts
-│   │   │   └── rectToRectIntersect.ts
+│   │   │   ├── physicsBody.ts
+│   │   │   ├── rectToRectIntersect.ts
+│   │   │   └── server
+│   │   │       └── physicsServer.ts
 │   │   ├── scene.ts
 │   │   ├── sound
 │   │   │   └── soundPlayer.ts
@@ -232,7 +235,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 ### How to contribute
 
 1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
-2. Fork the repository.
+2. Fork the repository and create a new branch following the [branch guidelines](branch_guidelines.md).
 3. Clone the fork to your device.
 4. CD (change directories) into the cloned directory.
 5. Run `yarn upgrade`.
@@ -240,7 +243,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 7. Make your changes.
 8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
 9. Create a pull request.
-10. Wait for it to be reviewed and maybe merged.
+10. Wait for it to be reviewed and revised and possibly merged.
 
 ### Dev Scripts
 
@@ -254,7 +257,8 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
 9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
 10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
-11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure)
+11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
+12. `yarn run serve` - Serves the docs on :8080.
 
 ### Branches
 

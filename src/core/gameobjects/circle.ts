@@ -2,6 +2,7 @@ import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 import Texture from '../models/texture';
+import Scene from '../scene';
 
 /**
  * @class Circle
@@ -15,7 +16,8 @@ export default class Circle extends GameObject<'color'> {
 		y: number,
 		r: number,
 		fillColor: string,
-		game: Game
+		game: Game,
+		scene: Scene
 	) {
 		super(
 			'circle',
@@ -25,7 +27,8 @@ export default class Circle extends GameObject<'color'> {
 			0,
 			r,
 			Texture.fromColor(fillColor, r, r),
-			game
+			game,
+			scene
 		);
 		this.init(this);
 	}

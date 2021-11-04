@@ -79,7 +79,8 @@ export default class ParticleEmitter {
 			this.particle.h,
 			this.particle.r,
 			this.particle.originalFillColorOrIMGPath,
-			this.game
+			this.game,
+			this.scene
 		);
 
 		obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);

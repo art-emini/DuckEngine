@@ -16,14 +16,7 @@ import Texture from '../../models/texture';
  */
 export default class Button extends GameObject<'either'> {
 	public shape: Duck.Types.Interactive.Button.Shape;
-	public x: number;
-	public y: number;
-	public w: number;
-	public h: number;
-	public r: number;
 	public text: Text;
-	public game: Game;
-	public scene: Scene;
 
 	public hovering: boolean;
 	protected listeners: Duck.Types.Interactive.Button.Listener[];
@@ -63,21 +56,15 @@ export default class Button extends GameObject<'either'> {
 			h,
 			r,
 			Texture.fromEither(fillColorOrIMGPath, w, h),
-			game
+			game,
+			scene
 		);
 		this.shape = shape;
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-		this.r = r;
 		this.text = text;
-		this.game = game;
-		this.scene = scene;
 
 		this.hovering = false;
 
-		this.zIndex = 3;
+		this.zIndex = Duck.Layers.Rendering.zIndex.button;
 
 		this.listeners = [];
 
@@ -90,12 +77,12 @@ export default class Button extends GameObject<'either'> {
 					y: e.clientY - rect.top,
 				};
 
-				const buttonPos = { x: this.x, y: this.y };
+				const buttonPos = { x: this.position.x, y: this.position.y };
 
 				if (this.scene.currentCamera) {
 					const coords = this.scene.currentCamera.worldToScreen(
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y,
 						this
 					);
 					buttonPos.x = coords.position.x;
@@ -140,12 +127,12 @@ export default class Button extends GameObject<'either'> {
 					y: e.clientY - rect.top,
 				};
 
-				const buttonPos = { x: this.x, y: this.y };
+				const buttonPos = { x: this.position.x, y: this.position.y };
 
 				if (this.scene.currentCamera) {
 					const coords = this.scene.currentCamera.worldToScreen(
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y,
 						this
 					);
 					buttonPos.x = coords.position.x;
@@ -214,7 +201,12 @@ export default class Button extends GameObject<'either'> {
 			switch (this.shape) {
 				case 'rect':
 					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
+					this.game.ctx.fillRect(
+						this.position.x,
+						this.position.y,
+						this.w,
+						this.h
+					);
 					break;
 
 				case 'roundrect':
@@ -222,33 +214,36 @@ export default class Button extends GameObject<'either'> {
 					if (this.h < 2 * this.r) this.r = this.h / 2;
 					this.game.ctx.fillStyle = this.texture.texture as string;
 					this.game.ctx.beginPath();
-					this.game.ctx.moveTo(this.x + this.r, this.y);
+					this.game.ctx.moveTo(
+						this.position.x + this.r,
+						this.position.y
+					);
 					this.game.ctx.arcTo(
-						this.x + this.w,
-						this.y,
-						this.x + this.w,
-						this.y + this.h,
+						this.position.x + this.w,
+						this.position.y,
+						this.position.x + this.w,
+						this.position.y + this.h,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x + this.w,
-						this.y + this.h,
-						this.x,
-						this.y + this.h,
+						this.position.x + this.w,
+						this.position.y + this.h,
+						this.position.x,
+						this.position.y + this.h,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x,
-						this.y + this.h,
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y + this.h,
+						this.position.x,
+						this.position.y,
 						this.r
 					);
 					this.game.ctx.arcTo(
-						this.x,
-						this.y,
-						this.x + this.w,
-						this.y,
+						this.position.x,
+						this.position.y,
+						this.position.x + this.w,
+						this.position.y,
 						this.r
 					);
 					this.game.ctx.closePath();
@@ -258,8 +253,8 @@ export default class Button extends GameObject<'either'> {
 				case 'sprite':
 					this.game.ctx.drawImage(
 						this.texture.texture as HTMLImageElement,
-						this.x,
-						this.y,
+						this.position.x,
+						this.position.y,
 						this.w,
 						this.h
 					);

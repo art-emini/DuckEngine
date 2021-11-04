@@ -18,6 +18,7 @@ export default class Map<
 	}
 > {
 	public readonly id: number;
+	public readonly shape: string;
 	public tileW: number;
 	public tileH: number;
 	public rows: number;
@@ -51,6 +52,7 @@ export default class Map<
 		game: Game
 	) {
 		this.id = randomInt(0, 100000);
+		this.shape = 'map';
 		this.tileW = tileW;
 		this.tileH = tileH;
 		this.rows = rows;
