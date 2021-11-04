@@ -320,6 +320,22 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if window.focus is called on load or not
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				focus?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description Determines if window.blur is called on load or not
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				blur?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if rendering renderable objects is paused if tab is not focused, uses window.onblur and window.onfocus
 				 * @type boolean
 				 * @since 2.0.0
@@ -343,20 +359,22 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Function to call when rendering is paused, rendering pauses when this.stop is called or
 				 * if pauseRenderingOnBlur is true and the window.blur event was fired
-				 * @type (reason: 'windowBlur' | 'gameStop') => void
+				 * @type (reason: 'windowBlur' | 'gameStop' | 'gameConfigBlur') => void
 				 * @since 2.0.0
 				 */
-				onPauseRendering?: (reason: 'windowBlur' | 'gameStop') => void;
+				onPauseRendering?: (
+					reason: 'windowBlur' | 'gameStop' | 'gameConfigBlur'
+				) => void;
 
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Function to call when rendering is resumed/started, rendering resumes/starts when this.start is called or
 				 * if the window.focus event was fired
-				 * @type (reason: 'windowFocus' | 'gameStart') => void
+				 * @type (reason: 'windowFocus' | 'gameStart' | 'gameConfigFocus') => void
 				 * @since 2.0.0
 				 */
 				onResumeRendering?: (
-					reason: 'windowFocus' | 'gameStart'
+					reason: 'windowFocus' | 'gameStart' | 'gameConfigFocus'
 				) => void;
 
 				/**

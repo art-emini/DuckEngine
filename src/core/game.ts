@@ -156,6 +156,20 @@ export default class Game {
 			}
 		};
 
+		if (this.config.focus) {
+			window.focus();
+			if (this.config.onResumeRendering) {
+				this.config.onResumeRendering('gameConfigFocus');
+			}
+		}
+
+		if (this.config.blur) {
+			window.blur();
+			if (this.config.onPauseRendering) {
+				this.config.onPauseRendering('gameConfigBlur');
+			}
+		}
+
 		this.splashScreen =
 			this.config.splashScreen?.img ||
 			'https://i.ibb.co/bdN4CCN/Logo-Splash.png';

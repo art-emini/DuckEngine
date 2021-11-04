@@ -1,4 +1,4 @@
-# v2.0.0 Changelog - 2021-10-28
+# v2.0.0 Changelog - 2021-11-4
 
 ## Added
 
@@ -35,19 +35,20 @@
     - Misc
       - Added CanvasModulate with zIndex of 1 witch fills up the entire canvas with a color
 - Game
-  - Added roundPixels option to config
+  - Config
+    - Added physics object option
+    - Added roundPixels option
+    - Added pauseRenderingOnBlur
+    - Added onPauseRendering
+    - Added onResumeRendering
+    - Added splashScreen object option
   - Added isRendering property
-  - Added pauseRenderingOnBlur to config
-  - Added onPauseRendering to config
-  - Added onResumeRendering to config
-  - Added splashScreen object config to config
   - Added fps property which is the current fps
-  - Added start sequence to start method
-  - Added physics option to config
-    - Start Sequence:
-      - Show splash screen
-      - Preload all assets from all scenes
-      - Create all assets from all scenes
+  - Added "start sequence" to start method
+  - Start Sequence:
+    - Show splash screen
+    - Preload all assets from all scenes
+    - Create all assets from all scenes
 - Scene
   - Added preload and create method
   - Added displayList property
