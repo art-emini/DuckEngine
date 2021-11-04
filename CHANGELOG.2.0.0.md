@@ -22,6 +22,7 @@
   - Added id, zIndex, and visible properties to all renderable objects
   - Added better rendering with depth sorting and only rendering and updating objects that are set to be visible
   - Added ability to preload assets
+  - Added events and EventEmitter
 - New Classes
   - Models
     - Added DisplayList class to manage renderable objects
@@ -42,6 +43,7 @@
     - Added onPauseRendering
     - Added onResumeRendering
     - Added splashScreen object option
+  - Added eventEmitter property
   - Added isRendering property
   - Added fps property which is the current fps
   - Added "start sequence" to start method

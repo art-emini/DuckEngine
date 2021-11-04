@@ -4,6 +4,7 @@ import Scene from './scene';
 import Debug from './debug/debug';
 import startup from '../helper/startup';
 import dprScale from '../helper/dprScale';
+import EventEmitter from './events/eventEmitter';
 
 /**
  * @class Game
@@ -42,6 +43,8 @@ export default class Game {
 
 	public splashScreen: string;
 
+	public eventEmitter: EventEmitter;
+
 	/**
 	 * @constructor Game
 	 * @description Creates a Game instance.
@@ -71,6 +74,8 @@ export default class Game {
 		this.oldTime = 0;
 		this.now = 0;
 		this.fps = 0;
+
+		this.eventEmitter = new EventEmitter();
 
 		// set scale
 		if (this.config.scale) {

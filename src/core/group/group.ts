@@ -23,8 +23,6 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	public game: Game;
 	public readonly name: string;
 
-	protected listeners: Duck.Types.Group.Listener[];
-
 	/**
 	 * @constructor
 	 * @description Creates a Group instance.
@@ -37,8 +35,6 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 		this.name = name;
 		this.stack = defaultItems || [];
 		this.game = game;
-
-		this.listeners = [];
 	}
 
 	/**
@@ -54,10 +50,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 		}
 
 		// listener
-		const foundListener = this.listeners.find((l) => l.type === 'ADD');
-		if (foundListener) {
-			foundListener.func(item);
-		}
+		this.game.eventEmitter.emit('GROUP_ADD', item);
 	}
 
 	/**
@@ -79,10 +72,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 		}
 
 		// listener
-		const foundListener = this.listeners.find((l) => l.type === 'REMOVE');
-		if (foundListener) {
-			foundListener.func(item);
-		}
+		this.game.eventEmitter.emit('GROUP_REMOVE', item);
 	}
 
 	/**
@@ -192,10 +182,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @since 1.0.0-beta
 	 */
 	public on(type: Duck.Types.Group.ListenerType, cb: () => unknown) {
-		this.listeners.push({
-			type: type,
-			func: cb,
-		});
+		this.game.eventEmitter.on(`GROUP_${type}`, cb);
 	}
 
 	/**
@@ -205,15 +192,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @since 1.0.0-beta
 	 */
 	public off(type: Duck.Types.Group.ListenerType) {
-		const foundListener = this.listeners.find((l) => l.type === type);
-
-		if (foundListener) {
-			this.listeners.splice(this.listeners.indexOf(foundListener), 1);
-		} else {
-			new Debug.Error(
-				'Cannot remove event listener from group. Type does not exist.'
-			);
-		}
+		this.game.eventEmitter.off(`GROUP_${type}`);
 	}
 
 	/**

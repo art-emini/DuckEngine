@@ -19,7 +19,6 @@ export default class Button extends GameObject<'either'> {
 	public text: Text;
 
 	public hovering: boolean;
-	protected listeners: Duck.Types.Interactive.Button.Listener[];
 
 	/**
 	 * @constructor
@@ -66,8 +65,6 @@ export default class Button extends GameObject<'either'> {
 
 		this.zIndex = Duck.Layers.Rendering.zIndex.button;
 
-		this.listeners = [];
-
 		if (this.game.canvas) {
 			this.game.canvas.addEventListener('click', (e) => {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -104,17 +101,11 @@ export default class Button extends GameObject<'either'> {
 					) &&
 					this.scene.visible
 				) {
-					const f = this.listeners.find(
-						(a) => a.type.toLowerCase() === 'click'
-					);
-
-					if (f) {
-						f.func({
-							x: mousePos.x,
-							y: mousePos.y,
-							type: 'CLICK',
-						});
-					}
+					this.game.eventEmitter.emit('BUTTON_CLICK', {
+						x: mousePos.x,
+						y: mousePos.y,
+						type: 'BUTTON_CLICK',
+					});
 				}
 			});
 
@@ -154,31 +145,19 @@ export default class Button extends GameObject<'either'> {
 					) &&
 					this.scene.visible
 				) {
-					const f = this.listeners.find(
-						(a) => a.type.toLowerCase() === 'hover'
-					);
-
-					if (f) {
-						f.func({
-							x: mousePos.x,
-							y: mousePos.y,
-							type: 'HOVER',
-						});
-					}
+					this.game.eventEmitter.emit('BUTTON_HOVER', {
+						x: mousePos.x,
+						y: mousePos.y,
+						type: 'BUTTON_HOVER',
+					});
 
 					this.hovering = true;
 				} else if (this.scene.visible) {
-					const f = this.listeners.find(
-						(a) => a.type.toLowerCase() === 'nothover'
-					);
-
-					if (f) {
-						f.func({
-							x: mousePos.x,
-							y: mousePos.y,
-							type: 'NOTHOVER',
-						});
-					}
+					this.game.eventEmitter.emit('BUTTON_NOTHOVER', {
+						x: mousePos.x,
+						y: mousePos.y,
+						type: 'BUTTON_NOTHOVER',
+					});
 
 					this.hovering = false;
 				}
@@ -280,10 +259,7 @@ export default class Button extends GameObject<'either'> {
 		type: Duck.Types.Interactive.Button.ListenerType,
 		func: Duck.Types.Interactive.Button.ListenerFunc
 	) {
-		this.listeners.push({
-			type,
-			func,
-		});
+		this.game.eventEmitter.on(`BUTTON_${type}`, func);
 	}
 
 	/**
@@ -293,21 +269,6 @@ export default class Button extends GameObject<'either'> {
 	 * @since 1.0.0
 	 */
 	public off(type: Duck.Types.Interactive.Button.ListenerType) {
-		const f = this.listeners.find(
-			(l) => l.type.toLowerCase() === type.toLowerCase()
-		);
-
-		if (f) {
-			this.listeners.splice(this.listeners.indexOf(f), 1);
-			if (this.game.config.debug) {
-				new Debug.Log(
-					`Removed event listener of type "${type}" from button.`
-				);
-			}
-		} else {
-			new Debug.Error(
-				`Cannot remove event listener from button. Event Listener of type "${type}" does not exist.`
-			);
-		}
+		this.game.eventEmitter.off(`BUTTON_${type}`);
 	}
 }

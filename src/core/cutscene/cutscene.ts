@@ -25,8 +25,6 @@ export default class Cutscene {
 
 	public running: boolean;
 
-	protected listeners: Duck.Types.Cutscene.OnListener[];
-
 	/**
 	 * @constructor
 	 * @description Creates an instance of a Cutscene.
@@ -54,8 +52,6 @@ export default class Cutscene {
 
 		this.running = false;
 
-		this.listeners = [];
-
 		this.init();
 	}
 
@@ -79,10 +75,9 @@ export default class Cutscene {
 	public start() {
 		this.running = true;
 
-		const cb = this.listeners.find((l) => l.type === 'START');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit(
+			'CUTSCENE_START' as Duck.Types.Cutscene.OnListenerType
+		);
 	}
 
 	/**
@@ -93,10 +88,9 @@ export default class Cutscene {
 	public stop() {
 		this.running = false;
 
-		const cb = this.listeners.find((l) => l.type === 'END');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit(
+			'CUTSCENE_END' as Duck.Types.Cutscene.OnListenerType
+		);
 	}
 
 	/**
@@ -269,10 +263,7 @@ export default class Cutscene {
 			this.stop();
 		}
 
-		const cb = this.listeners.find((l) => l.type === 'NEXT');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit('CUTSCENE_NEXT');
 	}
 
 	/**
@@ -289,17 +280,15 @@ export default class Cutscene {
 	 * @memberof Cutscene
 	 * @description Adds an event listener to Cutscene
 	 * @param {Duck.Types.Cutscene.OnListenerType} type Listener type
-	 * @param {Function} cb Callback function
+	 * @param {(...args: any) => void} cb Callback function
 	 * @since 1.0.0-beta
 	 */
-	public on(type: Duck.Types.Cutscene.OnListenerType, cb: Function) {
-		this.listeners.push({
-			type: type,
-			func: cb,
-		});
-		if (this.game.config.debug) {
-			new Debug.Log('Added Event Listener to cutscene.');
-		}
+	public on(
+		type: Duck.Types.Cutscene.OnListenerType,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		cb: (...args: any) => void
+	) {
+		this.game.eventEmitter.on(`CUTSCENE_${type}`, cb);
 	}
 
 	/**
@@ -309,13 +298,6 @@ export default class Cutscene {
 	 * @since 1.0.0-beta
 	 */
 	public off(type: Duck.Types.Cutscene.OnListenerType) {
-		const found = this.listeners.find((l) => l.type === type);
-		if (found) {
-			this.listeners.splice(this.listeners.indexOf(found), 1);
-		} else {
-			new Debug.Error(
-				'Cannot Remove Cutscene listener that does not exist.'
-			);
-		}
+		this.game.eventEmitter.off(`CUTSCENE_${type}`);
 	}
 }

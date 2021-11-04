@@ -11,7 +11,6 @@ import Game from '../game';
 export default class Input {
 	public game: Game;
 	protected controller: Duck.Types.Input.Controller;
-	protected listeners: Duck.Types.Input.Listener[];
 
 	/**
 	 * @constructor
@@ -32,8 +31,6 @@ export default class Input {
 			ArrowRight: false,
 			spacebar: false,
 		};
-
-		this.listeners = [];
 
 		this.listener();
 	}
@@ -77,11 +74,7 @@ export default class Input {
 		cb: (e: KeyboardEvent) => void
 	) {
 		document.addEventListener(type, cb);
-		this.listeners.push({
-			fn: cb,
-			description: description,
-			type: type,
-		});
+		this.game.eventEmitter.on(`INPUT_${description.toUpperCase()}`, cb);
 		if (this.game.config.debug) {
 			new Debug.Log('Added event listener to Input.');
 		}
@@ -94,19 +87,7 @@ export default class Input {
 	 * @since 1.0.0-beta
 	 */
 	public off(description: string) {
-		const foundListener = this.listeners.find(
-			(_listener) => _listener.description === description
-		);
-		if (foundListener) {
-			document.removeEventListener(
-				foundListener.type,
-				foundListener.fn,
-				true
-			);
-			if (this.game.config.debug) {
-				new Debug.Log('Removed event listener from Input.');
-			}
-		}
+		this.game.eventEmitter.off(`INPUT_${description.toUpperCase()}`);
 	}
 
 	/**
