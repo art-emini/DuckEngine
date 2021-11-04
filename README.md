@@ -16,31 +16,31 @@
 
 ## Features
 
-1. Physics
-2. Sprites & SpriteSheets
-3. Many Game objects
-4. Group Management
-5. Keyboard, and Mouse input
-6. Scenes
-7. Cameras
-8. Multi-Camera Switching
-9. Mobile Scaling / DevicePixel ratio scaling
-10. Smart scaling
-11. Storage
-12. Tilemaps
-13. Particles, ParticleEmitter and Containers
-14. Effects with Presets
-15. Sound player with sound sprites
-16. Text and Button UIs
-17. Scene Unique Stack / Entity Manager
-18. Game Stack / Global Scene Manager
-19. Animations
-20. Cutscenes
-21. Custom loader to load from URL or file path
-22. [Docs](https://ksplatdev.github.io/DuckEngine/)
-23. Written in typescript
-24. Types are included
-25. And way more
+- AABB (Axis-Aligned Bounding Box) Physics Engine
+- Multiple Scenes
+- Performant
+- Sprites & Spritesheets
+- Many GameObjects
+- Raycasts
+- Multiple Cameras with Effects
+- Animations & Cutscenes
+- Hitboxes and Colliders
+- Keyboard, Mouse, and Touch Input
+- DPR / Mobile Scaling
+- Particle System
+- Effects
+- Button and Text UI
+- Groups
+- Tilemaps
+- Fast & Performant
+- Small Package
+- Lighting
+- Preloader
+- Textures
+- Made in Typescript
+- Typedefs
+- [Docs](#docs)
+- A lot more...
 
 ## Download
 
@@ -100,6 +100,39 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 1. Knowledge of TypeScript, Git, and HTML Canvas.
 2. Reading and agreeing to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
 3. Basic knowledge of how DuckEngine works.
+
+### How to contribute
+
+1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
+2. Fork the repository and create a new branch following the [branch guidelines](branch_guidelines.md).
+3. Clone the fork to your device.
+4. CD (change directories) into the cloned directory.
+5. Run `yarn upgrade`.
+6. Run `yarn run build` or `ctrl + shift + b` for vscode users.
+7. Make your changes.
+8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
+9. Create a pull request.
+10. Wait for it to be reviewed and revised and possibly merged.
+
+### Dev Scripts
+
+1. `yarn run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
+2. `yarn run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
+3. `yarn run build:docs` - Uses TypeDoc to build docs.
+4. `yarn run webpack` - Bundles files in lib directory.
+5. `yarn run minify` - Uses uglifyjs to minify bundled file.
+6. `yarn run format` - Uses Prettier to format files.
+7. `yarn run format:watch` - Watches for changes and formats once changes are saved.
+8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
+9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
+10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
+11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
+12. `yarn run serve` - Serves the docs on :8080.
+
+### Branches
+
+1. main - main branch
+2. staging - stage changes to this branch
 
 ### File Structure
 
@@ -236,39 +269,6 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 2. lib - Javascript files, compiled from src
 3. dist - Javascript & type declaration files, bundled with webpack from lib
 4. global - Global Assets
-
-### How to contribute
-
-1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
-2. Fork the repository and create a new branch following the [branch guidelines](branch_guidelines.md).
-3. Clone the fork to your device.
-4. CD (change directories) into the cloned directory.
-5. Run `yarn upgrade`.
-6. Run `yarn run build` or `ctrl + shift + b` for vscode users.
-7. Make your changes.
-8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
-9. Create a pull request.
-10. Wait for it to be reviewed and revised and possibly merged.
-
-### Dev Scripts
-
-1. `yarn run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
-2. `yarn run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
-3. `yarn run build:docs` - Uses TypeDoc to build docs.
-4. `yarn run webpack` - Bundles files in lib directory.
-5. `yarn run minify` - Uses uglifyjs to minify bundled file.
-6. `yarn run format` - Uses Prettier to format files.
-7. `yarn run format:watch` - Watches for changes and formats once changes are saved.
-8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
-9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
-10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
-11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
-12. `yarn run serve` - Serves the docs on :8080.
-
-### Branches
-
-1. main - main branch
-2. staging - stage changes to this branch
 
 ## Versions
 

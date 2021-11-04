@@ -3,7 +3,6 @@ import randomFloat from '../../math/randomFloat';
 import randomInt from '../../math/randomInt';
 import Game from '../../game';
 import Particle from './particle';
-import ParticleContainer from './particleContainer';
 import Scene from '../../scene';
 
 /**
@@ -13,6 +12,7 @@ import Scene from '../../scene';
  * @since 1.0.0-beta
  */
 export default class ParticleEmitter {
+	public readonly id: number;
 	protected particle: Particle;
 	public rangeX: Duck.Types.ParticleEmitter.Range;
 	public rangeY: Duck.Types.ParticleEmitter.Range;
@@ -22,11 +22,12 @@ export default class ParticleEmitter {
 	public scene: Scene;
 
 	public emitting: boolean;
+	public enabled: boolean;
 
 	protected floatRangeX: Duck.Types.ParticleEmitter.Range;
 	protected floatRangeY: Duck.Types.ParticleEmitter.Range;
 
-	protected container: ParticleContainer | undefined;
+	public offloaders: Duck.Types.ParticleEmitter.Offloaders;
 
 	/**
 	 * @constructor
@@ -47,6 +48,7 @@ export default class ParticleEmitter {
 		game: Game,
 		scene: Scene
 	) {
+		this.id = particle.id;
 		this.particle = particle;
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
@@ -56,11 +58,22 @@ export default class ParticleEmitter {
 		this.scene = scene;
 
 		this.emitting = false;
+		this.enabled = false;
 
 		this.floatRangeX = [0, 0];
 		this.floatRangeY = [0, 0];
 
-		this.container;
+		this.offloaders = {
+			maxAge: () => {
+				return;
+			},
+			maxAmount: () => {
+				return;
+			},
+			maxBounds: () => {
+				return;
+			},
+		};
 
 		// create particles
 		this.create();
@@ -82,6 +95,8 @@ export default class ParticleEmitter {
 			this.game,
 			this.scene
 		);
+
+		obj.visible = true;
 
 		obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);
 		obj.position.y = randomInt(this.rangeY[0], this.rangeY[1]);
@@ -110,6 +125,7 @@ export default class ParticleEmitter {
 	 */
 	public emit() {
 		this.emitting = true;
+		this.enabled = true;
 	}
 
 	/**
@@ -119,6 +135,7 @@ export default class ParticleEmitter {
 	 */
 	public stopEmit() {
 		this.emitting = false;
+		this.enabled = false;
 	}
 
 	/**
@@ -184,36 +201,79 @@ export default class ParticleEmitter {
 				(renderableObject) => renderableObject instanceof Particle
 			) as Particle[]
 		).pop();
+
+		// remove from physics list
+		(
+			this.scene.displayList.list.filter(
+				(obj) => obj instanceof Particle
+			) as Particle[]
+		).pop();
 	}
 
 	/**
 	 * @memberof ParticleEmitter
 	 * @description Offloads particles based on position
-	 * @param {number} offloadY The max y position of when a particle is offloaded
-	 * @param {number} [offloadX] The max x position of when a particle is offloaded, optional
-	 * @since 1.0.0
+	 * @param {number} bounds The Bounds of the particles, a BoundsLike object that causes a particle to be offloaded
+	 * @since 2.0.0
 	 */
-	public offload(offloadY: number, offloadX?: number) {
+	public offloadBounds(bounds: Duck.Types.Math.BoundsLike) {
 		this.list.forEach((particle, index) => {
-			if (particle.position.y < offloadY) {
+			if (particle.position.x < bounds.x) {
 				this.list.splice(index, 1);
 			}
-			if (offloadX) {
-				if (particle.position.x > offloadX) {
-					this.list.splice(index, 1);
-				}
+
+			if (particle.position.y < bounds.y) {
+				this.list.splice(index, 1);
+			}
+
+			if (particle.position.x > bounds.w) {
+				this.list.splice(index, 1);
+			}
+
+			if (particle.position.y > bounds.w) {
+				this.list.splice(index, 1);
 			}
 		});
 
 		// remove from displayList
 		this.scene.displayList.each((renderableObject, index) => {
 			if (renderableObject instanceof Particle) {
-				if (renderableObject.position.y < offloadY) {
-					this.scene.displayList.splice(index, 1);
+				if (renderableObject.position.x < bounds.x) {
+					this.list.splice(index, 1);
 				}
-				if (offloadX) {
-					if (renderableObject.position.x > offloadX) {
-						this.scene.displayList.splice(index, 1);
+
+				if (renderableObject.position.y < bounds.y) {
+					this.list.splice(index, 1);
+				}
+
+				if (renderableObject.position.x > bounds.w) {
+					this.list.splice(index, 1);
+				}
+
+				if (renderableObject.position.y > bounds.w) {
+					this.list.splice(index, 1);
+				}
+			}
+		});
+
+		// remove from physicsList
+		this.scene.physicsList.each((obj, index) => {
+			if (obj instanceof Particle) {
+				if (obj instanceof Particle) {
+					if (obj.position.x < bounds.x) {
+						this.list.splice(index, 1);
+					}
+
+					if (obj.position.y < bounds.y) {
+						this.list.splice(index, 1);
+					}
+
+					if (obj.position.x > bounds.w) {
+						this.list.splice(index, 1);
+					}
+
+					if (obj.position.y > bounds.w) {
+						this.list.splice(index, 1);
 					}
 				}
 			}
@@ -238,6 +298,15 @@ export default class ParticleEmitter {
 			if (renderableObject instanceof Particle) {
 				if (renderableObject.age >= ageInSeconds) {
 					this.scene.displayList.splice(index, 1);
+				}
+			}
+		});
+
+		// remove from physicsList
+		this.scene.physicsList.each((obj, index) => {
+			if (obj instanceof Particle) {
+				if (obj.age >= ageInSeconds) {
+					this.scene.physicsList.splice(index, 1);
 				}
 			}
 		});
@@ -332,26 +401,5 @@ export default class ParticleEmitter {
 		this.list.forEach((particle) => {
 			particle.setImagePath(imagePath);
 		});
-	}
-
-	/**
-	 * @memberof ParticleEmitter
-	 * @description Adds a {@link ParticleContainer}
-	 * @param {number} x X bounds of ParticleContainer
-	 * @param {number} y Y bounds of ParticleContainer
-	 * @param {number} w Width of ParticleContainer
-	 * @param {number} h Height of ParticleContainer
-	 * @param {Duck.Types.ParticleContainer.Physics} physics Physics configuration for ParticleContainer
-	 * @since 1.2.0
-	 */
-	public addContainer(
-		x: number,
-		y: number,
-		w: number,
-		h: number,
-		physics: Duck.Types.ParticleContainer.Physics
-	) {
-		this.container = new ParticleContainer(x, y, w, h, physics, this.game);
-		return this.container;
 	}
 }

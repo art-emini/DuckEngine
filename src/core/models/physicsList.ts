@@ -1,6 +1,5 @@
 import { Duck } from '../..';
 import Debug from '../debug/debug';
-import PhysicsBody from '../physics/physicsBody';
 
 /**
  * @class PhysicsList
@@ -9,25 +8,25 @@ import PhysicsBody from '../physics/physicsBody';
  * @since 2.0.0
  */
 export default class PhysicsList {
-	public list: PhysicsBody<Duck.Types.Texture.Type>[] = [];
+	public list: Duck.Types.PhysicsProcessMember[] = [];
 
 	/**
 	 * @memberof PhysicsList
 	 * @description Adds a physicsObject to the list
-	 * @param {PhysicsBody<Duck.Types.Texture.Type>} physicsObject A physicsObject
+	 * @param {Duck.Types.PhysicsProcessMember} physicsObject A physicsObject
 	 * @since 2.0.0
 	 */
-	public add(physicsObject: PhysicsBody<Duck.Types.Texture.Type>) {
+	public add(physicsObject: Duck.Types.PhysicsProcessMember) {
 		this.list.push(physicsObject);
 	}
 
 	/**
 	 * @memberof PhysicsList
 	 * @description Removes a physicsObject from the list
-	 * @param {PhysicsBody<Duck.Types.Texture.Type>} physicsObject A physicsObject
+	 * @param {Duck.Types.PhysicsProcessMember} physicsObject A physicsObject
 	 * @since 2.0.0
 	 */
-	public remove(physicsObject: PhysicsBody<Duck.Types.Texture.Type>) {
+	public remove(physicsObject: Duck.Types.PhysicsProcessMember) {
 		const f = this.list.find((r) => r.id === physicsObject.id);
 		if (f) {
 			this.list.splice(
@@ -48,14 +47,11 @@ export default class PhysicsList {
 	 * @memberof PhysicsList
 	 * @template t
 	 * @description Loops through each physicsObject and runs a callback with it passed
-	 * @param {(physicsObject: Duck.Types.Renderable, index: number) => t} cb Callback
+	 * @param {(physicsObject: Duck.Types.PhysicsProcessMember, index: number) => t} cb Callback
 	 * @since 2.0.0
 	 */
 	public each<t = void>(
-		cb: (
-			renderableObject: PhysicsBody<Duck.Types.Texture.Type>,
-			index: number
-		) => t
+		cb: (physicsBody: Duck.Types.PhysicsProcessMember, index: number) => t
 	) {
 		this.list.forEach(cb.bind(this));
 	}
@@ -89,10 +85,10 @@ export default class PhysicsList {
 	/**
 	 * @memberof PhysicsList
 	 * @description Overwrites the list items with passed parameter
-	 * @param {PhysicsBody<Duck.Types.Texture.Type>} listItems Renderable objects to overwrite with
+	 * @param {Duck.Types.PhysicsProcessMember[]} listItems Renderable objects to overwrite with
 	 * @since 2.0.0
 	 */
-	public set listItems(listItems: PhysicsBody<Duck.Types.Texture.Type>[]) {
+	public set listItems(listItems: Duck.Types.PhysicsProcessMember[]) {
 		this.list = listItems;
 	}
 }

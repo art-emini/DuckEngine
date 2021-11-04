@@ -25,7 +25,6 @@ import DuckStorageClass from './core/storage/storage';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
 import ButtonClass from './core/gameobjects/interactive/button';
-import ParticleContainerClass from './core/gameobjects/particles/particleContainer';
 import EffectClass from './core/effect/effect';
 import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
@@ -89,7 +88,6 @@ export namespace Duck {
 			export namespace Particles {
 				export const Particle = ParticleClass;
 				export const ParticleEmitter = ParticleEmitterClass;
-				export const ParticleContainer = ParticleContainerClass;
 			}
 			export namespace Interactive {
 				export const Button = ButtonClass;
@@ -181,7 +179,6 @@ export namespace Duck {
 			export namespace Particles {
 				export type Particle = ParticleClass;
 				export type ParticleEmitter = ParticleEmitterClass;
-				export type ParticleContainer = ParticleContainerClass;
 			}
 			export namespace Interactive {
 				export type Button = ButtonClass;
@@ -286,6 +283,10 @@ export namespace Duck {
 			| HitboxClass
 			| Duck.TypeClasses.Effects.Effect
 			| Duck.TypeClasses.Maps.TileMap;
+
+		export type PhysicsProcessMember =
+			PhysicsBodyClass<Duck.Types.Texture.Type>;
+
 		export namespace Game {
 			export interface Config {
 				/**
@@ -571,6 +572,11 @@ export namespace Duck {
 
 		export namespace ParticleEmitter {
 			export type Range = Helper.FixedLengthArray<[number, number]>;
+			export interface Offloaders {
+				maxAmount: () => void;
+				maxAge: () => void;
+				maxBounds: () => void;
+			}
 		}
 
 		export namespace Cutscene {
@@ -743,6 +749,11 @@ export namespace Duck {
 			export interface Vector2Like {
 				x: number;
 				y: number;
+			}
+
+			export interface Vector2LikeOptional {
+				x?: number;
+				y?: number;
 			}
 
 			export interface BoundsLike extends Vector2Like {

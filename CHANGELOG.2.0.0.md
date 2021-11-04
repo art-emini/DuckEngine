@@ -87,6 +87,7 @@
   - Added Duck.TypeClasses which holds all of the classes as types
   - Added Duck.Classes which holds all of the classes as constants
   - Added Duck.Types which holds all of the types needed by classes
+  - Added Duck.Types.Math which holds all math related types such as Vector2Like, BoundsLike, and Vector2LikeOptional
   - Added Loader and Texture namespaces to Duck.Types
   - Added Duck.Layers
 
@@ -119,6 +120,8 @@
     - Reworked how colliders work
 - StaticLight
   - Made class extend GameObject class
+- ParticleEmitter
+  - Renamed offload to offloadBounds which takes a Vector2LikeOptional
 - Interactive
   - Button and Text now extend the GameObject class
   - Button default zIndex is set to 4
@@ -166,6 +169,9 @@
   - Removed x and y props, now is position vector2
 - ParticleEmitter
   - Removed draw method
+  - Removed offload method as it has been renamed and changed to offloadBounds
+- Removed Classes
+  - ParticleContainer
 
 ## Fixed
 

@@ -69,6 +69,7 @@ export default class Particle extends GameObject<'either'> {
 		this.floatVelocity = Vector2.ZERO;
 
 		this.zIndex = Duck.Layers.Rendering.zIndex.particle;
+		this.visible = false;
 
 		// age
 
@@ -185,7 +186,9 @@ export default class Particle extends GameObject<'either'> {
 
 	/**
 	 * @memberof Particle
+	 *
 	 * *Modified from gameobject*
+	 *
 	 * @description Updates the gameobject's position by the velocity. Sets velocity to 0 on every tick.
 	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
 	 * @since 2.0.0
