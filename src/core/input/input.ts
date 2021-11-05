@@ -73,12 +73,7 @@ export default class Input {
 		description: string,
 		cb: (e: KeyboardEvent) => void
 	) {
-		document.addEventListener(type, (e) => {
-			this.game.eventEmitter.emit(
-				`INPUT_${description.toUpperCase()}`,
-				e
-			);
-		});
+		document.addEventListener(type, cb);
 		this.game.eventEmitter.on(`INPUT_${description.toUpperCase()}`, cb);
 		if (this.game.config.debug) {
 			new Debug.Log('Added event listener to Input.');
