@@ -6,6 +6,7 @@ import rectToRectIntersect from '../../physics/rectToRectIntersect';
 import Scene from '../../scene';
 import Text from './text';
 import Texture from '../../models/texture';
+import EVENTS from '../../events/events';
 
 /**
  * @class Button
@@ -101,10 +102,10 @@ export default class Button extends GameObject<'either'> {
 					) &&
 					this.scene.visible
 				) {
-					this.game.eventEmitter.emit('BUTTON_CLICK', {
+					this.game.eventEmitter.emit(EVENTS.BUTTON.CLICK, {
 						x: mousePos.x,
 						y: mousePos.y,
-						type: 'BUTTON_CLICK',
+						type: EVENTS.BUTTON.CLICK,
 					});
 				}
 			});
@@ -145,18 +146,18 @@ export default class Button extends GameObject<'either'> {
 					) &&
 					this.scene.visible
 				) {
-					this.game.eventEmitter.emit('BUTTON_HOVER', {
+					this.game.eventEmitter.emit(EVENTS.BUTTON.HOVER, {
 						x: mousePos.x,
 						y: mousePos.y,
-						type: 'BUTTON_HOVER',
+						type: EVENTS.BUTTON.HOVER,
 					});
 
 					this.hovering = true;
 				} else if (this.scene.visible) {
-					this.game.eventEmitter.emit('BUTTON_NOTHOVER', {
+					this.game.eventEmitter.emit(EVENTS.BUTTON.NOTHOVER, {
 						x: mousePos.x,
 						y: mousePos.y,
-						type: 'BUTTON_NOTHOVER',
+						type: EVENTS.BUTTON.NOTHOVER,
 					});
 
 					this.hovering = false;

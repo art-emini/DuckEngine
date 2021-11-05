@@ -24,7 +24,7 @@ export default class Render {
 
 	/**
 	 * @memberof Render
-	 * @description Updates everything in method, gets called **first** in the Game -> Scene loop
+	 * @description Updates everything in method, gets called **second** in the Game loop
 	 * @param {number} deltaTime Time since the last frame
 	 * @since 1.0.0-beta
 	 */

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
-import Debug from '../debug/debug';
+import EVENTS from '../events/events';
 import Game from '../game';
 
 /**
@@ -75,9 +75,7 @@ export default class Cutscene {
 	public start() {
 		this.running = true;
 
-		this.game.eventEmitter.emit(
-			'CUTSCENE_START' as Duck.Types.Cutscene.OnListenerType
-		);
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.START);
 	}
 
 	/**
@@ -88,9 +86,7 @@ export default class Cutscene {
 	public stop() {
 		this.running = false;
 
-		this.game.eventEmitter.emit(
-			'CUTSCENE_END' as Duck.Types.Cutscene.OnListenerType
-		);
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.END);
 	}
 
 	/**
@@ -263,7 +259,7 @@ export default class Cutscene {
 			this.stop();
 		}
 
-		this.game.eventEmitter.emit('CUTSCENE_NEXT');
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.NEXT);
 	}
 
 	/**

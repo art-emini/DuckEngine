@@ -816,9 +816,9 @@ export default class Scene extends Render {
 
 	/**
 	 * @memberof Scene
-	 * @description Calls all visible gameobjects' _update method, calls physics server __tick method if game.config.physics is true
+	 * @description Calls physics server __tick method if game.config.physics.enabled is true
 	 *
-	 * *Do not call manually, this is called in physicsServer.__tick()*
+	 * *Do not call manually, this is called in GAME LOOP*
 	 *
 	 * @since 2.0.0
 	 */

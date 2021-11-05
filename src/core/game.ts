@@ -5,6 +5,7 @@ import Debug from './debug/debug';
 import startup from '../helper/startup';
 import dprScale from '../helper/dprScale';
 import EventEmitter from './events/eventEmitter';
+import EVENTS from './events/events';
 
 /**
  * @class Game
@@ -144,6 +145,7 @@ export default class Game {
 				!this.config.debugRendering
 			) {
 				this.isRendering = true;
+				this.eventEmitter.emit(EVENTS.GAME.FOCUS);
 				if (this.config.onResumeRendering) {
 					this.config.onResumeRendering('windowFocus');
 				}
@@ -155,6 +157,7 @@ export default class Game {
 				!this.config.debugRendering
 			) {
 				this.isRendering = false;
+				this.eventEmitter.emit(EVENTS.GAME.BLUR);
 				if (this.config.onPauseRendering) {
 					this.config.onPauseRendering('windowBlur');
 				}
@@ -212,6 +215,7 @@ export default class Game {
 			add: (scenes: Scene[]) => {
 				scenes.forEach((scene) => {
 					this.stack.scenes.push(scene);
+					this.eventEmitter.emit(EVENTS.GAME.SCENE_ADD, scene);
 				});
 			},
 
@@ -230,6 +234,7 @@ export default class Game {
 						this.stack.scenes.indexOf(scene),
 						1
 					);
+					this.eventEmitter.emit(EVENTS.GAME.SCENE_REMOVE, scene);
 				}
 			},
 		};
@@ -241,7 +246,10 @@ export default class Game {
 	 * @since 1.0.0-beta
 	 */
 	public async start() {
+		this.eventEmitter.emit(EVENTS.GAME.LOAD_BEGIN);
+
 		// show loading splash screen
+		this.eventEmitter.emit(EVENTS.GAME.DRAW_SPLASH);
 		await this.drawSplashScreen();
 
 		// load scenes
@@ -251,6 +259,8 @@ export default class Game {
 
 			// create assets
 			scene.create();
+
+			this.eventEmitter.emit(EVENTS.GAME.LOAD_SCENE);
 		}
 
 		// set states
@@ -269,6 +279,8 @@ export default class Game {
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
 		}
+
+		this.eventEmitter.emit(EVENTS.GAME.LOAD_FINISH);
 	}
 
 	/**
@@ -290,6 +302,14 @@ export default class Game {
 
 			if (this.config.debug) {
 				new Debug.Log('Stopped animation frame.');
+			}
+
+			this.eventEmitter.emit(EVENTS.GAME.STOP);
+		} else {
+			if (this.config.debug) {
+				new Debug.Error(
+					'Cannot stop animation frame. You must start the game loop first.'
+				);
 			}
 		}
 	}
@@ -313,8 +333,8 @@ export default class Game {
 						scene.currentCamera.begin();
 					}
 
-					scene.update(this.deltaTime);
 					scene.__tick();
+					scene.update(this.deltaTime);
 
 					// displayList
 					const depthSorted = scene.displayList.depthSort();
@@ -368,6 +388,7 @@ export default class Game {
 	public clearFrame() {
 		if (this.canvas && this.ctx) {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			this.eventEmitter.emit(EVENTS.GAME.CLEAR_FRAME);
 		} else {
 			new Debug.Error('Canvas is undefined');
 		}
@@ -387,6 +408,8 @@ export default class Game {
 			if (scale.height) {
 				this.canvas.height = scale.height;
 			}
+
+			this.eventEmitter.emit(EVENTS.GAME.SET_SCALE, scale);
 		} else {
 			new Debug.Error('Cannot setScale to a canvas of undefined.');
 		}
@@ -400,6 +423,8 @@ export default class Game {
 	public setBackground(background: string) {
 		if (this.canvas) {
 			this.canvas.style.background = background;
+
+			this.eventEmitter.emit(EVENTS.GAME.SET_BACKGROUND, background);
 		} else {
 			new Debug.Error(
 				'Cannot set background of undefined. Canvas is undefined.'
@@ -422,6 +447,8 @@ export default class Game {
 				f.visible = false;
 				f2.visible = true;
 				f2.onChange();
+
+				this.eventEmitter.emit(EVENTS.GAME.SWITCH_SCENE);
 			} else {
 				new Debug.Error(
 					`Cannot switch to scene with scene key "${key2}. Scene not found."`
@@ -444,6 +471,8 @@ export default class Game {
 		const f = this.stack.scenes.find((_scene) => _scene.key === key);
 		if (f) {
 			f.visible = true;
+
+			this.eventEmitter.emit(EVENTS.GAME.SHOW_SCENE);
 		} else {
 			new Debug.Error(
 				`Cannot switch to scene with key "${key}. Scene not found."`
@@ -465,6 +494,8 @@ export default class Game {
 					if (this.canvas) {
 						this.scaleToWindow();
 					}
+
+					this.eventEmitter.emit(EVENTS.GAME.FULLSCREEN);
 				})
 				.catch(
 					() =>
@@ -505,6 +536,8 @@ export default class Game {
 					if (this.canvas) {
 						this.resetScale();
 					}
+
+					this.eventEmitter.emit(EVENTS.GAME.UNFULLSCREEN);
 				})
 				.catch((e) => new Debug.Error(e));
 		}
@@ -518,6 +551,7 @@ export default class Game {
 	public lockPointer() {
 		if (this.canvas) {
 			this.canvas.requestPointerLock();
+			this.eventEmitter.emit(EVENTS.GAME.LOCK_POINTER);
 		}
 	}
 
@@ -529,6 +563,7 @@ export default class Game {
 	public unlockPointer() {
 		if (document.pointerLockElement) {
 			document.exitPointerLock();
+			this.eventEmitter.emit(EVENTS.GAME.UNLOCK_POINTER);
 		}
 	}
 
@@ -586,6 +621,11 @@ export default class Game {
 					`Scaled with devicePixelRatio of ${window.devicePixelRatio} while fullscreen.`
 				);
 			}
+
+			this.eventEmitter.emit(EVENTS.GAME.SET_SCALE, {
+				w: window.innerWidth,
+				h: window.innerHeight,
+			});
 		}
 	}
 }

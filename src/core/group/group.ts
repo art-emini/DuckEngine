@@ -10,6 +10,7 @@ import Sprite from '../gameobjects/sprite';
 import Text from '../gameobjects/interactive/text';
 import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
+import EVENTS from '../events/events';
 
 /**
  * @class Group
@@ -50,7 +51,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 		}
 
 		// listener
-		this.game.eventEmitter.emit('GROUP_ADD', item);
+		this.game.eventEmitter.emit(EVENTS.GROUP.ADD, item);
 	}
 
 	/**
@@ -72,7 +73,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 		}
 
 		// listener
-		this.game.eventEmitter.emit('GROUP_REMOVE', item);
+		this.game.eventEmitter.emit(EVENTS.GROUP.REMOVE, item);
 	}
 
 	/**
