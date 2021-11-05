@@ -42,6 +42,23 @@
 - [Docs](#docs)
 - A lot more...
 
+## Performance & Compatibility
+
+### Rankings
+
+1. Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave
+2. Safari
+3. Firefox
+
+### Recommendation
+
+- Google Chrome or any other Chromium based browser
+
+### Browser Requirements
+
+1. Browser supports ES6 (EcmaScript2015)
+2. Browser supports Canvas APIs
+
 ## Download
 
 ### Github

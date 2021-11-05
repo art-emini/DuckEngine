@@ -92,7 +92,12 @@ export default class MainScene extends DuckEngine.Scene {
 		}
 
 		// offload particles
-		this.myParticleEmitter.offload(-100, 600);
+		this.myParticleEmitter.offloadBounds({
+			x: 0,
+			y: 0,
+			w: this.game.canvas.width,
+			h: this.game.canvas.height,
+		});
 		this.myParticleEmitter.offloadMaxAge(10);
 		this.myParticleEmitter.offloadMaxAmount(100);
 	}
