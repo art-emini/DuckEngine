@@ -19,6 +19,7 @@ import StaticLight from '../lights/staticLight';
 import Button from '../gameobjects/interactive/button';
 import Text from '../gameobjects/interactive/text';
 import Particle from '../gameobjects/particles/particle';
+import GameObject from '../gameobjects/gameObject';
 
 /**
  * @class Camera
@@ -590,10 +591,16 @@ export default class Camera {
 
 		for (const culledObject of culledObjects) {
 			culledObject.visible = true;
+			if (culledObject instanceof GameObject) {
+				culledObject.enabled = true;
+			}
 		}
 
 		for (const nonCulledObject of nonCulledObjects) {
 			nonCulledObject.visible = false;
+			if (nonCulledObject instanceof GameObject) {
+				nonCulledObject.enabled = false;
+			}
 		}
 	}
 

@@ -40,7 +40,7 @@ export default class GameObject<
 	/**
 	 * @memberof GameObject
 	 * @description Determines the depth or zIndex of a GameObject
-	 * @type boolean
+	 * @type number
 	 * @since 2.0.0
 	 */
 	public zIndex: number;
