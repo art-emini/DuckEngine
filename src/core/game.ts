@@ -6,6 +6,8 @@ import startup from '../helper/startup';
 import dprScale from '../helper/dprScale';
 import EventEmitter from './events/eventEmitter';
 import EVENTS from './events/events';
+import detectBrowser from '../utils/detectBrowser';
+import smoothOut from '../utils/smoothArray';
 
 /**
  * @class Game
@@ -24,7 +26,9 @@ export default class Game {
 
 	public gameStorage: DuckStorage | undefined;
 
+	public deltaTimeArray: number[];
 	public deltaTime: number;
+	public smoothDeltaTime: number;
 	protected oldTime: number;
 	protected now: number;
 	public fps: number;
@@ -46,6 +50,8 @@ export default class Game {
 
 	public eventEmitter: EventEmitter;
 
+	public browser: string;
+
 	/**
 	 * @constructor Game
 	 * @description Creates a Game instance.
@@ -56,6 +62,10 @@ export default class Game {
 		console.log(startup);
 
 		this.config = config;
+
+		if (this.config.canvas === null) {
+			this.config.canvas = Duck.AutoCanvas();
+		}
 
 		if (!this.config.canvas) {
 			new Debug.Error(
@@ -71,7 +81,9 @@ export default class Game {
 			this.ctx = this.config.canvas.ctx;
 		}
 
+		this.deltaTimeArray = [];
 		this.deltaTime = 0;
+		this.smoothDeltaTime = 0;
 		this.oldTime = 0;
 		this.now = 0;
 		this.fps = 0;
@@ -201,6 +213,9 @@ export default class Game {
 			}
 		}
 
+		// browser
+		this.browser = detectBrowser() as string;
+
 		// animation frame
 		this.animationFrame;
 
@@ -325,6 +340,14 @@ export default class Game {
 		this.now = performance.now();
 		this.deltaTime = (this.now - this.oldTime) / 1000;
 		this.fps = 1 / this.deltaTime;
+
+		if (this.deltaTimeArray.length >= 100) {
+			this.deltaTimeArray.shift();
+		}
+		this.deltaTimeArray.push(this.deltaTime);
+		this.smoothDeltaTime = Number(
+			smoothOut(this.deltaTimeArray, 1).toPrecision(1)
+		);
 
 		if (this.isRendering) {
 			self.stack.scenes.forEach((scene) => {

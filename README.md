@@ -48,7 +48,7 @@
 
 1. Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave
 2. Safari
-3. Firefox
+3. Firefox | [Bugs](#firefox-bugs)
 
 ### Recommendation
 
@@ -58,6 +58,12 @@
 
 1. Browser supports ES6 (EcmaScript2015)
 2. Browser supports Canvas APIs
+
+### Browser Bugs
+
+#### Firefox Bugs
+
+- More stuttering and garbage collection calls occur more often than Safari and Chromium Browsers (Not really noticeable)
 
 ## Download
 

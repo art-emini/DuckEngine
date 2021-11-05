@@ -46,6 +46,8 @@
   - Added eventEmitter property
   - Added isRendering property
   - Added fps property which is the current fps
+  - Added smoothDeltaTime property which is the smoothed out version of deltaTime
+  - Added browser property which is the user's browser
   - Added "start sequence" to start method
   - Start Sequence:
     - Show splash screen
@@ -97,13 +99,17 @@
 ## Changed
 
 - GameObjects
+  - Extends PhysicsBody class
+  - Moved most methods and properties to PhysicsBody
   - Renamed draw method to _draw which is a public method, but should *not* be called manually
   - Collider should not be updated manually, automatically updated in scene.physicsServer
-  - Moved most methods and properties to PhysicsBody
+  - Changed how delta time is applied to velocity
+  - Changed velocity value to be in pixels per second
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created
   - All private properties and methods in all classes are either public or protected
+  - All PhysicsBodies now use Game.smoothDeltaTime instead of Game.deltaTime
 - Game
   - Improved AutoCanvas
   - Typescript: canvas and ctx properties are never undefined

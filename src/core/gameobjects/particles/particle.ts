@@ -177,11 +177,6 @@ export default class Particle extends GameObject<'either'> {
 				'Cannot draw particle. CanvasRenderingContext2D is undefined.'
 			);
 		}
-
-		// float
-
-		(this.position.x += this.floatVelocity.x) * this.game.deltaTime;
-		(this.position.y += this.floatVelocity.y) * this.game.deltaTime;
 	}
 
 	/**
@@ -194,8 +189,12 @@ export default class Particle extends GameObject<'either'> {
 	 * @since 2.0.0
 	 */
 	public _update() {
-		(this.position.x += this.velocity.x) * this.game.deltaTime;
-		(this.position.y += this.velocity.y) * this.game.deltaTime;
+		this.position.x += this.velocity.x * this.game.smoothDeltaTime;
+		this.position.y += this.velocity.y * this.game.smoothDeltaTime;
+
+		// float
+		this.position.x += this.floatVelocity.x * this.game.smoothDeltaTime;
+		this.position.y += this.floatVelocity.y * this.game.smoothDeltaTime;
 
 		// clamp to bounds
 		this.position.x = clamp(this.position.x, this.bounds.x, this.bounds.w);

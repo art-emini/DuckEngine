@@ -415,8 +415,8 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * @since 2.0.0
 	 */
 	public _update() {
-		(this.position.x += this.velocity.x) * this.game.deltaTime;
-		(this.position.y += this.velocity.y) * this.game.deltaTime;
+		this.position.x += this.velocity.x * this.game.smoothDeltaTime;
+		this.position.y += this.velocity.y * this.game.smoothDeltaTime;
 
 		// clamp to bounds
 		this.position.x = clamp(this.position.x, this.bounds.x, this.bounds.w);
@@ -494,10 +494,10 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * @memberof PhysicsBody
 	 * @description Sets the velocity based on an axis, PhysicsBody.options.type must be KinematicBody
 	 * @param {'x'|'y'} axis The axis to set the velocity of
-	 * @param {number} v The value to set the velocity axis as
+	 * @param {number} pxPerSecond The value to set the velocity axis as, in pixels per second
 	 * @since 2.0.0
 	 */
-	public setVelocity(axis: 'x' | 'y', v: number) {
+	public setVelocity(axis: 'x' | 'y', pxPerSecond: number) {
 		if (this.options.type !== 'KinematicBody') {
 			new Debug.Error(
 				`Cannot set velocity as PhysicsBody.options.type is ${this.options.type} instead of KinematicBody.`
@@ -506,44 +506,44 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		}
 
 		if (axis === 'x') {
-			this.velocity.x = v;
+			this.velocity.x = pxPerSecond;
 		}
 
 		if (axis === 'y') {
-			this.velocity.y = v;
+			this.velocity.y = pxPerSecond;
 		}
 	}
 
 	/**
 	 * @memberof PhysicsBody
 	 * @description Sets the velocity.x, PhysicsBody.options.type must be KinematicBody
-	 * @param {number} v The value to set the velocity.x as
+	 * @param {number} pxPerSecond The value to set the velocity axis as, in pixels per second
 	 * @since 2.0.0
 	 */
-	public setVelocityX(v: number) {
+	public setVelocityX(pxPerSecond: number) {
 		if (this.options.type !== 'KinematicBody') {
 			new Debug.Error(
 				`Cannot set velocity X as PhysicsBody.options.type is ${this.options.type} instead of KinematicBody.`
 			);
 			return;
 		}
-		this.velocity.x = v;
+		this.velocity.x = pxPerSecond;
 	}
 
 	/**
 	 * @memberof PhysicsBody
 	 * @description Sets the velocity.y, PhysicsBody.options.type must be KinematicBody
-	 * @param {number} v The value to set the velocity.y as
+	 * @param {number} pxPerSecond The value to set the velocity.y as, in pixels per second
 	 * @since 2.0.0
 	 */
-	public setVelocityY(v: number) {
+	public setVelocityY(pxPerSecond: number) {
 		if (this.options.type !== 'KinematicBody') {
 			new Debug.Error(
 				`Cannot set velocity Y as PhysicsBody.options.type is ${this.options.type} instead of KinematicBody.`
 			);
 			return;
 		}
-		this.velocity.y = v;
+		this.velocity.y = pxPerSecond;
 	}
 
 	/**
