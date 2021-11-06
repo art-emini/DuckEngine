@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import Animation from '../animation/animation';
+import AnimationManager from '../animation/animationManager';
 import Game from '../game';
 import Scene from '../scene';
 import GameObject from './gameObject';
@@ -18,9 +20,11 @@ export default class SpriteSheet extends GameObject<'image'> {
 	public currentRow: number;
 	public currentCol: number;
 
-	public animating: boolean;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected animationInterval: any | undefined;
+
+	public anims: AnimationManager;
+	public defaultAnim: Animation;
 
 	/**
 	 * @memberof SpriteSheet
@@ -68,161 +72,27 @@ export default class SpriteSheet extends GameObject<'image'> {
 
 		this.rows = rows;
 		this.cols = cols;
-
 		this.currentRow = currentRow;
 		this.currentCol = currentCol;
 
-		this.animating = false;
-		this.animationInterval;
-	}
+		const defaultAnimConfig = {
+			key: '__default',
+			frameRate: 0,
+			frames: [
+				{
+					col: this.currentCol,
+					row: this.currentRow,
+				},
+			],
+		};
 
-	/**
-	 * @memberof SpriteSheet
-	 * @description Changes the current column to the next
-	 * @since 1.0.0
-	 */
-	public nextCol() {
-		if (this.currentCol < this.cols) {
-			this.currentCol += 1;
-		}
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Changes the current row to the next
-	 * @since 1.0.0
-	 */
-	public nextRow() {
-		if (this.currentRow < this.rows) {
-			this.currentRow += 1;
-		}
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Stops the animation
-	 * @since 1.0.0
-	 */
-	public startAnimation() {
-		this.animating = true;
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Animates the spritesheet
-	 * @param {number} fps Frames per second
-	 * @param {boolean} [switchRowOnEnd] Determines if there is no column next to switch the row to the next
-	 * @since 1.0.0
-	 */
-	public animate(fps: number, switchRowOnEnd?: boolean) {
-		this.animationInterval = setInterval(() => {
-			if (this.animating) {
-				this.nextCol();
-
-				if (this.currentCol === this.cols && !switchRowOnEnd) {
-					this.currentCol = 1; // draw subtracts one so it equals 0
-				}
-
-				if (this.currentCol === this.cols && switchRowOnEnd) {
-					this.currentCol = 1; // draw subtracts one so it equals 0
-					this.nextRow();
-				}
-			}
-		}, 1000 / fps);
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Animates the spritesheet for a duration
-	 * @param {number} fps Frames per second
-	 * @param {number} timeMS Duration in milliseconds
-	 * @param {boolean} [switchRowOnEnd] Determines if there is no column next to switch the row to the next
-	 * @since 1.0.0
-	 */
-	public animateFor(fps: number, timeMS: number, switchRowOnEnd?: boolean) {
-		this.animate(fps, switchRowOnEnd);
-		setTimeout(() => {
-			this.stopAnimation();
-		}, timeMS);
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Animates the spritesheet in between frames
-	 * @param {number} fps Frames per second
-	 * @param {number} col Start column
-	 * @param {number} row Start row
-	 * @param {number} stopCol End column
-	 * @param {number} stopRow End row
-	 * @param {boolean} [switchRowOnEnd] Determines if there is no column next to switch the row to the next
-	 * @since 1.0.0
-	 */
-	public animateFrames(
-		fps: number,
-		col: number,
-		row: number,
-		stopCol: number,
-		stopRow: number,
-		switchRowOnEnd?: boolean
-	) {
-		this.currentCol = col;
-		this.currentRow = row;
-
-		this.animationInterval = setInterval(() => {
-			if (this.animating) {
-				if (this.currentCol !== stopCol) {
-					this.nextCol();
-
-					if (this.currentCol === stopCol && !switchRowOnEnd) {
-						this.currentCol = stopCol; // draw subtracts one so it equals 0
-					}
-
-					if (this.currentCol === this.cols && switchRowOnEnd) {
-						if (this.currentRow !== stopRow) {
-							this.nextRow();
-						} else {
-							this.currentCol = stopCol; // draw subtracts one so it equals 0
-						}
-					}
-				} else {
-					this.stopAnimation();
-				}
-			}
-		}, 1000 / fps);
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Animates the spritesheet with no set fps, works only with a being called in any loop
-	 * @param {boolean} [switchRowOnEnd] Determines if there is no column next to switch the row to the next
-	 * @since 1.0.0
-	 */
-	public animateNoFPS(switchRowOnEnd?: boolean) {
-		if (this.animating) {
-			this.nextCol();
-
-			if (this.currentCol === this.cols && !switchRowOnEnd) {
-				this.currentCol = 1; // draw subtracts one so it equals 0
-			}
-
-			if (this.currentCol === this.cols && switchRowOnEnd) {
-				this.currentCol = 1; // draw subtracts one so it equals 0
-				this.nextRow();
-			}
-		}
-	}
-
-	/**
-	 * @memberof SpriteSheet
-	 * @description Stops the animation
-	 * @since 1.0.0
-	 */
-	public stopAnimation() {
-		this.animating = false;
-
-		if (this.animationInterval !== undefined) {
-			clearInterval(this.animationInterval);
-		}
+		this.anims = new AnimationManager(
+			this.game,
+			this.scene,
+			this,
+			defaultAnimConfig
+		);
+		this.defaultAnim = this.anims.get('__default') as Animation;
 	}
 
 	/**

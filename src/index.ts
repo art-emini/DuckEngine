@@ -767,6 +767,41 @@ export namespace Duck {
 			export type StaticBody = 'StaticBody';
 		}
 
+		export namespace Animation {
+			export interface Config {
+				key: string;
+				frames: FrameBase[];
+				frameRate: number;
+				autoplay?: boolean;
+				repeat?: number;
+				yoyo?: boolean;
+			}
+
+			export interface FrameBase {
+				col: number;
+				row: number;
+			}
+		}
+
+		export namespace StateMachine {
+			export interface ConnectionBase {
+				from: ConnectionBaseValue;
+				to: ConnectionBaseValue;
+				connType: 'one' | 'loop';
+			}
+
+			export interface ConnectionBaseValue {
+				key: string;
+				vector: Vector2Class;
+				autoAdvance?: boolean;
+			}
+
+			export interface Config {
+				defaultState: string;
+				connections: ConnectionBase[];
+			}
+		}
+
 		export namespace Math {
 			export interface Vector2Like {
 				x: number;
