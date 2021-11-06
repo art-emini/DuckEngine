@@ -97,6 +97,7 @@ export default class ParticleEmitter {
 		);
 
 		obj.visible = true;
+		obj.enabled = true;
 
 		obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);
 		obj.position.y = randomInt(this.rangeY[0], this.rangeY[1]);
@@ -116,6 +117,9 @@ export default class ParticleEmitter {
 
 		// add to display list
 		this.scene.displayList.add(obj);
+
+		// add to physics list
+		this.scene.physicsList.add(obj);
 	}
 
 	/**
@@ -374,8 +378,8 @@ export default class ParticleEmitter {
 		this.floatRangeY = rangeVY;
 
 		this.list.forEach((particle) => {
-			particle.floatVelocity.x = randomFloat(rangeVX[0], rangeVX[1], 1);
-			particle.floatVelocity.y = randomFloat(rangeVY[0], rangeVY[1], 1);
+			particle.floatVelocity.x = randomInt(rangeVX[0], rangeVX[1]);
+			particle.floatVelocity.y = randomInt(rangeVY[0], rangeVY[1]);
 		});
 	}
 
