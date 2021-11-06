@@ -738,7 +738,11 @@ export namespace Duck {
 
 			export interface Config {
 				type: Type;
-				physicsEnabled: boolean;
+			}
+
+			export interface AttachedBody {
+				body: PhysicsBodyClass<Duck.Types.Texture.Type>;
+				offset: Vector2Class;
 			}
 
 			/**

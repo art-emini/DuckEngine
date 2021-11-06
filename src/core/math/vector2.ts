@@ -584,6 +584,19 @@ export default class Vector2 {
 		return this;
 	}
 
+	/**
+	 * @memberof Vector2
+	 * @description Gets the absolute value of the vector
+	 * @returns Vector2
+	 * @since 2.0.0
+	 */
+	public abs() {
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
+
+		return this;
+	}
+
 	// STATIC
 
 	/**

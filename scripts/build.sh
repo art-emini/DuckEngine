@@ -6,13 +6,13 @@ echo "Compiling"
 tsc
 echo "Compiled"
 echo "Bundling Files"
-npm run webpack
+yarn run webpack
 echo "Bundled"
 echo "Minifying"
-npm run minify
+yarn run minify
 echo "Minified"
 echo "Building Docs"
-npm run build:docs
+yarn run build:docs
 echo "Built Docs"
 echo "Finishing"
 cp package.json lib/package.json

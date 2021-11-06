@@ -9,6 +9,8 @@
   - Added isColliding, isOnFloor, isOnCeiling, and isOnWall methods
   - Added texture prop
   - Added type generic to GameObject for Texture class
+  - Added attachTo, attachChild, detachFrom, detachChild methods
+  - Added isAttached and attachedChildren properties
   - Rect, RoundRect, Circle, StaticLight, CanvasModulate
     - Added texture colors support
   - Sprite, Spritesheet

@@ -66,9 +66,9 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description PhysicsBody config, includes: type - KinematicBody | RigidBody | StaticBody, physicsEnabled - enables physics
+	 * @description PhysicsBody config, includes: type - KinematicBody | RigidBody | StaticBody
 	 *
-	 * defaults: { type: 'KinematicBody', physicsEnabled: true }
+	 * defaults: { type: 'KinematicBody'}
 	 *
 	 * @type Duck.Types.PhysicsBody.Config
 	 * @since 2.0.0
@@ -165,6 +165,10 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 */
 	public enabled: boolean;
 
+	public isAttached: boolean;
+	public attachedChildren: PhysicsBody<Duck.Types.Texture.Type>[];
+	public attachOffset: Vector2;
+
 	protected internalRaycasts: {
 		top: Raycast;
 		bottom: Raycast;
@@ -248,7 +252,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 		this.options = {
 			type: 'KinematicBody',
-			physicsEnabled: true,
 		};
 
 		this.game = game;
@@ -268,6 +271,10 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		this.collidesWith = [];
 
 		this.enabled = true;
+
+		this.isAttached = false;
+		this.attachedChildren = [];
+		this.attachOffset = Vector2.ZERO;
 
 		this.bounds = {
 			x: -Infinity,
@@ -443,6 +450,19 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			}
 		}
 
+		// update attached children position
+		this.attachedChildren.forEach((object) => {
+			const pos = this.position.clone();
+			pos.subtract(object.attachOffset);
+
+			object.position = pos;
+			if (object.hitbox) {
+				object.hitbox.position = object.position
+					.clone()
+					.add(object.hitbox.offset);
+			}
+		});
+
 		// internal raycasts
 		const middle = this.getCenter();
 
@@ -490,6 +510,68 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		return this.options;
 	}
 
+	public attachTo(
+		object: PhysicsBody<Duck.Types.Texture.Type>,
+		diffOffset?: Vector2
+	) {
+		const offset =
+			diffOffset ||
+			Vector2.fromVec(object.position).subtract(this.position);
+
+		this.isAttached = true;
+		this.attachOffset = offset;
+
+		object.attachedChildren.push(this);
+	}
+
+	public attachChild(
+		object: PhysicsBody<Duck.Types.Texture.Type>,
+		diffOffset?: Vector2
+	) {
+		const offset =
+			diffOffset ||
+			Vector2.fromVec(this.position).subtract(object.position);
+
+		object.isAttached = true;
+		object.attachOffset = offset;
+
+		this.attachedChildren.push(object);
+	}
+
+	public detachFrom(object: PhysicsBody<Duck.Types.Texture.Type>) {
+		const f = object.attachedChildren.find((o) => o.id === this.id);
+
+		if (f) {
+			this.isAttached = false;
+			this.attachOffset = Vector2.ZERO;
+			object.attachedChildren.splice(
+				object.attachedChildren.findIndex((o) => o.id === this.id),
+				1
+			);
+		} else {
+			new Debug.Error(
+				'Cannot detachFrom from object, PhysicsBody is not attached to anything.'
+			);
+		}
+	}
+
+	public detachChild(object: PhysicsBody<Duck.Types.Texture.Type>) {
+		const f = this.attachedChildren.find((o) => o.id === object.id);
+
+		if (f) {
+			object.isAttached = false;
+			object.attachOffset = Vector2.ZERO;
+			this.attachedChildren.splice(
+				this.attachedChildren.findIndex((o) => o.id === object.id),
+				1
+			);
+		} else {
+			new Debug.Error(
+				'Cannot detachChild from PhysicsBody, object is not attached to anything.'
+			);
+		}
+	}
+
 	/**
 	 * @memberof PhysicsBody
 	 * @description Sets the velocity based on an axis, PhysicsBody.options.type must be KinematicBody
@@ -501,6 +583,13 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		if (this.options.type !== 'KinematicBody') {
 			new Debug.Error(
 				`Cannot set velocity as PhysicsBody.options.type is ${this.options.type} instead of KinematicBody.`
+			);
+			return;
+		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot set velocity as PhysicsBody is attached to another PhysicsBody.'
 			);
 			return;
 		}
@@ -527,6 +616,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot set velocity X as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		this.velocity.x = pxPerSecond;
 	}
 
@@ -543,6 +640,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot set velocity Y as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		this.velocity.y = pxPerSecond;
 	}
 
@@ -560,6 +665,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot accelerate velocity as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		this.velocity.moveTowards(this.velocity, target, amount);
 	}
 
@@ -579,6 +692,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot apply friction as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		this.velocity.subtract(frictionAmount).clampMin(0);
 	}
 
@@ -598,6 +719,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot apply gravity as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		if (gravity.x !== 0) {
 			this.velocity.x += gravity.x;
 		}
@@ -625,6 +754,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot bounce velocity as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		if (this.position.x > bounds.w || this.position.x < bounds.x) {
 			this.velocity.x = this.velocity.x * -restitution;
 		}
@@ -652,6 +789,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			);
 			return;
 		}
+
+		if (this.isAttached) {
+			new Debug.Error(
+				'Cannot reflect velocity as PhysicsBody is attached to another PhysicsBody.'
+			);
+			return;
+		}
+
 		this.velocity.reflect();
 	}
 

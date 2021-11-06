@@ -44,6 +44,11 @@
 
 ## Performance & Compatibility
 
+### Browser Requirements
+
+1. Browser supports ES6 (EcmaScript2015)
+2. Browser supports Canvas APIs
+
 ### Rankings
 
 1. Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave
@@ -54,16 +59,11 @@
 
 - Google Chrome or any other Chromium based browser
 
-### Browser Requirements
-
-1. Browser supports ES6 (EcmaScript2015)
-2. Browser supports Canvas APIs
-
 ### Browser Bugs
 
 #### Firefox Bugs
 
-- More stuttering and garbage collection calls occur more often than Safari and Chromium Browsers (Not really noticeable)
+- More stuttering and garbage collection calls occurs more often than Safari and Chromium Browsers (Not really noticeable)
 
 ## Download
 
@@ -84,7 +84,9 @@
 ### CDN
 
 1. Setup an asset bundler like webpack or parcel.
-2. Import DuckEngine from URL <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.js> or <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.min.js> for minified version.
+2. Import DuckEngine from URL
+   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.js>
+   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.min.js>
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)

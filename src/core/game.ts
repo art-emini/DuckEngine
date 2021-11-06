@@ -81,7 +81,7 @@ export default class Game {
 			this.ctx = this.config.canvas.ctx;
 		}
 
-		this.deltaTimeArray = [];
+		this.deltaTimeArray = Array(100).fill(0.0016);
 		this.deltaTime = 0;
 		this.smoothDeltaTime = 0;
 		this.oldTime = 0;
