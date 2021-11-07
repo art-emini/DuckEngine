@@ -2,7 +2,7 @@
 
 **v2.0.0 released! [Changelog](CHANGELOG.md)**
 
-[Demos](#demos)
+| [Docs](#docs) | [Wiki](#wiki) | [Demos](#demos) |
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
@@ -91,7 +91,13 @@
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)
 
-## Typescript
+Learn how to use DuckEngine with simple, clean, documentation with typings and more.
+
+## [Wiki](https://github.com/ksplatdev/DuckEngine/wiki)
+
+Learn, write, get help, with DuckEngine in the DuckEngine Wiki.
+
+## How to use with Typescript
 
 How to use DuckEngine with Typescript.
 

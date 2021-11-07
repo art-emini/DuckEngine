@@ -769,13 +769,63 @@ export namespace Duck {
 
 		export namespace Animation {
 			export interface Config {
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description Key / Name of Animation
+				 * @type string
+				 * @since 2.0.0
+				 */
 				key: string;
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description Frames of the Animation, objects that are later converted to {@link AnimationFrame}
+				 * @type Duck.Types.Animation.FrameBase[]
+				 * @since 2.0.0
+				 */
 				frames: FrameBase[];
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description The frame rate of the animation
+				 * @type number
+				 * @since 2.0.0
+				 */
 				frameRate: number;
-				autoplay?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description Determines the amount of times the Animation loops, optional -> defaults: 1
+				 * @type number
+				 * @since 2.0.0
+				 */
 				repeat?: number;
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description Determines if the animation plays in the opposite direction of its current direction and switches on end, like a yoyo
+				 * optional -> defaults: false
+				 * @type boolean
+				 * @since 2.0.0
+				 */
 				yoyo?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description The amount of milliseconds that is waited for before playing the animation, optional -> defaults: 0
+				 * @type number
+				 * @since 2.0.0
+				 */
 				delay?: number;
+
+				/**
+				 * @memberof Duck.Types.Animation.Config
+				 * @description Determines if the Animation timers count by the Game.deltaTime, set to true if used in the Scene.update method, and false
+				 * otherwise, optional -> defaults: false
+				 * @type boolean
+				 * @since 2.0.0
+				 */
+				useDelta?: boolean;
 			}
 
 			export interface FrameBase {

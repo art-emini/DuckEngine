@@ -282,6 +282,8 @@ export default class Game {
 		this.isRendering = true;
 		this.isLoaded = true;
 
+		this.eventEmitter.emit(EVENTS.GAME.LOAD_FINISH);
+
 		if (this.config.debug) {
 			new Debug.Log('Game loaded.');
 		}
@@ -294,8 +296,6 @@ export default class Game {
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
 		}
-
-		this.eventEmitter.emit(EVENTS.GAME.LOAD_FINISH);
 	}
 
 	/**

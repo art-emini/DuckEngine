@@ -12,6 +12,8 @@ export default class Animation {
 	public scene: Scene;
 	public spritesheet: SpriteSheet;
 
+	public countBy: number;
+
 	public repeat: number;
 	public frames: AnimationFrame[];
 	public reversedFrames: AnimationFrame[];
@@ -35,6 +37,10 @@ export default class Animation {
 		this.game = game;
 		this.scene = scene;
 		this.spritesheet = spritesheet;
+
+		this.countBy = this.config.useDelta
+			? this.game.deltaTime
+			: 1000 / this.config.frameRate;
 
 		this.repeat = this.config.repeat || 1;
 		this.frames = this.createFrames();
@@ -68,10 +74,6 @@ export default class Animation {
 
 		this.currentIndex = 0;
 		this.currentFrame = this.frames[this.currentIndex];
-
-		if (this.config.autoplay) {
-			this.play();
-		}
 	}
 
 	protected createFrames() {
@@ -126,24 +128,32 @@ export default class Animation {
 	}
 
 	public play() {
+		this.countBy = this.config.useDelta
+			? this.game.deltaTime
+			: 1000 / this.config.frameRate;
+
 		if (this.delayTimer) {
-			this.delayTimer.count(this.game.deltaTime);
+			this.delayTimer.count(this.countBy);
 			if (this.delayTimer.done) {
-				this.animationNormalTimer.count(this.game.deltaTime);
+				this.animationNormalTimer.count(this.countBy);
 			}
 		} else {
-			this.animationNormalTimer.count(this.game.deltaTime);
+			this.animationNormalTimer.count(this.countBy);
 		}
 	}
 
 	public playReverse() {
+		this.countBy = this.config.useDelta
+			? this.game.deltaTime
+			: 1000 / this.config.frameRate;
+
 		if (this.delayTimer) {
-			this.delayTimer.count(this.game.deltaTime);
+			this.delayTimer.count(this.countBy);
 			if (this.delayTimer.done) {
-				this.animationReverseTimer.count(this.game.deltaTime);
+				this.animationReverseTimer.count(this.countBy);
 			}
 		} else {
-			this.animationReverseTimer.count(this.game.deltaTime);
+			this.animationReverseTimer.count(this.countBy);
 		}
 	}
 
