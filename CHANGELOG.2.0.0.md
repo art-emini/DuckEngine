@@ -15,6 +15,9 @@
     - Added texture colors support
   - Sprite, Spritesheet
     - Added textureKey parameter which is the key of a preloaded texture loaded with scene.loader
+  - Spritesheet
+    - Added anims property which is an AnimationManager
+    - Added defaultAnimation property which is a default animation that is created on init
   - Particle
     - Added texture color and image support
   - Now extends PhysicsObject which adds a lot more methods and properties (check [docs](https://ksplatdev.github.io/DuckEngine/))
@@ -181,6 +184,8 @@
 - ParticleEmitter
   - Removed draw method
   - Removed offload method as it has been renamed and changed to offloadBounds
+- Spritesheet
+  - Removed all animation related methods and properties, replaced with anims property which is an animation manager
 - Removed Classes
   - ParticleContainer
 

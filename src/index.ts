@@ -775,6 +775,7 @@ export namespace Duck {
 				autoplay?: boolean;
 				repeat?: number;
 				yoyo?: boolean;
+				delay?: number;
 			}
 
 			export interface FrameBase {

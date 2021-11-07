@@ -20,9 +20,6 @@ export default class SpriteSheet extends GameObject<'image'> {
 	public currentRow: number;
 	public currentCol: number;
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	protected animationInterval: any | undefined;
-
 	public anims: AnimationManager;
 	public defaultAnim: Animation;
 

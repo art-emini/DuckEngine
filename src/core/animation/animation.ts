@@ -19,6 +19,8 @@ export default class Animation {
 	public animationNormalTimer: Timer;
 	public animationReverseTimer: Timer;
 
+	public delayTimer: Timer | undefined;
+
 	public currentIndex: number;
 	public currentFrame: AnimationFrame;
 
@@ -54,6 +56,15 @@ export default class Animation {
 			[],
 			this.reversedFrames.length * this.repeat
 		);
+
+		if (this.config.delay) {
+			this.delayTimer = new Timer(
+				this.config.delay,
+				() => undefined,
+				[],
+				1
+			);
+		}
 
 		this.currentIndex = 0;
 		this.currentFrame = this.frames[this.currentIndex];
@@ -115,11 +126,25 @@ export default class Animation {
 	}
 
 	public play() {
-		this.animationNormalTimer.count(this.game.deltaTime);
+		if (this.delayTimer) {
+			this.delayTimer.count(this.game.deltaTime);
+			if (this.delayTimer.done) {
+				this.animationNormalTimer.count(this.game.deltaTime);
+			}
+		} else {
+			this.animationNormalTimer.count(this.game.deltaTime);
+		}
 	}
 
 	public playReverse() {
-		this.animationReverseTimer.count(this.game.deltaTime);
+		if (this.delayTimer) {
+			this.delayTimer.count(this.game.deltaTime);
+			if (this.delayTimer.done) {
+				this.animationReverseTimer.count(this.game.deltaTime);
+			}
+		} else {
+			this.animationReverseTimer.count(this.game.deltaTime);
+		}
 	}
 
 	public pause() {
