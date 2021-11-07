@@ -77,7 +77,7 @@
   - Collider
     - Added support for group class as a collidesWith
 - Input
-  - Added Keyboard event parameter to callback for onKeyUp and onKeyDown methods
+  - Added createKeyboardInput method to create a KeyBoardInput
 - Loader
   - Added constructor with scene parameter
   - Added loadJSON, loadHTML, loadXML, loadFont, and loadAudio async methods
@@ -143,6 +143,9 @@
   - Text width and height properties are correctly set using context.measureText
   - Buttons now can be interacted with even with an active camera
   - Button.scene is now a public property
+- Input
+  - Changed how Input works, now works as a base class where you can create different inputs from
+  - Now uses Events and EventEmitter to work out of a loop
 - Camera
   - Made viewport property public
   - Renamed follow method to startFollow
@@ -186,6 +189,8 @@
   - Removed offload method as it has been renamed and changed to offloadBounds
 - Spritesheet
   - Removed all animation related methods and properties, replaced with anims property which is an animation manager
+- Input
+  - Removed all methods and properties excluding game property
 - Removed Classes
   - ParticleContainer
 

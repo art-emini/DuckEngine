@@ -494,40 +494,7 @@ export namespace Duck {
 				sprites?: Helper.DefaultValue<undefined, Sprite[]>;
 			}
 		}
-		export namespace Input {
-			export type Scope = 'GLOBAL' | 'CANVAS';
-
-			export interface Mapping {
-				w?: boolean;
-				a?: boolean;
-				s?: boolean;
-				d?: boolean;
-				arrow_up?: boolean;
-				arrow_down?: boolean;
-				arrow_left?: boolean;
-				arrow_right?: boolean;
-				spacebar?: boolean;
-			}
-
-			export interface Controller {
-				[key: string]: unknown;
-				w: boolean;
-				a: boolean;
-				s: boolean;
-				d: boolean;
-				ArrowUp: boolean;
-				ArrowDown: boolean;
-				ArrowLeft: boolean;
-				ArrowRight: boolean;
-				spacebar: boolean;
-			}
-
-			export interface Listener {
-				fn: (e: KeyboardEvent) => void;
-				description: string;
-				type: 'keydown' | 'keyup';
-			}
-		}
+		export namespace Input {}
 
 		export namespace Interactive {
 			export namespace Text {

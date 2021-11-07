@@ -574,7 +574,7 @@ export default class Scene extends Render {
 				return new SoundPlayer(path, options);
 			},
 			input: () => {
-				return new Input(this.game);
+				return new Input(this.game, this);
 			},
 			camera: () => {
 				const c = new Camera(this.game, this);
