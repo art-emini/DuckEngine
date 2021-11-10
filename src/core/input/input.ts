@@ -1,6 +1,7 @@
 import Game from '../game';
 import Scene from '../scene';
 import KeyboardInput from './keyboardInput';
+import MouseInput from './mouseInput';
 
 /**
  * @class Input
@@ -25,5 +26,9 @@ export default class Input {
 
 	public createKeyboardInput() {
 		return new KeyboardInput(this.game, this.scene);
+	}
+
+	public createMouseInput() {
+		return new MouseInput(this.game, this.scene);
 	}
 }

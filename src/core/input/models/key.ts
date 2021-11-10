@@ -4,7 +4,8 @@ import Scene from '../../scene';
 import KeyboardInput from '../keyboardInput';
 
 export default class Key {
-	public keyString: string;
+	public keyCode: number;
+	public descriptor: string;
 	public game: Game;
 	public scene: Scene;
 	public keyboardInput: KeyboardInput;
@@ -16,16 +17,18 @@ export default class Key {
 	public state: boolean;
 
 	constructor(
-		keyString: string,
+		keyCode: number,
+		descriptor: string,
 		game: Game,
 		scene: Scene,
 		keyboardInput: KeyboardInput,
 		keyDown?: (e: KeyboardEvent) => any,
 		keyUp?: (e: KeyboardEvent) => any,
 		keyJustPressed?: (e: KeyboardEvent) => any,
-		keyState?: (e: KeyboardEvent) => any
+		keyState?: (e: KeyboardEvent, state: boolean) => any
 	) {
-		this.keyString = keyString.toUpperCase();
+		this.keyCode = keyCode;
+		this.descriptor = descriptor.toUpperCase();
 		this.game = game;
 		this.scene = scene;
 
@@ -38,25 +41,25 @@ export default class Key {
 
 		if (keyDown) {
 			this.keyboardInput.eventEmitter.on(
-				`KEY_DOWN_${this.keyString}`,
+				`KEY_DOWN_${this.descriptor}`,
 				keyDown
 			);
 		}
 		if (keyUp) {
 			this.keyboardInput.eventEmitter.on(
-				`KEY_UP_${this.keyString}`,
+				`KEY_UP_${this.descriptor}`,
 				keyUp
 			);
 		}
 		if (keyJustPressed) {
 			this.keyboardInput.eventEmitter.on(
-				`KEY_JUST_PRESSED_${this.keyString}`,
+				`KEY_JUST_PRESSED_${this.descriptor}`,
 				keyJustPressed
 			);
 		}
 		if (keyState) {
 			this.keyboardInput.eventEmitter.on(
-				`KEY_STATE_${this.keyString}`,
+				`KEY_STATE_${this.descriptor}`,
 				keyState
 			);
 		}
@@ -66,11 +69,12 @@ export default class Key {
 
 	protected registerListeners() {
 		document.addEventListener('keydown', (e) => {
-			if (e.key.toUpperCase() === this.keyString) {
+			if (e.keyCode === this.keyCode) {
 				this.state = true;
 				this.keyboardInput.eventEmitter.emit(
-					`KEY_STATE_${this.keyString}`,
-					e
+					`KEY_STATE_${this.descriptor}`,
+					e,
+					this.state
 				);
 
 				if (!e.repeat) {
@@ -79,11 +83,11 @@ export default class Key {
 					this.isJustPressed = true;
 
 					this.keyboardInput.eventEmitter.emit(
-						`KEY_JUST_PRESSED_${this.keyString}`,
+						`KEY_JUST_PRESSED_${this.descriptor}`,
 						e
 					);
 					this.keyboardInput.eventEmitter.emit(
-						`KEY_INPUT_${this.keyString}`,
+						`KEY_INPUT_${this.descriptor}`,
 						this,
 						e
 					);
@@ -93,11 +97,11 @@ export default class Key {
 					this.isJustPressed = false;
 
 					this.keyboardInput.eventEmitter.emit(
-						`KEY_DOWN_${this.keyString}`,
+						`KEY_DOWN_${this.descriptor}`,
 						e
 					);
 					this.keyboardInput.eventEmitter.emit(
-						`KEY_INPUT_${this.keyString}`,
+						`KEY_INPUT_${this.descriptor}`,
 						this,
 						e
 					);
@@ -105,11 +109,12 @@ export default class Key {
 			}
 		});
 		document.addEventListener('keyup', (e) => {
-			if (e.key.toUpperCase() === this.keyString) {
+			if (e.keyCode === this.keyCode) {
 				this.state = false;
 				this.keyboardInput.eventEmitter.emit(
-					`KEY_STATE_${this.keyString}`,
-					e
+					`KEY_STATE_${this.descriptor}`,
+					e,
+					this.state
 				);
 
 				this.isDown = false;
@@ -117,11 +122,11 @@ export default class Key {
 				this.isJustPressed = false;
 
 				this.keyboardInput.eventEmitter.emit(
-					`KEY_UP_${this.keyString}`,
+					`KEY_UP_${this.descriptor}`,
 					e
 				);
 				this.keyboardInput.eventEmitter.emit(
-					`KEY_INPUT_${this.keyString}`,
+					`KEY_INPUT_${this.descriptor}`,
 					this,
 					e
 				);
@@ -130,6 +135,6 @@ export default class Key {
 	}
 
 	public onInput(cb: (key: Key, e: KeyboardEvent) => any) {
-		this.keyboardInput.eventEmitter.on(`KEY_INPUT_${this.keyString}`, cb);
+		this.keyboardInput.eventEmitter.on(`KEY_INPUT_${this.descriptor}`, cb);
 	}
 }

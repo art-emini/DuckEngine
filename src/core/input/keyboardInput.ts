@@ -22,14 +22,16 @@ export default class KeyboardInput {
 	}
 
 	public addKey(
-		keyString: string,
+		keyCode: number,
+		descriptor: string,
 		keyDown?: (e: KeyboardEvent) => any,
 		keyUp?: (e: KeyboardEvent) => any,
 		keyJustPressed?: (e: KeyboardEvent) => any,
 		keyState?: (e: KeyboardEvent) => any
 	) {
 		const myKey = new Key(
-			keyString,
+			keyCode,
+			descriptor,
 			this.game,
 			this.scene,
 			this,
@@ -39,14 +41,15 @@ export default class KeyboardInput {
 			keyState
 		);
 
-		this.keys[keyString.toUpperCase()] = myKey;
+		this.keys[descriptor] = myKey;
 
 		return myKey;
 	}
 
 	public addKeys(
 		keys: {
-			keyString: string;
+			keyCode: number;
+			descriptor: string;
 			keyDown?: (e: KeyboardEvent) => any;
 			keyUp?: (e: KeyboardEvent) => any;
 			keyJustPressed?: (e: KeyboardEvent) => any;
@@ -55,7 +58,8 @@ export default class KeyboardInput {
 	) {
 		keys.forEach((keyBase) => {
 			this.addKey(
-				keyBase.keyString,
+				keyBase.keyCode,
+				keyBase.descriptor,
 				keyBase.keyDown,
 				keyBase.keyUp,
 				keyBase.keyJustPressed,
@@ -64,11 +68,11 @@ export default class KeyboardInput {
 		});
 	}
 
-	public removeKey(keyString: string) {
-		const key = this.keys[keyString];
+	public removeKey(descriptor: string) {
+		const key = this.keys[descriptor];
 
 		if (key) {
-			delete this.keys[keyString];
+			delete this.keys[descriptor];
 		}
 	}
 
