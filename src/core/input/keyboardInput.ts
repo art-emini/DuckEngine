@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import EventEmitter from '../events/eventEmitter';
 import Game from '../game';
 import Scene from '../scene';
 import Key from './models/key';
@@ -6,6 +7,7 @@ import Key from './models/key';
 export default class KeyboardInput {
 	public game: Game;
 	public scene: Scene;
+	public eventEmitter: EventEmitter;
 
 	public keys: {
 		[key: string]: Key;
@@ -14,6 +16,7 @@ export default class KeyboardInput {
 	constructor(game: Game, scene: Scene) {
 		this.game = game;
 		this.scene = scene;
+		this.eventEmitter = new EventEmitter();
 
 		this.keys = {};
 	}
@@ -29,6 +32,7 @@ export default class KeyboardInput {
 			keyString,
 			this.game,
 			this.scene,
+			this,
 			keyDown,
 			keyUp,
 			keyJustPressed,
