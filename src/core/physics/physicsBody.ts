@@ -4,7 +4,6 @@ import Game from '../game';
 import Group from '../group/group';
 import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
-import Raycast from '../misc/raycast';
 import Scene from '../scene';
 import Collider from './collider';
 import Hitbox from './models/hitbox';
@@ -93,30 +92,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description An instance of itself, used for colliders
-	 * @type PhysicsBody
-	 * @since 2.0.0
-	 */
-	protected self: PhysicsBody<textureType> | undefined;
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description Half of the width or the full radius
-	 * @type number
-	 * @since 2.0.0
-	 */
-	protected halfW: number;
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description Half of the height or the full radius
-	 * @type number
-	 * @since 2.0.0
-	 */
-	protected halfH: number;
-
-	/**
-	 * @memberof PhysicsBody
 	 * @description The Collider instance of the PhysicsBody
 	 * @type Collider | undefined
 	 * @since 2.0.0
@@ -125,7 +100,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description An array or group of GameObjects that can collide with the PhysicsBody, also used for internalRaycasts.cast
+	 * @description An array or group of GameObjects that can collide with the PhysicsBody
 	 * @type Duck.TypeClasses.GameObjects.GameObject<textureType>[] | Group<Duck.TypeClasses.GameObjects.GameObject<textureType>>
 	 * @since 2.0.0
 	 */
@@ -168,13 +143,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	public isAttached: boolean;
 	public attachedChildren: PhysicsBody<Duck.Types.Texture.Type>[];
 	public attachOffset: Vector2;
-
-	protected internalRaycasts: {
-		top: Raycast;
-		bottom: Raycast;
-		left: Raycast;
-		right: Raycast;
-	};
 
 	/**
 	 * @memberof PhysicsBody
@@ -257,14 +225,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		this.game = game;
 		this.scene = scene;
 
-		this.halfW = this.w / 2;
-		this.halfH = this.h / 2;
-
-		if (this.shape === 'circle') {
-			this.halfW = r;
-			this.halfH = r;
-		}
-
 		this.velocity = Vector2.ZERO;
 
 		this.collider = undefined;
@@ -281,48 +241,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			y: -Infinity,
 			w: Infinity,
 			h: Infinity,
-		};
-
-		// setup internal raycasts
-		const middle = this.getCenter();
-
-		let width = this.w / 2;
-		let height = this.h / 2;
-
-		if (this.shape === 'circle') {
-			width = this.r;
-			height = this.r;
-		}
-
-		this.internalRaycasts = {
-			top: new Raycast(
-				middle,
-				Vector2.fromVec(
-					middle.clone().setValues(middle.x, middle.y - (height + 1))
-				),
-				this.game
-			),
-			bottom: new Raycast(
-				middle,
-				Vector2.fromVec(
-					middle.clone().setValues(middle.x, middle.y + (height + 1))
-				),
-				this.game
-			),
-			left: new Raycast(
-				middle,
-				Vector2.fromVec(
-					middle.clone().setValues(middle.x - (width + 1), middle.y)
-				),
-				this.game
-			),
-			right: new Raycast(
-				middle,
-				Vector2.fromVec(
-					middle.clone().setValues(middle.x + (width + 1), middle.y)
-				),
-				this.game
-			),
 		};
 
 		// methods
@@ -403,19 +321,9 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Initializes the PhysicsBody.self property that is used for colliders
-	 * @param {PhysicsBody} self Instance of PhysicsBody
-	 * @since 2.0.0
-	 */
-	protected init(self: PhysicsBody<textureType>) {
-		this.self = self;
-	}
-
-	/**
-	 * @memberof PhysicsBody
 	 * @description Updates the PhysicsBody's position by the velocity. Sets velocity to 0 on every tick.
 	 * Clamps position to bounds if exists. Rounds pixels if roundPixels game config is set to true.
-	 * Casts internal raycasts.
+	 * Updates hitbox.collisionState if hitbox exists.
 	 *
 	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
 	 *
@@ -463,40 +371,21 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 			}
 		});
 
-		// internal raycasts
-		const middle = this.getCenter();
-
-		let width = this.w / 2;
-		let height = this.h / 2;
-
-		if (this.shape === 'circle') {
-			width = this.r;
-			height = this.r;
+		if (this.hitbox) {
+			if (Array.isArray(this.collidesWith)) {
+				this.collidesWith.forEach((obj) => {
+					if (obj.hitbox) {
+						this.hitbox?.intersectsFaceWith(obj.hitbox);
+					}
+				});
+			} else {
+				this.collidesWith.each((obj) => {
+					if (obj.hitbox) {
+						this.hitbox?.intersectsFaceWith(obj.hitbox);
+					}
+				});
+			}
 		}
-
-		this.internalRaycasts.top.position = middle;
-		this.internalRaycasts.bottom.position = middle;
-		this.internalRaycasts.left.position = middle;
-		this.internalRaycasts.right.position = middle;
-
-		this.internalRaycasts.top.positionEnd = Vector2.fromVec(
-			middle.clone().setValues(middle.x, middle.y - (height + 1))
-		);
-		this.internalRaycasts.bottom.positionEnd = Vector2.fromVec(
-			middle.clone().setValues(middle.x, middle.y + (height + 1))
-		);
-		this.internalRaycasts.left.positionEnd = Vector2.fromVec(
-			middle.clone().setValues(middle.x - (width + 1), middle.y)
-		);
-		this.internalRaycasts.right.positionEnd = Vector2.fromVec(
-			middle.clone().setValues(middle.x + (width + 1), middle.y)
-		);
-
-		// cast internal raycasts
-		this.internalRaycasts.top.cast(this.collidesWith);
-		this.internalRaycasts.bottom.cast(this.collidesWith);
-		this.internalRaycasts.left.cast(this.collidesWith);
-		this.internalRaycasts.right.cast(this.collidesWith);
 	}
 
 	/**
@@ -907,49 +796,16 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description Checks if any one of the internal raycasts is colliding with this.collidesWith
-	 * @returns false | Duck.Types.Raycast.StateValue
+	 * @description Checks and returns the Collision Type if two hitboxes are colliding
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} obj PhysicsBody to check their hitbox with
+	 * @returns false | Duck.Types.Collider.CollisionResponseType | undefined
 	 * @since 2.0.0
 	 */
-	public get isColliding() {
-		return (
-			this.internalRaycasts.top.isIntersecting ||
-			this.internalRaycasts.bottom.isIntersecting ||
-			this.internalRaycasts.left.isIntersecting ||
-			this.internalRaycasts.right.isIntersecting
-		);
-	}
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description Checks if the bottom internal raycasts is colliding with this.collidesWith
-	 * @returns false | Duck.Types.Raycast.StateValue
-	 * @since 2.0.0
-	 */
-	public get isOnFloor() {
-		return this.internalRaycasts.bottom.isIntersecting;
-	}
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description Checks if the top internal raycasts is colliding with this.collidesWith
-	 * @returns false | Duck.Types.Raycast.StateValue
-	 * @since 2.0.0
-	 */
-	public get isOnCeiling() {
-		return this.internalRaycasts.top.isIntersecting;
-	}
-
-	/**
-	 * @memberof PhysicsBody
-	 * @description Checks if the left or right internal raycasts is colliding with this.collidesWith
-	 * @returns false | Duck.Types.Raycast.StateValue
-	 * @since 2.0.0
-	 */
-	public get isOnWall() {
-		return (
-			this.internalRaycasts.left.isIntersecting ||
-			this.internalRaycasts.right.isIntersecting
-		);
+	public isColliding(obj: PhysicsBody<Duck.Types.Texture.Type>) {
+		if (obj.hitbox) {
+			return this.hitbox?.intersectsFaceWith(obj.hitbox);
+		} else {
+			return false;
+		}
 	}
 }

@@ -33,10 +33,15 @@
     - Added DisplayList class to manage renderable objects
     - Added Texture to save and load images and colors
   - Misc
-    - Added Raycast class to cast a ray and check for intersections
     - Added Area class to detect intersections with other PhysicsBody hitboxes
   - Math
     - Added Vector2 class to manage coordinates and more
+  - Input
+    - KeyboardInput
+    - MouseInput
+    - Models
+      - Key
+      - Mouse
   - GameObjects
     - Misc
       - Added CanvasModulate with zIndex of 1 witch fills up the entire canvas with a color
@@ -69,7 +74,6 @@
       - Added vector property to tools.math which is a reference to the Vector2 class
   - Add
     - Added misc to gameobjects property
-    - Added raycast to gameobjects.misc property
 - Physics
   - Added PhysicsServer class
   - Added PhysicsBody class

@@ -30,7 +30,6 @@ export default class Circle extends GameObject<'color'> {
 			game,
 			scene
 		);
-		this.init(this);
 	}
 
 	/**

@@ -62,7 +62,6 @@ export default class SpriteSheet extends GameObject<'image'> {
 			game,
 			scene
 		);
-		this.init(this);
 
 		this.frameWidth = frameWidth;
 		this.frameHeight = frameHeight;

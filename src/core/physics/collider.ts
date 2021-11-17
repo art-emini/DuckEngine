@@ -75,7 +75,9 @@ export default class Collider {
 		}
 	}
 
-	protected collideHitboxes(hitbox2: Hitbox) {
+	protected collideHitboxes(
+		hitbox2: Hitbox
+	): Duck.Types.Collider.CollisionResponseType {
 		const rectCX = hitbox2.position.x + hitbox2.w * 0.5;
 		const rectCY = hitbox2.position.y + hitbox2.h * 0.5;
 
@@ -88,21 +90,37 @@ export default class Collider {
 		const ah = (hitbox2.h + this.hitbox.h) * 0.5; // average height
 
 		/* If either distance is greater than the average dimension there is no collision. */
-		if (Math.abs(dx) > aw || Math.abs(dy) > ah) return false;
+		if (Math.abs(dx) > aw || Math.abs(dy) > ah) {
+			return 'none';
+		}
 
 		/* To determine which region of this rectangle the rect's center
           point is in, we have to account for the scale of the this rectangle.
           To do that, we divide dx and dy by it's width and height respectively. */
 		if (Math.abs(dx / this.hitbox.w) > Math.abs(dy / this.hitbox.h)) {
-			if (dx < 0) this.hitbox.position.x = hitbox2.position.x + hitbox2.w;
-			// left
-			else this.hitbox.position.x = hitbox2.position.x - this.hitbox.w; // right
-		} else {
-			if (dy < 0) this.hitbox.position.y = hitbox2.position.y + hitbox2.h;
-			// top
-			else this.hitbox.position.y = hitbox2.position.y - this.hitbox.h; // bottom
-		}
+			if (dx < 0) {
+				// left
+				this.hitbox.position.x = hitbox2.position.x + hitbox2.w;
 
-		return true;
+				return 'left';
+			} else {
+				// right
+				this.hitbox.position.x = hitbox2.position.x - this.hitbox.w;
+
+				return 'right';
+			}
+		} else {
+			if (dy < 0) {
+				// top
+				this.hitbox.position.y = hitbox2.position.y + hitbox2.h;
+
+				return 'top';
+			} else {
+				// bottom
+				this.hitbox.position.y = hitbox2.position.y - this.hitbox.h;
+
+				return 'bottom';
+			}
+		}
 	}
 }

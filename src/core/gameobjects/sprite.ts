@@ -32,7 +32,6 @@ export default class Sprite extends GameObject<'image'> {
 			game,
 			scene
 		);
-		this.init(this);
 
 		this.scene = scene;
 
@@ -71,12 +70,10 @@ export default class Sprite extends GameObject<'image'> {
 	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (scale.width) {
 			this.w = scale.width;
-			this.halfW = this.w / 2;
 		}
 
 		if (scale.height) {
 			this.h = scale.height;
-			this.halfH = this.h / 2;
 		}
 	}
 

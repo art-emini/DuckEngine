@@ -33,7 +33,6 @@ export default class RoundRect extends GameObject<'color'> {
 			game,
 			scene
 		);
-		this.init(this);
 	}
 
 	/**

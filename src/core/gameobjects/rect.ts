@@ -31,7 +31,6 @@ export default class Rect extends GameObject<'color'> {
 			game,
 			scene
 		);
-		this.init(this);
 	}
 
 	/**

@@ -3,13 +3,8 @@
 import { Duck } from '../../index';
 import randomInt from '../math/randomInt';
 import Game from '../game';
-import Collider from '../physics/collider';
-import Vector2 from '../math/vector2';
-import clamp from '../math/clamp';
-import Raycast from '../misc/raycast';
 import Texture from '../models/texture';
 import Scene from '../scene';
-import Debug from '../debug/debug';
 import PhysicsBody from '../physics/physicsBody';
 
 /**
@@ -107,12 +102,10 @@ export default class GameObject<
 		if (typeof scale !== 'number') {
 			if (scale.width) {
 				this.w = scale.width;
-				this.halfW = this.w / 2;
 			}
 
 			if (scale.height) {
 				this.h = scale.height;
-				this.halfH = this.h / 2;
 			}
 		} else {
 			this.r = scale;

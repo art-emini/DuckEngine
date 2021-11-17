@@ -74,7 +74,6 @@ import CanvasModulate from './gameobjects/misc/canvasModulate';
 import Vector2 from './math/vector2';
 import clamp from './math/clamp';
 import lerp from './math/lerp';
-import Raycast from './misc/raycast';
 import PhysicsServer from './physics/server/physicsServer';
 import PhysicsList from './models/physicsList';
 import Area from './physics/models/area';
@@ -161,7 +160,6 @@ export default class Scene extends Render {
 			) => SpriteSheet;
 		};
 		misc: {
-			raycast: (begin: Vector2, end: Vector2) => Raycast;
 			area: (
 				x: number,
 				y: number,
@@ -509,10 +507,6 @@ export default class Scene extends Render {
 				},
 			},
 			misc: {
-				raycast: (begin: Vector2, end: Vector2) => {
-					const myRayCast = new Raycast(begin, end, this.game);
-					return myRayCast;
-				},
 				area: (
 					x: number,
 					y: number,

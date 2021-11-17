@@ -3,6 +3,7 @@ import Debug from '../../debug/debug';
 import Game from '../../game';
 import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
+import hitboxFaceIntersect from '../hitboxFaceIntersect';
 import PhysicsBody from '../physicsBody';
 import rectToRectIntersect from '../rectToRectIntersect';
 
@@ -20,6 +21,14 @@ export default class Hitbox {
 	public debugColor: string | undefined;
 	public visible: boolean;
 	public zIndex: number;
+
+	/**
+	 * @memberof Hitbox
+	 * @description A string determining the state of the current collision
+	 * @type Duck.Types.Collider.CollisionResponseType
+	 * @since 2.0.0
+	 */
+	public collisionState: Duck.Types.Collider.CollisionResponseType;
 
 	constructor(
 		id: number,
@@ -44,6 +53,8 @@ export default class Hitbox {
 		this.debugColor = debugColor;
 		this.visible = debugColor ? true : false;
 		this.zIndex = Duck.Layers.Rendering.zIndex.graphicDebug;
+
+		this.collisionState = 'none';
 	}
 
 	public _draw() {
@@ -67,12 +78,13 @@ export default class Hitbox {
 	public _update(physicsObject: PhysicsBody<Duck.Types.Texture.Type>) {
 		this.physicsObject = physicsObject;
 
+		// resolve
 		this.position = this.physicsObject.position.add(this.offset);
 	}
 
-	public setDebugColor(debugColor: string) {
+	public setDebugColor(debugColor: string, visible = true) {
 		this.debugColor = debugColor;
-		this.visible = true;
+		this.visible = visible;
 	}
 
 	public scale(scale: Vector2) {
@@ -132,6 +144,12 @@ export default class Hitbox {
 				h: hitbox.h,
 			}
 		);
+	}
+
+	public intersectsFaceWith(hitbox: Hitbox) {
+		this.collisionState = hitboxFaceIntersect(this, hitbox);
+
+		return this.collisionState;
 	}
 
 	/**

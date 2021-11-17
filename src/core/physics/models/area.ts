@@ -80,6 +80,6 @@ export default class Area extends PhysicsBody<'color'> {
 		physicsBody: PhysicsBody<Duck.Types.Texture.Type>
 	) {
 		const f = this.bodies.find((object) => object.id === physicsBody.id);
-		return f ? f : false;
+		return f ? true : false;
 	}
 }

@@ -32,7 +32,6 @@ import Vector2Class from './core/math/vector2';
 import DisplayListClass from './core/models/displayList';
 import CanvasModulateClass from './core/gameobjects/misc/canvasModulate';
 import MapClass from './core/map/map';
-import RaycastClass from './core/misc/raycast';
 import AmountClass from './base/amount';
 import TextureClass from './core/models/texture';
 import PhysicsServerClass from './core/physics/server/physicsServer';
@@ -113,7 +112,6 @@ export namespace Duck {
 			export const Loader = LoaderClass;
 			export const Group = GroupClass;
 			export const Cutscene = CutsceneClass;
-			export const Raycast = RaycastClass;
 		}
 
 		export namespace Base {
@@ -205,7 +203,6 @@ export namespace Duck {
 			export type Group<t extends Duck.Types.Group.StackItem> =
 				GroupClass<t>;
 			export type Cutscene = CutsceneClass;
-			export type Raycast = RaycastClass;
 		}
 
 		export namespace Base {
@@ -466,6 +463,13 @@ export namespace Duck {
 				| 'roundrect'
 				| 'spritesheet'
 				| 'sprite';
+
+			export type CollisionResponseType =
+				| 'none'
+				| 'top'
+				| 'left'
+				| 'right'
+				| 'bottom';
 		}
 
 		export namespace Storage {
@@ -494,7 +498,52 @@ export namespace Duck {
 				sprites?: Helper.DefaultValue<undefined, Sprite[]>;
 			}
 		}
-		export namespace Input {}
+		export namespace GamepadInput {
+			export type MappingType = 'Xbox' | 'Playstation';
+			export type Mapping =
+				| typeof XboxMapping
+				| typeof PlaystationMapping;
+
+			export enum XboxMapping {
+				A = 0,
+				B = 1,
+				X = 2,
+				Y = 3,
+				LB = 4,
+				RB = 5,
+				LT = 6,
+				RT = 7,
+				SHOW_ADDRESS_BAR = 8,
+				SHOW_MENU = 9,
+				LEFT_STICK_PRESS = 10,
+				RIGHT_STICK_PRESS = 11,
+				D_PAD_UP = 12,
+				D_PAD_DOWN = 13,
+				D_PAD_LEFT = 14,
+				D_PAD_RIGHT = 15,
+				LOGO = 16,
+			}
+
+			export enum PlaystationMapping {
+				X = 0,
+				CIRCLE = 1,
+				SQUARE = 2,
+				TRIANGLE = 3,
+				L1 = 4,
+				R1 = 5,
+				L2 = 6,
+				R2 = 7,
+				SHARE = 8,
+				OPTIONS = 9,
+				LEFT_STICK_PRESS = 10,
+				RIGHT_STICK_PRESS = 11,
+				D_PAD_UP = 12,
+				D_PAD_DOWN = 13,
+				D_PAD_LEFT = 14,
+				D_PAD_RIGHT = 15,
+				LOGO = 16,
+			}
+		}
 
 		export namespace Interactive {
 			export namespace Text {
@@ -675,7 +724,6 @@ export namespace Duck {
 			}
 
 			export interface StateValue {
-				intersection: Vector2Class;
 				with: GameObject<Duck.Types.Texture.Type>;
 			}
 		}
