@@ -15,6 +15,7 @@ export default class Animation {
 	public countBy: number;
 
 	public repeat: number;
+	public repeatCounter: number;
 	public frames: AnimationFrame[];
 	public reversedFrames: AnimationFrame[];
 
@@ -43,6 +44,7 @@ export default class Animation {
 			: 1000 / this.config.frameRate;
 
 		this.repeat = this.config.repeat || 1;
+		this.repeatCounter = 0;
 		this.frames = this.createFrames();
 		this.reversedFrames = this.frames.slice().reverse();
 
@@ -94,12 +96,17 @@ export default class Animation {
 	protected normalStep(self: Animation) {
 		if (self.currentIndex < self.frames.length - 1) {
 			self.currentIndex += 1;
-			self.currentFrame = self.frames[this.currentIndex];
+			self.currentFrame = self.frames[self.currentIndex];
 			self.currentFrame.set();
 		} else {
+			self.repeatCounter += 1;
 			if (self.config.yoyo) {
 				self.stop();
 				self.playReverse();
+			} else if (self.repeatCounter < self.repeat) {
+				self.currentIndex = 0;
+				self.currentFrame = self.frames[self.currentIndex];
+				self.currentFrame.set();
 			}
 		}
 	}
@@ -107,12 +114,17 @@ export default class Animation {
 	protected reverseStep(self: Animation) {
 		if (self.currentIndex < self.reversedFrames.length - 1) {
 			self.currentIndex += 1;
-			self.currentFrame = self.reversedFrames[this.currentIndex];
+			self.currentFrame = self.reversedFrames[self.currentIndex];
 			self.currentFrame.set();
 		} else {
+			self.repeatCounter += 1;
 			if (self.config.yoyo) {
 				self.stopReverse();
 				self.play();
+			} else if (self.repeatCounter < self.repeat) {
+				self.currentIndex = 0;
+				self.currentFrame = self.frames[self.currentIndex];
+				self.currentFrame.set();
 			}
 		}
 	}

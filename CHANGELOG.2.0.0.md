@@ -44,7 +44,7 @@
       - Mouse
   - GameObjects
     - Misc
-      - Added CanvasModulate with zIndex of 1 witch fills up the entire canvas with a color
+      - Added CanvasModulate with zIndex of 1 which fills up the entire canvas with a color
 - Game
   - Config
     - Added physics object option
