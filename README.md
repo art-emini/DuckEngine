@@ -16,19 +16,19 @@
 
 ## Features
 
-- AABB (Axis-Aligned Bounding Box) Physics Engine
+- AABB (Axis-Aligned Bounding Box) Hitbox Based Physics Engine
 - Multiple Scenes
-- Performant
+- Fast & Performant
 - Sprites & Spritesheets
 - Many GameObjects
-- Raycasts
+- Plugins & PluginManager
 - Multiple Cameras with Effects
-- Animations & Cutscenes
+- Animations & State Machines & Cutscenes
 - Hitboxes and Colliders
-- Keyboard, Mouse, and Touch Input
+- Keyboard, Mouse, Controller, and Touch Input
 - DPR / Mobile Scaling
-- Particle System
-- Effects
+- Advanced Particle System
+- Effects and Presets
 - Button and Text UI
 - Groups
 - Tilemaps

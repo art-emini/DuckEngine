@@ -78,6 +78,7 @@ import PhysicsServer from './physics/server/physicsServer';
 import PhysicsList from './models/physicsList';
 import Area from './physics/models/area';
 import PhysicsBody from './physics/physicsBody';
+import GameObject from './gameobjects/gameObject';
 
 /**
  * @class Scene
@@ -119,6 +120,9 @@ export default class Scene extends Render {
 					fillColor: string
 				) => CanvasModulate;
 			};
+			existing: <t extends Duck.Types.Texture.Type>(
+				gameobject: GameObject<t>
+			) => GameObject<t>;
 			sprite: (
 				x: number,
 				y: number,
@@ -396,6 +400,13 @@ export default class Scene extends Render {
 						this.physicsList.add(myCanvasModulate);
 						return myCanvasModulate;
 					},
+				},
+				existing: <t extends Duck.Types.Texture.Type>(
+					gameobject: GameObject<t>
+				) => {
+					this.displayList.add(gameobject);
+					this.physicsList.add(gameobject);
+					return gameobject;
 				},
 				sprite: (
 					x: number,

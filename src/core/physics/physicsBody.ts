@@ -803,9 +803,49 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 */
 	public isColliding(obj: PhysicsBody<Duck.Types.Texture.Type>) {
 		if (obj.hitbox) {
-			return this.hitbox?.intersectsFaceWith(obj.hitbox);
+			return this.hitbox?.intersectsFaceWith(obj.hitbox) !== 'none'
+				? this.hitbox?.intersectsFaceWith(obj.hitbox)
+				: false;
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @memberof PhysicsBody
+	 * @description Checks and returns the Collision Type if multiple hitboxes are colliding
+	 * @param {Group<PhysicsBody<Duck.Types.Texture.Type>> | PhysicsBody<Duck.Types.Texture.Type>[]} objects PhysicsBodies to check their hitbox with
+	 * @returns false | Duck.Types.Collider.CollisionResponseType | undefined
+	 * @since 2.0.0
+	 */
+	public isCollidingGroup(
+		objects:
+			| Group<PhysicsBody<Duck.Types.Texture.Type>>
+			| PhysicsBody<Duck.Types.Texture.Type>[]
+	) {
+		const hitboxes: Hitbox[] = [];
+
+		if (Array.isArray(objects)) {
+			objects.forEach((obj) => {
+				if (obj.hitbox) {
+					hitboxes.push(obj.hitbox);
+				}
+			});
+		} else {
+			objects.each((obj) => {
+				if (obj.hitbox) {
+					hitboxes.push(obj.hitbox);
+				}
+			});
+		}
+
+		const states = this.hitbox?.groupIntersectsFaceWith(hitboxes);
+
+		return (
+			states?.includes('top') ||
+			states?.includes('bottom') ||
+			states?.includes('left') ||
+			states?.includes('right')
+		);
 	}
 }

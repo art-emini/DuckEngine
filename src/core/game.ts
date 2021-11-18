@@ -8,6 +8,7 @@ import EventEmitter from './events/eventEmitter';
 import EVENTS from './events/events';
 import detectBrowser from '../utils/detectBrowser';
 import smoothOut from '../utils/smoothArray';
+import PluginManager from './misc/pluginManager';
 
 /**
  * @class Game
@@ -49,6 +50,7 @@ export default class Game {
 	public splashScreen: string;
 
 	public eventEmitter: EventEmitter;
+	public pluginManager: PluginManager;
 
 	public browser: string;
 
@@ -89,6 +91,7 @@ export default class Game {
 		this.fps = 0;
 
 		this.eventEmitter = new EventEmitter();
+		this.pluginManager = new PluginManager();
 
 		// set scale
 		if (this.config.scale) {

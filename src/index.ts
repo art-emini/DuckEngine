@@ -447,6 +447,12 @@ export namespace Duck {
 				scenes: SceneClass[];
 				defaultScene: string;
 			}
+
+			export interface Plugin {
+				func: (...args: unknown[]) => unknown;
+				args: unknown[];
+				name: string;
+			}
 		}
 
 		export namespace Misc {
@@ -584,10 +590,12 @@ export namespace Duck {
 		export namespace Group {
 			export type StackItem =
 				| GameObject<Duck.Types.Texture.Type>
+				| PhysicsBodyClass<Duck.Types.Texture.Type>
 				| CameraClass
 				| TextClass
 				| StaticLightClass
-				| ColliderClass;
+				| ColliderClass
+				| HitboxClass;
 
 			export type Filter =
 				| 'gameobject'

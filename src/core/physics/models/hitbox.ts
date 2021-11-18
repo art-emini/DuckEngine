@@ -1,6 +1,7 @@
 import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
+import Group from '../../group/group';
 import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
 import hitboxFaceIntersect from '../hitboxFaceIntersect';
@@ -150,6 +151,26 @@ export default class Hitbox {
 		this.collisionState = hitboxFaceIntersect(this, hitbox);
 
 		return this.collisionState;
+	}
+
+	public groupIntersectsFaceWith(hitboxes: Group<Hitbox> | Hitbox[]) {
+		const collisionStates: Duck.Types.Collider.CollisionResponseType[] = [];
+
+		if (Array.isArray(hitboxes)) {
+			for (let i = 0; i < hitboxes.length; i++) {
+				const hitbox = hitboxes[i];
+
+				collisionStates.push(hitboxFaceIntersect(this, hitbox));
+			}
+		} else {
+			for (let i = 0; i < hitboxes.group.length; i++) {
+				const hitbox = hitboxes.group[i];
+
+				collisionStates.push(hitboxFaceIntersect(this, hitbox));
+			}
+		}
+
+		return collisionStates;
 	}
 
 	/**

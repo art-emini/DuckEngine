@@ -32,8 +32,10 @@
   - Models
     - Added DisplayList class to manage renderable objects
     - Added Texture to save and load images and colors
-  - Misc
+  - Physics Misc
     - Added Area class to detect intersections with other PhysicsBody hitboxes
+  - Misc
+    - Added PluginManager Class
   - Math
     - Added Vector2 class to manage coordinates and more
   - Input
@@ -54,6 +56,7 @@
     - Added onResumeRendering
     - Added splashScreen object option
   - Added eventEmitter property
+  - Added pluginManager property
   - Added isRendering property
   - Added fps property which is the current fps
   - Added smoothDeltaTime property which is the smoothed out version of deltaTime
@@ -131,6 +134,7 @@
   - Renamed this.add.sound to this.add.soundPlayer
 - Physics
   - Collider
+    - Colliders now use hitboxes instead of GameObjects
     - Changed collider.shape to collider.object
     - Changed collider.update diffCollidesWith parameter to be required and renamed to updatedCollidesWith
     - Changed collider.update to collider.__update which shouldn't be called manually as it is called by PhysicsServer
