@@ -815,7 +815,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * @memberof PhysicsBody
 	 * @description Checks and returns the Collision Type if multiple hitboxes are colliding
 	 * @param {Group<PhysicsBody<Duck.Types.Texture.Type>> | PhysicsBody<Duck.Types.Texture.Type>[]} objects PhysicsBodies to check their hitbox with
-	 * @returns false | Duck.Types.Collider.CollisionResponseType | undefined
+	 * @returns false | Duck.Types.Collider.CollisionResponseType
 	 * @since 2.0.0
 	 */
 	public isCollidingGroup(
@@ -841,11 +841,14 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 		const states = this.hitbox?.groupIntersectsFaceWith(hitboxes);
 
-		return (
-			states?.includes('top') ||
-			states?.includes('bottom') ||
-			states?.includes('left') ||
-			states?.includes('right')
-		);
+		return states?.includes('top')
+			? 'top'
+			: false || states?.includes('bottom')
+			? 'bottom'
+			: false || states?.includes('left')
+			? 'left'
+			: false || states?.includes('right')
+			? 'right'
+			: false;
 	}
 }
