@@ -13,7 +13,7 @@ export default class MainScene extends DuckEngine.Scene {
 	public myParticle: Duck.TypeClasses.GameObjects.Particles.Particle;
 	public myParticleEmitter: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
 
-	public myInput: Duck.TypeClasses.Input.Input;
+	public myInput: Duck.TypeClasses.Input.KeyboardInput;
 	private mySpeed = 1;
 
 	constructor(game: Duck.TypeClasses.Game) {
@@ -59,35 +59,42 @@ export default class MainScene extends DuckEngine.Scene {
 		this.myParticleEmitter.float([-0.2, 0.2], [-0.1, -0.3]);
 
 		// input
-		this.myInput = this.add.input();
+		this.myInput = this.add.input().createKeyboardInput();
+
+		this.myInput.addKeys([
+			{
+				keyCode: 87, // w
+				descriptor: 'W',
+			},
+			{
+				keyCode: 83, // s
+				descriptor: 'S',
+			},
+			{
+				keyCode: 65, // a
+				descriptor: 'A',
+			},
+			{
+				keyCode: 68, // d
+				descriptor: 'D',
+			},
+		]);
 
 		// sprinting
 		this.mySpeed = 1;
-
-		this.myInput.on('keydown', 'Shift', (e) => {
-			if (e.key === 'Shift') {
-				this.mySpeed = 3;
-			}
-		});
-
-		this.myInput.on('keyup', 'Shift', (e) => {
-			if (e.key === 'Shift') {
-				this.mySpeed = 1;
-			}
-		});
 	}
 
 	public update() {
-		if (this.myInput.inputs.w) {
+		if (this.myInput.inputs.W.state) {
 			this.myRect.setVelocity('y', -this.mySpeed);
 		}
-		if (this.myInput.inputs.s) {
+		if (this.myInput.inputs.S.state) {
 			this.myRect.setVelocity('y', this.mySpeed);
 		}
-		if (this.myInput.inputs.a) {
+		if (this.myInput.inputs.A.state) {
 			this.myRect.setVelocity('x', -this.mySpeed);
 		}
-		if (this.myInput.inputs.d) {
+		if (this.myInput.inputs.D.state) {
 			this.myRect.setVelocity('x', this.mySpeed);
 		}
 
@@ -100,5 +107,11 @@ export default class MainScene extends DuckEngine.Scene {
 		});
 		this.myParticleEmitter.offloadMaxAge(10);
 		this.myParticleEmitter.offloadMaxAmount(100);
+
+		if (this.myRect.isCollidingGroup([this.myCircle])) {
+			this.myRect.setFillColor('#ff0000');
+		} else {
+			this.myRect.setFillColor('#2185d1');
+		}
 	}
 }
