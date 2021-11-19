@@ -2,7 +2,7 @@
 
 **v2.0.0 released! [Changelog](CHANGELOG.md)**
 
-| [Docs](#docs) | [Wiki](#wiki) | [Demos](#demos) |
+| [Docs](#docs) | [Wiki](#wiki) | [Demos](#demos) | [Download](#download) |
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
@@ -12,7 +12,7 @@
 ![Format Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-2D Game Library for the web.
+2D Game Engine for the web.
 
 ## Features
 
@@ -25,7 +25,7 @@
 - Multiple Cameras with Effects
 - Animations & State Machines & Cutscenes
 - Hitboxes and Colliders
-- Keyboard, Mouse, Controller, and Touch Input
+- Keyboard, and Mouse Inputs
 - DPR / Mobile Scaling
 - Advanced Particle System
 - Effects and Presets
@@ -33,7 +33,7 @@
 - Groups
 - Tilemaps
 - Fast & Performant
-- Small Package
+- Small Package Size
 - Lighting
 - Preloader
 - Textures
@@ -191,8 +191,18 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   ├── base
 │   │   ├── amount.ts
 │   │   ├── once.ts
-│   │   └── render.ts
+│   │   ├── render.ts
+│   │   └── timer.ts
 │   ├── core
+│   │   ├── animation
+│   │   │   ├── animationFrame.ts
+│   │   │   ├── animationManager.ts
+│   │   │   ├── animationState.ts
+│   │   │   ├── animation.ts
+│   │   │   ├── stateMachine.ts
+│   │   │   └── tweens
+│   │   │       ├── easing.ts
+│   │   │       └── interpolation.ts
 │   │   ├── camera
 │   │   │   └── camera.ts
 │   │   ├── cutscene
@@ -204,6 +214,15 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   └── preset
 │   │   │       ├── explosion.ts
 │   │   │       └── smoke.ts
+│   │   ├── events
+│   │   │   ├── eventEmitter.ts
+│   │   │   ├── events.ts
+│   │   │   ├── main
+│   │   │   │   └── gameEvents.ts
+│   │   │   └── other
+│   │   │       ├── buttonEvents.ts
+│   │   │       ├── cutsceneEvents.ts
+│   │   │       └── groupEvents.ts
 │   │   ├── gameobjects
 │   │   │   ├── circle.ts
 │   │   │   ├── gameObject.ts
@@ -213,7 +232,6 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   ├── misc
 │   │   │   │   └── canvasModulate.ts
 │   │   │   ├── particles
-│   │   │   │   ├── particleContainer.ts
 │   │   │   │   ├── particleEmitter.ts
 │   │   │   │   └── particle.ts
 │   │   │   ├── rect.ts
@@ -225,14 +243,22 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── group
 │   │   │   └── group.ts
 │   │   ├── input
-│   │   │   └── input.ts
+│   │   │   ├── input.ts
+│   │   │   ├── keyboardInput.ts
+│   │   │   ├── models
+│   │   │   │   ├── key.ts
+│   │   │   │   └── mouse.ts
+│   │   │   └── mouseInput.ts
 │   │   ├── lights
 │   │   │   └── staticLight.ts
 │   │   ├── loader
 │   │   │   └── loader.ts
 │   │   ├── map
 │   │   │   ├── map.ts
-│   │   │   └── tilemap.ts
+│   │   │   ├── tilelayer.ts
+│   │   │   ├── tilemap.ts
+│   │   │   ├── tileset.ts
+│   │   │   └── tile.ts
 │   │   ├── math
 │   │   │   ├── clamp.ts
 │   │   │   ├── lerp.ts
@@ -240,7 +266,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   ├── randomInt.ts
 │   │   │   └── vector2.ts
 │   │   ├── misc
-│   │   │   └── raycast.ts
+│   │   │   └── pluginManager.ts
 │   │   ├── models
 │   │   │   ├── displayList.ts
 │   │   │   ├── physicsList.ts
@@ -248,6 +274,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── physics
 │   │   │   ├── circleToRectIntersect.ts
 │   │   │   ├── collider.ts
+│   │   │   ├── hitboxFaceIntersect.ts
 │   │   │   ├── models
 │   │   │   │   ├── area.ts
 │   │   │   │   └── hitbox.ts
@@ -284,9 +311,12 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   └── version.ts
 │   ├── index.ts
 │   └── utils
+│       ├── averageArray.ts
 │       ├── cloneClass.ts
 │       ├── degToRadians.ts
+│       ├── detectBrowser.ts
 │       ├── extractNumbers.ts
+│       ├── smoothArray.ts
 │       ├── swapElement.ts
 │       └── validURL.ts
 ├── tsconfig.json
@@ -309,8 +339,6 @@ DuckEngine follows [SemVer](https://semver.org/).
 
 All demos are bundled with parcel-bundler and are all on codesandbox.
 
-### [Space Shooter Game](https://codesandbox.io/s/duckengine-space-shooter-64wkg?file=/src/scene.js)
-
 ### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
 
 ### [Particle Test](https://codesandbox.io/s/duckengine-particle-test-dhcr1?file=/src/scene.js)
@@ -319,7 +347,7 @@ All demos are bundled with parcel-bundler and are all on codesandbox.
 
 ## Attribution
 
-Cube found in logo by José Manuel de Laá from the Noun Project.
+The cube in the [DuckEngine Logo](global/Logo.png) is by José Manuel de Laá from the Noun Project.
 
 ## License
 

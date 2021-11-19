@@ -39,10 +39,8 @@ import PhysicsBodyClass from './core/physics/physicsBody';
 import HitboxClass from './core/physics/models/hitbox';
 import KeyboardInputClass from './core/input/keyboardInput';
 import MouseInputClass from './core/input/mouseInput';
-import GamepadInputClass from './core/input/gamepadInput';
 import KeyClass from './core/input/models/key';
 import MouseClass from './core/input/models/mouse';
-import GamepadModelClass from './core/input/models/gamepad';
 
 // main
 
@@ -165,11 +163,9 @@ export namespace Duck {
 			export const Input = InputClass;
 			export const KeyboardInput = KeyboardInputClass;
 			export const MouseInput = MouseInputClass;
-			export const GamepadInput = GamepadInputClass;
 			export namespace Models {
 				export const Key = KeyClass;
 				export const Mouse = MouseClass;
-				export const Gamepad = GamepadModelClass;
 			}
 		}
 	}
@@ -251,12 +247,7 @@ export namespace Duck {
 		}
 
 		export namespace Maps {
-			export type Map<
-				map extends number[][],
-				atlas extends {
-					[key: number]: HTMLImageElement | string;
-				}
-			> = MapClass<map, atlas>;
+			export type Map = MapClass;
 			export type TileMap = TileMapClass;
 		}
 
@@ -272,12 +263,9 @@ export namespace Duck {
 			export type Input = InputClass;
 			export type KeyboardInput = KeyboardInputClass;
 			export type MouseInput = MouseInputClass;
-			export type GamepadInput = GamepadInputClass;
 			export namespace Models {
 				export type Key = KeyClass;
 				export type Mouse = MouseClass;
-				export type Gamepad<t extends Duck.Types.GamepadInput.Mapping> =
-					GamepadModelClass<t>;
 			}
 		}
 	}

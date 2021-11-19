@@ -1,6 +1,8 @@
-import { Duck } from '../../index';
+import { Duck } from '../..';
 import Game from '../game';
+import Scene from '../scene';
 import Map from './map';
+import TileLayer from './tilelayer';
 
 /**
  * @class TileMap
@@ -9,32 +11,22 @@ import Map from './map';
  * @extends Map
  * @since 1.0.0
  */
-export default class TileMap extends Map<
-	Duck.Types.Tilemap.Map,
-	Duck.Types.Tilemap.Atlas
-> {
+export default class TileMap extends Map {
 	/**
 	 * @constructor TileMap
-	 * @description Creates a tilemap of images with a 2D array and atlas
-	 * @param {number} tileW How wide a tile is
-	 * @param {number} tileH How tall a tile is
-	 * @param {number} rows How many rows are there
-	 * @param {number} cols How many columns are there
-	 * @param {map} map An Array with nested arrays that represents the map
-	 * @param {atlas} atlas An object with numbers as their keys that are used to find the asset to use for the map
+	 * @description Creates a TileMap instance.
+	 * @param {TileLayer[]} tileLayers An array of TileLayers
 	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0
 	 */
 	constructor(
-		tileW: number,
-		tileH: number,
-		rows: number,
-		cols: number,
-		map: Duck.Types.Tilemap.Map,
-		atlas: Duck.Types.Tilemap.Atlas,
-		game: Game
+		origin: Duck.Types.Math.Vector2Like,
+		tileLayers: TileLayer[],
+		game: Game,
+		scene: Scene
 	) {
-		super(tileW, tileH, rows, cols, map, atlas, game);
+		super(origin, tileLayers, game, scene);
 	}
 
 	/**
@@ -44,23 +36,32 @@ export default class TileMap extends Map<
 	 *
 	 */
 	public _draw() {
-		for (let row = 0; row < this.rows; row++) {
-			for (let col = 0; col < this.cols; col++) {
-				const number = this.map[row][col];
-				const image = this.atlas[number];
-				const x = col * this.tileW;
-				const y = row * this.tileH;
+		this.getVisibleTileLayers().forEach((layer) => {
+			for (let row = 0; row < layer.map.length; row++) {
+				for (let col = 0; col < layer.map[row].length; col++) {
+					const tile = layer.tileset.getTile(layer.map[row][col]);
 
-				if (this.game.ctx && image instanceof HTMLImageElement) {
-					this.game.ctx.drawImage(
-						image,
-						x,
-						y,
-						this.tileW,
-						this.tileW
-					);
+					if (tile) {
+						if (this.game.ctx && layer.tileset.texture.texture) {
+							this.game.ctx.drawImage(
+								layer.tileset.texture.texture,
+								tile.position.x,
+								tile.position.y,
+								layer.tileset.tileW,
+								layer.tileset.tileH,
+								layer.tileset.tileW * col + this.origin.x,
+								layer.tileset.tileH * row + this.origin.y,
+								layer.tileset.tileW,
+								layer.tileset.tileH
+							);
+						}
+					}
 				}
 			}
-		}
+		});
+	}
+
+	public getVisibleTileLayers(filter = true) {
+		return this.tileLayers.filter((layer) => layer.visible === filter);
 	}
 }

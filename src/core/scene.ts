@@ -79,6 +79,8 @@ import PhysicsList from './models/physicsList';
 import Area from './physics/models/area';
 import PhysicsBody from './physics/physicsBody';
 import GameObject from './gameobjects/gameObject';
+import Tileset from './map/tileset';
+import TileLayer from './map/tilelayer';
 
 /**
  * @class Scene
@@ -225,14 +227,26 @@ export default class Scene extends Render {
 			config: Duck.Types.Cutscene.Config,
 			instructions: Duck.Types.Cutscene.Instructions
 		) => Cutscene;
-		tilemap: (
-			tileW: number,
-			tileH: number,
-			rows: number,
-			cols: number,
-			map: Duck.Types.Tilemap.Map,
-			atlas: Duck.Types.Tilemap.Atlas
-		) => TileMap;
+		map: {
+			tilemap: (
+				origin: Duck.Types.Math.Vector2Like,
+				tilelayers: TileLayer[]
+			) => TileMap;
+			tileset: (
+				textureKey: string,
+				map: number[][],
+				tileW: number,
+				tileH: number,
+				rows: number,
+				cols: number
+			) => Tileset;
+			tileLayer: (
+				tileset: Tileset,
+				map: number[][],
+				zIndex?: number,
+				visible?: boolean
+			) => TileLayer;
+		};
 		effect: (
 			rangeX: Duck.Types.ParticleEmitter.Range,
 			rangeY: Duck.Types.ParticleEmitter.Range,
@@ -662,25 +676,54 @@ export default class Scene extends Render {
 			) => {
 				return new Cutscene(config, instructions, this.game);
 			},
-			tilemap: (
-				tileW: number,
-				tileH: number,
-				rows: number,
-				cols: number,
-				map: Duck.Types.Tilemap.Map,
-				atlas: Duck.Types.Tilemap.Atlas
-			) => {
-				const myTileMap = new TileMap(
-					tileW,
-					tileH,
-					rows,
-					cols,
-					map,
-					atlas,
-					this.game
-				);
-				this.displayList.add(myTileMap);
-				return myTileMap;
+			map: {
+				tilemap: (
+					origin: Duck.Types.Math.Vector2Like,
+					tilelayers: TileLayer[]
+				) => {
+					const myTileMap = new TileMap(
+						origin,
+						tilelayers,
+						this.game,
+						this
+					);
+					this.displayList.add(myTileMap);
+					return myTileMap;
+				},
+				tileset: (
+					textureKey: string,
+					map: number[][],
+					tileW: number,
+					tileH: number,
+					rows: number,
+					cols: number
+				) => {
+					return new Tileset(
+						textureKey,
+						map,
+						tileW,
+						tileH,
+						rows,
+						cols,
+						this.game,
+						this
+					);
+				},
+				tileLayer: (
+					tileset: Tileset,
+					map: number[][],
+					zIndex = 2,
+					visible = true
+				) => {
+					return new TileLayer(
+						tileset,
+						map,
+						this.game,
+						this,
+						zIndex,
+						visible
+					);
+				},
 			},
 			effect: (
 				rangeX: Duck.Types.ParticleEmitter.Range,

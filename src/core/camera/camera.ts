@@ -19,7 +19,8 @@ import StaticLight from '../lights/staticLight';
 import Button from '../gameobjects/interactive/button';
 import Text from '../gameobjects/interactive/text';
 import Particle from '../gameobjects/particles/particle';
-import GameObject from '../gameobjects/gameObject';
+import PhysicsBody from '../physics/physicsBody';
+import Map from '../map/map';
 
 /**
  * @class Camera
@@ -520,11 +521,27 @@ export default class Camera {
 		);
 
 		for (const culledObject of culledObjects) {
+			// skip maps
+			if (culledObject instanceof Map) {
+				continue;
+			}
+
 			culledObject.visible = true;
+			if (culledObject instanceof PhysicsBody) {
+				culledObject.enabled = true;
+			}
 		}
 
 		for (const nonCulledObject of nonCulledObjects) {
+			// skip maps
+			if (nonCulledObject instanceof Map) {
+				continue;
+			}
+
 			nonCulledObject.visible = false;
+			if (nonCulledObject instanceof PhysicsBody) {
+				nonCulledObject.enabled = false;
+			}
 		}
 	}
 
@@ -590,15 +607,25 @@ export default class Camera {
 		);
 
 		for (const culledObject of culledObjects) {
+			// skip maps
+			if (culledObject instanceof Map) {
+				continue;
+			}
+
 			culledObject.visible = true;
-			if (culledObject instanceof GameObject) {
+			if (culledObject instanceof PhysicsBody) {
 				culledObject.enabled = true;
 			}
 		}
 
 		for (const nonCulledObject of nonCulledObjects) {
+			// skip maps
+			if (nonCulledObject instanceof Map) {
+				continue;
+			}
+
 			nonCulledObject.visible = false;
-			if (nonCulledObject instanceof GameObject) {
+			if (nonCulledObject instanceof PhysicsBody) {
 				nonCulledObject.enabled = false;
 			}
 		}
