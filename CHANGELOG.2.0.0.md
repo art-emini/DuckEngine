@@ -119,6 +119,7 @@
   - Changed velocity value to be in pixels per second
   - SpriteSheet class has been removed and replaced with Sprite class
   - Removed applyFilter from Sprite
+  - Changed how IDs are generated
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created

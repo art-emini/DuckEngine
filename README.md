@@ -12,7 +12,7 @@
 ![Format Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-2D Game Engine for the web.
+A 2D Game Engine for the web.
 
 ## Features
 
@@ -88,6 +88,12 @@
 2. Import DuckEngine from URL
    - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.js>
    - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.min.js>
+3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
+
+### Itch.io
+
+1. Download DuckEngine from <https://ksplatdev.itch.io/duckengine>
+2. Import DuckEngine into your project.
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)
@@ -182,6 +188,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   ├── Logo_Splash.xcf
 │   ├── Logo.xcf
 │   └── README.md
+├── itch.io-description.md
 ├── LICENSE
 ├── package.json
 ├── README.md
@@ -200,10 +207,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   ├── animationManager.ts
 │   │   │   ├── animationState.ts
 │   │   │   ├── animation.ts
-│   │   │   ├── stateMachine.ts
-│   │   │   └── tweens
-│   │   │       ├── easing.ts
-│   │   │       └── interpolation.ts
+│   │   │   └── stateMachine.ts
 │   │   ├── camera
 │   │   │   └── camera.ts
 │   │   ├── cutscene
@@ -237,9 +241,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   │   │   └── particle.ts
 │   │   │   ├── rect.ts
 │   │   │   ├── roundrect.ts
-│   │   │   ├── spritesheet.ts
-│   │   │   ├── sprite.ts
-│   │   │   └── webgl
+│   │   │   └── sprite.ts
 │   │   ├── game.ts
 │   │   ├── group
 │   │   │   └── group.ts
@@ -287,7 +289,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │   │   ├── sound
 │   │   │   └── soundPlayer.ts
 │   │   └── storage
-│   │       └── storage.ts
+│   │       └── cacheManager.ts
 │   ├── helper
 │   │   ├── color
 │   │   │   ├── convertColorToRGBA.ts
@@ -319,6 +321,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 │       ├── extractNumbers.ts
 │       ├── smoothArray.ts
 │       ├── swapElement.ts
+│       ├── uniqueID.ts
 │       └── validURL.ts
 ├── tsconfig.json
 ├── webpack.config.js

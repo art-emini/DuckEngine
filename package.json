@@ -1,7 +1,7 @@
 {
 	"name": "duckengine",
 	"version": "2.0.0",
-	"description": "2D Game Library for the web.",
+	"description": "A 2D Game Engine for the web.",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"maintainers": [
@@ -32,7 +32,10 @@
 		"2d",
 		"game engine",
 		"simple",
-		"fast"
+		"fast",
+		"web game engine",
+		"javascript game engine",
+		"performant"
 	],
 	"author": "Bleart Emini",
 	"license": "MIT",
