@@ -56,6 +56,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @memberof Group
 	 * @description Adds an item to the Group
 	 * @param {t} item Item to add
+	 * @emits EVENTS.GROUP.ADD
 	 * @since 1.0.0-beta
 	 */
 	public add(item: t) {
@@ -72,6 +73,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @memberof Group
 	 * @description Removes an item from the Group
 	 * @param {t} item Item to remove
+	 * @emits EVENTS.GROUP.REMOVE
 	 * @since 1.0.0-beta
 	 */
 	public remove(item: t) {

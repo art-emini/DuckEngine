@@ -51,4 +51,7 @@ module.exports = {
 	experiments: {
 		outputModule: true,
 	},
+	performance: {
+		hints: false
+	}
 };

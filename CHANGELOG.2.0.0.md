@@ -199,6 +199,8 @@
   - Removed offload method as it has been renamed and changed to offloadBounds
 - Input
   - Removed all methods and properties excluding game property
+- Camera
+  - Removed scrollToZoom method
 - Removed Classes
   - ParticleContainer
   - SpriteSheet (Moved its functionality to Sprite)

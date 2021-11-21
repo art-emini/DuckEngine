@@ -4,7 +4,7 @@
 /**
  * @class Render
  * @classdesc Creates a DuckEngine Render base class
- * @description The Render Class. Base class that DuckEngine {@link Scene} extends
+ * @description The Render Class. Base class that DuckEngine Scene extends
  * @since 1.0.0-beta
  */
 export default class Render {

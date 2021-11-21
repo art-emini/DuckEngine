@@ -39,13 +39,22 @@ import KeyboardInputClass from './core/input/keyboardInput';
 import MouseInputClass from './core/input/mouseInput';
 import KeyClass from './core/input/models/key';
 import MouseClass from './core/input/models/mouse';
+import CacheManagerClass from './core/storage/cacheManager';
+import AreaClass from './core/physics/models/area';
+import PhysicsListClass from './core/models/physicsList';
+import PluginManagerClass from './core/misc/pluginManager';
+import AnimationClass from './core/animation/animation';
+import AnimationFrameClass from './core/animation/animationFrame';
+import AnimationManagerClass from './core/animation/animationManager';
+import AnimationStateClass from './core/animation/animationState';
+import StateMachineClass from './core/animation/stateMachine';
 
 // main
 
 // spec
 /**
  * @namespace Duck
- * All Types, Type Classes, Classes, Layers, and Configurations are stored here.
+ * @description All Types, Type Classes, Classes, Layers, and Configurations are stored here.
  * @since 1.0.0-beta
  */
 export namespace Duck {
@@ -53,7 +62,7 @@ export namespace Duck {
 	 * @memberof Duck
 	 * @description Returns a HTMLCanvasElement and CanvasRenderingContext2D, finds a canvas, if none exist,
 	 * it creates and appends one
-	 * @returns {canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D}
+	 * @returns {{canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D}}
 	 */
 	export const AutoCanvas = () => {
 		let canvas: HTMLCanvasElement = document.querySelector(
@@ -90,7 +99,7 @@ export namespace Duck {
 		export const Game = GameClass;
 		export const Scene = SceneClass;
 
-		export namespace Gameobjects {
+		export namespace GameObjects {
 			export const GameObject = GameObjectClass;
 			export const Circle = CircleClass;
 			export const Rect = RectClass;
@@ -124,6 +133,8 @@ export namespace Duck {
 			export const Loader = LoaderClass;
 			export const Group = GroupClass;
 			export const Cutscene = CutsceneClass;
+			export const CacheManager = CacheManagerClass;
+			export const PluginManager = PluginManagerClass;
 		}
 
 		export namespace Base {
@@ -146,11 +157,13 @@ export namespace Duck {
 			export const PhysicsBody = PhysicsBodyClass;
 			export namespace Models {
 				export const Hitbox = HitboxClass;
+				export const Area = AreaClass;
 			}
 		}
 
 		export namespace Models {
 			export const DisplayList = DisplayListClass;
+			export const PhysicsList = PhysicsListClass;
 			export const Texture = TextureClass;
 		}
 
@@ -176,10 +189,18 @@ export namespace Duck {
 				export const Mouse = MouseClass;
 			}
 		}
+
+		export namespace Animation {
+			export const Animation = AnimationClass;
+			export const AnimationFrame = AnimationFrameClass;
+			export const AnimationManager = AnimationManagerClass;
+			export const AnimationState = AnimationStateClass;
+			export const StateMachine = StateMachineClass;
+		}
 	}
 
 	/**
-	 * @namespace Duck.Classes
+	 * @namespace Duck.TypeClasses
 	 * @memberof Duck
 	 * @description All type classes are stored here so that it can be referenced.
 	 * @since 2.0.0
@@ -189,9 +210,8 @@ export namespace Duck {
 		export type Scene = SceneClass;
 
 		export namespace GameObjects {
-			export type GameObject<
-				textureType extends Duck.Types.Texture.Type
-			> = GameObjectClass<textureType>;
+			export type GameObject<t extends Duck.Types.Texture.Type> =
+				GameObjectClass<t>;
 			export type Circle = CircleClass;
 			export type Rect = RectClass;
 			export type RoundRect = RoundRectClass;
@@ -225,6 +245,8 @@ export namespace Duck {
 			export type Group<t extends Duck.Types.Group.StackItem> =
 				GroupClass<t>;
 			export type Cutscene = CutsceneClass;
+			export type CacheManager = CacheManagerClass;
+			export type PluginManager = PluginManagerClass;
 		}
 
 		export namespace Base {
@@ -244,21 +266,22 @@ export namespace Duck {
 		export namespace Physics {
 			export type Collider = ColliderClass;
 			export type PhysicsServer = PhysicsServerClass;
-			export type PhysicsBody<
-				textureType extends Duck.Types.Texture.Type
-			> = PhysicsBodyClass<textureType>;
+			export type PhysicsBody<t extends Duck.Types.Texture.Type> =
+				PhysicsBodyClass<t>;
 			export namespace Models {
 				export type Hitbox = HitboxClass;
+				export type Area = AreaClass;
 			}
 		}
 
 		export namespace Models {
 			export type DisplayList = DisplayListClass;
-			export type Texture<type extends Duck.Types.Texture.Type> =
-				TextureClass<type>;
+			export type PhysicsList = PhysicsListClass;
+			export type Texture<t extends Duck.Types.Texture.Type> =
+				TextureClass<t>;
 		}
 
-		export namespace Maps {
+		export namespace Map {
 			export type Map = MapClass;
 			export type TileMap = TileMapClass;
 		}
@@ -280,10 +303,18 @@ export namespace Duck {
 				export type Mouse = MouseClass;
 			}
 		}
+
+		export namespace Animation {
+			export type Animation = AnimationClass;
+			export type AnimationFrame = AnimationFrameClass;
+			export type AnimationManager = AnimationManagerClass;
+			export type AnimationState = AnimationStateClass;
+			export type StateMachine = StateMachineClass;
+		}
 	}
 
 	/**
-	 * @namespace Duck.Classes
+	 * @namespace Duck.Layers
 	 * @memberof Duck
 	 * @description All rendering zIndexes are stored here.
 	 * @since 2.0.0
@@ -302,7 +333,7 @@ export namespace Duck {
 	}
 
 	/**
-	 * @namespace Duck.Classes
+	 * @namespace Duck.Types
 	 * @memberof Duck
 	 * @description All Class configs and types for that class are stored here. All types are here.
 	 * @since 2.0.0
@@ -314,7 +345,7 @@ export namespace Duck {
 			| GameObjectClass<Duck.Types.Texture.Type>
 			| HitboxClass
 			| Duck.TypeClasses.Effects.Effect
-			| Duck.TypeClasses.Maps.TileMap;
+			| Duck.TypeClasses.Map.TileMap;
 
 		export type PhysicsProcessMember =
 			PhysicsBodyClass<Duck.Types.Texture.Type>;
@@ -815,7 +846,7 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Animation.Config
-				 * @description Frames of the Animation, objects that are later converted to {@link AnimationFrame}
+				 * @description Frames of the Animation, objects that are later converted to AnimationFrame
 				 * @type Duck.Types.Animation.FrameBase[]
 				 * @since 2.0.0
 				 */

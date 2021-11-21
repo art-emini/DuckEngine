@@ -2,10 +2,10 @@
 import DuckEngine, { Duck } from '../../dist';
 
 export default class MainScene extends DuckEngine.Scene {
-	public myRect: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
-	public myCircle: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	public myRect: Duck.TypeClasses.GameObjects.GameObject<'color'>;
+	public myCircle: Duck.TypeClasses.GameObjects.GameObject<'color'>;
 	public gameObjects: Duck.TypeClasses.Misc.Group<
-		Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		Duck.TypeClasses.GameObjects.GameObject<'color'>
 	>;
 
 	public myCamera: Duck.TypeClasses.Cameras.Camera;
@@ -14,7 +14,7 @@ export default class MainScene extends DuckEngine.Scene {
 	public myParticleEmitter: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
 
 	public myInput: Duck.TypeClasses.Input.KeyboardInput;
-	private mySpeed = 1;
+	private mySpeed = 250;
 
 	constructor(game: Duck.TypeClasses.Game) {
 		super('main', game);
@@ -56,7 +56,7 @@ export default class MainScene extends DuckEngine.Scene {
 
 		this.myParticleEmitter.emit();
 		this.myParticleEmitter.keepEmitting(100, 100);
-		this.myParticleEmitter.float([-0.2, 0.2], [-0.1, -0.3]);
+		this.myParticleEmitter.float([-200, 200], [-100, -300]);
 
 		// input
 		this.myInput = this.add.input().createKeyboardInput();

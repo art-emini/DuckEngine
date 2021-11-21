@@ -13,6 +13,12 @@ import Game from '../game';
 export default class Cutscene {
 	protected config: Duck.Types.Cutscene.Config;
 	protected instructions: Duck.Types.Cutscene.Instructions;
+	/**
+	 * @memberof Cutscene
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
 	public game: Game;
 
 	protected steps: Duck.Types.Cutscene.Step[];
@@ -20,13 +26,23 @@ export default class Cutscene {
 	protected otherObjects: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
 	protected camera: Camera;
 	protected otherCameras: Camera[];
-
+	/**
+	 * @memberof Cutscene
+	 * @description The index of the current cutscene step
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public index: number;
-
+	/**
+	 * @memberof Cutscene
+	 * @description The state of the Cutscene running
+	 * @type boolean
+	 * @since 1.0.0-beta
+	 */
 	public running: boolean;
 
 	/**
-	 * @constructor
+	 * @constructor Cutscene
 	 * @description Creates an instance of a Cutscene.
 	 * @param {Duck.Types.Cutscene.Config} config Configuration
 	 * @param {Duck.Types.Cutscene.Instructions} instructions Cutscene instructions
@@ -70,6 +86,7 @@ export default class Cutscene {
 	/**
 	 * @memberof Cutscene
 	 * @description Starts the cutscene
+	 * @emits EVENTS.CUTSCENE.START
 	 * @since 1.0.0-beta
 	 */
 	public start() {
@@ -81,6 +98,7 @@ export default class Cutscene {
 	/**
 	 * @memberof Cutscene
 	 * @description Stops the cutscene
+	 * @emits EVENTS.CUTSCENE.END
 	 * @since 1.0.0-beta
 	 */
 	public stop() {
@@ -251,6 +269,7 @@ export default class Cutscene {
 	/**
 	 * @memberof Cutscene
 	 * @description Starts the next step
+	 * @emits EVENTS.CUTSCENE.NEXT
 	 * @since 1.0.0-beta
 	 */
 	public next() {

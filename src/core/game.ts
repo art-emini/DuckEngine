@@ -371,6 +371,10 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Starts the game loop
+	 * @emits EVENTS.GAME.LOAD_BEGIN
+	 * @emits EVENTS.GAME.DRAW_SPLASH
+	 * @emits EVENTS.GAME.LOAD_SCENE
+	 * @emits EVENTS.GAME.LOAD_FINISH
 	 * @since 1.0.0-beta
 	 */
 	public async start() {
@@ -415,6 +419,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Stops the game loop
+	 * @emits EVENTS.GAME.STOP
 	 * @since 1.0.0
 	 */
 	public stop() {
@@ -521,6 +526,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Clears the current frame on the canvas
+	 * @emits EVENTS.GAME.CLEAR_FRAME
 	 * @since 1.0.0
 	 */
 	public clearFrame() {
@@ -535,6 +541,7 @@ export default class Game {
 	 * @memberof Game
 	 * @description Sets the scale of the canvas
 	 * @param {Duck.Types.Misc.Scale} scale Scale to set the canvas to
+	 * @emits EVENTS.GAME.SET_SCALE
 	 * @since 1.0.0-beta
 	 */
 	public setScale(scale: Duck.Types.Misc.Scale) {
@@ -557,6 +564,8 @@ export default class Game {
 	 * @memberof Game
 	 * @description Sets the style background color of the canvas
 	 * @param {string} background Background color
+	 * @emits EVENTS.GAME.SET_BACKGROUND
+	 * @since 1.0.0-beta
 	 */
 	public setBackground(background: string) {
 		if (this.canvas) {
@@ -575,6 +584,7 @@ export default class Game {
 	 * @description Switches the current scene by the key
 	 * @param {string} key Key of the scene to switch from
 	 * @param {string} key2 Key of the scene to switch to
+	 * @emits EVENTS.GAME.SWITCH_SCENE
 	 * @since 1.0.0-beta
 	 */
 	public switchScene(key: string, key2: string) {
@@ -603,6 +613,7 @@ export default class Game {
 	 * @memberof Game
 	 * @description Sets a scene to visible. Keeps the current scene visible
 	 * @param {string} key Key of the scene to show
+	 * @emits EVENTS.GAME.SHOW_SCENE
 	 * @since 1.0.0-beta
 	 */
 	public showScene(key: string) {
@@ -621,6 +632,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Fullscreens the canvas and scales canvas
+	 * @emits EVENTS.GAME.FULLSCREEN
 	 * @since 1.0.0
 	 */
 	public fullscreen() {
@@ -664,6 +676,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Unfullscreens the canvas and scales canvas
+	 * @emits EVENTS.GAME.UNFULLSCREEN
 	 * @since 1.0.0
 	 */
 	public unfullscreen() {
@@ -684,6 +697,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Locks the pointer on the canvas
+	 * @emits EVENTS.GAME.LOCK_POINTER
 	 * @since 1.0.0
 	 */
 	public lockPointer() {
@@ -696,6 +710,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Unlocks the pointer from the canvas
+	 * @emits EVENTS.GAME.UNLOCK_POINTER
 	 * @since 1.0.0
 	 */
 	public unlockPointer() {
@@ -738,6 +753,7 @@ export default class Game {
 	/**
 	 * @memberof Game
 	 * @description Scales the canvas to fit the whole window
+	 * @emits EVENTS.GAME.SET_SCALE
 	 * @since 1.0.0
 	 */
 	public scaleToWindow() {

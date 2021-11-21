@@ -28,12 +28,31 @@ import Map from '../map/map';
  * @since 1.0.0-beta
  */
 export default class Camera {
+	/**
+	 * @memberof Camera
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Camera
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
 	protected distance: number;
 	protected lookAt: number[];
 	protected ctx: CanvasRenderingContext2D | null | undefined;
 	protected fieldOfView: number;
+
+	/**
+	 * @memberof Camera
+	 * @description Camera's viewport, has info about the viewport
+	 * @since 1.0.0-beta
+	 */
 	public viewport: {
 		left: number;
 		right: number;
@@ -44,12 +63,25 @@ export default class Camera {
 		scale: number[];
 	};
 	protected aspectRatio: number | undefined;
+
+	/**
+	 * @memberof Camera
+	 * @description Determines if the camera is a main camera in the attached scene. Must be added by Scene.mainCamera
+	 * @type boolean
+	 * @since 1.0.0-beta
+	 */
 	public readonly isMain: boolean;
 
 	protected bounds:
 		| { position: { x: number; y: number }; w: number; h: number }
 		| undefined;
 
+	/**
+	 * @memberof Camera
+	 * @description A gameobject that the Camera is currently following
+	 * @type Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type> | undefined
+	 * @since
+	 */
 	public following:
 		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
 		| undefined;
@@ -57,8 +89,8 @@ export default class Camera {
 	protected lerpY = 1;
 
 	/**
-	 * @constructor
-	 * @description Creates a camera instance.
+	 * @constructor Camera
+	 * @description Creates a Camera instance.
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
@@ -342,7 +374,7 @@ export default class Camera {
 	/**
 	 * @memberof Camera
 	 * @description Transforms a coordinate pair from world coordinates into screen coordinates (relative to the canvas) -
-	 * useful for interacting with a {@link Button} while having a camera
+	 * useful for interacting with a Button while having a camera
 	 * @param {number} x X position
 	 * @param {number} y Y position
 	 * @param {Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>} obj GameObject
@@ -482,29 +514,6 @@ export default class Camera {
 
 	/**
 	 * @memberof Camera
-	 * @description Adds a scroll event that changes the zoom value
-	 * @since 1.0.0-beta
-	 */
-	public scrollToZoom() {
-		window.onwheel = (e: WheelEvent) => {
-			if (e.ctrlKey) {
-				let zoomLevel = this.distance - e.deltaY * 20;
-				if (zoomLevel <= 1) {
-					zoomLevel = 1;
-				}
-
-				this.setZoom(zoomLevel);
-			} else {
-				const x = this.lookAt[0] + e.deltaX * 2;
-				const y = this.lookAt[1] + e.deltaY * 2;
-
-				this.moveTo(x, y);
-			}
-		};
-	}
-
-	/**
-	 * @memberof Camera
 	 * @description Culls/Renders objects that are passed and does not render other object that are not passed
 	 * @param {Duck.Types.Renderable[]} renderableObjects Objects that should be culled/rendered
 	 * @since 2.0.0
@@ -634,7 +643,7 @@ export default class Camera {
 	 * @description Returns the default zoom, also uses DPR scaling if enabled
 	 * @since 1.0.0
 	 */
-	get defaultZoom() {
+	public get defaultZoom() {
 		if (this.game.config.dprScale) {
 			if (this.game.config.debug) {
 				new Debug.Log(
@@ -652,7 +661,7 @@ export default class Camera {
 	 * @description Returns the default FOV
 	 * @since 1.0.0
 	 */
-	get defaultFOV() {
+	public get defaultFOV() {
 		return Math.PI / 4;
 	}
 }

@@ -7,7 +7,7 @@ import GameObject from '../gameObject';
 
 /**
  * @class CanvasModulate
- * @classdesc Creates a DuckEngine CanvasModulate {@link GameObject}
+ * @classdesc Creates a DuckEngine CanvasModulate GameObject
  * @description The CanvasModulate Class. A large rectangle with a special zIndex to use as a background, works with lights
  * @extends GameObject
  * @since 2.0.0

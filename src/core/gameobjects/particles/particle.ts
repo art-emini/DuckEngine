@@ -10,7 +10,7 @@ import Scene from '../../scene';
 /**
  * @class Particle
  * @classdesc Creates a DuckEngine Particle
- * @description The Particle Class. A particle that can be emitted by a {@link ParticleEmitter}
+ * @description The Particle Class. A particle that can be emitted by a ParticleEmitter
  * @extends GameObject
  * @since 1.0.0
  */
