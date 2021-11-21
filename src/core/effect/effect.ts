@@ -10,22 +10,83 @@ import ParticleEmitter from '../gameobjects/particles/particleEmitter';
  * @since 1.2.0
  */
 export default class Effect {
+	/**
+	 * @memberof Effect
+	 * @description A unique identifier for the Effect
+	 * @type number
+	 * @since 1.2.0
+	 */
 	public readonly id: number;
+
+	/**
+	 * @memberof Effect
+	 * @description Shape, always "Effect" used for Scene.displayList
+	 * @type string
+	 * @since 1.2.0
+	 */
 	public readonly shape: string;
+
+	/**
+	 * @memberof Effect
+	 * @description Range of numbers for x pos
+	 * @type Duck.Types.ParticleEmitter.Range
+	 * @since 1.2.0
+	 */
 	public rangeX: Duck.Types.ParticleEmitter.Range;
+
+	/**
+	 * @memberof Effect
+	 * @description Range of numbers for y pos
+	 * @type Duck.Types.ParticleEmitter.Range
+	 * @since 1.2.0
+	 */
 	public rangeY: Duck.Types.ParticleEmitter.Range;
+
+	/**
+	 * @memberof Effect
+	 * @description ParticleEmitter to control
+	 * @type ParticleEmitter
+	 * @since 1.2.0
+	 */
 	public particleEmitter: ParticleEmitter;
+
+	/**
+	 * @memberof Effect
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.2.0
+	 */
 	public game: Game;
 
+	/**
+	 * @memberof Effect
+	 * @description Determines the visibility of the Effect
+	 * @type boolean
+	 * @since 1.2.0
+	 */
 	public visible: boolean;
+
+	/**
+	 * @memberof Effect
+	 * @description Used for depth sorted
+	 * @type number
+	 * @since 1.2.0
+	 */
 	public zIndex: number;
 
+	/**
+	 * @memberof Effect
+	 * @description A gameobject that the Effect is following
+	 * @type Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>| undefined
+	 * @since 1.2.0
+	 */
 	public following:
 		| Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
 		| undefined;
 	protected randomMaxOffset: number;
+
 	/**
-	 * @constructor
+	 * @constructor Effect
 	 * @description Creates an Effect instance.
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX A range of 2 numbers to determine the new created particles x position
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY A range of 2 numbers to determine the new created particles y position

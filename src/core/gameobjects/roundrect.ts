@@ -12,6 +12,18 @@ import GameObject from './gameObject';
  * @since 1.0.0-beta
  */
 export default class RoundRect extends GameObject<'color'> {
+	/**
+	 * @constructor RoundRect
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width of RoundRect
+	 * @param {number} h Height of RoundRect
+	 * @param {number} r Radius of RoundRect
+	 * @param {string} fillColor Fill Color of RoundRect
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,

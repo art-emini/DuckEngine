@@ -1,6 +1,7 @@
-[ -d "./dist" ] && rm -rfv ./dist/*
-[ -d "./lib" ] && rm -rfv ./lib/*
-[ -d "./docs" ] && rm -rfv ./docs/*
+[ -d "./dist" ] && rm -rf ./dist/* && echo "Cleaned dist directory"
+[ -d "./lib" ] && rm -rf ./lib/* && echo "Cleaned lib directory"
+[ -d "./docs" ] && rm -rf ./docs/* && echo "Cleaned docs directory"
+
 
 echo "Compiling"
 tsc

@@ -16,9 +16,28 @@ import EVENTS from '../../events/events';
  * @since 1.0.0
  */
 export default class Button extends GameObject<'either'> {
+	/**
+	 * @memberof Button
+	 * @description Shape of the button
+	 * @type Duck.Types.Interactive.Button.Shape
+	 * @since 1.0.0
+	 */
 	public shape: Duck.Types.Interactive.Button.Shape;
+
+	/**
+	 * @memberof Button
+	 * @description Text of the button, Text instance
+	 * @type Text
+	 * @since 1.0.0
+	 */
 	public text: Text;
 
+	/**
+	 * @memberof Button
+	 * @description Hovering state
+	 * @type boolean
+	 * @since 1.0.0
+	 */
 	public hovering: boolean;
 
 	/**

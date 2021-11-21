@@ -8,19 +8,99 @@ import hitboxFaceIntersect from '../hitboxFaceIntersect';
 import PhysicsBody from '../physicsBody';
 import rectToRectIntersect from '../rectToRectIntersect';
 
+/**
+ * @class Hitbox
+ * @classdesc Creates a DuckEngine Hitbox
+ * @description The Hitbox Class. A AABB Hitbox used for Colliders
+ * @since 2.0.0
+ */
 export default class Hitbox {
+	/**
+	 * @memberof Hitbox
+	 * @description The unique identifier for a Hitbox
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public readonly id: number;
 
+	/**
+	 * @memberof Hitbox
+	 * @description The Position of the Hitbox
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public position: Vector2;
+
+	/**
+	 * @memberof Hitbox
+	 * @description The Offset Position of the hitbox
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public offset: Vector2;
+
+	/**
+	 * @memberof Hitbox
+	 * @description The Width of the Hitbox
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public w: number;
+
+	/**
+	 * @memberof Hitbox
+	 * @description The Height of the Hitbox
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public h: number;
+
+	/**
+	 * @memberof Hitbox
+	 * @description Game instance
+	 * @type Game
+	 * @since 2.0.0
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Hitbox
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
+
+	/**
+	 * @memberof Hitbox
+	 * @description PhysicsBody that the Hitbox is attached to
+	 * @type PhysicsBody<Duck.Types.Texture.Type>
+	 * @since 2.0.0
+	 */
 	public physicsObject: PhysicsBody<Duck.Types.Texture.Type>;
 
+	/**
+	 * @memberof Hitbox
+	 * @description The debug color of the Hitbox, determines if the visibility of the hitbox
+	 * @type string | undefined
+	 * @since
+	 */
 	public debugColor: string | undefined;
+
+	/**
+	 * @memberof Hitbox
+	 * @description Determines if the Hitbox will be drawn on the screen as a debug aid
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public visible: boolean;
+
+	/**
+	 * @memberof Hitbox
+	 * @description The zIndex of the Hitbox, effects how the Hitbox is layered if it is drawn on the screen as a debug aid
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public zIndex: number;
 
 	/**
@@ -31,6 +111,18 @@ export default class Hitbox {
 	 */
 	public collisionState: Duck.Types.Collider.CollisionResponseType;
 
+	/**
+	 * @constructor Hitbox
+	 * @param {number} id The PhysicsBody ID
+	 * @param {Vector2} position The position of the Hitbox
+	 * @param {number} w The width of the Hitbox
+	 * @param {number} h The height of the Hitbox
+	 * @param {Vector2} offset The offset position of the Hitbox
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} physicsObject The PhysicsBody that the Hitbox is attached to
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @param {string|undefined} [debugColor=undefined] The debugColor of the Hitbox
+	 */
 	constructor(
 		id: number,
 		position: Vector2,
@@ -58,6 +150,14 @@ export default class Hitbox {
 		this.collisionState = 'none';
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Draws the hitbox if a debugColor is passed in the constructor.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 * @since 2.0.0
+	 */
 	public _draw() {
 		if (this.game.ctx) {
 			if (this.debugColor) {
@@ -76,6 +176,14 @@ export default class Hitbox {
 		}
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Sets the Hitboxes position to the PhysicsBodies position plus the passed offset if one was set
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick
+	 *
+	 * @since 2.0.0
+	 */
 	public _update(physicsObject: PhysicsBody<Duck.Types.Texture.Type>) {
 		this.physicsObject = physicsObject;
 
@@ -83,21 +191,47 @@ export default class Hitbox {
 		this.position = this.physicsObject.position.add(this.offset);
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Sets the debugColor and visibility of the Hitbox as a debug aid
+	 * @param {string} debugColor Color
+	 * @param {boolean} [visible=true] What to set the visible property as, optional -> defaults: true
+	 * @since 2.0.0
+	 */
 	public setDebugColor(debugColor: string, visible = true) {
 		this.debugColor = debugColor;
 		this.visible = visible;
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Sets the width and height of the Hitbox
+	 * @param {Vector2} scale The new scale of the Hitbox
+	 * @since 2.0.0
+	 */
 	public scale(scale: Vector2) {
 		this.w = scale.x;
 		this.h = scale.y;
 	}
 
-	public setPosition(newPosition: Vector2, offset = Vector2.ZERO) {
+	/**
+	 * @memberof Hitbox
+	 * @description Sets position of the Hitbox
+	 * @param {Vector2} newPosition The new position of the Hitbox
+	 * @param {Vector2} [offset] The new offset position of the Hitbox, optional -> defaults: Hitbox.offset
+	 * @since 2.0.0
+	 */
+	public setPosition(newPosition: Vector2, offset = this.offset) {
 		this.offset = offset;
 		this.position = newPosition.add(this.offset);
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Auto scales, positions, and offsets the Hitbox based on the shape of the PhysicsBody
+	 * @param {Vector2} [offset] The new offset position of the Hitbox, optional
+	 * @since 2.0.0
+	 */
 	public auto(offset?: Vector2) {
 		if (this.physicsObject.shape === 'circle') {
 			// top left corner
@@ -126,6 +260,13 @@ export default class Hitbox {
 		}
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Checks if the Hitbox is intersecting with another Hitbox
+	 * @param {Hitbox} Hitbox Hitbox to use to test the intersection
+	 * @returns boolean
+	 * @since 2.0.0
+	 */
 	public intersectsWith(hitbox: Hitbox) {
 		return rectToRectIntersect(
 			{
@@ -147,12 +288,26 @@ export default class Hitbox {
 		);
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Checks if the Hitbox is intersecting with another Hitbox and returns the face that is colliding
+	 * @param {Hitbox} hitbox Hitbox to use to test the intersection
+	 * @returns Duck.Types.Collider.CollisionResponseType
+	 * @since 2.0.0
+	 */
 	public intersectsFaceWith(hitbox: Hitbox) {
 		this.collisionState = hitboxFaceIntersect(this, hitbox);
 
 		return this.collisionState;
 	}
 
+	/**
+	 * @memberof Hitbox
+	 * @description Checks if the Hitbox is intersecting with other Hitboxes and returns the face that is colliding
+	 * @param {Group<Hitbox> | Hitbox[]} hitboxes Hitboxes to use to test the intersection
+	 * @returns Duck.Types.Collider.CollisionResponseType[]
+	 * @since 2.0.0
+	 */
 	public groupIntersectsFaceWith(hitboxes: Group<Hitbox> | Hitbox[]) {
 		const collisionStates: Duck.Types.Collider.CollisionResponseType[] = [];
 

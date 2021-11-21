@@ -13,11 +13,17 @@ import GameObject from '../gameObject';
  * @since 1.0.0-beta
  */
 export default class Text extends GameObject<'color'> {
+	/**
+	 * @memberof Text
+	 * @description Text string
+	 * @type string
+	 * @since 1.0.0-beta
+	 */
 	public text: string;
 	protected config: Duck.Types.Interactive.Text.Config;
-	public game: Game;
+
 	/**
-	 * @constructor
+	 * @constructor Text
 	 * @description Creates a Text instance.
 	 * @param {string} text Text string
 	 * @param {Duck.Types.Interactive.Text.Config} config Text configuration, styles, position and more

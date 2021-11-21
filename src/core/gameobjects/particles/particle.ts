@@ -12,11 +12,23 @@ import Scene from '../../scene';
  * @classdesc Creates a DuckEngine Particle
  * @description The Particle Class. A particle that can be emitted by a {@link ParticleEmitter}
  * @extends GameObject
- * @since 1.0.0-beta
+ * @since 1.0.0
  */
 export default class Particle extends GameObject<'either'> {
+	/**
+	 * @memberof Particle
+	 * @description The float velocity of the Particle
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public floatVelocity: Vector2;
 
+	/**
+	 * @memberof Particle
+	 * @description The original fill color or img path of the Particle
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public originalFillColorOrIMGPath: string;
 
 	/**
@@ -28,7 +40,7 @@ export default class Particle extends GameObject<'either'> {
 	public age: number;
 
 	/**
-	 * @constructor
+	 * @constructor Particle
 	 * @description Creates a Particle instance
 	 * @param {Duck.Types.Collider.ShapeString} shape Shape of the particle
 	 * @param {number} w Width of the particle

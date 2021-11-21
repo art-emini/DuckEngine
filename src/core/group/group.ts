@@ -21,7 +21,21 @@ import EVENTS from '../events/events';
  */
 export default class Group<t extends Duck.Types.Group.StackItem> {
 	protected stack: t[];
+
+	/**
+	 * @memberof Group
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Group
+	 * @description Group name
+	 * @type string
+	 * @since 1.0.0-beta
+	 */
 	public readonly name: string;
 
 	/**

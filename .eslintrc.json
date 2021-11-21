@@ -33,6 +33,7 @@
 		"release",
 		"webpack.config.js",
 		"webpack.window.config.js",
-		"tests/**/*"
+		"tests/**/*",
+		"webpack.es5.config.js"
 	]
 }

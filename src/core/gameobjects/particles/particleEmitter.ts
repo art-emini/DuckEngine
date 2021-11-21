@@ -12,26 +12,85 @@ import Scene from '../../scene';
  * @since 1.0.0-beta
  */
 export default class ParticleEmitter {
+	/**
+	 * @memberof ParticleEmitter
+	 * @description A unique identifier for the ParticleEmitter
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public readonly id: number;
 	protected particle: Particle;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description A range of numbers where particle x pos will be
+	 * @type Duck.Types.ParticleEmitter.Range
+	 * @since 1.0.0-beta
+	 */
 	public rangeX: Duck.Types.ParticleEmitter.Range;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description A range of numbers where particle y pos will be
+	 * @type Duck.Types.ParticleEmitter.Range
+	 * @since 1.0.0-beta
+	 */
 	public rangeY: Duck.Types.ParticleEmitter.Range;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description The starting amount of particle
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public readonly amount: number;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description The list of current particles
+	 * @type Particles[]
+	 * @since 1.0.0-beta
+	 */
 	public list: Particle[];
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 1.0.0-beta
+	 */
 	public scene: Scene;
 
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Determines if the ParticleEmitter is emitting or not
+	 * @type boolean
+	 * @since 1.0.0-beta
+	 */
 	public emitting: boolean;
+
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Determines if the ParticleEmitter is enabled or not
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public enabled: boolean;
 
 	protected floatRangeX: Duck.Types.ParticleEmitter.Range;
 	protected floatRangeY: Duck.Types.ParticleEmitter.Range;
 
-	public offloaders: Duck.Types.ParticleEmitter.Offloaders;
-
 	/**
-	 * @constructor
-	 * @description
+	 * @constructor ParticleEmitter
+	 * @description Creates ParticleEmitter instance
 	 * @param {Particle} particle Base particle that is cloned and modified from
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX Where the new emitted particles x position is. A range of 2 values
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY Where the new emitted particles y position is. A range of 2 values
@@ -62,18 +121,6 @@ export default class ParticleEmitter {
 
 		this.floatRangeX = [0, 0];
 		this.floatRangeY = [0, 0];
-
-		this.offloaders = {
-			maxAge: () => {
-				return;
-			},
-			maxAmount: () => {
-				return;
-			},
-			maxBounds: () => {
-				return;
-			},
-		};
 
 		// create particles
 		this.create();

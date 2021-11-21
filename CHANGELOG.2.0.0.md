@@ -1,4 +1,4 @@
-# v2.0.0 Changelog - 2021-11-4
+# v2.0.0 Changelog - 2021-11-20
 
 ## Added
 
@@ -13,11 +13,11 @@
   - Added isAttached and attachedChildren properties
   - Rect, RoundRect, Circle, StaticLight, CanvasModulate
     - Added texture colors support
-  - Sprite, Spritesheet
+  - Sprite
     - Added textureKey parameter which is the key of a preloaded texture loaded with scene.loader
-  - Spritesheet
     - Added anims property which is an AnimationManager
     - Added defaultAnimation property which is a default animation that is created on init
+    - Added all properties from SpriteSheet to Sprite as SpriteSheet class has been removed and replaced with Sprite class
   - Particle
     - Added texture color and image support
   - Now extends PhysicsObject which adds a lot more methods and properties (check [docs](https://ksplatdev.github.io/DuckEngine/))
@@ -117,6 +117,8 @@
   - Collider should not be updated manually, automatically updated in scene.physicsServer
   - Changed how delta time is applied to velocity
   - Changed velocity value to be in pixels per second
+  - SpriteSheet class has been removed and replaced with Sprite class
+  - Removed applyFilter from Sprite
 - Core
   - Game loop now uses displayList to render all visible renderable objects
   - Reworked how assets are loaded and created
@@ -195,12 +197,12 @@
 - ParticleEmitter
   - Removed draw method
   - Removed offload method as it has been renamed and changed to offloadBounds
-- Spritesheet
-  - Removed all animation related methods and properties, replaced with anims property which is an animation manager
 - Input
   - Removed all methods and properties excluding game property
 - Removed Classes
   - ParticleContainer
+  - SpriteSheet (Moved its functionality to Sprite)
+  - DuckStorage
 
 ## Fixed
 
@@ -210,13 +212,4 @@
 
 ## Bugs
 
-## Security
-
-### Supported Versions
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 2.x.x | :white_check_mark:   |
-| 1.2.x | :white_check_mark: |
-| 1.0.x -> 1.1.x | :x: |
-| 1.x.x-beta | :x: |
+## [Security Policy](SECURITY.md)

@@ -16,14 +16,68 @@ import TileLayer from './tilelayer';
  * @since 1.2.0
  */
 export default class Map {
+	/**
+	 * @memberof Map
+	 * @description A unique identifier for the Map
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public readonly id: number;
+
+	/**
+	 * @memberof Map
+	 * @description "Shape" of the map, always "Map", used by Scene.displayList to distinguish between Renderables
+	 * @type string
+	 * @since 2.0.0
+	 */
 	public readonly shape: string;
+
+	/**
+	 * @memberof Map
+	 * @description The map origin point
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public origin: Vector2;
+
+	/**
+	 * @memberof Map
+	 * @description An array of TileLayers
+	 * @type TileLayers[]
+	 * @since 2.0.0
+	 */
 	public tileLayers: TileLayer[];
+
+	/**
+	 * @memberof Map
+	 * @description Game instance
+	 * @type Game
+	 * @since 2.0.0
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Map
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
 
+	/**
+	 * @memberof Map
+	 * @description Determines if the Map is visible or not
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public visible: boolean;
+
+	/**
+	 * @memberof Map
+	 * @description Used for depth sorting, default: 2
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public zIndex: number;
 
 	/**

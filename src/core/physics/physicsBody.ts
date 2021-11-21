@@ -25,7 +25,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 
 	/**
 	 * @memberof PhysicsBody
-	 * @description The shape of the GameObject, 'rect', 'circle', 'roundrect', 'sprite', or 'spritesheet'
+	 * @description The shape of the GameObject, 'rect', 'circle', 'roundrect', or 'sprite'
 	 * @type Duck.Types.Collider.ShapeString
 	 * @since 2.0.0
 	 */
@@ -140,8 +140,28 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 */
 	public enabled: boolean;
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Determines if the PhysicsBody is attached to another PhysicsBody
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public isAttached: boolean;
+
+	/**
+	 * @memberof PhysicsBody
+	 * @description PhysicsBodies that are attached
+	 * @type PhysicsBody<Duck.Types.Texture.Type>[]
+	 * @since 2.0.0
+	 */
 	public attachedChildren: PhysicsBody<Duck.Types.Texture.Type>[];
+
+	/**
+	 * @memberof PhysicsBody
+	 * @description The offset between the PhysicsBody that self is attached to
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
 	public attachOffset: Vector2;
 
 	/**
@@ -186,7 +206,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	};
 
 	/**
-	 * @constructor
+	 * @constructor PhysicsBody
 	 * @description Creates a PhysicsBody instance. Extended by GameObject
 	 * @param {Duck.Types.Collider.ShapeString} shape Shape of PhysicsBody
 	 * @param {number} id ID from GameObject ID
@@ -325,7 +345,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * Clamps position to bounds if exists. Rounds pixels if roundPixels game config is set to true.
 	 * Updates hitbox.collisionState if hitbox exists.
 	 *
-	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick(deltaTime)
+	 * DO NOT CALL MANUALLY, CALLED IN SCENE.__tick
 	 *
 	 * @since 2.0.0
 	 */
@@ -399,6 +419,13 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		return this.options;
 	}
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Attaches self to another PhysicsBody, makes self unmovable and follows the PhysicsBody accordingly
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object PhysicsBody to attach to
+	 * @param {Vector2} [diffOffset=Vector2] A different offset, optional -> defaults: Difference in positions from PhysicsBody to self
+	 * @since 2.0.0
+	 */
 	public attachTo(
 		object: PhysicsBody<Duck.Types.Texture.Type>,
 		diffOffset?: Vector2
@@ -413,6 +440,13 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		object.attachedChildren.push(this);
 	}
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Attaches a child PhysicsBody to self, makes child unmovable and follows the self accordingly
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object PhysicsBody to attach
+	 * @param {Vector2} [diffOffset=Vector2] A different offset, optional -> defaults: Difference in positions from self to PhysicsBody
+	 * @since 2.0.0
+	 */
 	public attachChild(
 		object: PhysicsBody<Duck.Types.Texture.Type>,
 		diffOffset?: Vector2
@@ -427,6 +461,12 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		this.attachedChildren.push(object);
 	}
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Detaches self from another PhysicsBody
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object PhysicsBody to detach from
+	 * @since 2.0.0
+	 */
 	public detachFrom(object: PhysicsBody<Duck.Types.Texture.Type>) {
 		const f = object.attachedChildren.find((o) => o.id === this.id);
 
@@ -444,6 +484,12 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 		}
 	}
 
+	/**
+	 * @memberof PhysicsBody
+	 * @description Detaches PhysicsBody from self
+	 * @param {PhysicsBody<Duck.Types.Texture.Type>} object PhysicsBody to detach
+	 * @since 2.0.0
+	 */
 	public detachChild(object: PhysicsBody<Duck.Types.Texture.Type>) {
 		const f = this.attachedChildren.find((o) => o.id === object.id);
 

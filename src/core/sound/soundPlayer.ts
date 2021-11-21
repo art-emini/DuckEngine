@@ -13,8 +13,11 @@ export default class SoundPlayer {
 	protected sprites: Duck.Types.Sound.Sprite[];
 
 	/**
+	 * @constructor SoundPlayer
+	 * @description Creates a SoundPlayer instance
 	 * @param {string} path Path to sound file
 	 * @param {Duck.Types.Sound.Config} [options] Sound Configuration
+	 * @since 1.0.0-beta
 	 */
 	constructor(path: string, options?: Duck.Types.Sound.Config) {
 		this.path = path;

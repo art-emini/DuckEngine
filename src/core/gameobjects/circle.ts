@@ -11,6 +11,16 @@ import Scene from '../scene';
  * @since 1.0.0-beta
  */
 export default class Circle extends GameObject<'color'> {
+	/**
+	 * @constructor Circle
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} r Radius of Circle
+	 * @param {string} fillColor Fill Color of Circle
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,

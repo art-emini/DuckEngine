@@ -10,18 +10,15 @@ import Scene from '../scene';
  * @class StaticLight
  * @classdesc Creates a DuckEngine StaticLight
  * @description The StaticLight Class. A static light
+ * @extends GameObject<'color'>
  * @since 1.0.0-beta
  */
 export default class StaticLight extends GameObject<'color'> {
 	protected color: string;
 	protected alpha: Duck.Types.Helper.AlphaRange;
-	public game: Game;
-
-	public visible: boolean;
-	public zIndex: number;
 
 	/**
-	 * @constructor
+	 * @constructor StaticLight
 	 * @description Creates an instance of a StaticLight
 	 * @param {number} x X position
 	 * @param {number} y Y position

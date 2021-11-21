@@ -14,7 +14,6 @@ import lerp from '../math/lerp';
 import circleRectCollision from '../physics/circleToRectIntersect';
 import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
-import SpriteSheet from '../gameobjects/spritesheet';
 import StaticLight from '../lights/staticLight';
 import Button from '../gameobjects/interactive/button';
 import Text from '../gameobjects/interactive/text';
@@ -559,7 +558,6 @@ export default class Camera {
 				r instanceof Rect ||
 				r instanceof RoundRect ||
 				r instanceof Sprite ||
-				r instanceof SpriteSheet ||
 				r instanceof Button ||
 				r instanceof Text
 			) {

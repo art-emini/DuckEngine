@@ -13,7 +13,6 @@ import CircleClass from './core/gameobjects/circle';
 import RectClass from './core/gameobjects/rect';
 import RoundRectClass from './core/gameobjects/roundrect';
 import SpriteClass from './core/gameobjects/sprite';
-import SpriteSheetClass from './core/gameobjects/spritesheet';
 import GroupClass from './core/group/group';
 import InputClass from './core/input/input';
 import LoaderClass from './core/loader/loader';
@@ -21,7 +20,6 @@ import TileMapClass from './core/map/tilemap';
 import ParticleClass from './core/gameobjects/particles/particle';
 import ParticleEmitterClass from './core/gameobjects/particles/particleEmitter';
 import SoundPlayerClass from './core/sound/soundPlayer';
-import DuckStorageClass from './core/storage/storage';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
 import ButtonClass from './core/gameobjects/interactive/button';
@@ -47,10 +45,16 @@ import MouseClass from './core/input/models/mouse';
 // spec
 /**
  * @namespace Duck
- * All Types, Type Classes, Classes, Layers, and Config is stored here.
+ * All Types, Type Classes, Classes, Layers, and Configurations are stored here.
  * @since 1.0.0-beta
  */
 export namespace Duck {
+	/**
+	 * @memberof Duck
+	 * @description Returns a HTMLCanvasElement and CanvasRenderingContext2D, finds a canvas, if none exist,
+	 * it creates and appends one
+	 * @returns {canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D}
+	 */
 	export const AutoCanvas = () => {
 		let canvas: HTMLCanvasElement = document.querySelector(
 			'canvas'
@@ -76,6 +80,12 @@ export namespace Duck {
 		};
 	};
 
+	/**
+	 * @namespace Duck.Classes
+	 * @memberof Duck
+	 * @description All classes are stored here so that it can be extended.
+	 * @since 2.0.0
+	 */
 	export namespace Classes {
 		export const Game = GameClass;
 		export const Scene = SceneClass;
@@ -86,7 +96,6 @@ export namespace Duck {
 			export const Rect = RectClass;
 			export const RoundRect = RoundRectClass;
 			export const Sprite = SpriteClass;
-			export const SpriteSheet = SpriteSheetClass;
 
 			export namespace Particles {
 				export const Particle = ParticleClass;
@@ -112,7 +121,6 @@ export namespace Duck {
 		}
 
 		export namespace Misc {
-			export const Storage = DuckStorageClass;
 			export const Loader = LoaderClass;
 			export const Group = GroupClass;
 			export const Cutscene = CutsceneClass;
@@ -170,6 +178,12 @@ export namespace Duck {
 		}
 	}
 
+	/**
+	 * @namespace Duck.Classes
+	 * @memberof Duck
+	 * @description All type classes are stored here so that it can be referenced.
+	 * @since 2.0.0
+	 */
 	export namespace TypeClasses {
 		export type Game = GameClass;
 		export type Scene = SceneClass;
@@ -182,7 +196,6 @@ export namespace Duck {
 			export type Rect = RectClass;
 			export type RoundRect = RoundRectClass;
 			export type Sprite = SpriteClass;
-			export type SpriteSheet = SpriteSheetClass;
 
 			export namespace Particles {
 				export type Particle = ParticleClass;
@@ -208,7 +221,6 @@ export namespace Duck {
 		}
 
 		export namespace Misc {
-			export type Storage = DuckStorageClass;
 			export type Loader = LoaderClass;
 			export type Group<t extends Duck.Types.Group.StackItem> =
 				GroupClass<t>;
@@ -270,6 +282,12 @@ export namespace Duck {
 		}
 	}
 
+	/**
+	 * @namespace Duck.Classes
+	 * @memberof Duck
+	 * @description All rendering zIndexes are stored here.
+	 * @since 2.0.0
+	 */
 	export namespace Layers {
 		export namespace Rendering {
 			export const zIndex = {
@@ -283,6 +301,12 @@ export namespace Duck {
 		}
 	}
 
+	/**
+	 * @namespace Duck.Classes
+	 * @memberof Duck
+	 * @description All Class configs and types for that class are stored here. All types are here.
+	 * @since 2.0.0
+	 */
 	export namespace Types {
 		export type GameObject<textureType extends Duck.Types.Texture.Type> =
 			GameObjectClass<textureType>;
@@ -417,17 +441,9 @@ export namespace Duck {
 				 * @since 2.0.0
 				 */
 				splashScreen?: {
-					img: string | 'default';
+					img?: string | 'default';
 					extraDuration?: number;
 				};
-
-				/**
-				 * @memberof Duck.Types.Game.Config
-				 * @description DuckStorage config, creates an instance if passed
-				 * @type Duck.Types.Storage.Config
-				 * @since 1.0.0-beta
-				 */
-				storage?: Storage.Config;
 
 				/**
 				 * @memberof Duck.Types.Game.Config
@@ -478,7 +494,6 @@ export namespace Duck {
 				| 'rect'
 				| 'circle'
 				| 'roundrect'
-				| 'spritesheet'
 				| 'sprite';
 
 			export type CollisionResponseType =
@@ -487,19 +502,6 @@ export namespace Duck {
 				| 'left'
 				| 'right'
 				| 'bottom';
-		}
-
-		export namespace Storage {
-			export interface Config {
-				save: {
-					scenes?: SceneClass[];
-					data?: unknown[];
-					gameConfig?: boolean;
-				};
-				loadOnWindowLoad?: LoadType;
-			}
-
-			export type LoadType = 'scenes' | 'data' | 'gameConfig' | 'all';
 		}
 
 		export namespace Sound {
@@ -887,6 +889,34 @@ export namespace Duck {
 			}
 		}
 
+		export namespace KeyboardInput {
+			export interface KeyBase {
+				keyCode: number;
+				descriptor: string;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				keyDown?: (e: KeyboardEvent) => any;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				keyUp?: (e: KeyboardEvent) => any;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				keyJustPressed?: (e: KeyboardEvent) => any;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				keyState?: (e: KeyboardEvent) => any;
+			}
+		}
+
+		export namespace MouseInput {
+			export interface MouseBase {
+				button: 0 | 1 | 2 | 3 | 4;
+				descriptor: string;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				mouseDown?: (e: MouseEvent) => any;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				mouseUp?: (e: MouseEvent) => any;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				mouseMove?: (e: MouseEvent) => any;
+			}
+		}
+
 		export namespace Math {
 			export interface Vector2Like {
 				x: number;
@@ -1046,6 +1076,7 @@ export namespace Duck {
  * @property {Game} game Game Class
  * @property {Scene} scene Scene Class
  * @description Main Export of DuckEngine
+ * @since 1.0.0-beta
  */
 const DuckEngine = {
 	Game: GameClass,

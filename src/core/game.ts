@@ -1,5 +1,4 @@
 import { Duck } from '../index';
-import DuckStorage from '../core/storage/storage';
 import Scene from './scene';
 import Debug from './debug/debug';
 import startup from '../helper/startup';
@@ -9,6 +8,7 @@ import EVENTS from './events/events';
 import detectBrowser from '../utils/detectBrowser';
 import smoothOut from '../utils/smoothArray';
 import PluginManager from './misc/pluginManager';
+import CacheManager from './storage/cacheManager';
 
 /**
  * @class Game
@@ -17,47 +17,164 @@ import PluginManager from './misc/pluginManager';
  * @since 1.0.0-beta
  */
 export default class Game {
+	/**
+	 * @memberof Game
+	 * @description Game Configuration
+	 * @type Duck.Types.Game.Config
+	 * @since 1.0.0-beta
+	 */
 	public readonly config: Duck.Types.Game.Config;
 
+	/**
+	 * @memberof Game
+	 * @description The Canvas that is used to render to
+	 * @type HTMLCanvasElement
+	 * @since 1.0.0-beta
+	 */
 	public canvas: HTMLCanvasElement;
+
+	/**
+	 * @memberof Game
+	 * @description The CanvasRenderingContext2D that is used
+	 * @type CanvasRenderingContext2D
+	 * @since 1.0.0-beta
+	 */
 	public ctx: CanvasRenderingContext2D;
+
+	/**
+	 * @memberof Game
+	 * @description The Game Stack, holds all Scenes, and the defaultScene key
+	 * @type Duck.Types.Game.Stack
+	 * @since 1.0.0-beta
+	 */
 	public stack: Duck.Types.Game.Stack;
 
+	/**
+	 * @memberof Game
+	 * @description A reference to the animationFrame
+	 * @type number | undefined
+	 * @since 1.0.0
+	 */
 	public animationFrame: number | undefined;
 
-	public gameStorage: DuckStorage | undefined;
+	/**
+	 * @memberof Game
+	 * @description A CacheManager instance
+	 * @type CacheManager
+	 * @since 2.0.0
+	 */
+	public cacheManager: CacheManager;
 
+	/**
+	 * @memberof Game
+	 * @description An array of the last 100 deltaTimes, deltaTime = time since last frame
+	 * @type number[]
+	 * @since 2.0.0
+	 */
 	public deltaTimeArray: number[];
+
+	/**
+	 * @memberof Game
+	 * @description The time since the last frame
+	 * @type number
+	 * @since 1.0.0
+	 */
 	public deltaTime: number;
+
+	/**
+	 * @memberof Game
+	 * @description The time since the last frame averaged and smoothed out using Game.deltaTimeArray, applied to velocity of gameobjects
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public smoothDeltaTime: number;
 	protected oldTime: number;
 	protected now: number;
+
+	/**
+	 * @memberof Game
+	 * @description The current fps (Frames per second) that the Game loop is running at
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public fps: number;
 
+	/**
+	 * @memberof Game
+	 * @description The state of being in fullscreen, determines if the game is in fullscreen or not, changing this value does nothing
+	 * use game.fullscreen and game.unfullscreen to effect this value
+	 * @type boolean
+	 * @since 1.0.0
+	 */
 	public isInFullscreen: boolean;
 	protected oldWidth: number;
 	protected oldHeight: number;
 
 	// methods
+
+	/**
+	 * @memberof Game
+	 * @description The scene manager, object that holds methods to add and remove scenes from the Game.stack
+	 * @type{ add: (scenes: Scene[]) => void; remove: (scene: Scene) => void };
+	 * @since 1.0.0-beta
+	 */
 	public scenes: {
 		add: (scenes: Scene[]) => void;
 		remove: (scene: Scene) => void;
 	};
 
+	/**
+	 * @memberof Game
+	 * @description The state of the game, if it is currently rendering
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public isRendering: boolean;
+
+	/**
+	 * @memberof Game
+	 * @description The state of the game, if it is currently loading
+	 * @type boolean
+	 * @since 2.0.0
+	 */
 	public isLoaded: boolean;
 
+	/**
+	 * @memberof Game
+	 * @description The source to the splash screen image that is shown during loading
+	 * @type string
+	 * @since 2.0.0
+	 */
 	public splashScreen: string;
 
+	/**
+	 * @memberof Game
+	 * @description An EventEmitter, used by many classes other than the Game class (also used by Game class)
+	 * @type EventEmitter
+	 * @since 2.0.0
+	 */
 	public eventEmitter: EventEmitter;
+
+	/**
+	 * @memberof Game
+	 * @description A PluginManager, stores and manages plugins
+	 * @type PluginManager
+	 * @since 2.0.0
+	 */
 	public pluginManager: PluginManager;
 
+	/**
+	 * @memberof Game
+	 * @description The browser being used
+	 * @type string
+	 * @since 2.0.0
+	 */
 	public browser: string;
 
 	/**
 	 * @constructor Game
-	 * @description Creates a Game instance.
-	 * @param {Duck.Types.Game.Config} config Configuration
+	 * @description Creates a Game instance
+	 * @param {Duck.Types.Game.Config} config Game Configuration
 	 * @since 1.0.0-beta
 	 */
 	constructor(config: Duck.Types.Game.Config) {
@@ -207,14 +324,7 @@ export default class Game {
 			defaultScene: this.config.defaultScene,
 		};
 
-		this.gameStorage;
-
-		if (this.config.storage) {
-			this.gameStorage = new DuckStorage(this.config.storage, this);
-			if (this.config.storage.loadOnWindowLoad) {
-				this.gameStorage.load(this.config.storage.loadOnWindowLoad);
-			}
-		}
+		this.cacheManager = new CacheManager();
 
 		// browser
 		this.browser = detectBrowser() as string;
@@ -285,6 +395,7 @@ export default class Game {
 		this.isRendering = true;
 		this.isLoaded = true;
 
+		await this.hideSplashScreen();
 		this.eventEmitter.emit(EVENTS.GAME.LOAD_FINISH);
 
 		if (this.config.debug) {
@@ -386,20 +497,21 @@ export default class Game {
 
 	/**
 	 * @memberof Game
-	 * @description Draws the splash screen to the canvas if isLoaded is false
+	 * @description Draws the splash screen to the canvas by setting the background image
 	 * @since 2.0.0
 	 */
 	protected async drawSplashScreen() {
-		if (!this.isLoaded) {
-			this.canvas.style.backgroundImage = `url('${this.splashScreen}')`;
-			await this.sleep(this.config.splashScreen?.extraDuration || 500);
-			if (this.config.background) {
-				this.canvas.style.backgroundImage = 'none';
-				this.setBackground(this.config.background);
-			} else {
-				this.canvas.style.backgroundImage = 'none';
-			}
-		}
+		this.canvas.style.backgroundImage = `url('${this.splashScreen}')`;
+		await this.sleep(this.config.splashScreen?.extraDuration || 0);
+	}
+
+	/**
+	 * @memberof Game
+	 * @description Hides the splash screen to the canvas
+	 * @since 2.0.0
+	 */
+	protected async hideSplashScreen() {
+		this.canvas.style.backgroundImage = 'none';
 	}
 
 	protected sleep(ms: number) {

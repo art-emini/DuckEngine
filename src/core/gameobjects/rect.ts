@@ -11,6 +11,17 @@ import Scene from '../scene';
  * @since 1.0.0-beta
  */
 export default class Rect extends GameObject<'color'> {
+	/**
+	 * @constructor Rect
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width of Rect
+	 * @param {number} h Height of Rect
+	 * @param {string} fillColor Fill Color of Rect
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,

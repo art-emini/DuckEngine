@@ -4,12 +4,59 @@ import Scene from '../../scene';
 import MouseInput from '../mouseInput';
 
 export default class Mouse {
+	/**
+	 * @memberof Mouse
+	 * @description The Mouse button
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public button: 0 | 1 | 2 | 3 | 4;
+
+	/**
+	 * @memberof Mouse
+	 * @description The Mouse descriptor
+	 * @type string
+	 * @since 2.0.0
+	 */
 	public descriptor: string;
+
+	/**
+	 * @memberof Mouse
+	 * @description Game instance
+	 * @type Game
+	 * @since 2.0.0
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Mouse
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
+
+	/**
+	 * @memberof Mouse
+	 * @description The MouseInput that the Mouse is attached to
+	 * @type MouseInput
+	 * @since 2.0.0
+	 */
 	public mouseInput: MouseInput;
 
+	/**
+	 * @constructor Mouse
+	 * @description Creates a Mouse instance
+	 * @param { 0 | 1 | 2 | 3 | 4 } button Mouse button
+	 * @param {string} descriptor Mouse descriptor
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @param {MouseInput} mouseInput MouseInput that the Mouse is attached to
+	 * @param { (e:MouseEvent) => any } [mouseDown] Mouse down callback
+	 * @param { (e:MouseEvent) => any } [mouseUp] Mouse up callback
+	 * @param { (e:MouseEvent) => any } [mouseMove] Mouse move callback
+	 * @since 2.0.0
+	 */
 	constructor(
 		button: 0 | 1 | 2 | 3 | 4,
 		descriptor: string,

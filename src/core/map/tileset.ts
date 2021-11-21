@@ -4,21 +4,91 @@ import Texture from '../models/texture';
 import Scene from '../scene';
 import Tile from './tile';
 
+/**
+ * @class Tileset
+ * @classdesc Creates a DuckEngine Tileset
+ * @description The Tileset Class. Stores information about a tileset image and splits it into tiles
+ * @since 2.0.0
+ */
 export default class Tileset {
+	/**
+	 * @memberof Tileset
+	 * @description The Tileset image texture
+	 * @type Texture<'image'>
+	 * @since 2.0.0
+	 */
 	public texture: Texture<'image'>;
-	public map: number[][];
+
+	/**
+	 * @memberof Tileset
+	 * @description Width of each Tile
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public tileW: number;
+
+	/**
+	 * @memberof Tileset
+	 * @description Height of each Tile
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public tileH: number;
+
+	/**
+	 * @memberof Tileset
+	 * @description Number of rows in the tileset image
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public rows: number;
+
+	/**
+	 * @memberof Tileset
+	 * @description Number of columns in the tileset image
+	 * @type number
+	 * @since 2.0.0
+	 */
 	public cols: number;
+
+	/**
+	 * @memberof Tileset
+	 * @description Game instance
+	 * @type Game
+	 * @since 2.0.0
+	 */
 	public game: Game;
+
+	/**
+	 * @memberof Tileset
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
 	public scene: Scene;
 
+	/**
+	 * @memberof Tileset
+	 * @description Array of tiles that are generated from the Tileset
+	 * @type Tile[]
+	 * @since 2.0.0
+	 */
 	public tiles: Tile[];
 
+	/**
+	 * @constructor Tileset
+	 * @description Creates a Tileset instance
+	 * @param {string} textureKey Key to the tileset image texture
+	 * @param {number} tileW Width of each Tile
+	 * @param {number} tileH Height of each Tile
+	 * @param {number} rows Number of rows in the tileset image texture
+	 * @param {number} cols Number of columns in the tileset image texture
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 2.0.0
+	 */
 	constructor(
 		textureKey: string,
-		map: number[][],
 		tileW: number,
 		tileH: number,
 		rows: number,
@@ -29,7 +99,6 @@ export default class Tileset {
 		this.texture = scene.loader.imageStack.find(
 			(v) => v.key === textureKey
 		)!.value;
-		this.map = map;
 		this.tileW = tileW;
 		this.tileH = tileH;
 		this.rows = rows;
@@ -59,6 +128,12 @@ export default class Tileset {
 		return new Tile(x, y, w, h);
 	}
 
+	/**
+	 * @memberof Tileset
+	 * @description Gets the Tile based on index
+	 * @param {number} num Index
+	 * @since 2.0.0
+	 */
 	public getTile(num: number): Tile | undefined {
 		return this.tiles[num];
 	}

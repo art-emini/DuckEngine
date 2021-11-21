@@ -1,7 +1,7 @@
 import { Duck } from '../..';
 import Timer from '../../base/timer';
 import Game from '../game';
-import SpriteSheet from '../gameobjects/spritesheet';
+import Sprite from '../gameobjects/sprite';
 import Scene from '../scene';
 import AnimationFrame from './animationFrame';
 
@@ -10,7 +10,7 @@ export default class Animation {
 	public config: Duck.Types.Animation.Config;
 	public game: Game;
 	public scene: Scene;
-	public spritesheet: SpriteSheet;
+	public sprite: Sprite;
 
 	public countBy: number;
 
@@ -31,13 +31,13 @@ export default class Animation {
 		config: Duck.Types.Animation.Config,
 		game: Game,
 		scene: Scene,
-		spritesheet: SpriteSheet
+		sprite: Sprite
 	) {
 		this.key = config.key;
 		this.config = config;
 		this.game = game;
 		this.scene = scene;
-		this.spritesheet = spritesheet;
+		this.sprite = sprite;
 
 		this.countBy = this.config.useDelta
 			? this.game.deltaTime
@@ -83,11 +83,7 @@ export default class Animation {
 		for (let i = 0; i < this.config.frames.length; i++) {
 			const frameBase = this.config.frames[i];
 			res.push(
-				new AnimationFrame(
-					frameBase.col,
-					frameBase.row,
-					this.spritesheet
-				)
+				new AnimationFrame(frameBase.col, frameBase.row, this.sprite)
 			);
 		}
 		return res;

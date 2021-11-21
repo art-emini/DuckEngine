@@ -4,6 +4,8 @@ import { Duck } from '../../index';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
 import Scene from '../scene';
+import AnimationManager from '../animation/animationManager';
+import Animation from '../animation/animation';
 
 /**
  * @class Sprite
@@ -12,6 +14,62 @@ import Scene from '../scene';
  * @since 1.0.0-beta
  */
 export default class Sprite extends GameObject<'image'> {
+	protected frameWidth: number | undefined;
+	protected frameHeight: number | undefined;
+
+	protected rows: number | undefined;
+	protected cols: number | undefined;
+
+	/**
+	 * @memberof Sprite
+	 * @description The current row of the spritesheet texture, only if sprite texture is a spritesheet
+	 * @type number | undefined
+	 * @since 2.0.0
+	 */
+	public currentRow: number | undefined;
+
+	/**
+	 * @memberof Sprite
+	 * @description The current column of the spritesheet texture, only if sprite texture is a spritesheet
+	 * @type number | undefined
+	 * @since 2.0.0
+	 */
+	public currentCol: number | undefined;
+
+	/**
+	 * @memberof Sprite
+	 * @description The AnimationManager instance, if the texture is a spritesheet
+	 * @type AnimationManager | undefined
+	 * @since 2.0.0
+	 */
+	public anims: AnimationManager | undefined;
+
+	/**
+	 * @memberof Sprite
+	 * @description The Default Animation instance, if the texture is a spritesheet
+	 * @type Animation | undefined
+	 * @since 2.0.0
+	 */
+	public defaultAnim: Animation | undefined;
+
+	/**
+	 * @constructor Sprite
+	 * @description Creates a Sprite instance
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width of Sprite
+	 * @param {number} h Height of Sprite
+	 * @param {string} textureKey Key of a preloaded texture
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @param {number} [frameWidth] Frame Width for spritesheet texture
+	 * @param {number} [frameHeight] Frame Height for spritesheet texture
+	 * @param {number} [rows] Amount of rows for the spritesheet texture
+	 * @param {number} [cols] Amount of columns for the spritesheet texture
+	 * @param {number} [currentRow] The default row to use for the spritesheet texture
+	 * @param {number} [currentCol] The default column to use for the spritesheet texture
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,
@@ -19,7 +77,13 @@ export default class Sprite extends GameObject<'image'> {
 		h: number,
 		textureKey: string,
 		game: Game,
-		scene: Scene
+		scene: Scene,
+		frameWidth?: number,
+		frameHeight?: number,
+		rows?: number,
+		cols?: number,
+		currentRow?: number,
+		currentCol?: number
 	) {
 		super(
 			'sprite',
@@ -33,10 +97,32 @@ export default class Sprite extends GameObject<'image'> {
 			scene
 		);
 
-		this.scene = scene;
+		this.frameWidth = frameWidth;
+		this.frameHeight = frameHeight;
 
-		this.w = w;
-		this.h = h;
+		this.rows = rows;
+		this.cols = cols;
+		this.currentRow = currentRow;
+		this.currentCol = currentCol;
+
+		const defaultAnimConfig = {
+			key: '__default',
+			frameRate: 0,
+			frames: [
+				{
+					col: this.currentCol!,
+					row: this.currentRow!,
+				},
+			],
+		};
+
+		this.anims = new AnimationManager(
+			this.game,
+			this.scene,
+			this,
+			defaultAnimConfig
+		);
+		this.defaultAnim = this.anims.get('__default') as Animation;
 	}
 
 	/**
@@ -47,13 +133,29 @@ export default class Sprite extends GameObject<'image'> {
 	 */
 	public _draw() {
 		if (this.game.ctx) {
-			this.game.ctx.drawImage(
-				this.texture.texture,
-				this.position.x,
-				this.position.y,
-				this.w,
-				this.h
-			);
+			if (this.frameWidth) {
+				// spritesheet
+				this.game.ctx.drawImage(
+					this.texture.texture, // image
+					(this.currentCol! - 1) * this.frameWidth!, // source x
+					(this.currentRow! - 1) * this.frameHeight!, // source y
+					this.frameWidth!, // source width
+					this.frameHeight!, // source height
+					this.position.x, // target x
+					this.position.y, // target y
+					this.frameWidth!, // target width
+					this.frameHeight! // target height
+				);
+			} else {
+				// normal sprite
+				this.game.ctx.drawImage(
+					this.texture.texture,
+					this.position.x,
+					this.position.y,
+					this.w,
+					this.h
+				);
+			}
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'
@@ -92,46 +194,5 @@ export default class Sprite extends GameObject<'image'> {
 		new Debug.Warn(
 			'Cannot fill color of a sprite. Changed the image path instead. Use setImagePath instead.'
 		);
-	}
-
-	/**
-	 * @memberof Sprite
-	 * @description Applies a filter to the Sprite image
-	 * @param {'lightness'} filter Filter, 'lightness'
-	 * @param {number} value Value
-	 * @since 1.0.0-beta
-	 */
-	public applyFilter(filter: 'lightness', value: number) {
-		if (this.game.ctx) {
-			if (filter === 'lightness') {
-				const id = this.game.ctx.getImageData(
-					this.position.x,
-					this.position.y,
-					this.w,
-					this.h
-				);
-				const data = id.data;
-
-				for (let i = 0; i < data.length; i++) {
-					const red = data[i];
-					const green = data[i + 1];
-					const blue = data[i + 2];
-
-					const brightenedRed = value * red;
-					const brightenedGreen = value * green;
-					const brightenedBlue = value * blue;
-
-					data[i] = brightenedRed;
-					data[i + 1] = brightenedGreen;
-					data[i + 2] = brightenedBlue;
-				}
-
-				this.game.ctx.putImageData(
-					id,
-					this.position.x,
-					this.position.y
-				);
-			}
-		}
 	}
 }

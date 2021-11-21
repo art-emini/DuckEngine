@@ -14,7 +14,7 @@ import GameObject from '../gameObject';
  */
 export default class CanvasModulate extends GameObject<'color'> {
 	/**
-	 * @constructor
+	 * @constructor CanvasModulate
 	 * @description Creates a CanvasModulate instance.
 	 * @param {number} x X position
 	 * @param {number} y Y position

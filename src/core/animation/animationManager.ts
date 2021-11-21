@@ -1,6 +1,6 @@
 import { Duck } from '../..';
 import Game from '../game';
-import SpriteSheet from '../gameobjects/spritesheet';
+import Sprite from '../gameobjects/sprite';
 import Scene from '../scene';
 import Animation from './animation';
 import StateMachine from './stateMachine';
@@ -8,7 +8,7 @@ import StateMachine from './stateMachine';
 export default class AnimationManager {
 	public game: Game;
 	public scene: Scene;
-	public spritesheet: SpriteSheet;
+	public sprite: Sprite;
 
 	public animations: Animation[];
 
@@ -17,12 +17,12 @@ export default class AnimationManager {
 	constructor(
 		game: Game,
 		scene: Scene,
-		spritesheet: SpriteSheet,
+		sprite: Sprite,
 		defaultAnimation: Duck.Types.Animation.Config
 	) {
 		this.game = game;
 		this.scene = scene;
-		this.spritesheet = spritesheet;
+		this.sprite = sprite;
 
 		this.animations = [];
 
@@ -41,12 +41,7 @@ export default class AnimationManager {
 	}
 
 	public add(config: Duck.Types.Animation.Config) {
-		const anim = new Animation(
-			config,
-			this.game,
-			this.scene,
-			this.spritesheet
-		);
+		const anim = new Animation(config, this.game, this.scene, this.sprite);
 
 		this.animations.push(anim);
 

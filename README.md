@@ -63,7 +63,8 @@
 
 #### Firefox Bugs
 
-- More stuttering and garbage collection calls occurs more often than Safari and Chromium Browsers (Not really noticeable)
+- More stuttering than Chromium Browsers and Safari.
+- Garbage collection occurs more often than Safari and Chromium Browsers. (Causes *very* minor and not noticeable stutters.)
 
 ## Download
 
