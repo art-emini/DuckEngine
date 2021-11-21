@@ -3,81 +3,79 @@
 import { Duck } from '../../index';
 import randomInt from '../math/randomInt';
 import Game from '../game';
-import Collider from '../physics/collider';
+import Texture from '../models/texture';
+import Scene from '../scene';
+import PhysicsBody from '../physics/physicsBody';
+import uniqueID from '../../utils/uniqueID';
 
-export default class GameObject {
-	public readonly id: number;
-	public readonly shape: Duck.Collider.ShapeString;
-	public x: number;
-	public y: number;
-	public w: number;
-	public h: number;
-	public r: number;
-	public fillColor: string;
-	protected game: Game;
-	private self: Duck.GameObject | undefined;
+/**
+ * @class GameObject
+ * @classdesc Creates a DuckEngine GameObject
+ * @description The GameObject Class. All GameObjects extend this class
+ * @since 1.0.0-beta
+ */
+export default class GameObject<
+	textureType extends Duck.Types.Texture.Type
+> extends PhysicsBody<textureType> {
+	/**
+	 * @memberof GameObject
+	 * @description The texture of the GameObject
+	 * @type Texture
+	 * @since 1.0.0-beta
+	 */
+	public texture: Texture<textureType>;
 
-	protected halfW: number;
-	protected halfH: number;
+	/**
+	 * @memberof GameObject
+	 * @description Determines if a GameObject should be rendered or not
+	 * @type boolean
+	 * @since 2.0.0
+	 */
+	public visible: boolean;
 
-	private rotAngle: number;
-
-	public collider: Collider | undefined;
-	public collidesWith: Duck.GameObject[];
-	public vx: number;
-	public vy: number;
+	/**
+	 * @memberof GameObject
+	 * @description Determines the depth or zIndex of a GameObject
+	 * @type number
+	 * @since 2.0.0
+	 */
+	public zIndex: number;
 
 	// methods
-	public physics: {
-		addCollider: (collidesWith: Duck.GameObject[]) => Collider;
-	};
 
+	/**
+	 * @constructor
+	 * @description Creates a GameObject instance.
+	 * @param {Duck.Types.Collider.ShapeString} shape Shape of the gameobject
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} w Width
+	 * @param {number} h Height
+	 * @param {number} r Radius
+	 * @param {string} fillColor Fill color or Texture instance
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
-		shape: Duck.Collider.ShapeString,
+		shape: Duck.Types.Collider.ShapeString,
 		x: number,
 		y: number,
 		w: number,
 		h: number,
 		r: number,
-		fillColor: string,
-		game: Game
+		texture: Texture<textureType>,
+		game: Game,
+		scene: Scene
 	) {
-		this.id = randomInt(0, 100000);
-		this.shape = shape;
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-		this.r = r;
-		this.fillColor = fillColor;
-		this.self;
-		this.game = game;
+		const id = uniqueID();
 
-		this.halfW = this.w / 2;
-		this.halfH = this.h / 2;
+		super(shape, id, x, y, w, h, r, game, scene);
 
-		this.rotAngle = 0;
+		this.texture = texture;
 
-		this.collider;
-		this.collidesWith = [];
-		this.vx = 0;
-		this.vy = 0;
-
-		// methods
-		this.physics = {
-			addCollider: (collidesWith: Duck.GameObject[]) => {
-				this.collidesWith = collidesWith;
-
-				this.collider = new Collider(
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					this.self!,
-					collidesWith,
-					this.game
-				);
-
-				return this.collider;
-			},
-		};
+		this.visible = true;
+		this.zIndex = Duck.Layers.Rendering.zIndex.gameobject;
 
 		// fix
 		if (this.game.ctx) {
@@ -85,75 +83,43 @@ export default class GameObject {
 		}
 	}
 
-	protected init(self: Duck.GameObject) {
-		this.self = self;
-	}
+	/**
+	 * @memberof GameObject
+	 * @description Draws the gameobject.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 * @since 1.0.0-beta
+	 */
+	public _draw() {}
 
-	public draw() {}
-
-	public setScale(scale: Duck.Misc.Scale | number) {
+	/**
+	 * @memberof GameObject
+	 * @description Sets the scale of the GameObject
+	 * @param {Duck.Types.Misc.Scale|number} scale Scale of the gameobject, can be a number to change the radius
+	 * @since 1.0.0-beta
+	 */
+	public setScale(scale: Duck.Types.Misc.Scale | number) {
 		if (typeof scale !== 'number') {
 			if (scale.width) {
 				this.w = scale.width;
-				this.halfW = this.w / 2;
 			}
 
 			if (scale.height) {
 				this.h = scale.height;
-				this.halfH = this.h / 2;
 			}
 		} else {
 			this.r = scale;
 		}
 	}
 
-	public setVelocity(axis: 'x' | 'y', v: number) {
-		if (axis === 'x') {
-			this.vx = v;
-			(this.x += this.vx) * this.game.deltaTime;
-		}
-
-		if (axis === 'y') {
-			this.vy = v;
-			(this.y += this.vy) * this.game.deltaTime;
-		}
-	}
-
+	/**
+	 * @memberof GameObject
+	 * @description Sets the fill color of the GameObject
+	 * @param {string} fillColor Fill color
+	 * @since 1.0.0-beta
+	 */
 	public setFillColor(fillColor: string) {
-		this.fillColor = fillColor;
-	}
-
-	// position methods
-
-	public getTop() {
-		return this.y;
-	}
-
-	public getBottom() {
-		return this.y + this.h;
-	}
-
-	public getLeft() {
-		return this.x;
-	}
-
-	public getRight() {
-		return this.x + this.w;
-	}
-
-	public getCenterY() {
-		if (this.shape === 'circle') {
-			return this.y + this.r;
-		} else {
-			return this.y + this.h / 2;
-		}
-	}
-
-	public getCenterX() {
-		if (this.shape === 'circle') {
-			return this.x + this.r;
-		} else {
-			return this.x + this.w / 2;
-		}
+		(this.texture.texture as string) = fillColor;
 	}
 }

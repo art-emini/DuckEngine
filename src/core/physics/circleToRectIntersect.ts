@@ -2,12 +2,30 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Sprite from '../gameobjects/sprite';
 
+/**
+ * @function
+ * @description Returns a boolean based on if a circle is intersecting with a rectangle
+ * @param {Circle| { position: { x:number; y:number }; w:number; h:number; r:number; }} circle Circle
+ * @param {Rect | { position: { x:number; y:number }; w:number; h:number } | Sprite} rect Rect
+ * @returns boolean
+ * @since 1.1.0-beta
+ */
 export default function circleRectCollision(
-	circle: Circle | { x: number; y: number; w: number; h: number; r: number },
-	rect: Rect | { x: number; y: number; w: number; h: number } | Sprite
+	circle:
+		| Circle
+		| {
+				position: { x: number; y: number };
+				w: number;
+				h: number;
+				r: number;
+		  },
+	rect:
+		| Rect
+		| { position: { x: number; y: number }; w: number; h: number }
+		| Sprite
 ) {
-	let dx = Math.abs(circle.x - (rect.x + rect.w / 2));
-	let dy = Math.abs(circle.y - (rect.y + rect.h / 2));
+	let dx = Math.abs(circle.position.x - (rect.position.x + rect.w / 2));
+	let dy = Math.abs(circle.position.y - (rect.position.y + rect.h / 2));
 
 	if (dx > circle.r + rect.w / 2) {
 		return false;

@@ -2,34 +2,42 @@
 import DuckEngine, { Duck } from '../../dist';
 
 export default class MainScene extends DuckEngine.Scene {
-	public myRect: Duck.GameObject;
-	public myCircle: Duck.GameObject;
-	public gameObjects: Duck.Class.Group<Duck.GameObject>;
+	public myRect: Duck.TypeClasses.GameObjects.GameObject<'color'>;
+	public myCircle: Duck.TypeClasses.GameObjects.GameObject<'color'>;
+	public gameObjects: Duck.TypeClasses.Misc.Group<
+		Duck.TypeClasses.GameObjects.GameObject<'color'>
+	>;
 
-	public myCamera: Duck.Class.Camera;
+	public myCamera: Duck.TypeClasses.Cameras.Camera;
 
-	public myParticle: Duck.Class.Particle;
-	public myParticleEmitter: Duck.Class.ParticleEmitter;
+	public myParticle: Duck.TypeClasses.GameObjects.Particles.Particle;
+	public myParticleEmitter: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
 
-	public myInput: Duck.Class.Input;
-	private mySpeed = 1;
+	public myInput: Duck.TypeClasses.Input.KeyboardInput;
+	private mySpeed = 250;
 
-	constructor(game: Duck.Class.Game) {
+	constructor(game: Duck.TypeClasses.Game) {
 		super('main', game);
 
 		// gameobjects
 		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#fff');
 		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#fff');
 
-		this.gameObjects = this.add.group<Duck.GameObject>('gameObjects', [
-			this.myRect,
-			this.myCircle,
-		]);
+		this.gameObjects = this.add.group<
+			Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+		>('gameObjects', [this.myRect, this.myCircle]);
+
+		// colliders and hitboxes
+		this.myRect.physics.addHitbox();
+		this.myCircle.physics.addHitbox();
+
+		this.myRect.physics.addCollider([this.myCircle]);
 
 		// camera
 		this.myCamera = this.add.mainCamera();
 		this.myCamera.setFOV(1.1);
-		this.myCamera.setFOVSmooth(50, 0.1, Math.PI / 4); // Math.PI / 4 is default FOV
+		this.myCamera.setFOVSmooth(50, 0.1, this.myCamera.defaultFOV);
+		this.myCamera.startFollow(this.myRect, 0.1, 0.1);
 
 		// particles
 		this.myParticle = this.add.particle(
@@ -48,53 +56,62 @@ export default class MainScene extends DuckEngine.Scene {
 
 		this.myParticleEmitter.emit();
 		this.myParticleEmitter.keepEmitting(100, 100);
-		this.myParticleEmitter.float([-0.2, 0.2], [-0.1, -0.3]);
+		this.myParticleEmitter.float([-200, 200], [-100, -300]);
 
 		// input
-		this.myInput = this.add.input();
+		this.myInput = this.add.input().createKeyboardInput();
+
+		this.myInput.addKeys([
+			{
+				keyCode: 87, // w
+				descriptor: 'W',
+			},
+			{
+				keyCode: 83, // s
+				descriptor: 'S',
+			},
+			{
+				keyCode: 65, // a
+				descriptor: 'A',
+			},
+			{
+				keyCode: 68, // d
+				descriptor: 'D',
+			},
+		]);
 
 		// sprinting
 		this.mySpeed = 1;
-
-		this.myInput.on('keydown', 'Shift', (e) => {
-			if (e.key === 'Shift') {
-				this.mySpeed = 3;
-			}
-		});
-
-		this.myInput.on('keyup', 'Shift', (e) => {
-			if (e.key === 'Shift') {
-				this.mySpeed = 1;
-			}
-		});
-	}
-
-	public render() {
-		this.gameObjects.each((gameobject) => {
-			gameobject.draw();
-		});
 	}
 
 	public update() {
-		if (this.myInput.inputs.w) {
+		if (this.myInput.inputs.W.state) {
 			this.myRect.setVelocity('y', -this.mySpeed);
 		}
-		if (this.myInput.inputs.s) {
+		if (this.myInput.inputs.S.state) {
 			this.myRect.setVelocity('y', this.mySpeed);
 		}
-		if (this.myInput.inputs.a) {
+		if (this.myInput.inputs.A.state) {
 			this.myRect.setVelocity('x', -this.mySpeed);
 		}
-		if (this.myInput.inputs.d) {
+		if (this.myInput.inputs.D.state) {
 			this.myRect.setVelocity('x', this.mySpeed);
 		}
 
 		// offload particles
-		this.myParticleEmitter.offload(-100, 600);
+		this.myParticleEmitter.offloadBounds({
+			x: 0,
+			y: 0,
+			w: this.game.canvas.width,
+			h: this.game.canvas.height,
+		});
 		this.myParticleEmitter.offloadMaxAge(10);
 		this.myParticleEmitter.offloadMaxAmount(100);
 
-		// camera
-		this.myCamera.follow(this.myRect);
+		if (this.myRect.isCollidingGroup([this.myCircle])) {
+			this.myRect.setFillColor('#ff0000');
+		} else {
+			this.myRect.setFillColor('#2185d1');
+		}
 	}
 }

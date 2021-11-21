@@ -1,29 +1,57 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Duck } from '../../index';
 import Camera from '../camera/camera';
-import Debug from '../debug/debug';
+import EVENTS from '../events/events';
 import Game from '../game';
 
+/**
+ * @class Cutscene
+ * @classdesc Creates a DuckEngine Cutscene
+ * @description The Cutscene Class. Create a cutscene
+ * @since 1.0.0-beta
+ */
 export default class Cutscene {
-	private config: Duck.Cutscene.Config;
-	private instructions: Duck.Cutscene.Instructions;
-	private game: Game;
+	protected config: Duck.Types.Cutscene.Config;
+	protected instructions: Duck.Types.Cutscene.Instructions;
+	/**
+	 * @memberof Cutscene
+	 * @description Game instance
+	 * @type Game
+	 * @since 1.0.0-beta
+	 */
+	public game: Game;
 
-	private steps: Duck.Cutscene.Step[];
-	private mainObject: Duck.GameObject;
-	private otherObjects: Duck.GameObject[];
-	private camera: Camera;
-	private otherCameras: Camera[];
-
+	protected steps: Duck.Types.Cutscene.Step[];
+	protected mainObject: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>;
+	protected otherObjects: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>[];
+	protected camera: Camera;
+	protected otherCameras: Camera[];
+	/**
+	 * @memberof Cutscene
+	 * @description The index of the current cutscene step
+	 * @type number
+	 * @since 1.0.0-beta
+	 */
 	public index: number;
-
+	/**
+	 * @memberof Cutscene
+	 * @description The state of the Cutscene running
+	 * @type boolean
+	 * @since 1.0.0-beta
+	 */
 	public running: boolean;
 
-	private listeners: Duck.Cutscene.OnListener[];
-
+	/**
+	 * @constructor Cutscene
+	 * @description Creates an instance of a Cutscene.
+	 * @param {Duck.Types.Cutscene.Config} config Configuration
+	 * @param {Duck.Types.Cutscene.Instructions} instructions Cutscene instructions
+	 * @param {Game} game
+	 * @since 1.0.0-beta
+	 */
 	constructor(
-		config: Duck.Cutscene.Config,
-		instructions: Duck.Cutscene.Instructions,
+		config: Duck.Types.Cutscene.Config,
+		instructions: Duck.Types.Cutscene.Instructions,
 		game: Game
 	) {
 		this.config = config;
@@ -40,39 +68,50 @@ export default class Cutscene {
 
 		this.running = false;
 
-		this.listeners = [];
-
 		this.init();
 	}
 
-	private init() {
-		this.mainObject.x = this.instructions.init.mainObjectPos.x;
-		this.mainObject.y = this.instructions.init.mainObjectPos.y;
+	protected init() {
+		this.mainObject.position.x = this.instructions.init.mainObjectPos.x;
+		this.mainObject.position.y = this.instructions.init.mainObjectPos.y;
 
 		this.otherObjects.forEach((otherObject, index) => {
-			otherObject.x = this.instructions.init.otherObjectPos[index].x;
-			otherObject.y = this.instructions.init.otherObjectPos[index].y;
+			otherObject.position.x =
+				this.instructions.init.otherObjectPos[index].x;
+			otherObject.position.y =
+				this.instructions.init.otherObjectPos[index].y;
 		});
 	}
 
+	/**
+	 * @memberof Cutscene
+	 * @description Starts the cutscene
+	 * @emits EVENTS.CUTSCENE.START
+	 * @since 1.0.0-beta
+	 */
 	public start() {
 		this.running = true;
 
-		const cb = this.listeners.find((l) => l.type === 'START');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.START);
 	}
 
+	/**
+	 * @memberof Cutscene
+	 * @description Stops the cutscene
+	 * @emits EVENTS.CUTSCENE.END
+	 * @since 1.0.0-beta
+	 */
 	public stop() {
 		this.running = false;
 
-		const cb = this.listeners.find((l) => l.type === 'END');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.END);
 	}
 
+	/**
+	 * @memberof Cutscene
+	 * @description Updates the cutscene, must be in a loop or interval and come before Cutscene.next()
+	 * @since 1.0.0-beta
+	 */
 	public update() {
 		if (this.running) {
 			// camera
@@ -119,8 +158,10 @@ export default class Cutscene {
 
 			// follow
 			if (this.instructions.init.cameraSettings?.follow) {
-				this.camera.follow(
-					this.instructions.init.cameraSettings.follow
+				this.camera.startFollow(
+					this.instructions.init.cameraSettings.follow,
+					this.instructions.init.cameraSettings.followLerpX,
+					this.instructions.init.cameraSettings.followLerpY
 				);
 			}
 
@@ -128,15 +169,21 @@ export default class Cutscene {
 			const step = this.steps[this.index];
 
 			if (step.type === 'DRAW' && step.affect) {
-				return (step.affect as Duck.GameObject).draw();
+				return (
+					step.affect as Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+				)._draw();
 			}
 
 			if (step.type === 'MOVE' && step.moveTo) {
 				if (step.moveTo.x) {
-					(step.affect as Duck.GameObject).x = step.moveTo.x;
+					(
+						step.affect as Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+					).position.x = step.moveTo.x;
 				}
 				if (step.moveTo.y) {
-					(step.affect as Duck.GameObject).y = step.moveTo.y;
+					(
+						step.affect as Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
+					).position.y = step.moveTo.y;
 				}
 			}
 
@@ -152,7 +199,7 @@ export default class Cutscene {
 				(step.affect as Camera).setZoom(step.cameraValue);
 			}
 
-			if (step.moveTo) {
+			if (step.moveTo && step.affect) {
 				if (
 					step.type === 'CAMERA_MOVE' &&
 					step.moveTo.x &&
@@ -178,43 +225,94 @@ export default class Cutscene {
 					step.cameraValue
 				);
 			}
+
+			if (
+				step.type === 'CAMERA_START_FOLLOW' &&
+				step.cameraFollow &&
+				step.affect
+			) {
+				// no lerp
+				if (!step.cameraFollowLerpX && !step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(step.cameraFollow);
+				}
+				// only lerpX
+				if (step.cameraFollowLerpX && !step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						step.cameraFollowLerpX
+					);
+				}
+				// only lerpY
+				if (!step.cameraFollowLerpX && step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						1,
+						step.cameraFollowLerpY
+					);
+				}
+				// lerp both
+				if (step.cameraFollowLerpX && step.cameraFollowLerpY) {
+					(step.affect as Camera).startFollow(
+						step.cameraFollow,
+						step.cameraFollowLerpX,
+						step.cameraFollowLerpY
+					);
+				}
+			}
+
+			if (step.type === 'CAMERA_STOP_FOLLOW' && step.affect) {
+				(step.affect as Camera).stopFollow();
+			}
 		}
 	}
 
+	/**
+	 * @memberof Cutscene
+	 * @description Starts the next step
+	 * @emits EVENTS.CUTSCENE.NEXT
+	 * @since 1.0.0-beta
+	 */
 	public next() {
 		this.index++;
 		if (this.index > this.steps.length - 1) {
 			this.stop();
 		}
 
-		const cb = this.listeners.find((l) => l.type === 'NEXT');
-		if (cb) {
-			cb.func();
-		}
+		this.game.eventEmitter.emit(EVENTS.CUTSCENE.NEXT);
 	}
 
+	/**
+	 * @memberof Cutscene
+	 * @description Sleeps/Waits for a duration
+	 * @param {number} ms Duration in millisecond
+	 * @since 1.0.0-beta
+	 */
 	public async sleep(ms: number) {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
-	public on(type: Duck.Cutscene.OnListenerType, cb: Function) {
-		this.listeners.push({
-			type: type,
-			func: cb,
-		});
-		if (this.game.config.debug) {
-			new Debug.Log('Added Event Listener to cutscene.');
-		}
+	/**
+	 * @memberof Cutscene
+	 * @description Adds an event listener to Cutscene
+	 * @param {Duck.Types.Cutscene.OnListenerType} type Listener type
+	 * @param {(...args: any) => void} cb Callback function
+	 * @since 1.0.0-beta
+	 */
+	public on(
+		type: Duck.Types.Cutscene.OnListenerType,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		cb: (...args: any) => void
+	) {
+		this.game.eventEmitter.on(`CUTSCENE_${type}`, cb);
 	}
 
-	public off(type: Duck.Cutscene.OnListenerType) {
-		const found = this.listeners.find((l) => l.type === type);
-		if (found) {
-			this.listeners.splice(this.listeners.indexOf(found), 1);
-		} else {
-			new Debug.Error(
-				'Cannot Remove Cutscene listener that does not exist.'
-			);
-		}
+	/**
+	 * @memberof Cutscene
+	 * @description Removes an event listener from Cutscene
+	 * @param {Duck.Types.Cutscene.OnListenerType} type Listener type
+	 * @since 1.0.0-beta
+	 */
+	public off(type: Duck.Types.Cutscene.OnListenerType) {
+		this.game.eventEmitter.off(`CUTSCENE_${type}`);
 	}
 }

@@ -2,41 +2,87 @@ import { Duck } from '../../index';
 import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
+import GameObject from '../gameobjects/gameObject';
+import Texture from '../models/texture';
+import Scene from '../scene';
 
-export default class StaticLight {
-	public x: number;
-	public y: number;
-	public r: number;
-	private color: string;
-	private alpha: Duck.Helper.AlphaRange;
-	private game: Game;
+/**
+ * @class StaticLight
+ * @classdesc Creates a DuckEngine StaticLight
+ * @description The StaticLight Class. A static light
+ * @extends GameObject<'color'>
+ * @since 1.0.0-beta
+ */
+export default class StaticLight extends GameObject<'color'> {
+	protected color: string;
+	protected alpha: Duck.Types.Helper.AlphaRange;
 
+	/**
+	 * @constructor StaticLight
+	 * @description Creates an instance of a StaticLight
+	 * @param {number} x X position
+	 * @param {number} y Y position
+	 * @param {number} r Radius
+	 * @param {string} fillColor Color
+	 * @param {Duck.Types.Helper.AlphaRange} alpha Alpha
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 1.0.0-beta
+	 */
 	constructor(
 		x: number,
 		y: number,
 		r: number,
 		fillColor: string,
-		alpha: Duck.Helper.AlphaRange,
-		game: Game
+		alpha: Duck.Types.Helper.AlphaRange,
+		game: Game,
+		scene: Scene
 	) {
-		this.x = x;
-		this.y = y;
+		super(
+			'circle',
+			x,
+			y,
+			0,
+			0,
+			r,
+			Texture.fromColor(fillColor, r, r),
+			game,
+			scene
+		);
 		this.r = r;
 		this.alpha = alpha;
 		this.game = game;
+
+		this.visible = true;
+		this.zIndex = 2;
 
 		this.color = fillColor;
 
 		// convert all colors to RGBA
 		this.color = convertColorToRGBA(this.color, this.alpha);
+
+		this.texture.texture = this.color;
 	}
 
-	public draw() {
+	/**
+	 * @description Draws the StaticLight.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
+	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.globalCompositeOperation = 'lighter';
 			this.game.ctx.beginPath();
-			this.game.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-			this.game.ctx.fillStyle = this.color;
+			this.game.ctx.arc(
+				this.position.x,
+				this.position.y,
+				this.r,
+				0,
+				2 * Math.PI,
+				false
+			);
+			this.game.ctx.fillStyle = this.texture.texture;
 			this.game.ctx.fill();
 			this.game.ctx.globalCompositeOperation = 'source-over';
 		} else {
@@ -46,7 +92,17 @@ export default class StaticLight {
 		}
 	}
 
-	public setFillColor(color: string, alpha: Duck.Helper.AlphaRange) {
+	/**
+	 * @memberof StaticLight
+	 * @description Sets the fillColor with alpha
+	 * @param  {string} color Fill Color
+	 * @param  {Duck.Types.Helper.AlphaRange} alpha Alpha
+	 * @since 2.0.0
+	 */
+	public setFillColorAlpha(
+		color: string,
+		alpha: Duck.Types.Helper.AlphaRange
+	) {
 		this.color = convertColorToRGBA(color, alpha);
 	}
 }

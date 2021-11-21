@@ -1,31 +1,34 @@
 import { Duck } from '../../../index';
 import Game from '../../game';
-import Particle from '../../particles/particle';
-import ParticleEmitter from '../../particles/particleEmitter';
+import Particle from '../../gameobjects/particles/particle';
+import ParticleEmitter from '../../gameobjects/particles/particleEmitter';
+import Scene from '../../scene';
 import Effect from '../effect';
 
 export default class SmokeEffect extends Effect {
-	private maxAge: number;
+	protected maxAge: number;
 
 	constructor(
-		rangeX: Duck.ParticleEmitter.Range,
-		rangeY: Duck.ParticleEmitter.Range,
+		rangeX: Duck.Types.ParticleEmitter.Range,
+		rangeY: Duck.Types.ParticleEmitter.Range,
 		game: Game,
 		particleAmount = 50,
 		speedRangeX = [-0.1, -0.4],
 		speedRangeY = [-0.1, -0.4],
 		maxAge = 20,
 		color = '#2e2e2e',
-		interval = 50
+		interval = 50,
+		scene: Scene
 	) {
-		const particle = new Particle('circle', 0, 0, 5, color, game);
+		const particle = new Particle('circle', 0, 0, 5, color, game, scene);
 
 		const particleEmitter = new ParticleEmitter(
 			particle,
 			rangeX,
 			rangeY,
 			particleAmount,
-			game
+			game,
+			scene
 		);
 
 		super(rangeX, rangeY, particleEmitter, game);
@@ -39,8 +42,13 @@ export default class SmokeEffect extends Effect {
 		this.particleEmitter.keepEmitting(interval);
 	}
 
-	public draw() {
-		this.particleEmitter.draw();
+	/**
+	 * @description Draws the effect.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
+	public _draw() {
 		this.particleEmitter.offloadMaxAge(this.maxAge);
 	}
 }

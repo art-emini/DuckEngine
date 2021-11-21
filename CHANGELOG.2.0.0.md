@@ -1,0 +1,218 @@
+# v2.0.0 Changelog - 2021-11-20
+
+## Added
+
+- GameObjects
+  - Added zIndex and visible properties
+  - Added new misc gameobject CanvasModulate
+  - Added internalRaycasts for checking if it is colliding with an object
+  - Added isColliding, isOnFloor, isOnCeiling, and isOnWall methods
+  - Added texture prop
+  - Added type generic to GameObject for Texture class
+  - Added attachTo, attachChild, detachFrom, detachChild methods
+  - Added isAttached and attachedChildren properties
+  - Rect, RoundRect, Circle, StaticLight, CanvasModulate
+    - Added texture colors support
+  - Sprite
+    - Added textureKey parameter which is the key of a preloaded texture loaded with scene.loader
+    - Added anims property which is an AnimationManager
+    - Added defaultAnimation property which is a default animation that is created on init
+    - Added all properties from SpriteSheet to Sprite as SpriteSheet class has been removed and replaced with Sprite class
+  - Particle
+    - Added texture color and image support
+  - Now extends PhysicsObject which adds a lot more methods and properties (check [docs](https://ksplatdev.github.io/DuckEngine/))
+- Map
+  - Added id, zIndex, and visible properties
+- Core
+  - Added id, zIndex, and visible properties to all renderable objects
+  - Added better rendering with depth sorting and only rendering and updating objects that are set to be visible
+  - Added ability to preload assets
+  - Added events and EventEmitter
+- New Classes
+  - Models
+    - Added DisplayList class to manage renderable objects
+    - Added Texture to save and load images and colors
+  - Physics Misc
+    - Added Area class to detect intersections with other PhysicsBody hitboxes
+  - Misc
+    - Added PluginManager Class
+  - Math
+    - Added Vector2 class to manage coordinates and more
+  - Input
+    - KeyboardInput
+    - MouseInput
+    - Models
+      - Key
+      - Mouse
+  - GameObjects
+    - Misc
+      - Added CanvasModulate with zIndex of 1 which fills up the entire canvas with a color
+- Game
+  - Config
+    - Added physics object option
+    - Added roundPixels option
+    - Added pauseRenderingOnBlur
+    - Added onPauseRendering
+    - Added onResumeRendering
+    - Added splashScreen object option
+  - Added eventEmitter property
+  - Added pluginManager property
+  - Added isRendering property
+  - Added fps property which is the current fps
+  - Added smoothDeltaTime property which is the smoothed out version of deltaTime
+  - Added browser property which is the user's browser
+  - Added "start sequence" to start method
+  - Start Sequence:
+    - Show splash screen
+    - Preload all assets from all scenes
+    - Create all assets from all scenes
+- Scene
+  - Added preload and create method
+  - Added displayList property
+  - Added loader property
+  - Added misc.canvasModulate to add property
+  - Tools
+    - Added math property
+      - Added createVector function to tools.math
+      - Added vector property to tools.math which is a reference to the Vector2 class
+  - Add
+    - Added misc to gameobjects property
+- Physics
+  - Added PhysicsServer class
+  - Added PhysicsBody class
+  - Added Hitbox class
+  - Collider
+    - Added support for group class as a collidesWith
+- Input
+  - Added createKeyboardInput method to create a KeyBoardInput
+- Loader
+  - Added constructor with scene parameter
+  - Added loadJSON, loadHTML, loadXML, loadFont, and loadAudio async methods
+  - Added imageStack, jsonStack, htmlStack, xmlStack, fontStack, and audioStack public properties
+- Camera
+  - Added lerpX and lerpY to startFollow method
+  - Added cull method to only render certain objects
+  - Added autoCull method to only render in view objects, aka Frustum Culling
+- Effect
+  - Added id, zIndex, and visible properties
+- Math
+  - Added lerp function
+  - Added Vector2 class
+- Misc
+  - Added renderableObject type to Duck.Types
+  - Added jsdoc comments
+  - Added Duck.TypeClasses which holds all of the classes as types
+  - Added Duck.Classes which holds all of the classes as constants
+  - Added Duck.Types which holds all of the types needed by classes
+  - Added Duck.Types.Math which holds all math related types such as Vector2Like, BoundsLike, and Vector2LikeOptional
+  - Added Loader and Texture namespaces to Duck.Types
+  - Added Duck.Layers
+
+## Changed
+
+- GameObjects
+  - Extends PhysicsBody class
+  - Moved most methods and properties to PhysicsBody
+  - Renamed draw method to _draw which is a public method, but should *not* be called manually
+  - Collider should not be updated manually, automatically updated in scene.physicsServer
+  - Changed how delta time is applied to velocity
+  - Changed velocity value to be in pixels per second
+  - SpriteSheet class has been removed and replaced with Sprite class
+  - Removed applyFilter from Sprite
+  - Changed how IDs are generated
+- Core
+  - Game loop now uses displayList to render all visible renderable objects
+  - Reworked how assets are loaded and created
+  - All private properties and methods in all classes are either public or protected
+  - All PhysicsBodies now use Game.smoothDeltaTime instead of Game.deltaTime
+- Game
+  - Improved AutoCanvas
+  - Typescript: canvas and ctx properties are never undefined
+  - Moved scene.currentCamera.begin and end to if visible condition
+  - Changed start method to be async
+  - Changed how delta time is calculated
+- Scene
+  - Tools
+    - Moved randomInt and randomFloat to math
+  - Renamed this.add.sound to this.add.soundPlayer
+- Physics
+  - Collider
+    - Colliders now use hitboxes instead of GameObjects
+    - Changed collider.shape to collider.object
+    - Changed collider.update diffCollidesWith parameter to be required and renamed to updatedCollidesWith
+    - Changed collider.update to collider.__update which shouldn't be called manually as it is called by PhysicsServer
+    - Changed collider.shape to collider.hitbox
+    - Reworked how colliders work
+- StaticLight
+  - Made class extend GameObject class
+- ParticleEmitter
+  - Renamed offload to offloadBounds which takes a Vector2LikeOptional
+- Interactive
+  - Button and Text now extend the GameObject class
+  - Button default zIndex is set to 4
+  - Text default zIndex is set to 5
+  - Text width and height properties are correctly set using context.measureText
+  - Buttons now can be interacted with even with an active camera
+  - Button.scene is now a public property
+- Input
+  - Changed how Input works, now works as a base class where you can create different inputs from
+  - Now uses Events and EventEmitter to work out of a loop
+- Camera
+  - Made viewport property public
+  - Renamed follow method to startFollow
+- Map
+  - Changed all private properties to be public
+- Sound
+  - Renamed Sound class to SoundPlayer
+- Loader
+  - Changed static method load to non-static loadTexture method
+- Misc
+  - Changed all classes that included the game property to be a public property
+  - File Structure
+    - Moved particles and interactive folders to gameobjects folder
+  - Modified start message
+  - Changed project from npm to yarn
+  - Changed build script
+  - Updated README.md
+  - Updated security policy
+  - Updated dev dependencies
+
+## Removed
+
+- GameObjects
+  - Removed props x and y and changed to position which is a Vector2
+  - Removed props vx and vy and changed to velocity which is a Vector2
+  - Removed fillColor prop (now is called texture)
+  - Removed most methods and properties from GameObject as it now extends PhysicsBody which as all removed methods and properties and more
+- Particle
+  - Removed props floatVX and floatVY and changed to floatVelocity Vector2
+- Scene
+  - Removed render method
+  - Removed adding itself to game scene stack as that produced duplicate scenes
+- Math
+  - Removed Duck.Types.Helper.alphaValue return type from randomFloat
+- StaticLight
+  - Removed x and y props, now is position vector2
+- Interactive
+  - Removed x and y props, now is position vector2
+- ParticleEmitter
+  - Removed draw method
+  - Removed offload method as it has been renamed and changed to offloadBounds
+- Input
+  - Removed all methods and properties excluding game property
+- Camera
+  - Removed scrollToZoom method
+- Removed Classes
+  - ParticleContainer
+  - SpriteSheet (Moved its functionality to Sprite)
+  - DuckStorage
+
+## Fixed
+
+- Fixed "bouncy" and "laggy" rect to round-rect collision response [#16](https://github.com/ksplatdev/DuckEngine/issues/16)
+- Fixed Button unable to be interacted with if there is an active camera
+- Fixed scene adding itself to game scene stack as that produced duplicate scenes
+
+## Bugs
+
+## [Security Policy](SECURITY.md)

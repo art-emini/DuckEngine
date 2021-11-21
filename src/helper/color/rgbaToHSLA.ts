@@ -16,7 +16,7 @@ export default function rgbaToHSLA(
 		s,
 		l = (max + min) / 2;
 
-	if (max == min) {
+	if (max === min) {
 		h = s = 0; // achromatic
 	} else {
 		const d = max - min;

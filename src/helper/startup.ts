@@ -1,9 +1,11 @@
 import version from './version';
 
 export default `
-DuckEngine - ${version}
+🦆 DuckEngine - ${version} 🦆
 
 https://github.com/ksplatdev/DuckEngine
 
-MIT LICENSE
+MIT License
+
+Copyright (c) 2021 Bleart Emini
 `;

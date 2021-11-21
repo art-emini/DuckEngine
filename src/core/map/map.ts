@@ -2,75 +2,114 @@
 
 /* This class is extended by all map classes for code reusability */
 
+import { Duck } from '../..';
+import uniqueID from '../../utils/uniqueID';
 import Game from '../game';
+import Vector2 from '../math/vector2';
+import Scene from '../scene';
+import TileLayer from './tilelayer';
 
-export default class Map<
-	map extends number[][],
-	atlas extends {
-		[key: number]: HTMLImageElement | string;
-	}
-> {
-	protected tileW: number;
-	protected tileH: number;
-	protected rows: number;
-	protected cols: number;
-	protected map: map;
-	protected atlas: atlas;
-	protected game: Game;
+/**
+ * @class Map
+ * @classdesc Creates a DuckEngine Map
+ * @description The Map Class. Base Map class, extends by TileMap
+ * @since 1.2.0
+ */
+export default class Map {
+	/**
+	 * @memberof Map
+	 * @description A unique identifier for the Map
+	 * @type number
+	 * @since 2.0.0
+	 */
+	public readonly id: string;
 
+	/**
+	 * @memberof Map
+	 * @description "Shape" of the map, always "Map", used by Scene.displayList to distinguish between Renderables
+	 * @type string
+	 * @since 2.0.0
+	 */
+	public readonly shape: string;
+
+	/**
+	 * @memberof Map
+	 * @description The map origin point
+	 * @type Vector2
+	 * @since 2.0.0
+	 */
+	public origin: Vector2;
+
+	/**
+	 * @memberof Map
+	 * @description An array of TileLayers
+	 * @type TileLayers[]
+	 * @since 2.0.0
+	 */
+	public tileLayers: TileLayer[];
+
+	/**
+	 * @memberof Map
+	 * @description Game instance
+	 * @type Game
+	 * @since 2.0.0
+	 */
+	public game: Game;
+
+	/**
+	 * @memberof Map
+	 * @description Scene instance
+	 * @type Scene
+	 * @since 2.0.0
+	 */
+	public scene: Scene;
+
+	/**
+	 * @memberof Map
+	 * @description Determines if the Map is visible or not
+	 * @type boolean
+	 * @since 2.0.0
+	 */
+	public visible: boolean;
+
+	/**
+	 * @memberof Map
+	 * @description Used for depth sorting, default: 2
+	 * @type number
+	 * @since 2.0.0
+	 */
+	public zIndex: number;
+
+	/**
+	 * @constructor Map
+	 * @description Creates a Map instance.
+	 * @param {TileLayer[]} tileLayers An array of TileLayers
+	 * @param {Game} game Game instance
+	 * @param {Scene} scene Scene instance
+	 * @since 2.0.0
+	 */
 	constructor(
-		tileW: number,
-		tileH: number,
-		rows: number,
-		cols: number,
-		map: map,
-		atlas: atlas,
-		game: Game
+		origin: Duck.Types.Math.Vector2Like,
+		tileLayers: TileLayer[],
+		game: Game,
+		scene: Scene
 	) {
-		this.tileW = tileW;
-		this.tileH = tileH;
-		this.rows = rows;
-		this.cols = cols;
-		this.map = map;
-		this.atlas = atlas;
+		this.id = uniqueID();
+		this.shape = 'map';
+		this.origin = Vector2.fromVector2Like(origin);
+		this.tileLayers = tileLayers;
 		this.game = game;
+		this.scene = scene;
+
+		this.visible = true;
+		this.zIndex = 2;
 	}
 
-	public draw() {}
-
-	public selectByNumber(number: number) {
-		for (let row = 0; row < this.rows; row++) {
-			for (let col = 0; col < this.cols; col++) {
-				const num = this.map[row][col];
-				if (num === number) {
-					const object = this.atlas[number];
-					return object;
-				} else {
-					return undefined;
-				}
-			}
-		}
-	}
-
-	public getRowOf(number: number) {
-		for (let i = 0; i < this.map.length; i++) {
-			const row = this.map[i];
-			return row.find((num) => num === number);
-		}
-	}
-
-	public getColOf(number: number) {
-		for (let i = 0; i < this.map.length; i++) {
-			const row = this.map[i];
-			for (let x = 0; x < row.length; x++) {
-				const col = row[x];
-
-				if (col === number) {
-					return col;
-				} else {
-					return undefined;
-				}
-			}
-		}
-	}
+	/**
+	 * @description Draws the map.
+	 *
+	 * DO NOT CALL MANUALLY, CALLED IN GAME LOOP USING SCENE.displayList
+	 *
+	 */
+	public _draw() {}
 }
