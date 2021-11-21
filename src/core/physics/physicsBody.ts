@@ -18,10 +18,10 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description The unique identifier for a GameObject
-	 * @type number
+	 * @type string
 	 * @since 2.0.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof PhysicsBody
@@ -221,7 +221,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 */
 	constructor(
 		shape: Duck.Types.Collider.ShapeString,
-		id: number,
+		id: string,
 		x: number,
 		y: number,
 		w: number,

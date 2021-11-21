@@ -1,6 +1,6 @@
 import { Duck } from '../../..';
+import uniqueID from '../../../utils/uniqueID';
 import Game from '../../game';
-import randomInt from '../../math/randomInt';
 import Scene from '../../scene';
 import PhysicsBody from '../physicsBody';
 
@@ -69,7 +69,7 @@ export default class Area extends PhysicsBody<'color'> {
 		game: Game,
 		scene: Scene
 	) {
-		const id = randomInt(0, 100000);
+		const id = uniqueID();
 
 		super('rect', id, x, y, w, h, 0, game, scene);
 

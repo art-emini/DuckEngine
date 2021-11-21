@@ -15,10 +15,10 @@ export default class ParticleEmitter {
 	/**
 	 * @memberof ParticleEmitter
 	 * @description A unique identifier for the ParticleEmitter
-	 * @type number
+	 * @type string
 	 * @since 1.0.0-beta
 	 */
-	public readonly id: number;
+	public readonly id: string;
 	protected particle: Particle;
 
 	/**

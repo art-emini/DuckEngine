@@ -3,8 +3,8 @@
 /* This class is extended by all map classes for code reusability */
 
 import { Duck } from '../..';
+import uniqueID from '../../utils/uniqueID';
 import Game from '../game';
-import randomInt from '../math/randomInt';
 import Vector2 from '../math/vector2';
 import Scene from '../scene';
 import TileLayer from './tilelayer';
@@ -22,7 +22,7 @@ export default class Map {
 	 * @type number
 	 * @since 2.0.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof Map
@@ -94,7 +94,7 @@ export default class Map {
 		game: Game,
 		scene: Scene
 	) {
-		this.id = randomInt(0, 100000);
+		this.id = uniqueID();
 		this.shape = 'map';
 		this.origin = Vector2.fromVector2Like(origin);
 		this.tileLayers = tileLayers;

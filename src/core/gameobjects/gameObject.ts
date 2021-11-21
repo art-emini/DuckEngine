@@ -6,6 +6,7 @@ import Game from '../game';
 import Texture from '../models/texture';
 import Scene from '../scene';
 import PhysicsBody from '../physics/physicsBody';
+import uniqueID from '../../utils/uniqueID';
 
 /**
  * @class GameObject
@@ -67,7 +68,7 @@ export default class GameObject<
 		game: Game,
 		scene: Scene
 	) {
-		const id = randomInt(0, 100000);
+		const id = uniqueID();
 
 		super(shape, id, x, y, w, h, r, game, scene);
 

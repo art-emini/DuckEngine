@@ -1,4 +1,4 @@
-import randomInt from '../math/randomInt';
+import uniqueID from '../../utils/uniqueID';
 import Vector2 from '../math/vector2';
 
 /**
@@ -11,10 +11,10 @@ export default class Tile {
 	/**
 	 * @memberof Tile
 	 * @description Unique identifier for the Tile
-	 * @type number
+	 * @type string
 	 * @since 2.0.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof Tile
@@ -49,7 +49,7 @@ export default class Tile {
 	 * @param {number} h Height of the Tile
 	 */
 	constructor(x: number, y: number, w: number, h: number) {
-		this.id = randomInt(0, 100000);
+		this.id = uniqueID();
 		this.position = new Vector2(x, y);
 		this.w = w;
 		this.h = h;

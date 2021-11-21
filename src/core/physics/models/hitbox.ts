@@ -18,10 +18,10 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description The unique identifier for a Hitbox
-	 * @type number
+	 * @type string
 	 * @since 2.0.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof Hitbox
@@ -124,7 +124,7 @@ export default class Hitbox {
 	 * @param {string|undefined} [debugColor=undefined] The debugColor of the Hitbox
 	 */
 	constructor(
-		id: number,
+		id: string,
 		position: Vector2,
 		w: number,
 		h: number,

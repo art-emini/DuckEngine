@@ -1,7 +1,7 @@
 import { Duck } from '../../index';
 import Game from '../game';
-import randomInt from '../math/randomInt';
 import ParticleEmitter from '../gameobjects/particles/particleEmitter';
+import uniqueID from '../../utils/uniqueID';
 
 /**
  * @class Effect
@@ -13,10 +13,10 @@ export default class Effect {
 	/**
 	 * @memberof Effect
 	 * @description A unique identifier for the Effect
-	 * @type number
+	 * @type string
 	 * @since 1.2.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof Effect
@@ -100,7 +100,7 @@ export default class Effect {
 		particleEmitter: ParticleEmitter,
 		game: Game
 	) {
-		this.id = randomInt(0, 100000);
+		this.id = uniqueID();
 		this.shape = 'effect';
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;

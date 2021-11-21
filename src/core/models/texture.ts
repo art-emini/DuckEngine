@@ -1,5 +1,5 @@
 import { Duck } from '../..';
-import randomInt from '../math/randomInt';
+import uniqueID from '../../utils/uniqueID';
 import Vector2 from '../math/vector2';
 
 /**
@@ -13,10 +13,10 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof Texture
 	 * @description The unique identifier for the texture
-	 * @type number
+	 * @type string
 	 * @since 2.0.0
 	 */
-	public readonly id: number;
+	public readonly id: string;
 
 	/**
 	 * @memberof Texture
@@ -103,7 +103,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 		w: number,
 		h: number
 	) {
-		this.id = randomInt(0, 100000);
+		this.id = uniqueID();
 		this.type = type;
 
 		this.texture = texture;
