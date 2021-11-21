@@ -2506,10 +2506,10 @@ typedoc-plugin-rename-defaults@^0.4.0:
   resolved "https://registry.yarnpkg.com/typedoc-plugin-rename-defaults/-/typedoc-plugin-rename-defaults-0.4.0.tgz#9739bb87ce7c084d7d48feb485ede4d4014a9b49"
   integrity sha512-7m7MbNZKcxCA4Z+0MW06sFEmuQ+he1xfc+rLRtvvQcQypPTd3fgFmkEJKVu42t8mONC+kKS/WkbmqwzsiqI1YQ==
 
-typedoc@0.22.7:
-  version "0.22.7"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.22.7.tgz#e5e095ab14676296f4b12ac3355321eae650e447"
-  integrity sha512-ndxxp+tU1Wczvdxp4u2/PvT1qjD6hdFdSdehpORHjE+JXmMkl2bftXCR0upHmsnesBG7VCcr8vfgloGHIH8glQ==
+typedoc@0.22.9:
+  version "0.22.9"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.22.9.tgz#7e3f4f72586bbef4c2382f0afcea8e0f9270b712"
+  integrity sha512-84PjudoXVcap6bwdZFbYIUWlgdz/iLV09ZHwrCzhtHWXaDQG6mlosJ8te6DSThuRkRvQjp46HO+qY/P7Gpm78g==
   dependencies:
     glob "^7.2.0"
     lunr "^2.3.9"
