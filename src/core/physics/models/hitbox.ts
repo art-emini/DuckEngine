@@ -1,4 +1,5 @@
 import { Duck } from '../../..';
+import uniqueID from '../../../utils/uniqueID';
 import Debug from '../../debug/debug';
 import Game from '../../game';
 import Group from '../../group/group';
@@ -124,7 +125,6 @@ export default class Hitbox {
 	 * @param {string|undefined} [debugColor=undefined] The debugColor of the Hitbox
 	 */
 	constructor(
-		id: string,
 		position: Vector2,
 		w: number,
 		h: number,
@@ -134,7 +134,7 @@ export default class Hitbox {
 		scene: Scene,
 		debugColor?: string
 	) {
-		this.id = id;
+		this.id = uniqueID();
 		this.position = position;
 		this.offset = offset;
 		this.w = w;

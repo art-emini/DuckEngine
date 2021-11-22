@@ -86,8 +86,8 @@ A 2D Game Engine for the web.
 
 1. Setup an asset bundler like webpack or parcel.
 2. Import DuckEngine from URL
-   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.js>
-   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.0/dist/index.min.js>
+   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.js>
+   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.min.js>
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ### Itch.io

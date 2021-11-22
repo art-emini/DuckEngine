@@ -135,6 +135,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Determines if the PhysicsBody._update is called by the Scene.physicsServer used by Scene.physicsList
+	 * , changing this value does nothing, must use PhysicsBody.setEnabled
 	 * @type boolean
 	 * @since 2.0.0
 	 */
@@ -306,7 +307,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 				}
 
 				this.hitbox = new Hitbox(
-					this.id,
 					this.position,
 					w || 0,
 					h || 0,

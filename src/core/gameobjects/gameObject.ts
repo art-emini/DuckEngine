@@ -27,7 +27,7 @@ export default class GameObject<
 
 	/**
 	 * @memberof GameObject
-	 * @description Determines if a GameObject should be rendered or not
+	 * @description Determines if a GameObject should be rendered or not (note: Camera.cull and autoCull overwrite this property)
 	 * @type boolean
 	 * @since 2.0.0
 	 */

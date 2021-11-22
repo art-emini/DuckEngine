@@ -33,9 +33,6 @@ export default class DisplayList {
 				this.list.findIndex((r) => r.id === renderableObject.id),
 				1
 			);
-			new Debug.Log(
-				`INTERNAL -> Removed renderableObject from displayList with id "${renderableObject.id}".`
-			);
 		} else {
 			new Debug.Error(
 				`INTERNAL -> Cannot remove renderableObject from displayList with id "${renderableObject.id}". If you suspect this as a bug, please report it on github.`

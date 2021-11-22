@@ -33,12 +33,9 @@ export default class PhysicsList {
 				this.list.findIndex((r) => r.id === physicsObject.id),
 				1
 			);
-			new Debug.Log(
-				`INTERNAL -> Removed physicsObject from displayList with id "${physicsObject.id}".`
-			);
 		} else {
 			new Debug.Error(
-				`INTERNAL -> Cannot remove physicsObject from displayList with id "${physicsObject.id}". If you suspect this as a bug, please report it on github.`
+				`INTERNAL -> Cannot remove physicsObject from physicsList with id "${physicsObject.id}". If you suspect this as a bug, please report it on github.`
 			);
 		}
 	}

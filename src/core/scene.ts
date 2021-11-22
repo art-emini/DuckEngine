@@ -674,8 +674,6 @@ export default class Scene extends Render {
 					this.game,
 					this
 				);
-				this.displayList.add(myParticle);
-				this.physicsList.add(myParticle);
 				return myParticle;
 			},
 			particleEmitter: (
