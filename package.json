@@ -1,0 +1,65 @@
+{
+	"name": "duckengine",
+	"version": "2.0.1",
+	"description": "A 2D Game Engine for the web.",
+	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
+	"maintainers": [
+		"ksplatdev <aviatorbuzz921@gmail.com>"
+	],
+	"scripts": {
+		"test": "npx open-cli https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js",
+		"build": "bash scripts/build.sh",
+		"webpack": "npx webpack --config webpack.config.js",
+		"minify": "npx uglifyjs dist/index.js -o dist/index.min.js",
+		"build:docs": "npx typedoc src/ --out docs/ --exclude \"src/helper/*.ts\" --exclude \"src/helper/**/*.ts\" --exclude \"src/utils/*.ts\" --exclude \"src/base/*.ts\" --name \"DuckEngine\" --includeVersion --entryPointStrategy expand",
+		"format": "npx prettier --config .prettierrc --write \"src/**/*.ts\"",
+		"format:watch": "npx onchange \"src/**/*.ts\" \"*.json\" \"*.md\" \"examples/**/*.ts\" -- prettier --write --ignore-unknown {{changed}}",
+		"lint": "npx eslint -c .eslintrc.json src/",
+		"lint:watch": "npx onchange \"src/**/*.ts\"  \"examples/**/*.ts\" -- eslint -c .eslintrc.json --fix {{changed}}",
+		"lint:fix": "npx eslint -c .eslintrc.json --fix src/",
+		"tree": "tree -I 'examples|release|lib|docs|dist|node_modules'",
+		"serve": "npx http-server docs/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ksplatdev/DuckEngine.git"
+	},
+	"keywords": [
+		"Duck",
+		"Ducky",
+		"Engine",
+		"2d",
+		"game engine",
+		"simple",
+		"fast",
+		"web game engine",
+		"javascript game engine",
+		"performant"
+	],
+	"author": "Bleart Emini",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ksplatdev/DuckEngine/issues"
+	},
+	"homepage": "https://github.com/ksplatdev/DuckEngine#readme",
+	"devDependencies": {
+		"@types/css-font-loading-module": "^0.0.6",
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"@typescript-eslint/parser": "^4.31.1",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^3.4.1",
+		"express": "^4.17.1",
+		"onchange": "^7.1.0",
+		"open-cli": "^7.0.1",
+		"prettier": "^2.4.1",
+		"typedoc": "0.22.7",
+		"typedoc-plugin-rename-defaults": "^0.4.0",
+		"typescript": "^4.4.3",
+		"uglify-js": "^3.14.2",
+		"webpack": "^5.53.0",
+		"webpack-cli": "^4.8.0",
+		"yarn": "^1.22.11"
+	}
+}

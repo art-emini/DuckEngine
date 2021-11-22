@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "es6",
+		"moduleResolution": "node",
+		"removeComments": false,
+		"noImplicitAny": true,
+		"outDir": "lib",
+		"strict": true,
+		"declaration": true,
+		"declarationDir": "dist/"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "lib", "dist"]
+}
