@@ -341,7 +341,7 @@ DuckEngine follows [SemVer](https://semver.org/).
 
 ## Demos
 
-All demos are bundled with parcel-bundler and are all on codesandbox.
+### [Simple Demo Game](https://github.com/ksplatdev/DuckEngine-Demo-Game/tree/main)
 
 ### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
 

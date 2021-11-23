@@ -543,9 +543,10 @@ export namespace Duck {
 			}
 
 			export interface Config {
-				autoplay?: Helper.DefaultValue<undefined, false>;
-				volume?: Helper.DefaultValue<undefined, number>;
-				sprites?: Helper.DefaultValue<undefined, Sprite[]>;
+				autoplay?: boolean;
+				volume?: number;
+				sprites?: Sprite[];
+				loop?: boolean;
 			}
 		}
 		export namespace GamepadInput {

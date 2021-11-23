@@ -29,6 +29,7 @@ export default class SoundPlayer {
 		this.element.src = this.path;
 		this.element.volume = options?.volume || 1;
 		this.element.autoplay = options?.autoplay || false;
+		this.element.loop = options?.loop || false;
 
 		if (options?.volume === 0) {
 			this.mute();
@@ -73,6 +74,24 @@ export default class SoundPlayer {
 	 */
 	public unmute() {
 		this.element.muted = false;
+	}
+
+	/**
+	 * @memberof Sound
+	 * @description Pauses the audio, alias to SoundPlayer.pause
+	 * @since 2.1.0
+	 */
+	public stop() {
+		this.pause();
+	}
+
+	/**
+	 * @memberof Sound
+	 * @description Sets the loop of the audio
+	 * @since 2.1.0
+	 */
+	public loop(loop = true) {
+		this.element.loop = loop;
 	}
 
 	/**

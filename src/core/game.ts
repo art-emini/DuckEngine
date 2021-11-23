@@ -771,9 +771,11 @@ export default class Game {
 					window.innerWidth,
 					window.innerHeight
 				);
-				new Debug.Log(
-					`Scaled with devicePixelRatio of ${window.devicePixelRatio} while fullscreen.`
-				);
+				if (this.config.debug) {
+					new Debug.Log(
+						`Scaled with devicePixelRatio of ${window.devicePixelRatio} while fullscreen.`
+					);
+				}
 			}
 
 			this.eventEmitter.emit(EVENTS.GAME.SET_SCALE, {
