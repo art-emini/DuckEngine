@@ -5,6 +5,9 @@
 - SoundPlayer
   - Added loop to config
   - Added loop and stop method
+- Misc
+  - Added wiki-pages folder
+  - Added new wiki page, [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started)
 
 ## Fixed
 

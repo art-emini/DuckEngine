@@ -2,7 +2,7 @@
 
 **v2.0.0 released! [Changelog](CHANGELOG.md)**
 
-| [Docs](#docs) | [Wiki](#wiki) | [Demos](#demos) | [Download](#download) |
+| [Docs](#docs) | [Wiki](#wiki) | [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started) | [Demos](#demos) | [Download](#download) |
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)

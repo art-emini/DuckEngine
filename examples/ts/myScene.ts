@@ -2,23 +2,25 @@
 import DuckEngine, { Duck } from '../../dist';
 
 export default class MainScene extends DuckEngine.Scene {
-	public myRect: Duck.TypeClasses.GameObjects.GameObject<'color'>;
-	public myCircle: Duck.TypeClasses.GameObjects.GameObject<'color'>;
-	public gameObjects: Duck.TypeClasses.Misc.Group<
+	public myRect!: Duck.TypeClasses.GameObjects.GameObject<'color'>;
+	public myCircle!: Duck.TypeClasses.GameObjects.GameObject<'color'>;
+	public gameObjects!: Duck.TypeClasses.Misc.Group<
 		Duck.TypeClasses.GameObjects.GameObject<'color'>
 	>;
 
-	public myCamera: Duck.TypeClasses.Cameras.Camera;
+	public myCamera!: Duck.TypeClasses.Cameras.Camera;
 
-	public myParticle: Duck.TypeClasses.GameObjects.Particles.Particle;
-	public myParticleEmitter: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
+	public myParticle!: Duck.TypeClasses.GameObjects.Particles.Particle;
+	public myParticleEmitter!: Duck.TypeClasses.GameObjects.Particles.ParticleEmitter;
 
-	public myInput: Duck.TypeClasses.Input.KeyboardInput;
+	public myInput!: Duck.TypeClasses.Input.KeyboardInput;
 	private mySpeed = 250;
 
 	constructor(game: Duck.TypeClasses.Game) {
 		super('main', game);
+	}
 
+	public create() {
 		// gameobjects
 		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#fff');
 		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#fff');
