@@ -421,7 +421,7 @@ export default class Game {
 			this.config.onResumeRendering('gameStart');
 		}
 
-		this.loop(this);
+		this.loop();
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
 		}
@@ -464,8 +464,8 @@ export default class Game {
 	 * @description Core loop
 	 * @since 1.0.0-beta
 	 */
-	protected loop(self: Game) {
-		self.clearFrame();
+	protected loop() {
+		this.clearFrame();
 
 		this.now = performance.now();
 		this.deltaTime = (this.now - this.oldTime) / 1000;
@@ -480,7 +480,7 @@ export default class Game {
 		);
 
 		if (this.isRendering) {
-			self.stack.scenes.forEach((scene) => {
+			this.stack.scenes.forEach((scene) => {
 				if (scene.visible) {
 					if (scene.currentCamera) {
 						scene.currentCamera.begin();
@@ -491,10 +491,11 @@ export default class Game {
 
 					// displayList
 					const depthSorted = scene.displayList.depthSort();
-					depthSorted.forEach((renderableObject) => {
-						if (renderableObject.visible) {
-							renderableObject._draw();
-						}
+					const visibleObjects = depthSorted.filter(
+						(r) => r.visible === true
+					);
+					visibleObjects.forEach((r) => {
+						r._draw();
 					});
 
 					if (scene.currentCamera) {
@@ -507,7 +508,7 @@ export default class Game {
 		this.oldTime = this.now;
 
 		this.animationFrame = requestAnimationFrame(() => {
-			self.loop(self);
+			this.loop();
 		});
 	}
 
@@ -542,7 +543,7 @@ export default class Game {
 	 */
 	public clearFrame() {
 		if (this.canvas && this.ctx) {
-			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			this.renderer.clearFrame();
 			this.eventEmitter.emit(EVENTS.GAME.CLEAR_FRAME);
 		} else {
 			new Debug.Error('Canvas is undefined');

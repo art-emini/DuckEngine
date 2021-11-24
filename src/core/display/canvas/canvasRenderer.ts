@@ -23,6 +23,10 @@ export default class CanvasRenderer extends BaseRenderer {
 		);
 	}
 
+	public clearRect(x: number, y: number, w: number, h: number) {
+		this.ctx.clearRect(x, y, w, h);
+	}
+
 	public drawRect(x: number, y: number, w: number, h: number, color: string) {
 		this.ctx.fillStyle = color;
 		this.ctx.fillRect(x, y, w, h);
