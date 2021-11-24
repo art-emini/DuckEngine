@@ -1,17 +1,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import EVENTS from '../../events/events';
 import Game from '../../game';
 import Texture from '../../models/texture';
 import BaseRenderer from '../baseRenderer';
+import RendererPipeline from './pipeline/rendererPipeline';
 
 export default class CanvasRenderer extends BaseRenderer {
 	public ctx: CanvasRenderingContext2D;
 
-	constructor(game: Game) {
+	public pipeline: RendererPipeline;
+
+	constructor(game: Game, poolingInterval = 1000) {
 		super(game);
 
 		this.ctx = this.game.canvas.getContext(
 			'2d'
 		) as CanvasRenderingContext2D;
+
+		this.pipeline = new RendererPipeline(this.game, poolingInterval);
 	}
 
 	public clearFrame() {
@@ -21,6 +27,7 @@ export default class CanvasRenderer extends BaseRenderer {
 			this.game.canvas.width,
 			this.game.canvas.height
 		);
+		this.game.eventEmitter.emit(EVENTS.RENDERER.CLEAR_FRAME);
 	}
 
 	public clearRect(x: number, y: number, w: number, h: number) {

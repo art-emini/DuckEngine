@@ -375,8 +375,9 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Game.Config
-				 * @description Rounds pixels from floats to integers, effects gameobjects (excluding particles)
+				 * @description Rounds pixels from floats to integers, affects gameobjects (excluding particles)
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				roundPixels?: boolean;
@@ -385,6 +386,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if window.focus is called on load or not
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				focus?: boolean;
@@ -393,6 +395,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if window.blur is called on load or not
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				blur?: boolean;
@@ -401,6 +404,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if rendering renderable objects is paused if tab is not focused, uses window.onblur and window.onfocus
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				pauseRenderingOnBlur?: boolean;
@@ -408,7 +412,6 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Physics Options
-				 * @type boolean
 				 * @since 2.0.0
 				 */
 				physics?: {
@@ -452,6 +455,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if DuckEngine logs out events that are occurring
 				 * @type boolean
+				 * @default false
 				 * @since 1.0.0-beta
 				 */
 				debug?: boolean;
@@ -459,6 +463,7 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if DuckEngine silences/prevents pauseRenderingOnBlur, onPauseRendering, and onResumeRendering configurations
+				 * @default false
 				 * @type boolean
 				 * @since 2.0.0
 				 */
@@ -480,6 +485,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description CSS background color of the canvas (hint: to fill a scene with a background color, use scene.add.misc.canvasModulate)
 				 * @type string
+				 * @default undefined
 				 * @since 1.0.0-beta
 				 */
 				background?: string;
@@ -488,6 +494,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if the canvas is scaled down to the window size if the window size is smaller than the canvas
 				 * @type boolean
+				 * @default false
 				 * @since 1.0.0
 				 */
 				smartScale?: boolean;
@@ -495,10 +502,21 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Uses the device pixel ratio to scale the canvas accordingly
+				 * @default false
 				 * @type boolean
 				 * @since 1.0.0
 				 */
 				dprScale?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description How often, in milliseconds, the RendererPipeline calls its pool method, affects how long it takes for a scene
+				 * or renderable to change its visibility as both are controlled and updated by the RendererPipeline
+				 * @default 1000
+				 * @type number
+				 * @since 2.1.0
+				 */
+				poolingInterval?: number;
 			}
 
 			export interface Stack {
@@ -510,6 +528,19 @@ export namespace Duck {
 				func: (...args: unknown[]) => unknown;
 				args: unknown[];
 				name: string;
+			}
+		}
+
+		export namespace RendererPipeline {
+			export interface PoolStackItem {
+				scene: SceneClass;
+				/**
+				 * @memberof Duck.Types.Game.PoolStackItem
+				 * @description An array of renderables that are visible and depth sorted
+				 * @type Duck.Types.Renderable[]
+				 * @since 2.1.0
+				 */
+				renderables: Duck.Types.Renderable[];
 			}
 		}
 

@@ -5,6 +5,13 @@
 - SoundPlayer
   - Added loop to config
   - Added loop and stop method
+- Core
+  - Renderer
+    - Added new CanvasRenderer and RendererPipeline
+  - Made Game loop more efficient by looping only through visible scenes and already pooled visible renderables use RendererPipeline
+    - This makes GC calls less often
+- Events
+  - Added Renderer Events
 - ParticleEmitter
   - Added autoCreate option to constructor
 - Misc
@@ -15,6 +22,10 @@
 
 - ParticleEmitter
   - Made create and createOne methods public
+- Core
+  - Changed how rendering is handled (new CanvasRenderer and RendererPipeline)
+- Game
+  - Loading always has a delay for pooling of RendererPipeline: (config.splashScreen.extraDuration || 0) + (config.poolingInterval || 1000)
 
 ## Fixed
 
@@ -22,4 +33,5 @@
   - Fixed all types in config to true types
 - Game.scaleToWindow always debugs without config setting
 - Fixed effects showing the particles before emitting
-- Fixed particleEmitter particles showing before emitting
+- Fixed ParticleEmitter particles showing before emitting
+- Fixed EventEmitter not applying args correctly to callbacks

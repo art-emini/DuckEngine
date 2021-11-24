@@ -9,7 +9,7 @@ import detectBrowser from '../utils/detectBrowser';
 import smoothOut from '../utils/smoothArray';
 import PluginManager from './misc/pluginManager';
 import CacheManager from './storage/cacheManager';
-import CanvasRenderer from './display/canvas/canvasRenderer';
+import CanvasRenderer from './renderer/canvas/canvasRenderer';
 
 /**
  * @class Game
@@ -209,7 +209,7 @@ export default class Game {
 			this.ctx = this.config.canvas.ctx;
 		}
 
-		this.renderer = new CanvasRenderer(this);
+		this.renderer = new CanvasRenderer(this, this.config.poolingInterval);
 
 		this.deltaTimeArray = Array(100).fill(0.0016);
 		this.deltaTime = 0;
@@ -355,6 +355,7 @@ export default class Game {
 				scenes.forEach((scene) => {
 					this.stack.scenes.push(scene);
 					this.eventEmitter.emit(EVENTS.GAME.SCENE_ADD, scene);
+					this.renderer.pipeline.pool();
 				});
 			},
 
@@ -374,6 +375,7 @@ export default class Game {
 						1
 					);
 					this.eventEmitter.emit(EVENTS.GAME.SCENE_REMOVE, scene);
+					this.renderer.pipeline.pool();
 				}
 			},
 		};
@@ -421,6 +423,10 @@ export default class Game {
 			this.config.onResumeRendering('gameStart');
 		}
 
+		// pool
+		this.renderer.pipeline.pool();
+
+		// start loop
 		this.loop();
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
@@ -465,7 +471,7 @@ export default class Game {
 	 * @since 1.0.0-beta
 	 */
 	protected loop() {
-		this.clearFrame();
+		this.renderer.clearFrame();
 
 		this.now = performance.now();
 		this.deltaTime = (this.now - this.oldTime) / 1000;
@@ -480,27 +486,20 @@ export default class Game {
 		);
 
 		if (this.isRendering) {
-			this.stack.scenes.forEach((scene) => {
-				if (scene.visible) {
-					if (scene.currentCamera) {
-						scene.currentCamera.begin();
-					}
+			this.renderer.pipeline.poolStack.forEach((pool) => {
+				if (pool.scene.currentCamera) {
+					pool.scene.currentCamera.begin();
+				}
 
-					scene.__tick();
-					scene.update(this.deltaTime);
+				pool.scene.__tick();
+				pool.scene.update(this.deltaTime);
 
-					// displayList
-					const depthSorted = scene.displayList.depthSort();
-					const visibleObjects = depthSorted.filter(
-						(r) => r.visible === true
-					);
-					visibleObjects.forEach((r) => {
-						r._draw();
-					});
+				pool.renderables.forEach((r) => {
+					r._draw();
+				});
 
-					if (scene.currentCamera) {
-						scene.currentCamera.end();
-					}
+				if (pool.scene.currentCamera) {
+					pool.scene.currentCamera.end();
 				}
 			});
 		}
@@ -519,7 +518,10 @@ export default class Game {
 	 */
 	protected async drawSplashScreen() {
 		this.canvas.style.backgroundImage = `url('${this.splashScreen}')`;
-		await this.sleep(this.config.splashScreen?.extraDuration || 0);
+		await this.sleep(
+			(this.config.splashScreen?.extraDuration || 0) +
+				(this.config?.poolingInterval || 1000) // add pooling interval so that scenes will be pooled on load
+		);
 	}
 
 	/**
@@ -535,20 +537,6 @@ export default class Game {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
-	/**
-	 * @memberof Game
-	 * @description Clears the current frame on the canvas
-	 * @emits EVENTS.GAME.CLEAR_FRAME
-	 * @since 1.0.0
-	 */
-	public clearFrame() {
-		if (this.canvas && this.ctx) {
-			this.renderer.clearFrame();
-			this.eventEmitter.emit(EVENTS.GAME.CLEAR_FRAME);
-		} else {
-			new Debug.Error('Canvas is undefined');
-		}
-	}
 	/**
 	 * @memberof Game
 	 * @description Sets the scale of the canvas
