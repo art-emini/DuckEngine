@@ -105,7 +105,8 @@ export default class ParticleEmitter {
 		rangeY: Duck.Types.ParticleEmitter.Range,
 		amount: number,
 		game: Game,
-		scene: Scene
+		scene: Scene,
+		autoCreate = true
 	) {
 		this.id = particle.id;
 		this.particle = particle;
@@ -123,16 +124,28 @@ export default class ParticleEmitter {
 		this.floatRangeY = [0, 0];
 
 		// create particles
-		this.create();
+		if (autoCreate) {
+			this.create();
+		}
 	}
 
-	protected create() {
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Creates an amount of particles
+	 * @since 2.1.0
+	 */
+	public create() {
 		for (let i = 0; i < this.amount; i++) {
 			this.createOne();
 		}
 	}
 
-	protected createOne() {
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Creates one particle
+	 * @since 2.1.0
+	 */
+	public createOne() {
 		const obj = new Particle(
 			this.particle.shape,
 			this.particle.w,

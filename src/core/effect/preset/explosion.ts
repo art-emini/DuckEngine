@@ -29,7 +29,8 @@ export default class ExplosionEffect extends Effect {
 			rangeY,
 			particleAmount,
 			game,
-			scene
+			scene,
+			false
 		);
 
 		super(rangeX, rangeY, particleEmitter, game);
@@ -47,6 +48,7 @@ export default class ExplosionEffect extends Effect {
 		const min = randomFloat(-this.speedRange[0], -this.speedRange[1]);
 		const max = randomFloat(this.speedRange[0], this.speedRange[1]);
 
+		this.particleEmitter.create();
 		this.particleEmitter.float([min, max], [min, max]);
 
 		this.particleEmitter.emit();

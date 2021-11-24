@@ -199,63 +199,33 @@ export default class Button extends GameObject<'either'> {
 		if (this.game.ctx) {
 			switch (this.shape) {
 				case 'rect':
-					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.fillRect(
+					this.game.renderer.drawRect(
 						this.position.x,
 						this.position.y,
 						this.w,
-						this.h
+						this.h,
+						this.texture.texture as string
 					);
 					break;
 
 				case 'roundrect':
-					if (this.w < 2 * this.r) this.r = this.w / 2;
-					if (this.h < 2 * this.r) this.r = this.h / 2;
-					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.beginPath();
-					this.game.ctx.moveTo(
-						this.position.x + this.r,
-						this.position.y
-					);
-					this.game.ctx.arcTo(
-						this.position.x + this.w,
-						this.position.y,
-						this.position.x + this.w,
-						this.position.y + this.h,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x + this.w,
-						this.position.y + this.h,
-						this.position.x,
-						this.position.y + this.h,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x,
-						this.position.y + this.h,
-						this.position.x,
-						this.position.y,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x,
-						this.position.y,
-						this.position.x + this.w,
-						this.position.y,
-						this.r
-					);
-					this.game.ctx.closePath();
-					this.game.ctx.fill();
-					break;
-
-				case 'sprite':
-					this.game.ctx.drawImage(
-						this.texture.texture as HTMLImageElement,
+					this.game.renderer.drawRoundRect(
 						this.position.x,
 						this.position.y,
 						this.w,
-						this.h
+						this.h,
+						this.r,
+						this.texture.texture as string
+					);
+					break;
+
+				case 'sprite':
+					this.game.renderer.drawSprite(
+						this.position.x,
+						this.position.y,
+						this.w,
+						this.h,
+						this.texture as unknown as Texture<'image'>
 					);
 					break;
 

@@ -9,6 +9,7 @@ import detectBrowser from '../utils/detectBrowser';
 import smoothOut from '../utils/smoothArray';
 import PluginManager from './misc/pluginManager';
 import CacheManager from './storage/cacheManager';
+import CanvasRenderer from './display/canvas/canvasRenderer';
 
 /**
  * @class Game
@@ -40,6 +41,14 @@ export default class Game {
 	 * @since 1.0.0-beta
 	 */
 	public ctx: CanvasRenderingContext2D;
+
+	/**
+	 * @memberof Game
+	 * @description The Renderer used to draw and clear frames
+	 * @type CanvasRenderer
+	 * @since 2.1.0
+	 */
+	public renderer: CanvasRenderer;
 
 	/**
 	 * @memberof Game
@@ -199,6 +208,8 @@ export default class Game {
 			this.canvas = this.config.canvas.canvas;
 			this.ctx = this.config.canvas.ctx;
 		}
+
+		this.renderer = new CanvasRenderer(this);
 
 		this.deltaTimeArray = Array(100).fill(0.0016);
 		this.deltaTime = 0;

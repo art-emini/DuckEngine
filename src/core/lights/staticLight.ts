@@ -73,17 +73,12 @@ export default class StaticLight extends GameObject<'color'> {
 	public _draw() {
 		if (this.game.ctx) {
 			this.game.ctx.globalCompositeOperation = 'lighter';
-			this.game.ctx.beginPath();
-			this.game.ctx.arc(
+			this.game.renderer.drawCircle(
 				this.position.x,
 				this.position.y,
 				this.r,
-				0,
-				2 * Math.PI,
-				false
+				this.texture.texture
 			);
-			this.game.ctx.fillStyle = this.texture.texture;
-			this.game.ctx.fill();
 			this.game.ctx.globalCompositeOperation = 'source-over';
 		} else {
 			new Debug.Error(

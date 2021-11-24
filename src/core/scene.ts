@@ -262,7 +262,8 @@ export default class Scene extends Render {
 			particle: Particle,
 			rangeX: Duck.Types.ParticleEmitter.Range,
 			rangeY: Duck.Types.ParticleEmitter.Range,
-			amount: number
+			amount: number,
+			autoCreate?: boolean
 		) => ParticleEmitter;
 		cutscene: (
 			config: Duck.Types.Cutscene.Config,
@@ -680,7 +681,8 @@ export default class Scene extends Render {
 				particle: Particle,
 				rangeX: Duck.Types.ParticleEmitter.Range,
 				rangeY: Duck.Types.ParticleEmitter.Range,
-				amount: number
+				amount: number,
+				autoCreate = true
 			) => {
 				return new ParticleEmitter(
 					particle,
@@ -688,7 +690,8 @@ export default class Scene extends Render {
 					rangeY,
 					amount,
 					this.game,
-					this
+					this,
+					autoCreate
 				);
 			},
 			cutscene: (

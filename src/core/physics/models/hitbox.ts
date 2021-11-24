@@ -161,12 +161,12 @@ export default class Hitbox {
 	public _draw() {
 		if (this.game.ctx) {
 			if (this.debugColor) {
-				this.game.ctx.fillStyle = this.debugColor;
-				this.game.ctx.fillRect(
+				this.game.renderer.drawRect(
 					this.position.x,
 					this.position.y,
 					this.w,
-					this.h
+					this.h,
+					this.debugColor
 				);
 			}
 		} else {
