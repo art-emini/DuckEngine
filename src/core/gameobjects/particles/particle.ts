@@ -98,80 +98,45 @@ export default class Particle extends GameObject<'either'> {
 	 * @since 1.0.0-beta
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			switch (this.shape) {
 				case 'circle':
-					this.game.ctx.beginPath();
-					this.game.ctx.arc(
+					this.game.renderer.drawCircle(
 						this.position.x,
 						this.position.y,
 						this.r,
-						0,
-						2 * Math.PI,
-						false
+						this.texture.texture as string
 					);
-					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.fill();
 					break;
 
 				case 'rect':
-					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.fillRect(
+					this.game.renderer.drawRect(
 						this.position.x,
 						this.position.y,
 						this.w,
-						this.h
+						this.h,
+						this.texture.texture as string
 					);
 					break;
 
 				case 'roundrect':
-					if (this.w < 2 * this.r) this.r = this.w / 2;
-					if (this.h < 2 * this.r) this.r = this.h / 2;
-					this.game.ctx.fillStyle = this.texture.texture as string;
-					this.game.ctx.beginPath();
-					this.game.ctx.moveTo(
-						this.position.x + this.r,
-						this.position.y
-					);
-					this.game.ctx.arcTo(
-						this.position.x + this.w,
-						this.position.y,
-						this.position.x + this.w,
-						this.position.y + this.h,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x + this.w,
-						this.position.y + this.h,
-						this.position.x,
-						this.position.y + this.h,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x,
-						this.position.y + this.h,
-						this.position.x,
-						this.position.y,
-						this.r
-					);
-					this.game.ctx.arcTo(
-						this.position.x,
-						this.position.y,
-						this.position.x + this.w,
-						this.position.y,
-						this.r
-					);
-					this.game.ctx.closePath();
-					this.game.ctx.fill();
-					break;
-
-				case 'sprite':
-					this.game.ctx.drawImage(
-						this.texture.texture as HTMLImageElement,
+					this.game.renderer.drawRoundRect(
 						this.position.x,
 						this.position.y,
 						this.w,
-						this.h
+						this.h,
+						this.r,
+						this.texture.texture as string
+					);
+					break;
+
+				case 'sprite':
+					this.game.renderer.drawSprite(
+						this.position.x,
+						this.position.y,
+						this.w,
+						this.h,
+						this.texture.texture as unknown as Texture<'image'>
 					);
 
 					break;

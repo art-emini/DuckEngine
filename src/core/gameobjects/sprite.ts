@@ -132,30 +132,18 @@ export default class Sprite extends GameObject<'image'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			if (this.frameWidth) {
-				// spritesheet
-				this.game.ctx.drawImage(
-					this.texture.texture, // image
-					(this.currentCol! - 1) * this.frameWidth!, // source x
-					(this.currentRow! - 1) * this.frameHeight!, // source y
-					this.frameWidth!, // source width
-					this.frameHeight!, // source height
-					this.position.x, // target x
-					this.position.y, // target y
-					this.frameWidth!, // target width
-					this.frameHeight! // target height
-				);
-			} else {
-				// normal sprite
-				this.game.ctx.drawImage(
-					this.texture.texture,
-					this.position.x,
-					this.position.y,
-					this.w,
-					this.h
-				);
-			}
+		if (this.game.renderer.ctx) {
+			this.game.renderer.drawSprite(
+				this.position.x,
+				this.position.y,
+				this.w,
+				this.h,
+				this.texture,
+				this.frameWidth,
+				this.frameHeight,
+				this.currentRow,
+				this.currentCol
+			);
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. HTMLCanvasElement is undefined.'

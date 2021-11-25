@@ -32,7 +32,8 @@ export default class SmokeEffect extends Effect {
 			rangeY,
 			particleAmount,
 			game,
-			scene
+			scene,
+			false
 		);
 
 		super(rangeX, rangeY, particleEmitter, game);
@@ -49,6 +50,7 @@ export default class SmokeEffect extends Effect {
 	 * @since 1.2.0
 	 */
 	public emit() {
+		this.particleEmitter.create();
 		this.particleEmitter.float(
 			[this.speedRangeX[0], this.speedRangeX[0]],
 			[this.speedRangeY[1], this.speedRangeY[1]]

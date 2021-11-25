@@ -9,6 +9,7 @@ import detectBrowser from '../utils/detectBrowser';
 import smoothOut from '../utils/smoothArray';
 import PluginManager from './misc/pluginManager';
 import CacheManager from './storage/cacheManager';
+import CanvasRenderer from './renderer/canvas/canvasRenderer';
 
 /**
  * @class Game
@@ -35,11 +36,11 @@ export default class Game {
 
 	/**
 	 * @memberof Game
-	 * @description The CanvasRenderingContext2D that is used
-	 * @type CanvasRenderingContext2D
-	 * @since 1.0.0-beta
+	 * @description The Renderer used to draw and clear frames
+	 * @type CanvasRenderer
+	 * @since 2.1.0
 	 */
-	public ctx: CanvasRenderingContext2D;
+	public renderer: CanvasRenderer;
 
 	/**
 	 * @memberof Game
@@ -194,11 +195,11 @@ export default class Game {
 
 		if (this.config.canvas instanceof HTMLCanvasElement) {
 			this.canvas = this.config.canvas;
-			this.ctx = this.canvas.getContext('2d') || Duck.AutoCanvas().ctx;
 		} else {
 			this.canvas = this.config.canvas.canvas;
-			this.ctx = this.config.canvas.ctx;
 		}
+
+		this.renderer = new CanvasRenderer(this, this.config.poolingInterval);
 
 		this.deltaTimeArray = Array(100).fill(0.0016);
 		this.deltaTime = 0;
@@ -224,7 +225,7 @@ export default class Game {
 		if (this.config.dprScale) {
 			dprScale(
 				this.canvas,
-				this.ctx,
+				this.renderer.ctx,
 				this.config.scale?.width || this.canvas.width,
 				this.config.scale?.height || this.canvas.height
 			);
@@ -332,6 +333,26 @@ export default class Game {
 		// animation frame
 		this.animationFrame;
 
+		// set up some events
+		this.eventEmitter.on(EVENTS.GAME.CONTEXT_LOST, () => {
+			// restore context
+			if (!this.canvas) {
+				const res = Duck.AutoCanvas();
+				this.canvas = res.canvas;
+			}
+
+			if (!this.renderer.ctx) {
+				this.renderer.ctx = this.canvas.getContext(
+					'2d'
+				) as CanvasRenderingContext2D;
+			}
+
+			this.eventEmitter.emit(
+				EVENTS.GAME.CONTEXT_RESTORED,
+				this.renderer.ctx
+			);
+		});
+
 		// methods
 		this.scenes = {
 			/**
@@ -344,6 +365,7 @@ export default class Game {
 				scenes.forEach((scene) => {
 					this.stack.scenes.push(scene);
 					this.eventEmitter.emit(EVENTS.GAME.SCENE_ADD, scene);
+					this.renderer.pipeline.pool();
 				});
 			},
 
@@ -363,6 +385,7 @@ export default class Game {
 						1
 					);
 					this.eventEmitter.emit(EVENTS.GAME.SCENE_REMOVE, scene);
+					this.renderer.pipeline.pool();
 				}
 			},
 		};
@@ -410,7 +433,11 @@ export default class Game {
 			this.config.onResumeRendering('gameStart');
 		}
 
-		this.loop(this);
+		// pool
+		this.renderer.pipeline.pool();
+
+		// start loop
+		this.loop();
 		if (this.config.debug) {
 			new Debug.Log('Started animation frame.');
 		}
@@ -453,8 +480,8 @@ export default class Game {
 	 * @description Core loop
 	 * @since 1.0.0-beta
 	 */
-	protected loop(self: Game) {
-		self.clearFrame();
+	protected loop() {
+		this.renderer.clearFrame();
 
 		this.now = performance.now();
 		this.deltaTime = (this.now - this.oldTime) / 1000;
@@ -469,26 +496,20 @@ export default class Game {
 		);
 
 		if (this.isRendering) {
-			self.stack.scenes.forEach((scene) => {
-				if (scene.visible) {
-					if (scene.currentCamera) {
-						scene.currentCamera.begin();
-					}
+			this.renderer.pipeline.poolStack.forEach((pool) => {
+				if (pool.scene.currentCamera) {
+					pool.scene.currentCamera.begin();
+				}
 
-					scene.__tick();
-					scene.update(this.deltaTime);
+				pool.scene.__tick();
+				pool.scene.update(this.deltaTime);
 
-					// displayList
-					const depthSorted = scene.displayList.depthSort();
-					depthSorted.forEach((renderableObject) => {
-						if (renderableObject.visible) {
-							renderableObject._draw();
-						}
-					});
+				pool.renderables.forEach((r) => {
+					r._draw();
+				});
 
-					if (scene.currentCamera) {
-						scene.currentCamera.end();
-					}
+				if (pool.scene.currentCamera) {
+					pool.scene.currentCamera.end();
 				}
 			});
 		}
@@ -496,7 +517,7 @@ export default class Game {
 		this.oldTime = this.now;
 
 		this.animationFrame = requestAnimationFrame(() => {
-			self.loop(self);
+			this.loop();
 		});
 	}
 
@@ -507,7 +528,10 @@ export default class Game {
 	 */
 	protected async drawSplashScreen() {
 		this.canvas.style.backgroundImage = `url('${this.splashScreen}')`;
-		await this.sleep(this.config.splashScreen?.extraDuration || 0);
+		await this.sleep(
+			(this.config.splashScreen?.extraDuration || 0) +
+				(this.config?.poolingInterval || 1000) // add pooling interval so that scenes will be pooled on load
+		);
 	}
 
 	/**
@@ -523,20 +547,6 @@ export default class Game {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
-	/**
-	 * @memberof Game
-	 * @description Clears the current frame on the canvas
-	 * @emits EVENTS.GAME.CLEAR_FRAME
-	 * @since 1.0.0
-	 */
-	public clearFrame() {
-		if (this.canvas && this.ctx) {
-			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-			this.eventEmitter.emit(EVENTS.GAME.CLEAR_FRAME);
-		} else {
-			new Debug.Error('Canvas is undefined');
-		}
-	}
 	/**
 	 * @memberof Game
 	 * @description Sets the scale of the canvas
@@ -742,7 +752,7 @@ export default class Game {
 			if (this.config.dprScale && window.devicePixelRatio !== 1) {
 				dprScale(
 					this.canvas,
-					this.ctx,
+					this.renderer.ctx,
 					this.canvas.width,
 					this.canvas.height
 				);
@@ -767,7 +777,7 @@ export default class Game {
 			if (this.config.dprScale && window.devicePixelRatio !== 1) {
 				dprScale(
 					this.canvas,
-					this.ctx,
+					this.renderer.ctx,
 					window.innerWidth,
 					window.innerHeight
 				);

@@ -45,7 +45,6 @@ export default class Camera {
 	public scene: Scene;
 	protected distance: number;
 	protected lookAt: number[];
-	protected ctx: CanvasRenderingContext2D | null | undefined;
 	protected fieldOfView: number;
 
 	/**
@@ -104,7 +103,6 @@ export default class Camera {
 			this.isMain = true;
 		}
 		this.lookAt = [0, 0];
-		this.ctx = game.ctx;
 		this.fieldOfView = Math.PI / 4.0;
 		this.viewport = {
 			left: 0,
@@ -132,7 +130,7 @@ export default class Camera {
 	 * @since 1.0.0-beta
 	 */
 	public begin() {
-		this.ctx?.save();
+		this.game.renderer.save();
 		this.applyScale();
 		this.applyTranslation();
 
@@ -214,28 +212,31 @@ export default class Camera {
 	 * @since 1.0.0-beta
 	 */
 	public end() {
-		this.ctx?.restore();
+		this.game.renderer.restore();
 	}
 
 	protected applyScale() {
-		this.ctx?.scale(this.viewport.scale[0], this.viewport.scale[1]);
+		this.game.renderer.scale(
+			this.viewport.scale[0],
+			this.viewport.scale[1]
+		);
 	}
 
 	protected applyTranslation() {
-		this.ctx?.translate(-this.viewport.left, -this.viewport.top);
+		this.game.renderer.translate(-this.viewport.left, -this.viewport.top);
 	}
 
 	protected updateViewport() {
-		if (this.ctx) {
+		if (this.game.renderer.ctx) {
 			// dpr scaling
-			let cWidth = this.ctx.canvas.width;
-			let cHeight = this.ctx.canvas.height;
+			let cWidth = this.game.canvas.width;
+			let cHeight = this.game.canvas.height;
 
 			if (this.game.config.dprScale && window.devicePixelRatio !== 1) {
-				cWidth = Number(this.ctx.canvas.style.width.replace('px', ''));
+				cWidth = Number(this.game.canvas.style.width.replace('px', ''));
 
 				cHeight = Number(
-					this.ctx.canvas.style.height.replace('px', '')
+					this.game.canvas.style.height.replace('px', '')
 				);
 
 				// set zoom for dpr scaling
@@ -516,6 +517,9 @@ export default class Camera {
 	 * @memberof Camera
 	 * @description Culls/Renders objects that are passed and does not render other object that are not passed
 	 * @param {Duck.Types.Renderable[]} renderableObjects Objects that should be culled/rendered
+	 *
+	 * Notes:
+	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
 	 * @since 2.0.0
 	 */
 	public cull(renderableObjects: Duck.Types.Renderable[]) {
@@ -551,12 +555,18 @@ export default class Camera {
 				nonCulledObject.enabled = false;
 			}
 		}
+
+		// pool RendererPipeline
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**
 	 * @memberof Camera
 	 * @description A form of Frustum Culling that gets all objects visible to the player by the viewport's width and height and culls those objects
 	 * and does not render objects outside/not-visible to the player/camera
+	 *
+	 * Notes:
+	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
 	 * @since 2.0.0
 	 */
 	public autoCull() {
@@ -636,6 +646,9 @@ export default class Camera {
 				nonCulledObject.enabled = false;
 			}
 		}
+
+		// pool RendererPipeline
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**

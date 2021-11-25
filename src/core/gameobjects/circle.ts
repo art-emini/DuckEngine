@@ -49,18 +49,13 @@ export default class Circle extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			this.game.ctx.beginPath();
-			this.game.ctx.arc(
+		if (this.game.renderer.ctx) {
+			this.game.renderer.drawCircle(
 				this.position.x,
 				this.position.y,
 				this.r,
-				0,
-				2 * Math.PI,
-				false
+				this.texture.texture
 			);
-			this.game.ctx.fillStyle = this.texture.texture;
-			this.game.ctx.fill();
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'

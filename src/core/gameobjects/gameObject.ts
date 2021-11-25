@@ -77,9 +77,9 @@ export default class GameObject<
 		this.visible = true;
 		this.zIndex = Duck.Layers.Rendering.zIndex.gameobject;
 
-		// fix
-		if (this.game.ctx) {
-			this.game.ctx.globalCompositeOperation = 'source-over';
+		// fix blend mode due to StaticLight setting blend mode to lighten
+		if (this.game.renderer.ctx) {
+			this.game.renderer.setBlendMode('source-over');
 		}
 	}
 

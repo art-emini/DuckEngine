@@ -54,42 +54,15 @@ export default class RoundRect extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			if (this.w < 2 * this.r) this.r = this.w / 2;
-			if (this.h < 2 * this.r) this.r = this.h / 2;
-			this.game.ctx.fillStyle = this.texture.texture;
-			this.game.ctx.beginPath();
-			this.game.ctx.moveTo(this.position.x + this.r, this.position.y);
-			this.game.ctx.arcTo(
-				this.position.x + this.w,
-				this.position.y,
-				this.position.x + this.w,
-				this.position.y + this.h,
-				this.r
-			);
-			this.game.ctx.arcTo(
-				this.position.x + this.w,
-				this.position.y + this.h,
-				this.position.x,
-				this.position.y + this.h,
-				this.r
-			);
-			this.game.ctx.arcTo(
-				this.position.x,
-				this.position.y + this.h,
+		if (this.game.renderer.ctx) {
+			this.game.renderer.drawRoundRect(
 				this.position.x,
 				this.position.y,
-				this.r
+				this.w,
+				this.h,
+				this.r,
+				this.texture.texture
 			);
-			this.game.ctx.arcTo(
-				this.position.x,
-				this.position.y,
-				this.position.x + this.w,
-				this.position.y,
-				this.r
-			);
-			this.game.ctx.closePath();
-			this.game.ctx.fill();
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined as Canvas is undefined.'
