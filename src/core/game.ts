@@ -36,14 +36,6 @@ export default class Game {
 
 	/**
 	 * @memberof Game
-	 * @description The CanvasRenderingContext2D that is used
-	 * @type CanvasRenderingContext2D
-	 * @since 1.0.0-beta
-	 */
-	public ctx: CanvasRenderingContext2D;
-
-	/**
-	 * @memberof Game
 	 * @description The Renderer used to draw and clear frames
 	 * @type CanvasRenderer
 	 * @since 2.1.0
@@ -203,10 +195,8 @@ export default class Game {
 
 		if (this.config.canvas instanceof HTMLCanvasElement) {
 			this.canvas = this.config.canvas;
-			this.ctx = this.canvas.getContext('2d') || Duck.AutoCanvas().ctx;
 		} else {
 			this.canvas = this.config.canvas.canvas;
-			this.ctx = this.config.canvas.ctx;
 		}
 
 		this.renderer = new CanvasRenderer(this, this.config.poolingInterval);
@@ -235,7 +225,7 @@ export default class Game {
 		if (this.config.dprScale) {
 			dprScale(
 				this.canvas,
-				this.ctx,
+				this.renderer.ctx,
 				this.config.scale?.width || this.canvas.width,
 				this.config.scale?.height || this.canvas.height
 			);
@@ -342,6 +332,26 @@ export default class Game {
 
 		// animation frame
 		this.animationFrame;
+
+		// set up some events
+		this.eventEmitter.on(EVENTS.GAME.CONTEXT_LOST, () => {
+			// restore context
+			if (!this.canvas) {
+				const res = Duck.AutoCanvas();
+				this.canvas = res.canvas;
+			}
+
+			if (!this.renderer.ctx) {
+				this.renderer.ctx = this.canvas.getContext(
+					'2d'
+				) as CanvasRenderingContext2D;
+			}
+
+			this.eventEmitter.emit(
+				EVENTS.GAME.CONTEXT_RESTORED,
+				this.renderer.ctx
+			);
+		});
 
 		// methods
 		this.scenes = {
@@ -742,7 +752,7 @@ export default class Game {
 			if (this.config.dprScale && window.devicePixelRatio !== 1) {
 				dprScale(
 					this.canvas,
-					this.ctx,
+					this.renderer.ctx,
 					this.canvas.width,
 					this.canvas.height
 				);
@@ -767,7 +777,7 @@ export default class Game {
 			if (this.config.dprScale && window.devicePixelRatio !== 1) {
 				dprScale(
 					this.canvas,
-					this.ctx,
+					this.renderer.ctx,
 					window.innerWidth,
 					window.innerHeight
 				);

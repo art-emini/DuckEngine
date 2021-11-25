@@ -98,7 +98,7 @@ export default class Particle extends GameObject<'either'> {
 	 * @since 1.0.0-beta
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			switch (this.shape) {
 				case 'circle':
 					this.game.renderer.drawCircle(

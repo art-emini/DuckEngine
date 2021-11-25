@@ -49,7 +49,7 @@ export default class Circle extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			this.game.renderer.drawCircle(
 				this.position.x,
 				this.position.y,

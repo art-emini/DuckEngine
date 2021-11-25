@@ -26,6 +26,13 @@
   - Changed how rendering is handled (new CanvasRenderer and RendererPipeline)
 - Game
   - Loading always has a delay for pooling of RendererPipeline: (config.splashScreen.extraDuration || 0) + (config.poolingInterval || 1000)
+- StaticLight
+  - Blend mode is now lighten instead of lighter
+
+## Removed
+
+- Game
+  - Removed ctx property which is now replaced by Game.renderer.ctx
 
 ## Fixed
 

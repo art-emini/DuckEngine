@@ -54,7 +54,7 @@ export default class RoundRect extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			this.game.renderer.drawRoundRect(
 				this.position.x,
 				this.position.y,

@@ -71,15 +71,15 @@ export default class StaticLight extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			this.game.ctx.globalCompositeOperation = 'lighter';
+		if (this.game.renderer.ctx) {
+			this.game.renderer.setBlendMode('lighten');
 			this.game.renderer.drawCircle(
 				this.position.x,
 				this.position.y,
 				this.r,
 				this.texture.texture
 			);
-			this.game.ctx.globalCompositeOperation = 'source-over';
+			this.game.renderer.setBlendMode('source-over');
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'

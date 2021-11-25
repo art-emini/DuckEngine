@@ -132,7 +132,7 @@ export default class Sprite extends GameObject<'image'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			this.game.renderer.drawSprite(
 				this.position.x,
 				this.position.y,

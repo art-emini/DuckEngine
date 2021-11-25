@@ -196,7 +196,7 @@ export default class Button extends GameObject<'either'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			switch (this.shape) {
 				case 'rect':
 					this.game.renderer.drawRect(

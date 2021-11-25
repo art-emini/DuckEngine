@@ -1,5 +1,6 @@
 import Game from '../game';
 import Texture from '../models/texture';
+import { BlendModes } from './canvas/const/blendModes';
 
 export default abstract class BaseRenderer {
 	public game: Game;
@@ -36,4 +37,34 @@ export default abstract class BaseRenderer {
 		currentRow?: number,
 		currentCol?: number
 	): void;
+	abstract save(): void;
+	abstract restore(): void;
+	abstract scale(x: number, y: number): void;
+	abstract translate(x: number, y: number): void;
+	abstract transform(
+		a: number,
+		b: number,
+		c: number,
+		d: number,
+		e: number,
+		f: number
+	): void;
+	abstract setFont(font: string): void;
+	abstract measureText(font: string, text: string): void;
+	abstract drawText(
+		text: string,
+		x: number,
+		y: number,
+		maxWidth?: number
+	): void;
+	abstract strokeText(
+		text: string,
+		x: number,
+		y: number,
+		maxWidth?: number
+	): void;
+	abstract setFillColor(color: string): void;
+	abstract setStrokeColor(color: string): void;
+	abstract setLineWidth(width: number): void;
+	abstract setBlendMode(blendMode: keyof typeof BlendModes): void;
 }

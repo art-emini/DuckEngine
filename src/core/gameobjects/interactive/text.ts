@@ -53,8 +53,10 @@ export default class Text extends GameObject<'color'> {
 		this.game = game;
 
 		// set w and h
-		this.game.ctx.font = this.config.styles.fontCSS;
-		this.w = game.ctx.measureText(text).width;
+		this.w = this.game.renderer.measureText(
+			config.styles.fontCSS,
+			this.text
+		).width;
 		this.h = extractNumbers(config.styles.fontCSS);
 
 		this.texture.setScale({
@@ -72,16 +74,20 @@ export default class Text extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			this.game.ctx.font = this.config.styles.fontCSS;
+		if (this.game.renderer.ctx) {
+			this.game.renderer.setFont(this.config.styles.fontCSS);
+			this.game.renderer.setLineWidth(
+				this.config.styles.strokeWidth || 1
+			);
+			this.game.renderer.setStrokeColor(
+				this.config.styles.strokeColor || '#000'
+			);
+			this.game.renderer.setFillColor(
+				this.config.styles.fillColor || '#000'
+			);
 
 			if (this.config.method === 'draw') {
-				this.game.ctx.fillStyle =
-					this.config.styles.fillColor || '#000';
-				this.game.ctx.strokeStyle =
-					this.config.styles.strokeColor || '#000';
-
-				this.game.ctx.fillText(
+				this.game.renderer.drawText(
 					this.text,
 					this.position.x,
 					this.position.y,
@@ -90,9 +96,7 @@ export default class Text extends GameObject<'color'> {
 			}
 
 			if (this.config.method === 'stroke') {
-				this.game.ctx.lineWidth = this.config.styles.strokeWidth || 1;
-
-				this.game.ctx.strokeText(
+				this.game.renderer.strokeText(
 					this.text,
 					this.position.x,
 					this.position.y,
@@ -101,20 +105,14 @@ export default class Text extends GameObject<'color'> {
 			}
 
 			if (this.config.method === 'draw-stroke') {
-				this.game.ctx.lineWidth = this.config.styles.strokeWidth || 1;
-				this.game.ctx.strokeStyle =
-					this.config.styles.strokeColor || '#000';
-				this.game.ctx.fillStyle =
-					this.config.styles.fillColor || '#000';
-
-				this.game.ctx.fillText(
+				this.game.renderer.drawText(
 					this.text,
 					this.position.x,
 					this.position.y,
 					this.config.styles.maxWidth
 				);
 
-				this.game.ctx.strokeText(
+				this.game.renderer.strokeText(
 					this.text,
 					this.position.x,
 					this.position.y,

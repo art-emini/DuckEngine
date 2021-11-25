@@ -3,6 +3,7 @@ import EVENTS from '../../events/events';
 import Game from '../../game';
 import Texture from '../../models/texture';
 import BaseRenderer from '../baseRenderer';
+import { BlendModes } from './const/blendModes';
 import RendererPipeline from './pipeline/rendererPipeline';
 
 export default class CanvasRenderer extends BaseRenderer {
@@ -18,6 +19,62 @@ export default class CanvasRenderer extends BaseRenderer {
 		) as CanvasRenderingContext2D;
 
 		this.pipeline = new RendererPipeline(this.game, poolingInterval);
+	}
+
+	public save() {
+		this.ctx.save();
+	}
+
+	public restore() {
+		this.ctx.restore();
+	}
+
+	public translate(x: number, y: number) {
+		this.ctx.translate(x, y);
+	}
+
+	public transform(
+		a: number,
+		b: number,
+		c: number,
+		d: number,
+		e: number,
+		f: number
+	) {
+		this.ctx.transform(a, b, c, d, e, f);
+	}
+
+	public scale(x: number, y: number) {
+		this.ctx.scale(x, y);
+	}
+
+	public setFont(font: string) {
+		this.ctx.font = font;
+	}
+
+	public measureText(font: string, text: string) {
+		this.setFont(font);
+		return this.ctx.measureText(text);
+	}
+
+	public setFillColor(color: string) {
+		this.ctx.fillStyle = color;
+	}
+
+	public setStrokeColor(color: string) {
+		this.ctx.strokeStyle = color;
+	}
+
+	public setLineWidth(width: number) {
+		this.ctx.lineWidth = width;
+	}
+
+	public drawText(text: string, x: number, y: number, maxWidth?: number) {
+		this.ctx.fillText(text, x, y, maxWidth);
+	}
+
+	public strokeText(text: string, x: number, y: number, maxWidth?: number) {
+		this.ctx.strokeText(text, x, y, maxWidth);
 	}
 
 	public clearFrame() {
@@ -41,10 +98,10 @@ export default class CanvasRenderer extends BaseRenderer {
 
 	public drawCircle(x: number, y: number, r: number, color: string) {
 		this.ctx.fillStyle = color;
-		this.game.ctx.beginPath();
-		this.game.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-		this.game.ctx.fillStyle = color;
-		this.game.ctx.fill();
+		this.ctx.beginPath();
+		this.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+		this.ctx.fillStyle = color;
+		this.ctx.fill();
 	}
 
 	public drawRoundRect(
@@ -57,15 +114,15 @@ export default class CanvasRenderer extends BaseRenderer {
 	) {
 		if (w < 2 * r) r = w / 2;
 		if (h < 2 * r) r = h / 2;
-		this.game.ctx.fillStyle = color;
-		this.game.ctx.beginPath();
-		this.game.ctx.moveTo(x + r, y);
-		this.game.ctx.arcTo(x + w, y, x + w, y + h, r);
-		this.game.ctx.arcTo(x + w, y + h, x, y + h, r);
-		this.game.ctx.arcTo(x, y + h, x, y, r);
-		this.game.ctx.arcTo(x, y, x + w, y, r);
-		this.game.ctx.closePath();
-		this.game.ctx.fill();
+		this.ctx.fillStyle = color;
+		this.ctx.beginPath();
+		this.ctx.moveTo(x + r, y);
+		this.ctx.arcTo(x + w, y, x + w, y + h, r);
+		this.ctx.arcTo(x + w, y + h, x, y + h, r);
+		this.ctx.arcTo(x, y + h, x, y, r);
+		this.ctx.arcTo(x, y, x + w, y, r);
+		this.ctx.closePath();
+		this.ctx.fill();
 	}
 
 	public drawSprite(
@@ -81,7 +138,7 @@ export default class CanvasRenderer extends BaseRenderer {
 	) {
 		if (frameWidth) {
 			// spritesheet
-			this.game.ctx.drawImage(
+			this.ctx.drawImage(
 				texture.texture, // image
 				(currentCol! - 1) * frameWidth!, // source x
 				(currentRow! - 1) * frameHeight!, // source y
@@ -94,7 +151,11 @@ export default class CanvasRenderer extends BaseRenderer {
 			);
 		} else {
 			// normal sprite
-			this.game.ctx.drawImage(texture.texture, x, y, w, h);
+			this.ctx.drawImage(texture.texture, x, y, w, h);
 		}
+	}
+
+	public setBlendMode(blendMode: keyof typeof BlendModes) {
+		this.ctx.globalCompositeOperation = blendMode;
 	}
 }

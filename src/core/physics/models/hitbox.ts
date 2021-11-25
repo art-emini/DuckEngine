@@ -159,7 +159,7 @@ export default class Hitbox {
 	 * @since 2.0.0
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			if (this.debugColor) {
 				this.game.renderer.drawRect(
 					this.position.x,

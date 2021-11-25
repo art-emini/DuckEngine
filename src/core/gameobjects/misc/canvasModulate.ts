@@ -55,7 +55,7 @@ export default class CanvasModulate extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			this.game.renderer.drawRect(
 				this.position.x,
 				this.position.y,
