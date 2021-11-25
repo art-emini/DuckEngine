@@ -8,13 +8,19 @@ export default class RendererPipeline {
 	public poolInterval: unknown;
 	public poolStack: Duck.Types.RendererPipeline.PoolStackItem[];
 
-	constructor(game: Game, poolingInterval = 1000) {
+	protected updateTimeInterval: unknown;
+
+	constructor(game: Game, poolingInterval = 1000 / game.fps) {
 		this.game = game;
 
 		this.poolInterval = setInterval(() => {
 			this.pool();
 		}, poolingInterval);
 		this.poolStack = [];
+
+		this.updateTimeInterval = setInterval(() => {
+			this.updateTime();
+		}, 1000);
 	}
 
 	public pool() {
@@ -42,5 +48,15 @@ export default class RendererPipeline {
 			EVENTS.RENDERER.PIPELINE_POOL,
 			this.poolStack
 		);
+	}
+
+	public updateTime() {
+		const newInterval = 1000 / this.game.fps;
+
+		clearInterval(this.poolInterval as number);
+
+		this.poolInterval = setInterval(() => {
+			this.pool();
+		}, newInterval);
 	}
 }

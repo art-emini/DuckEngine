@@ -11,7 +11,7 @@ export default class CanvasRenderer extends BaseRenderer {
 
 	public pipeline: RendererPipeline;
 
-	constructor(game: Game, poolingInterval = 1000) {
+	constructor(game: Game, poolingInterval = 1000 / game.fps) {
 		super(game);
 
 		this.ctx = this.game.canvas.getContext(
