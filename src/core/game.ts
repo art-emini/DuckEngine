@@ -496,22 +496,7 @@ export default class Game {
 		);
 
 		if (this.isRendering) {
-			this.renderer.pipeline.poolStack.forEach((pool) => {
-				if (pool.scene.currentCamera) {
-					pool.scene.currentCamera.begin();
-				}
-
-				pool.scene.__tick();
-				pool.scene.update(this.deltaTime);
-
-				pool.renderables.forEach((r) => {
-					r._draw();
-				});
-
-				if (pool.scene.currentCamera) {
-					pool.scene.currentCamera.end();
-				}
-			});
+			this.renderer.render(this.deltaTime);
 		}
 
 		this.oldTime = this.now;

@@ -1,5 +1,7 @@
 # v2.1.0 Changelog - 2021-11-23
 
+This update increases performance and decreases memory usage and GC calls by creating a new CanvasRenderer and RendererPipeline.
+
 ## Added
 
 - SoundPlayer
