@@ -44,3 +44,6 @@ This update increases performance and decreases memory usage and GC calls by cre
 - Fixed effects showing the particles before emitting
 - Fixed ParticleEmitter particles showing before emitting
 - Fixed EventEmitter not applying args correctly to callbacks
+- Fixed PhysicsServer also applying gravity which was incorrect
+- Fixed ParticleEmitter.setRange not updated existing particle positions based on new ranges
+- Fixed Effect following not setting the ranges correctly

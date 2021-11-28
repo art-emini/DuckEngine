@@ -217,7 +217,7 @@ export default class ParticleEmitter {
 
 	/**
 	 * @memberof ParticleEmitter
-	 * @description Sets the new particles' position range
+	 * @description Sets the new or old particles' position range
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX Where the new emitted particles x position is. A range of 2 values
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY Where the new emitted particles y position is. A range of 2 values
 	 * @since 1.0.0-beta
@@ -228,6 +228,22 @@ export default class ParticleEmitter {
 	) {
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
+
+		this.list.forEach((obj) => {
+			obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);
+			obj.position.y = randomInt(this.rangeY[0], this.rangeY[1]);
+
+			obj.floatVelocity.x = randomFloat(
+				this.floatRangeX[0],
+				this.floatRangeX[1],
+				1
+			);
+			obj.floatVelocity.y = randomFloat(
+				this.floatRangeY[0],
+				this.floatRangeY[1],
+				1
+			);
+		});
 	}
 
 	/**

@@ -162,8 +162,7 @@ export default class Effect {
 				this.following.position.y + this.randomMaxOffset,
 			];
 
-			this.particleEmitter.rangeX = rangeX;
-			this.particleEmitter.rangeY = rangeY;
+			this.particleEmitter.setRange(rangeX, rangeY);
 		}
 	}
 
