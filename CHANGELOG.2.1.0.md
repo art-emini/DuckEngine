@@ -2,6 +2,11 @@
 
 This update increases performance and decreases memory usage and GC calls by creating a new CanvasRenderer and RendererPipeline.
 
+*Most changes and additions are included in this changelog, however, some may be missing.*
+*(Found something missing? [Contribute!](README.md#developers-guide))*
+
+------------------------------------------------------------------------------------------------------
+
 ## Added
 
 - SoundPlayer
