@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
 /**
  * @class Once
  * @classdesc Creates a DuckEngine Once
@@ -7,17 +5,17 @@
  * @since 1.0.0
  */
 export default class Once {
-	protected func: Function;
+	protected func: (...args: unknown[]) => unknown;
 	public ran: boolean;
 
 	/**
 	 * @constructor
 	 * @description Creates a Once instance.
-	 * @param {Function} func Function to run on Once.run
+	 * @param {(...args: unknown[]) => unknown} func Function to run on Once.run
 	 * @param {boolean} [run] Determines if function is run as soon as Once class is constructed
 	 * @since 1.0.0
 	 */
-	constructor(func: Function, run?: boolean) {
+	constructor(func: (...args: unknown[]) => unknown, run?: boolean) {
 		this.func = func;
 		this.ran = false;
 

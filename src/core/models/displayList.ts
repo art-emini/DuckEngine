@@ -43,7 +43,7 @@ export default class DisplayList {
 	/**
 	 * @memberof DisplayList
 	 * @description Sorts all renderableObject by zIndex
-	 * @returns Duck.Types.Renderable[]
+	 * @returns {Duck.Types.Renderable[]}
 	 * @since 2.0.0
 	 */
 	public depthSort() {
@@ -58,7 +58,7 @@ export default class DisplayList {
 	 * @memberof DisplayList
 	 * @description Filters all renderableObjects by its visible boolean property
 	 * @param {boolean} [filter=true] By what to filter. EX: true, filters all visible objects, optional -> default: true
-	 * @returns Duck.Types.Renderable[]
+	 * @returns {Duck.Types.Renderable[]}
 	 * @since 2.0.0
 	 */
 	public visibilityFilter(filter = true) {

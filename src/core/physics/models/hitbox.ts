@@ -264,7 +264,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with another Hitbox
 	 * @param {Hitbox} Hitbox Hitbox to use to test the intersection
-	 * @returns boolean
+	 * @returns {boolean}
 	 * @since 2.0.0
 	 */
 	public intersectsWith(hitbox: Hitbox) {
@@ -292,7 +292,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with another Hitbox and returns the face that is colliding
 	 * @param {Hitbox} hitbox Hitbox to use to test the intersection
-	 * @returns Duck.Types.Collider.CollisionResponseType
+	 * @returns {Duck.Types.Collider.CollisionResponseType}
 	 * @since 2.0.0
 	 */
 	public intersectsFaceWith(hitbox: Hitbox) {
@@ -305,7 +305,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with other Hitboxes and returns the face that is colliding
 	 * @param {Group<Hitbox> | Hitbox[]} hitboxes Hitboxes to use to test the intersection
-	 * @returns Duck.Types.Collider.CollisionResponseType[]
+	 * @returns {Duck.Types.Collider.CollisionResponseType[]}
 	 * @since 2.0.0
 	 */
 	public groupIntersectsFaceWith(hitboxes: Group<Hitbox> | Hitbox[]) {
@@ -331,7 +331,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the top most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getTop() {
@@ -341,7 +341,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the bottom most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getBottom() {
@@ -351,7 +351,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the left most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getLeft() {
@@ -361,7 +361,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the right most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getRight() {
@@ -371,7 +371,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the center coordinates of the Hitbox
-	 * @returns Vector2
+	 * @returns {Vector2}
 	 * @since 2.0.0
 	 */
 	public getCenter() {
@@ -384,7 +384,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the centerY coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterY() {
@@ -394,7 +394,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the centerX coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterX() {

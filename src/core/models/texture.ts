@@ -163,7 +163,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns Texture<'color'>
+	 * @returns {Texture<'color'>}
 	 * @since 2.0.0
 	 */
 	public static fromColor(color: string, w: number, h: number) {
@@ -177,7 +177,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns Texture<'image'>
+	 * @returns {Texture<'image'>}
 	 * @since 2.0.0
 	 */
 	public static fromTexture(imgpath: string, w: number, h: number) {
@@ -194,7 +194,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns Texture<'either'>
+	 * @returns {Texture<'either'>}
 	 * @since 2.0.0
 	 */
 	public static fromEither(fillColorOrIMGPath: string, w: number, h: number) {

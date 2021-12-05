@@ -589,7 +589,12 @@ export default class Game {
 			if (f2) {
 				f.visible = false;
 				f2.visible = true;
+
+				// will be removed in v3.0.0
 				f2.onChange();
+
+				f.onSceneInactive();
+				f2.onSceneActive();
 
 				this.eventEmitter.emit(EVENTS.GAME.SWITCH_SCENE);
 			} else {
@@ -615,6 +620,8 @@ export default class Game {
 		const f = this.stack.scenes.find((_scene) => _scene.key === key);
 		if (f) {
 			f.visible = true;
+
+			f.onSceneActive();
 
 			this.eventEmitter.emit(EVENTS.GAME.SHOW_SCENE);
 		} else {

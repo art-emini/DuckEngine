@@ -160,7 +160,7 @@ export default class StateMachine {
 	 * @memberof StateMachine
 	 * @description Checks if the currentState's connections include another AnimationState connection with a passed key
 	 * @param {string} dest The destination or key to find
-	 * @returns boolean
+	 * @returns {boolean}
 	 * @since 2.0.0
 	 */
 	public canTravel(dest: string) {

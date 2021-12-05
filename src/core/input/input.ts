@@ -41,7 +41,7 @@ export default class Input {
 	/**
 	 * @memberof Input
 	 * @description Creates a KeyboardInput instance
-	 * @returns KeyboardInput
+	 * @returns {KeyboardInput}
 	 * @since 2.0.0
 	 */
 	public createKeyboardInput() {
@@ -51,7 +51,7 @@ export default class Input {
 	/**
 	 * @memberof Input
 	 * @description Creates a MouseInput instance
-	 * @returns MouseInput
+	 * @returns {MouseInput}
 	 * @since 2.0.0
 	 */
 	public createMouseInput() {

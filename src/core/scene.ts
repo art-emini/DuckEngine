@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import Game from './game';
 import Render from '../base/render';
 import { Duck } from '../index';
@@ -52,6 +51,7 @@ import PhysicsBody from './physics/physicsBody';
 import GameObject from './gameobjects/gameObject';
 import Tileset from './map/tileset';
 import TileLayer from './map/tilelayer';
+import Timer from '../base/timer';
 
 /**
  * @class Scene
@@ -149,6 +149,22 @@ export default class Scene extends Render {
 	 * @since 2.0.0
 	 */
 	public physicsServer: PhysicsServer | undefined;
+
+	/**
+	 * @memberof Scene
+	 * @description A property that is a function that gets called when the scene is switched to being visible
+	 * @type () => void
+	 * @since 2.1.0
+	 */
+	public onSceneActive: () => void;
+
+	/**
+	 * @memberof Scene
+	 * @description A property that is a function that gets called when the scene is switched to not being visible
+	 * @type () => void
+	 * @since 2.1.0
+	 */
+	public onSceneInactive: () => void;
 
 	// methods
 
@@ -428,6 +444,14 @@ export default class Scene extends Render {
 		if (this.game.config.physics?.enabled) {
 			this.physicsServer = new PhysicsServer(this.game, this);
 		}
+
+		this.onSceneActive = () => {
+			// On scene change to visible
+		};
+
+		this.onSceneInactive = () => {
+			// On scene change to not visible
+		};
 
 		// methods
 
@@ -941,11 +965,12 @@ export default class Scene extends Render {
 	/**
 	 * @memberof Scene
 	 * @description Runs a function once no matter if it is in a loop or not
-	 * @param {Function} func Function to run
+	 * @param {(...args: unknown[]) => unknown} func Function to run
 	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @returns {Once}
 	 * @since 1.0.0
 	 */
-	public once(func: Function, run?: boolean) {
+	public once(func: (...args: unknown[]) => unknown, run?: boolean) {
 		const one = new Once(func, run);
 		return one;
 	}
@@ -956,6 +981,7 @@ export default class Scene extends Render {
 	 * @param {(currentCount:number) => void} func Function to call
 	 * @param {number} maxAmount Max amount of times to allow the function to be called
 	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @returns {Amount}
 	 * @since 1.1.0
 	 */
 	public runAmount(
@@ -965,5 +991,25 @@ export default class Scene extends Render {
 	) {
 		const amount = new Amount(func, maxAmount, this.game, run);
 		return amount;
+	}
+
+	/**
+	 * @memberof Scene
+	 * @description Creates and returns a Timer instance
+	 * @param {number} ms Milliseconds, converted to seconds which is used to check if the target time is reached in Timer.count
+	 * @param {(...args:unknown[])=>unknown} cb Callback to call every time the timer reaches its target
+	 * @param {unknown[]} args Arguments to pass to the callback
+	 * @param {number} repeat Amount of times to repeat, set to infinity to repeat forever
+	 * @returns {Timer}
+	 * @since 2.1.0
+	 */
+	public createTimer(
+		ms: number,
+		cb: (...args: unknown[]) => unknown,
+		args: unknown[],
+		repeat: number
+	) {
+		const timer = new Timer(ms, cb, args, repeat);
+		return timer;
 	}
 }

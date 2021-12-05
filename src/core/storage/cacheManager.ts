@@ -52,7 +52,7 @@ export default class CacheManager {
 	 * @memberof CacheManager
 	 * @description Gets a value from a Name/Key from the storage
 	 * @param {string} name Name/Key to get the value from
-	 * @returns string
+	 * @returns {string}
 	 * @since 2.0.0
 	 */
 	public get(name: string): string | undefined | null {
@@ -91,7 +91,7 @@ export default class CacheManager {
 	/**
 	 * @memberof CacheManager
 	 * @description Returns the keys from the memory-cache
-	 * @returns string[]
+	 * @returns {string[]}
 	 * @since 2.0.0
 	 */
 	public keys() {
@@ -101,7 +101,7 @@ export default class CacheManager {
 	/**
 	 * @memberof CacheManager
 	 * @description Returns the values from the memory-cache
-	 * @returns string[]
+	 * @returns {string[]}
 	 * @since 2.0.0
 	 */
 	public values() {

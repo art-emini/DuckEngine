@@ -77,7 +77,7 @@ export default class PluginManager {
 	 * @memberof PluginManager
 	 * @description Finds a plugin by its name
 	 * @param {string} name Name of plugin to find
-	 * @returns Duck.Types.Game.Plugin
+	 * @returns {Duck.Types.Game.Plugin}
 	 * @since 2.0.0
 	 */
 	public find(name: string): Duck.Types.Game.Plugin | undefined {

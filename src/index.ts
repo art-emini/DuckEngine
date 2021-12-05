@@ -328,6 +328,7 @@ export namespace Duck {
 				button: 4,
 				text: 5,
 				graphicDebug: 6,
+				fades: 7,
 			};
 		}
 	}

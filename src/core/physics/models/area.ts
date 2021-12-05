@@ -131,7 +131,7 @@ export default class Area extends PhysicsBody<'color'> {
 	 * @memberof Area
 	 * @description Checks if the body is currently in the area
 	 * @param {PhysicsBody<Duck.Types.Texture.Type>} physicsBody PhysicsBody to check
-	 * @returns boolean
+	 * @returns {boolean}
 	 */
 	public bodyIsInArea(physicsBody: PhysicsBody<Duck.Types.Texture.Type>) {
 		const f = this.bodies.find((object) => object.id === physicsBody.id);

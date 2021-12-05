@@ -126,7 +126,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Pops an item from the Group array
-	 * @returns t | undefined
+	 * @returns {t | undefined}
 	 * @since 1.0.0-beta
 	 */
 	public pop() {
@@ -136,7 +136,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Shifts an item from the Group array
-	 * @returns t | undefined
+	 * @returns {t | undefined}
 	 * @since 1.0.0-beta
 	 */
 	public shift() {
@@ -148,7 +148,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @description Splices an item from the Group array
 	 * @param {number} index Index to splice at
 	 * @param {number} [deleteCount] How many items to remove, optional
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public splice(index: number, deleteCount?: number) {
@@ -159,7 +159,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @memberof Group
 	 * @description Filters items from the Group
 	 * @param {Duck.Types.Group.Filter} filter Filter string
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public filter(filter: Duck.Types.Group.Filter) {
@@ -215,7 +215,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Returns the array
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public get group() {
@@ -225,7 +225,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Returns the length of the array
-	 * @returns number
+	 * @returns {number}
 	 * @since 1.0.0-beta
 	 */
 	public get length() {

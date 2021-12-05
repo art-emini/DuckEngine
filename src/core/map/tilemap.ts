@@ -68,7 +68,7 @@ export default class TileMap extends Map {
 	 * @memberof Tilemap
 	 * @description Gets visible layers based on filter, then depth sorts the layers
 	 * @param {boolean} [filter=true]
-	 * @returns TileLayer[]
+	 * @returns {TileLayer[]}
 	 * @since 2.0.0
 	 */
 	public sortTileLayers(filter = true) {
