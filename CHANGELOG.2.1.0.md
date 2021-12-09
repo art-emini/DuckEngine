@@ -20,6 +20,9 @@ This update increases performance and decreases memory usage and GC calls by cre
 - Scene
   - Added onSceneActive and onSceneInactive methods that are called when visible is set to true and false
   - Added createTimer method that returns a new Timer instance
+  - Added setVisible method to set the visibility of the scene and it immediately updates it by pooling the RendererPipeline
+- GameObject
+  - Added setVisible method to set the visibility of the scene and it immediately updates it by pooling the RendererPipeline
 - Events
   - Added Renderer Events
 - ParticleEmitter

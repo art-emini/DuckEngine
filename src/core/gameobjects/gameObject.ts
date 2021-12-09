@@ -95,6 +95,20 @@ export default class GameObject<
 
 	/**
 	 * @memberof GameObject
+	 * @description Sets the visible property and calls the game.renderer.pipeline.pool method to immediately update the visibility
+	 *
+	 * **Note: this calls Game.renderer.pipeline.pool to immediately update the visibility**
+	 *
+	 * @param {boolean} visible What to set the visible property to
+	 * @since 2.1.0
+	 */
+	public setVisible(visible: boolean) {
+		this.visible = visible;
+		this.game.renderer.pipeline.pool();
+	}
+
+	/**
+	 * @memberof GameObject
 	 * @description Sets the scale of the GameObject
 	 * @param {Duck.Types.Misc.Scale|number} scale Scale of the gameobject, can be a number to change the radius
 	 * @since 1.0.0-beta
