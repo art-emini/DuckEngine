@@ -1,28 +1,28 @@
 import { Duck } from '../../../index';
 import Debug from '../../debug/debug';
 import Game from '../../game';
-import GameObject from '../gameObject';
 import rectToRectIntersect from '../../physics/rectToRectIntersect';
 import Scene from '../../scene';
 import Text from './text';
 import Texture from '../../models/texture';
 import EVENTS from '../../events/events';
+import UI from './ui';
 
 /**
  * @class Button
  * @classdesc Creates a DuckEngine Button
  * @description The Button Class. Acts like a Button
- * @extends GameObject
+ * @extends UI
  * @since 1.0.0
  */
-export default class Button extends GameObject<'either'> {
+export default class Button extends UI<'either'> {
 	/**
 	 * @memberof Button
 	 * @description Shape of the button
-	 * @type Duck.Types.Interactive.Button.Shape
+	 * @type Duck.Types.UI.Button.Shape
 	 * @since 1.0.0
 	 */
-	public shape: Duck.Types.Interactive.Button.Shape;
+	public shape: Duck.Types.UI.Button.Shape;
 
 	/**
 	 * @memberof Button
@@ -43,7 +43,7 @@ export default class Button extends GameObject<'either'> {
 	/**
 	 * @constructor
 	 * @description Creates a Button instance
-	 * @param {Duck.Types.Interactive.Button.Shape} shape Shape of the button, 'rect', 'roundrect', or 'sprite'
+	 * @param {Duck.Types.UI.Button.Shape} shape Shape of the button, 'rect', 'roundrect', or 'sprite'
 	 * @param {number} x X position
 	 * @param {number} y Y position
 	 * @param {number} w Width
@@ -56,7 +56,7 @@ export default class Button extends GameObject<'either'> {
 	 * @since 1.0.0
 	 */
 	constructor(
-		shape: Duck.Types.Interactive.Button.Shape,
+		shape: Duck.Types.UI.Button.Shape,
 		x: number,
 		y: number,
 		w: number,
@@ -241,13 +241,13 @@ export default class Button extends GameObject<'either'> {
 	/**
 	 * @memberof Button
 	 * @description Adds an event listener to the button
-	 * @param {Duck.Types.Interactive.Button.ListenerType} type Listener Type, type of event
-	 * @param {Duck.Types.Interactive.Button.ListenerFunc} func Callback function, called on event
+	 * @param {Duck.Types.UI.Button.ListenerType} type Listener Type, type of event
+	 * @param {Duck.Types.UI.Button.ListenerFunc} func Callback function, called on event
 	 * @since 1.0.0
 	 */
 	public on(
-		type: Duck.Types.Interactive.Button.ListenerType,
-		func: Duck.Types.Interactive.Button.ListenerFunc
+		type: Duck.Types.UI.Button.ListenerType,
+		func: Duck.Types.UI.Button.ListenerFunc
 	) {
 		this.game.eventEmitter.on(`BUTTON_${type}`, func);
 	}
@@ -255,10 +255,10 @@ export default class Button extends GameObject<'either'> {
 	/**
 	 * @memberof Button
 	 * @description Removes an event listener from the button
-	 * @param {Duck.Types.Interactive.Button.ListenerType} type Listener Type, type of event
+	 * @param {Duck.Types.UI.Button.ListenerType} type Listener Type, type of event
 	 * @since 1.0.0
 	 */
-	public off(type: Duck.Types.Interactive.Button.ListenerType) {
+	public off(type: Duck.Types.UI.Button.ListenerType) {
 		this.game.eventEmitter.off(`BUTTON_${type}`);
 	}
 }

@@ -3,16 +3,16 @@ import extractNumbers from '../../../utils/extractNumbers';
 import Game from '../../game';
 import Texture from '../../models/texture';
 import Scene from '../../scene';
-import GameObject from '../gameObject';
+import UI from './ui';
 
 /**
  * @class Text
  * @classdesc Creates a DuckEngine Text
  * @description The Button Class. Renders Text to the canvas
- * @extends GameObject
+ * @extends UI
  * @since 1.0.0-beta
  */
-export default class Text extends GameObject<'color'> {
+export default class Text extends UI<'color'> {
 	/**
 	 * @memberof Text
 	 * @description Text string
@@ -20,20 +20,20 @@ export default class Text extends GameObject<'color'> {
 	 * @since 1.0.0-beta
 	 */
 	public text: string;
-	protected config: Duck.Types.Interactive.Text.Config;
+	protected config: Duck.Types.UI.Text.Config;
 
 	/**
 	 * @constructor Text
 	 * @description Creates a Text instance.
 	 * @param {string} text Text string
-	 * @param {Duck.Types.Interactive.Text.Config} config Text configuration, styles, position and more
+	 * @param {Duck.Types.UI.Text.Config} config Text configuration, styles, position and more
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
 	 */
 	constructor(
 		text: string,
-		config: Duck.Types.Interactive.Text.Config,
+		config: Duck.Types.UI.Text.Config,
 		game: Game,
 		scene: Scene
 	) {

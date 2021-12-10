@@ -34,8 +34,8 @@ import circleToRectIntersect from './physics/circleToRectIntersect';
 import TileMap from './map/tilemap';
 import Once from '../base/once';
 import Amount from '../base/amount';
-import Button from './gameobjects/interactive/button';
-import Text from './gameobjects/interactive/text';
+import Button from './gameobjects/ui/button';
+import Text from './gameobjects/ui/text';
 import Effect from './effect/effect';
 import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
@@ -231,13 +231,10 @@ export default class Scene extends Render {
 				collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
 			) => Area;
 		};
-		interactive: {
-			text: (
-				text: string,
-				config: Duck.Types.Interactive.Text.Config
-			) => Text;
+		ui: {
+			text: (text: string, config: Duck.Types.UI.Text.Config) => Text;
 			button: (
-				shape: Duck.Types.Interactive.Button.Shape,
+				shape: Duck.Types.UI.Button.Shape,
 				x: number,
 				y: number,
 				w: number,
@@ -263,10 +260,7 @@ export default class Scene extends Render {
 				alpha: Duck.Types.Helper.AlphaRange
 			) => StaticLight;
 		};
-		group: <t extends Duck.Types.Group.StackItem>(
-			name: string,
-			defaultValues?: t[]
-		) => Group<t>;
+		group: <t>(name: string, defaultValues?: t[]) => Group<t>;
 		particle: (
 			shape: Duck.Types.Collider.ShapeString,
 			w: number,
@@ -600,18 +594,15 @@ export default class Scene extends Render {
 					return myArea;
 				},
 			},
-			interactive: {
-				text: (
-					text: string,
-					config: Duck.Types.Interactive.Text.Config
-				) => {
+			ui: {
+				text: (text: string, config: Duck.Types.UI.Text.Config) => {
 					const myText = new Text(text, config, this.game, this);
 					this.displayList.add(myText);
 					this.physicsList.add(myText);
 					return myText;
 				},
 				button: (
-					shape: Duck.Types.Interactive.Button.Shape,
+					shape: Duck.Types.UI.Button.Shape,
 					x: number,
 					y: number,
 					w: number,
@@ -677,10 +668,7 @@ export default class Scene extends Render {
 					return myStaticLight;
 				},
 			},
-			group: <t extends Duck.Types.Group.StackItem>(
-				name: string,
-				defaultValues?: t[]
-			) => {
+			group: <t>(name: string, defaultValues?: t[]) => {
 				return new Group<t>(name, this.game, defaultValues);
 			},
 			particle: (

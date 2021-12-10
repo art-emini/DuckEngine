@@ -1,5 +1,4 @@
 import Game from '../../game';
-import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
 
 /**

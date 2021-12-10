@@ -3,14 +3,12 @@ import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
 import Game from '../game';
-import Circle from '../gameobjects/circle';
-import Rect from '../gameobjects/rect';
-import RoundRect from '../gameobjects/roundrect';
-import Sprite from '../gameobjects/sprite';
-import Text from '../gameobjects/interactive/text';
 import StaticLight from '../lights/staticLight';
 import Collider from '../physics/collider';
 import EVENTS from '../events/events';
+import GameObject from '../gameobjects/gameObject';
+import UI from '../gameobjects/ui/ui';
+import Hitbox from '../physics/models/hitbox';
 
 /**
  * @class Group
@@ -19,7 +17,7 @@ import EVENTS from '../events/events';
  * @template t Stack Item type generic
  * @since 1.0.0-beta
  */
-export default class Group<t extends Duck.Types.Group.StackItem> {
+export default class Group<t> {
 	protected stack: t[];
 
 	/**
@@ -168,23 +166,22 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 				return this.stack.filter((item) => item instanceof Camera);
 				break;
 			case 'gameobject':
-				return this.stack.filter(
-					(item) =>
-						item instanceof Circle || Rect || RoundRect || Sprite
-				);
+				return this.stack.filter((item) => item instanceof GameObject);
 				break;
-			case 'interactive':
-				return this.stack.filter((item) => item instanceof Text);
+			case 'ui':
+				return this.stack.filter((item) => item instanceof UI);
 				break;
 			case 'lights':
 				return this.stack.filter((item) => item instanceof StaticLight);
 				break;
 			case 'physics':
-				return this.stack.filter((item) => item instanceof Collider);
+				return this.stack.filter(
+					(item) => item instanceof Collider || item instanceof Hitbox
+				);
 				break;
 			default:
 				new Debug.Error(
-					'Cannot filter Group. Filter must be "cameras", "gameobject", "interactive", "lights", or "physics".'
+					'Cannot filter Group. Filter must be "cameras", "gameobject", "ui", "lights", or "physics".'
 				);
 				return this.stack;
 				break;

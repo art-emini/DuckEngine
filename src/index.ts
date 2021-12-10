@@ -4,7 +4,7 @@
 import CameraClass from './core/camera/camera';
 import GameClass from './core/game';
 import SceneClass from './core/scene';
-import TextClass from './core/gameobjects/interactive/text';
+import TextClass from './core/gameobjects/ui/text';
 import StaticLightClass from './core/lights/staticLight';
 import ColliderClass from './core/physics/collider';
 import GameObjectClass from './core/gameobjects/gameObject';
@@ -22,7 +22,7 @@ import ParticleEmitterClass from './core/gameobjects/particles/particleEmitter';
 import SoundPlayerClass from './core/sound/soundPlayer';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
-import ButtonClass from './core/gameobjects/interactive/button';
+import ButtonClass from './core/gameobjects/ui/button';
 import EffectClass from './core/effect/effect';
 import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
@@ -110,7 +110,7 @@ export namespace Duck {
 				export const Particle = ParticleClass;
 				export const ParticleEmitter = ParticleEmitterClass;
 			}
-			export namespace Interactive {
+			export namespace UI {
 				export const Button = ButtonClass;
 				export const Text = TextClass;
 			}
@@ -221,7 +221,7 @@ export namespace Duck {
 				export type Particle = ParticleClass;
 				export type ParticleEmitter = ParticleEmitterClass;
 			}
-			export namespace Interactive {
+			export namespace UI {
 				export type Button = ButtonClass;
 				export type Text = TextClass;
 			}
@@ -242,8 +242,7 @@ export namespace Duck {
 
 		export namespace Misc {
 			export type Loader = LoaderClass;
-			export type Group<t extends Duck.Types.Group.StackItem> =
-				GroupClass<t>;
+			export type Group<t> = GroupClass<t>;
 			export type Cutscene = CutsceneClass;
 			export type CacheManager = CacheManagerClass;
 			export type PluginManager = PluginManagerClass;
@@ -628,7 +627,7 @@ export namespace Duck {
 			}
 		}
 
-		export namespace Interactive {
+		export namespace UI {
 			export namespace Text {
 				export interface Config {
 					x: number;
@@ -665,26 +664,17 @@ export namespace Duck {
 		}
 
 		export namespace Group {
-			export type StackItem =
-				| GameObject<Duck.Types.Texture.Type>
-				| PhysicsBodyClass<Duck.Types.Texture.Type>
-				| CameraClass
-				| TextClass
-				| StaticLightClass
-				| ColliderClass
-				| HitboxClass;
-
 			export type Filter =
 				| 'gameobject'
 				| 'lights'
-				| 'interactive'
+				| 'ui'
 				| 'physics'
 				| 'cameras';
 
 			export type ListenerType = 'ADD' | 'REMOVE';
 
 			export interface Listener {
-				func: (item: StackItem) => unknown;
+				func: (item: unknown) => unknown;
 				type: ListenerType;
 			}
 		}

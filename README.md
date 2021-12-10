@@ -16,7 +16,7 @@ A 2D Game Engine for the web.
 
 ## Features
 
-- AABB (Axis-Aligned Bounding Box) Hitbox Based Physics Engine
+- Customizable Hitbox Based Physics Engine
 - Multiple Scenes
 - Fast & Performant
 - Sprites & Spritesheets
@@ -29,15 +29,14 @@ A 2D Game Engine for the web.
 - DPR / Mobile Scaling
 - Advanced Particle System
 - Effects and Presets
-- Button and Text UI
-- Groups
-- Tilemaps
-- Fast & Performant
+- Advanced UI System
+- Groups & Management
+- Advanced Tilemap System
 - Small Package Size
-- Lighting
-- Preloader
-- Textures
-- Made in Typescript
+- Static Lighting
+- Asset Preloader & Manager
+- Textures & Manager
+- Made fully in TypeScript
 - Typedefs
 - [Docs](#docs)
 - A lot more...
