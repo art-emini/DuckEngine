@@ -14,9 +14,10 @@ import uniqueID from '../../utils/uniqueID';
  * @description The GameObject Class. All GameObjects extend this class
  * @since 1.0.0-beta
  */
-export default class GameObject<
-	textureType extends Duck.Types.Texture.Type
-> extends PhysicsBody<textureType> {
+export default class GameObject<textureType extends Duck.Types.Texture.Type>
+	extends PhysicsBody<textureType>
+	implements Duck.Types.Renderable
+{
 	/**
 	 * @memberof GameObject
 	 * @description The texture of the GameObject
@@ -40,6 +41,14 @@ export default class GameObject<
 	 * @since 2.0.0
 	 */
 	public zIndex: number;
+
+	/**
+	 * @memberof GameObject
+	 * @description Determines if the GameObject should be visible by the current scene's current camera
+	 * @type boolean
+	 * @since 2.1.0
+	 */
+	public culled: boolean;
 
 	// methods
 
@@ -76,6 +85,7 @@ export default class GameObject<
 
 		this.visible = true;
 		this.zIndex = Duck.Layers.Rendering.zIndex.gameobject;
+		this.culled = true;
 
 		// fix blend mode due to StaticLight setting blend mode to lighten
 		if (this.game.renderer.ctx) {

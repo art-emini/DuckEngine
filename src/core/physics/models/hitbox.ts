@@ -15,7 +15,7 @@ import rectToRectIntersect from '../rectToRectIntersect';
  * @description The Hitbox Class. A AABB Hitbox used for Colliders
  * @since 2.0.0
  */
-export default class Hitbox {
+export default class Hitbox implements Duck.Types.Renderable {
 	/**
 	 * @memberof Hitbox
 	 * @description The unique identifier for a Hitbox
@@ -106,6 +106,14 @@ export default class Hitbox {
 
 	/**
 	 * @memberof Hitbox
+	 * @description Determines if the Hitbox should be visible by the current scene's current camera
+	 * @type boolean
+	 * @since 2.1.0
+	 */
+	public culled: boolean;
+
+	/**
+	 * @memberof Hitbox
 	 * @description A string determining the state of the current collision
 	 * @type Duck.Types.Collider.CollisionResponseType
 	 * @since 2.0.0
@@ -146,6 +154,7 @@ export default class Hitbox {
 		this.debugColor = debugColor;
 		this.visible = debugColor ? true : false;
 		this.zIndex = Duck.Layers.Rendering.zIndex.graphicDebug;
+		this.culled = debugColor ? true : false;
 
 		this.collisionState = 'none';
 	}

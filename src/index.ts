@@ -341,14 +341,18 @@ export namespace Duck {
 	export namespace Types {
 		export type GameObject<textureType extends Duck.Types.Texture.Type> =
 			GameObjectClass<textureType>;
-		export type Renderable =
-			| GameObjectClass<Duck.Types.Texture.Type>
-			| HitboxClass
-			| Duck.TypeClasses.Effects.Effect
-			| Duck.TypeClasses.Map.TileMap;
 
 		export type PhysicsProcessMember =
 			PhysicsBodyClass<Duck.Types.Texture.Type>;
+
+		export interface Renderable {
+			readonly id: string;
+			zIndex: number;
+			visible: boolean;
+			game: GameClass;
+			_draw(): void;
+			culled: boolean;
+		}
 
 		export namespace Game {
 			export interface Config {

@@ -33,6 +33,9 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - Added new UI class
 - Group
   - Added physics filter can now also filter hitboxes
+- Types
+  - Added new Renderable type (replaces old renderable type)
+    - Added new prop culled
 - Misc
   - Added wiki-pages folder
   - Added new layer "fades" to Duck.Layers.Rendering.zIndex
@@ -44,6 +47,7 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - Made create and createOne methods public
 - Core
   - Changed how rendering is handled (new CanvasRenderer and RendererPipeline)
+  - All renderables now implement the new Renderable interface
 - Game
   - Loading always has a delay for pooling of RendererPipeline: (config.splashScreen.extraDuration || 0) + (config.poolingInterval || 1000)
 - StaticLight
@@ -62,6 +66,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
 
 - Game
   - Removed ctx property which is now replaced by Game.renderer.ctx
+- Types
+  - Removed **type** Duck.Types.Renderable which has been replaced with Duck.Types.Renderable **interface** that is now implemented into classes
 
 ## Deprecated
 

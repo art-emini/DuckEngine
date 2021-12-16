@@ -539,6 +539,7 @@ export default class Camera {
 			}
 
 			culledObject.visible = true;
+			culledObject.culled = true;
 			if (culledObject instanceof PhysicsBody) {
 				culledObject.enabled = true;
 			}
@@ -551,6 +552,7 @@ export default class Camera {
 			}
 
 			nonCulledObject.visible = false;
+			nonCulledObject.culled = false;
 			if (nonCulledObject instanceof PhysicsBody) {
 				nonCulledObject.enabled = false;
 			}
@@ -630,6 +632,7 @@ export default class Camera {
 			}
 
 			culledObject.visible = true;
+			culledObject.culled = true;
 			if (culledObject instanceof PhysicsBody) {
 				culledObject.enabled = true;
 			}
@@ -642,6 +645,7 @@ export default class Camera {
 			}
 
 			nonCulledObject.visible = false;
+			nonCulledObject.culled = false;
 			if (nonCulledObject instanceof PhysicsBody) {
 				nonCulledObject.enabled = false;
 			}
