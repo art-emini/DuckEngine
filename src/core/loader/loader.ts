@@ -6,7 +6,6 @@ import Scene from '../scene';
 import TextureSheet from '../texture/textureSheet';
 import Debug from '../debug/debug';
 import getImageData from '../../utils/getImageData';
-import convertURItoBlob from '../../utils/convertURItoBlob';
 
 // loads images by URL or file path
 // static class
@@ -448,58 +447,33 @@ export default class Loader {
 	 * @description Loads an Audio file and adds it to the audioStack
 	 * @param {string} pathOrURL Path to the file or the URL
 	 * @param {string} key Key of the file to use to save it as
+	 * @param {string} [mimeType] The mime type of the file, optional -> default: 'audio/mp3'
 	 * @since 2.0.0
 	 */
-	public async loadAudio(pathOrURL: string, key: string) {
-		// try cache
-		const cacheData = await this.tryCache('audio', key);
-		if (cacheData) {
-			const blob = convertURItoBlob(cacheData);
+	public async loadAudio(
+		pathOrURL: string,
+		key: string,
+		mimeType = 'audio/mp3'
+	) {
+		const res = await fetch(pathOrURL);
+		const reader = res.body?.getReader();
 
-			if (this.game.config.debug) {
-				new Debug.Log('Loaded Audio from cache');
-			}
+		const result = await reader?.read();
 
-			const url = window.URL.createObjectURL(blob);
-			const audio = new Audio();
-			audio.src = url;
+		const blob = new Blob([result?.value] as unknown as BlobPart[], {
+			type: mimeType,
+		});
 
-			this.audioStack.push({
-				type: 'audio',
-				value: audio,
-				key,
-			});
+		const url = window.URL.createObjectURL(blob);
+		const audio = new Audio();
+		audio.src = url;
 
-			return audio;
-		} else {
-			const res = await fetch(pathOrURL);
-			const reader = res.body?.getReader();
+		this.audioStack.push({
+			type: 'audio',
+			value: audio,
+			key,
+		});
 
-			const result = await reader?.read();
-
-			const blob = new Blob([result?.value] as unknown as BlobPart[], {
-				type: 'audio/mp3',
-			});
-
-			const url = window.URL.createObjectURL(blob);
-			const audio = new Audio();
-			audio.src = url;
-
-			this.audioStack.push({
-				type: 'audio',
-				value: audio,
-				key,
-			});
-
-			// save in cache
-			const fileReader = new FileReader();
-			fileReader.onload = (e) => {
-				this.saveCache('audio', key, e.target?.result as string);
-			};
-
-			fileReader.readAsDataURL(blob);
-
-			return audio;
-		}
+		return audio;
 	}
 }
