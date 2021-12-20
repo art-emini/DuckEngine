@@ -385,7 +385,7 @@ export default class Loader {
 			);
 
 			this.xmlStack.push({
-				type: 'html',
+				type: 'xml',
 				value: xml,
 				key,
 			});
@@ -400,7 +400,7 @@ export default class Loader {
 			);
 
 			this.xmlStack.push({
-				type: 'html',
+				type: 'xml',
 				value: xml,
 				key,
 			});

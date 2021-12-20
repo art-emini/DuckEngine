@@ -517,12 +517,23 @@ export default class Camera {
 	 * @memberof Camera
 	 * @description Culls/Renders objects that are passed and does not render other object that are not passed
 	 * @param {Duck.Types.Renderable[]} renderableObjects Objects that should be culled/rendered
+	 * @param {Duck.Types.Camera.CullingOptions} [options] Options to modify how objects are culled, optional -> defaults:
+	 * { preserveVisibility: true, modifyPhysicsEnable: true }
 	 *
 	 * Notes:
 	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
+	 *
 	 * @since 2.0.0
 	 */
-	public cull(renderableObjects: Duck.Types.Renderable[]) {
+	public cull(
+		renderableObjects: Duck.Types.Renderable[],
+		options?: Duck.Types.Camera.CullingOptions
+	) {
+		const preserveVisibility = options ? options.preserveVisibility : true;
+		const modifyPhysicsEnable = options
+			? options.modifyPhysicsEnable
+			: true;
+
 		const visibleObjects = this.scene.displayList.visibilityFilter(true);
 
 		const culledObjects = visibleObjects.filter((r) =>
@@ -538,10 +549,16 @@ export default class Camera {
 				continue;
 			}
 
-			culledObject.visible = true;
-			culledObject.culled = true;
-			if (culledObject instanceof PhysicsBody) {
-				culledObject.enabled = true;
+			if (preserveVisibility) {
+				culledObject.culled = true;
+			} else {
+				culledObject.visible = true;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (culledObject instanceof PhysicsBody) {
+					culledObject.enabled = true;
+				}
 			}
 		}
 
@@ -551,10 +568,16 @@ export default class Camera {
 				continue;
 			}
 
-			nonCulledObject.visible = false;
-			nonCulledObject.culled = false;
-			if (nonCulledObject instanceof PhysicsBody) {
-				nonCulledObject.enabled = false;
+			if (preserveVisibility) {
+				nonCulledObject.culled = false;
+			} else {
+				nonCulledObject.visible = false;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (nonCulledObject instanceof PhysicsBody) {
+					nonCulledObject.enabled = false;
+				}
 			}
 		}
 
@@ -566,12 +589,20 @@ export default class Camera {
 	 * @memberof Camera
 	 * @description A form of Frustum Culling that gets all objects visible to the player by the viewport's width and height and culls those objects
 	 * and does not render objects outside/not-visible to the player/camera
+	 * @param {Duck.Types.Camera.CullingOptions} [options] Options to modify how objects are culled, optional -> defaults:
+	 * { preserveVisibility: true, modifyPhysicsEnable: true }
 	 *
 	 * Notes:
 	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
+	 *
 	 * @since 2.0.0
 	 */
-	public autoCull() {
+	public autoCull(options?: Duck.Types.Camera.CullingOptions) {
+		const preserveVisibility = options ? options.preserveVisibility : true;
+		const modifyPhysicsEnable = options
+			? options.modifyPhysicsEnable
+			: true;
+
 		const objects = this.scene.displayList.list;
 
 		const culledObjects = objects.filter((r) => {
@@ -631,10 +662,16 @@ export default class Camera {
 				continue;
 			}
 
-			culledObject.visible = true;
-			culledObject.culled = true;
-			if (culledObject instanceof PhysicsBody) {
-				culledObject.enabled = true;
+			if (preserveVisibility) {
+				culledObject.culled = true;
+			} else {
+				culledObject.visible = true;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (culledObject instanceof PhysicsBody) {
+					culledObject.enabled = true;
+				}
 			}
 		}
 
@@ -644,10 +681,16 @@ export default class Camera {
 				continue;
 			}
 
-			nonCulledObject.visible = false;
-			nonCulledObject.culled = false;
-			if (nonCulledObject instanceof PhysicsBody) {
-				nonCulledObject.enabled = false;
+			if (preserveVisibility) {
+				nonCulledObject.culled = false;
+			} else {
+				nonCulledObject.visible = false;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (nonCulledObject instanceof PhysicsBody) {
+					nonCulledObject.enabled = false;
+				}
 			}
 		}
 

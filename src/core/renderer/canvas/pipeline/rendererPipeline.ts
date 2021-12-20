@@ -78,7 +78,7 @@ export default class RendererPipeline {
 			// displayList
 			const depthSorted = scene.displayList.depthSort();
 			const visibleObjects = depthSorted.filter(
-				(r) => r.visible === true
+				(r) => r.visible && r.culled
 			);
 
 			this.poolStack.push({

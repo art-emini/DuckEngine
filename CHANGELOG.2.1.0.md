@@ -4,7 +4,9 @@ This update increases performance and decreases memory usage and GC calls by cre
 
 This update completely overhauls the UI *(previously Interactive)* system with new features and fixes.
 
-*Most changes and additions are included in this changelog, however, some may be missing.*
+This update adds new features to textures by using cache and more new texture classes.
+
+*Most changes and additions are included in this changelog, however, some ***may*** be missing.*
 *(Found something missing? [Contribute!](README.md#developers-guide))*
 
 ------------------------------------------------------------------------------------------------------
@@ -41,6 +43,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - Added support for fallback to memory-cache for all methods that use localStorage, does not interfer with syncValues
 - UI
   - Added new UI class
+- Camera
+  - Added optional options (Duck.Types.Camera.CullingOptions) to cull and autoCull methods
 - Group
   - Added physics filter can now also filter hitboxes
 - Types
@@ -58,6 +62,7 @@ This update completely overhauls the UI *(previously Interactive)* system with n
 - Core
   - Changed how rendering is handled (new CanvasRenderer and RendererPipeline)
   - All renderables now implement the new Renderable interface
+  - Renderables only render if both the visible and culled properties are true
 - Game
   - Loading always has a delay for pooling of RendererPipeline: (config.splashScreen.extraDuration || 0) + (config.poolingInterval || 1000)
   - oldWidth and oldHeight properties are now public instead of protected
@@ -70,6 +75,10 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - All previous uis *(previously called Interactive)* now extend the new UI class
 - File Structure
   - Move src/core/models/texture.ts to src/core/texture
+- Camera
+  - Changed how renderable's visible and enabled properties are effected by cull and autoCull methods
+    - Ex: If a renderable's visible property is false, it will stay false even though it's culled property is true
+    - Renderables only render if both the visible and culled properties are true
 - Group
   - Change group filter interactive to ui
   - Changed type generic to any making groups allow a group of anything
@@ -104,3 +113,4 @@ This update completely overhauls the UI *(previously Interactive)* system with n
 - Fixed Effect following not setting the ranges correctly
 - Fixed JSDoc Comments "@returns"
 - Fixed group filter method not correctly filtering
+- Fixed camera cull and autoCull not preserving the renderable's falsy visibility if set (new feature)

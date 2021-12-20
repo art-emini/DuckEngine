@@ -793,20 +793,6 @@ export namespace Duck {
 			}
 		}
 
-		export namespace Raycast {
-			export interface State {
-				colliding: StateValue | false;
-				collidingTop: StateValue | false;
-				collidingBottom: StateValue | false;
-				collidingLeft: StateValue | false;
-				collidingRight: StateValue | false;
-			}
-
-			export interface StateValue {
-				with: GameObject<Duck.Types.Texture.Type>;
-			}
-		}
-
 		export namespace Loader {
 			export type StackItemType =
 				| 'texture'
@@ -981,6 +967,29 @@ export namespace Duck {
 			}
 		}
 
+		export namespace Camera {
+			export interface CullingOptions {
+				/**
+				 * @memberof Duck.Types.Camera.CullingOptions
+				 * @description Determines if the visibility of the renderable is preserved, renderable's culled property will only be modified instead
+				 * of the visibility property, this keeps hidden renderables hidden and visible renderables based on the culled property
+				 * @default true
+				 * @type boolean
+				 * @since 2.1.0
+				 */
+				preserveVisibility?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Camera.CullingOptions
+				 * @description Determines if the enabled property of PhysicsBodies will be modified base on if the renderable is culled
+				 * @default true
+				 * @type boolean
+				 * @since 2.1.0
+				 */
+				modifyPhysicsEnable?: boolean;
+			}
+		}
+
 		export namespace Math {
 			export interface Vector2Like {
 				x: number;
@@ -1015,15 +1024,6 @@ export namespace Duck {
 				T,
 				Exclude<keyof T, ArrayLengthMutationKeys>
 			> & { [Symbol.iterator]: () => IterableIterator<ArrayItems<T>> };
-
-			export type NonNullable<T> = T extends null | undefined ? never : T;
-			export type DefaultValue<
-				Type,
-				Default,
-				ExtraRule = null
-			> = Type extends null | undefined | false | 0 | ExtraRule | ''
-				? Default
-				: Type;
 
 			//#region Long Type
 			export type AlphaRange =
