@@ -450,10 +450,10 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Scale of the canvas, the size of the canvas
-				 * @type Duck.Types.Misc.Scale
-				 * @since 1.0.0-beta
+				 * @type Duck.Types.Math.Vector2Like
+				 * @since 2.1.0
 				 */
-				scale?: Misc.Scale;
+				scale?: Duck.Types.Math.Vector2Like;
 
 				/**
 				 * @memberof Duck.Types.Game.Config

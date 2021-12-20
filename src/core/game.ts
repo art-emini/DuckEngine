@@ -10,6 +10,7 @@ import smoothOut from '../utils/smoothArray';
 import PluginManager from './misc/pluginManager';
 import CacheManager from './storage/cacheManager';
 import CanvasRenderer from './renderer/canvas/canvasRenderer';
+import DisplayManager from './display/displayManager';
 
 /**
  * @class Game
@@ -108,8 +109,22 @@ export default class Game {
 	 * @since 1.0.0
 	 */
 	public isInFullscreen: boolean;
-	protected oldWidth: number;
-	protected oldHeight: number;
+
+	/**
+	 * @memberof Game
+	 * @description The width of the canvas that was set by the config, never changes, may not be current
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public readonly oldWidth: number;
+
+	/**
+	 * @memberof Game
+	 * @description The width of the canvas that was set by the config, never changes, may not be current
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public readonly oldHeight: number;
 
 	// methods
 
@@ -166,6 +181,14 @@ export default class Game {
 
 	/**
 	 * @memberof Game
+	 * @description A DisplayManager, manages the scaling of the canvas
+	 * @type DisplayManager
+	 * @since 2.0.0
+	 */
+	public displayManager: DisplayManager;
+
+	/**
+	 * @memberof Game
 	 * @description The browser being used
 	 * @type string
 	 * @since 2.0.0
@@ -210,10 +233,11 @@ export default class Game {
 
 		this.eventEmitter = new EventEmitter();
 		this.pluginManager = new PluginManager();
+		this.displayManager = new DisplayManager(this);
 
 		// set scale
 		if (this.config.scale) {
-			this.setScale(this.config.scale);
+			this.displayManager.scale(this.config.scale);
 		}
 
 		// set background
@@ -226,8 +250,8 @@ export default class Game {
 			dprScale(
 				this.canvas,
 				this.renderer.ctx,
-				this.config.scale?.width || this.canvas.width,
-				this.config.scale?.height || this.canvas.height
+				this.config.scale?.x || this.canvas.width,
+				this.config.scale?.y || this.canvas.height
 			);
 			if (this.config.debug) {
 				new Debug.Log(
@@ -241,75 +265,15 @@ export default class Game {
 		this.oldWidth = this.canvas.width;
 		this.oldHeight = this.canvas.height;
 
-		// resize listener & smartScale
-		window.onresize = () => {
-			if (this.isInFullscreen && this.canvas) {
-				this.scaleToWindow();
-			}
-			if (
-				this.canvas &&
-				this.config.smartScale &&
-				window.devicePixelRatio === 1
-			) {
-				if (window.innerWidth <= this.canvas.width) {
-					this.canvas.width = window.innerWidth;
-				}
-				if (window.innerHeight <= this.canvas.height) {
-					this.canvas.height = window.innerHeight;
-				}
-
-				if (window.innerWidth > this.canvas.width) {
-					this.canvas.width = this.oldWidth;
-				}
-
-				if (window.innerHeight > this.canvas.height) {
-					this.canvas.height = this.oldHeight;
-				}
-			}
-		};
+		// smart scale
+		if (this.config.smartScale) {
+			window.onresize = () => {
+				this.displayManager.smallCorrectionScale();
+			};
+		}
 
 		this.isRendering = false;
 		this.isLoaded = false;
-
-		// blur and focus listener
-		window.onfocus = () => {
-			if (
-				this.config.pauseRenderingOnBlur &&
-				!this.config.debugRendering
-			) {
-				this.isRendering = true;
-				this.eventEmitter.emit(EVENTS.GAME.FOCUS);
-				if (this.config.onResumeRendering) {
-					this.config.onResumeRendering('windowFocus');
-				}
-			}
-		};
-		window.onblur = () => {
-			if (
-				this.config.pauseRenderingOnBlur &&
-				!this.config.debugRendering
-			) {
-				this.isRendering = false;
-				this.eventEmitter.emit(EVENTS.GAME.BLUR);
-				if (this.config.onPauseRendering) {
-					this.config.onPauseRendering('windowBlur');
-				}
-			}
-		};
-
-		if (this.config.focus) {
-			window.focus();
-			if (this.config.onResumeRendering) {
-				this.config.onResumeRendering('gameConfigFocus');
-			}
-		}
-
-		if (this.config.blur) {
-			window.blur();
-			if (this.config.onPauseRendering) {
-				this.config.onPauseRendering('gameConfigBlur');
-			}
-		}
 
 		this.splashScreen =
 			this.config.splashScreen?.img ||
@@ -335,6 +299,10 @@ export default class Game {
 
 		// set up some events
 		this.eventEmitter.on(EVENTS.GAME.CONTEXT_LOST, () => {
+			if (this.config.debug) {
+				new Debug.Error('Context lost! Trying to restore...');
+			}
+
 			// restore context
 			if (!this.canvas) {
 				const res = Duck.AutoCanvas();
@@ -351,6 +319,12 @@ export default class Game {
 				EVENTS.GAME.CONTEXT_RESTORED,
 				this.renderer.ctx
 			);
+		});
+
+		this.eventEmitter.on(EVENTS.GAME.CONTEXT_RESTORED, () => {
+			if (this.config.debug) {
+				new Debug.Log('Restored context...');
+			}
 		});
 
 		// methods
@@ -483,6 +457,7 @@ export default class Game {
 	protected loop() {
 		this.renderer.clearFrame();
 
+		/* Delta Time Stuff */
 		this.now = performance.now();
 		this.deltaTime = (this.now - this.oldTime) / 1000;
 		this.fps = 1 / this.deltaTime;
@@ -495,6 +470,7 @@ export default class Game {
 			smoothOut(this.deltaTimeArray, 1).toPrecision(1)
 		);
 
+		/* Call Renderer.render */
 		if (this.isRendering) {
 			this.renderer.render(this.deltaTime);
 		}
@@ -633,71 +609,6 @@ export default class Game {
 
 	/**
 	 * @memberof Game
-	 * @description Fullscreens the canvas and scales canvas
-	 * @emits EVENTS.GAME.FULLSCREEN
-	 * @since 1.0.0
-	 */
-	public fullscreen() {
-		if (this.canvas && document.fullscreenEnabled) {
-			this.canvas
-				.requestFullscreen()
-				.then(() => {
-					this.isInFullscreen = true;
-					if (this.canvas) {
-						this.scaleToWindow();
-					}
-
-					this.eventEmitter.emit(EVENTS.GAME.FULLSCREEN);
-				})
-				.catch(
-					() =>
-						new Debug.Error(
-							'User must interact with the page before fullscreen API can be used.'
-						)
-				);
-
-			// on un fullscreen
-			this.canvas.onfullscreenchange = () => {
-				if (!document.fullscreenElement) {
-					this.resetScale();
-					this.isInFullscreen = false;
-					if (this.config.debug) {
-						new Debug.Log('Unfullscreen, reset canvas scale.');
-					}
-				}
-			};
-		}
-
-		if (!document.fullscreenEnabled) {
-			new Debug.Warn(
-				'Fullscreen is not supported/enabled on this browser.'
-			);
-		}
-	}
-
-	/**
-	 * @memberof Game
-	 * @description Unfullscreens the canvas and scales canvas
-	 * @emits EVENTS.GAME.UNFULLSCREEN
-	 * @since 1.0.0
-	 */
-	public unfullscreen() {
-		if (document.fullscreenElement) {
-			document
-				.exitFullscreen()
-				.then(() => {
-					if (this.canvas) {
-						this.resetScale();
-					}
-
-					this.eventEmitter.emit(EVENTS.GAME.UNFULLSCREEN);
-				})
-				.catch((e) => new Debug.Error(e));
-		}
-	}
-
-	/**
-	 * @memberof Game
 	 * @description Locks the pointer on the canvas
 	 * @emits EVENTS.GAME.LOCK_POINTER
 	 * @since 1.0.0
@@ -719,71 +630,6 @@ export default class Game {
 		if (document.pointerLockElement) {
 			document.exitPointerLock();
 			this.eventEmitter.emit(EVENTS.GAME.UNLOCK_POINTER);
-		}
-	}
-
-	/**
-	 * @memberof Game
-	 * @description Resets the canvas scale to before scaled
-	 * @since 1.0.0
-	 */
-	public resetScale() {
-		if (this.canvas) {
-			if (window.devicePixelRatio === 1) {
-				this.canvas.width = this.oldWidth;
-				this.canvas.height = this.oldHeight;
-				this.canvas.style.width = this.oldWidth + 'px';
-				this.canvas.style.height = this.oldHeight + 'px';
-			} else {
-				this.canvas.width = this.oldWidth / 2;
-				this.canvas.height = this.oldHeight / 2;
-				this.canvas.style.width = this.oldWidth / 2 + 'px';
-				this.canvas.style.height = this.oldHeight / 2 + 'px';
-			}
-
-			if (this.config.dprScale && window.devicePixelRatio !== 1) {
-				dprScale(
-					this.canvas,
-					this.renderer.ctx,
-					this.canvas.width,
-					this.canvas.height
-				);
-			}
-		}
-	}
-
-	/**
-	 * @memberof Game
-	 * @description Scales the canvas to fit the whole window
-	 * @emits EVENTS.GAME.SET_SCALE
-	 * @since 1.0.0
-	 */
-	public scaleToWindow() {
-		if (this.canvas) {
-			if (window.devicePixelRatio === 1) {
-				this.canvas.width = window.innerWidth;
-				this.canvas.height = window.innerHeight;
-				return;
-			}
-
-			if (this.config.dprScale && window.devicePixelRatio !== 1) {
-				dprScale(
-					this.canvas,
-					this.renderer.ctx,
-					window.innerWidth,
-					window.innerHeight
-				);
-				if (this.config.debug) {
-					new Debug.Log(
-						`Scaled with devicePixelRatio of ${window.devicePixelRatio} while fullscreen.`
-					);
-				}
-			}
-
-			this.eventEmitter.emit(EVENTS.GAME.SET_SCALE, {
-				w: window.innerWidth,
-				h: window.innerHeight,
-			});
 		}
 	}
 }

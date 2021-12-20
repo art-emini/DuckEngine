@@ -19,6 +19,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
     - Added new CanvasRenderer and RendererPipeline
   - Made Game loop more efficient by looping only through visible scenes and already pooled visible renderables use RendererPipeline
     - This makes GC calls less often
+  - DisplayManager
+    - Added new class DisplayManages, Manages the scale of the canvas
 - Scene
   - Added onSceneActive and onSceneInactive methods that are called when visible is set to true and false
   - Added createTimer method that returns a new Timer instance
@@ -50,6 +52,9 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - All renderables now implement the new Renderable interface
 - Game
   - Loading always has a delay for pooling of RendererPipeline: (config.splashScreen.extraDuration || 0) + (config.poolingInterval || 1000)
+  - oldWidth and oldHeight properties are now public instead of protected
+  - New DisplayManager now handles scaling
+  - Changed config.scale to be Duck.Types.Math.Vector2Like instead of Duck.Types.Misc.Scale
 - StaticLight
   - Blend mode is now lighten instead of lighter
 - Gameobjects/interactive is now Gameobjects/ui in the file structure and type classes and classes
@@ -66,6 +71,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
 
 - Game
   - Removed ctx property which is now replaced by Game.renderer.ctx
+  - Removed fullscreen and unfullscreen methods, replaced by Game.displayManager.fullscreen and unfullscreen
+  - Removed scaleToWindow and resetScale methods, replaced by Game.displayManager.scaleToWindow and resetScale
 - Types
   - Removed **type** Duck.Types.Renderable which has been replaced with Duck.Types.Renderable **interface** that is now implemented into classes
 
