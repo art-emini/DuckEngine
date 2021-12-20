@@ -426,7 +426,7 @@ export default class Scene extends Render {
 		this.mainCamera;
 		this.cameras = [];
 
-		this.displayList = new DisplayList();
+		this.displayList = new DisplayList(this.game);
 		this.physicsList = new PhysicsList();
 
 		this.loader = new Loader(this.game, this);

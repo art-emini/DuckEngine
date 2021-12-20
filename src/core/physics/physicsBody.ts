@@ -390,22 +390,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 					.add(object.hitbox.offset);
 			}
 		});
-
-		if (this.hitbox) {
-			if (Array.isArray(this.collidesWith)) {
-				this.collidesWith.forEach((obj) => {
-					if (obj.hitbox) {
-						this.hitbox?.intersectsFaceWith(obj.hitbox);
-					}
-				});
-			} else {
-				this.collidesWith.each((obj) => {
-					if (obj.hitbox) {
-						this.hitbox?.intersectsFaceWith(obj.hitbox);
-					}
-				});
-			}
-		}
 	}
 
 	/**

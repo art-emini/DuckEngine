@@ -182,6 +182,31 @@ export default class Particle extends GameObject<'either'> {
 		this.velocity.y = 0;
 
 		// don't round pixels for particles
+
+		// apply gravity
+		if (this.game.config.physics?.gravity) {
+			if (
+				this.options.type === 'KinematicBody' ||
+				this.options.type === 'RigidBody'
+			) {
+				this.applyGravity(
+					Vector2.fromVector2Like(this.game.config.physics.gravity)
+				);
+			}
+		}
+
+		// update attached children position
+		this.attachedChildren.forEach((object) => {
+			const pos = this.position.clone();
+			pos.subtract(object.attachOffset);
+
+			object.position = pos;
+			if (object.hitbox) {
+				object.hitbox.position = object.position
+					.clone()
+					.add(object.hitbox.offset);
+			}
+		});
 	}
 
 	/**

@@ -950,7 +950,7 @@ export namespace Duck {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				keyJustPressed?: (e: KeyboardEvent) => any;
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				keyState?: (e: KeyboardEvent) => any;
+				keyState?: (e: KeyboardEvent, state: boolean) => any;
 			}
 		}
 

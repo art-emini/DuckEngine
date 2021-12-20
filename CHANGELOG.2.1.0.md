@@ -23,6 +23,8 @@ This update adds new features to textures by using cache and more new texture cl
     - This makes GC calls less often
   - DisplayManager
     - Added new class DisplayManages, Manages the scale of the canvas
+- Game
+  - Added condition where deltaTimeArray must have more than 99 items before rendering to prevent delta time speed up on game start
 - Scene
   - Added onSceneActive and onSceneInactive methods that are called when visible is set to true and false
   - Added createTimer method that returns a new Timer instance
@@ -47,6 +49,8 @@ This update adds new features to textures by using cache and more new texture cl
   - Added optional options (Duck.Types.Camera.CullingOptions) to cull and autoCull methods
 - Group
   - Added physics filter can now also filter hitboxes
+- Keyboard Input & Key
+  - Added state argument to keyState callback
 - Types
   - Added new Renderable type (replaces old renderable type)
     - Added new prop culled
@@ -114,3 +118,4 @@ This update adds new features to textures by using cache and more new texture cl
 - Fixed JSDoc Comments "@returns"
 - Fixed group filter method not correctly filtering
 - Fixed camera cull and autoCull not preserving the renderable's falsy visibility if set (new feature)
+- Fixed delta time speed up on game start for the first second by adding a condition to check if the array is populated before rendering

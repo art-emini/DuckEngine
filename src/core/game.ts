@@ -224,7 +224,7 @@ export default class Game {
 
 		this.renderer = new CanvasRenderer(this, this.config.poolingInterval);
 
-		this.deltaTimeArray = Array(100).fill(0.0016);
+		this.deltaTimeArray = [];
 		this.deltaTime = 0;
 		this.smoothDeltaTime = 0;
 		this.oldTime = 0;
@@ -462,7 +462,7 @@ export default class Game {
 		this.deltaTime = (this.now - this.oldTime) / 1000;
 		this.fps = 1 / this.deltaTime;
 
-		if (this.deltaTimeArray.length >= 100) {
+		if (this.deltaTimeArray.length > 100) {
 			this.deltaTimeArray.shift();
 		}
 		this.deltaTimeArray.push(this.deltaTime);
@@ -471,7 +471,7 @@ export default class Game {
 		);
 
 		/* Call Renderer.render */
-		if (this.isRendering) {
+		if (this.isRendering && this.deltaTimeArray.length > 99) {
 			this.renderer.render(this.deltaTime);
 		}
 

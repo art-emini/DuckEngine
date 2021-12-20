@@ -95,6 +95,7 @@ export default class ParticleEmitter {
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX Where the new emitted particles x position is. A range of 2 values
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY Where the new emitted particles y position is. A range of 2 values
 	 * @param {number} amount Amount of starting particles
+	 * @param {boolean} [autoCreate=true] Determines if particles are created on init, populates the list, optional -> defaults: true
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
@@ -177,6 +178,7 @@ export default class ParticleEmitter {
 
 		// add to display list
 		this.scene.displayList.add(obj);
+		// no need to pool the renderer pipeline as displayList.add pools the renderer pipeline
 
 		// add to physics list
 		this.scene.physicsList.add(obj);

@@ -1,5 +1,6 @@
 import { Duck } from '../..';
 import Debug from '../debug/debug';
+import Game from '../game';
 
 /**
  * @class DisplayList
@@ -8,16 +9,28 @@ import Debug from '../debug/debug';
  * @since 2.0.0
  */
 export default class DisplayList {
+	public game: Game;
+
 	public list: Duck.Types.Renderable[] = [];
+
+	constructor(game: Game) {
+		this.game = game;
+	}
 
 	/**
 	 * @memberof DisplayList
 	 * @description Adds a renderableObject to the list
 	 * @param {Duck.Types.Renderable} renderableObject A renderableObject
+	 *
+	 * Note: this pools the game's renderer pipeline for instant updates
+	 *
 	 * @since 2.0.0
 	 */
 	public add(renderableObject: Duck.Types.Renderable) {
 		this.list.push(renderableObject);
+
+		// pool renderer pipeline for instant update
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**

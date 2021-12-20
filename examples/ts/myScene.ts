@@ -22,8 +22,8 @@ export default class MainScene extends DuckEngine.Scene {
 
 	public create() {
 		// gameobjects
-		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#fff');
-		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#fff');
+		this.myRect = this.add.gameobject.rect(0, 0, 15, 15, '#ffffff');
+		this.myCircle = this.add.gameobject.circle(50, 50, 10, '#ffffff');
 
 		this.gameObjects = this.add.group<
 			Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
@@ -80,10 +80,17 @@ export default class MainScene extends DuckEngine.Scene {
 				keyCode: 68, // d
 				descriptor: 'D',
 			},
+			{
+				keyCode: 16, // shift
+				descriptor: 'SPRINT',
+				keyDown: () => {
+					this.mySpeed = 350;
+				},
+				keyUp: () => {
+					this.mySpeed = 250;
+				},
+			},
 		]);
-
-		// sprinting
-		this.mySpeed = 1;
 	}
 
 	public update() {

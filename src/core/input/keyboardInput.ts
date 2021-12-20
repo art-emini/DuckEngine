@@ -78,7 +78,7 @@ export default class KeyboardInput {
 		keyDown?: (e: KeyboardEvent) => any,
 		keyUp?: (e: KeyboardEvent) => any,
 		keyJustPressed?: (e: KeyboardEvent) => any,
-		keyState?: (e: KeyboardEvent) => any
+		keyState?: (e: KeyboardEvent, state: boolean) => any
 	) {
 		const myKey = new Key(
 			keyCode,
