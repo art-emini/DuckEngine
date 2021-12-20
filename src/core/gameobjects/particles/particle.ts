@@ -4,7 +4,7 @@ import Game from '../../game';
 import GameObject from '../gameObject';
 import clamp from '../../math/clamp';
 import Vector2 from '../../math/vector2';
-import Texture from '../../models/texture';
+import Texture from '../../texture/texture';
 import Scene from '../../scene';
 
 /**

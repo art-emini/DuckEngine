@@ -31,7 +31,7 @@ import DisplayListClass from './core/models/displayList';
 import CanvasModulateClass from './core/gameobjects/misc/canvasModulate';
 import MapClass from './core/map/map';
 import AmountClass from './base/amount';
-import TextureClass from './core/models/texture';
+import TextureClass from './core/texture/texture';
 import PhysicsServerClass from './core/physics/server/physicsServer';
 import PhysicsBodyClass from './core/physics/physicsBody';
 import HitboxClass from './core/physics/models/hitbox';
@@ -821,10 +821,16 @@ export namespace Duck {
 				value: t;
 				key: string;
 			}
+
+			export interface TextureStackItem<t> extends StackItem<t> {
+				dataType: Duck.Types.Texture.DataType;
+			}
 		}
 
 		export namespace Texture {
 			export type Type = 'image' | 'color' | 'either';
+
+			export type DataType = 'sheet' | 'base' | 'atlas' | 'list';
 		}
 
 		export namespace PhysicsBody {

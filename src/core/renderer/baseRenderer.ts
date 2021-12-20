@@ -1,5 +1,5 @@
 import Game from '../game';
-import Texture from '../models/texture';
+import TextureBase from '../texture/textureBase';
 import { BlendModes } from './canvas/const/blendModes';
 
 export default abstract class BaseRenderer {
@@ -31,7 +31,7 @@ export default abstract class BaseRenderer {
 		y: number,
 		w: number,
 		h: number,
-		texture: Texture<'image'>,
+		texture: TextureBase<'image'>,
 		frameWidth?: number,
 		frameHeight?: number,
 		currentRow?: number,

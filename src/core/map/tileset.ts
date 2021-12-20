@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Game from '../game';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
 import Tile from './tile';
 

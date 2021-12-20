@@ -4,7 +4,7 @@ import Game from '../../game';
 import rectToRectIntersect from '../../physics/rectToRectIntersect';
 import Scene from '../../scene';
 import Text from './text';
-import Texture from '../../models/texture';
+import Texture from '../../texture/texture';
 import EVENTS from '../../events/events';
 import UI from './ui';
 

@@ -29,8 +29,14 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - Added setVisible method to set the visibility of the scene and it immediately updates it by pooling the RendererPipeline
 - Events
   - Added Renderer Events
+  - Added Display Events
 - ParticleEmitter
   - Added autoCreate option to constructor
+- Textures
+  - Added new TextureBase class
+  - Added new TextureSheet class to store info about spritesheets
+- Loader
+  - Added loadTextureSheet method to create and load a spritesheet
 - UI
   - Added new UI class
 - Group
@@ -60,6 +66,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
 - Gameobjects/interactive is now Gameobjects/ui in the file structure and type classes and classes
 - UI
   - All previous uis *(previously called Interactive)* now extend the new UI class
+- File Structure
+  - Move src/core/models/texture.ts to src/core/texture
 - Group
   - Change group filter interactive to ui
   - Changed type generic to any making groups allow a group of anything

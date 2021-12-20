@@ -1,7 +1,7 @@
 import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
-import Texture from '../../models/texture';
+import Texture from '../../texture/texture';
 import Scene from '../../scene';
 import UI from './ui';
 

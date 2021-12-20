@@ -193,10 +193,6 @@ export default class Scene extends Render {
 				w: number,
 				h: number,
 				textureKey: string,
-				frameWidth?: number,
-				frameHeight?: number,
-				rows?: number,
-				cols?: number,
 				currentRow?: number,
 				currentCol?: number
 			) => Sprite;
@@ -486,10 +482,6 @@ export default class Scene extends Render {
 					w: number,
 					h: number,
 					textureKey: string,
-					frameWidth?: number,
-					frameHeight?: number,
-					rows?: number,
-					cols?: number,
 					currentRow?: number,
 					currentCol?: number
 				) => {
@@ -501,10 +493,6 @@ export default class Scene extends Render {
 						textureKey,
 						this.game,
 						this,
-						frameWidth,
-						frameHeight,
-						rows,
-						cols,
 						currentRow,
 						currentCol
 					);

@@ -3,7 +3,7 @@
 import { Duck } from '../../index';
 import randomInt from '../math/randomInt';
 import Game from '../game';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
 import PhysicsBody from '../physics/physicsBody';
 import uniqueID from '../../utils/uniqueID';

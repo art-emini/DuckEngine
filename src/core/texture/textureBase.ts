@@ -2,35 +2,36 @@ import { Duck } from '../..';
 import uniqueID from '../../utils/uniqueID';
 import Vector2 from '../math/vector2';
 
-/**
- * @class Texture
- * @classdesc Creates a DuckEngine Texture
- * @description The Texture Class. Stores images and colors in a class
- * @template type Texture type, 'image' | 'color' | 'either'
- * @since 2.0.0
- */
-export default class Texture<type extends Duck.Types.Texture.Type> {
+export default class TextureBase<type extends Duck.Types.Texture.Type> {
 	/**
-	 * @memberof Texture
+	 * @memberof TextureBase
 	 * @description The unique identifier for the texture
 	 * @type string
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public readonly id: string;
 
 	/**
-	 * @memberof Texture
-	 * @description The type of texture, 'image' | 'color' | 'either'
+	 * @memberof TextureBase
+	 * @description The type of texture source, 'image' | 'color' | 'either'
 	 * @type Duck.Types.Texture.Type
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public readonly type: Duck.Types.Texture.Type;
 
 	/**
-	 * @memberof Texture
+	 * @memberof TextureBase
+	 * @description The data type of texture, 'sheet' | 'base' | 'atlas' | 'list'
+	 * @type Duck.Types.Texture.DataType
+	 * @since 2.1.0
+	 */
+	public readonly dataType: Duck.Types.Texture.DataType;
+
+	/**
+	 * @memberof TextureBase
 	 * @description The texture itself, can be an image or color
 	 * @type HTMLImageElement | string
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public texture: type extends 'image'
 		? HTMLImageElement
@@ -42,7 +43,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @memberof Texture
 	 * @description The scale of the texture
 	 * @type Vector2
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public scale: Vector2;
 
@@ -53,9 +54,15 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {HTMLImageElement} texture Texture source
 	 * @param {number} w Width of texture
 	 * @param {number} h Height of texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
-	constructor(type: 'image', texture: HTMLImageElement, w: number, h: number);
+	constructor(
+		type: 'image',
+		dataType: Duck.Types.Texture.DataType,
+		texture: HTMLImageElement,
+		w: number,
+		h: number
+	);
 
 	/**
 	 * @constructor Texture
@@ -64,9 +71,15 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {string} texture Texture source
 	 * @param {number} w Width of texture
 	 * @param {number} h Height of texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
-	constructor(type: 'color', texture: string, w: number, h: number);
+	constructor(
+		type: 'color',
+		dataType: Duck.Types.Texture.DataType,
+		texture: string,
+		w: number,
+		h: number
+	);
 
 	/**
 	 * @constructor Texture
@@ -75,10 +88,11 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {HTMLImageElement | string} texture Texture source
 	 * @param {number} w Width of texture
 	 * @param {number} h Height of texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	constructor(
 		type: 'either',
+		dataType: Duck.Types.Texture.DataType,
 		texture: HTMLImageElement | string,
 		w: number,
 		h: number
@@ -91,10 +105,11 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @param {HTMLImageElement:string} texture Texture source
 	 * @param {number} w Width of texture
 	 * @param {number} h Height of texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	constructor(
 		type: Duck.Types.Texture.Type,
+		dataType: Duck.Types.Texture.DataType,
 		texture: type extends 'image'
 			? HTMLImageElement
 			: type extends 'either'
@@ -105,6 +120,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	) {
 		this.id = uniqueID();
 		this.type = type;
+		this.dataType = dataType;
 
 		this.texture = texture;
 		this.scale = new Vector2(w, h);
@@ -119,7 +135,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @memberof Texture
 	 * @description Sets the Texture Scale
 	 * @param {Duck.Types.Misc.Scale} scale New scale of the texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public setScale(scale: Duck.Types.Misc.Scale) {
 		this.scale = new Vector2(scale.width, scale.height);
@@ -136,7 +152,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @memberof Texture
 	 * @description Sets the Texture Image Path if the type is image
 	 * @param {string} imagePath New imagePath of the texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public setImagePath(imagePath: string) {
 		if (this.type === 'image') {
@@ -148,7 +164,7 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	 * @memberof Texture
 	 * @description Sets the Texture color if the type is color
 	 * @param {string} color New color of the texture
-	 * @since 2.0.0
+	 * @since 2.1.0
 	 */
 	public setFillColor(color: string | number) {
 		if (this.type === 'color') {
@@ -157,47 +173,53 @@ export default class Texture<type extends Duck.Types.Texture.Type> {
 	}
 
 	/**
-	 * @memberof Texture
-	 * @description Creates a new Texture instance from a color
+	 * @memberof TextureBase
+	 * @description Creates a new TextureBase instance from a color
 	 * @param {string} color Color
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns {Texture<'color'>}
-	 * @since 2.0.0
+	 * @returns {TextureBase<'color'>}
+	 * @since 2.1.0
 	 */
 	public static fromColor(color: string, w: number, h: number) {
-		return new Texture<'color'>('color', color, w, h);
+		return new TextureBase<'color'>('color', 'base', color, w, h);
 	}
 
 	/**
-	 * @memberof Texture
-	 * @description Creates a new Texture instance from an image path
+	 * @memberof TextureBase
+	 * @description Creates a new TextureBase instance from an image path
 	 * @param {string} imgpath Image path
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns {Texture<'image'>}
-	 * @since 2.0.0
+	 * @returns {TextureBase<'image'>}
+	 * @since 2.1.0
 	 */
 	public static fromTexture(imgpath: string, w: number, h: number) {
 		const img = new Image(w, h);
 		img.src = imgpath;
 
-		return new Texture<'image'>('image', img, w, h);
+		return new TextureBase<'image'>('image', 'base', img, w, h);
 	}
 
 	/**
-	 * @memberof Texture
-	 * @description Creates a new Texture instance from a color or an image path
+	 * @memberof TextureBase
+	 * @description Creates a new TextureBase instance from a color or an image path
 	 * @param {string} fillColorOrIMGPath Color or Image path
 	 * @param {number} w Width
 	 * @param {number} h Height
 	 * @static
-	 * @returns {Texture<'either'>}
-	 * @since 2.0.0
+	 * @returns {TextureBase<'either'>}
+	 * @since 2.1.0
 	 */
 	public static fromEither(fillColorOrIMGPath: string, w: number, h: number) {
-		return new Texture<'either'>('either', fillColorOrIMGPath, w, h);
+		return new TextureBase<'either'>(
+			'either',
+			'base',
+			fillColorOrIMGPath,
+			w,
+			h
+		);
 	}
 }

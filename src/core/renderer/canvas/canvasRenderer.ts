@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import EVENTS from '../../events/events';
 import Game from '../../game';
-import Texture from '../../models/texture';
+import TextureBase from '../../texture/textureBase';
 import BaseRenderer from '../baseRenderer';
 import { BlendModes } from './const/blendModes';
 import RendererPipeline from './pipeline/rendererPipeline';
@@ -311,7 +311,7 @@ export default class CanvasRenderer extends BaseRenderer {
 	 * @param {number} y Y position
 	 * @param {number} w Width of roundRect
 	 * @param {number} h Height of roundRect
-	 * @param {Texture<'image'>} texture Texture to use for the Sprite
+	 * @param {TextureBase<'image'>} texture Texture to use for the Sprite
 	 * @param {number} [frameWidth] Width of one frame, for spritesheets
 	 * @param {number} [frameHeight] Height of one frame, for spritesheets
 	 * @param {number} [currentRow] The default row to use for the texture, for spritesheets
@@ -323,7 +323,7 @@ export default class CanvasRenderer extends BaseRenderer {
 		y: number,
 		w: number,
 		h: number,
-		texture: Texture<'image'>,
+		texture: TextureBase<'image'>,
 		frameWidth?: number,
 		frameHeight?: number,
 		currentRow?: number,

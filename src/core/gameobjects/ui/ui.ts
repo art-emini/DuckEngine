@@ -1,6 +1,6 @@
 import { Duck } from '../../..';
 import Game from '../../game';
-import Texture from '../../models/texture';
+import Texture from '../../texture/texture';
 import Scene from '../../scene';
 import GameObject from '../gameObject';
 

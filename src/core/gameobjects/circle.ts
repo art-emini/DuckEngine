@@ -1,7 +1,7 @@
 import Game from '../game';
 import Debug from '../debug/debug';
 import GameObject from './gameObject';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
 
 /**

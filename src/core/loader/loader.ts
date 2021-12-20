@@ -1,8 +1,9 @@
 // utils
 import { Duck } from '../..';
 import Game from '../game';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
+import TextureSheet from '../texture/textureSheet';
 
 // loads images by URL or file path
 // static class
@@ -33,10 +34,10 @@ export default class Loader {
 	/**
 	 * @memberof Loader
 	 * @description An array of loaded Textures
-	 * @type Duck.Types.Loader.StackItem<Texture<'image'>>[]
+	 * @type Duck.Types.Loader.TextureStackItem<Texture<'image'>>[]
 	 * @since 2.0.0
 	 */
-	public imageStack: Duck.Types.Loader.StackItem<Texture<'image'>>[];
+	public imageStack: Duck.Types.Loader.TextureStackItem<Texture<'image'>>[];
 
 	/**
 	 * @memberof Loader
@@ -125,6 +126,50 @@ export default class Loader {
 			type: 'texture',
 			value: texture,
 			key,
+			dataType: 'base',
+		});
+
+		return image;
+	}
+
+	/**
+	 * @memberof Loader
+	 * @description Loads an image and creates a texture sheet
+	 * @param {string} pathOrURL Path to the file or the URL
+	 * @param {string} key Key of the texture, used to load the texture in sprites and spritesheet
+	 * @param {number} w Width of image
+	 * @param {number} h Height of image
+	 * @since 2.1.0
+	 */
+	public async loadTextureSheet(
+		pathOrURL: string,
+		key: string,
+		frameWidth: number,
+		frameHeight: number,
+		rows: number,
+		cols: number
+	) {
+		const res = await fetch(pathOrURL);
+		const blob = await res.blob();
+
+		const url = URL.createObjectURL(blob.slice(0, 4000));
+
+		const image = new Image();
+		image.src = url;
+
+		const texture = new TextureSheet(
+			image,
+			frameWidth,
+			frameHeight,
+			rows,
+			cols
+		);
+
+		this.imageStack.push({
+			type: 'texture',
+			value: texture,
+			key,
+			dataType: 'sheet',
 		});
 
 		return image;
