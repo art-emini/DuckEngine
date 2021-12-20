@@ -28,6 +28,7 @@ A 2D Game Engine for the web.
 - Keyboard, and Mouse Inputs
 - DPR / Mobile Scaling
 - Advanced Particle System
+- Cache & Fast Loading Times
 - Effects and Presets
 - Advanced UI System
 - Groups & Management

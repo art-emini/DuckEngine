@@ -37,6 +37,8 @@ This update completely overhauls the UI *(previously Interactive)* system with n
   - Added new TextureSheet class to store info about spritesheets
 - Loader
   - Added loadTextureSheet method to create and load a spritesheet
+- CacheManager
+  - Added support for fallback to memory-cache for all methods that use localStorage, does not interfer with syncValues
 - UI
   - Added new UI class
 - Group

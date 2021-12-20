@@ -4,6 +4,9 @@ import Game from '../game';
 import Texture from '../texture/texture';
 import Scene from '../scene';
 import TextureSheet from '../texture/textureSheet';
+import Debug from '../debug/debug';
+import getImageData from '../../utils/getImageData';
+import convertURItoBlob from '../../utils/convertURItoBlob';
 
 // loads images by URL or file path
 // static class
@@ -97,11 +100,20 @@ export default class Loader {
 		this.audioStack = [];
 	}
 
+	protected async tryCache(prefix: string, key: string) {
+		return this.game.cacheManager.get(`${prefix}_${key}`);
+	}
+
+	protected async saveCache(prefix: string, key: string, value: string) {
+		return this.game.cacheManager.set(`${prefix}_${key}`, value);
+	}
+
 	/**
 	 * @memberof Loader
-	 * @description Loads an image and creates a texture
+	 * @description Loads an image and creates a texture, caches it if it does not already exist in the cache (clear cache if texture does not update
+	 * if you edit the image src)
 	 * @param {string} pathOrURL Path to the file or the URL
-	 * @param {string} key Key of the texture, used to load the texture in sprites and spritesheet
+	 * @param {string} key Key of the texture, used to load the texture in sprites
 	 * @param {number} w Width of image
 	 * @param {number} h Height of image
 	 * @since 2.0.0
@@ -112,29 +124,69 @@ export default class Loader {
 		w: number,
 		h: number
 	) {
-		const res = await fetch(pathOrURL);
-		const blob = await res.blob();
-
-		const url = URL.createObjectURL(blob.slice(0, 4000));
-
 		const image = new Image();
-		image.src = url;
+		image.width = w;
+		image.height = h;
 
-		const texture = new Texture<'image'>('image', image, w, h);
+		// try cache
+		const cacheData = await this.tryCache('texture', key);
+		if (cacheData) {
+			image.setAttribute('src', cacheData); // DATA URL object
 
-		this.imageStack.push({
-			type: 'texture',
-			value: texture,
-			key,
-			dataType: 'base',
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded texture from cache.');
+			}
 
-		return image;
+			const texture = new Texture<'image'>('image', image, w, h);
+
+			this.imageStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'base',
+			});
+
+			return image;
+		} else {
+			const res = await fetch(pathOrURL);
+			const blob = await res.blob();
+
+			const url = URL.createObjectURL(blob.slice(0, 4000));
+
+			image.src = url;
+
+			const texture = new Texture<'image'>('image', image, w, h);
+
+			this.imageStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'base',
+			});
+
+			// save image in cache
+			getImageData(
+				image,
+				w,
+				h,
+				(data) => {
+					this.saveCache('texture', key, data);
+				},
+				() => {
+					new Debug.Error(
+						'Failed to save texture in cache, report this bug.'
+					);
+				}
+			);
+
+			return image;
+		}
 	}
 
 	/**
 	 * @memberof Loader
-	 * @description Loads an image and creates a texture sheet
+	 * @description Loads an image and creates a texture sheet, caches it if it does not already exist in the cache (clear cache if texture does not update
+	 * if you edit the image src)
 	 * @param {string} pathOrURL Path to the file or the URL
 	 * @param {string} key Key of the texture, used to load the texture in sprites and spritesheet
 	 * @param {number} w Width of image
@@ -149,50 +201,116 @@ export default class Loader {
 		rows: number,
 		cols: number
 	) {
-		const res = await fetch(pathOrURL);
-		const blob = await res.blob();
-
-		const url = URL.createObjectURL(blob.slice(0, 4000));
-
 		const image = new Image();
-		image.src = url;
+		image.width = frameWidth * cols;
+		image.height = frameHeight * rows;
 
-		const texture = new TextureSheet(
-			image,
-			frameWidth,
-			frameHeight,
-			rows,
-			cols
-		);
+		// try cache
+		const cacheData = await this.tryCache('texture_sheet', key);
+		if (cacheData) {
+			image.setAttribute('src', cacheData); // DATA URL object
 
-		this.imageStack.push({
-			type: 'texture',
-			value: texture,
-			key,
-			dataType: 'sheet',
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded texture sheet from cache.');
+			}
 
-		return image;
+			const texture = new TextureSheet(
+				image,
+				frameWidth,
+				frameHeight,
+				rows,
+				cols
+			);
+
+			this.imageStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'sheet',
+			});
+
+			return image;
+		} else {
+			const res = await fetch(pathOrURL);
+			const blob = await res.blob();
+
+			const url = URL.createObjectURL(blob.slice(0, 4000));
+
+			image.src = url;
+
+			const texture = new TextureSheet(
+				image,
+				frameWidth,
+				frameHeight,
+				rows,
+				cols
+			);
+
+			this.imageStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'sheet',
+			});
+
+			// save image in cache
+			getImageData(
+				image,
+				frameWidth * cols,
+				frameHeight * rows,
+				(data) => {
+					this.saveCache('texture_sheet', key, data);
+				},
+				() => {
+					new Debug.Error(
+						'Failed to save texture sheet in cache, report this bug.'
+					);
+				}
+			);
+
+			return image;
+		}
 	}
 
 	/**
 	 * @memberof Loader
-	 * @description Loads a JSON file and adds it to the jsonStack
+	 * @description Loads a JSON file and adds it to the jsonStack, caches it if it does not already exist
 	 * @param {string} pathOrURL Path to the file or the URL
 	 * @param {string} key Key of the file to use to save it as
 	 * @since 2.0.0
 	 */
 	public async loadJSON(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const json: Record<string, unknown> = await res.json();
+		// try cache
+		const cacheData = await this.tryCache('json', key);
+		if (cacheData) {
+			const json = JSON.parse(cacheData);
 
-		this.jsonStack.push({
-			type: 'json',
-			value: json,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded JSON from cache');
+			}
 
-		return json;
+			this.jsonStack.push({
+				type: 'json',
+				value: json,
+				key,
+			});
+
+			return json;
+		} else {
+			const res = await fetch(pathOrURL);
+			const json: Record<string, unknown> = await res.json();
+
+			this.jsonStack.push({
+				type: 'json',
+				value: json,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('json', key, JSON.stringify(json));
+
+			return json;
+		}
 	}
 
 	/**
@@ -203,17 +321,46 @@ export default class Loader {
 	 * @since 2.0.0
 	 */
 	public async loadHTML(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const text = await res.text();
-		const html = new window.DOMParser().parseFromString(text, 'text/html');
+		// try cache
+		const cacheData = await this.tryCache('html', key);
+		if (cacheData) {
+			const text = cacheData;
 
-		this.htmlStack.push({
-			type: 'html',
-			value: html,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded HTML from cache');
+			}
 
-		return html;
+			const html = new window.DOMParser().parseFromString(
+				text,
+				'text/html'
+			);
+
+			this.htmlStack.push({
+				type: 'html',
+				value: html,
+				key,
+			});
+
+			return html;
+		} else {
+			const res = await fetch(pathOrURL);
+			const text = await res.text();
+			const html = new window.DOMParser().parseFromString(
+				text,
+				'text/html'
+			);
+
+			this.htmlStack.push({
+				type: 'html',
+				value: html,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('html', key, text);
+
+			return html;
+		}
 	}
 
 	/**
@@ -224,17 +371,46 @@ export default class Loader {
 	 * @since 2.0.0
 	 */
 	public async loadXML(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const text = await res.text();
-		const xml = new window.DOMParser().parseFromString(text, 'text/xml');
+		// try cache
+		const cacheData = await this.tryCache('xml', key);
+		if (cacheData) {
+			const text = cacheData;
 
-		this.xmlStack.push({
-			type: 'html',
-			value: xml,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded XML from cache');
+			}
 
-		return xml;
+			const xml = new window.DOMParser().parseFromString(
+				text,
+				'text/xml'
+			);
+
+			this.xmlStack.push({
+				type: 'html',
+				value: xml,
+				key,
+			});
+
+			return xml;
+		} else {
+			const res = await fetch(pathOrURL);
+			const text = await res.text();
+			const xml = new window.DOMParser().parseFromString(
+				text,
+				'text/xml'
+			);
+
+			this.xmlStack.push({
+				type: 'html',
+				value: xml,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('xml', key, text);
+
+			return xml;
+		}
 	}
 
 	/**
@@ -256,6 +432,8 @@ export default class Loader {
 
 		const res = await font.load();
 
+		document.fonts.add(font);
+
 		this.fontStack.push({
 			type: 'font',
 			value: res,
@@ -273,25 +451,55 @@ export default class Loader {
 	 * @since 2.0.0
 	 */
 	public async loadAudio(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const reader = res.body?.getReader();
+		// try cache
+		const cacheData = await this.tryCache('audio', key);
+		if (cacheData) {
+			const blob = convertURItoBlob(cacheData);
 
-		const result = await reader?.read();
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded Audio from cache');
+			}
 
-		const blob = new Blob([result?.value] as unknown as BlobPart[], {
-			type: 'audio/mp3',
-		});
+			const url = window.URL.createObjectURL(blob);
+			const audio = new Audio();
+			audio.src = url;
 
-		const url = window.URL.createObjectURL(blob);
-		const audio = new Audio();
-		audio.src = url;
+			this.audioStack.push({
+				type: 'audio',
+				value: audio,
+				key,
+			});
 
-		this.audioStack.push({
-			type: 'audio',
-			value: audio,
-			key,
-		});
+			return audio;
+		} else {
+			const res = await fetch(pathOrURL);
+			const reader = res.body?.getReader();
 
-		return audio;
+			const result = await reader?.read();
+
+			const blob = new Blob([result?.value] as unknown as BlobPart[], {
+				type: 'audio/mp3',
+			});
+
+			const url = window.URL.createObjectURL(blob);
+			const audio = new Audio();
+			audio.src = url;
+
+			this.audioStack.push({
+				type: 'audio',
+				value: audio,
+				key,
+			});
+
+			// save in cache
+			const fileReader = new FileReader();
+			fileReader.onload = (e) => {
+				this.saveCache('audio', key, e.target?.result as string);
+			};
+
+			fileReader.readAsDataURL(blob);
+
+			return audio;
+		}
 	}
 }
