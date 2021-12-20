@@ -6,7 +6,6 @@ import GameObject from './gameObject';
 import Scene from '../scene';
 import AnimationManager from '../animation/animationManager';
 import Animation from '../animation/animation';
-import TextureSheet from '../texture/textureSheet';
 
 /**
  * @class Sprite
@@ -122,8 +121,6 @@ export default class Sprite extends GameObject<'image'> {
 					this.w,
 					this.h,
 					this.texture,
-					(this.texture as TextureSheet).frameWidth,
-					(this.texture as TextureSheet).frameHeight,
 					this.currentRow,
 					this.currentCol
 				);

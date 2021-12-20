@@ -2,6 +2,7 @@
 import EVENTS from '../../events/events';
 import Game from '../../game';
 import TextureBase from '../../texture/textureBase';
+import TextureSheet from '../../texture/textureSheet';
 import BaseRenderer from '../baseRenderer';
 import { BlendModes } from './const/blendModes';
 import RendererPipeline from './pipeline/rendererPipeline';
@@ -312,10 +313,8 @@ export default class CanvasRenderer extends BaseRenderer {
 	 * @param {number} w Width of roundRect
 	 * @param {number} h Height of roundRect
 	 * @param {TextureBase<'image'>} texture Texture to use for the Sprite
-	 * @param {number} [frameWidth] Width of one frame, for spritesheets
-	 * @param {number} [frameHeight] Height of one frame, for spritesheets
 	 * @param {number} [currentRow] The default row to use for the texture, for spritesheets
-	 * @param {number} [frameWidth] The default column to use for the texture, for spritesheets
+	 * @param {number} [currentCol] The default column to use for the texture, for spritesheets
 	 * @since 2.1.0
 	 */
 	public drawSprite(
@@ -324,23 +323,21 @@ export default class CanvasRenderer extends BaseRenderer {
 		w: number,
 		h: number,
 		texture: TextureBase<'image'>,
-		frameWidth?: number,
-		frameHeight?: number,
 		currentRow?: number,
 		currentCol?: number
 	) {
-		if (frameWidth) {
+		if (texture instanceof TextureSheet) {
 			// spritesheet
 			this.ctx.drawImage(
 				texture.texture, // image
-				(currentCol! - 1) * frameWidth!, // source x
-				(currentRow! - 1) * frameHeight!, // source y
-				frameWidth!, // source width
-				frameHeight!, // source height
+				(currentCol! - 1) * texture.frameWidth!, // source x
+				(currentRow! - 1) * texture.frameHeight!, // source y
+				texture.frameWidth!, // source width
+				texture.frameHeight!, // source height
 				x, // target x
 				y, // target y
-				frameWidth!, // target width
-				frameHeight! // target height
+				texture.frameWidth!, // target width
+				texture.frameHeight! // target height
 			);
 		} else {
 			// normal sprite
