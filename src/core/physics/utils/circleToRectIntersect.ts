@@ -1,6 +1,6 @@
-import Circle from '../gameobjects/circle';
-import Rect from '../gameobjects/rect';
-import Sprite from '../gameobjects/sprite';
+import Circle from '../../gameobjects/circle';
+import Rect from '../../gameobjects/rect';
+import Sprite from '../../gameobjects/sprite';
 
 /**
  * @function

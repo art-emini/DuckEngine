@@ -1,5 +1,5 @@
-import { Duck } from '../..';
-import Hitbox from './models/hitbox';
+import { Duck } from '../../../index';
+import Hitbox from '../models/hitbox';
 
 export default function hitboxFaceIntersect(
 	hitbox:

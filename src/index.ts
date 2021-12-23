@@ -6,7 +6,7 @@ import GameClass from './core/game';
 import SceneClass from './core/scene';
 import TextClass from './core/gameobjects/ui/text';
 import StaticLightClass from './core/lights/staticLight';
-import ColliderClass from './core/physics/collider';
+import ColliderClass from './core/physics/models/collider';
 import GameObjectClass from './core/gameobjects/gameObject';
 import CutsceneClass from './core/cutscene/cutscene';
 import CircleClass from './core/gameobjects/circle';
@@ -816,7 +816,7 @@ export namespace Duck {
 		export namespace Texture {
 			export type Type = 'image' | 'color' | 'either';
 
-			export type DataType = 'sheet' | 'base' | 'atlas' | 'list';
+			export type DataType = 'sheet' | 'base' | 'atlas';
 		}
 
 		export namespace PhysicsBody {
@@ -987,6 +987,21 @@ export namespace Duck {
 				 * @since 2.1.0
 				 */
 				modifyPhysicsEnable?: boolean;
+			}
+		}
+
+		export namespace TextureAtlas {
+			export interface FrameData {
+				key: string;
+				x: number;
+				y: number;
+				w: number;
+				h: number;
+			}
+
+			export interface JSONSchema {
+				name: string;
+				data: FrameData[];
 			}
 		}
 

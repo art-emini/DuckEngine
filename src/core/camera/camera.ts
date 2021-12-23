@@ -6,12 +6,12 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Scene from '../scene';
 import { Duck } from '../../index';
-import rectToRectIntersect from '../physics/rectToRectIntersect';
-import circleToRectIntersect from '../physics/circleToRectIntersect';
+import rectToRectIntersect from '../physics/utils/rectToRectIntersect';
+import circleToRectIntersect from '../physics/utils/circleToRectIntersect';
 import Debug from '../debug/debug';
 import randomInt from '../math/randomInt';
 import lerp from '../math/lerp';
-import circleRectCollision from '../physics/circleToRectIntersect';
+import circleRectCollision from '../physics/utils/circleToRectIntersect';
 import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
 import StaticLight from '../lights/staticLight';
@@ -43,9 +43,23 @@ export default class Camera {
 	 * @since 2.0.0
 	 */
 	public scene: Scene;
-	protected distance: number;
 	protected lookAt: number[];
-	protected fieldOfView: number;
+
+	/**
+	 * @memberof Camera
+	 * @description The Camera's current FOV
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public fieldOfView: number;
+
+	/**
+	 * @memberof Camera
+	 * @description The Camera's current zoom
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public distance: number;
 
 	/**
 	 * @memberof Camera

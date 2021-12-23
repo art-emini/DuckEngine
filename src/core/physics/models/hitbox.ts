@@ -5,9 +5,9 @@ import Game from '../../game';
 import Group from '../../group/group';
 import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
-import hitboxFaceIntersect from '../hitboxFaceIntersect';
+import hitboxFaceIntersect from '../utils/hitboxFaceIntersect';
 import PhysicsBody from '../physicsBody';
-import rectToRectIntersect from '../rectToRectIntersect';
+import rectToRectIntersect from '../utils/rectToRectIntersect';
 
 /**
  * @class Hitbox

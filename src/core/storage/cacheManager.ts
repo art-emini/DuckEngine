@@ -29,10 +29,10 @@ export default class CacheManager {
 		this.cache = {};
 		this.storageIdentifier = 'DuckEngine_CacheManager_';
 
-		this.syncValues();
+		this.sync();
 	}
 
-	protected syncValues() {
+	public sync() {
 		this.cache = { ...localStorage };
 	}
 
@@ -129,12 +129,12 @@ export default class CacheManager {
 
 	/**
 	 * @memberof CacheManager
-	 * @description Returns the memory-cache entries as an object
+	 * @description Returns the memory-cache entries as an object, calls CacheManager.sync
 	 * @returns {{[key: string]: string}}
 	 * @since 2.0.0
 	 */
 	public get entries() {
-		this.syncValues();
+		this.sync();
 		return this.cache;
 	}
 }

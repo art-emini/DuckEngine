@@ -25,6 +25,8 @@ This update adds new features to textures by using cache and more new texture cl
     - Added new class DisplayManages, Manages the scale of the canvas
 - Game
   - Added condition where deltaTimeArray must have more than 99 items before rendering to prevent delta time speed up on game start
+  - Events
+    - Added SYNC_CACHE event
 - Scene
   - Added onSceneActive and onSceneInactive methods that are called when visible is set to true and false
   - Added createTimer method that returns a new Timer instance
@@ -48,7 +50,8 @@ This update adds new features to textures by using cache and more new texture cl
 - Camera
   - Added optional options (Duck.Types.Camera.CullingOptions) to cull and autoCull methods
 - Group
-  - Added physics filter can now also filter hitboxes
+  - Added physics filter can now also filter hitboxes and PhysicsBodies
+  - Added method at to return an item or undefined at a specified index
 - Keyboard Input & Key
   - Added state argument to keyState callback
 - Types
@@ -58,6 +61,7 @@ This update adds new features to textures by using cache and more new texture cl
   - Added wiki-pages folder
   - Added new layer "fades" to Duck.Layers.Rendering.zIndex
   - Added new wiki page, [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started)
+  - Added checkout script for developers
 
 ## Changed
 
@@ -83,6 +87,7 @@ This update adds new features to textures by using cache and more new texture cl
   - Changed how renderable's visible and enabled properties are effected by cull and autoCull methods
     - Ex: If a renderable's visible property is false, it will stay false even though it's culled property is true
     - Renderables only render if both the visible and culled properties are true
+  - Made fieldOfView and distance (zoom) properties public
 - Group
   - Change group filter interactive to ui
   - Changed type generic to any making groups allow a group of anything
@@ -96,6 +101,8 @@ This update adds new features to textures by using cache and more new texture cl
   - Removed ctx property which is now replaced by Game.renderer.ctx
   - Removed fullscreen and unfullscreen methods, replaced by Game.displayManager.fullscreen and unfullscreen
   - Removed scaleToWindow and resetScale methods, replaced by Game.displayManager.scaleToWindow and resetScale
+  - Events
+    - Removed fullscreen and unfullscreen events, replaces by DisplayEvents
 - Types
   - Removed **type** Duck.Types.Renderable which has been replaced with Duck.Types.Renderable **interface** that is now implemented into classes
 

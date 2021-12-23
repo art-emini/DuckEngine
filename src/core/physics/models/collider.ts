@@ -1,11 +1,11 @@
 // circle collision physics from https://github.com/pothonprogramming/pothonprogramming.github.io/blob/master/content/circle-collision-response/circle-collision-response.html
 // most of rect physics also from PothOnProgramming
 
-import { Duck } from '../../index';
-import Game from '../game';
-import GameObject from '../gameobjects/gameObject';
-import Group from '../group/group';
-import Hitbox from './models/hitbox';
+import { Duck } from '../../../index';
+import Game from '../../game';
+import GameObject from '../../gameobjects/gameObject';
+import Group from '../../group/group';
+import Hitbox from './hitbox';
 
 /**
  * @class Collider

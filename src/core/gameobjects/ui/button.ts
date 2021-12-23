@@ -1,7 +1,7 @@
 import { Duck } from '../../../index';
 import Debug from '../../debug/debug';
 import Game from '../../game';
-import rectToRectIntersect from '../../physics/rectToRectIntersect';
+import rectToRectIntersect from '../../physics/utils/rectToRectIntersect';
 import Scene from '../../scene';
 import Text from './text';
 import Texture from '../../texture/texture';

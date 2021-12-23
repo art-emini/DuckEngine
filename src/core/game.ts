@@ -377,6 +377,10 @@ export default class Game {
 	public async start() {
 		this.eventEmitter.emit(EVENTS.GAME.LOAD_BEGIN);
 
+		// sync cache
+		this.eventEmitter.emit(EVENTS.GAME.SYNC_CACHE);
+		this.cacheManager.sync();
+
 		// show loading splash screen
 		this.eventEmitter.emit(EVENTS.GAME.DRAW_SPLASH);
 		await this.drawSplashScreen();

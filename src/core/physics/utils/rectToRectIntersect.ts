@@ -1,6 +1,6 @@
-import Rect from '../gameobjects/rect';
-import RoundRect from '../gameobjects/roundrect';
-import Sprite from '../gameobjects/sprite';
+import Rect from '../../gameobjects/rect';
+import RoundRect from '../../gameobjects/roundrect';
+import Sprite from '../../gameobjects/sprite';
 
 /**
  * @function

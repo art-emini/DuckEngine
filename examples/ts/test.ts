@@ -15,6 +15,10 @@ const game = new DuckEngine.Game({
 	},
 	focus: true, // auto focus
 	roundPixels: true, // does not allow for floating point values for coordinates for gameobjects excluding particles
+	scale: {
+		x: 700,
+		y: 500,
+	},
 });
 
 const main = new MainScene(game);

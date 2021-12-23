@@ -4,11 +4,12 @@ import Camera from '../camera/camera';
 import Debug from '../debug/debug';
 import Game from '../game';
 import StaticLight from '../lights/staticLight';
-import Collider from '../physics/collider';
+import Collider from '../physics/models/collider';
 import EVENTS from '../events/events';
 import GameObject from '../gameobjects/gameObject';
 import UI from '../gameobjects/ui/ui';
 import Hitbox from '../physics/models/hitbox';
+import PhysicsBody from '../physics/physicsBody';
 
 /**
  * @class Group
@@ -176,7 +177,10 @@ export default class Group<t> {
 				break;
 			case 'physics':
 				return this.stack.filter(
-					(item) => item instanceof Collider || item instanceof Hitbox
+					(item) =>
+						item instanceof Collider ||
+						item instanceof Hitbox ||
+						item instanceof PhysicsBody
 				);
 				break;
 			default:
@@ -207,6 +211,17 @@ export default class Group<t> {
 	 */
 	public off(type: Duck.Types.Group.ListenerType) {
 		this.game.eventEmitter.off(`GROUP_${type}`);
+	}
+
+	/**
+	 * @memberof Group
+	 * @description Returns an item or undefined at a specified index
+	 * @param {number} index The index to return a value from, 0-based like an array
+	 * @returns {t | undefined}
+	 * @since 2.1.0
+	 */
+	public at(index: number): t | undefined {
+		return this.stack[index];
 	}
 
 	/**

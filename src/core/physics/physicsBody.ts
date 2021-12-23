@@ -5,7 +5,7 @@ import Group from '../group/group';
 import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
 import Scene from '../scene';
-import Collider from './collider';
+import Collider from './models/collider';
 import Hitbox from './models/hitbox';
 
 /**
