@@ -3,7 +3,6 @@ import { Duck } from '../..';
 import clipImage from '../../utils/clipImage';
 import Debug from '../debug/debug';
 import Game from '../game';
-import Group from '../group/group';
 import Scene from '../scene';
 import Texture from './texture';
 import TextureBase from './textureBase';
@@ -14,24 +13,27 @@ export default class TextureAtlas extends TextureBase<'image'> {
 
 	public json: Duck.Types.TextureAtlas.JSONSchema;
 
-	public textures: Group<Texture<'image'>>;
-
 	constructor(
-		texture: HTMLImageElement,
+		textureKey: string,
 		jsonKey: string,
 		w: number,
 		h: number,
 		game: Game,
 		scene: Scene
 	) {
-		super('image', 'atlas', texture, w, h);
+		super(
+			'image',
+			'atlas',
+			scene.loader.textureStack.find((image) => image.key === textureKey)!
+				.value.texture,
+			w,
+			h
+		);
 		this.game = game;
 		this.scene = scene;
 
 		this.json = scene.loader.jsonStack.find((json) => json.key === jsonKey)!
 			.value as unknown as Duck.Types.TextureAtlas.JSONSchema;
-
-		this.textures = new Group('textures', this.game, []);
 
 		this.validateJSON();
 	}
@@ -83,7 +85,12 @@ export default class TextureAtlas extends TextureBase<'image'> {
 						frameData.h
 					);
 
-					this.textures.add(texture);
+					this.scene.loader.textureStack.push({
+						type: 'texture',
+						value: texture,
+						key: frameData.key,
+						dataType: 'base',
+					});
 				},
 				() => {
 					new Debug.Error(
@@ -94,7 +101,9 @@ export default class TextureAtlas extends TextureBase<'image'> {
 		});
 	}
 
-	public get(index: number): Texture<'image'> | undefined {
-		return this.textures.at(index);
+	public get(key: string): Texture<'image'> | undefined {
+		return this.scene.loader.textureStack.find(
+			(texture) => texture.key === key
+		)?.value;
 	}
 }

@@ -6,6 +6,8 @@ import Scene from '../scene';
 import TextureSheet from '../texture/textureSheet';
 import Debug from '../debug/debug';
 import getImageData from '../../utils/getImageData';
+import TextureAtlas from '../texture/textureAtlas';
+import TextureBase from '../texture/textureBase';
 
 // loads images by URL or file path
 // static class
@@ -36,10 +38,12 @@ export default class Loader {
 	/**
 	 * @memberof Loader
 	 * @description An array of loaded Textures
-	 * @type Duck.Types.Loader.TextureStackItem<Texture<'image'>>[]
+	 * @type Duck.Types.Loader.TextureStackItem<TextureBase<'image'>>[]
 	 * @since 2.0.0
 	 */
-	public imageStack: Duck.Types.Loader.TextureStackItem<Texture<'image'>>[];
+	public textureStack: Duck.Types.Loader.TextureStackItem<
+		TextureBase<'image'>
+	>[];
 
 	/**
 	 * @memberof Loader
@@ -91,7 +95,7 @@ export default class Loader {
 		this.game = game;
 		this.scene = scene;
 
-		this.imageStack = [];
+		this.textureStack = [];
 		this.jsonStack = [];
 		this.htmlStack = [];
 		this.xmlStack = [];
@@ -138,7 +142,7 @@ export default class Loader {
 
 			const texture = new Texture<'image'>('image', image, w, h);
 
-			this.imageStack.push({
+			this.textureStack.push({
 				type: 'texture',
 				value: texture,
 				key,
@@ -156,7 +160,7 @@ export default class Loader {
 
 			const texture = new Texture<'image'>('image', image, w, h);
 
-			this.imageStack.push({
+			this.textureStack.push({
 				type: 'texture',
 				value: texture,
 				key,
@@ -221,7 +225,7 @@ export default class Loader {
 				cols
 			);
 
-			this.imageStack.push({
+			this.textureStack.push({
 				type: 'texture',
 				value: texture,
 				key,
@@ -245,7 +249,7 @@ export default class Loader {
 				cols
 			);
 
-			this.imageStack.push({
+			this.textureStack.push({
 				type: 'texture',
 				value: texture,
 				key,
@@ -271,6 +275,38 @@ export default class Loader {
 		}
 	}
 
+	public async loadTextureAtlas(
+		atlasKey: string,
+		texturePathOrURL: string,
+		jsonPathOrURL: string,
+		textureKey: string,
+		jsonKey: string,
+		imageW: number,
+		imageH: number
+	) {
+		// load texture and json
+		// both try for cache
+		await this.loadTexture(texturePathOrURL, textureKey, imageW, imageH);
+		await this.loadJSON(jsonPathOrURL, jsonKey);
+
+		// create TextureAtlas
+		const textureAtlas = new TextureAtlas(
+			textureKey,
+			jsonKey,
+			imageW,
+			imageH,
+			this.game,
+			this.scene
+		);
+
+		this.textureStack.push({
+			type: 'texture',
+			value: textureAtlas,
+			key: atlasKey,
+			dataType: 'atlas',
+		});
+	}
+
 	/**
 	 * @memberof Loader
 	 * @description Loads a JSON file and adds it to the jsonStack, caches it if it does not already exist
@@ -278,7 +314,10 @@ export default class Loader {
 	 * @param {string} key Key of the file to use to save it as
 	 * @since 2.0.0
 	 */
-	public async loadJSON(pathOrURL: string, key: string) {
+	public async loadJSON(
+		pathOrURL: string,
+		key: string
+	): Promise<Record<string, unknown>> {
 		// try cache
 		const cacheData = await this.tryCache('json', key);
 		if (cacheData) {

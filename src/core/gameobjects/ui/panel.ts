@@ -24,7 +24,7 @@ export default class Panel extends UI<'either'> {
 			w,
 			h,
 			r,
-			scene.loader.imageStack.find((t) => t.key === textureKeyOrColor)
+			scene.loader.textureStack.find((t) => t.key === textureKeyOrColor)
 				?.value || Texture.fromEither(textureKeyOrColor, w, h),
 			game,
 			scene

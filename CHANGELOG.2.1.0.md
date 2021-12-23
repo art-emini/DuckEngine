@@ -41,8 +41,11 @@ This update adds new features to textures by using cache and more new texture cl
 - Textures
   - Added new TextureBase class
   - Added new TextureSheet class to store info about spritesheets
+  - Added new TextureAtlas class which creates and loads Texture classes into Scene.loader.textureStack (previously called imageStack) that are clipped from the main texture
 - Loader
+  - Added CacheManager support for faster loading
   - Added loadTextureSheet method to create and load a spritesheet
+  - Added loadTextureAtlas method which loads and creates a TextureAtlas class
 - CacheManager
   - Added support for fallback to memory-cache for all methods that use localStorage, does not interfer with syncValues
 - UI
@@ -88,6 +91,8 @@ This update adds new features to textures by using cache and more new texture cl
     - Ex: If a renderable's visible property is false, it will stay false even though it's culled property is true
     - Renderables only render if both the visible and culled properties are true
   - Made fieldOfView and distance (zoom) properties public
+- Loader
+  - Changed imageStack property to textureStack, an array of StackItem with TextureBase classes
 - Group
   - Change group filter interactive to ui
   - Changed type generic to any making groups allow a group of anything
@@ -126,3 +131,13 @@ This update adds new features to textures by using cache and more new texture cl
 - Fixed group filter method not correctly filtering
 - Fixed camera cull and autoCull not preserving the renderable's falsy visibility if set (new feature)
 - Fixed delta time speed up on game start for the first second by adding a condition to check if the array is populated before rendering
+
+## FaQ
+
+Q: Any major changes in version 2.1.0?
+> To find all major core changes and additions, look into [Added](#added) and [Changed](#changed) -> Core sub-lists
+
+Q: What is a Texture Atlas?
+> A TextureAtlas is a new class added in 2.1.0. This class parses a passed JSON file and creates and clips images from the passed texture into
+> Texture classes which are then pushed onto the Scene.loader.textureStack array for later use. This helps load multiple textures from one image.
+> [Wiki Article](https://en.wikipedia.org/wiki/Texture_atlas)

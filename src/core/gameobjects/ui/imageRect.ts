@@ -20,7 +20,7 @@ export default class ImageRect extends UI<'image'> {
 			w,
 			h,
 			0,
-			scene.loader.imageStack.find((t) => t.key === textureKey)!.value,
+			scene.loader.textureStack.find((t) => t.key === textureKey)!.value,
 			game,
 			scene
 		);
