@@ -166,6 +166,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
 11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
 12. `yarn run serve` - Serves the docs on :8080.
+13. `yarn run checkout` - Runs the checkout shell script with bash. Run before thinking about publishing a release.
 
 ### Branches
 
