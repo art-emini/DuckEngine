@@ -100,9 +100,13 @@ A 2D Game Engine for the web.
 
 Learn how to use DuckEngine with simple, clean, documentation with typings and more.
 
+## [Discussions](https://github.com/ksplatdev/DuckEngine/discussions)
+
+Ask questions, share ideas, engage with the community, and share your work with DuckEngine Discussions.
+
 ## [Wiki](https://github.com/ksplatdev/DuckEngine/wiki)
 
-Learn, write, get help, with DuckEngine in the DuckEngine Wiki.
+Read and learn about DuckEngine with the DuckEngine wiki.
 
 ## How to use with Typescript
 
