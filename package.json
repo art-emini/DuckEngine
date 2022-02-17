@@ -18,7 +18,6 @@
 		"lint": "npx eslint -c .eslintrc.json src/",
 		"lint:watch": "npx onchange \"src/**/*.ts\"  \"examples/**/*.ts\" -- eslint -c .eslintrc.json --fix {{changed}}",
 		"lint:fix": "npx eslint -c .eslintrc.json --fix src/",
-		"tree": "tree -I 'examples|release|lib|docs|dist|node_modules'",
 		"serve": "npx http-server docs/",
 		"checkout": "bash scripts/checkout.sh"
 	},
