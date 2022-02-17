@@ -2,7 +2,7 @@
 
 This update increases performance and decreases memory usage and GC calls by creating a new CanvasRenderer and RendererPipeline.
 
-This update completely overhauls the UI *(previously Interactive)* system with new features and fixes.
+This update starts the overhaul of the UI *(previously Interactive)* system with new features and fixes.
 
 This update adds new features to textures by using cache and more new texture classes.
 
