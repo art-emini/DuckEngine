@@ -2,7 +2,7 @@
 
 **v2.0.0 released! [Changelog](CHANGELOG.md)**
 
-| [Docs](#docs) | [Wiki](#wiki) | [Demos](#demos) | [Download](#download) |
+| [Docs](#docs) | [Wiki](#wiki) | [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started) | [Demos](#demos) | [Download](#download) |
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
@@ -16,7 +16,7 @@ A 2D Game Engine for the web.
 
 ## Features
 
-- AABB (Axis-Aligned Bounding Box) Hitbox Based Physics Engine
+- Customizable Hitbox Based Physics Engine
 - Multiple Scenes
 - Fast & Performant
 - Sprites & Spritesheets
@@ -28,16 +28,16 @@ A 2D Game Engine for the web.
 - Keyboard, and Mouse Inputs
 - DPR / Mobile Scaling
 - Advanced Particle System
+- Cache & Fast Loading Times
 - Effects and Presets
-- Button and Text UI
-- Groups
-- Tilemaps
-- Fast & Performant
+- Advanced UI System
+- Groups & Management
+- Advanced Tilemap System
 - Small Package Size
-- Lighting
-- Preloader
-- Textures
-- Made in Typescript
+- Static Lighting
+- Asset Preloader & Manager
+- Textures & Manager
+- Made fully in TypeScript
 - Typedefs
 - [Docs](#docs)
 - A lot more...
@@ -86,8 +86,8 @@ A 2D Game Engine for the web.
 
 1. Setup an asset bundler like webpack or parcel.
 2. Import DuckEngine from URL
-   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.js>
-   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.min.js>
+   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.js>
+   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.min.js>
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ### Itch.io
@@ -100,9 +100,13 @@ A 2D Game Engine for the web.
 
 Learn how to use DuckEngine with simple, clean, documentation with typings and more.
 
+## [Discussions](https://github.com/ksplatdev/DuckEngine/discussions)
+
+Ask questions, share ideas, engage with the community, and share your work with DuckEngine Discussions.
+
 ## [Wiki](https://github.com/ksplatdev/DuckEngine/wiki)
 
-Learn, write, get help, with DuckEngine in the DuckEngine Wiki.
+Read and learn about DuckEngine with the DuckEngine wiki.
 
 ## How to use with Typescript
 
@@ -166,174 +170,12 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
 11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
 12. `yarn run serve` - Serves the docs on :8080.
+13. `yarn run checkout` - Runs the checkout shell script with bash. Run before thinking about publishing a release.
 
 ### Branches
 
 1. main - main branch
 2. staging - stage changes to this branch
-
-### File Structure
-
-```bash
-.
-├── branch_guidelines.md
-├── CHANGELOG.1.2.0.md
-├── CHANGELOG.2.0.0.md
-├── CHANGELOG.md
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── global
-│   ├── Logo.png
-│   ├── Logo_Splash.png
-│   ├── Logo_Splash.xcf
-│   ├── Logo.xcf
-│   └── README.md
-├── itch.io-description.md
-├── LICENSE
-├── package.json
-├── README.md
-├── scripts
-│   └── build.sh
-├── SECURITY.md
-├── src
-│   ├── base
-│   │   ├── amount.ts
-│   │   ├── once.ts
-│   │   ├── render.ts
-│   │   └── timer.ts
-│   ├── core
-│   │   ├── animation
-│   │   │   ├── animationFrame.ts
-│   │   │   ├── animationManager.ts
-│   │   │   ├── animationState.ts
-│   │   │   ├── animation.ts
-│   │   │   └── stateMachine.ts
-│   │   ├── camera
-│   │   │   └── camera.ts
-│   │   ├── cutscene
-│   │   │   └── cutscene.ts
-│   │   ├── debug
-│   │   │   └── debug.ts
-│   │   ├── effect
-│   │   │   ├── effect.ts
-│   │   │   └── preset
-│   │   │       ├── explosion.ts
-│   │   │       └── smoke.ts
-│   │   ├── events
-│   │   │   ├── eventEmitter.ts
-│   │   │   ├── events.ts
-│   │   │   ├── main
-│   │   │   │   └── gameEvents.ts
-│   │   │   └── other
-│   │   │       ├── buttonEvents.ts
-│   │   │       ├── cutsceneEvents.ts
-│   │   │       └── groupEvents.ts
-│   │   ├── gameobjects
-│   │   │   ├── circle.ts
-│   │   │   ├── gameObject.ts
-│   │   │   ├── interactive
-│   │   │   │   ├── button.ts
-│   │   │   │   └── text.ts
-│   │   │   ├── misc
-│   │   │   │   └── canvasModulate.ts
-│   │   │   ├── particles
-│   │   │   │   ├── particleEmitter.ts
-│   │   │   │   └── particle.ts
-│   │   │   ├── rect.ts
-│   │   │   ├── roundrect.ts
-│   │   │   └── sprite.ts
-│   │   ├── game.ts
-│   │   ├── group
-│   │   │   └── group.ts
-│   │   ├── input
-│   │   │   ├── input.ts
-│   │   │   ├── keyboardInput.ts
-│   │   │   ├── models
-│   │   │   │   ├── key.ts
-│   │   │   │   └── mouse.ts
-│   │   │   └── mouseInput.ts
-│   │   ├── lights
-│   │   │   └── staticLight.ts
-│   │   ├── loader
-│   │   │   └── loader.ts
-│   │   ├── map
-│   │   │   ├── map.ts
-│   │   │   ├── tilelayer.ts
-│   │   │   ├── tilemap.ts
-│   │   │   ├── tileset.ts
-│   │   │   └── tile.ts
-│   │   ├── math
-│   │   │   ├── clamp.ts
-│   │   │   ├── lerp.ts
-│   │   │   ├── randomFloat.ts
-│   │   │   ├── randomInt.ts
-│   │   │   └── vector2.ts
-│   │   ├── misc
-│   │   │   └── pluginManager.ts
-│   │   ├── models
-│   │   │   ├── displayList.ts
-│   │   │   ├── physicsList.ts
-│   │   │   └── texture.ts
-│   │   ├── physics
-│   │   │   ├── circleToRectIntersect.ts
-│   │   │   ├── collider.ts
-│   │   │   ├── hitboxFaceIntersect.ts
-│   │   │   ├── models
-│   │   │   │   ├── area.ts
-│   │   │   │   └── hitbox.ts
-│   │   │   ├── physicsBody.ts
-│   │   │   ├── rectToRectIntersect.ts
-│   │   │   └── server
-│   │   │       └── physicsServer.ts
-│   │   ├── scene.ts
-│   │   ├── sound
-│   │   │   └── soundPlayer.ts
-│   │   └── storage
-│   │       └── cacheManager.ts
-│   ├── helper
-│   │   ├── color
-│   │   │   ├── convertColorToRGBA.ts
-│   │   │   ├── getValuesHSL.ts
-│   │   │   ├── getValuesRGB.ts
-│   │   │   ├── hexToHSL.ts
-│   │   │   ├── hexToRGBA.ts
-│   │   │   ├── hexToRGB.ts
-│   │   │   ├── hslaToRGBA.ts
-│   │   │   ├── hslToRGB.ts
-│   │   │   ├── isHex.ts
-│   │   │   ├── isHSL.ts
-│   │   │   ├── isRGB.ts
-│   │   │   ├── randomAlphaColor.ts
-│   │   │   ├── randomColor.ts
-│   │   │   ├── rgbaToHSLA.ts
-│   │   │   ├── rgbaToRGB.ts
-│   │   │   ├── rgbToHSL.ts
-│   │   │   └── rgbToRGBA.ts
-│   │   ├── dprScale.ts
-│   │   ├── startup.ts
-│   │   └── version.ts
-│   ├── index.ts
-│   └── utils
-│       ├── averageArray.ts
-│       ├── cloneClass.ts
-│       ├── degToRadians.ts
-│       ├── detectBrowser.ts
-│       ├── extractNumbers.ts
-│       ├── smoothArray.ts
-│       ├── swapElement.ts
-│       ├── uniqueID.ts
-│       └── validURL.ts
-├── tsconfig.json
-├── webpack.config.js
-└── yarn.lock
-```
-
-#### Meaning & Use
-
-1. src - Typescript files, main directory
-2. lib - Javascript files, compiled from src
-3. dist - Javascript & type declaration files, bundled with webpack from lib
-4. global - Global Assets
 
 ## Versions
 
@@ -341,7 +183,7 @@ DuckEngine follows [SemVer](https://semver.org/).
 
 ## Demos
 
-All demos are bundled with parcel-bundler and are all on codesandbox.
+### [Simple Demo Game](https://github.com/ksplatdev/DuckEngine-Demo-Game/tree/main)
 
 ### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
 

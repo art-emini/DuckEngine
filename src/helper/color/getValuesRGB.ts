@@ -1,10 +1,8 @@
-export default function getValuesRGB(rgb: string | any): string[] {
-	rgb = 'rgb(200, 12, 53)';
-
+export default function getValuesRGB(rgb: string | any): number[] {
 	rgb = rgb
 		.substring(4, rgb.length - 1)
 		.replace(/ /g, '')
 		.split(',');
 
-	return rgb;
+	return (rgb as string[]).map((str: string) => parseInt(str));
 }

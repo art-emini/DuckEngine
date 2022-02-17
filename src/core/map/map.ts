@@ -15,7 +15,7 @@ import TileLayer from './tilelayer';
  * @description The Map Class. Base Map class, extends by TileMap
  * @since 1.2.0
  */
-export default class Map {
+export default class Map implements Duck.Types.Renderable {
 	/**
 	 * @memberof Map
 	 * @description A unique identifier for the Map
@@ -81,6 +81,14 @@ export default class Map {
 	public zIndex: number;
 
 	/**
+	 * @memberof Map
+	 * @description Determines if the Map should be visible by the current scene's current camera
+	 * @type boolean
+	 * @since 2.1.0
+	 */
+	public culled: boolean;
+
+	/**
 	 * @constructor Map
 	 * @description Creates a Map instance.
 	 * @param {TileLayer[]} tileLayers An array of TileLayers
@@ -103,6 +111,7 @@ export default class Map {
 
 		this.visible = true;
 		this.zIndex = 2;
+		this.culled = true;
 	}
 
 	/**

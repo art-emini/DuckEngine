@@ -29,10 +29,10 @@ export default class CacheManager {
 		this.cache = {};
 		this.storageIdentifier = 'DuckEngine_CacheManager_';
 
-		this.syncValues();
+		this.sync();
 	}
 
-	protected syncValues() {
+	public sync() {
 		this.cache = { ...localStorage };
 	}
 
@@ -50,13 +50,16 @@ export default class CacheManager {
 
 	/**
 	 * @memberof CacheManager
-	 * @description Gets a value from a Name/Key from the storage
+	 * @description Gets a value from a Name/Key from the storage or memory-cache
 	 * @param {string} name Name/Key to get the value from
-	 * @returns string
+	 * @returns {string}
 	 * @since 2.0.0
 	 */
 	public get(name: string): string | undefined | null {
-		return localStorage.getItem(`${this.storageIdentifier}${name}`);
+		return (
+			localStorage.getItem(`${this.storageIdentifier}${name}`) ||
+			this.cache[name]
+		);
 	}
 
 	/**
@@ -78,12 +81,14 @@ export default class CacheManager {
 
 	/**
 	 * @memberof CacheManager
-	 * @description Gets a Key-Value pair from the storage and returns based on if it exists or not
+	 * @description Gets a Key-Value pair from the storage or memory-cache and returns based on if it exists or not
 	 * @param {string} name Name/Key to save the value to
 	 * @since 2.0.0
 	 */
 	public has(name: string): boolean {
-		const e = localStorage.getItem(`${this.storageIdentifier}${name}`);
+		const e =
+			localStorage.getItem(`${this.storageIdentifier}${name}`) ||
+			this.cache[name];
 
 		return e ? true : false;
 	}
@@ -91,7 +96,7 @@ export default class CacheManager {
 	/**
 	 * @memberof CacheManager
 	 * @description Returns the keys from the memory-cache
-	 * @returns string[]
+	 * @returns {string[]}
 	 * @since 2.0.0
 	 */
 	public keys() {
@@ -101,7 +106,7 @@ export default class CacheManager {
 	/**
 	 * @memberof CacheManager
 	 * @description Returns the values from the memory-cache
-	 * @returns string[]
+	 * @returns {string[]}
 	 * @since 2.0.0
 	 */
 	public values() {
@@ -124,12 +129,12 @@ export default class CacheManager {
 
 	/**
 	 * @memberof CacheManager
-	 * @description Returns the memory-cache entries as an object
+	 * @description Returns the memory-cache entries as an object, calls CacheManager.sync
 	 * @returns {{[key: string]: string}}
 	 * @since 2.0.0
 	 */
 	public get entries() {
-		this.syncValues();
+		this.sync();
 		return this.cache;
 	}
 }

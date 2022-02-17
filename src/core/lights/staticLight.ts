@@ -3,7 +3,7 @@ import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';
 import GameObject from '../gameobjects/gameObject';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
 
 /**
@@ -71,20 +71,15 @@ export default class StaticLight extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			this.game.ctx.globalCompositeOperation = 'lighter';
-			this.game.ctx.beginPath();
-			this.game.ctx.arc(
+		if (this.game.renderer.ctx) {
+			this.game.renderer.setBlendMode('lighten');
+			this.game.renderer.drawCircle(
 				this.position.x,
 				this.position.y,
 				this.r,
-				0,
-				2 * Math.PI,
-				false
+				this.texture.texture
 			);
-			this.game.ctx.fillStyle = this.texture.texture;
-			this.game.ctx.fill();
-			this.game.ctx.globalCompositeOperation = 'source-over';
+			this.game.renderer.setBlendMode('source-over');
 		} else {
 			new Debug.Error(
 				'CanvasRenderingContext2D is undefined. Canvas is undefined.'

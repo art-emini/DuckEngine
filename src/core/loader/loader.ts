@@ -1,8 +1,13 @@
 // utils
 import { Duck } from '../..';
 import Game from '../game';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
+import TextureSheet from '../texture/textureSheet';
+import Debug from '../debug/debug';
+import getImageData from '../../utils/getImageData';
+import TextureAtlas from '../texture/textureAtlas';
+import TextureBase from '../texture/textureBase';
 
 // loads images by URL or file path
 // static class
@@ -33,10 +38,12 @@ export default class Loader {
 	/**
 	 * @memberof Loader
 	 * @description An array of loaded Textures
-	 * @type Duck.Types.Loader.StackItem<Texture<'image'>>[]
+	 * @type Duck.Types.Loader.TextureStackItem<TextureBase<'image'>>[]
 	 * @since 2.0.0
 	 */
-	public imageStack: Duck.Types.Loader.StackItem<Texture<'image'>>[];
+	public textureStack: Duck.Types.Loader.TextureStackItem<
+		TextureBase<'image'>
+	>[];
 
 	/**
 	 * @memberof Loader
@@ -88,7 +95,7 @@ export default class Loader {
 		this.game = game;
 		this.scene = scene;
 
-		this.imageStack = [];
+		this.textureStack = [];
 		this.jsonStack = [];
 		this.htmlStack = [];
 		this.xmlStack = [];
@@ -96,11 +103,20 @@ export default class Loader {
 		this.audioStack = [];
 	}
 
+	protected async tryCache(prefix: string, key: string) {
+		return this.game.cacheManager.get(`${prefix}_${key}`);
+	}
+
+	protected async saveCache(prefix: string, key: string, value: string) {
+		return this.game.cacheManager.set(`${prefix}_${key}`, value);
+	}
+
 	/**
 	 * @memberof Loader
-	 * @description Loads an image and creates a texture
+	 * @description Loads an image and creates a texture, caches it if it does not already exist in the cache (clear cache if texture does not update
+	 * if you edit the image src)
 	 * @param {string} pathOrURL Path to the file or the URL
-	 * @param {string} key Key of the texture, used to load the texture in sprites and spritesheet
+	 * @param {string} key Key of the texture, used to load the texture in sprites
 	 * @param {number} w Width of image
 	 * @param {number} h Height of image
 	 * @since 2.0.0
@@ -111,43 +127,228 @@ export default class Loader {
 		w: number,
 		h: number
 	) {
-		const res = await fetch(pathOrURL);
-		const blob = await res.blob();
-
-		const url = URL.createObjectURL(blob.slice(0, 4000));
-
 		const image = new Image();
-		image.src = url;
+		image.width = w;
+		image.height = h;
 
-		const texture = new Texture<'image'>('image', image, w, h);
+		// try cache
+		const cacheData = await this.tryCache('texture', key);
+		if (cacheData) {
+			image.setAttribute('src', cacheData); // DATA URL object
 
-		this.imageStack.push({
-			type: 'texture',
-			value: texture,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded texture from cache.');
+			}
 
-		return image;
+			const texture = new Texture<'image'>('image', image, w, h);
+
+			this.textureStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'base',
+			});
+
+			return image;
+		} else {
+			const res = await fetch(pathOrURL);
+			const blob = await res.blob();
+
+			const url = URL.createObjectURL(blob.slice(0, 4000));
+
+			image.src = url;
+
+			const texture = new Texture<'image'>('image', image, w, h);
+
+			this.textureStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'base',
+			});
+
+			// save image in cache
+			getImageData(
+				image,
+				w,
+				h,
+				(data) => {
+					this.saveCache('texture', key, data);
+				},
+				() => {
+					new Debug.Error(
+						'Failed to save texture in cache, report this bug.'
+					);
+				}
+			);
+
+			return image;
+		}
 	}
 
 	/**
 	 * @memberof Loader
-	 * @description Loads a JSON file and adds it to the jsonStack
+	 * @description Loads an image and creates a texture sheet, caches it if it does not already exist in the cache (clear cache if texture does not update
+	 * if you edit the image src)
+	 * @param {string} pathOrURL Path to the file or the URL
+	 * @param {string} key Key of the texture, used to load the texture in sprites and spritesheet
+	 * @param {number} w Width of image
+	 * @param {number} h Height of image
+	 * @since 2.1.0
+	 */
+	public async loadTextureSheet(
+		pathOrURL: string,
+		key: string,
+		frameWidth: number,
+		frameHeight: number,
+		rows: number,
+		cols: number
+	) {
+		const image = new Image();
+		image.width = frameWidth * cols;
+		image.height = frameHeight * rows;
+
+		// try cache
+		const cacheData = await this.tryCache('texture_sheet', key);
+		if (cacheData) {
+			image.setAttribute('src', cacheData); // DATA URL object
+
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded texture sheet from cache.');
+			}
+
+			const texture = new TextureSheet(
+				image,
+				frameWidth,
+				frameHeight,
+				rows,
+				cols
+			);
+
+			this.textureStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'sheet',
+			});
+
+			return image;
+		} else {
+			const res = await fetch(pathOrURL);
+			const blob = await res.blob();
+
+			const url = URL.createObjectURL(blob.slice(0, 4000));
+
+			image.src = url;
+
+			const texture = new TextureSheet(
+				image,
+				frameWidth,
+				frameHeight,
+				rows,
+				cols
+			);
+
+			this.textureStack.push({
+				type: 'texture',
+				value: texture,
+				key,
+				dataType: 'sheet',
+			});
+
+			// save image in cache
+			getImageData(
+				image,
+				frameWidth * cols,
+				frameHeight * rows,
+				(data) => {
+					this.saveCache('texture_sheet', key, data);
+				},
+				() => {
+					new Debug.Error(
+						'Failed to save texture sheet in cache, report this bug.'
+					);
+				}
+			);
+
+			return image;
+		}
+	}
+
+	public async loadTextureAtlas(
+		atlasKey: string,
+		texturePathOrURL: string,
+		jsonPathOrURL: string,
+		textureKey: string,
+		jsonKey: string,
+		imageW: number,
+		imageH: number
+	) {
+		// load texture and json
+		// both try for cache
+		await this.loadTexture(texturePathOrURL, textureKey, imageW, imageH);
+		await this.loadJSON(jsonPathOrURL, jsonKey);
+
+		// create TextureAtlas
+		const textureAtlas = new TextureAtlas(
+			textureKey,
+			jsonKey,
+			imageW,
+			imageH,
+			this.game,
+			this.scene
+		);
+
+		this.textureStack.push({
+			type: 'texture',
+			value: textureAtlas,
+			key: atlasKey,
+			dataType: 'atlas',
+		});
+	}
+
+	/**
+	 * @memberof Loader
+	 * @description Loads a JSON file and adds it to the jsonStack, caches it if it does not already exist
 	 * @param {string} pathOrURL Path to the file or the URL
 	 * @param {string} key Key of the file to use to save it as
 	 * @since 2.0.0
 	 */
-	public async loadJSON(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const json: Record<string, unknown> = await res.json();
+	public async loadJSON(
+		pathOrURL: string,
+		key: string
+	): Promise<Record<string, unknown>> {
+		// try cache
+		const cacheData = await this.tryCache('json', key);
+		if (cacheData) {
+			const json = JSON.parse(cacheData);
 
-		this.jsonStack.push({
-			type: 'json',
-			value: json,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded JSON from cache');
+			}
 
-		return json;
+			this.jsonStack.push({
+				type: 'json',
+				value: json,
+				key,
+			});
+
+			return json;
+		} else {
+			const res = await fetch(pathOrURL);
+			const json: Record<string, unknown> = await res.json();
+
+			this.jsonStack.push({
+				type: 'json',
+				value: json,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('json', key, JSON.stringify(json));
+
+			return json;
+		}
 	}
 
 	/**
@@ -158,17 +359,46 @@ export default class Loader {
 	 * @since 2.0.0
 	 */
 	public async loadHTML(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const text = await res.text();
-		const html = new window.DOMParser().parseFromString(text, 'text/html');
+		// try cache
+		const cacheData = await this.tryCache('html', key);
+		if (cacheData) {
+			const text = cacheData;
 
-		this.htmlStack.push({
-			type: 'html',
-			value: html,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded HTML from cache');
+			}
 
-		return html;
+			const html = new window.DOMParser().parseFromString(
+				text,
+				'text/html'
+			);
+
+			this.htmlStack.push({
+				type: 'html',
+				value: html,
+				key,
+			});
+
+			return html;
+		} else {
+			const res = await fetch(pathOrURL);
+			const text = await res.text();
+			const html = new window.DOMParser().parseFromString(
+				text,
+				'text/html'
+			);
+
+			this.htmlStack.push({
+				type: 'html',
+				value: html,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('html', key, text);
+
+			return html;
+		}
 	}
 
 	/**
@@ -179,17 +409,46 @@ export default class Loader {
 	 * @since 2.0.0
 	 */
 	public async loadXML(pathOrURL: string, key: string) {
-		const res = await fetch(pathOrURL);
-		const text = await res.text();
-		const xml = new window.DOMParser().parseFromString(text, 'text/xml');
+		// try cache
+		const cacheData = await this.tryCache('xml', key);
+		if (cacheData) {
+			const text = cacheData;
 
-		this.xmlStack.push({
-			type: 'html',
-			value: xml,
-			key,
-		});
+			if (this.game.config.debug) {
+				new Debug.Log('Loaded XML from cache');
+			}
 
-		return xml;
+			const xml = new window.DOMParser().parseFromString(
+				text,
+				'text/xml'
+			);
+
+			this.xmlStack.push({
+				type: 'xml',
+				value: xml,
+				key,
+			});
+
+			return xml;
+		} else {
+			const res = await fetch(pathOrURL);
+			const text = await res.text();
+			const xml = new window.DOMParser().parseFromString(
+				text,
+				'text/xml'
+			);
+
+			this.xmlStack.push({
+				type: 'xml',
+				value: xml,
+				key,
+			});
+
+			// save in cache
+			this.saveCache('xml', key, text);
+
+			return xml;
+		}
 	}
 
 	/**
@@ -211,6 +470,8 @@ export default class Loader {
 
 		const res = await font.load();
 
+		document.fonts.add(font);
+
 		this.fontStack.push({
 			type: 'font',
 			value: res,
@@ -225,16 +486,21 @@ export default class Loader {
 	 * @description Loads an Audio file and adds it to the audioStack
 	 * @param {string} pathOrURL Path to the file or the URL
 	 * @param {string} key Key of the file to use to save it as
+	 * @param {string} [mimeType] The mime type of the file, optional -> default: 'audio/mp3'
 	 * @since 2.0.0
 	 */
-	public async loadAudio(pathOrURL: string, key: string) {
+	public async loadAudio(
+		pathOrURL: string,
+		key: string,
+		mimeType = 'audio/mp3'
+	) {
 		const res = await fetch(pathOrURL);
 		const reader = res.body?.getReader();
 
 		const result = await reader?.read();
 
 		const blob = new Blob([result?.value] as unknown as BlobPart[], {
-			type: 'audio/mp3',
+			type: mimeType,
 		});
 
 		const url = window.URL.createObjectURL(blob);

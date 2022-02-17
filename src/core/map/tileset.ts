@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Game from '../game';
-import Texture from '../models/texture';
+import Texture from '../texture/texture';
 import Scene from '../scene';
 import Tile from './tile';
 
@@ -96,7 +96,7 @@ export default class Tileset {
 		game: Game,
 		scene: Scene
 	) {
-		this.texture = scene.loader.imageStack.find(
+		this.texture = scene.loader.textureStack.find(
 			(v) => v.key === textureKey
 		)!.value;
 		this.tileW = tileW;

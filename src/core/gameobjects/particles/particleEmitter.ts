@@ -95,6 +95,7 @@ export default class ParticleEmitter {
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX Where the new emitted particles x position is. A range of 2 values
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY Where the new emitted particles y position is. A range of 2 values
 	 * @param {number} amount Amount of starting particles
+	 * @param {boolean} [autoCreate=true] Determines if particles are created on init, populates the list, optional -> defaults: true
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
 	 * @since 1.0.0-beta
@@ -105,7 +106,8 @@ export default class ParticleEmitter {
 		rangeY: Duck.Types.ParticleEmitter.Range,
 		amount: number,
 		game: Game,
-		scene: Scene
+		scene: Scene,
+		autoCreate = true
 	) {
 		this.id = particle.id;
 		this.particle = particle;
@@ -123,16 +125,28 @@ export default class ParticleEmitter {
 		this.floatRangeY = [0, 0];
 
 		// create particles
-		this.create();
+		if (autoCreate) {
+			this.create();
+		}
 	}
 
-	protected create() {
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Creates an amount of particles
+	 * @since 2.1.0
+	 */
+	public create() {
 		for (let i = 0; i < this.amount; i++) {
 			this.createOne();
 		}
 	}
 
-	protected createOne() {
+	/**
+	 * @memberof ParticleEmitter
+	 * @description Creates one particle
+	 * @since 2.1.0
+	 */
+	public createOne() {
 		const obj = new Particle(
 			this.particle.shape,
 			this.particle.w,
@@ -164,6 +178,7 @@ export default class ParticleEmitter {
 
 		// add to display list
 		this.scene.displayList.add(obj);
+		// no need to pool the renderer pipeline as displayList.add pools the renderer pipeline
 
 		// add to physics list
 		this.scene.physicsList.add(obj);
@@ -204,7 +219,7 @@ export default class ParticleEmitter {
 
 	/**
 	 * @memberof ParticleEmitter
-	 * @description Sets the new particles' position range
+	 * @description Sets the new or old particles' position range
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeX Where the new emitted particles x position is. A range of 2 values
 	 * @param {Duck.Types.ParticleEmitter.Range} rangeY Where the new emitted particles y position is. A range of 2 values
 	 * @since 1.0.0-beta
@@ -215,6 +230,22 @@ export default class ParticleEmitter {
 	) {
 		this.rangeX = rangeX;
 		this.rangeY = rangeY;
+
+		this.list.forEach((obj) => {
+			obj.position.x = randomInt(this.rangeX[0], this.rangeX[1]);
+			obj.position.y = randomInt(this.rangeY[0], this.rangeY[1]);
+
+			obj.floatVelocity.x = randomFloat(
+				this.floatRangeX[0],
+				this.floatRangeX[1],
+				1
+			);
+			obj.floatVelocity.y = randomFloat(
+				this.floatRangeY[0],
+				this.floatRangeY[1],
+				1
+			);
+		});
 	}
 
 	/**

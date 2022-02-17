@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import Game from './game';
 import Render from '../base/render';
 import { Duck } from '../index';
@@ -30,13 +29,13 @@ import hexToRGB from '../helper/color/hexToRGB';
 import hexToHSL from '../helper/color/hexToHSL';
 import randomColor from '../helper/color/randomColor';
 import randomColorWithAlpha from '../helper/color/randomAlphaColor';
-import rectToRectIntersect from './physics/rectToRectIntersect';
-import circleToRectIntersect from './physics/circleToRectIntersect';
+import rectToRectIntersect from './physics/utils/rectToRectIntersect';
+import circleToRectIntersect from './physics/utils/circleToRectIntersect';
 import TileMap from './map/tilemap';
 import Once from '../base/once';
 import Amount from '../base/amount';
-import Button from './gameobjects/interactive/button';
-import Text from './gameobjects/interactive/text';
+import Button from './gameobjects/ui/button';
+import Text from './gameobjects/ui/text';
 import Effect from './effect/effect';
 import ExplosionEffect from './effect/preset/explosion';
 import SmokeEffect from './effect/preset/smoke';
@@ -52,6 +51,7 @@ import PhysicsBody from './physics/physicsBody';
 import GameObject from './gameobjects/gameObject';
 import Tileset from './map/tileset';
 import TileLayer from './map/tilelayer';
+import Timer from '../base/timer';
 
 /**
  * @class Scene
@@ -150,6 +150,22 @@ export default class Scene extends Render {
 	 */
 	public physicsServer: PhysicsServer | undefined;
 
+	/**
+	 * @memberof Scene
+	 * @description A property that is a function that gets called when the scene is switched to being visible
+	 * @type () => void
+	 * @since 2.1.0
+	 */
+	public onSceneActive: () => void;
+
+	/**
+	 * @memberof Scene
+	 * @description A property that is a function that gets called when the scene is switched to not being visible
+	 * @type () => void
+	 * @since 2.1.0
+	 */
+	public onSceneInactive: () => void;
+
 	// methods
 
 	/**
@@ -177,10 +193,6 @@ export default class Scene extends Render {
 				w: number,
 				h: number,
 				textureKey: string,
-				frameWidth?: number,
-				frameHeight?: number,
-				rows?: number,
-				cols?: number,
 				currentRow?: number,
 				currentCol?: number
 			) => Sprite;
@@ -215,13 +227,10 @@ export default class Scene extends Render {
 				collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
 			) => Area;
 		};
-		interactive: {
-			text: (
-				text: string,
-				config: Duck.Types.Interactive.Text.Config
-			) => Text;
+		ui: {
+			text: (text: string, config: Duck.Types.UI.Text.Config) => Text;
 			button: (
-				shape: Duck.Types.Interactive.Button.Shape,
+				shape: Duck.Types.UI.Button.Shape,
 				x: number,
 				y: number,
 				w: number,
@@ -247,10 +256,7 @@ export default class Scene extends Render {
 				alpha: Duck.Types.Helper.AlphaRange
 			) => StaticLight;
 		};
-		group: <t extends Duck.Types.Group.StackItem>(
-			name: string,
-			defaultValues?: t[]
-		) => Group<t>;
+		group: <t>(name: string, defaultValues?: t[]) => Group<t>;
 		particle: (
 			shape: Duck.Types.Collider.ShapeString,
 			w: number,
@@ -262,7 +268,8 @@ export default class Scene extends Render {
 			particle: Particle,
 			rangeX: Duck.Types.ParticleEmitter.Range,
 			rangeY: Duck.Types.ParticleEmitter.Range,
-			amount: number
+			amount: number,
+			autoCreate?: boolean
 		) => ParticleEmitter;
 		cutscene: (
 			config: Duck.Types.Cutscene.Config,
@@ -419,7 +426,7 @@ export default class Scene extends Render {
 		this.mainCamera;
 		this.cameras = [];
 
-		this.displayList = new DisplayList();
+		this.displayList = new DisplayList(this.game);
 		this.physicsList = new PhysicsList();
 
 		this.loader = new Loader(this.game, this);
@@ -427,6 +434,14 @@ export default class Scene extends Render {
 		if (this.game.config.physics?.enabled) {
 			this.physicsServer = new PhysicsServer(this.game, this);
 		}
+
+		this.onSceneActive = () => {
+			// On scene change to visible
+		};
+
+		this.onSceneInactive = () => {
+			// On scene change to not visible
+		};
 
 		// methods
 
@@ -467,10 +482,6 @@ export default class Scene extends Render {
 					w: number,
 					h: number,
 					textureKey: string,
-					frameWidth?: number,
-					frameHeight?: number,
-					rows?: number,
-					cols?: number,
 					currentRow?: number,
 					currentCol?: number
 				) => {
@@ -482,10 +493,6 @@ export default class Scene extends Render {
 						textureKey,
 						this.game,
 						this,
-						frameWidth,
-						frameHeight,
-						rows,
-						cols,
 						currentRow,
 						currentCol
 					);
@@ -575,18 +582,15 @@ export default class Scene extends Render {
 					return myArea;
 				},
 			},
-			interactive: {
-				text: (
-					text: string,
-					config: Duck.Types.Interactive.Text.Config
-				) => {
+			ui: {
+				text: (text: string, config: Duck.Types.UI.Text.Config) => {
 					const myText = new Text(text, config, this.game, this);
 					this.displayList.add(myText);
 					this.physicsList.add(myText);
 					return myText;
 				},
 				button: (
-					shape: Duck.Types.Interactive.Button.Shape,
+					shape: Duck.Types.UI.Button.Shape,
 					x: number,
 					y: number,
 					w: number,
@@ -652,10 +656,7 @@ export default class Scene extends Render {
 					return myStaticLight;
 				},
 			},
-			group: <t extends Duck.Types.Group.StackItem>(
-				name: string,
-				defaultValues?: t[]
-			) => {
+			group: <t>(name: string, defaultValues?: t[]) => {
 				return new Group<t>(name, this.game, defaultValues);
 			},
 			particle: (
@@ -680,7 +681,8 @@ export default class Scene extends Render {
 				particle: Particle,
 				rangeX: Duck.Types.ParticleEmitter.Range,
 				rangeY: Duck.Types.ParticleEmitter.Range,
-				amount: number
+				amount: number,
+				autoCreate = true
 			) => {
 				return new ParticleEmitter(
 					particle,
@@ -688,7 +690,8 @@ export default class Scene extends Render {
 					rangeY,
 					amount,
 					this.game,
-					this
+					this,
+					autoCreate
 				);
 			},
 			cutscene: (
@@ -892,6 +895,20 @@ export default class Scene extends Render {
 
 	/**
 	 * @memberof Scene
+	 * @description Sets the visible property and calls the game.renderer.pipeline.pool method to immediately update the visibility
+	 *
+	 * **Note: this calls Game.renderer.pipeline.pool to immediately update the visibility**
+	 *
+	 * @param {boolean} visible What to set the visible property to
+	 * @since 2.1.0
+	 */
+	public setVisible(visible: boolean) {
+		this.visible = visible;
+		this.game.renderer.pipeline.pool();
+	}
+
+	/**
+	 * @memberof Scene
 	 * @description Switches the active camera to a passed camera
 	 * @param {Camera} camera Camera to switch to
 	 * @memberof 1.0.0-beta
@@ -938,11 +955,12 @@ export default class Scene extends Render {
 	/**
 	 * @memberof Scene
 	 * @description Runs a function once no matter if it is in a loop or not
-	 * @param {Function} func Function to run
+	 * @param {(...args: unknown[]) => unknown} func Function to run
 	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @returns {Once}
 	 * @since 1.0.0
 	 */
-	public once(func: Function, run?: boolean) {
+	public once(func: (...args: unknown[]) => unknown, run?: boolean) {
 		const one = new Once(func, run);
 		return one;
 	}
@@ -953,6 +971,7 @@ export default class Scene extends Render {
 	 * @param {(currentCount:number) => void} func Function to call
 	 * @param {number} maxAmount Max amount of times to allow the function to be called
 	 * @param {boolean} [run] Determines if function is ran right when it is initialized
+	 * @returns {Amount}
 	 * @since 1.1.0
 	 */
 	public runAmount(
@@ -962,5 +981,25 @@ export default class Scene extends Render {
 	) {
 		const amount = new Amount(func, maxAmount, this.game, run);
 		return amount;
+	}
+
+	/**
+	 * @memberof Scene
+	 * @description Creates and returns a Timer instance
+	 * @param {number} ms Milliseconds, converted to seconds which is used to check if the target time is reached in Timer.count
+	 * @param {(...args:unknown[])=>unknown} cb Callback to call every time the timer reaches its target
+	 * @param {unknown[]} args Arguments to pass to the callback
+	 * @param {number} repeat Amount of times to repeat, set to infinity to repeat forever
+	 * @returns {Timer}
+	 * @since 2.1.0
+	 */
+	public createTimer(
+		ms: number,
+		cb: (...args: unknown[]) => unknown,
+		args: unknown[],
+		repeat: number
+	) {
+		const timer = new Timer(ms, cb, args, repeat);
+		return timer;
 	}
 }

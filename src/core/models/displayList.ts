@@ -1,5 +1,6 @@
 import { Duck } from '../..';
 import Debug from '../debug/debug';
+import Game from '../game';
 
 /**
  * @class DisplayList
@@ -8,16 +9,28 @@ import Debug from '../debug/debug';
  * @since 2.0.0
  */
 export default class DisplayList {
+	public game: Game;
+
 	public list: Duck.Types.Renderable[] = [];
+
+	constructor(game: Game) {
+		this.game = game;
+	}
 
 	/**
 	 * @memberof DisplayList
 	 * @description Adds a renderableObject to the list
 	 * @param {Duck.Types.Renderable} renderableObject A renderableObject
+	 *
+	 * Note: this pools the game's renderer pipeline for instant updates
+	 *
 	 * @since 2.0.0
 	 */
 	public add(renderableObject: Duck.Types.Renderable) {
 		this.list.push(renderableObject);
+
+		// pool renderer pipeline for instant update
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**
@@ -43,7 +56,7 @@ export default class DisplayList {
 	/**
 	 * @memberof DisplayList
 	 * @description Sorts all renderableObject by zIndex
-	 * @returns Duck.Types.Renderable[]
+	 * @returns {Duck.Types.Renderable[]}
 	 * @since 2.0.0
 	 */
 	public depthSort() {
@@ -58,7 +71,7 @@ export default class DisplayList {
 	 * @memberof DisplayList
 	 * @description Filters all renderableObjects by its visible boolean property
 	 * @param {boolean} [filter=true] By what to filter. EX: true, filters all visible objects, optional -> default: true
-	 * @returns Duck.Types.Renderable[]
+	 * @returns {Duck.Types.Renderable[]}
 	 * @since 2.0.0
 	 */
 	public visibilityFilter(filter = true) {

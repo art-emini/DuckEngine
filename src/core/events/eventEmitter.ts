@@ -16,7 +16,13 @@ export default class EventEmitter {
 	public emit(event: string, ...args: any) {
 		const cbs = this.callbacks[event];
 		if (cbs) {
-			cbs.forEach((cb) => cb(args));
+			cbs.forEach((cb) => {
+				if (args) {
+					cb(...args);
+				} else {
+					cb();
+				}
+			});
 		}
 	}
 }

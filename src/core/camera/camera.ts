@@ -6,17 +6,17 @@ import Circle from '../gameobjects/circle';
 import Rect from '../gameobjects/rect';
 import Scene from '../scene';
 import { Duck } from '../../index';
-import rectToRectIntersect from '../physics/rectToRectIntersect';
-import circleToRectIntersect from '../physics/circleToRectIntersect';
+import rectToRectIntersect from '../physics/utils/rectToRectIntersect';
+import circleToRectIntersect from '../physics/utils/circleToRectIntersect';
 import Debug from '../debug/debug';
 import randomInt from '../math/randomInt';
 import lerp from '../math/lerp';
-import circleRectCollision from '../physics/circleToRectIntersect';
+import circleRectCollision from '../physics/utils/circleToRectIntersect';
 import RoundRect from '../gameobjects/roundrect';
 import Sprite from '../gameobjects/sprite';
 import StaticLight from '../lights/staticLight';
-import Button from '../gameobjects/interactive/button';
-import Text from '../gameobjects/interactive/text';
+import Button from '../gameobjects/ui/button';
+import Text from '../gameobjects/ui/text';
 import Particle from '../gameobjects/particles/particle';
 import PhysicsBody from '../physics/physicsBody';
 import Map from '../map/map';
@@ -43,10 +43,23 @@ export default class Camera {
 	 * @since 2.0.0
 	 */
 	public scene: Scene;
-	protected distance: number;
 	protected lookAt: number[];
-	protected ctx: CanvasRenderingContext2D | null | undefined;
-	protected fieldOfView: number;
+
+	/**
+	 * @memberof Camera
+	 * @description The Camera's current FOV
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public fieldOfView: number;
+
+	/**
+	 * @memberof Camera
+	 * @description The Camera's current zoom
+	 * @type number
+	 * @since 2.1.0
+	 */
+	public distance: number;
 
 	/**
 	 * @memberof Camera
@@ -104,7 +117,6 @@ export default class Camera {
 			this.isMain = true;
 		}
 		this.lookAt = [0, 0];
-		this.ctx = game.ctx;
 		this.fieldOfView = Math.PI / 4.0;
 		this.viewport = {
 			left: 0,
@@ -132,7 +144,7 @@ export default class Camera {
 	 * @since 1.0.0-beta
 	 */
 	public begin() {
-		this.ctx?.save();
+		this.game.renderer.save();
 		this.applyScale();
 		this.applyTranslation();
 
@@ -214,28 +226,31 @@ export default class Camera {
 	 * @since 1.0.0-beta
 	 */
 	public end() {
-		this.ctx?.restore();
+		this.game.renderer.restore();
 	}
 
 	protected applyScale() {
-		this.ctx?.scale(this.viewport.scale[0], this.viewport.scale[1]);
+		this.game.renderer.scale(
+			this.viewport.scale[0],
+			this.viewport.scale[1]
+		);
 	}
 
 	protected applyTranslation() {
-		this.ctx?.translate(-this.viewport.left, -this.viewport.top);
+		this.game.renderer.translate(-this.viewport.left, -this.viewport.top);
 	}
 
 	protected updateViewport() {
-		if (this.ctx) {
+		if (this.game.renderer.ctx) {
 			// dpr scaling
-			let cWidth = this.ctx.canvas.width;
-			let cHeight = this.ctx.canvas.height;
+			let cWidth = this.game.canvas.width;
+			let cHeight = this.game.canvas.height;
 
 			if (this.game.config.dprScale && window.devicePixelRatio !== 1) {
-				cWidth = Number(this.ctx.canvas.style.width.replace('px', ''));
+				cWidth = Number(this.game.canvas.style.width.replace('px', ''));
 
 				cHeight = Number(
-					this.ctx.canvas.style.height.replace('px', '')
+					this.game.canvas.style.height.replace('px', '')
 				);
 
 				// set zoom for dpr scaling
@@ -516,9 +531,23 @@ export default class Camera {
 	 * @memberof Camera
 	 * @description Culls/Renders objects that are passed and does not render other object that are not passed
 	 * @param {Duck.Types.Renderable[]} renderableObjects Objects that should be culled/rendered
+	 * @param {Duck.Types.Camera.CullingOptions} [options] Options to modify how objects are culled, optional -> defaults:
+	 * { preserveVisibility: true, modifyPhysicsEnable: true }
+	 *
+	 * Notes:
+	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
+	 *
 	 * @since 2.0.0
 	 */
-	public cull(renderableObjects: Duck.Types.Renderable[]) {
+	public cull(
+		renderableObjects: Duck.Types.Renderable[],
+		options?: Duck.Types.Camera.CullingOptions
+	) {
+		const preserveVisibility = options ? options.preserveVisibility : true;
+		const modifyPhysicsEnable = options
+			? options.modifyPhysicsEnable
+			: true;
+
 		const visibleObjects = this.scene.displayList.visibilityFilter(true);
 
 		const culledObjects = visibleObjects.filter((r) =>
@@ -534,9 +563,16 @@ export default class Camera {
 				continue;
 			}
 
-			culledObject.visible = true;
-			if (culledObject instanceof PhysicsBody) {
-				culledObject.enabled = true;
+			if (preserveVisibility) {
+				culledObject.culled = true;
+			} else {
+				culledObject.visible = true;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (culledObject instanceof PhysicsBody) {
+					culledObject.enabled = true;
+				}
 			}
 		}
 
@@ -546,20 +582,41 @@ export default class Camera {
 				continue;
 			}
 
-			nonCulledObject.visible = false;
-			if (nonCulledObject instanceof PhysicsBody) {
-				nonCulledObject.enabled = false;
+			if (preserveVisibility) {
+				nonCulledObject.culled = false;
+			} else {
+				nonCulledObject.visible = false;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (nonCulledObject instanceof PhysicsBody) {
+					nonCulledObject.enabled = false;
+				}
 			}
 		}
+
+		// pool RendererPipeline
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**
 	 * @memberof Camera
 	 * @description A form of Frustum Culling that gets all objects visible to the player by the viewport's width and height and culls those objects
 	 * and does not render objects outside/not-visible to the player/camera
+	 * @param {Duck.Types.Camera.CullingOptions} [options] Options to modify how objects are culled, optional -> defaults:
+	 * { preserveVisibility: true, modifyPhysicsEnable: true }
+	 *
+	 * Notes:
+	 *  - Calls CanvasRenderer.pipeline.pool() ignoring the pool interval
+	 *
 	 * @since 2.0.0
 	 */
-	public autoCull() {
+	public autoCull(options?: Duck.Types.Camera.CullingOptions) {
+		const preserveVisibility = options ? options.preserveVisibility : true;
+		const modifyPhysicsEnable = options
+			? options.modifyPhysicsEnable
+			: true;
+
 		const objects = this.scene.displayList.list;
 
 		const culledObjects = objects.filter((r) => {
@@ -619,9 +676,16 @@ export default class Camera {
 				continue;
 			}
 
-			culledObject.visible = true;
-			if (culledObject instanceof PhysicsBody) {
-				culledObject.enabled = true;
+			if (preserveVisibility) {
+				culledObject.culled = true;
+			} else {
+				culledObject.visible = true;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (culledObject instanceof PhysicsBody) {
+					culledObject.enabled = true;
+				}
 			}
 		}
 
@@ -631,11 +695,21 @@ export default class Camera {
 				continue;
 			}
 
-			nonCulledObject.visible = false;
-			if (nonCulledObject instanceof PhysicsBody) {
-				nonCulledObject.enabled = false;
+			if (preserveVisibility) {
+				nonCulledObject.culled = false;
+			} else {
+				nonCulledObject.visible = false;
+			}
+
+			if (modifyPhysicsEnable) {
+				if (nonCulledObject instanceof PhysicsBody) {
+					nonCulledObject.enabled = false;
+				}
 			}
 		}
+
+		// pool RendererPipeline
+		this.game.renderer.pipeline.pool();
 	}
 
 	/**

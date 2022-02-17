@@ -14,12 +14,6 @@ import Animation from '../animation/animation';
  * @since 1.0.0-beta
  */
 export default class Sprite extends GameObject<'image'> {
-	protected frameWidth: number | undefined;
-	protected frameHeight: number | undefined;
-
-	protected rows: number | undefined;
-	protected cols: number | undefined;
-
 	/**
 	 * @memberof Sprite
 	 * @description The current row of the spritesheet texture, only if sprite texture is a spritesheet
@@ -59,13 +53,9 @@ export default class Sprite extends GameObject<'image'> {
 	 * @param {number} y Y position
 	 * @param {number} w Width of Sprite
 	 * @param {number} h Height of Sprite
-	 * @param {string} textureKey Key of a preloaded texture
+	 * @param {string} textureKey Key of a preloaded texture sheet
 	 * @param {Game} game Game instance
 	 * @param {Scene} scene Scene instance
-	 * @param {number} [frameWidth] Frame Width for spritesheet texture
-	 * @param {number} [frameHeight] Frame Height for spritesheet texture
-	 * @param {number} [rows] Amount of rows for the spritesheet texture
-	 * @param {number} [cols] Amount of columns for the spritesheet texture
 	 * @param {number} [currentRow] The default row to use for the spritesheet texture
 	 * @param {number} [currentCol] The default column to use for the spritesheet texture
 	 * @since 1.0.0-beta
@@ -78,10 +68,6 @@ export default class Sprite extends GameObject<'image'> {
 		textureKey: string,
 		game: Game,
 		scene: Scene,
-		frameWidth?: number,
-		frameHeight?: number,
-		rows?: number,
-		cols?: number,
 		currentRow?: number,
 		currentCol?: number
 	) {
@@ -92,16 +78,11 @@ export default class Sprite extends GameObject<'image'> {
 			w,
 			h,
 			0,
-			scene.loader.imageStack.find((t) => t.key === textureKey)!.value,
+			scene.loader.textureStack.find((t) => t.key === textureKey)!.value,
 			game,
 			scene
 		);
 
-		this.frameWidth = frameWidth;
-		this.frameHeight = frameHeight;
-
-		this.rows = rows;
-		this.cols = cols;
 		this.currentRow = currentRow;
 		this.currentCol = currentCol;
 
@@ -132,28 +113,24 @@ export default class Sprite extends GameObject<'image'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			if (this.frameWidth) {
-				// spritesheet
-				this.game.ctx.drawImage(
-					this.texture.texture, // image
-					(this.currentCol! - 1) * this.frameWidth!, // source x
-					(this.currentRow! - 1) * this.frameHeight!, // source y
-					this.frameWidth!, // source width
-					this.frameHeight!, // source height
-					this.position.x, // target x
-					this.position.y, // target y
-					this.frameWidth!, // target width
-					this.frameHeight! // target height
-				);
-			} else {
-				// normal sprite
-				this.game.ctx.drawImage(
-					this.texture.texture,
+		if (this.game.renderer.ctx) {
+			if (this.texture.dataType === 'sheet') {
+				this.game.renderer.drawSprite(
 					this.position.x,
 					this.position.y,
 					this.w,
-					this.h
+					this.h,
+					this.texture,
+					this.currentRow,
+					this.currentCol
+				);
+			} else {
+				this.game.renderer.drawSprite(
+					this.position.x,
+					this.position.y,
+					this.w,
+					this.h,
+					this.texture
 				);
 			}
 		} else {
@@ -166,16 +143,22 @@ export default class Sprite extends GameObject<'image'> {
 	/**
 	 * @memberof Sprite
 	 * @description Sets the scale of the Sprite
-	 * @param {Duck.Types.Misc.Scale|number} scale
+	 * @param {Duck.Types.Misc.Scale} scale
 	 * @since 1.0.0-beta
 	 */
 	public setScale(scale: Duck.Types.Misc.Scale) {
 		if (scale.width) {
 			this.w = scale.width;
+			this.texture.setScale({
+				width: this.w,
+			});
 		}
 
 		if (scale.height) {
 			this.h = scale.height;
+			this.texture.setScale({
+				height: this.h,
+			});
 		}
 	}
 

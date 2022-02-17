@@ -9,7 +9,7 @@ import uniqueID from '../../utils/uniqueID';
  * @description The Effect Class. Store a particleEmitter instance and particles that can be run easily
  * @since 1.2.0
  */
-export default class Effect {
+export default class Effect implements Duck.Types.Renderable {
 	/**
 	 * @memberof Effect
 	 * @description A unique identifier for the Effect
@@ -76,6 +76,14 @@ export default class Effect {
 
 	/**
 	 * @memberof Effect
+	 * @description Determines if the Effect should be visible by the current scene's current camera
+	 * @type boolean
+	 * @since 2.1.0
+	 */
+	public culled: boolean;
+
+	/**
+	 * @memberof Effect
 	 * @description A gameobject that the Effect is following
 	 * @type Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>| undefined
 	 * @since 1.2.0
@@ -109,6 +117,7 @@ export default class Effect {
 
 		this.visible = true;
 		this.zIndex = 2;
+		this.culled = true;
 
 		this.particleEmitter.rangeX = rangeX;
 		this.particleEmitter.rangeY = rangeY;
@@ -162,8 +171,7 @@ export default class Effect {
 				this.following.position.y + this.randomMaxOffset,
 			];
 
-			this.particleEmitter.rangeX = rangeX;
-			this.particleEmitter.rangeY = rangeY;
+			this.particleEmitter.setRange(rangeX, rangeY);
 		}
 	}
 

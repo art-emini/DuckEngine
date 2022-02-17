@@ -3,14 +3,13 @@ import { Duck } from '../../index';
 import Camera from '../camera/camera';
 import Debug from '../debug/debug';
 import Game from '../game';
-import Circle from '../gameobjects/circle';
-import Rect from '../gameobjects/rect';
-import RoundRect from '../gameobjects/roundrect';
-import Sprite from '../gameobjects/sprite';
-import Text from '../gameobjects/interactive/text';
 import StaticLight from '../lights/staticLight';
-import Collider from '../physics/collider';
+import Collider from '../physics/models/collider';
 import EVENTS from '../events/events';
+import GameObject from '../gameobjects/gameObject';
+import UI from '../gameobjects/ui/ui';
+import Hitbox from '../physics/models/hitbox';
+import PhysicsBody from '../physics/physicsBody';
 
 /**
  * @class Group
@@ -19,7 +18,7 @@ import EVENTS from '../events/events';
  * @template t Stack Item type generic
  * @since 1.0.0-beta
  */
-export default class Group<t extends Duck.Types.Group.StackItem> {
+export default class Group<t> {
 	protected stack: t[];
 
 	/**
@@ -126,7 +125,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Pops an item from the Group array
-	 * @returns t | undefined
+	 * @returns {t | undefined}
 	 * @since 1.0.0-beta
 	 */
 	public pop() {
@@ -136,7 +135,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Shifts an item from the Group array
-	 * @returns t | undefined
+	 * @returns {t | undefined}
 	 * @since 1.0.0-beta
 	 */
 	public shift() {
@@ -148,7 +147,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @description Splices an item from the Group array
 	 * @param {number} index Index to splice at
 	 * @param {number} [deleteCount] How many items to remove, optional
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public splice(index: number, deleteCount?: number) {
@@ -159,7 +158,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	 * @memberof Group
 	 * @description Filters items from the Group
 	 * @param {Duck.Types.Group.Filter} filter Filter string
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public filter(filter: Duck.Types.Group.Filter) {
@@ -168,23 +167,25 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 				return this.stack.filter((item) => item instanceof Camera);
 				break;
 			case 'gameobject':
-				return this.stack.filter(
-					(item) =>
-						item instanceof Circle || Rect || RoundRect || Sprite
-				);
+				return this.stack.filter((item) => item instanceof GameObject);
 				break;
-			case 'interactive':
-				return this.stack.filter((item) => item instanceof Text);
+			case 'ui':
+				return this.stack.filter((item) => item instanceof UI);
 				break;
 			case 'lights':
 				return this.stack.filter((item) => item instanceof StaticLight);
 				break;
 			case 'physics':
-				return this.stack.filter((item) => item instanceof Collider);
+				return this.stack.filter(
+					(item) =>
+						item instanceof Collider ||
+						item instanceof Hitbox ||
+						item instanceof PhysicsBody
+				);
 				break;
 			default:
 				new Debug.Error(
-					'Cannot filter Group. Filter must be "cameras", "gameobject", "interactive", "lights", or "physics".'
+					'Cannot filter Group. Filter must be "cameras", "gameobject", "ui", "lights", or "physics".'
 				);
 				return this.stack;
 				break;
@@ -214,8 +215,19 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 
 	/**
 	 * @memberof Group
+	 * @description Returns an item or undefined at a specified index
+	 * @param {number} index The index to return a value from, 0-based like an array
+	 * @returns {t | undefined}
+	 * @since 2.1.0
+	 */
+	public at(index: number): t | undefined {
+		return this.stack[index];
+	}
+
+	/**
+	 * @memberof Group
 	 * @description Returns the array
-	 * @returns t[]
+	 * @returns {t[]}
 	 * @since 1.0.0-beta
 	 */
 	public get group() {
@@ -225,7 +237,7 @@ export default class Group<t extends Duck.Types.Group.StackItem> {
 	/**
 	 * @memberof Group
 	 * @description Returns the length of the array
-	 * @returns number
+	 * @returns {number}
 	 * @since 1.0.0-beta
 	 */
 	public get length() {

@@ -42,8 +42,11 @@ export default class TileMap extends Map {
 					const tile = layer.tileset.getTile(layer.map[row][col]);
 
 					if (tile) {
-						if (this.game.ctx && layer.tileset.texture.texture) {
-							this.game.ctx.drawImage(
+						if (
+							this.game.renderer.ctx &&
+							layer.tileset.texture.texture
+						) {
+							this.game.renderer.ctx.drawImage(
 								layer.tileset.texture.texture,
 								tile.position.x,
 								tile.position.y,
@@ -65,7 +68,7 @@ export default class TileMap extends Map {
 	 * @memberof Tilemap
 	 * @description Gets visible layers based on filter, then depth sorts the layers
 	 * @param {boolean} [filter=true]
-	 * @returns TileLayer[]
+	 * @returns {TileLayer[]}
 	 * @since 2.0.0
 	 */
 	public sortTileLayers(filter = true) {

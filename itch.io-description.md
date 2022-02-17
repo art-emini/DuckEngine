@@ -1,8 +1,6 @@
-[Github](https://github.com/ksplatdev/DuckEngine)
+**v2.0.0 released! [Changelog](https://github.com/ksplatdev/DuckEngine/blob/main/CHANGELOG.2.0.0.md)**
 
-**v2.0.0 released! [Changelog](https://github.com/ksplatdev/DuckEngine/blob/staging/CHANGELOG.md)**
-
-| [Docs](https://ksplatdev.github.io/DuckEngine/) | [Wiki](https://github.com/ksplatdev/DuckEngine/wiki) |
+| [Docs](#docs) | [Wiki](#wiki) | [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started) | [Demos](#demos) | [Download](#download) |
 
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
@@ -16,7 +14,7 @@ A 2D Game Engine for the web.
 
 ## Features
 
-- AABB (Axis-Aligned Bounding Box) Hitbox Based Physics Engine
+- Customizable Hitbox Based Physics Engine
 - Multiple Scenes
 - Fast & Performant
 - Sprites & Spritesheets
@@ -28,16 +26,16 @@ A 2D Game Engine for the web.
 - Keyboard, and Mouse Inputs
 - DPR / Mobile Scaling
 - Advanced Particle System
+- Cache & Fast Loading Times
 - Effects and Presets
-- Button and Text UI
-- Groups
-- Tilemaps
-- Fast & Performant
+- Advanced UI System
+- Groups & Management
+- Advanced Tilemap System
 - Small Package Size
-- Lighting
-- Preloader
-- Textures
-- Made in Typescript
+- Static Lighting
+- Asset Preloader & Manager
+- Textures & Manager
+- Made fully in TypeScript
 - Typedefs
 - [Docs](#docs)
 - A lot more...
@@ -86,40 +84,119 @@ A 2D Game Engine for the web.
 
 1. Setup an asset bundler like webpack or parcel.
 2. Import DuckEngine from URL
-   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.js>
-   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.0.1/dist/index.min.js>
+   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.js>
+   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.min.js>
+3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
+
+### Itch.io
+
+1. Download DuckEngine from <https://ksplatdev.itch.io/duckengine>
+2. Import DuckEngine into your project.
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ## [Docs](https://ksplatdev.github.io/DuckEngine/)
 
 Learn how to use DuckEngine with simple, clean, documentation with typings and more.
 
+## [Discussions](https://github.com/ksplatdev/DuckEngine/discussions)
+
+Ask questions, share ideas, engage with the community, and share your work with DuckEngine Discussions.
+
 ## [Wiki](https://github.com/ksplatdev/DuckEngine/wiki)
 
-Learn, write, get help, with DuckEngine in the DuckEngine Wiki.
+Read and learn about DuckEngine with the DuckEngine wiki.
 
-## [Github](https://github.com/ksplatdev/DuckEngine)
+## How to use with Typescript
 
-## LICENSE
+How to use DuckEngine with Typescript.
 
-MIT License
+1. Setup webpack/parcel and tsconfig.
+2. Import DuckEngine and Duck for types.
 
-Copyright (c) 2021 Bleart Emini
+Not working ? Add the following to your tsconfig.json
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+```json
+{
+    "typeRoots": [
+        "./node_modules/@types",
+        "path_to_duckengine_index.d.ts"
+    ],
+    "types": [
+        "DuckEngine"
+    ]
+}
+```
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+### Duck Namespace
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The Duck Namespace has types such as gameobject, every class config, all classes, and more.
+
+### [Typescript Example](examples/ts/myScene.ts)
+
+## Developers' Guide
+
+### Requirements
+
+1. Knowledge of TypeScript, Git, and HTML Canvas.
+2. Reading and agreeing to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
+3. Basic knowledge of how DuckEngine works.
+
+### How to contribute
+
+1. Reading and agree to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.
+2. Fork the repository and create a new branch following the [branch guidelines](branch_guidelines.md).
+3. Clone the fork to your device.
+4. CD (change directories) into the cloned directory.
+5. Run `yarn upgrade`.
+6. Run `yarn run build` or `ctrl + shift + b` for vscode users.
+7. Make your changes.
+8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
+9. Create a pull request.
+10. Wait for it to be reviewed and revised and possibly merged.
+
+### Dev Scripts
+
+1. `yarn run test` - Opens the [codesandbox test](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js).
+2. `yarn run build` - Compiles typescript, bundles files, creates minified version, builds docs, and copies package.json to dist.
+3. `yarn run build:docs` - Uses TypeDoc to build docs.
+4. `yarn run webpack` - Bundles files in lib directory.
+5. `yarn run minify` - Uses uglifyjs to minify bundled file.
+6. `yarn run format` - Uses Prettier to format files.
+7. `yarn run format:watch` - Watches for changes and formats once changes are saved.
+8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
+9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
+10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
+11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
+12. `yarn run serve` - Serves the docs on :8080.
+13. `yarn run checkout` - Runs the checkout shell script with bash. Run before thinking about publishing a release.
+
+### Branches
+
+1. main - main branch
+2. staging - stage changes to this branch
+
+## Versions
+
+DuckEngine follows [SemVer](https://semver.org/).
+
+## Demos
+
+### [Simple Demo Game](https://github.com/ksplatdev/DuckEngine-Demo-Game/tree/main)
+
+### [Test Template](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js)
+
+### [Particle Test](https://codesandbox.io/s/duckengine-particle-test-dhcr1?file=/src/scene.js)
+
+### [Tilemap test](https://codesandbox.io/s/duckengine-tilemap-test-ryqqz?file=/src/scene.js)
+
+## Attribution
+
+The cube in the [DuckEngine Logo](global/Logo.png) is by José Manuel de Laá from the Noun Project.
+
+## License
+
+[MIT](LICENSE)
+
+## Author
+
+Bleart Emini

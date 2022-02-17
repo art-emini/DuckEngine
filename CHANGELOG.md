@@ -4,6 +4,8 @@ Only [supported versions](SECURITY.md#Supported\Versions)' changelogs will be ad
 
 ## Major and Minor Versions
 
+### [2.1.0](CHANGELOG.2.1.0.md)
+
 ### [2.0.0](CHANGELOG.2.0.0.md)
 
 ### [1.2.0](CHANGELOG.1.2.0.md)

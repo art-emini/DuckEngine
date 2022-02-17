@@ -69,7 +69,7 @@ export default class MouseInput {
 	 * @param { (e: MouseEvent) => any } [mouseDown] Mouse down callback
 	 * @param { (e: MouseEvent) => any } [mouseUp] Mouse up callback
 	 * @param { (e: MouseEvent) => any } [mouseMove] Mouse move callback
-	 * @returns Mouse
+	 * @returns {Mouse}
 	 * @since 2.0.0
 	 */
 	public addMouse(

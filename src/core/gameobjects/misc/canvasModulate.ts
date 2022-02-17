@@ -1,7 +1,7 @@
 import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
-import Texture from '../../models/texture';
+import Texture from '../../texture/texture';
 import Scene from '../../scene';
 import GameObject from '../gameObject';
 
@@ -55,13 +55,13 @@ export default class CanvasModulate extends GameObject<'color'> {
 	 *
 	 */
 	public _draw() {
-		if (this.game.ctx) {
-			this.game.ctx.fillStyle = this.texture.texture;
-			this.game.ctx.fillRect(
+		if (this.game.renderer.ctx) {
+			this.game.renderer.drawRect(
 				this.position.x,
 				this.position.y,
 				this.w,
-				this.h
+				this.h,
+				this.texture.texture
 			);
 		} else {
 			new Debug.Error(

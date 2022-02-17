@@ -74,7 +74,7 @@ export default class AnimationManager {
 	 * @description Creates a StateMachine
 	 * @param {Duck.Types.StateMachine.Config} config StateMachine config
 	 * @param {Animation[]} animations Animations to add to the StateMachine
-	 * @returns StateMachine
+	 * @returns {StateMachine}
 	 * @since 2.0.0
 	 */
 	public createStateMachine(
@@ -98,7 +98,7 @@ export default class AnimationManager {
 	 * @memberof AnimationManager
 	 * @description Adds and creates a new Animation
 	 * @param {string} key Key of the Animation to set as the currentAnimation
-	 * @returns Animation
+	 * @returns {Animation}
 	 * @since 2.0.0
 	 */
 	public add(config: Duck.Types.Animation.Config) {
@@ -127,7 +127,7 @@ export default class AnimationManager {
 	 * @memberof AnimationManager
 	 * @description Finds and returns an Animation from the array of animations (AnimationManager#animations)
 	 * @param {string} key Key of the Animation find
-	 * @returns Animation | undefined
+	 * @returns {Animation | undefined}
 	 * @since 2.0.0
 	 */
 	public get(key: string) {
@@ -138,7 +138,7 @@ export default class AnimationManager {
 	 * @memberof AnimationManager
 	 * @description Finds and returns the index of an Animation from the array of animations (AnimationManager#animations)
 	 * @param {string} key Key of the Animation find the index of
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getIndex(key: string) {

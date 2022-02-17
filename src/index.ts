@@ -4,9 +4,9 @@
 import CameraClass from './core/camera/camera';
 import GameClass from './core/game';
 import SceneClass from './core/scene';
-import TextClass from './core/gameobjects/interactive/text';
+import TextClass from './core/gameobjects/ui/text';
 import StaticLightClass from './core/lights/staticLight';
-import ColliderClass from './core/physics/collider';
+import ColliderClass from './core/physics/models/collider';
 import GameObjectClass from './core/gameobjects/gameObject';
 import CutsceneClass from './core/cutscene/cutscene';
 import CircleClass from './core/gameobjects/circle';
@@ -22,7 +22,7 @@ import ParticleEmitterClass from './core/gameobjects/particles/particleEmitter';
 import SoundPlayerClass from './core/sound/soundPlayer';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
-import ButtonClass from './core/gameobjects/interactive/button';
+import ButtonClass from './core/gameobjects/ui/button';
 import EffectClass from './core/effect/effect';
 import ExplosionEffectClass from './core/effect/preset/explosion';
 import SmokeEffectClass from './core/effect/preset/smoke';
@@ -31,7 +31,7 @@ import DisplayListClass from './core/models/displayList';
 import CanvasModulateClass from './core/gameobjects/misc/canvasModulate';
 import MapClass from './core/map/map';
 import AmountClass from './base/amount';
-import TextureClass from './core/models/texture';
+import TextureClass from './core/texture/texture';
 import PhysicsServerClass from './core/physics/server/physicsServer';
 import PhysicsBodyClass from './core/physics/physicsBody';
 import HitboxClass from './core/physics/models/hitbox';
@@ -110,7 +110,7 @@ export namespace Duck {
 				export const Particle = ParticleClass;
 				export const ParticleEmitter = ParticleEmitterClass;
 			}
-			export namespace Interactive {
+			export namespace UI {
 				export const Button = ButtonClass;
 				export const Text = TextClass;
 			}
@@ -221,7 +221,7 @@ export namespace Duck {
 				export type Particle = ParticleClass;
 				export type ParticleEmitter = ParticleEmitterClass;
 			}
-			export namespace Interactive {
+			export namespace UI {
 				export type Button = ButtonClass;
 				export type Text = TextClass;
 			}
@@ -242,8 +242,7 @@ export namespace Duck {
 
 		export namespace Misc {
 			export type Loader = LoaderClass;
-			export type Group<t extends Duck.Types.Group.StackItem> =
-				GroupClass<t>;
+			export type Group<t> = GroupClass<t>;
 			export type Cutscene = CutsceneClass;
 			export type CacheManager = CacheManagerClass;
 			export type PluginManager = PluginManagerClass;
@@ -328,6 +327,7 @@ export namespace Duck {
 				button: 4,
 				text: 5,
 				graphicDebug: 6,
+				fades: 7,
 			};
 		}
 	}
@@ -341,14 +341,18 @@ export namespace Duck {
 	export namespace Types {
 		export type GameObject<textureType extends Duck.Types.Texture.Type> =
 			GameObjectClass<textureType>;
-		export type Renderable =
-			| GameObjectClass<Duck.Types.Texture.Type>
-			| HitboxClass
-			| Duck.TypeClasses.Effects.Effect
-			| Duck.TypeClasses.Map.TileMap;
 
 		export type PhysicsProcessMember =
 			PhysicsBodyClass<Duck.Types.Texture.Type>;
+
+		export interface Renderable {
+			readonly id: string;
+			zIndex: number;
+			visible: boolean;
+			game: GameClass;
+			_draw(): void;
+			culled: boolean;
+		}
 
 		export namespace Game {
 			export interface Config {
@@ -375,8 +379,9 @@ export namespace Duck {
 
 				/**
 				 * @memberof Duck.Types.Game.Config
-				 * @description Rounds pixels from floats to integers, effects gameobjects (excluding particles)
+				 * @description Rounds pixels from floats to integers, affects gameobjects (excluding particles)
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				roundPixels?: boolean;
@@ -385,6 +390,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if window.focus is called on load or not
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				focus?: boolean;
@@ -393,6 +399,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if window.blur is called on load or not
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				blur?: boolean;
@@ -401,6 +408,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if rendering renderable objects is paused if tab is not focused, uses window.onblur and window.onfocus
 				 * @type boolean
+				 * @default false
 				 * @since 2.0.0
 				 */
 				pauseRenderingOnBlur?: boolean;
@@ -408,7 +416,6 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Physics Options
-				 * @type boolean
 				 * @since 2.0.0
 				 */
 				physics?: {
@@ -443,15 +450,16 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Scale of the canvas, the size of the canvas
-				 * @type Duck.Types.Misc.Scale
-				 * @since 1.0.0-beta
+				 * @type Duck.Types.Math.Vector2Like
+				 * @since 2.1.0
 				 */
-				scale?: Misc.Scale;
+				scale?: Duck.Types.Math.Vector2Like;
 
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if DuckEngine logs out events that are occurring
 				 * @type boolean
+				 * @default false
 				 * @since 1.0.0-beta
 				 */
 				debug?: boolean;
@@ -459,6 +467,7 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if DuckEngine silences/prevents pauseRenderingOnBlur, onPauseRendering, and onResumeRendering configurations
+				 * @default false
 				 * @type boolean
 				 * @since 2.0.0
 				 */
@@ -480,6 +489,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description CSS background color of the canvas (hint: to fill a scene with a background color, use scene.add.misc.canvasModulate)
 				 * @type string
+				 * @default undefined
 				 * @since 1.0.0-beta
 				 */
 				background?: string;
@@ -488,6 +498,7 @@ export namespace Duck {
 				 * @memberof Duck.Types.Game.Config
 				 * @description Determines if the canvas is scaled down to the window size if the window size is smaller than the canvas
 				 * @type boolean
+				 * @default false
 				 * @since 1.0.0
 				 */
 				smartScale?: boolean;
@@ -495,10 +506,21 @@ export namespace Duck {
 				/**
 				 * @memberof Duck.Types.Game.Config
 				 * @description Uses the device pixel ratio to scale the canvas accordingly
+				 * @default false
 				 * @type boolean
 				 * @since 1.0.0
 				 */
 				dprScale?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Game.Config
+				 * @description How often, in milliseconds, the RendererPipeline calls its pool method, affects how long it takes for a scene
+				 * or renderable to change its visibility as both are controlled and updated by the RendererPipeline
+				 * @default 1000
+				 * @type number
+				 * @since 2.1.0
+				 */
+				poolingInterval?: number;
 			}
 
 			export interface Stack {
@@ -510,6 +532,19 @@ export namespace Duck {
 				func: (...args: unknown[]) => unknown;
 				args: unknown[];
 				name: string;
+			}
+		}
+
+		export namespace RendererPipeline {
+			export interface PoolStackItem {
+				scene: SceneClass;
+				/**
+				 * @memberof Duck.Types.Game.PoolStackItem
+				 * @description An array of renderables that are visible and depth sorted
+				 * @type Duck.Types.Renderable[]
+				 * @since 2.1.0
+				 */
+				renderables: Duck.Types.Renderable[];
 			}
 		}
 
@@ -543,9 +578,10 @@ export namespace Duck {
 			}
 
 			export interface Config {
-				autoplay?: Helper.DefaultValue<undefined, false>;
-				volume?: Helper.DefaultValue<undefined, number>;
-				sprites?: Helper.DefaultValue<undefined, Sprite[]>;
+				autoplay?: boolean;
+				volume?: number;
+				sprites?: Sprite[];
+				loop?: boolean;
 			}
 		}
 		export namespace GamepadInput {
@@ -595,7 +631,7 @@ export namespace Duck {
 			}
 		}
 
-		export namespace Interactive {
+		export namespace UI {
 			export namespace Text {
 				export interface Config {
 					x: number;
@@ -632,26 +668,17 @@ export namespace Duck {
 		}
 
 		export namespace Group {
-			export type StackItem =
-				| GameObject<Duck.Types.Texture.Type>
-				| PhysicsBodyClass<Duck.Types.Texture.Type>
-				| CameraClass
-				| TextClass
-				| StaticLightClass
-				| ColliderClass
-				| HitboxClass;
-
 			export type Filter =
 				| 'gameobject'
 				| 'lights'
-				| 'interactive'
+				| 'ui'
 				| 'physics'
 				| 'cameras';
 
 			export type ListenerType = 'ADD' | 'REMOVE';
 
 			export interface Listener {
-				func: (item: StackItem) => unknown;
+				func: (item: unknown) => unknown;
 				type: ListenerType;
 			}
 		}
@@ -766,20 +793,6 @@ export namespace Duck {
 			}
 		}
 
-		export namespace Raycast {
-			export interface State {
-				colliding: StateValue | false;
-				collidingTop: StateValue | false;
-				collidingBottom: StateValue | false;
-				collidingLeft: StateValue | false;
-				collidingRight: StateValue | false;
-			}
-
-			export interface StateValue {
-				with: GameObject<Duck.Types.Texture.Type>;
-			}
-		}
-
 		export namespace Loader {
 			export type StackItemType =
 				| 'texture'
@@ -794,10 +807,16 @@ export namespace Duck {
 				value: t;
 				key: string;
 			}
+
+			export interface TextureStackItem<t> extends StackItem<t> {
+				dataType: Duck.Types.Texture.DataType;
+			}
 		}
 
 		export namespace Texture {
 			export type Type = 'image' | 'color' | 'either';
+
+			export type DataType = 'sheet' | 'base' | 'atlas';
 		}
 
 		export namespace PhysicsBody {
@@ -931,7 +950,7 @@ export namespace Duck {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				keyJustPressed?: (e: KeyboardEvent) => any;
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				keyState?: (e: KeyboardEvent) => any;
+				keyState?: (e: KeyboardEvent, state: boolean) => any;
 			}
 		}
 
@@ -945,6 +964,44 @@ export namespace Duck {
 				mouseUp?: (e: MouseEvent) => any;
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				mouseMove?: (e: MouseEvent) => any;
+			}
+		}
+
+		export namespace Camera {
+			export interface CullingOptions {
+				/**
+				 * @memberof Duck.Types.Camera.CullingOptions
+				 * @description Determines if the visibility of the renderable is preserved, renderable's culled property will only be modified instead
+				 * of the visibility property, this keeps hidden renderables hidden and visible renderables based on the culled property
+				 * @default true
+				 * @type boolean
+				 * @since 2.1.0
+				 */
+				preserveVisibility?: boolean;
+
+				/**
+				 * @memberof Duck.Types.Camera.CullingOptions
+				 * @description Determines if the enabled property of PhysicsBodies will be modified base on if the renderable is culled
+				 * @default true
+				 * @type boolean
+				 * @since 2.1.0
+				 */
+				modifyPhysicsEnable?: boolean;
+			}
+		}
+
+		export namespace TextureAtlas {
+			export interface FrameData {
+				key: string;
+				x: number;
+				y: number;
+				w: number;
+				h: number;
+			}
+
+			export interface JSONSchema {
+				name: string;
+				data: FrameData[];
 			}
 		}
 
@@ -982,15 +1039,6 @@ export namespace Duck {
 				T,
 				Exclude<keyof T, ArrayLengthMutationKeys>
 			> & { [Symbol.iterator]: () => IterableIterator<ArrayItems<T>> };
-
-			export type NonNullable<T> = T extends null | undefined ? never : T;
-			export type DefaultValue<
-				Type,
-				Default,
-				ExtraRule = null
-			> = Type extends null | undefined | false | 0 | ExtraRule | ''
-				? Default
-				: Type;
 
 			//#region Long Type
 			export type AlphaRange =

@@ -1,5 +1,4 @@
 import Game from '../../game';
-import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
 
 /**
@@ -40,7 +39,7 @@ export default class PhysicsServer {
 	/**
 	 * @memberof PhysicsServer
 	 * @description Uses PhysicsServer.Scene.physicsList and filters all enabled PhysicsBodies and calls PhysicsBody._update,
-	 * PhysicsBody.hitbox._update, PhysicsBody.collider._update, and appliesGravity if Game.config.physics.gravity has a value
+	 * PhysicsBody.hitbox._update, and PhysicsBody.collider._update
 	 *
 	 * *DO NOT CALL MANUALLY! CALLED IN SCENE.__TICK*
 	 *
@@ -54,14 +53,6 @@ export default class PhysicsServer {
 				r.hitbox._update(r);
 
 				r.collider._update(r.hitbox, r.collidesWith);
-
-				if (this.game.config.physics?.gravity) {
-					r.applyGravity(
-						Vector2.fromVector2Like(
-							this.game.config.physics.gravity
-						)
-					);
-				}
 			}
 		});
 	}

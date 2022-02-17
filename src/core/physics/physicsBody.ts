@@ -5,7 +5,7 @@ import Group from '../group/group';
 import clamp from '../math/clamp';
 import Vector2 from '../math/vector2';
 import Scene from '../scene';
-import Collider from './collider';
+import Collider from './models/collider';
 import Hitbox from './models/hitbox';
 
 /**
@@ -390,22 +390,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 					.add(object.hitbox.offset);
 			}
 		});
-
-		if (this.hitbox) {
-			if (Array.isArray(this.collidesWith)) {
-				this.collidesWith.forEach((obj) => {
-					if (obj.hitbox) {
-						this.hitbox?.intersectsFaceWith(obj.hitbox);
-					}
-				});
-			} else {
-				this.collidesWith.each((obj) => {
-					if (obj.hitbox) {
-						this.hitbox?.intersectsFaceWith(obj.hitbox);
-					}
-				});
-			}
-		}
 	}
 
 	/**
@@ -758,7 +742,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the top most coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getTop() {
@@ -768,7 +752,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the bottom most coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getBottom() {
@@ -778,7 +762,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the left most coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getLeft() {
@@ -788,7 +772,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the right most coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getRight() {
@@ -798,7 +782,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the center coordinates of the PhysicsBody
-	 * @returns Vector2
+	 * @returns {Vector2}
 	 * @since 2.0.0
 	 */
 	public getCenter() {
@@ -815,7 +799,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the centerY coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterY() {
@@ -829,7 +813,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	/**
 	 * @memberof PhysicsBody
 	 * @description Gets the centerX coordinate of the PhysicsBody
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterX() {
@@ -844,7 +828,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * @memberof PhysicsBody
 	 * @description Checks and returns the Collision Type if two hitboxes are colliding
 	 * @param {PhysicsBody<Duck.Types.Texture.Type>} obj PhysicsBody to check their hitbox with
-	 * @returns false | Duck.Types.Collider.CollisionResponseType | undefined
+	 * @returns {false | Duck.Types.Collider.CollisionResponseType | undefined}
 	 * @since 2.0.0
 	 */
 	public isColliding(obj: PhysicsBody<Duck.Types.Texture.Type>) {
@@ -861,7 +845,7 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
 	 * @memberof PhysicsBody
 	 * @description Checks and returns the Collision Type if multiple hitboxes are colliding
 	 * @param {Group<PhysicsBody<Duck.Types.Texture.Type>> | PhysicsBody<Duck.Types.Texture.Type>[]} objects PhysicsBodies to check their hitbox with
-	 * @returns false | Duck.Types.Collider.CollisionResponseType
+	 * @returns {false | Duck.Types.Collider.CollisionResponseType}
 	 * @since 2.0.0
 	 */
 	public isCollidingGroup(

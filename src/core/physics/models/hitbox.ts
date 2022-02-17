@@ -5,9 +5,9 @@ import Game from '../../game';
 import Group from '../../group/group';
 import Vector2 from '../../math/vector2';
 import Scene from '../../scene';
-import hitboxFaceIntersect from '../hitboxFaceIntersect';
+import hitboxFaceIntersect from '../utils/hitboxFaceIntersect';
 import PhysicsBody from '../physicsBody';
-import rectToRectIntersect from '../rectToRectIntersect';
+import rectToRectIntersect from '../utils/rectToRectIntersect';
 
 /**
  * @class Hitbox
@@ -15,7 +15,7 @@ import rectToRectIntersect from '../rectToRectIntersect';
  * @description The Hitbox Class. A AABB Hitbox used for Colliders
  * @since 2.0.0
  */
-export default class Hitbox {
+export default class Hitbox implements Duck.Types.Renderable {
 	/**
 	 * @memberof Hitbox
 	 * @description The unique identifier for a Hitbox
@@ -106,6 +106,14 @@ export default class Hitbox {
 
 	/**
 	 * @memberof Hitbox
+	 * @description Determines if the Hitbox should be visible by the current scene's current camera
+	 * @type boolean
+	 * @since 2.1.0
+	 */
+	public culled: boolean;
+
+	/**
+	 * @memberof Hitbox
 	 * @description A string determining the state of the current collision
 	 * @type Duck.Types.Collider.CollisionResponseType
 	 * @since 2.0.0
@@ -146,6 +154,7 @@ export default class Hitbox {
 		this.debugColor = debugColor;
 		this.visible = debugColor ? true : false;
 		this.zIndex = Duck.Layers.Rendering.zIndex.graphicDebug;
+		this.culled = debugColor ? true : false;
 
 		this.collisionState = 'none';
 	}
@@ -159,14 +168,14 @@ export default class Hitbox {
 	 * @since 2.0.0
 	 */
 	public _draw() {
-		if (this.game.ctx) {
+		if (this.game.renderer.ctx) {
 			if (this.debugColor) {
-				this.game.ctx.fillStyle = this.debugColor;
-				this.game.ctx.fillRect(
+				this.game.renderer.drawRect(
 					this.position.x,
 					this.position.y,
 					this.w,
-					this.h
+					this.h,
+					this.debugColor
 				);
 			}
 		} else {
@@ -264,7 +273,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with another Hitbox
 	 * @param {Hitbox} Hitbox Hitbox to use to test the intersection
-	 * @returns boolean
+	 * @returns {boolean}
 	 * @since 2.0.0
 	 */
 	public intersectsWith(hitbox: Hitbox) {
@@ -292,7 +301,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with another Hitbox and returns the face that is colliding
 	 * @param {Hitbox} hitbox Hitbox to use to test the intersection
-	 * @returns Duck.Types.Collider.CollisionResponseType
+	 * @returns {Duck.Types.Collider.CollisionResponseType}
 	 * @since 2.0.0
 	 */
 	public intersectsFaceWith(hitbox: Hitbox) {
@@ -305,7 +314,7 @@ export default class Hitbox {
 	 * @memberof Hitbox
 	 * @description Checks if the Hitbox is intersecting with other Hitboxes and returns the face that is colliding
 	 * @param {Group<Hitbox> | Hitbox[]} hitboxes Hitboxes to use to test the intersection
-	 * @returns Duck.Types.Collider.CollisionResponseType[]
+	 * @returns {Duck.Types.Collider.CollisionResponseType[]}
 	 * @since 2.0.0
 	 */
 	public groupIntersectsFaceWith(hitboxes: Group<Hitbox> | Hitbox[]) {
@@ -331,7 +340,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the top most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getTop() {
@@ -341,7 +350,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the bottom most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getBottom() {
@@ -351,7 +360,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the left most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getLeft() {
@@ -361,7 +370,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the right most coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getRight() {
@@ -371,7 +380,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the center coordinates of the Hitbox
-	 * @returns Vector2
+	 * @returns {Vector2}
 	 * @since 2.0.0
 	 */
 	public getCenter() {
@@ -384,7 +393,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the centerY coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterY() {
@@ -394,7 +403,7 @@ export default class Hitbox {
 	/**
 	 * @memberof Hitbox
 	 * @description Gets the centerX coordinate of the Hitbox
-	 * @returns number
+	 * @returns {number}
 	 * @since 2.0.0
 	 */
 	public getCenterX() {
