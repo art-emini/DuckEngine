@@ -35,4 +35,8 @@ This update improves the animation system by adding Tweens and more.
 
 ## Fixed
 
+- Scene
+  - Tools
+    - Fixed chance of color.random returning invalid color
+
 ## FaQ
