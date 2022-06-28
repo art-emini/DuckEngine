@@ -1,4 +1,4 @@
-# 2.2.0 Changelog - 2022-04-4
+# 3.0.0 Changelog - 2022-06-28
 
 This update improves and adds flexibility to rendering.
 
@@ -13,10 +13,21 @@ This update improves the animation system by adding Tweens and more.
 
 ## Added
 
+- New Classes
+  - Added Color class to store and manage color info and strokes
+- Scene
+  - Add
+    - Added color method to Scene.add
+
 ## Changed
 
 - Misc
   - Changed startup message and version
+- Rendering
+  - Replaced all use of strings for colors with new Color class
+- Scene
+  - Tools
+    - color.random now returns a Color instance and not a string
 
 ## Removed
 
