@@ -7,7 +7,6 @@
 ![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
 ![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
 ![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
-[![wakatime](https://wakatime.com/badge/github/ksplatdev/DuckEngine.svg)](https://wakatime.com/badge/github/ksplatdev/DuckEngine)
 ![Lint Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/lint.yml/badge.svg)
 ![Format Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -16,7 +15,7 @@ A 2D Game Engine for the web.
 
 ## Features
 
-- Customizable Hitbox Based Physics Engine
+- Fast & Advanced SAT Physics Engine // [DuckPhysics](https://github.com/ksplatdev/DuckPhysics)
 - Multiple Scenes
 - Fast & Performant
 - Sprites & Spritesheets
@@ -24,7 +23,6 @@ A 2D Game Engine for the web.
 - Plugins & PluginManager
 - Multiple Cameras with Effects
 - Animations & State Machines & Cutscenes
-- Hitboxes and Colliders
 - Keyboard, and Mouse Inputs
 - DPR / Mobile Scaling
 - Advanced Particle System
@@ -49,7 +47,7 @@ A 2D Game Engine for the web.
 1. Browser supports ES6 (EcmaScript2015)
 2. Browser supports Canvas APIs
 
-### Rankings
+### Browser Rankings
 
 1. Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave
 2. Safari
@@ -86,8 +84,8 @@ A 2D Game Engine for the web.
 
 1. Setup an asset bundler like webpack or parcel.
 2. Import DuckEngine from URL
-   - Regular <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.js>
-   - Minified <https://cdn.jsdelivr.net/npm/duckengine@2.1.0/dist/index.min.js>
+   - Regular <https://cdn.jsdelivr.net/npm/duckengine@3.0.0/dist/index.js>
+   - Minified <https://cdn.jsdelivr.net/npm/duckengine@3.0.0/dist/index.min.js>
 3. Read the [docs](https://ksplatdev.github.io/DuckEngine/).
 
 ### Itch.io
@@ -168,7 +166,7 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 8. `yarn run lint` - Uses ESLint to lint all files in the src directory.
 9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
 10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
-11. `yarn run tree` - Prints out all files and directories used in [readme](#file-structure).
+11. `yarn run tree` - Prints out all files and directories.
 12. `yarn run serve` - Serves the docs on :8080.
 13. `yarn run checkout` - Runs the checkout shell script with bash. Run before thinking about publishing a release.
 

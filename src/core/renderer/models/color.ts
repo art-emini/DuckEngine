@@ -77,4 +77,92 @@ export default class Color {
 		this.stroke = stroke;
 		this.strokeWidth = strokeWidth;
 	}
+
+	public static get lightRed() {
+		return new Color('#df2c14');
+	}
+
+	public static get red() {
+		return new Color('#ff0000');
+	}
+
+	public static get darkRed() {
+		return new Color('#540100');
+	}
+
+	public static get lightOrange() {
+		return new Color('#ffa136');
+	}
+
+	public static get orange() {
+		return new Color('#ff8800');
+	}
+
+	public static get darkOrange() {
+		return new Color('#b86200');
+	}
+
+	public static get lightYellow() {
+		return new Color('#fcfc4e');
+	}
+
+	public static get yellow() {
+		return new Color('#ffff00');
+	}
+
+	public static get darkYellow() {
+		return new Color('#8f8f00');
+	}
+
+	public static get lightGreen() {
+		return new Color('#53f553');
+	}
+
+	public static get green() {
+		return new Color('#00ff00');
+	}
+
+	public static get darkGreen() {
+		return new Color('#027802');
+	}
+
+	public static get lightBlue() {
+		return new Color('#3131f7');
+	}
+
+	public static get blue() {
+		return new Color('#0000ff');
+	}
+
+	public static get darkBlue() {
+		return new Color('#000085');
+	}
+
+	public static get lightPurple() {
+		return new Color('#b349f5');
+	}
+
+	public static get purple() {
+		return new Color('#a020f0');
+	}
+
+	public static get darkPurple() {
+		return new Color('#661499');
+	}
+
+	public static get white() {
+		return new Color('#ffffff');
+	}
+
+	public static get gray() {
+		return new Color('#808080');
+	}
+
+	public static get black() {
+		return new Color('#000000');
+	}
+
+	public static get pink() {
+		return new Color('#ffb3b3');
+	}
 }

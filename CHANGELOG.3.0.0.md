@@ -3,7 +3,7 @@
 This update improves and adds flexibility to rendering.
 
 This update overhauls the physics system by adding a complete new SAT collision system with different shaped hitboxes and multiple adjustable
-hitboxes for PhysicsBody.
+hitboxes for PhysicsBody. - [DuckPhysics](https://github.com/ksplatdev/DuckPhysics)
 
 This update overhauls the sound system by adding support for WebAudio and fallback to HTMLAudio.
 
