@@ -254,6 +254,13 @@ export default class CanvasRenderer extends BaseRenderer {
 	 */
 	public drawRect(x: number, y: number, w: number, h: number, color: Color) {
 		this.setFillColor(color);
+		if (color.stroke) {
+			this.setStrokeColor(color);
+			if (color.strokeWidth) {
+				this.setLineWidth(color.strokeWidth);
+			}
+		}
+
 		this.ctx.fillRect(x, y, w, h);
 	}
 
@@ -268,6 +275,13 @@ export default class CanvasRenderer extends BaseRenderer {
 	 */
 	public drawCircle(x: number, y: number, r: number, color: Color) {
 		this.setFillColor(color);
+		if (color.stroke) {
+			this.setStrokeColor(color);
+			if (color.strokeWidth) {
+				this.setLineWidth(color.strokeWidth);
+			}
+		}
+
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
 		this.setFillColor(color);
@@ -295,7 +309,15 @@ export default class CanvasRenderer extends BaseRenderer {
 	) {
 		if (w < 2 * r) r = w / 2;
 		if (h < 2 * r) r = h / 2;
+
 		this.setFillColor(color);
+		if (color.stroke) {
+			this.setStrokeColor(color);
+			if (color.strokeWidth) {
+				this.setLineWidth(color.strokeWidth);
+			}
+		}
+
 		this.ctx.beginPath();
 		this.ctx.moveTo(x + r, y);
 		this.ctx.arcTo(x + w, y, x + w, y + h, r);

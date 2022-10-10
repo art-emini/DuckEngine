@@ -18,6 +18,8 @@ This update improves the animation system by adding Tweens and more.
 - Scene
   - Add
     - Added color method to Scene.add
+  - Tools
+    - Added staticColor property which refers to new Color class
 
 ## Changed
 

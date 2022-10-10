@@ -329,6 +329,7 @@ export default class Scene extends Render {
 	 */
 	public tools: {
 		loader: typeof Loader;
+		staticColor: typeof Color;
 		color: {
 			random: () => Color;
 			randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) => string;
@@ -805,6 +806,7 @@ export default class Scene extends Render {
 
 		this.tools = {
 			loader: Loader,
+			staticColor: Color,
 			color: {
 				random: () => {
 					return new Color(randomColor());
