@@ -63,13 +63,18 @@ export default class PluginManager {
 	 * @memberof PluginManager
 	 * @description Calls/Runs a plugin by its name
 	 * @param {string} name Name of plugin to call/run
+	 * @param {unknown[]} [overrideArgs] If you want to override the passed arguments, these will override
 	 * @since 2.0.0
 	 */
-	public call(name: string) {
+	public call(name: string, overrideArgs?: unknown[]) {
 		const plugin = this.find(name);
 
 		if (plugin) {
-			plugin.func(...plugin.args);
+			if (overrideArgs) {
+				plugin.func(...overrideArgs);
+			} else {
+				plugin.func(...plugin.args);
+			}
 		}
 	}
 

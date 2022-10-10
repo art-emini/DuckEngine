@@ -331,7 +331,7 @@ export default class Scene extends Render {
 		loader: typeof Loader;
 		staticColor: typeof Color;
 		color: {
-			random: () => Color;
+			random: (stroke?: string | number, strokeWidth?: number) => Color;
 			randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) => string;
 			is: {
 				hex: (str: string) => boolean;
@@ -808,7 +808,15 @@ export default class Scene extends Render {
 			loader: Loader,
 			staticColor: Color,
 			color: {
-				random: () => {
+				random: (stroke?: string | number, strokeWidth?: number) => {
+					if (stroke) {
+						return new Color(
+							randomColor(),
+							stroke,
+							strokeWidth || 1
+						);
+					}
+
 					return new Color(randomColor());
 				},
 				randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) =>

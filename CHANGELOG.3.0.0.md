@@ -20,9 +20,21 @@ This update improves the animation system by adding Tweens and more.
     - Added color method to Scene.add
   - Tools
     - Added staticColor property which refers to new Color class
+    - Added arguments to Scene.tools.color.random(), stroke and strokeWidth may now be passed
+- PluginManager
+  - PluginManager.call can now take overrideArgs to override passed arguments with the ones passed in PluginManager.call
 
 ## Changed
 
+- Core
+  - Loop
+    - Made Scene.update get called before the PhysicsServer.tick
+    - Current Loop Steps:
+      - Active Camera Start
+      - Scene.update
+      - Scene.__tick
+      - Renderables are drawn
+      - Active Camera End
 - Misc
   - Changed startup message and version
 - Rendering
@@ -40,5 +52,7 @@ This update improves the animation system by adding Tweens and more.
 - Scene
   - Tools
     - Fixed chance of color.random returning invalid color
+- CanvasRenderer
+  - Fixed setStrokeStyle not properly setting stroke color
 
 ## FaQ

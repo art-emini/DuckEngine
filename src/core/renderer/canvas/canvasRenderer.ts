@@ -60,8 +60,8 @@ export default class CanvasRenderer extends BaseRenderer {
 				pool.scene.currentCamera.begin();
 			}
 
-			pool.scene.__tick();
 			pool.scene.update(deltaTime);
+			pool.scene.__tick();
 
 			pool.renderables.forEach((r) => {
 				r._draw();
@@ -175,7 +175,9 @@ export default class CanvasRenderer extends BaseRenderer {
 	 * @since 2.1.0
 	 */
 	public setStrokeColor(color: Color) {
-		this.ctx.strokeStyle = color.value;
+		if (color.stroke) {
+			this.ctx.strokeStyle = color.stroke;
+		}
 	}
 
 	/**
@@ -259,6 +261,8 @@ export default class CanvasRenderer extends BaseRenderer {
 			if (color.strokeWidth) {
 				this.setLineWidth(color.strokeWidth);
 			}
+
+			this.ctx.strokeRect(x, y, w, h);
 		}
 
 		this.ctx.fillRect(x, y, w, h);
@@ -285,6 +289,16 @@ export default class CanvasRenderer extends BaseRenderer {
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
 		this.setFillColor(color);
+
+		if (color.stroke) {
+			this.setStrokeColor(color);
+			if (color.strokeWidth) {
+				this.setLineWidth(color.strokeWidth);
+			}
+
+			this.ctx.stroke();
+		}
+
 		this.ctx.fill();
 	}
 
@@ -311,12 +325,6 @@ export default class CanvasRenderer extends BaseRenderer {
 		if (h < 2 * r) r = h / 2;
 
 		this.setFillColor(color);
-		if (color.stroke) {
-			this.setStrokeColor(color);
-			if (color.strokeWidth) {
-				this.setLineWidth(color.strokeWidth);
-			}
-		}
 
 		this.ctx.beginPath();
 		this.ctx.moveTo(x + r, y);
@@ -325,6 +333,16 @@ export default class CanvasRenderer extends BaseRenderer {
 		this.ctx.arcTo(x, y + h, x, y, r);
 		this.ctx.arcTo(x, y, x + w, y, r);
 		this.ctx.closePath();
+
+		if (color.stroke) {
+			this.setStrokeColor(color);
+			if (color.strokeWidth) {
+				this.setLineWidth(color.strokeWidth);
+			}
+
+			this.ctx.stroke();
+		}
+
 		this.ctx.fill();
 	}
 
