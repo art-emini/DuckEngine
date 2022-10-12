@@ -42,6 +42,8 @@ This update improves the animation system by adding Tweens and more.
 - Scene
   - Tools
     - color.random now returns a Color instance and not a string
+- Coding Style
+  - Use of two spaces for indentions
 
 ## Removed
 

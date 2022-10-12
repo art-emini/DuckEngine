@@ -1,3 +1,3 @@
 export default function degToRadians(degrees: number) {
-	return (degrees * Math.PI) / 180;
+  return (degrees * Math.PI) / 180;
 }

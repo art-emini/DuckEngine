@@ -1,3 +1,3 @@
 export default function hexNumberToString(hex: number) {
-	return hex.toString(16);
+  return hex.toString(16);
 }

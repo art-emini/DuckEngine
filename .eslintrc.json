@@ -22,8 +22,8 @@
 		"eqeqeq": ["error", "always"],
 		"@typescript-eslint/no-namespace": 0,
 		"@typescript-eslint/explicit-module-boundary-types": 0,
-		"no-multiple-empty-lines": 1,
-		"prettier/prettier": ["warn"]
+		"no-multiple-empty-lines": 1
+		// "prettier/prettier": ["warn"],
 	},
 	"ignorePatterns": [
 		"lib/",
