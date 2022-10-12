@@ -14,10 +14,17 @@ This update improves the animation system by adding Tweens and more.
 ## Added
 
 - New Classes
-  - Added Color class to store and manage color info and strokes
+  - Rendering
+    - Added Color class to store and manage color info and strokes
+  - Sound
+    - Added Sound class which stores DuckEngine WebAudio or HTMLAudio sound player classes to play audio
+    - Added abstract BaseSoundPlayer class
+    - Added WebSoundPlayer class for use of WebAudio API to play audio
+    - Added HTMLSoundPlayer class for use of HTMLAudio to play audio (replace old SoundPlayer)
 - Scene
   - Add
     - Added color method to Scene.add
+    - Added sound method to Scene.add to add the new Sound class
   - Tools
     - Added staticColor property which refers to new Color class
     - Added arguments to Scene.tools.color.random(), stroke and strokeWidth may now be passed
@@ -46,6 +53,12 @@ This update improves the animation system by adding Tweens and more.
   - Use of two spaces for indentions
 
 ## Removed
+
+- Sound
+  - Removed SoundPlayer class which is replace by HTMLSoundPlayer class which is accessed through new Sound.soundPlayer class if using HTMLAudio
+- Scene
+  - Add
+    - Removed soundPlayer from Scene.add which is replaced by new Sound class
 
 ## Deprecated
 

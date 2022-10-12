@@ -8,7 +8,6 @@ import Circle from './gameobjects/circle';
 import RoundRect from './gameobjects/roundrect';
 import Particle from './gameobjects/particles/particle';
 import ParticleEmitter from './gameobjects/particles/particleEmitter';
-import SoundPlayer from './sound/soundPlayer';
 import Input from './input/input';
 import Camera from './camera/camera';
 import StaticLight from './lights/staticLight';
@@ -53,6 +52,7 @@ import Tileset from './map/tileset';
 import TileLayer from './map/tilelayer';
 import Timer from '../base/timer';
 import Color from './renderer/models/color';
+import Sound from './sound/sound';
 
 /**
  * @class Scene
@@ -235,10 +235,11 @@ export default class Scene extends Render {
         text: Text
       ) => Button;
     };
-    soundPlayer: (
+    sound: (
       path: string,
-      options?: Duck.Types.Sound.Config
-    ) => SoundPlayer;
+      soundPlayer?: Duck.Types.Sound.SoundPlayerType,
+      htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+    ) => Sound;
     input: () => Input;
     camera: () => Camera;
     mainCamera: () => Camera;
@@ -586,8 +587,12 @@ export default class Scene extends Render {
           return myButton;
         },
       },
-      soundPlayer: (path: string, options?: Duck.Types.Sound.Config) => {
-        return new SoundPlayer(path, options);
+      sound: (
+        path: string,
+        soundPlayer?: Duck.Types.Sound.SoundPlayerType,
+        htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+      ) => {
+        return new Sound(path, this.game, soundPlayer, htmlAudioOptions);
       },
       input: () => {
         return new Input(this.game, this);

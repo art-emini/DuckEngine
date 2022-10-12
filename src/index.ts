@@ -19,7 +19,6 @@ import LoaderClass from './core/loader/loader';
 import TileMapClass from './core/map/tilemap';
 import ParticleClass from './core/gameobjects/particles/particle';
 import ParticleEmitterClass from './core/gameobjects/particles/particleEmitter';
-import SoundPlayerClass from './core/sound/soundPlayer';
 import OnceClass from './base/once';
 import RenderClass from './base/render';
 import ButtonClass from './core/gameobjects/ui/button';
@@ -49,6 +48,9 @@ import AnimationManagerClass from './core/animation/animationManager';
 import AnimationStateClass from './core/animation/animationState';
 import StateMachineClass from './core/animation/stateMachine';
 import ColorClass from './core/renderer/models/color';
+import SoundClass from './core/sound/sound';
+import WebSoundPlayerClass from './core/sound/models/webSoundPlayer';
+import HTMLSoundPlayerClass from './core/sound/models/htmlSoundPlayer';
 
 // main
 
@@ -145,7 +147,9 @@ export namespace Duck {
     }
 
     export namespace Sound {
-      export const SoundPlayer = SoundPlayerClass;
+      export const Sound = SoundClass;
+      export const WebSoundPlayer = WebSoundPlayerClass;
+      export const HTMLSoundPlayer = HTMLSoundPlayerClass;
     }
 
     export namespace Cameras {
@@ -257,7 +261,9 @@ export namespace Duck {
     }
 
     export namespace Sound {
-      export type SoundPlayer = SoundPlayerClass;
+      export type Sound = SoundClass;
+      export type WebSoundPlayer = WebSoundPlayerClass;
+      export type HTMLSoundPlayer = HTMLSoundPlayerClass;
     }
 
     export namespace Cameras {
@@ -575,12 +581,18 @@ export namespace Duck {
         key: string;
       }
 
-      export interface Config {
+      export interface HtmlAudioConfig {
         autoplay?: boolean;
         volume?: number;
         sprites?: Sprite[];
         loop?: boolean;
       }
+
+      export type SoundPlayerType =
+        | 'WebAudio'
+        | 'HTMLAudio'
+        | 'AUTO'
+        | undefined;
     }
     export namespace GamepadInput {
       export type MappingType = 'Xbox' | 'Playstation';
