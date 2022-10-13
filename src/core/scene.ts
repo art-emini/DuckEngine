@@ -879,6 +879,13 @@ export default class Scene extends Render {
     const foundCamera = this.cameras.find((_camera) => _camera === camera);
     if (foundCamera) {
       this.currentCamera = foundCamera;
+
+      // call smart scale
+      if (this.game.config.smartScale) {
+        // call on load too
+        this.game.displayManager.smallCorrectionScale();
+      }
+
       if (this.game.config.debug) {
         new Debug.Log('Switched cameras.');
       }
@@ -896,6 +903,13 @@ export default class Scene extends Render {
    */
   public switchToMainCamera() {
     this.currentCamera = this.mainCamera;
+
+    // call smart scale
+    if (this.game.config.smartScale) {
+      // call on load too
+      this.game.displayManager.smallCorrectionScale();
+    }
+
     if (this.game.config.debug) {
       new Debug.Log('Switched to main camera.');
     }
@@ -909,6 +923,13 @@ export default class Scene extends Render {
    */
   public setMainCamera(camera: Camera) {
     this.mainCamera = camera;
+
+    // call smart scale
+    if (this.game.config.smartScale) {
+      // call on load too
+      this.game.displayManager.smallCorrectionScale();
+    }
+
     if (this.game.config.debug) {
       new Debug.Log(`Set main camera to ${camera}.`);
     }

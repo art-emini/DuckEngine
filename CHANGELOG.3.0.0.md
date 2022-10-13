@@ -54,6 +54,9 @@ This update improves the animation system by adding Tweens and more.
   - Use of two spaces for indentions
 - PluginManager
   - PluginManager.call can now take overrideArgs to override passed arguments with the ones passed in PluginManager.call
+- Game
+  - DisplayManager
+    - Fixed smartScale not being called on camera load and switch when needed
 
 ## Removed
 
