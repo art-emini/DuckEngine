@@ -97,6 +97,7 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
   public pause() {
     if (this.context.state === 'running') {
       this.context.suspend();
+      this.paused = true;
     }
   }
 
