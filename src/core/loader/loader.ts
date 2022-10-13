@@ -517,14 +517,14 @@ export default class Loader {
 
     const res = await fetch(pathOrURL);
     const arrayBuffer = await res.arrayBuffer();
-    const decodedAudio = await ctx.decodeAudioData(arrayBuffer);
+    const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
 
     this.audioBufferStack.push({
-      type: 'arrayBuffer',
-      value: decodedAudio,
+      type: 'audioBuffer',
+      value: audioBuffer,
       key,
     });
 
-    return decodedAudio;
+    return audioBuffer;
   }
 }

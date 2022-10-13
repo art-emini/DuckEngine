@@ -809,7 +809,7 @@ export namespace Duck {
         | 'html'
         | 'xml'
         | 'audio'
-        | 'arrayBuffer';
+        | 'audioBuffer';
 
       export interface StackItem<t> {
         type: StackItemType;
