@@ -84,6 +84,15 @@ export default class Loader {
    * @since 2.0.0
    */
   public audioStack: Duck.Types.Loader.StackItem<HTMLAudioElement>[];
+
+  /**
+   * @memberof Loader
+   * @description An array of loaded AudioBuffer from an audio
+   * @type Duck.Types.Loader.StackItem<AudioBuffer>[]
+   * @since 3.0.0
+   */
+  public audioBufferStack: Duck.Types.Loader.StackItem<AudioBuffer>[];
+
   /**
    * @constructor Loader
    * @description Creates a Loader instance
@@ -101,6 +110,7 @@ export default class Loader {
     this.xmlStack = [];
     this.fontStack = [];
     this.audioStack = [];
+    this.audioBufferStack = [];
   }
 
   protected async tryCache(prefix: string, key: string) {
@@ -500,5 +510,21 @@ export default class Loader {
     });
 
     return audio;
+  }
+
+  public async loadAudioBuffer(pathOrURL: string, key: string) {
+    const ctx = new AudioContext();
+
+    const res = await fetch(pathOrURL);
+    const arrayBuffer = await res.arrayBuffer();
+    const decodedAudio = await ctx.decodeAudioData(arrayBuffer);
+
+    this.audioBufferStack.push({
+      type: 'arrayBuffer',
+      value: decodedAudio,
+      key,
+    });
+
+    return decodedAudio;
   }
 }

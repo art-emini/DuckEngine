@@ -592,7 +592,7 @@ export default class Scene extends Render {
         soundPlayer?: Duck.Types.Sound.SoundPlayerType,
         htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
       ) => {
-        return new Sound(path, this.game, soundPlayer, htmlAudioOptions);
+        return new Sound(path, this.game, this, soundPlayer, htmlAudioOptions);
       },
       input: () => {
         return new Input(this.game, this);

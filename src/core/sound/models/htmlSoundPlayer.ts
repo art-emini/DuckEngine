@@ -3,9 +3,30 @@ import Debug from '../../debug/debug';
 import Game from '../../game';
 import BaseSoundPlayer from './baseSoundPlayer';
 
+/**
+ * @class HTMLSoundPlayer
+ * @classdesc Creates a HTMLSoundPlayer class.
+ * @description The HTMLSoundPlayer Class. Uses HTMLAudio to play sound
+ * @extends BaseSoundPlayer
+ * @since 3.0.0
+ */
 export default class HTMLSoundPlayer extends BaseSoundPlayer {
+  /**
+   * @memberof HTMLSoundPlayer
+   * @description HTMLAudioElement that is playing audio
+   * @type HTMLAudioElement
+   * @since 3.0.0
+   */
   public element: HTMLAudioElement;
 
+  /**
+   * @constructor HTMLSoundPlayer
+   * @description Creates a HTMLSoundPlayer instance
+   * @param {string} path Path to sound file
+   * @param {Game} game Game instance
+   * @param {Duck.Types.Sound.HtmlAudioConfig} [htmlAudioOptions] HTMLSoundPlayer Configuration, optional
+   * @since 3.0.0
+   */
   constructor(
     path: string,
     game: Game,

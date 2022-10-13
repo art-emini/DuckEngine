@@ -1,5 +1,6 @@
 import { Duck } from '../..';
 import Game from '../game';
+import Scene from '../scene';
 import BaseSoundPlayer from './models/baseSoundPlayer';
 import HTMLSoundPlayer from './models/htmlSoundPlayer';
 import WebSoundPlayer from './models/webSoundPlayer';
@@ -13,11 +14,11 @@ import WebSoundPlayer from './models/webSoundPlayer';
 export default class Sound {
   /**
    * @memberof Sound
-   * @description Path to sound file
+   * @description Path to sound file for HTMLSoundPlayer OR the key of a preloaded AudioBuffer for WebSoundPlayer
    * @type string
    * @since 3.0.0
    */
-  public path: string;
+  public pathOrKey: string;
 
   /**
    * @memberof Sound
@@ -26,6 +27,14 @@ export default class Sound {
    * @since 3.0.0
    */
   public game: Game;
+
+  /**
+   * @memberof Sound
+   * @description Scene instance
+   * @type Scene
+   * @since 3.0.0
+   */
+  public scene: Scene;
 
   /**
    * @memberof Sound
@@ -42,30 +51,40 @@ export default class Sound {
    * @param {Game} game Game instance
    * @param {Duck.Types.Sound.SoundPlayerType} [soundPlayer] Specify preference for WebAudio use or HTMLAudio use, optional, default => AUTO
    * @param {Duck.Types.Sound.HtmlAudioConfig} [htmlAudioOptions] HTMLSoundPlayer Configuration, optional, only in use if HTMLSoundPlayer is being used
-   * @since 1.0.0-beta
+   * @since 3.0.0
    */
   constructor(
-    path: string,
+    pathOrKey: string,
     game: Game,
+    scene: Scene,
     soundPlayer?: Duck.Types.Sound.SoundPlayerType,
     htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
   ) {
-    this.path = path;
+    this.pathOrKey = pathOrKey;
     this.game = game;
+    this.scene = scene;
 
     if (soundPlayer === 'WebAudio') {
-      this.soundPlayer = new WebSoundPlayer(this.path, this.game);
+      this.soundPlayer = new WebSoundPlayer(
+        this.pathOrKey,
+        this.game,
+        this.scene
+      );
     } else if (soundPlayer === 'HTMLAudio') {
       this.soundPlayer = new HTMLSoundPlayer(
-        this.path,
+        this.pathOrKey,
         this.game,
         htmlAudioOptions
       );
     } else if (window.AudioContext) {
-      this.soundPlayer = new WebSoundPlayer(this.path, this.game);
+      this.soundPlayer = new WebSoundPlayer(
+        this.pathOrKey,
+        this.game,
+        this.scene
+      );
     } else {
       this.soundPlayer = new HTMLSoundPlayer(
-        this.path,
+        this.pathOrKey,
         this.game,
         htmlAudioOptions
       );

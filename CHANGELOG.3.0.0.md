@@ -28,8 +28,9 @@ This update improves the animation system by adding Tweens and more.
   - Tools
     - Added staticColor property which refers to new Color class
     - Added arguments to Scene.tools.color.random(), stroke and strokeWidth may now be passed
-- PluginManager
-  - PluginManager.call can now take overrideArgs to override passed arguments with the ones passed in PluginManager.call
+- Loader
+  - Added loadAudioBuffer to load AudioBuffer for new WebSoundPlayer class and for use of WebAudio API
+  - Added audioBufferStack to store loaded AudioBuffer
 
 ## Changed
 
@@ -51,6 +52,8 @@ This update improves the animation system by adding Tweens and more.
     - color.random now returns a Color instance and not a string
 - Coding Style
   - Use of two spaces for indentions
+- PluginManager
+  - PluginManager.call can now take overrideArgs to override passed arguments with the ones passed in PluginManager.call
 
 ## Removed
 

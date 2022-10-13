@@ -45,17 +45,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract play(): void;
-
-  /**
-   * @memberof BaseSoundPlayer
-   * @description Plays the audio for a duration
-   * @param {number} duration The duration to play the audio for
-   * @override
-   * @abstract
-   * @since 3.0.0
-   */
-  abstract play(duration: number): void;
+  public abstract play(): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -63,16 +53,15 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract pause(): void;
+  public abstract pause(): void;
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Pauses the audio, alias to BaseSoundPlayer.pause
-   * @alias BaseSoundPlayer.pause
+   * @description Stops the audio, disconnects nodes for WebSoundPlayer, **not an alias to BaseSoundPlayer.pause**
    * @abstract
    * @since 3.0.0
    */
-  abstract stop(): void;
+  public abstract stop(): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -80,7 +69,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract mute(): void;
+  public abstract mute(): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -88,7 +77,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract unmute(): void;
+  public abstract unmute(): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -97,7 +86,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract loop(loop: boolean): void;
+  public abstract loop(loop: boolean): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -106,7 +95,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract seek(timeInSeconds: number): void;
+  public abstract seek(timeInSeconds: number): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -114,7 +103,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract restart(): void;
+  public abstract restart(): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -123,7 +112,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract setVolume(volume: number): void;
+  public abstract setVolume(volume: number): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -131,7 +120,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract get duration(): number;
+  public abstract get duration(): number;
 
   /**
    * @memberof BaseSoundPlayer
@@ -139,7 +128,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract get isPlaying(): boolean;
+  public abstract get isPlaying(): boolean;
 
   /**
    * @memberof BaseSoundPlayer
@@ -147,7 +136,7 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract get currentVolume(): number;
+  public abstract get currentVolume(): number;
 
   /**
    * @memberof BaseSoundPlayer
@@ -155,13 +144,5 @@ export default abstract class BaseSoundPlayer {
    * @abstract
    * @since 3.0.0
    */
-  abstract get isMuted(): boolean;
-
-  /**
-   * @memberof BaseSoundPlayer
-   * @description Plays a sound sprite based on the key
-   * @param {string} key Key of the sound sprite
-   * @since 3.0.0
-   */
-  abstract playSprite(key: string): void;
+  public abstract get isMuted(): boolean;
 }
