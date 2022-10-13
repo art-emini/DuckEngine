@@ -19,7 +19,7 @@ on:
       - '**.ts'
   pull_request:
     branches:
-      - '*-staging'
+      - '**-staging'
     paths:
       - '**.ts'
   schedule:
