@@ -12,10 +12,7 @@
 name: "CodeQL"
 
 on:
-  push:
-    paths:
-      - '**.ts'
-  pull_request:
+  [push | pull_request]:
     paths:
       - '**.ts'
   schedule:
