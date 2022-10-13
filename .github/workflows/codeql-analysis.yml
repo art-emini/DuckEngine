@@ -13,13 +13,9 @@ name: "CodeQL"
 
 on:
   push:
-    branches:
-      - 'main'
     paths:
       - '**.ts'
   pull_request:
-    branches:
-      - '**-staging'
     paths:
       - '**.ts'
   schedule:
