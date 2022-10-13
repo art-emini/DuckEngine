@@ -2,12 +2,15 @@
 
 This update improves and adds flexibility to rendering.
 
-This update overhauls the physics system by adding a complete new SAT collision system with different shaped hitboxes and multiple adjustable
-hitboxes for PhysicsBody. - [DuckPhysics](https://github.com/ksplatdev/DuckPhysics)
+This update overhauls the physics system by adding a complete new SAT collision system with different shaped hitboxes and multiple adjustable hitboxes for PhysicsBody. DuckPhysics
 
 This update overhauls the sound system by adding support for WebAudio and fallback to HTMLAudio.
 
 This update improves the animation system by adding Tweens and more.
+
+This update overhauls the input system by adding support for Gamepads and Touch support. As well as the new InputServer and pooling.
+
+This updates improves tilemaps by adding support and parsing of Tiled maps. As well as camera culling & autoCulling and collisions by new DuckPhysics physics engine.
 
 ------------------------------------------------------------------------------------------------------
 
