@@ -68,6 +68,10 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Add
     - Removed soundPlayer from Scene.add which is replaced by new Sound class
+- Duck
+  - Types
+    - Helper
+      - Removed useless AlphaValue type and replace all occurrences with number
 
 ## Deprecated
 

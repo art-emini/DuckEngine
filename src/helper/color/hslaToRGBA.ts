@@ -5,7 +5,7 @@ export default function hslaToRGBA(
   h: number | string,
   s: number | string,
   l: number | string,
-  alpha: Duck.Types.Helper.AlphaRange
+  alpha: number
 ) {
   h = parseInt(h as string);
   l = parseInt(l as string);

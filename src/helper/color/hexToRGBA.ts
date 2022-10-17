@@ -2,10 +2,7 @@ import { Duck } from '../../index';
 import Debug from '../../core/debug/debug';
 import isHex from './isHex';
 
-export default function hexToRGBA(
-  hex: string,
-  alpha: Duck.Types.Helper.AlphaRange
-) {
+export default function hexToRGBA(hex: string, alpha: number) {
   if (isHex(hex)) {
     hex = hex.replace('#', '');
     if (hex.length === 3) {

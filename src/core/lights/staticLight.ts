@@ -16,7 +16,7 @@ import Color from '../renderer/models/color';
  */
 export default class StaticLight extends GameObject<'color'> {
   protected color: Color;
-  protected alpha: Duck.Types.Helper.AlphaRange;
+  protected alpha: number;
 
   /**
    * @constructor StaticLight
@@ -25,7 +25,7 @@ export default class StaticLight extends GameObject<'color'> {
    * @param {number} y Y position
    * @param {number} r Radius
    * @param {Color} color Color
-   * @param {Duck.Types.Helper.AlphaRange} alpha Alpha
+   * @param {number} alpha Alpha
    * @param {Game} game Game instance
    * @param {Scene} scene Scene instance
    * @since 1.0.0-beta
@@ -35,7 +35,7 @@ export default class StaticLight extends GameObject<'color'> {
     y: number,
     r: number,
     color: Color,
-    alpha: Duck.Types.Helper.AlphaRange,
+    alpha: number,
     game: Game,
     scene: Scene
   ) {
@@ -85,10 +85,10 @@ export default class StaticLight extends GameObject<'color'> {
    * @memberof StaticLight
    * @description Sets the fillColor with alpha
    * @param  {string} color Fill Color
-   * @param  {Duck.Types.Helper.AlphaRange} alpha Alpha
+   * @param  {number} alpha Alpha
    * @since 2.0.0
    */
-  public setFillColorAlpha(color: string, alpha: Duck.Types.Helper.AlphaRange) {
+  public setFillColorAlpha(color: string, alpha: number) {
     this.color.value = convertColorToRGBA(color, alpha);
   }
 }

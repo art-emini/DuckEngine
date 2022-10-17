@@ -249,7 +249,7 @@ export default class Scene extends Render {
         y: number,
         r: number,
         color: Color,
-        alpha: Duck.Types.Helper.AlphaRange
+        alpha: number
       ) => StaticLight;
     };
     group: <t>(name: string, defaultValues?: t[]) => Group<t>;
@@ -327,7 +327,7 @@ export default class Scene extends Render {
     staticColor: typeof Color;
     color: {
       random: (stroke?: string | number, strokeWidth?: number) => Color;
-      randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) => string;
+      randomWithAlpha: (alpha?: number) => string;
       is: {
         hex: (str: string) => boolean;
         hsl: (str: string) => boolean;
@@ -336,22 +336,19 @@ export default class Scene extends Render {
       convert: {
         rgb: {
           toHsl: (r: number, g: number, b: number) => string;
-          toRgba: (
-            color: string,
-            alpha: Duck.Types.Helper.AlphaRange
-          ) => string;
+          toRgba: (color: string, alpha: number) => string;
         };
         rgba: {
           toHsla: (
             r: string | number,
             g: string | number,
             b: string | number,
-            a: Duck.Types.Helper.AlphaRange
+            a: number
           ) => string;
           toRgb: (rgba: string) => string;
         };
         hex: {
-          toRgba: (hex: string, alpha: Duck.Types.Helper.AlphaRange) => string;
+          toRgba: (hex: string, alpha: number) => string;
           toRgb: (hex: string) => string | null;
           toHsl: (hex: string) => string;
         };
@@ -615,7 +612,7 @@ export default class Scene extends Render {
           y: number,
           r: number,
           color: Color,
-          alpha: Duck.Types.Helper.AlphaRange
+          alpha: number
         ) => {
           const myStaticLight = new StaticLight(
             x,
@@ -780,8 +777,7 @@ export default class Scene extends Render {
 
           return new Color(randomColor());
         },
-        randomWithAlpha: (alpha?: Duck.Types.Helper.AlphaRange) =>
-          randomColorWithAlpha(alpha),
+        randomWithAlpha: (alpha?: number) => randomColorWithAlpha(alpha),
         is: {
           hex: isHex,
           hsl: isHSL,

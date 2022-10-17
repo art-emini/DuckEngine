@@ -7,10 +7,7 @@ import isHSL from './isHSL';
 import isRGB from './isRGB';
 import rgbToRGBA from './rgbToRGBA';
 
-export default function convertColorToRGBA(
-  color: string,
-  alpha: Duck.Types.Helper.AlphaRange
-) {
+export default function convertColorToRGBA(color: string, alpha: number) {
   let res = '';
 
   if (isHex(color)) {
