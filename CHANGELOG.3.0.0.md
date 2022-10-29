@@ -46,6 +46,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
       - Scene.__tick
       - Renderables are drawn
       - Active Camera End
+  - CanvasRenderer & RendererPipeline
+    - Does not take poolingInterval argument anymore
 - Misc
   - Changed startup message and version
 - Rendering
