@@ -42,10 +42,12 @@ export default abstract class BaseSoundPlayer {
   /**
    * @memberof BaseSoundPlayer
    * @description Plays the audio
+   * @param {number} [offset] Where to start play the audio, in milliseconds, optional -> default: undefined
+   * @param {number} [duration] Where to start play the audio, in milliseconds, optional -> default: undefined
    * @abstract
    * @since 3.0.0
    */
-  public abstract play(): void;
+  public abstract play(offset?: number, duration?: number): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -90,12 +92,12 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Seeks the audio
-   * @param {number} timeInSeconds The time in seconds to seek to
+   * @description Seeks and plays the audio
+   * @param {number} timeInMilliseconds The time in milliseconds to seek to
    * @abstract
    * @since 3.0.0
    */
-  public abstract seek(timeInSeconds: number): void;
+  public abstract seek(timeInMilliseconds: number): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -145,4 +147,12 @@ export default abstract class BaseSoundPlayer {
    * @since 3.0.0
    */
   public abstract get isMuted(): boolean;
+
+  /**
+   * @memberof BaseSoundPlayer
+   * @description Gets the current time of the sound playing in milliseconds
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract get currentTime(): number;
 }

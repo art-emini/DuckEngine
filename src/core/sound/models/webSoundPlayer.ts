@@ -84,13 +84,29 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.gainNode.gain.value = 1;
   }
 
-  public play() {
+  /**
+   * @memberof WebSoundPlayer
+   * @description Resets context, sourceNode, gainNode. Reconnects gainNode and sourceNode. Resets sourceNode buffer
+   * @abstract
+   * @since 3.0.0
+   */
+  public recreateNodes() {
+    this.context = new AudioContext();
+    this.sourceNode = this.context.createBufferSource();
+    this.gainNode = this.context.createGain();
+
+    this.gainNode.connect(this.context.destination);
+    this.sourceNode.connect(this.gainNode);
+    this.sourceNode.buffer = this.audioBuffer;
+  }
+
+  public play(offset?: number, duration?: number) {
     this.paused = false;
 
     if (this.context.state === 'suspended') {
       this.context.resume();
     } else {
-      this.sourceNode.start(0);
+      this.sourceNode.start(0, offset, duration);
     }
   }
 
@@ -127,18 +143,22 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.sourceNode.loop = loop;
   }
 
-  public seek(timeInSeconds: number) {
+  public seek(timeInMilliseconds: number) {
+    this.pause();
     this.stop();
 
-    this.paused = false;
-    this.sourceNode.start(0, timeInSeconds);
+    this.recreateNodes();
+
+    this.play(timeInMilliseconds / 1000);
   }
 
   public restart() {
+    this.pause();
     this.stop();
 
-    this.paused = false;
-    this.sourceNode.start(0, 0);
+    this.recreateNodes();
+
+    this.play();
   }
 
   public setVolume(volume: number) {
@@ -159,5 +179,9 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
 
   public get isMuted() {
     return this.muted;
+  }
+
+  public get currentTime() {
+    return this.context.currentTime * 1000;
   }
 }

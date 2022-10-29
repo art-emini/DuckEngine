@@ -53,7 +53,18 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     document.body.appendChild(this.element);
   }
 
-  public play() {
+  public play(offset?: number, duration?: number) {
+    if (offset) {
+      this.seek(this.currentTime + offset);
+    }
+
+    if (duration) {
+      const timeout = setTimeout(() => {
+        this.pause();
+        clearTimeout(timeout);
+      }, duration);
+    }
+
     this.element.play();
   }
 
@@ -77,8 +88,8 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     this.element.loop = loop;
   }
 
-  public seek(timeInSeconds: number) {
-    this.element.currentTime = timeInSeconds;
+  public seek(timeInMilliseconds: number) {
+    this.element.currentTime = timeInMilliseconds / 1000;
   }
 
   public restart() {
@@ -103,6 +114,10 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
 
   public get isMuted() {
     return this.element.muted;
+  }
+
+  public get currentTime() {
+    return this.element.currentTime * 1000;
   }
 
   public playSprite(key: string) {

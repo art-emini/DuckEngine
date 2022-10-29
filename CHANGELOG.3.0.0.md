@@ -24,6 +24,7 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
     - Added abstract BaseSoundPlayer class
     - Added WebSoundPlayer class for use of WebAudio API to play audio
     - Added HTMLSoundPlayer class for use of HTMLAudio to play audio (replace old SoundPlayer)
+    - Added new SoundSprite class for the use and making of sound sprites
 - Scene
   - Add
     - Added color method to Scene.add
