@@ -238,7 +238,7 @@ export default class Scene extends Render {
     sound: (
       path: string,
       soundPlayer?: Duck.Types.Sound.SoundPlayerType,
-      htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+      soundConfig?: Duck.Types.Sound.SoundConfig
     ) => Sound;
     input: () => Input;
     camera: () => Camera;
@@ -587,9 +587,9 @@ export default class Scene extends Render {
       sound: (
         path: string,
         soundPlayer?: Duck.Types.Sound.SoundPlayerType,
-        htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+        soundConfig?: Duck.Types.Sound.SoundConfig
       ) => {
-        return new Sound(path, this.game, this, soundPlayer, htmlAudioOptions);
+        return new Sound(path, this.game, this, soundPlayer, soundConfig);
       },
       input: () => {
         return new Input(this.game, this);

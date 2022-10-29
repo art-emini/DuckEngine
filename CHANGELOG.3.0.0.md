@@ -16,15 +16,14 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 
 ## Added
 
-- New Classes
-  - Rendering
-    - Added Color class to store and manage color info and strokes
-  - Sound
-    - Added Sound class which stores DuckEngine WebAudio or HTMLAudio sound player classes to play audio
-    - Added abstract BaseSoundPlayer class
-    - Added WebSoundPlayer class for use of WebAudio API to play audio
-    - Added HTMLSoundPlayer class for use of HTMLAudio to play audio (replace old SoundPlayer)
-    - Added new SoundSprite class for the use and making of sound sprites
+- Rendering
+  - Added Color class to store and manage color info and strokes
+- Sound
+  - Added Sound class which stores DuckEngine WebAudio or HTMLAudio sound player classes to play audio
+  - Added abstract BaseSoundPlayer class
+  - Added WebSoundPlayer class for use of WebAudio API to play audio
+  - Added HTMLSoundPlayer class for use of HTMLAudio to play audio (replace old SoundPlayer)
+  - Added new SoundSprite class for the use and making of sound sprites
 - Scene
   - Add
     - Added color method to Scene.add
@@ -56,11 +55,22 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
     - color.random now returns a Color instance and not a string
 - Coding Style
   - Use of two spaces for indentions
+- Sound
+  - HTMLSoundPlayer (old SoundPlayer class)
+    - Changed name to HTMLSoundPlayer (new and improved HTML audio player, look at Added/Sound)
+    - Changed playSprite method to be renamed to playSoundSprite
+    - Changed sprites property to be renamed to soundSprites which is now an array of new SoundSprite class
 - PluginManager
   - PluginManager.call can now take overrideArgs to override passed arguments with the ones passed in PluginManager.call
 - Game
   - DisplayManager
     - Fixed smartScale not being called on camera load and switch when needed
+- Types
+  - Sound
+    - Renamed interface Config to SoundConfig
+    - Renamed interface Sprite to SpriteStruct
+    - SoundConfig
+      - Renamed sprites option to spriteStruct
 
 ## Removed
 

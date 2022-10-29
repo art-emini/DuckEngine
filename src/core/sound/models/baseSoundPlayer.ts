@@ -1,5 +1,5 @@
-import { Duck } from '../../..';
 import Game from '../../game';
+import SoundSprite from './misc/soundSprite';
 
 /**
  * @class BaseSoundPlayer
@@ -28,15 +28,15 @@ export default abstract class BaseSoundPlayer {
   /**
    * @memberof BaseSoundPlayer
    * @description Audio Sprites
-   * @type Duck.Types.Sound.Sprite[]
+   * @type SoundSprite[]
    * @since 3.0.0
    */
-  protected sprites: Duck.Types.Sound.Sprite[];
+  protected soundSprites: SoundSprite[];
 
   constructor(path: string, game: Game) {
     this.path = path;
     this.game = game;
-    this.sprites = [];
+    this.soundSprites = [];
   }
 
   /**
@@ -94,18 +94,20 @@ export default abstract class BaseSoundPlayer {
    * @memberof BaseSoundPlayer
    * @description Seeks and plays the audio
    * @param {number} timeInMilliseconds The time in milliseconds to seek to
+   * @param {boolean} [play] Determines to play right after seeking, optional, defaults -> false
    * @abstract
    * @since 3.0.0
    */
-  public abstract seek(timeInMilliseconds: number): void;
+  public abstract seek(timeInMilliseconds: number, play?: boolean): void;
 
   /**
    * @memberof BaseSoundPlayer
    * @description Restarts the audio
+   * @param {boolean} [play] Determines to play right after restarting, optional, defaults -> false
    * @abstract
    * @since 3.0.0
    */
-  public abstract restart(): void;
+  public abstract restart(play?: boolean): void;
 
   /**
    * @memberof BaseSoundPlayer
@@ -115,6 +117,39 @@ export default abstract class BaseSoundPlayer {
    * @since 3.0.0
    */
   public abstract setVolume(volume: number): void;
+
+  /**
+   * @memberof BaseSoundPlayer
+   * @description Plays a SoundSprite based of passed key
+   * @param {string} key The key of the SoundSprite to find and play
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract playSoundSprite(key: string): void;
+
+  /**
+   * @memberof BaseSoundPlayer
+   * @description Creates a SoundSprite
+   * @param {string} key The key of the SoundSprite
+   * @param {number} startInMilliseconds The starting time in milliseconds of when the SoundSprite starts
+   * @param {number} endInMilliseconds The ending time in milliseconds of when the SoundSprite ends
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract createSoundSprite(
+    key: string,
+    startInMilliseconds: number,
+    endInMilliseconds: number
+  ): void;
+
+  /**
+   * @memberof BaseSoundPlayer
+   * @description Removes a SoundSprite from the soundSprites array
+   * @param {string} key The key of the SoundSprite to find and remove
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract removeSoundSprite(key: string): void;
 
   /**
    * @memberof BaseSoundPlayer

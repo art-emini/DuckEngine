@@ -49,44 +49,46 @@ export default class Sound {
    * @description Creates a Sound instance
    * @param {string} path Path to sound file
    * @param {Game} game Game instance
-   * @param {Duck.Types.Sound.SoundPlayerType} [soundPlayer] Specify preference for WebAudio use or HTMLAudio use, optional, default => AUTO
-   * @param {Duck.Types.Sound.HtmlAudioConfig} [htmlAudioOptions] HTMLSoundPlayer Configuration, optional, only in use if HTMLSoundPlayer is being used
+   * @param {Duck.Types.Sound.SoundPlayerType} [soundPlayerType] Specify preference for WebAudio use or HTMLAudio use, optional, default => AUTO
+   * @param {Duck.Types.Sound.SoundConfig} [soundConfig] SoundConfig, for use in both WebAudio and HtmlAudio sound players, option, default => undefined
    * @since 3.0.0
    */
   constructor(
     pathOrKey: string,
     game: Game,
     scene: Scene,
-    soundPlayer?: Duck.Types.Sound.SoundPlayerType,
-    htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+    soundPlayerType?: Duck.Types.Sound.SoundPlayerType,
+    soundConfig?: Duck.Types.Sound.SoundConfig
   ) {
     this.pathOrKey = pathOrKey;
     this.game = game;
     this.scene = scene;
 
-    if (soundPlayer === 'WebAudio') {
+    if (soundPlayerType === 'WebAudio') {
       this.soundPlayer = new WebSoundPlayer(
         this.pathOrKey,
         this.game,
-        this.scene
+        this.scene,
+        soundConfig
       );
-    } else if (soundPlayer === 'HTMLAudio') {
+    } else if (soundPlayerType === 'HTMLAudio') {
       this.soundPlayer = new HTMLSoundPlayer(
         this.pathOrKey,
         this.game,
-        htmlAudioOptions
+        soundConfig
       );
     } else if (window.AudioContext) {
       this.soundPlayer = new WebSoundPlayer(
         this.pathOrKey,
         this.game,
-        this.scene
+        this.scene,
+        soundConfig
       );
     } else {
       this.soundPlayer = new HTMLSoundPlayer(
         this.pathOrKey,
         this.game,
-        htmlAudioOptions
+        soundConfig
       );
     }
   }

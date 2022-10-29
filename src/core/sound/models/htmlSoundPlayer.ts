@@ -2,6 +2,7 @@ import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
 import BaseSoundPlayer from './baseSoundPlayer';
+import SoundSprite from './misc/soundSprite';
 
 /**
  * @class HTMLSoundPlayer
@@ -24,13 +25,13 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
    * @description Creates a HTMLSoundPlayer instance
    * @param {string} path Path to sound file
    * @param {Game} game Game instance
-   * @param {Duck.Types.Sound.HtmlAudioConfig} [htmlAudioOptions] HTMLSoundPlayer Configuration, optional
+   * @param {Duck.Types.Sound.SoundConfig} [soundConfig] SoundConfig, optional, defaults => undefined
    * @since 3.0.0
    */
   constructor(
     path: string,
     game: Game,
-    htmlAudioOptions?: Duck.Types.Sound.HtmlAudioConfig
+    soundConfig?: Duck.Types.Sound.SoundConfig
   ) {
     super(path, game);
 
@@ -40,15 +41,30 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     this.element.style.display = 'none';
     this.element.controls = false;
     this.element.src = this.path;
-    this.element.volume = htmlAudioOptions?.volume || 1;
-    this.element.autoplay = htmlAudioOptions?.autoplay || false;
-    this.element.loop = htmlAudioOptions?.loop || false;
+    this.element.volume = soundConfig?.volume || 1;
+    this.element.autoplay = soundConfig?.autoplay || false;
+    this.element.loop = soundConfig?.loop || false;
 
-    if (htmlAudioOptions?.volume === 0) {
+    if (soundConfig?.volume === 0) {
       this.mute();
     }
 
-    this.sprites = htmlAudioOptions?.sprites || [];
+    this.soundSprites = [];
+
+    // populate SoundSprites
+    if (soundConfig?.spriteStructs) {
+      for (const struct of soundConfig.spriteStructs) {
+        this.soundSprites.push(
+          new SoundSprite(
+            struct.key,
+            struct.startInMilliSeconds,
+            struct.endInMilliSeconds,
+            this,
+            this.game
+          )
+        );
+      }
+    }
 
     document.body.appendChild(this.element);
   }
@@ -88,12 +104,58 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     this.element.loop = loop;
   }
 
-  public seek(timeInMilliseconds: number) {
+  public seek(timeInMilliseconds: number, play?: boolean) {
     this.element.currentTime = timeInMilliseconds / 1000;
+    if (play) {
+      this.play();
+    }
   }
 
-  public restart() {
+  public restart(play?: boolean) {
     this.seek(0);
+
+    if (play) {
+      this.play;
+    }
+  }
+
+  public playSoundSprite(key: string) {
+    const foundSprite = this.soundSprites.find(
+      (_sprite) => _sprite.key === key
+    );
+
+    if (foundSprite) {
+      foundSprite.play();
+    } else {
+      new Debug.Error(`Cannot find sound sprite with key: "${key}".`);
+    }
+  }
+
+  public createSoundSprite(
+    key: string,
+    startInMilliseconds: number,
+    endInMilliseconds: number
+  ) {
+    this.soundSprites.push(
+      new SoundSprite(
+        key,
+        startInMilliseconds,
+        endInMilliseconds,
+        this,
+        this.game
+      )
+    );
+  }
+
+  public removeSoundSprite(key: string) {
+    const foundSprite = this.soundSprites.find(
+      (_sprite) => _sprite.key === key
+    );
+
+    if (foundSprite) {
+      const index = this.soundSprites.indexOf(foundSprite);
+      this.soundSprites.splice(index, 1);
+    }
   }
 
   public setVolume(volume: number) {
@@ -118,29 +180,5 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
 
   public get currentTime() {
     return this.element.currentTime * 1000;
-  }
-
-  public playSprite(key: string) {
-    const foundSprite = this.sprites.find((_sprite) => _sprite.key === key);
-
-    if (foundSprite) {
-      this.seek(foundSprite.startSeconds);
-
-      if (!this.isPlaying) {
-        this.play();
-      }
-
-      const int = setInterval(() => {
-        if (foundSprite) {
-          if (this.element.currentTime >= foundSprite.endSeconds) {
-            clearInterval(int);
-            this.pause();
-            this.restart();
-          }
-        }
-      }, 1000);
-    } else {
-      new Debug.Error(`Cannot find sound sprite with key: "${key}".`);
-    }
   }
 }

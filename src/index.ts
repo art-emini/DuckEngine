@@ -51,6 +51,7 @@ import ColorClass from './core/renderer/models/color';
 import SoundClass from './core/sound/sound';
 import WebSoundPlayerClass from './core/sound/models/webSoundPlayer';
 import HTMLSoundPlayerClass from './core/sound/models/htmlSoundPlayer';
+import SoundSpriteClass from './core/sound/models/misc/soundSprite';
 
 // main
 
@@ -150,6 +151,7 @@ export namespace Duck {
       export const Sound = SoundClass;
       export const WebSoundPlayer = WebSoundPlayerClass;
       export const HTMLSoundPlayer = HTMLSoundPlayerClass;
+      export const SoundSprite = SoundSpriteClass;
     }
 
     export namespace Cameras {
@@ -264,6 +266,7 @@ export namespace Duck {
       export type Sound = SoundClass;
       export type WebSoundPlayer = WebSoundPlayerClass;
       export type HTMLSoundPlayer = HTMLSoundPlayerClass;
+      export type SoundSprite = SoundSpriteClass;
     }
 
     export namespace Cameras {
@@ -575,16 +578,16 @@ export namespace Duck {
     }
 
     export namespace Sound {
-      export interface Sprite {
-        startSeconds: number;
-        endSeconds: number;
+      export interface SpriteStruct {
+        startInMilliSeconds: number;
+        endInMilliSeconds: number;
         key: string;
       }
 
-      export interface HtmlAudioConfig {
+      export interface SoundConfig {
         autoplay?: boolean;
         volume?: number;
-        sprites?: Sprite[];
+        spriteStructs?: SpriteStruct[];
         loop?: boolean;
       }
 

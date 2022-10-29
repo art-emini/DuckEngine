@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Duck } from '../../..';
 import Debug from '../../debug/debug';
 import Game from '../../game';
 import Scene from '../../scene';
 import BaseSoundPlayer from './baseSoundPlayer';
+import SoundSprite from './misc/soundSprite';
 
 /**
  * @class WebSoundPlayer
@@ -44,6 +46,8 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
    */
   public gainNode: GainNode;
 
+  protected seekTo: number | undefined;
+
   protected paused: boolean;
   protected muted: boolean;
   protected volume: number;
@@ -52,10 +56,17 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
    * @constructor WebSoundPlayer
    * @description Creates a Sound instance
    * @param {string} key Key of preloaded audio buffer
+   * @param {Duck.Types.Sound.SoundConfig} soundConfig SoundConfig, optional, defaults => undefined
    * @param {Game} game Game instance
+   * @param {Scene} scene Scene instance
    * @since 3.0.0
    */
-  constructor(key: string, game: Game, scene: Scene) {
+  constructor(
+    key: string,
+    game: Game,
+    scene: Scene,
+    soundConfig?: Duck.Types.Sound.SoundConfig
+  ) {
     super(key, game);
 
     // find preloaded audio buffer
@@ -77,11 +88,43 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.sourceNode.connect(this.gainNode);
     this.sourceNode.buffer = this.audioBuffer;
 
+    this.seekTo = undefined;
+
     this.paused = true;
     this.muted = false;
     this.volume = 1;
 
-    this.gainNode.gain.value = 1;
+    this.gainNode.gain.value = this.volume; // 1
+
+    this.soundSprites = [];
+
+    // populate SoundSprites
+    if (soundConfig?.spriteStructs) {
+      for (const struct of soundConfig.spriteStructs) {
+        this.soundSprites.push(
+          new SoundSprite(
+            struct.key,
+            struct.startInMilliSeconds,
+            struct.endInMilliSeconds,
+            this,
+            this.game
+          )
+        );
+      }
+    }
+
+    // use passed soundConfig
+    if (soundConfig?.volume) {
+      this.setVolume(soundConfig.volume);
+    }
+
+    if (soundConfig?.loop) {
+      this.loop(soundConfig.loop);
+    }
+
+    if (soundConfig?.autoplay) {
+      this.play();
+    }
   }
 
   /**
@@ -106,7 +149,9 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     if (this.context.state === 'suspended') {
       this.context.resume();
     } else {
-      this.sourceNode.start(0, offset, duration);
+      this.sourceNode.start(0, this.seekTo || offset, duration);
+
+      this.seekTo = undefined;
     }
   }
 
@@ -143,26 +188,73 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.sourceNode.loop = loop;
   }
 
-  public seek(timeInMilliseconds: number) {
+  public seek(timeInMilliseconds: number, play?: boolean) {
     this.pause();
     this.stop();
 
     this.recreateNodes();
 
-    this.play(timeInMilliseconds / 1000);
+    if (play) {
+      this.seekTo = undefined;
+      this.play(timeInMilliseconds / 1000);
+    } else {
+      this.seekTo = timeInMilliseconds / 1000;
+    }
   }
 
-  public restart() {
+  public restart(play?: boolean) {
     this.pause();
     this.stop();
 
     this.recreateNodes();
 
-    this.play();
+    if (play) {
+      this.play();
+    }
   }
 
   public setVolume(volume: number) {
-    this.gainNode.gain.value = volume;
+    this.volume = volume;
+    this.gainNode.gain.value = this.volume;
+  }
+
+  public playSoundSprite(key: string) {
+    const foundSprite = this.soundSprites.find(
+      (_sprite) => _sprite.key === key
+    );
+
+    if (foundSprite) {
+      foundSprite.play();
+    } else {
+      new Debug.Error(`Cannot find sound sprite with key: "${key}".`);
+    }
+  }
+
+  public createSoundSprite(
+    key: string,
+    startInMilliseconds: number,
+    endInMilliseconds: number
+  ) {
+    this.soundSprites.push(
+      new SoundSprite(
+        key,
+        startInMilliseconds,
+        endInMilliseconds,
+        this,
+        this.game
+      )
+    );
+  }
+
+  public removeSoundSprite(key: string) {
+    const foundSprite = this.soundSprites.find(
+      (_sprite) => _sprite.key === key
+    );
+
+    if (foundSprite) {
+      const index = this.soundSprites.indexOf(foundSprite);
+      this.soundSprites.splice(index, 1);
+    }
   }
 
   public get duration() {
