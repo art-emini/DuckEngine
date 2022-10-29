@@ -525,9 +525,9 @@ export namespace Duck {
 
         /**
          * @memberof Duck.Types.Game.Config
-         * @description How often, in milliseconds, the RendererPipeline calls its pool method, affects how long it takes for a scene
-         * or renderable to change its visibility as both are controlled and updated by the RendererPipeline
-         * @default 1000
+         * @description How often, in milliseconds, the RendererPipeline calls its pool method, affects how long it takes for a
+         *  renderable to change its visibility as it is controlled and updated by the RendererPipeline
+         * @default 1000 / game.fps
          * @type number
          * @since 2.1.0
          */

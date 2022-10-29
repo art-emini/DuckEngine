@@ -53,6 +53,7 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Tools
     - color.random now returns a Color instance and not a string
+  - Properties onSceneActive and onSceneInactive renamed to onActive and onInactive
 - Coding Style
   - Use of two spaces for indentions
 - Sound
@@ -79,6 +80,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Add
     - Removed soundPlayer from Scene.add which is replaced by new Sound class
+- Scene/Render
+  - Removed onChange method as it was deprecated in v2.1.0, replaced by properties Scene.onActive and Scene.onInactive (old names .onSceneActive and onSceneInactive)
 - Duck
   - Types
     - Helper
@@ -88,6 +91,12 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 
 ## Fixed
 
+- Game
+  - switchScene
+    - Fixed scenes not switching instantly as it would set the Scene.visible prop instead of calling Scene.setVisible to skip the poolingInterval
+  - renderer
+    - pipeline
+      - Fixed RendererPipeline ignoring Game.config.poolingInterval
 - Scene
   - Tools
     - Fixed chance of color.random returning invalid color

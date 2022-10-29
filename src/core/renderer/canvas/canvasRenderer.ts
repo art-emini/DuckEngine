@@ -38,12 +38,12 @@ export default class CanvasRenderer extends BaseRenderer {
    * @param {number} [poolingInterval= 1000 / game.fps] How often the does the RendererPipeline pool visible scenes and renderables
    * @since 2.1.0
    */
-  constructor(game: Game, poolingInterval = 1000 / game.fps) {
+  constructor(game: Game) {
     super(game);
 
     this.ctx = this.game.canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    this.pipeline = new RendererPipeline(this.game, poolingInterval);
+    this.pipeline = new RendererPipeline(this.game);
   }
 
   /**

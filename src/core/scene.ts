@@ -157,7 +157,7 @@ export default class Scene extends Render {
    * @type () => void
    * @since 2.1.0
    */
-  public onSceneActive: () => void;
+  public onActive: () => void;
 
   /**
    * @memberof Scene
@@ -165,7 +165,7 @@ export default class Scene extends Render {
    * @type () => void
    * @since 2.1.0
    */
-  public onSceneInactive: () => void;
+  public onInactive: () => void;
 
   // methods
 
@@ -426,11 +426,11 @@ export default class Scene extends Render {
       this.physicsServer = new PhysicsServer(this.game, this);
     }
 
-    this.onSceneActive = () => {
+    this.onActive = () => {
       // On scene change to visible
     };
 
-    this.onSceneInactive = () => {
+    this.onInactive = () => {
       // On scene change to not visible
     };
 

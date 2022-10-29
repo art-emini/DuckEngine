@@ -27,6 +27,14 @@ export default class RendererPipeline {
 
   /**
    * @memberof RendererPipeline
+   * @description How often the poolInterval is called, 1000 / this.game.fps or a passed game.config.poolingInterval
+   * @type unknown
+   * @since 3.0.0
+   */
+  public poolingInterval: number;
+
+  /**
+   * @memberof RendererPipeline
    * @description The poolStack, contains objects that holds a scene and its renderables
    * @type Duck.Types.RendererPipeline.PoolStackItem[]
    * @since 2.1.0
@@ -48,16 +56,21 @@ export default class RendererPipeline {
    * @param {number} [poolingInterval= 1000 / game.fps] How often RendererPipeline.pool is called
    * @since 2.1.0
    */
-  constructor(game: Game, poolingInterval = 1000 / game.fps) {
+  constructor(game: Game) {
     this.game = game;
+
+    this.poolingInterval =
+      this.game.config.poolingInterval || 1000 / this.game.fps;
 
     this.poolInterval = setInterval(() => {
       this.pool();
-    }, poolingInterval);
+    }, this.poolingInterval);
     this.poolStack = [];
 
     this.updateTimeInterval = setInterval(() => {
-      this.updateTime();
+      if (!this.game.config.poolingInterval) {
+        this.updateTime();
+      }
     }, 1000);
   }
 
@@ -95,12 +108,12 @@ export default class RendererPipeline {
    * @since 2.1.0
    */
   public updateTime() {
-    const newInterval = 1000 / this.game.fps;
+    this.poolingInterval = 1000 / this.game.fps;
 
     clearInterval(this.poolInterval as number);
 
     this.poolInterval = setInterval(() => {
       this.pool();
-    }, newInterval);
+    }, this.poolingInterval);
   }
 }

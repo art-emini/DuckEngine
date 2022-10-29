@@ -169,6 +169,14 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
+   * @description Gets the paused state of the sound
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract get isPaused(): boolean;
+
+  /**
+   * @memberof BaseSoundPlayer
    * @description Gets the current volume of the sound
    * @abstract
    * @since 3.0.0

@@ -29,15 +29,4 @@ export default class Render {
    * @since 1.0.0-beta
    */
   public update(deltaTime: number) {}
-
-  /**
-   * @memberof Render
-   * @description Gets called on scene switch to this scene
-   * @deprecated Set the Scene.onActive property instead
-   *
-   * **THIS WILL BE REMOVED IN 3.0.0**
-   *
-   * @since 1.0.0-beta
-   */
-  public onChange() {}
 }

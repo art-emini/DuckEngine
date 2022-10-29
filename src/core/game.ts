@@ -222,7 +222,7 @@ export default class Game {
       this.canvas = this.config.canvas.canvas;
     }
 
-    this.renderer = new CanvasRenderer(this, this.config.poolingInterval);
+    this.renderer = new CanvasRenderer(this);
 
     this.deltaTimeArray = [];
     this.deltaTime = 0;
@@ -559,14 +559,14 @@ export default class Game {
     const f2 = this.stack.scenes.find((_scene) => _scene.key === key2);
     if (f) {
       if (f2) {
-        f.visible = false;
-        f2.visible = true;
+        f.setVisible(false);
+        f2.setVisible(true);
 
         // will be removed in v3.0.0
-        f2.onChange();
+        // f2.onChange(); **REMOVED**
 
-        f.onSceneInactive();
-        f2.onSceneActive();
+        f.onInactive();
+        f2.onActive();
 
         this.eventEmitter.emit(EVENTS.GAME.SWITCH_SCENE);
       } else {
@@ -591,9 +591,9 @@ export default class Game {
   public showScene(key: string) {
     const f = this.stack.scenes.find((_scene) => _scene.key === key);
     if (f) {
-      f.visible = true;
+      f.setVisible(true);
 
-      f.onSceneActive();
+      f.onActive();
 
       this.eventEmitter.emit(EVENTS.GAME.SHOW_SCENE);
     } else {

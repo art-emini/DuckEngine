@@ -1,4 +1,3 @@
-import { Duck } from '../../index';
 import convertColorToRGBA from '../../helper/color/convertColorToRGBA';
 import Debug from '../debug/debug';
 import Game from '../game';

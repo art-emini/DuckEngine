@@ -170,6 +170,10 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     return !this.element.paused;
   }
 
+  public get isPaused() {
+    return this.element.paused;
+  }
+
   public get currentVolume() {
     return this.element.volume;
   }

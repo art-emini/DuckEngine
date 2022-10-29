@@ -265,6 +265,10 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     return !this.paused;
   }
 
+  public get isPaused() {
+    return this.paused;
+  }
+
   public get currentVolume() {
     return this.gainNode.gain.value;
   }
