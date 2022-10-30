@@ -93,7 +93,7 @@ export default class Camera {
    * @memberof Camera
    * @description A gameobject that the Camera is currently following
    * @type Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type> | undefined
-   * @since
+   * @since 1.0.0
    */
   public following:
     | Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
