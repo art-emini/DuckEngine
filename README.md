@@ -15,7 +15,7 @@ A 2D Game Engine for the web.
 
 ## Features
 
-- Fast & Advanced SAT Physics Engine // [DuckPhysics](https://github.com/ksplatdev/DuckPhysics)
+- Fast & Advanced Physics Engine // [DuckPhysics](https://github.com/ksplatdev/DuckPhysics)
 - Multiple Scenes
 - Fast & Performant
 - Sprites & Spritesheets
