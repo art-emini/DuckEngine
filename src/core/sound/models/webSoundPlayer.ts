@@ -218,6 +218,94 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.gainNode.gain.value = this.volume;
   }
 
+  public fadeVolume(
+    targetVolume: number,
+    amount: number,
+    ms: number,
+    cb?: () => void
+  ) {
+    const direction = amount < 0 ? -1 : +1; // determines fade in or fade out
+    const interval = setInterval(() => {
+      // check if currentVolume reached or surpassed targetVolume
+      const fixedVolume = Number(this.currentVolume.toFixed(2));
+      if (direction === 1) {
+        if (fixedVolume >= targetVolume) {
+          this.setVolume(targetVolume);
+
+          if (cb) {
+            cb();
+          }
+
+          clearInterval(interval);
+          return;
+        }
+      } else {
+        if (fixedVolume <= targetVolume) {
+          this.setVolume(targetVolume);
+
+          if (cb) {
+            cb();
+          }
+
+          clearInterval(interval);
+          return;
+        }
+      }
+
+      const newVolume = this.currentVolume + amount;
+      this.setVolume(newVolume); // set volume
+    }, ms);
+  }
+
+  public fadeVolumeAndPlay(
+    targetVolume: number,
+    amount: number,
+    ms: number,
+    cb?: () => void,
+    offset?: number,
+    duration?: number
+  ) {
+    const direction = amount < 0 ? -1 : +1;
+    if (direction === 1) {
+      // set volume to 0
+      this.setVolume(0);
+    }
+    if (direction === -1) {
+      // set volume to 1
+      this.setVolume(1);
+    }
+    this.fadeVolume(targetVolume, amount, ms, cb);
+    this.play(offset, duration);
+  }
+
+  public fadeVolumeAndPause(
+    targetVolume: number,
+    amount: number,
+    ms: number,
+    cb?: () => void
+  ) {
+    this.fadeVolume(targetVolume, amount, ms, () => {
+      this.pause();
+      if (cb) {
+        cb();
+      }
+    });
+  }
+
+  public fadeVolumeAndStop(
+    targetVolume: number,
+    amount: number,
+    ms: number,
+    cb?: () => void
+  ) {
+    this.fadeVolume(targetVolume, amount, ms, () => {
+      this.stop();
+      if (cb) {
+        cb();
+      }
+    });
+  }
+
   public playSoundSprite(key: string) {
     const foundSprite = this.soundSprites.find(
       (_sprite) => _sprite.key === key
