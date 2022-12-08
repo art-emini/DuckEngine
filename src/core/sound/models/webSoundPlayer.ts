@@ -51,6 +51,7 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
   protected paused: boolean;
   protected muted: boolean;
   protected volume: number;
+  protected looping: boolean;
 
   /**
    * @constructor WebSoundPlayer
@@ -93,6 +94,7 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.paused = true;
     this.muted = false;
     this.volume = 1;
+    this.looping = false;
 
     this.gainNode.gain.value = this.volume; // 1
 
@@ -141,6 +143,15 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     this.gainNode.connect(this.context.destination);
     this.sourceNode.connect(this.gainNode);
     this.sourceNode.buffer = this.audioBuffer;
+
+    // reset states
+    this.setVolume(this.volume);
+    if (this.muted) {
+      this.mute();
+    } else {
+      this.unmute();
+    }
+    this.loop(this.looping);
   }
 
   public play(offset?: number, duration?: number) {
@@ -186,6 +197,7 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
 
   public loop(loop: boolean) {
     this.sourceNode.loop = loop;
+    this.looping = loop;
   }
 
   public seek(timeInMilliseconds: number, play?: boolean) {
@@ -224,7 +236,10 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
     ms: number,
     cb?: () => void
   ) {
-    const direction = amount < 0 ? -1 : +1; // determines fade in or fade out
+    // make sure it is positive
+    amount = Math.abs(amount);
+
+    const direction = targetVolume < this.currentVolume ? -1 : +1; // determines fade in or fade out
     const interval = setInterval(() => {
       // check if currentVolume reached or surpassed targetVolume
       const fixedVolume = Number(this.currentVolume.toFixed(2));
@@ -252,8 +267,13 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
         }
       }
 
-      const newVolume = this.currentVolume + amount;
-      this.setVolume(newVolume); // set volume
+      if (direction === 1) {
+        const newVolume = this.currentVolume + amount;
+        this.setVolume(newVolume); // set volume
+      } else {
+        const newVolume = this.currentVolume - amount;
+        this.setVolume(newVolume); // set volume
+      }
     }, ms);
   }
 
@@ -363,6 +383,10 @@ export default class WebSoundPlayer extends BaseSoundPlayer {
 
   public get isMuted() {
     return this.muted;
+  }
+
+  public get isLooping() {
+    return this.looping;
   }
 
   public get currentTime() {

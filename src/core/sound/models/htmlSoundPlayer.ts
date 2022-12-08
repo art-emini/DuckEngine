@@ -168,7 +168,10 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
     ms: number,
     cb?: () => void
   ) {
-    const direction = amount < 0 ? -1 : +1; // determines fade in or fade out
+    // make sure it is positive
+    amount = Math.abs(amount);
+
+    const direction = targetVolume < this.currentVolume ? -1 : +1; // determines fade in or fade out
     const interval = setInterval(() => {
       // check if currentVolume reached or surpassed targetVolume
       const fixedVolume = Number(this.currentVolume.toFixed(2));
@@ -196,8 +199,13 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
         }
       }
 
-      const newVolume = this.currentVolume + amount;
-      this.setVolume(newVolume); // set volume
+      if (direction === 1) {
+        const newVolume = this.currentVolume + amount;
+        this.setVolume(newVolume); // set volume
+      } else {
+        const newVolume = this.currentVolume - amount;
+        this.setVolume(newVolume); // set volume
+      }
     }, ms);
   }
 
@@ -268,6 +276,10 @@ export default class HTMLSoundPlayer extends BaseSoundPlayer {
 
   public get isMuted() {
     return this.element.muted;
+  }
+
+  public get isLooping() {
+    return this.element.loop;
   }
 
   public get currentTime() {

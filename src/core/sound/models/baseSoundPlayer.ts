@@ -120,9 +120,9 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Fades the volume of the audio in or out linearly
+   * @description Fades the volume of the audio in or out automatically and linearly
    * @param {number} targetVolume The targetVolume to smoothly set the audio to, a decimal value (0.1 - 1)
-   * @param {number} amount The amount applied to the volume, (+/-, positive=fadeIn, negative=fadeOut)
+   * @param {number} amount The amount applied to the volume, (must be positive)
    * @param {number} ms How often the amount is applied to the volume
    * @param {() => void} [cb] Callback to be called when target volume has been reached, optional -> default: undefined
    * @abstract
@@ -137,9 +137,9 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Fades the volume of the audio in or out linearly, and plays the audio
+   * @description Fades the volume of the audio in or out automatically and linearly, and plays the audio
    * @param {number} targetVolume The targetVolume to smoothly set the audio to, a decimal value (0.1 - 1)
-   * @param {number} amount The amount applied to the volume, (+/-, positive=fadeIn, negative=fadeOut)
+   * @param {number} amount The amount applied to the volume, (must be positive)
    * @param {number} ms How often the amount is applied to the volume
    * @param {() => void} [cb] Callback to be called when target volume has been reached, optional -> default: undefined
    * @param {number} [offset] Where to start play the audio, in milliseconds, optional -> default: undefined
@@ -158,9 +158,9 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Fades the volume of the audio in or out linearly, and pauses the audio
+   * @description Fades the volume of the audio in or out automatically and linearly, and pauses the audio
    * @param {number} targetVolume The targetVolume to smoothly set the audio to, a decimal value (0.1 - 1)
-   * @param {number} amount The amount applied to the volume, (+/-, positive=fadeIn, negative=fadeOut)
+   * @param {number} amount The amount applied to the volume, (must be positive)
    * @param {number} ms How often the amount is applied to the volume
    * @param {() => void} [cb] Callback to be called when target volume has been reached, optional -> default: undefined
    * @abstract
@@ -175,9 +175,9 @@ export default abstract class BaseSoundPlayer {
 
   /**
    * @memberof BaseSoundPlayer
-   * @description Fades the volume of the audio in or out linearly, and stops the audio
+   * @description Fades the volume of the audio in or out automatically and linearly, and stops the audio
    * @param {number} targetVolume The targetVolume to smoothly set the audio to, a decimal value (0.1 - 1)
-   * @param {number} amount The amount applied to the volume, (+/-, positive=fadeIn, negative=fadeOut)
+   * @param {number} amount The amount applied to the volume, (must be positive)
    * @param {number} ms How often the amount is applied to the volume
    * @param {() => void} [cb] Callback to be called when target volume has been reached, optional -> default: undefined
    * @abstract
@@ -262,6 +262,14 @@ export default abstract class BaseSoundPlayer {
    * @since 3.0.0
    */
   public abstract get isMuted(): boolean;
+
+  /**
+   * @memberof BaseSoundPlayer
+   * @description Gets the loop state of the sound
+   * @abstract
+   * @since 3.0.0
+   */
+  public abstract get isLooping(): boolean;
 
   /**
    * @memberof BaseSoundPlayer
