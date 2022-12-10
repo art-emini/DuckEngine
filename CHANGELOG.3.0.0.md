@@ -41,9 +41,11 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
   - Loop
     - Made Scene.update get called before the PhysicsServer.tick
     - Current Loop Steps:
+      - Clear Frame
       - Active Camera Start
       - Scene.update
       - Scene.__tick
+        - Scene.physicsServer.__tick
       - Renderables are drawn
       - Active Camera End
   - CanvasRenderer & RendererPipeline
