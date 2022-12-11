@@ -312,33 +312,35 @@ export default class Camera {
    * @since 1.0.0-beta
    */
   public setZoomSmooth(intervalMS: number, smoothValue: number, z: number) {
-    let operation: 'add' | 'subtract' = 'add';
+    // make sure it is positive
+    smoothValue = Math.abs(smoothValue);
 
-    if (this.zoom < z) {
-      operation = 'add';
-    } else {
-      operation = 'subtract';
-    }
+    const direction = z < this.zoom ? -1 : +1; // determines fov in or fov out
+    const interval = setInterval(() => {
+      // check if current FOV reached or surpassed target FOV
+      const fixedVolume = Number(this.zoom.toFixed(2));
+      if (direction === 1) {
+        if (fixedVolume >= z) {
+          this.setZoom(z);
 
-    const int = setInterval(() => {
-      if (operation === 'add') {
-        if (this.zoom < z) {
-          this.zoom += smoothValue;
-        } else {
-          clearInterval(int);
-          if (this.game.config.debug) {
-            new Debug.Log('Reached target camera Zoom with setZoomSmooth');
-          }
+          clearInterval(interval);
+          return;
         }
       } else {
-        if (this.zoom > z) {
-          this.zoom -= smoothValue;
-        } else {
-          clearInterval(int);
-          if (this.game.config.debug) {
-            new Debug.Log('Reached target camera Zoom with setZoomSmooth');
-          }
+        if (fixedVolume <= z) {
+          this.setZoom(z);
+
+          clearInterval(interval);
+          return;
         }
+      }
+
+      if (direction === 1) {
+        const newVolume = this.zoom + smoothValue;
+        this.setFOV(newVolume); // set fov
+      } else {
+        const newVolume = this.zoom - smoothValue;
+        this.setFOV(newVolume); // set fov
       }
     }, intervalMS);
   }
@@ -439,33 +441,35 @@ export default class Camera {
    * @since 1.0.0-beta
    */
   public setFOVSmooth(intervalMS: number, smoothValue: number, f: number) {
-    let operation: 'add' | 'subtract' = 'add';
+    // make sure it is positive
+    smoothValue = Math.abs(smoothValue);
 
-    if (this.fieldOfView < f) {
-      operation = 'add';
-    } else {
-      operation = 'subtract';
-    }
+    const direction = f < this.fieldOfView ? -1 : +1; // determines fov in or fov out
+    const interval = setInterval(() => {
+      // check if current FOV reached or surpassed target FOV
+      const fixedVolume = Number(this.fieldOfView.toFixed(2));
+      if (direction === 1) {
+        if (fixedVolume >= f) {
+          this.setFOV(f);
 
-    const int = setInterval(() => {
-      if (operation === 'add') {
-        if (this.fieldOfView < f) {
-          this.fieldOfView += smoothValue;
-        } else {
-          clearInterval(int);
-          if (this.game.config.debug) {
-            new Debug.Log('Reached target camera FOV with setFOVSmooth');
-          }
+          clearInterval(interval);
+          return;
         }
       } else {
-        if (this.fieldOfView > f) {
-          this.fieldOfView -= smoothValue;
-        } else {
-          clearInterval(int);
-          if (this.game.config.debug) {
-            new Debug.Log('Reached target camera FOV with setFOVSmooth');
-          }
+        if (fixedVolume <= f) {
+          this.setFOV(f);
+
+          clearInterval(interval);
+          return;
         }
+      }
+
+      if (direction === 1) {
+        const newVolume = this.fieldOfView + smoothValue;
+        this.setFOV(newVolume); // set fov
+      } else {
+        const newVolume = this.fieldOfView - smoothValue;
+        this.setFOV(newVolume); // set fov
       }
     }, intervalMS);
   }
