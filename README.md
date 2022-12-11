@@ -135,7 +135,13 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 
 ## Developers' Guide
 
-### Requirements
+### Build Requirements
+
+- Must be on a linux machine or WSL
+- Must be able to run shell scripts for building
+- Must have typescript and yarn installed to path
+
+### Contributing Requirements
 
 1. Knowledge of TypeScript, Git, and HTML Canvas.
 2. Reading and agreeing to the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) documents.

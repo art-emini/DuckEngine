@@ -1,4 +1,4 @@
-# 3.0.0 Changelog - 2022-06-28
+# 3.0.0 Changelog - 2022-06-28 -> 2022-12-11
 
 This update improves and adds flexibility to rendering.
 
@@ -31,6 +31,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
   - Tools
     - Added staticColor property which refers to new Color class
     - Added arguments to Scene.tools.color.random(), stroke and strokeWidth may now be passed
+- Game
+  - Added new static property versionInfo that includes the version and date of build
 - Loader
   - Added loadAudioBuffer to load AudioBuffer for new WebSoundPlayer class and for use of WebAudio API
   - Added audioBufferStack to store loaded AudioBuffer
@@ -52,6 +54,7 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
     - Does not take poolingInterval argument anymore
 - Misc
   - Changed startup message and version
+  - Changed version util to versionInfo which is now an object with the version and build
 - Rendering
   - Replaced all use of strings for colors with new Color class
 - Scene

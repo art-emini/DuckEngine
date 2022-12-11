@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const version = require('./package.json').version
+const version = require('./package.json').version;
+const buildNum = require('./buildUtils/buildNum');
 
 const banner = `
-DuckEngine ${version}
+DuckEngine ${version}.${buildNum()}
 
 https://github.com/ksplatdev/DuckEngine
 
@@ -28,30 +29,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-`
+`;
 
 module.exports = {
-	mode: 'production',
+  mode: 'production',
 
-	entry: './lib/index.js',
+  entry: './lib/index.js',
 
-	output: {
-		path: __dirname + '/dist/',
-		filename: 'index.js',
-		libraryTarget: 'module',
-	},
-	plugins: [
-		new webpack.BannerPlugin({
-			banner
-		})
-	],
-	optimization: {
-		minimize: false,
-	},
-	experiments: {
-		outputModule: true,
-	},
-	performance: {
-		hints: false
-	}
+  output: {
+    path: __dirname + '/dist/',
+    filename: 'index.js',
+    libraryTarget: 'module',
+  },
+  plugins: [
+    new webpack.BannerPlugin({
+      banner,
+    }),
+  ],
+  optimization: {
+    minimize: false,
+  },
+  experiments: {
+    outputModule: true,
+  },
+  performance: {
+    hints: false,
+  },
 };

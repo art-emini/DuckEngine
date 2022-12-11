@@ -1,7 +1,9 @@
-import version from './version';
+import versionInfo from './versionInfo';
 
 export default `
-🦆 DuckEngine - ${version} 🦆
+🦆 DuckEngine 🦆
+
+${versionInfo.version}.${versionInfo.date};
 
 https://github.com/ksplatdev/DuckEngine
 

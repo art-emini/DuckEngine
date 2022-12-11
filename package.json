@@ -19,7 +19,8 @@
     "lint:watch": "npx onchange \"src/**/*.ts\"  \"examples/**/*.ts\" -- eslint -c .eslintrc.json --fix {{changed}}",
     "lint:fix": "npx eslint -c .eslintrc.json --fix src/",
     "serve": "npx http-server docs/",
-    "checkout": "bash scripts/checkout.sh"
+    "checkout": "bash scripts/checkout.sh",
+    "buildNum": "node buildUtils/buildNum.js"
   },
   "repository": {
     "type": "git",

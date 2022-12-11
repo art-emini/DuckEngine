@@ -11,6 +11,7 @@ import PluginManager from './misc/pluginManager';
 import CacheManager from './storage/cacheManager';
 import CanvasRenderer from './renderer/canvas/canvasRenderer';
 import DisplayManager from './display/displayManager';
+import versionInfo from '../helper/versionInfo';
 
 /**
  * @class Game
@@ -19,6 +20,14 @@ import DisplayManager from './display/displayManager';
  * @since 1.0.0-beta
  */
 export default class Game {
+  /**
+   * @memberof Game
+   * @description Version and build info
+   * @type Duck.Types.Game.VersionInfo
+   * @since 3.0.0
+   */
+  public static readonly versionInfo: Duck.Types.Game.VersionInfo = versionInfo;
+
   /**
    * @memberof Game
    * @description Game Configuration

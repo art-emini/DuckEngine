@@ -31,6 +31,8 @@
     "webpack.config.js",
     "webpack.window.config.js",
     "tests/**/*",
-    "webpack.es5.config.js"
+    "webpack.es5.config.js",
+    "webpack.*",
+    "buildUtils/"
   ]
 }

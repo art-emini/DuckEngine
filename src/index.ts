@@ -366,6 +366,11 @@ export namespace Duck {
     }
 
     export namespace Game {
+      export interface VersionInfo {
+        version: string;
+        date: string;
+      }
+
       export interface Config {
         /**
          * @memberof Duck.Types.Game.Config
