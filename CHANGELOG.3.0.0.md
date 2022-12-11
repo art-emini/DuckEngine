@@ -60,6 +60,7 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Tools
     - color.random now returns a Color instance and not a string
+    - color.random stroke arg can now be a boolean to also generate a random color stroke
   - Properties onSceneActive and onSceneInactive renamed to onActive and onInactive
 - Coding Style
   - Use of two spaces for indentions

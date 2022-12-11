@@ -326,7 +326,10 @@ export default class Scene extends Render {
     loader: typeof Loader;
     staticColor: typeof Color;
     color: {
-      random: (stroke?: string | number, strokeWidth?: number) => Color;
+      random: (
+        stroke?: string | number | boolean,
+        strokeWidth?: number
+      ) => Color;
       randomWithAlpha: (alpha?: number) => string;
       is: {
         hex: (str: string) => boolean;
@@ -770,9 +773,13 @@ export default class Scene extends Render {
       loader: Loader,
       staticColor: Color,
       color: {
-        random: (stroke?: string | number, strokeWidth?: number) => {
-          if (stroke) {
-            return new Color(randomColor(), stroke, strokeWidth || 1);
+        random: (stroke?: string | number | boolean, strokeWidth?: number) => {
+          if (typeof stroke === 'boolean') {
+            return new Color(randomColor(), randomColor(), strokeWidth || 1);
+          } else {
+            if (stroke) {
+              return new Color(randomColor(), stroke, strokeWidth || 1);
+            }
           }
 
           return new Color(randomColor());
