@@ -12,14 +12,10 @@ import Debug from '../debug/debug';
 import randomInt from '../math/randomInt';
 import lerp from '../math/lerp';
 import circleRectCollision from '../physics/utils/circleToRectIntersect';
-import RoundRect from '../gameobjects/roundrect';
-import Sprite from '../gameobjects/sprite';
-import StaticLight from '../lights/staticLight';
-import Button from '../gameobjects/ui/button';
-import Text from '../gameobjects/ui/text';
-import Particle from '../gameobjects/particles/particle';
 import PhysicsBody from '../physics/physicsBody';
 import Map from '../map/map';
+import Vector2 from '../math/vector2';
+import GameObject from '../gameobjects/gameObject';
 
 /**
  * @class Camera
@@ -43,11 +39,18 @@ export default class Camera {
    * @since 2.0.0
    */
   public scene: Scene;
-  protected lookAt: number[];
 
   /**
    * @memberof Camera
-   * @description The Camera's current FOV
+   * @description The position of the Camera
+   * @type Vector2
+   * @since 3.0.0
+   */
+  public position: Vector2;
+
+  /**
+   * @memberof Camera
+   * @description The Camera's current FOV, default: PI / 4
    * @type number
    * @since 2.1.0
    */
@@ -55,11 +58,11 @@ export default class Camera {
 
   /**
    * @memberof Camera
-   * @description The Camera's current zoom
+   * @description The Camera's current zoom, default: 1000.0
    * @type number
-   * @since 2.1.0
+   * @since 3.0.0
    */
-  public distance: number;
+  public zoom: number;
 
   /**
    * @memberof Camera
@@ -73,7 +76,7 @@ export default class Camera {
     bottom: number;
     w: number;
     h: number;
-    scale: number[];
+    scale: Vector2;
   };
   protected aspectRatio: number | undefined;
 
@@ -98,8 +101,14 @@ export default class Camera {
   public following:
     | Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
     | undefined;
-  protected lerpX = 1;
-  protected lerpY = 1;
+
+  /**
+   * @memberof Camera
+   * @description If the Camera is following a GameObject, this is the amount that will be used to lerp the Camera.position to the GameObject.position
+   * @type Vector2
+   * @since 3.0.0
+   */
+  public lerpAmount: Vector2;
 
   /**
    * @constructor Camera
@@ -111,13 +120,17 @@ export default class Camera {
   constructor(game: Game, scene: Scene) {
     this.game = game;
     this.scene = scene;
-    this.distance = 1000.0;
+
     this.isMain = false;
     if (scene.mainCamera === this) {
       this.isMain = true;
     }
-    this.lookAt = [0, 0];
+
+    this.position = Vector2.ZERO;
+
     this.fieldOfView = Math.PI / 4.0;
+    this.zoom = 1000.0;
+
     this.viewport = {
       left: 0,
       right: 0,
@@ -125,12 +138,13 @@ export default class Camera {
       bottom: 0,
       w: 0,
       h: 0,
-      scale: [1.0, 1.0],
+      scale: new Vector2(1.0, 1.0),
     };
 
     this.bounds;
 
     this.following;
+    this.lerpAmount = new Vector2(1, 1);
 
     this.updateViewport();
   }
@@ -150,60 +164,77 @@ export default class Camera {
 
     // follow
     if (this.following) {
-      if (this.following.shape === 'rect') {
-        if (this.bounds) {
-          if (rectToRectIntersect(this.following as Rect, this.bounds)) {
-            this.lookAt[0] = lerp(
-              this.lookAt[0],
-              this.following.getCenterX(),
-              this.lerpX
-            );
-            this.lookAt[1] = lerp(
-              this.lookAt[1],
-              this.following.getCenterY(),
-              this.lerpY
-            );
-          }
-        } else {
-          this.lookAt[0] = lerp(
-            this.lookAt[0],
+      if (
+        this.following.shape === 'rect' ||
+        this.following.shape === 'roundrect' ||
+        this.following.shape === 'sprite'
+      ) {
+        this.followRect();
+      }
+      if (this.following.shape === 'circle') {
+        this.followCircle();
+      }
+    }
+  }
+
+  protected followRect() {
+    if (this.following) {
+      if (this.bounds) {
+        if (rectToRectIntersect(this.following as Rect, this.bounds)) {
+          this.position.x = lerp(
+            this.position.x,
             this.following.getCenterX(),
-            this.lerpX
+            this.lerpAmount.x
           );
-          this.lookAt[1] = lerp(
-            this.lookAt[1],
+          this.position.y = lerp(
+            this.position.y,
             this.following.getCenterY(),
-            this.lerpY
+            this.lerpAmount.y
           );
         }
+      } else {
+        this.position.x = lerp(
+          this.position.x,
+          this.following.getCenterX(),
+          this.lerpAmount.x
+        );
+        this.position.y = lerp(
+          this.position.y,
+          this.following.getCenterY(),
+          this.lerpAmount.y
+        );
       }
 
-      if (this.following.shape === 'circle') {
-        if (this.bounds) {
-          if (circleToRectIntersect(this.following as Circle, this.bounds)) {
-            this.lookAt[0] = lerp(
-              this.lookAt[0],
-              this.following.getCenterX(),
-              this.lerpX
-            );
-            this.lookAt[1] = lerp(
-              this.lookAt[1],
-              this.following.getCenterY(),
-              this.lerpY
-            );
-          }
-        } else {
-          this.lookAt[0] = lerp(
-            this.lookAt[0],
+      this.updateViewport();
+    }
+  }
+
+  protected followCircle() {
+    if (this.following) {
+      if (this.bounds) {
+        if (circleToRectIntersect(this.following as Circle, this.bounds)) {
+          this.position.x = lerp(
+            this.position.x,
             this.following.getCenterX(),
-            this.lerpX
+            this.lerpAmount.x
           );
-          this.lookAt[1] = lerp(
-            this.lookAt[1],
+          this.position.y = lerp(
+            this.position.y,
             this.following.getCenterY(),
-            this.lerpY
+            this.lerpAmount.y
           );
         }
+      } else {
+        this.position.x = lerp(
+          this.position.x,
+          this.following.getCenterX(),
+          this.lerpAmount.x
+        );
+        this.position.y = lerp(
+          this.position.y,
+          this.following.getCenterY(),
+          this.lerpAmount.y
+        );
       }
 
       this.updateViewport();
@@ -223,7 +254,7 @@ export default class Camera {
   }
 
   protected applyScale() {
-    this.game.renderer.scale(this.viewport.scale[0], this.viewport.scale[1]);
+    this.game.renderer.scale(this.viewport.scale.x, this.viewport.scale.y);
   }
 
   protected applyTranslation() {
@@ -242,18 +273,18 @@ export default class Camera {
         cHeight = Number(this.game.canvas.style.height.replace('px', ''));
 
         // set zoom for dpr scaling
-        this.distance = 1000 / window.devicePixelRatio;
+        this.zoom = 1000 / window.devicePixelRatio;
       }
 
       this.aspectRatio = cWidth / cHeight;
-      this.viewport.w = this.distance * Math.tan(this.fieldOfView);
+      this.viewport.w = this.zoom * Math.tan(this.fieldOfView);
       this.viewport.h = this.viewport.w / this.aspectRatio;
-      this.viewport.left = this.lookAt[0] - this.viewport.w / 2.0;
-      this.viewport.top = this.lookAt[1] - this.viewport.h / 2.0;
+      this.viewport.left = this.position.x - this.viewport.w / 2.0;
+      this.viewport.top = this.position.y - this.viewport.h / 2.0;
       this.viewport.right = this.viewport.left + this.viewport.w;
       this.viewport.bottom = this.viewport.top + this.viewport.h;
-      this.viewport.scale[0] = cWidth / this.viewport.w;
-      this.viewport.scale[1] = cHeight / this.viewport.h;
+      this.viewport.scale.x = cWidth / this.viewport.w;
+      this.viewport.scale.y = cHeight / this.viewport.h;
     } else {
       new Debug.Error(
         'Cannot update camera. CanvasRenderingContext2D is undefined.'
@@ -268,7 +299,7 @@ export default class Camera {
    * @since 1.0.0-beta
    */
   public setZoom(z: number) {
-    this.distance = z;
+    this.zoom = z;
     this.updateViewport();
   }
 
@@ -283,7 +314,7 @@ export default class Camera {
   public setZoomSmooth(intervalMS: number, smoothValue: number, z: number) {
     let operation: 'add' | 'subtract' = 'add';
 
-    if (this.distance < z) {
+    if (this.zoom < z) {
       operation = 'add';
     } else {
       operation = 'subtract';
@@ -291,8 +322,8 @@ export default class Camera {
 
     const int = setInterval(() => {
       if (operation === 'add') {
-        if (this.distance < z) {
-          this.distance += smoothValue;
+        if (this.zoom < z) {
+          this.zoom += smoothValue;
         } else {
           clearInterval(int);
           if (this.game.config.debug) {
@@ -300,8 +331,8 @@ export default class Camera {
           }
         }
       } else {
-        if (this.distance > z) {
-          this.distance -= smoothValue;
+        if (this.zoom > z) {
+          this.zoom -= smoothValue;
         } else {
           clearInterval(int);
           if (this.game.config.debug) {
@@ -320,8 +351,8 @@ export default class Camera {
    * @since 1.0.0-beta
    */
   public moveTo(x: number, y: number) {
-    this.lookAt[0] = x;
-    this.lookAt[1] = y;
+    this.position.x = x;
+    this.position.y = y;
     this.updateViewport();
   }
 
@@ -339,8 +370,8 @@ export default class Camera {
     lerpY = 1
   ) {
     this.following = gameObject;
-    this.lerpX = lerpX;
-    this.lerpY = lerpY;
+    this.lerpAmount.x = lerpX;
+    this.lerpAmount.y = lerpY;
   }
 
   /**
@@ -365,8 +396,8 @@ export default class Camera {
     y: number,
     obj: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
   ) {
-    obj.position.x = x / this.viewport.scale[0] + this.viewport.left;
-    obj.position.y = y / this.viewport.scale[1] + this.viewport.top;
+    obj.position.x = x / this.viewport.scale.x + this.viewport.left;
+    obj.position.y = y / this.viewport.scale.y + this.viewport.top;
     return obj;
   }
 
@@ -384,8 +415,8 @@ export default class Camera {
     y: number,
     obj: Duck.TypeClasses.GameObjects.GameObject<Duck.Types.Texture.Type>
   ) {
-    obj.position.x = (x - this.viewport.left) * this.viewport.scale[0];
-    obj.position.y = (y - this.viewport.top) * this.viewport.scale[1];
+    obj.position.x = (x - this.viewport.left) * this.viewport.scale.x;
+    obj.position.y = (y - this.viewport.top) * this.viewport.scale.y;
     return obj;
   }
 
@@ -454,7 +485,7 @@ export default class Camera {
    * @since 1.0.0-beta
    */
   public resetZoom() {
-    this.distance = 1000.0;
+    this.zoom = 1000.0;
   }
 
   /**
@@ -484,19 +515,19 @@ export default class Camera {
       const r = randomInt(1, 4);
 
       if (r === 1) {
-        this.lookAt[0] += v;
+        this.position.x += v;
       }
 
       if (r === 2) {
-        this.lookAt[0] -= v;
+        this.position.x -= v;
       }
 
       if (r === 3) {
-        this.lookAt[1] += v;
+        this.position.y += v;
       }
 
       if (r === 2) {
-        this.lookAt[1] += v;
+        this.position.y += v;
       }
 
       this.updateViewport();
@@ -596,51 +627,49 @@ export default class Camera {
     const objects = this.scene.displayList.list;
 
     const culledObjects = objects.filter((r) => {
-      if (
-        r instanceof Rect ||
-        r instanceof RoundRect ||
-        r instanceof Sprite ||
-        r instanceof Button ||
-        r instanceof Text
-      ) {
+      if (r instanceof GameObject) {
         if (
-          rectToRectIntersect(r, {
-            position: {
-              x: this.viewport.left,
-              y: this.viewport.top,
-            },
-            w: this.viewport.w,
-            h: this.viewport.h,
-          })
+          r.shape === 'rect' ||
+          r.shape === 'sprite' ||
+          r.shape === 'roundrect'
         ) {
-          return true;
-        } else {
-          return false;
+          if (
+            rectToRectIntersect(r, {
+              position: {
+                x: this.viewport.left,
+                y: this.viewport.top,
+              },
+              w: this.viewport.w,
+              h: this.viewport.h,
+            })
+          ) {
+            return true;
+          } else {
+            return false;
+          }
         }
-      }
 
-      if (
-        r instanceof Circle ||
-        r instanceof StaticLight ||
-        r instanceof Particle
-      ) {
-        if (
-          circleRectCollision(r, {
-            position: {
-              x: this.viewport.left,
-              y: this.viewport.top,
-            },
-            w: this.viewport.w,
-            h: this.viewport.h,
-          })
-        ) {
-          return true;
-        } else {
-          return false;
+        if (r.shape === 'circle') {
+          if (
+            circleRectCollision(r, {
+              position: {
+                x: this.viewport.left,
+                y: this.viewport.top,
+              },
+              w: this.viewport.w,
+              h: this.viewport.h,
+            })
+          ) {
+            return true;
+          } else {
+            return false;
+          }
         }
-      }
 
-      return false;
+        return false;
+      } else {
+        return false;
+      }
     });
     const nonCulledObjects = objects.filter((r) => !culledObjects.includes(r));
 

@@ -12,7 +12,7 @@ import TileLayer from './tilelayer';
 /**
  * @class Map
  * @classdesc Creates a DuckEngine Map
- * @description The Map Class. Base Map class, extends by TileMap
+ * @description The Map Class. Base Map class, extended by TileMap
  * @since 1.2.0
  */
 export default class Map implements Duck.Types.Renderable {

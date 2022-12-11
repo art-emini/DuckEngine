@@ -73,6 +73,11 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Game
   - DisplayManager
     - Fixed smartScale not being called on camera load and switch when needed
+- Camera
+  - Changed lookAt property to a new public property position which is now a Vector2
+  - Changed viewport.scale to a Vector2
+  - Renamed distance to zoom
+  - Refactored some Camera code
 - Types
   - Sound
     - Renamed interface Config to SoundConfig
@@ -89,6 +94,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
     - Removed soundPlayer from Scene.add which is replaced by new Sound class
 - Scene/Render
   - Removed onChange method as it was deprecated in v2.1.0, replaced by properties Scene.onActive and Scene.onInactive (old names .onSceneActive and onSceneInactive)
+- Camera
+  - Removed lerpX and lerpY properties which is now replaced by a public lerpAmount property of type Vector2
 - Duck
   - Types
     - Helper
@@ -107,6 +114,9 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Tools
     - Fixed chance of color.random returning invalid color
+- Camera
+  - Fixed autoCull checking if renderable is only instance of a certain GameObject leaving out custom GameObject and more
+    - Now filters by shape to check for autoCulling
 - CanvasRenderer
   - Fixed setStrokeStyle not properly setting stroke color
 
