@@ -10,16 +10,21 @@ export default abstract class BaseRenderer {
     this.game = game;
   }
 
-  abstract clearFrame(): void;
-  abstract drawRect(
+  public abstract clearFrame(): void;
+  public abstract drawRect(
     x: number,
     y: number,
     w: number,
     h: number,
     color: Color
   ): void;
-  abstract drawCircle(x: number, y: number, r: number, color: Color): void;
-  abstract drawRoundRect(
+  public abstract drawCircle(
+    x: number,
+    y: number,
+    r: number,
+    color: Color
+  ): void;
+  public abstract drawRoundRect(
     x: number,
     y: number,
     w: number,
@@ -27,7 +32,7 @@ export default abstract class BaseRenderer {
     r: number,
     color: Color
   ): void;
-  abstract drawSprite(
+  public abstract drawSprite(
     x: number,
     y: number,
     w: number,
@@ -38,11 +43,11 @@ export default abstract class BaseRenderer {
     currentRow?: number,
     currentCol?: number
   ): void;
-  abstract save(): void;
-  abstract restore(): void;
-  abstract scale(x: number, y: number): void;
-  abstract translate(x: number, y: number): void;
-  abstract transform(
+  public abstract save(): void;
+  public abstract restore(): void;
+  public abstract scale(x: number, y: number): void;
+  public abstract translate(x: number, y: number): void;
+  public abstract transform(
     a: number,
     b: number,
     c: number,
@@ -50,22 +55,22 @@ export default abstract class BaseRenderer {
     e: number,
     f: number
   ): void;
-  abstract setFont(font: string): void;
-  abstract measureText(font: string, text: string): void;
-  abstract drawText(
+  public abstract setFont(font: string): void;
+  public abstract measureText(font: string, text: string): void;
+  public abstract drawText(
     text: string,
     x: number,
     y: number,
     maxWidth?: number
   ): void;
-  abstract strokeText(
+  public abstract strokeText(
     text: string,
     x: number,
     y: number,
     maxWidth?: number
   ): void;
-  abstract setFillColor(color: Color): void;
-  abstract setStrokeColor(color: Color): void;
-  abstract setLineWidth(width: number): void;
-  abstract setBlendMode(blendMode: keyof typeof BlendModes): void;
+  public abstract setFillColor(color: Color): void;
+  public abstract setStrokeColor(color: Color): void;
+  public abstract setLineWidth(width: number): void;
+  public abstract setBlendMode(blendMode: keyof typeof BlendModes): void;
 }
