@@ -2,7 +2,7 @@
 <a href="#" id="" style="color: inherit; text-decoration: none;">
   <h1><img src="global/Logo.png" alt="DuckEngine"></h1>
 </a>
-<p><strong>v2.0.0 released! <a href="CHANGELOG.md">Changelog</a></strong></p>
+<p><strong>v3.0.0 released! <a href="CHANGELOG.md">Changelog</a></strong></p>
 <p>| <a href="#docs">Docs</a> | <a href="#wiki">Wiki</a> | <a href="https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started">Getting Started</a> | <a href="#demos">Demos</a> | <a href="#download">Download</a> |</p>
 <p><img src="https://img.shields.io/github/actions/workflow/status/ksplatdev/DuckEngine/codeql-analysis.yml?branch=main" alt="Build Badge">
 <img src="https://img.shields.io/github/v/release/ksplatdev/DuckEngine" alt="Release Badge">
@@ -53,34 +53,6 @@
 <li>Browser supports ES6 (EcmaScript2015)</li>
 <li>Browser supports Canvas APIs</li>
 </ol>
-
-<a href="#browser-rankings" id="browser-rankings" style="color: inherit; text-decoration: none;">
-  <h3>Browser Rankings</h3>
-</a>
-<ol>
-<li>Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave</li>
-<li>Safari</li>
-<li>Firefox | <a href="#firefox-bugs">Bugs</a></li>
-</ol>
-
-<a href="#recommendation" id="recommendation" style="color: inherit; text-decoration: none;">
-  <h3>Recommendation</h3>
-</a>
-<ul>
-<li>Google Chrome or any other Chromium based browser</li>
-</ul>
-
-<a href="#browser-bugs" id="browser-bugs" style="color: inherit; text-decoration: none;">
-  <h3>Browser Bugs</h3>
-</a>
-
-<a href="#firefox-bugs" id="firefox-bugs" style="color: inherit; text-decoration: none;">
-  <h4>Firefox Bugs</h4>
-</a>
-<ul>
-<li>More stuttering than Chromium Browsers and Safari.</li>
-<li>Garbage collection occurs more often than Safari and Chromium Browsers. (Causes <em>very</em> minor and not noticeable stutters.)</li>
-</ul>
 
 <a href="#download" id="download" style="color: inherit; text-decoration: none;">
   <h2>Download</h2>
@@ -194,8 +166,8 @@
 <li>Fork the repository and create a new branch following the <a href="branch_guidelines.md">branch guidelines</a>.</li>
 <li>Clone the fork to your device.</li>
 <li>CD (change directories) into the cloned directory.</li>
-<li>Run <code>yarn upgrade</code>.</li>
-<li>Run <code>yarn run build</code> or <code>ctrl + shift + b</code> for vscode users.</li>
+<li>Run <code>yarn</code>.</li>
+<li>Run <code>yarn build</code> or <code>ctrl + shift + b</code> for vscode users.</li>
 <li>Make your changes.</li>
 <li>Test your changes on codesandbox by forking this <a href="https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js">codesandbox</a> and updating the duckengine.js file. (Or any other way you would like to test it.)</li>
 <li>Create a pull request.</li>
@@ -217,7 +189,7 @@
 <li><code>yarn run lint:watch</code> - Watches for changes and fixes all fixable issues found by ESLint.</li>
 <li><code>yarn run lint:fix</code> - Uses ESLint to fix all fixable issues found by ESLint.</li>
 <li><code>yarn run tree</code> - Prints out all files and directories.</li>
-<li><code>yarn run serve</code> - Serves the docs on :8080.</li>
+<li><code>yarn run serve</code> - Serves the documentation on :8080.</li>
 <li><code>yarn run checkout</code> - Runs the checkout shell script with bash. Run before thinking about publishing a release.</li>
 </ol>
 
@@ -226,7 +198,7 @@
 </a>
 <ol>
 <li>main - main branch</li>
-<li>staging - stage changes to this branch</li>
+<li>*-staging - stage changes to this branch</li>
 </ol>
 
 <a href="#versions" id="versions" style="color: inherit; text-decoration: none;">

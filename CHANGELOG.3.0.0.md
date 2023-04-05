@@ -121,6 +121,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
 - Scene
   - Tools
     - Fixed chance of color.random returning invalid color
+  - __tick
+    - Fixed Scene.__tick not checking if Game.config.physics.enabled is true before running
 - Camera
   - Fixed autoCull checking if renderable is only instance of a certain GameObject leaving out custom GameObject and more
     - Now filters by shape to check for autoCulling

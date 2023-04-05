@@ -1,6 +1,6 @@
 # ![DuckEngine](global/Logo.png)
 
-**v2.0.0 released! [Changelog](CHANGELOG.md)**
+**v3.0.0 released! [Changelog](CHANGELOG.md)**
 
 | [Docs](#docs) | [Wiki](#wiki) | [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started) | [Demos](#demos) | [Download](#download) |
 
@@ -46,23 +46,6 @@ A 2D Game Engine for the web.
 
 1. Browser supports ES6 (EcmaScript2015)
 2. Browser supports Canvas APIs
-
-### Browser Rankings
-
-1. Chromium Based Browsers, includes Chrome, Opera, Edge, Vivaldi, and Brave
-2. Safari
-3. Firefox | [Bugs](#firefox-bugs)
-
-### Recommendation
-
-- Google Chrome or any other Chromium based browser
-
-### Browser Bugs
-
-#### Firefox Bugs
-
-- More stuttering than Chromium Browsers and Safari.
-- Garbage collection occurs more often than Safari and Chromium Browsers. (Causes *very* minor and not noticeable stutters.)
 
 ## Download
 
@@ -153,8 +136,8 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 2. Fork the repository and create a new branch following the [branch guidelines](branch_guidelines.md).
 3. Clone the fork to your device.
 4. CD (change directories) into the cloned directory.
-5. Run `yarn upgrade`.
-6. Run `yarn run build` or `ctrl + shift + b` for vscode users.
+5. Run `yarn`.
+6. Run `yarn build` or `ctrl + shift + b` for vscode users.
 7. Make your changes.
 8. Test your changes on codesandbox by forking this [codesandbox](https://codesandbox.io/s/duckengine-test-7gfbt?file=/src/scene.js) and updating the duckengine.js file. (Or any other way you would like to test it.)
 9. Create a pull request.
@@ -173,13 +156,13 @@ The Duck Namespace has types such as gameobject, every class config, all classes
 9. `yarn run lint:watch` - Watches for changes and fixes all fixable issues found by ESLint.
 10. `yarn run lint:fix` - Uses ESLint to fix all fixable issues found by ESLint.
 11. `yarn run tree` - Prints out all files and directories.
-12. `yarn run serve` - Serves the docs on :8080.
+12. `yarn run serve` - Serves the documentation on :8080.
 13. `yarn run checkout` - Runs the checkout shell script with bash. Run before thinking about publishing a release.
 
 ### Branches
 
 1. main - main branch
-2. staging - stage changes to this branch
+2. *-staging - stage changes to this branch
 
 ## Versions
 

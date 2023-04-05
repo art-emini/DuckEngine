@@ -9,5 +9,5 @@ https://github.com/ksplatdev/DuckEngine
 
 MIT License
 
-Copyright (c) 2022 Bleart Emini
+Copyright (c) 2022-2023 Bleart Emini
 `;

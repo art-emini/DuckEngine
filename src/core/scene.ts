@@ -853,7 +853,10 @@ export default class Scene extends Render {
    * @since 2.0.0
    */
   public __tick() {
-    if (!this.game.config.physics?.customTick) {
+    if (
+      !this.game.config.physics?.customTick &&
+      this.game.config.physics?.enabled
+    ) {
       this.physicsServer?.__tick();
     }
   }
