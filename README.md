@@ -4,11 +4,11 @@
 
 | [Docs](#docs) | [Wiki](#wiki) | [Getting Started](https://github.com/ksplatdev/DuckEngine/wiki/Getting-Started) | [Demos](#demos) | [Download](#download) |
 
-![Build Badge](https://img.shields.io/github/workflow/status/ksplatdev/DuckEngine/CodeQL?style=flat-square)
-![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine?style=flat-square)
-![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine?label=license&style=flat-square)
-![Lint Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/lint.yml/badge.svg)
-![Format Badge](https://github.com/ksplatdev/DuckEngine/actions/workflows/format.yml/badge.svg)
+![Build Badge](https://img.shields.io/github/actions/workflow/status/ksplatdev/DuckEngine/codeql-analysis.yml?branch=main)
+![Release Badge](https://img.shields.io/github/v/release/ksplatdev/DuckEngine)
+![License Badge](https://img.shields.io/github/license/ksplatdev/DuckEngine)
+![Lint Badge](https://img.shields.io/github/actions/workflow/status/ksplatdev/DuckEngine/lint.yml?branch=main)
+![Format Badge](https://img.shields.io/github/actions/workflow/status/ksplatdev/DuckEngine/format.yml?branch=main)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 A 2D Game Engine for the web.
