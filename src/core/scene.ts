@@ -540,19 +540,6 @@ export default class Scene extends Render {
           return roundRect;
         },
       },
-      misc: {
-        area: (
-          x: number,
-          y: number,
-          w: number,
-          h: number,
-          collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
-        ) => {
-          const myArea = new Area(x, y, w, h, collisionFilter, this.game, this);
-          this.physicsList.add(myArea);
-          return myArea;
-        },
-      },
       ui: {
         text: (text: string, config: Duck.Types.UI.Text.Config) => {
           const myText = new Text(text, config, this.game, this);
@@ -585,6 +572,19 @@ export default class Scene extends Render {
           this.displayList.add(myButton);
           this.physicsList.add(myButton);
           return myButton;
+        },
+      },
+      misc: {
+        area: (
+          x: number,
+          y: number,
+          w: number,
+          h: number,
+          collisionFilter: PhysicsBody<Duck.Types.Texture.Type>[]
+        ) => {
+          const myArea = new Area(x, y, w, h, collisionFilter, this.game, this);
+          this.physicsList.add(myArea);
+          return myArea;
         },
       },
       sound: (
