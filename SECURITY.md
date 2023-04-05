@@ -6,6 +6,7 @@
 | ------- | ------------------ |
 | 3.0.0 | :white_check_mark:   |
 | 2.1.0 | :white_check_mark:   |
+| 2.0.x | :x: |
 | 1.x.x | :x: |
 | 1.x.x-beta | :x: |
 

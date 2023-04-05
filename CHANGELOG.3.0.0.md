@@ -31,6 +31,8 @@ This updates improves tilemaps by adding support and parsing of Tiled maps. As w
   - Tools
     - Added staticColor property which refers to new Color class
     - Added arguments to Scene.tools.color.random(), stroke and strokeWidth may now be passed
+- Camera
+  - Added method shakeDir to shake camera in a passed Vector2 direction
 - Particle System
   - Added new abstract ParticleComponent class for different modifiers to Particles emitted by a ParticleEmitter
   - Added preset ParticleComponent classes

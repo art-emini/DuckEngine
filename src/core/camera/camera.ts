@@ -508,7 +508,7 @@ export default class Camera {
 
   /**
    * @memberof Camera
-   * @description Shakes the camera
+   * @description Shakes the camera in a random direction
    * @param {number} intervalMS How often (in milliseconds) the passed value is added/subtracted from the Camera viewport position
    * @param {number} timeMS For how long in milliseconds the shake lasts
    * @param {number} v Value to be added/subtracted from the Camera viewport position
@@ -535,6 +535,41 @@ export default class Camera {
       }
 
       this.updateViewport();
+    }, intervalMS);
+
+    setTimeout(() => {
+      clearInterval(int);
+    }, timeMS);
+  }
+
+  /**
+   * @memberof Camera
+   * @description Shakes the camera in a direction
+   * @param {number} intervalMS How often (in milliseconds) the passed value is added/subtracted from the Camera viewport position
+   * @param {number} timeMS For how long in milliseconds the shake lasts
+   * @param {Vector2} vector Vector to be added/subtracted from the Camera viewport position, also used for direction of shaking
+   * @param {boolean} [opposite] Toggle to shake in the specified direction and the opposite direction as well, ex (true): shakes in both left and right
+   * directions, optional -> defaults: true
+   * @since 3.0.0
+   */
+  public shakeDir(
+    intervalMS: number,
+    timeMS: number,
+    vector: Vector2,
+    opposite = true
+  ) {
+    const oppositeVector = vector.clone().negate();
+    const int = setInterval(() => {
+      if (opposite) {
+        const r = randomInt(0, 1);
+        if (r === 0) {
+          this.position.add(vector);
+        } else {
+          this.position.add(oppositeVector);
+        }
+      } else {
+        this.position.add(vector);
+      }
     }, intervalMS);
 
     setTimeout(() => {
