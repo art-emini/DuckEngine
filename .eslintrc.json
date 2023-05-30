@@ -1,39 +1,38 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"prettier"
-	],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": 12,
-		"sourceType": "module"
-	},
-	"plugins": ["@typescript-eslint", "prettier"],
-	"rules": {
-		"indent": 0,
-		"linebreak-style": ["error", "unix"],
-		"quotes": ["error", "single"],
-		"semi": ["warn", "always"],
-		"eqeqeq": ["error", "always"],
-		"@typescript-eslint/no-namespace": 0,
-		"@typescript-eslint/explicit-module-boundary-types": 0,
-		"no-multiple-empty-lines": 1,
-		"prettier/prettier": ["warn"]
-	},
-	"ignorePatterns": [
-		"lib/",
-		"dist/",
-		"src/helper/",
-		"docs/",
-		"release",
-		"webpack.config.js",
-		"webpack.window.config.js",
-		"tests/**/*",
-		"webpack.es5.config.js"
-	]
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "eqeqeq": ["error", "always"],
+    "@typescript-eslint/no-namespace": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "no-multiple-empty-lines": 1,
+    "prettier/prettier": ["warn"]
+  },
+  "ignorePatterns": [
+    "lib/",
+    "dist/",
+    "src/helper/",
+    "docs/",
+    "release",
+    "webpack.config.js",
+    "webpack.window.config.js",
+    "tests/**/*",
+    "webpack.es5.config.js",
+    "webpack.*",
+    "buildUtils/"
+  ]
 }

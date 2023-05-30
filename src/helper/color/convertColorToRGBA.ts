@@ -7,25 +7,22 @@ import isHSL from './isHSL';
 import isRGB from './isRGB';
 import rgbToRGBA from './rgbToRGBA';
 
-export default function convertColorToRGBA(
-	color: string,
-	alpha: Duck.Types.Helper.AlphaRange
-) {
-	let res = '';
+export default function convertColorToRGBA(color: string, alpha: number) {
+  let res = '';
 
-	if (isHex(color)) {
-		res = hexToRGBA(color, alpha);
-	}
+  if (isHex(color)) {
+    res = hexToRGBA(color, alpha);
+  }
 
-	if (isRGB(color)) {
-		res = rgbToRGBA(color, alpha);
-	}
+  if (isRGB(color)) {
+    res = rgbToRGBA(color, alpha);
+  }
 
-	if (isHSL(color)) {
-		const values = getValuesHSL(color);
-		const a = hslToRGB(values[0], values[1], values[2]);
-		res = rgbToRGBA(a, alpha);
-	}
+  if (isHSL(color)) {
+    const values = getValuesHSL(color);
+    const a = hslToRGB(values[0], values[1], values[2]);
+    res = rgbToRGBA(a, alpha);
+  }
 
-	return res;
+  return res;
 }

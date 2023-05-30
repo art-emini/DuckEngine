@@ -9,103 +9,111 @@ import Game from '../../../game';
  * @since 2.1.0
  */
 export default class RendererPipeline {
-	/**
-	 * @memberof RendererPipeline
-	 * @description Game instance
-	 * @type Game
-	 * @since 2.1.0
-	 */
-	public game: Game;
+  /**
+   * @memberof RendererPipeline
+   * @description Game instance
+   * @type Game
+   * @since 2.1.0
+   */
+  public game: Game;
 
-	/**
-	 * @memberof RendererPipeline
-	 * @description The interval that calls RendererPipeline.pool, time: 1000 / this.game.fps
-	 * @type unknown
-	 * @since 2.1.0
-	 */
-	public poolInterval: unknown;
+  /**
+   * @memberof RendererPipeline
+   * @description The interval that calls RendererPipeline.pool, time: 1000 / this.game.fps
+   * @type unknown
+   * @since 2.1.0
+   */
+  public poolInterval: unknown;
 
-	/**
-	 * @memberof RendererPipeline
-	 * @description The poolStack, contains objects that holds a scene and its renderables
-	 * @type Duck.Types.RendererPipeline.PoolStackItem[]
-	 * @since 2.1.0
-	 */
-	public poolStack: Duck.Types.RendererPipeline.PoolStackItem[];
+  /**
+   * @memberof RendererPipeline
+   * @description How often the poolInterval is called, 1000 / this.game.fps or a passed game.config.poolingInterval
+   * @type unknown
+   * @since 3.0.0
+   */
+  public poolingInterval: number;
 
-	/**
-	 * @memberof RendererPipeline
-	 * @description The interval that calls RendererPipeline.updateTime, time: 1000, updates the time that the poolInterval is called for better results
-	 * @type unknown
-	 * @since 2.1.0
-	 */
-	protected updateTimeInterval: unknown;
+  /**
+   * @memberof RendererPipeline
+   * @description The poolStack, contains objects that holds a scene and its renderables
+   * @type Duck.Types.RendererPipeline.PoolStackItem[]
+   * @since 2.1.0
+   */
+  public poolStack: Duck.Types.RendererPipeline.PoolStackItem[];
 
-	/**
-	 * @constructor RendererPipeline
-	 * @description Creates a RendererPipeline instance
-	 * @param {Game} game Game instance
-	 * @param {number} [poolingInterval= 1000 / game.fps] How often RendererPipeline.pool is called
-	 * @since 2.1.0
-	 */
-	constructor(game: Game, poolingInterval = 1000 / game.fps) {
-		this.game = game;
+  /**
+   * @memberof RendererPipeline
+   * @description The interval that calls RendererPipeline.updateTime, time: 1000, updates the time that the poolInterval is called for better results
+   * @type unknown
+   * @since 2.1.0
+   */
+  protected updateTimeInterval: unknown;
 
-		this.poolInterval = setInterval(() => {
-			this.pool();
-		}, poolingInterval);
-		this.poolStack = [];
+  /**
+   * @constructor RendererPipeline
+   * @description Creates a RendererPipeline instance
+   * @param {Game} game Game instance
+   * @param {number} [poolingInterval= 1000 / game.fps] How often RendererPipeline.pool is called
+   * @since 2.1.0
+   */
+  constructor(game: Game) {
+    this.game = game;
 
-		this.updateTimeInterval = setInterval(() => {
-			this.updateTime();
-		}, 1000);
-	}
+    this.poolingInterval =
+      this.game.config.poolingInterval || 1000 / this.game.fps;
 
-	/**
-	 * @memberof RendererPipeline
-	 * @description Pools all visible scenes from the game stack and its renderables
-	 * @since 2.1.0
-	 */
-	public pool() {
-		this.poolStack = [];
+    this.poolInterval = setInterval(() => {
+      this.pool();
+    }, this.poolingInterval);
+    this.poolStack = [];
 
-		// get visible scenes
-		const visibleScenes = this.game.stack.scenes.filter(
-			(scene) => scene.visible === true
-		);
+    this.updateTimeInterval = setInterval(() => {
+      if (!this.game.config.poolingInterval) {
+        this.updateTime();
+      }
+    }, 1000);
+  }
 
-		visibleScenes.forEach((scene) => {
-			// displayList
-			const depthSorted = scene.displayList.depthSort();
-			const visibleObjects = depthSorted.filter(
-				(r) => r.visible && r.culled
-			);
+  /**
+   * @memberof RendererPipeline
+   * @description Pools all visible scenes from the game stack and its renderables
+   * @since 2.1.0
+   */
+  public pool() {
+    this.poolStack = [];
 
-			this.poolStack.push({
-				scene,
-				renderables: visibleObjects,
-			});
-		});
+    // get visible scenes
+    const visibleScenes = this.game.stack.scenes.filter(
+      (scene) => scene.visible === true
+    );
 
-		this.game.eventEmitter.emit(
-			EVENTS.RENDERER.PIPELINE_POOL,
-			this.poolStack
-		);
-	}
+    visibleScenes.forEach((scene) => {
+      // displayList
+      const depthSorted = scene.displayList.depthSort();
+      const visibleObjects = depthSorted.filter((r) => r.visible && r.culled);
 
-	/**
-	 * @memberof RendererPipeline
-	 * @description Clears the poolInterval and sets the interval again to a more recent time, time: 1000 / game.fps,
-	 * gets called automatically every 1000 ms
-	 * @since 2.1.0
-	 */
-	public updateTime() {
-		const newInterval = 1000 / this.game.fps;
+      this.poolStack.push({
+        scene,
+        renderables: visibleObjects,
+      });
+    });
 
-		clearInterval(this.poolInterval as number);
+    this.game.eventEmitter.emit(EVENTS.RENDERER.PIPELINE_POOL, this.poolStack);
+  }
 
-		this.poolInterval = setInterval(() => {
-			this.pool();
-		}, newInterval);
-	}
+  /**
+   * @memberof RendererPipeline
+   * @description Clears the poolInterval and sets the interval again to a more recent time, time: 1000 / game.fps,
+   * gets called automatically every 1000 ms
+   * @since 2.1.0
+   */
+  public updateTime() {
+    this.poolingInterval = 1000 / this.game.fps;
+
+    clearInterval(this.poolInterval as number);
+
+    this.poolInterval = setInterval(() => {
+      this.pool();
+    }, this.poolingInterval);
+  }
 }

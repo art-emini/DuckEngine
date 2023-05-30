@@ -5,53 +5,53 @@
  * @since 1.0.0
  */
 export default class Once {
-	protected func: (...args: unknown[]) => unknown;
-	public ran: boolean;
+  protected func: (...args: unknown[]) => unknown;
+  public ran: boolean;
 
-	/**
-	 * @constructor
-	 * @description Creates a Once instance.
-	 * @param {(...args: unknown[]) => unknown} func Function to run on Once.run
-	 * @param {boolean} [run] Determines if function is run as soon as Once class is constructed
-	 * @since 1.0.0
-	 */
-	constructor(func: (...args: unknown[]) => unknown, run?: boolean) {
-		this.func = func;
-		this.ran = false;
+  /**
+   * @constructor
+   * @description Creates a Once instance.
+   * @param {(...args: unknown[]) => unknown} func Function to run on Once.run
+   * @param {boolean} [run] Determines if function is run as soon as Once class is constructed
+   * @since 1.0.0
+   */
+  constructor(func: (...args: unknown[]) => unknown, run?: boolean) {
+    this.func = func;
+    this.ran = false;
 
-		if (run) {
-			this.run();
-		}
-	}
+    if (run) {
+      this.run();
+    }
+  }
 
-	/**
-	 * @memberof Once
-	 * @description Runs the function once
-	 * @since 1.0.0
-	 */
-	public run() {
-		if (!this.ran) {
-			this.func();
-			this.ran = true;
-		}
-	}
+  /**
+   * @memberof Once
+   * @description Runs the function once
+   * @since 1.0.0
+   */
+  public run() {
+    if (!this.ran) {
+      this.func();
+      this.ran = true;
+    }
+  }
 
-	/**
-	 * @memberof Once
-	 * @description Resets the state and allows the function to be ran again if called
-	 * @since 1.0.0
-	 */
-	public reset() {
-		this.ran = false;
-	}
+  /**
+   * @memberof Once
+   * @description Resets the state and allows the function to be ran again if called
+   * @since 1.0.0
+   */
+  public reset() {
+    this.ran = false;
+  }
 
-	/**
-	 * @memberof Once
-	 * @description Sets the ran state
-	 * @param {boolean} ran Ran state
-	 * @since 1.0.0
-	 */
-	public set state(ran: boolean) {
-		this.ran = ran;
-	}
+  /**
+   * @memberof Once
+   * @description Sets the ran state
+   * @param {boolean} ran Ran state
+   * @since 1.0.0
+   */
+  public set state(ran: boolean) {
+    this.ran = ran;
+  }
 }

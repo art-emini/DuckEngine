@@ -1,16 +1,16 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"module": "es6",
-		"moduleResolution": "node",
-		"removeComments": false,
-		"noImplicitAny": true,
-		"outDir": "lib",
-		"strict": true,
-		"declaration": true,
-		"declarationDir": "dist/",
-		"experimentalDecorators": true
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "lib", "dist"]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "noImplicitAny": true,
+    "outDir": "lib",
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "dist/",
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "lib", "dist"]
 }

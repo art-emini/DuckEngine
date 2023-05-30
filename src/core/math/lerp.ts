@@ -7,5 +7,5 @@
  * @since 2.0.0
  */
 export default function lerp(start: number, end: number, amount: number) {
-	return (1 - amount) * start + amount * end;
+  return (1 - amount) * start + amount * end;
 }
