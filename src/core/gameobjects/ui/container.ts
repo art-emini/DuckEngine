@@ -27,7 +27,7 @@ export default class Container extends UI<'either'> {
    * @param {string | Color} fillColorOrIMGPath Color or Image path of the Container
    * @param {Game} game Game instance
    * @param {Scene} scene Scene instance
-   * @since 1.0.0
+   * @since 3.0.0
    */
   constructor(
     shape: 'rect' | 'sprite',
@@ -57,5 +57,38 @@ export default class Container extends UI<'either'> {
       this.game,
       []
     );
+  }
+
+  /**
+   * @memberof Container
+   * @description Checks and returns a boolean if a UI Element exists inside of the Container
+   * @param {UI<'either'>} element UI Element to check if it exists inside of the Container
+   * @returns boolean
+   * @since 3.0.0
+   */
+  public includes(element: UI<'either'>) {
+    return this.elements.find(element) ? true : false;
+  }
+
+  /**
+   * @memberof Container
+   * @description Gets and returns the UI Element if it exists inside of the Container
+   * @param {UI<'either'>} element UI Element to get from the Container, if it exists
+   * @returns UI<'either'> | undefined
+   * @since 3.0.0
+   */
+  public get(element: UI<'either'>) {
+    return this.elements.find(element);
+  }
+
+  /**
+   * @memberof Container
+   * @description Gets and returns the UI Element by its ID, if it exists inside of the Container
+   * @param {string} id UI Element to get from the Container, by ID, if it exists
+   * @returns UI<'either'> | undefined
+   * @since 3.0.0
+   */
+  public getByID(id: string) {
+    return this.elements.group.find((e) => e.id === id);
   }
 }
