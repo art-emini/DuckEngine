@@ -635,9 +635,6 @@ export default class PhysicsBody<textureType extends Duck.Types.Texture.Type> {
     }
 
     if (this.isAttached) {
-      new Debug.Error(
-        'Cannot apply gravity as PhysicsBody is attached to another PhysicsBody.'
-      );
       return;
     }
 

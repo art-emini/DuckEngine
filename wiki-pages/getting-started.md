@@ -325,7 +325,7 @@ class MyScene extends DuckEngine.Scene {
     // called on every frame after physics tick
     public update(deltaTime: number /* time since last frame */) {
         // gravity
-        this.mySprite.setVelocity('y' 150) // move down by 100px per second
+        this.mySprite.setVelocity('y' 150) // move down by 150px per second
 
         if (this.myInput.inputs.JUMP.isJustPressed) {
             this.mySprite.setVelocity('y', -450)  // move up by 450px per second
